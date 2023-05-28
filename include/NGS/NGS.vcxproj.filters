@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="模块">
+      <UniqueIdentifier>{3773e10a-6297-4339-a6d9-2202f4b590a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\base">
+      <UniqueIdentifier>{ee97cda3-11ed-48f5-b6c9-3b67e26659eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\math">
+      <UniqueIdentifier>{0d19310b-53a4-4b39-afe2-37e8b8b079a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\extend">
+      <UniqueIdentifier>{1da9de14-e926-4143-8b4c-bb81d5c75eb4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NGS.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Math.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Line.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Base.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Bit.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Config.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Defined.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Concepts.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Lib.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Object.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_STL.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Setting.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_TypeTrait.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_TemplateMate.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Color.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Version.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Rectangle.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Event.h">
+      <Filter>头文件\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Function.h">
+      <Filter>头文件\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Memory.h">
+      <Filter>头文件\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Movie.h">
+      <Filter>头文件\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Time.h">
+      <Filter>头文件\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Debug.h">
+      <Filter>头文件\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug\Stream.h">
+      <Filter>头文件\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Console.h">
+      <Filter>头文件\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug\Debug.h">
+      <Filter>头文件\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS_Communication.h">
+      <Filter>头文件\extend</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteArray.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\VectorExperienment.h">
+      <Filter>头文件\math</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
