@@ -11,21 +11,13 @@ public:
 
 public:
 	template<typename T>
-		requires requires() {
-		std::ranges::bidirectional_range<T>;
-		std::ranges::sized_range<T>;
-		std::convertible_to<std::ranges::range_value_t<T>, byte>;
-	}
+		requires std::ranges::bidirectional_range<T>&& std::ranges::sized_range<T>&& std::convertible_to<std::ranges::range_value_t<T>, byte>
 	void Bind(const T& range) {
 		_data.resize(std::ranges::size(range));
 		std::ranges::copy(range, std::ranges::begin(_data));
 	}
 	template<typename T>
-		requires requires() {
-		std::ranges::bidirectional_range<T>;
-		std::ranges::sized_range<T>;
-		std::convertible_to<std::ranges::range_value_t<T>, byte>;
-	}
+		requires std::ranges::bidirectional_range<T>&& std::ranges::sized_range<T>&& std::convertible_to<std::ranges::range_value_t<T>, byte>
 	void Write(const T& range) {
 		_data.reserve(std::size(range));
 
@@ -37,21 +29,14 @@ public:
 		}
 	}
 	template<typename T>
-		requires requires() {
-		!std::ranges::range<T>;
-	}
+		requires (!std::ranges::range<T>)
 	void Write(T&& obj) {
 		std::array<byte, sizeof(T)> binary;
 		std::memcpy(binary.data(), &obj, binary.size());
 		Write<decltype(binary)>(binary);
 	}
 	template<typename T>
-		requires requires() {
-		std::ranges::bidirectional_range<T>;
-		std::ranges::sized_range<T>;
-		std::ranges::output_range<T, byte>;
-		std::convertible_to<std::ranges::range_value_t<T>, byte>;
-	}
+		requires std::ranges::bidirectional_range<T>&& std::ranges::sized_range<T>&& std::ranges::output_range<T, byte>&& std::convertible_to<std::ranges::range_value_t<T>, byte>
 	void Read(T&& range) {
 		if constexpr (std::endian::native == std::endian::big) {
 			std::ranges::copy(_data | std::views::drop(_position) | std::views::take(std::ranges::size(range)), std::rbegin(range));

@@ -120,5 +120,14 @@
     <ClInclude Include="Math\VectorExperienment.h">
       <Filter>头文件\math</Filter>
     </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>头文件\base</Filter>
+    </ClInclude>
+    <ClInclude Include="Embedded\GPIO.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Embedded\Embedded.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

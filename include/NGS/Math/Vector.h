@@ -16,6 +16,7 @@ private:
 	using ___this = _Vector<N, Number, Derived>;
 public:
 	inline constexpr static auto DIMENSIONAL = N;
+	using type = Number;
 
 	template<_CPT Arithmetic C> using __similar = _Vector<N, C, Derived>;
 	template<_CPT Arithmetic C> using __similar_ref = __similar<C>&;
@@ -28,6 +29,7 @@ public:
 	template<_CPT Arithmetic C> using __similar_d_ref_cst = const __similar<C>&;
 	template<_CPT Arithmetic C> using __similar_d_ptr = __similar<C>*;
 	template<_CPT Arithmetic C> using __similar_d_ptr_cst = const __similar<C>*;
+
 
 	NGS_TYPE_DEFINE(___this, this);
 	NGS_TYPE_DEFINE(Derived<Number>, derived);

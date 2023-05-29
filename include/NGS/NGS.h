@@ -12,7 +12,7 @@
 // 1:	Version
 // 2:	STL	Config
 // 3:	Defined
-// 4:	TypeTrait Lib Object Base 
+// 4:	TypeTrait Lib Object Base
 // 5:	Bit Concepts
 // 6:	Color TemplateMate ByteArray
 // ==============================
@@ -40,6 +40,7 @@
 #include "NGS/NGS_Color.h"
 #include "NGS/NGS_Defined.h"
 #include "NGS/ByteArray.h"
+#include "NGS/File.h"
 
 #include "NGS/NGS_Function.h"
 #include "NGS/NGS_Memory.h"
