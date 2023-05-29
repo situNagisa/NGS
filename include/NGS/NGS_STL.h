@@ -21,6 +21,7 @@
 #include <queue>
 #include <unordered_set>
 #include <set>
+#include <variant>
 
 #include <functional>
 

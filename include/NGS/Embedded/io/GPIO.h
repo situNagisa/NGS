@@ -2,11 +2,11 @@
 
 #include "NGS/NGS_Defined.h"
 #include "NGS/NGS_STL.h"
-#include "NGS/Embedded/Interface.h"
+#include "NGS/Embedded/io/IO.h"
 
 NGS_BEGIN
 
-class GPIO : public EmbeddedObject {
+class GPIO : public IO {
 public:
 	enum class Mode {
 		disable,
