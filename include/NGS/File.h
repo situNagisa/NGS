@@ -26,38 +26,47 @@ public:
 	}
 	operator std::string()const { return GetFilePath(); }
 
-	void Open(std::string_view file) {
+	void Open(std::string_view path) {
+		OpenDirectory(path);
+		_filename = _dir.back();
+		_dir.pop_back();
+	}
+	void OpenDirectory(std::string_view dir) {
 		using std::string_view_literals::operator""sv;
-		for (const auto& v : (file | std::views::split("\\"sv))) {
+		for (const auto& v : (dir | std::views::split("\\"sv))) {
 			for (const auto& folder : v | std::views::split("/"sv)) {
 #if NGS_COMPILER == NGS_GCC
 				std::string f;
 				for (const auto& c : folder) {
 					f += c;
 				}
-				_path.push_back(f);
+				_dir.push_back(f);
 #else
-				_path.emplace_back(folder.begin(), folder.end());
+				_dir.emplace_back(folder.begin(), folder.end());
 #endif
 			}
 		}
 	}
-	void Clear() { _path.clear(); }
-	void Close() { _path.pop_back(); }
-	size_t Size()const { return _path.size(); }
+	void Clear() {
+		_filename.clear();
+		_dir.clear();
+	}
+	void Close() { _dir.pop_back(); }
+	size_t Size()const { return _dir.size(); }
 	std::string GetDirectory()const {
 		std::string dir;
-		std::ranges::for_each(_path | std::views::take(_path.size() - 1), [&](const std::string& folder) {
+		std::ranges::for_each(_dir, [&](const std::string& folder) {
 			dir += folder + SEPARATOR;
 			});
 		return dir;
 	}
-	std::string GetFilename()const { return _path.back(); }
+	std::string GetFilename()const { return _filename; }
 	std::string GetFilePath()const { return GetDirectory() + GetFilename(); }
 private:
 
 private:
-	std::vector<std::string> _path;
+	std::string _filename = {};
+	std::vector<std::string> _dir;
 };
 
 NGS_END

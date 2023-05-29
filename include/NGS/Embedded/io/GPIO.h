@@ -33,7 +33,7 @@ public:
 	};
 public:
 
-	bool Open(pin_t gpio_num) { Open(gpio_num, Mode::output); }
+	bool Open(pin_t gpio_num) { return Open(gpio_num, Mode::output); }
 	bool Open(pin_t gpio_num, Mode mode);
 
 	bool IsOpened()const override;
