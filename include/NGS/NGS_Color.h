@@ -10,6 +10,20 @@
 
 NGS_BEGIN
 
+enum class PixelFormat : ngs::uint32 {
+	unknown,
+
+	ARGB8,
+	ARGB15,
+	ARGB16,
+	ARGB24,
+	ARGB32,
+
+	MJPEG,
+
+	YUYV,
+};
+
 NGS_CONCEPT
 
 template<typename T>

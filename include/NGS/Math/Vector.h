@@ -41,7 +41,7 @@ public:
 	//	构造函数
 	//=======================================
 	constexpr _Vector() = default;
-	constexpr _Vector(__num x) :
+	explicit(true) constexpr _Vector(__num x) :
 		x(x)
 	{}
 	constexpr _Vector(__this_ref_cst) = default;
@@ -250,11 +250,9 @@ template<_CPT Arithmetic Number>
 using Point2_ = Vector2D<Number>;
 
 using Point2i = Point2_<int>;
-using Point2d = Point2i;
 using Point2f = Point2_<float>;
 using Point2lf = Point2_<double>;
-
-using Point2 = Point2d;
+using Point2s = Point2_<size_t>;
 
 template<_CPT Arithmetic Number = float>
 class Vector3D : public _Vector<3, Number, Vector3D> {
@@ -292,10 +290,8 @@ template<_CPT Arithmetic Number>
 using Point3_ = Vector3D<Number>;
 
 using Point3i = Point3_<int>;
-using Point3d = Point3i;
 using Point3f = Point3_<float>;
 using Point3lf = Point3_<double>;
-
-using Point3 = Point3d;
+using Point3s = Point3_<size_t>;
 
 NGS_END
