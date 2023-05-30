@@ -24,6 +24,7 @@
     <ClInclude Include="Debug\Stream.h" />
     <ClInclude Include="Embedded\Embedded.h" />
     <ClInclude Include="Embedded\GPIO.h" />
+    <ClInclude Include="Embedded\io\IO.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="Math\Line.h" />
     <ClInclude Include="Math\Math.h" />
@@ -53,9 +54,6 @@
     <ClInclude Include="NGS_TypeTrait.h" />
     <ClInclude Include="NGS_Version.h" />
     <ClInclude Include="Windows\Console.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Embedded\io\MultiplexIO.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

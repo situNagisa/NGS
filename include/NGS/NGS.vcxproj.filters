@@ -129,5 +129,8 @@
     <ClInclude Include="Embedded\Embedded.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Embedded\io\IO.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
