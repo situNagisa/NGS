@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithm\Algorithm.h" />
+    <ClInclude Include="Algorithm\PID.h" />
+    <ClInclude Include="Algorithm\PID.hpp" />
     <ClInclude Include="ByteArray.h" />
     <ClInclude Include="Debug\Debug.h" />
     <ClInclude Include="Debug\Stream.h" />

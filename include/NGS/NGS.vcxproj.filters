@@ -135,5 +135,14 @@
     <ClInclude Include="Embedded\bus\usb\UVC.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Algorithm\PID.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithm\PID.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithm\Algorithm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
