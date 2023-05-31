@@ -22,6 +22,7 @@
     <ClInclude Include="ByteArray.h" />
     <ClInclude Include="Debug\Debug.h" />
     <ClInclude Include="Debug\Stream.h" />
+    <ClInclude Include="Embedded\bus\usb\UVC.h" />
     <ClInclude Include="Embedded\Embedded.h" />
     <ClInclude Include="Embedded\GPIO.h" />
     <ClInclude Include="Embedded\io\IO.h" />
