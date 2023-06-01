@@ -77,10 +77,23 @@ struct Channel {
 	static constexpr type ConvertFrom(Channel<_Count2, _Offset2>::type value) {
 		return ConvertFrom< Channel<_Count2, _Offset2>>(value);
 	}
+
+	static constexpr FilterColor(_CPT Integral color) {
+		return (color >> Offset) & Filter;
+	}
 private:
 	Channel() = default;
 };
-using StdChannel = Channel<8, 0>;
+using Channel1 = Channel<1, 0>;
+using Channel2 = Channel<2, 0>;
+using Channel3 = Channel<3, 0>;
+using Channel4 = Channel<4, 0>;
+using Channel5 = Channel<5, 0>;
+using Channel6 = Channel<6, 0>;
+using Channel7 = Channel<7, 0>;
+using Channel8 = Channel<8, 0>;
+
+using StdChannel = Channel8;
 
 static_assert(_CPT Channel_C<StdChannel>);
 NGS_END
@@ -110,23 +123,26 @@ NGS_TYPE
 #undef _R
 #undef _G
 #undef _B
-template<size_t _A, size_t _R, size_t _G, size_t _B>
-struct ARGB {
+
+template<_CPT Channel_C _A, _CPT Channel_C _R, _CPT Channel_C _G, _CPT Channel_C _B>
+struct _basic_ARGB {
 public:
-	using A = Channel<_A, _A + _R + _G>;
-	using R = Channel<_R, _A + _R>;
-	using G = Channel<_G, _A>;
-	using B = Channel<_B, 0>;
-	using type = byte_<ByteOf(_A + _R + _G + _B)>;
+	using A = _A;
+	using R = _R;
+	using G = _G;
+	using B = _B;
+	using type = byte_<ByteOf(A::Count + R::Count + G::Count + B::Count)>;
+
+	using std_type = byte_<ByteOf(StdChannel::Count) * 4>;
 
 	static constexpr uint32
 		Filter = A::FilterWithOffset | R::FilterWithOffset | G::FilterWithOffset | B::FilterWithOffset
 		;
 
-	constexpr ARGB() = default;
-	constexpr ARGB(type value) : _value(value) {}
+	constexpr _basic_ARGB() = default;
+	constexpr _basic_ARGB(type value) : _value(value) {}
 
-	constexpr ARGB(
+	constexpr _basic_ARGB(
 		StdChannel::type a,
 		StdChannel::type r,
 		StdChannel::type g,
@@ -139,6 +155,13 @@ public:
 			(B::template ConvertFrom<StdChannel>(b) << B::Offset)
 		)
 	{}
+
+	constexpr _basic_ARGB(type color)
+		: _value(color)
+	{}
+
+	operator type()const { return _value; }
+	constexpr type Value()const { return _value; }
 
 	constexpr A::type Alpha() const { return ((_value >> A::Offset) & A::Filter); }
 	void Alpha(A::type a) { _value = ((a << A::Offset) & A::FilterWithOffset) | (_value & ~A::FilterWithOffset); }
@@ -159,9 +182,9 @@ public:
 	void StdBlue(StdChannel::type b) { Blue(B::template ConvertFrom<StdChannel>(b)); }
 
 
-	template<size_t _A2, size_t _R2, size_t _G2, size_t _B2>
-	operator ARGB<_A2, _R2, _G2, _B2>()const {
-		return ARGB<_A2, _R2, _G2, _B2>(
+	template<_CPT Channel_C _A2, _CPT Channel_C _R2, _CPT Channel_C _G2, _CPT Channel_C _B2>
+	constexpr operator _basic_ARGB<_A2, _R2, _G2, _B2>()const {
+		return _basic_ARGB<_A2, _R2, _G2, _B2>(
 			StdAlpha(),
 			StdRed(),
 			StdGreen(),
@@ -172,6 +195,9 @@ private:
 	type _value;
 };
 
+template<size_t _A, size_t _R, size_t _G, size_t _B>
+using ARGB = _basic_ARGB<Channel<_A, _R + _G + _B>, Channel<_R, _G + _B>, Channel<_G, _B>, Channel<_B, 0>>;
+
 using ARGB32 = ARGB<8, 8, 8, 8>;
 using ARGB24 = ARGB<0, 8, 8, 8>;
 using ARGB16 = ARGB<0, 5, 6, 5>;
@@ -181,6 +207,19 @@ using ARGB8 = ARGB<0, 3, 3, 2>;
 using StdARGB = ARGB32;
 
 static_assert(_CPT ARGB_C<StdARGB>);
+
+template<size_t _B, size_t _G, size_t _R, size_t _A>
+using BGRA = _basic_ARGB<Channel<_B, _G + _R + _A>, Channel<_G, _R + _A>, Channel<_R, _A>, Channel<_A, 0>>;
+
+using BGRA32 = BGRA<8, 8, 8, 8>;
+using BGRA24 = BGRA<0, 8, 8, 8>;
+using BGRA16 = BGRA<0, 5, 6, 5>;
+using BGRA15 = BGRA<1, 5, 5, 5>;
+using BGRA8 = BGRA<0, 3, 3, 2>;
+
+using StdBGRA = BGRA32;
+
+static_assert(_CPT ARGB_C<StdBGRA>);
 
 struct HSV {
 	using HueType = byte;

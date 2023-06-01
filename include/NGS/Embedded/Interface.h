@@ -8,7 +8,7 @@ NGS_BEGIN
 
 using pin_t = ngs::uint32;
 
-class EmbeddedObject {
+class EmbeddedObject : public DeleteCopy {
 public:
 	virtual ~EmbeddedObject() {
 		if (_data) {
@@ -23,7 +23,7 @@ public:
 private:
 
 protected:
-	ngs::void_ptr _data;
+	ngs::void_ptr _data = nullptr;
 };
 
 NGS_END

@@ -225,9 +225,7 @@ MemorySwap(T* a, T* b) {
 		MemorySwap<modulo>(reinterpret_cast<byte_ptr>(a), reinterpret_cast<byte_ptr>(b));
 }
 
-inline
-void
-ByteInverse(byte_ptr p, size_t size) {
+inline void ByteInverse(byte_ptr p, size_t size) {
 	for (size_t i = 0, len = size / 2; i < len; i++)
 		MemorySwap(p + i, p + (size - 1 - i));
 }
