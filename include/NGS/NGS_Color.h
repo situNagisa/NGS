@@ -78,7 +78,7 @@ struct Channel {
 		return ConvertFrom< Channel<_Count2, _Offset2>>(value);
 	}
 
-	static constexpr FilterColor(_CPT Integral color) {
+	static constexpr auto FilterColor(_CPT Integral auto color) {
 		return (color >> Offset) & Filter;
 	}
 private:
@@ -142,24 +142,6 @@ public:
 	constexpr _basic_ARGB() = default;
 	constexpr _basic_ARGB(type value) : _value(value) {}
 
-	constexpr _basic_ARGB(
-		StdChannel::type a,
-		StdChannel::type r,
-		StdChannel::type g,
-		StdChannel::type b
-	)
-		: _value(
-			(A::template ConvertFrom<StdChannel>(a) << A::Offset) |
-			(R::template ConvertFrom<StdChannel>(r) << R::Offset) |
-			(G::template ConvertFrom<StdChannel>(g) << G::Offset) |
-			(B::template ConvertFrom<StdChannel>(b) << B::Offset)
-		)
-	{}
-
-	constexpr _basic_ARGB(type color)
-		: _value(color)
-	{}
-
 	operator type()const { return _value; }
 	constexpr type Value()const { return _value; }
 
@@ -196,7 +178,29 @@ private:
 };
 
 template<size_t _A, size_t _R, size_t _G, size_t _B>
-using ARGB = _basic_ARGB<Channel<_A, _R + _G + _B>, Channel<_R, _G + _B>, Channel<_G, _B>, Channel<_B, 0>>;
+struct ARGB : public _basic_ARGB<Channel<_A, _R + _G + _B>, Channel<_R, _G + _B>, Channel<_G, _B>, Channel<_B, 0>> {
+	using base = _basic_ARGB<Channel<_A, _R + _G + _B>, Channel<_R, _G + _B>, Channel<_G, _B>, Channel<_B, 0>>;
+	using A = typename base::A;
+	using R = typename base::R;
+	using G = typename base::G;
+	using B = typename base::B;
+
+	using base::_basic_ARGB;
+
+	constexpr ARGB(
+		StdChannel::type a,
+		StdChannel::type r,
+		StdChannel::type g,
+		StdChannel::type b
+	)
+		: base(
+			(A::template ConvertFrom<StdChannel>(a) << A::Offset) |
+			(R::template ConvertFrom<StdChannel>(r) << R::Offset) |
+			(G::template ConvertFrom<StdChannel>(g) << G::Offset) |
+			(B::template ConvertFrom<StdChannel>(b) << B::Offset)
+		)
+	{}
+};
 
 using ARGB32 = ARGB<8, 8, 8, 8>;
 using ARGB24 = ARGB<0, 8, 8, 8>;
@@ -209,7 +213,30 @@ using StdARGB = ARGB32;
 static_assert(_CPT ARGB_C<StdARGB>);
 
 template<size_t _B, size_t _G, size_t _R, size_t _A>
-using BGRA = _basic_ARGB<Channel<_B, _G + _R + _A>, Channel<_G, _R + _A>, Channel<_R, _A>, Channel<_A, 0>>;
+struct BGRA : public _basic_ARGB<Channel<_B, _G + _R + _A>, Channel<_G, _R + _A>, Channel<_R, _A>, Channel<_A, 0>> {
+	using base = _basic_ARGB<Channel<_B, _G + _R + _A>, Channel<_G, _R + _A>, Channel<_R, _A>, Channel<_A, 0>>;
+	using A = typename base::A;
+	using R = typename base::R;
+	using G = typename base::G;
+	using B = typename base::B;
+
+	using base::_basic_ARGB;
+
+	constexpr BGRA(
+		StdChannel::type b,
+		StdChannel::type g,
+		StdChannel::type r,
+		StdChannel::type a
+	)
+		: base(
+			(A::template ConvertFrom<StdChannel>(a) << A::Offset) |
+			(R::template ConvertFrom<StdChannel>(r) << R::Offset) |
+			(G::template ConvertFrom<StdChannel>(g) << G::Offset) |
+			(B::template ConvertFrom<StdChannel>(b) << B::Offset)
+		)
+	{}
+};
+
 
 using BGRA32 = BGRA<8, 8, 8, 8>;
 using BGRA24 = BGRA<0, 8, 8, 8>;
