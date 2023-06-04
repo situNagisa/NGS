@@ -1,8 +1,7 @@
 #pragma once
 
-#include "NGS/NGS_Defined.h"
-#include "NGS/NGS_STL.h"
-#include "NGS/Embedded/io/IO.h"
+#include "NGS/base/base.h"
+#include "NGS/embedded/io/IO.h"
 
 NGS_BEGIN
 

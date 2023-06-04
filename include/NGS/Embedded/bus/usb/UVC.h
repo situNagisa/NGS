@@ -1,9 +1,7 @@
 #pragma once
 
-#include "NGS/NGS_Defined.h"
-#include "NGS/NGS_STL.h"
-#include "NGS/NGS_Bit.h"
-#include "NGS/Embedded/bus/Bus.h"
+#include "NGS/base/base.h"
+#include "NGS/embedded/bus/Bus.h"
 
 NGS_BEGIN
 

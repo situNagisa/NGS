@@ -1,13 +1,11 @@
 #pragma once
 
-#include "NGS/NGS_Defined.h"
-#include "NGS/NGS_STL.h"
-#include "NGS/NGS_Bit.h"
-#include "NGS/Embedded/bus/Bus.h"
+#include "NGS/base/base.h"
+#include "NGS/embedded/bus/Bus.h"
 
 NGS_BEGIN
 
-class I2C : public Bus {
+class I2C : public BusSync<BusBase::Type::half_duplex> {
 protected:
 	NGS_TYPE_DEFINE(ngs::uint16, address);
 	NGS_TYPE_DEFINE(I2C, base);
@@ -44,8 +42,6 @@ protected:
 	__address _filter = ngs::bit_max(7);
 	__address _address = null_address;
 };
-template<>
-constexpr Bus::Type Bus::type<I2C> = Bus::Type::half_duplex;
 
 
 class I2CMaster : public I2C {

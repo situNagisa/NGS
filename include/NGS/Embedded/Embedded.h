@@ -1,10 +1,14 @@
 #pragma once
 
-#include "NGS/Embedded/Interface.h"
+#define NGS_CORE_EMBEDDED 1
 
-#include "NGS/Embedded/io/GPIO.h"
-#include "NGS/Embedded/io/PWM.h"
+#include "NGS/embedded/interface.h"
 
-#include "NGS/Embedded/bus/Bus.h"
-#include "NGS/Embedded/bus/i2c/I2C.h"
-#include "NGS/Embedded/bus/spi/SPI.h"
+#include "NGS/embedded/io/GPIO.h"
+#include "NGS/embedded/io/PWM.h"
+
+#include "NGS/embedded/bus/Bus.h"
+#include "NGS/embedded/bus/i2c/I2C.h"
+#include "NGS/embedded/bus/spi/SPI.h"
+#include "NGS/embedded/bus/uart/UART.h"
+#include "NGS/embedded/bus/serial_port/SerialPort.h"

@@ -1,14 +1,7 @@
-//
-// Created by 86198 on 2023/4/27.
-//
+#pragma once
 
-#ifndef NGS_LINE_H
-#define NGS_LINE_H
-
-#include "NGS/NGS_Defined.h"
-#include "NGS/NGS_STL.h"
-#include "NGS/Math/Vector.h"
-#include "NGS/NGS_Concepts.h"
+#include "NGS/base/base.h"
+#include "NGS/math/vector.h"
 
 NGS_BEGIN
 
@@ -41,5 +34,3 @@ using Line2lf = Line2D<double>;
 using Line2 = Line2i;
 
 NGS_END
-
-#endif //NGS_LINE_H

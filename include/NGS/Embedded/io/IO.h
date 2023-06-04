@@ -1,7 +1,7 @@
 #pragma once
 
-#include "NGS/Embedded/Interface.h"
-#include "NGS/NGS_Defined.h"
+#include "NGS/base/base.h"
+#include "NGS/embedded/interface.h"
 
 NGS_BEGIN
 

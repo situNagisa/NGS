@@ -3,10 +3,13 @@
 //
 #define _DEBUG
 #include "NGS/NGS.h"
-//#include "doctest.h"
+
+#ifdef NGS_USE_HPP
+static_assert(false);
+#endif
 
 
 int main() {
-	ngs::nos.Message("Hello, world!!");
+	//ngs::nos.Message("Hello, world!!");
 	return 0;
 }

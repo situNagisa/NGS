@@ -1,8 +1,6 @@
 #pragma once
 
-#include "NGS/NGS_Defined.h"
-#include "NGS/NGS_STL.h"
-#include "NGS/NGS_Concepts.h"
+#include "NGS/base/base.h"
 
 
 NGS_BEGIN
@@ -233,15 +231,15 @@ public:
 	friend constexpr __this operator^(__num s, __this_ref_cst a) { return Cross(s, a); }
 	constexpr __this_ref operator^=(__num s) { return CrossEq(*this, s); }
 
-	ngs::float64 Tan()const { return this->y / this->x; }
-	ngs::float64 Cot()const { return this->x / this->y; }
-	ngs::float64 Sin()const { return this->y / this->Length(); }
-	ngs::float64 Cos()const { return this->x / this->Length(); }
+	float64 Tan()const { return this->y / this->x; }
+	float64 Cot()const { return this->x / this->y; }
+	float64 Sin()const { return this->y / this->Length(); }
+	float64 Cos()const { return this->x / this->Length(); }
 
-	ngs::float64 ArcTan()const { return ::atan2(this->y, this->x); }
-	ngs::float64 ArcCot()const { return ::atan2(this->x, this->y); }
-	ngs::float64 ArcSin()const { return ::asin(Sin()); }
-	ngs::float64 ArcCos()const { return ::acos(Cos()); }
+	float64 ArcTan()const { return ::atan2(this->y, this->x); }
+	float64 ArcCot()const { return ::atan2(this->x, this->y); }
+	float64 ArcSin()const { return ::asin(Sin()); }
+	float64 ArcCos()const { return ::acos(Cos()); }
 
 public:
 	__num y;

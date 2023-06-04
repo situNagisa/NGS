@@ -1,0 +1,17 @@
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/CMakeFiles/NGS.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/CMakeFiles/edit_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/CMakeFiles/rebuild_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/CMakeFiles/edit_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/CMakeFiles/rebuild_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/algorithm/CMakeFiles/edit_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/algorithm/CMakeFiles/rebuild_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/base/CMakeFiles/edit_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/base/CMakeFiles/rebuild_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/embedded/CMakeFiles/edit_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/embedded/CMakeFiles/rebuild_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/extend/CMakeFiles/edit_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/extend/CMakeFiles/rebuild_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/math/CMakeFiles/edit_cache.dir
+G:/Projects/C_CPP/Clion/NGS/out/build/x64-Debug/include/NGS/math/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,7 @@
 #pragma once
 
-#include "NGS/Algorithm/PID.h"
-#include "NGS/Algorithm/PID.hpp"
+#include "NGS/algorithm/PID.h"
+
+#ifdef NGS_USE_HPP
+#include "NGS/algorithm/PID.hpp"
+#endif

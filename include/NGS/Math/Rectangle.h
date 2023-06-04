@@ -1,12 +1,8 @@
 #pragma  once
 
-#include "NGS/NGS_Defined.h"
-#include "NGS/NGS_Defined.h"
-#include "NGS/NGS_STL.h"
-#include "NGS/NGS_Concepts.h"
-#include "NGS/Math/Math.h"
-#include "NGS/Math/Vector.h"
-
+#include "NGS/base/base.h"
+#include "NGS/math/util.h"
+#include "NGS/math/vector.h"
 
 NGS_BEGIN
 
