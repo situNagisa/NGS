@@ -30,7 +30,9 @@
     <ClInclude Include="base\defined.h" />
     <ClInclude Include="embedded\bus\Bus.h" />
     <ClInclude Include="embedded\bus\i2c\I2C.h" />
+    <ClInclude Include="embedded\bus\serial_port\SerialPort.h" />
     <ClInclude Include="embedded\bus\spi\SPI.h" />
+    <ClInclude Include="embedded\bus\uart\UART.h" />
     <ClInclude Include="embedded\bus\usb\UVC.h" />
     <ClInclude Include="embedded\embedded.h" />
     <ClInclude Include="embedded\Interface.h" />
@@ -75,6 +77,10 @@
     <ClInclude Include="Math\vector_expr.h" />
     <ClInclude Include="NGS.h" />
     <ClInclude Include="extend\parser.h" />
+    <ClInclude Include="nsw\bus\serial_port\SerialPort.hpp" />
+    <ClInclude Include="nsw\bus\uart\UART.hpp" />
+    <ClInclude Include="nsw\defined.h" />
+    <ClInclude Include="nsw\depend.h" />
     <ClInclude Include="nsw\NSW.h" />
   </ItemGroup>
   <ItemGroup>

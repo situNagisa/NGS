@@ -39,7 +39,7 @@
     <ClInclude Include="file\device_file.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="io\GPIO.h">
+    <ClInclude Include="io\GPIO.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="io\MultiplexIO.h">

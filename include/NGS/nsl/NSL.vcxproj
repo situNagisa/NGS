@@ -23,7 +23,7 @@
     <ClInclude Include="file\device_file.h" />
     <ClInclude Include="file\file.h" />
     <ClInclude Include="file\file.hpp" />
-    <ClInclude Include="io\GPIO.h" />
+    <ClInclude Include="io\GPIO.hpp" />
     <ClInclude Include="io\MultiplexIO.h" />
     <ClInclude Include="io\MultiplexIO.hpp" />
     <ClInclude Include="depend.h" />

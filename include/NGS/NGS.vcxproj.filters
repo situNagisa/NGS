@@ -198,6 +198,24 @@
     <ClInclude Include="embedded\io\PWM.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="embedded\bus\uart\UART.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsw\bus\uart\UART.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsw\depend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsw\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\bus\serial_port\SerialPort.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsw\bus\serial_port\SerialPort.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="embedded\CMakeLists.txt" />

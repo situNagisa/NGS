@@ -71,7 +71,7 @@ public:
 	template<bool IS_PLAY>
 	void GoTo(size_t frame) {
 		GoTo(frame);
-		Bits<IS_PLAY>(_mc_flag, IS_PLAYING);
+		_mc_flag[IS_PLAYING] = IS_PLAY;
 	}
 	void GoTo(size_t frame) {
 		_currentFrame = frame - 1;

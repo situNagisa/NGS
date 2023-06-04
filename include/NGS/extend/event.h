@@ -6,7 +6,6 @@
 NGS_BEGIN
 class Event : public TypeDefined<Event> {
 public:
-	NGS_DEFAULT_TYPE;
 	NGS_TYPE_DEFINE(nstring, string);
 	NGS_TYPE_DEFINE(nstring_view, view);
 	NGS_TYPE_DEFINE(void_ptr, target);
@@ -88,7 +87,6 @@ private:
 };
 
 struct EventListener {
-	NGS_DEFAULT_TYPE;
 	NGS_TYPE_DEFINE(EventListener, this);
 	NGS_TYPE_DEFINE(void_ptr, target);
 	NGS_TYPE_DEFINE(Event, evt);
@@ -98,9 +96,9 @@ struct EventListener {
 
 	__target currentTarget = nullptr;
 	__handler handler;
-	__sign priority = 0;
+	int priority = 0;
 
-	EventListener(__handler_ref_cst handler, __target target = nullptr, __sign priority = 0) :
+	EventListener(__handler_ref_cst handler, __target target = nullptr, int priority = 0) :
 		currentTarget(target),
 		handler(handler),
 		priority(priority)
@@ -116,8 +114,6 @@ struct EventListener {
 
 class EventDispatcher : public TypeDefined<EventDispatcher> {
 public:
-	NGS_DEFAULT_TYPE;
-
 	NGS_TYPE_DEFINE(nstring, string);
 	NGS_TYPE_DEFINE(nstring_view, string_v);
 	NGS_TYPE_DEFINE(Event, evt);
@@ -207,7 +203,7 @@ public:
 		auto&& search = _cache.find(type);
 		if (search == _cache.end())return;
 		auto& listeners = search->second;
-		__size i = 0;
+		size_t i = 0;
 		for (; i < listeners.size(); i++)
 			if (listeners[i].handler == listener)break;
 
