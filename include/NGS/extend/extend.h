@@ -18,12 +18,7 @@
 #include "NGS/extend/movie.h"
 #include "NGS/extend/setting.h"
 #include "NGS/extend/timer.h"
-#include "NGS/extend/file.h"
-#include "NGS/extend/console.h"
+ //#include "NGS/extend/file.h"
 #include "NGS/extend/stream.h"
 #include "NGS/extend/debug.h"
 #include "NGS/extend/parser.h"
-
-#ifdef NGS_USE_HPP
-#include "NGS/extend/console.hpp"
-#endif

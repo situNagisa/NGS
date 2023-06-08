@@ -7,19 +7,19 @@ NSL_BEGIN
 
 inline bool File::Access(__path_ref_cst path, AccessMode mode) {
 	ngs::nos.Log("File::Access", "flag:%x\n", mode);
-	return !access(path.GetFilePath().c_str(), mode);
+	return !access(path.string().c_str(), mode);
 }
 
 
 inline bool File::Open(__path_ref_cst path, OpenMode mode) {
 	_path = path;
 	ngs::nos.Log("File::Open", "flag:%x\n", mode);
-	_fd = open(path.GetFilePath().c_str(), mode);
+	_fd = open(path.string().c_str(), mode);
 
 	if (_fd < 0)
-		ngs::nos.Error("打开 %s 失败\n", path.GetFilename().c_str());
+		ngs::nos.Error("打开 %s 失败\n", path.string().c_str());
 	else
-		ngs::nos.Log("File::Open", "打开 %s 成功!\n", path.GetFilename().c_str());
+		ngs::nos.Log("File::Open", "打开 %s 成功!\n", path.string().c_str());
 
 	return _fd >= 0;
 }
@@ -32,7 +32,7 @@ inline bool File::IsOpened() const { return _fd >= 0; }
 
 inline void File::Close() {
 	close(_fd);
-	_path.Clear();
+	_path.clear();
 	_fd = -1;
 }
 

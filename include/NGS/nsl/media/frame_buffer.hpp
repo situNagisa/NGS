@@ -10,12 +10,12 @@ struct _FrameBufferData {
 	fb_fix_screeninfo fix = {};
 };
 
-bool FrameBuffer::Open(const ngs::FilePath& path) {
+bool FrameBuffer::Open(const std::filesystem::path& path) {
 	_data = ngs::New(new _FrameBufferData());
 	auto& data = *reinterpret_cast<_FrameBufferData*>(_data);
 
 	if (!_file.IsOpened() && !_file.Open(path)) {
-		ngs::nos.Error("open path %s fail!\b", path.GetFilePath().c_str());
+		ngs::nos.Error("open path %s fail!\b", path.string().c_str());
 		goto err_new;
 	}
 

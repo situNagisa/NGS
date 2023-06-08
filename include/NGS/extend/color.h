@@ -280,6 +280,9 @@ struct HSV {
 	float32 value;
 };
 
+#undef max
+#undef min
+
 template<typename _From, typename _To>
 _To Convert(const _From& from);
 

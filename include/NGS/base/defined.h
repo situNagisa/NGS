@@ -174,6 +174,11 @@ _NGS_TYPE_DEFINE(byte_<sizeof(void*)>, ptr_t);
 
 NGS_END
 
+#if NGS_HAS_CPP_20
+using source_location = std::source_location;
+#else
+using source_location = std::experimental::source_location;
+#endif
 
 NGS_END
 

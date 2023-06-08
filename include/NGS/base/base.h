@@ -31,3 +31,11 @@
 #include "NGS/base/concepts.h"
 
 #include "NGS/base/template_mate.h"
+
+#include "NGS/base/console.h"
+#include "NGS/base/log.h"
+#include "NGS/base/assert.h"
+
+#ifdef NGS_USE_HPP
+#include "NGS/base/console.hpp"
+#endif

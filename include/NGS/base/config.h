@@ -35,4 +35,9 @@
 #define NGS_BUILD_TYPE NGS_RELEASE
 #endif
 
+#ifdef NGS_USE_HPP
+#define NGS_HPP_INLINE inline
+#else
+#define NGS_HPP_INILNE 
+#endif
 #endif // !__HEAD_NGS_NGS_Config

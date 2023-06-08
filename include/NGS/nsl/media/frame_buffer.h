@@ -8,7 +8,7 @@ NSL_BEGIN
 class FrameBuffer : public NSLDevice {
 public:
 
-	bool Open(const ngs::FilePath& path);
+	bool Open(const std::filesystem::path& path);
 
 	bool IsOpened()const override { return _data; }
 	void Close()override;

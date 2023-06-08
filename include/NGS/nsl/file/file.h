@@ -7,7 +7,7 @@
 NSL_BEGIN
 
 class File : public ngs::DeleteCopy, public NSLObject {
-	NGS_TYPE_DEFINE(ngs::FilePath, path);
+	NGS_TYPE_DEFINE(std::filesystem::path, path);
 public:
 	NGS_FLAG(F_ACCESS_EXIST, FLAG_ANY);
 	NGS_FLAG(F_ACCESS_EXE, 0);
@@ -49,7 +49,7 @@ public:
 	__path_ref_cst GetCurrentFilePath()const { return _path; }
 
 	bool OpenDirectory(std::string_view dir, OpenMode mode) {
-		_path.OpenDirectory(dir);
+		_path = __path(dir) / _path;
 		return Open(mode);
 	}
 	bool OpenDirectory(std::string_view dir) { return OpenDirectory(dir, DefaultOpenMode()); }

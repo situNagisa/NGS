@@ -61,14 +61,14 @@ public:
 	static constexpr uint64 ByteCount = (((BitCount) / BitPerByte) + (((BitCount) % BitPerByte) > 0));
 	using type = byte_<ByteCount>;
 
-	static constexpr type Mask = static_cast<type>((((uint64)1 << BitCount) - 1));
+	static constexpr type Mask = (BitCount == 64 ) ? static_cast<type>(~(uint64)0) : static_cast<type>((((uint64)1 << BitCount) - 1));
 
 
 	class Bit {
 		NGS_TYPE_DEFINE(BitSet<BitCount>, set);
 		NGS_TYPE_DEFINE(Bit, this);
 
-		friend class __set;
+		friend class BitSet<BitCount>;
 	public:
 		constexpr ~Bit()noexcept {}
 
@@ -84,7 +84,7 @@ public:
 			return *this;
 		}
 		constexpr bool operator~()const noexcept { return !(static_cast<bool>(*this)); }
-		operator bool()const noexcept { return _set_ref._Get(_pos); }
+        constexpr operator bool()const noexcept { return _set_ref._Get(_pos); }
 
 	private:
 		Bit(__set_ref set_ref, size_t pos)
@@ -108,7 +108,7 @@ public:
 	constexpr bool operator==(__this_ref_cst other)const { return _Get() == other._Get(); }
 
 	constexpr operator type()const { return _Get(); }
-	__bit operator[](size_t index) { return Bit(*this, index); }
+    constexpr __bit operator[](size_t index) { return Bit(*this, index); }
 	constexpr bool operator[](size_t index)const { return _Get(index); }
 	constexpr bool test(size_t index)const {
 		if (index < 0 || index >= (BitCount))

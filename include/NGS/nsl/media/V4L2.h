@@ -10,7 +10,7 @@ public:
 
 public:
 
-	bool Open(const ngs::FilePath& path);
+	bool Open(const std::filesystem::path& path);
 	bool IsOpened()const override;
 	void Close();
 

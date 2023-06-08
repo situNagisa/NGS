@@ -52,12 +52,12 @@ struct _V4l2Data {
 	v4l2_buffer* currentBuffer = nullptr;
 };
 
-bool V4L2::Open(const ngs::FilePath& path) {
+bool V4L2::Open(const std::filesystem::path& path) {
 	_data = ngs::New(new _V4l2Data());
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
 	if (!data.device.Open(path)) {
-		ngs::nos.Error("V4L2 can't open device file %s!\n", path.GetFilePath().c_str());
+		ngs::nos.Error("V4L2 can't open device file %s!\n", path.string().c_str());
 		goto err;
 	}
 	if (!data.device.IOCtrl(VIDIOC_QUERYCAP, &data.cap)) {
@@ -65,10 +65,10 @@ bool V4L2::Open(const ngs::FilePath& path) {
 		return false;
 	}
 	if (!ngs::Bits(data.cap.capabilities, V4L2_CAP_VIDEO_CAPTURE)) {
-		ngs::nos.Error("%s : No capture video device!\n", path.GetFilePath().c_str());
+		ngs::nos.Error("%s : No capture video device!\n", path.string().c_str());
 		goto err;
 	}
-	ngs::nos.Log("V4L2::Open", "open %s successfully\n", path.GetFilePath().c_str());
+	ngs::nos.Log("V4L2::Open", "open %s successfully\n", path.string().c_str());
 
 	LoadDeviceDescription();
 

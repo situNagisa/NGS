@@ -162,10 +162,10 @@
     <ClInclude Include="embeded\bus\spi\SPI.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\console.h">
+    <ClInclude Include="base\console.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\console.hpp">
+    <ClInclude Include="base\console.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nsw\NSW.h">
@@ -214,6 +214,51 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nsw\bus\serial_port\SerialPort.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\file\device_file.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\file\file.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\file\file.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\io\GPIO.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\io\MultiplexIO.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\io\MultiplexIO.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\media\frame_buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\media\frame_buffer.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\media\V4L2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\media\V4L2.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\depend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\NSL.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\assert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\log.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

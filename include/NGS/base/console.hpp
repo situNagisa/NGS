@@ -1,13 +1,17 @@
 #pragma once
 
-#include "NGS/base/base.h"
-#include "NGS/extend/console.h"
-
-NGS_BEGIN
+#include "NGS/base/console.h"
+#include "NGS/base/config.h"
 
 #if NGS_PLATFORM == NGS_WINDOWS
 
 #include <windows.h>
+
+#endif
+
+NGS_BEGIN
+
+#if NGS_PLATFORM == NGS_WINDOWS
 
 static constexpr byte
 BLACK = 0,
@@ -28,7 +32,7 @@ LIGHT_MAGENTA = 13,
 LIGHT_YELLOW = 14,
 BRIGHT_WHITE = 15;
 
-inline void Console::SetTextColor(Console::Color color) {
+NGS_HPP_INILNE void Console::SetTextColor(Console::Color color) {
 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -66,7 +70,7 @@ inline void Console::SetTextColor(Console::Color color) {
 	}
 }
 
-inline void Console::SetBackgroundColor(Console::Color color) {
+NGS_HPP_INILNE void Console::SetBackgroundColor(Console::Color color) {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	switch (color)
@@ -102,7 +106,7 @@ inline void Console::SetBackgroundColor(Console::Color color) {
 
 #else
 
-inline void Console::SetTextColor(Console::Color color) {
+NGS_HPP_INILNE void Console::SetTextColor(Console::Color color) {
 	auto& os = std::cout;
 	switch (color)
 	{
@@ -138,7 +142,7 @@ inline void Console::SetTextColor(Console::Color color) {
 	}
 }
 
-inline void Console::SetBackgroundColor(Console::Color color) {
+NGS_HPP_INILNE void Console::SetBackgroundColor(Console::Color color) {
 	auto& os = std::cout;
 	switch (color)
 	{

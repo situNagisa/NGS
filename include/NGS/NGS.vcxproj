@@ -22,12 +22,14 @@
     <ClInclude Include="algorithm\algorithm.h" />
     <ClInclude Include="algorithm\PID.h" />
     <ClInclude Include="algorithm\PID.hpp" />
+    <ClInclude Include="base\assert.h" />
     <ClInclude Include="base\base_class.h" />
     <ClInclude Include="base\bit.h" />
     <ClInclude Include="base\concepts.h" />
     <ClInclude Include="base\config.h" />
     <ClInclude Include="base\base.h" />
     <ClInclude Include="base\defined.h" />
+    <ClInclude Include="base\log.h" />
     <ClInclude Include="embedded\bus\Bus.h" />
     <ClInclude Include="embedded\bus\i2c\I2C.h" />
     <ClInclude Include="embedded\bus\serial_port\SerialPort.h" />
@@ -39,8 +41,8 @@
     <ClInclude Include="embedded\io\GPIO.h" />
     <ClInclude Include="embedded\io\IO.h" />
     <ClInclude Include="embedded\io\PWM.h" />
-    <ClInclude Include="extend\console.h" />
-    <ClInclude Include="extend\console.hpp" />
+    <ClInclude Include="base\console.h" />
+    <ClInclude Include="base\console.hpp" />
     <ClInclude Include="extend\file.h" />
     <ClInclude Include="base\library.h" />
     <ClInclude Include="base\STL.h" />
@@ -77,6 +79,19 @@
     <ClInclude Include="Math\vector_expr.h" />
     <ClInclude Include="NGS.h" />
     <ClInclude Include="extend\parser.h" />
+    <ClInclude Include="nsl\defined.h" />
+    <ClInclude Include="nsl\depend.h" />
+    <ClInclude Include="nsl\file\device_file.h" />
+    <ClInclude Include="nsl\file\file.h" />
+    <ClInclude Include="nsl\file\file.hpp" />
+    <ClInclude Include="nsl\io\GPIO.hpp" />
+    <ClInclude Include="nsl\io\MultiplexIO.h" />
+    <ClInclude Include="nsl\io\MultiplexIO.hpp" />
+    <ClInclude Include="nsl\media\frame_buffer.h" />
+    <ClInclude Include="nsl\media\frame_buffer.hpp" />
+    <ClInclude Include="nsl\media\V4L2.h" />
+    <ClInclude Include="nsl\media\V4L2.hpp" />
+    <ClInclude Include="nsl\NSL.h" />
     <ClInclude Include="nsw\bus\serial_port\SerialPort.hpp" />
     <ClInclude Include="nsw\bus\uart\UART.hpp" />
     <ClInclude Include="nsw\defined.h" />
@@ -127,45 +142,52 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NGSBase.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NGSBase.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NGSBase.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NGSBase.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temp\Compile\$(Platform)\$(Configuration)\</IntDir>
-    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
-    <IncludePath>$(BOOST_ROOT);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temp\Compile\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(BOOST_ROOT);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(BOOST_ROOT);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temp\Compile\$(Platform)\$(Configuration)\</IntDir>
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(BOOST_ROOT);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Temp\Compile\$(Platform)\$(Configuration)\</IntDir>
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -183,7 +205,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Lib;$(SolutionDir)Lib\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\Lib\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\Lib\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opencv_world470d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -207,7 +229,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Lib;$(SolutionDir)Lib\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\Lib\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\Lib\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opencv_world470.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -228,7 +250,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opencv_world470d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Lib;$(SolutionDir)Lib\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\Lib\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\Lib\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -252,7 +274,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opencv_world470.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Lib;$(SolutionDir)Lib\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\Lib\$(Platform)\$(Configuration)\;$(ProjectDir)..\..\Lib\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

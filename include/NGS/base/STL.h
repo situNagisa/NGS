@@ -22,12 +22,14 @@
 #include <unordered_set>
 #include <set>
 #include <variant>
+#include <stack>
 
 #include <functional>
 
 #include <iostream>
 #include <fstream>
 #include <strstream>
+#include <filesystem>
 
 #include <bit>
 #include <bitset>
@@ -48,6 +50,8 @@
 
 #include <ranges>
 #include <iterator>
+
+
 
 #ifdef NGS_CPP_20
 #include <source_location>

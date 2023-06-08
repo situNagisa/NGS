@@ -10,6 +10,7 @@ static_assert(false);
 
 
 int main() {
-	//ngs::nos.Message("Hello, world!!");
+	NGS_LOGF(ngs::debug,"ohhh %d",666);
 	return 0;
 }
+#include "NGS/base/console.hpp"
