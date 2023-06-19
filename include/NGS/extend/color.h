@@ -98,20 +98,21 @@ NGS_END
 NGS_CONCEPT
 template<typename T>
 concept ARGB_C = requires(T t) {
-	Channel_C<typename T::A>;
-	Channel_C<typename T::R>;
-	Channel_C<typename T::G>;
-	Channel_C<typename T::B>;
-	std::integral<typename T::type>;
+	requires Channel_C<typename T::A>;
+	requires Channel_C<typename T::R>;
+	requires Channel_C<typename T::G>;
+	requires Channel_C<typename T::B>;
+	requires std::integral<typename T::type>;
 
-	{ t.Alpha() } -> std::convertible_to<typename T::A::type>;
-	{ t.Red() } -> std::convertible_to<typename T::R::type>;
-	{ t.Green() } -> std::convertible_to<typename T::G::type>;
-	{ t.Blue() } -> std::convertible_to<typename T::B::type>;
-	{ t.StdAlpha() } -> std::convertible_to<StdChannel::type>;
-	{ t.StdRed() } -> std::convertible_to<StdChannel::type>;
-	{ t.StdGreen() } -> std::convertible_to<StdChannel::type>;
-	{ t.StdBlue() } -> std::convertible_to<StdChannel::type>;
+{ t.Alpha() } -> std::convertible_to<typename T::A::type>;
+{ t.Red() } -> std::convertible_to<typename T::R::type>;
+{ t.Green() } -> std::convertible_to<typename T::G::type>;
+{ t.Blue() } -> std::convertible_to<typename T::B::type>;
+{ t.StdAlpha() } -> std::convertible_to<StdChannel::type>;
+{ t.StdRed() } -> std::convertible_to<StdChannel::type>;
+{ t.StdGreen() } -> std::convertible_to<StdChannel::type>;
+{ t.StdBlue() } -> std::convertible_to<StdChannel::type>;
+
 };
 NGS_END
 
@@ -275,9 +276,9 @@ struct HSV {
 	constexpr float32 Saturation()const { return saturation; }
 	constexpr float32 Value()const { return value; }
 
-	HueType hue;
-	float32 saturation;
-	float32 value;
+	HueType hue{};
+	float32 saturation{};
+	float32 value{};
 };
 
 #undef max

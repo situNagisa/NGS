@@ -1,4 +1,5 @@
 if(NGS_BUILD_HPP)
-	file(GLOB_RECURSE NGS_MATH_SRC *.hpp)
-	target_sources(NGS PRIVATE ${NGS_MATH_SRC})
+	file(GLOB_RECURSE NGS_MATH_SRC *.hpp *.cpp)
+	#target_sources(NGS PRIVATE ${NGS_MATH_SRC})
+	set(NGS_SRC ${NGS_SRC} ${NGS_MATH_SRC} PARENT_SCOPE)
 endif()

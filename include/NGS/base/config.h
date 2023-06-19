@@ -29,7 +29,7 @@
 #define NGS_DEBUG 0
 #define NGS_RELEASE 1
 
-#ifdef _DEBUG || Debug
+#if defined(_DEBUG) || defined(Debug)
 #define NGS_BUILD_TYPE NGS_DEBUG
 #else
 #define NGS_BUILD_TYPE NGS_RELEASE
@@ -38,6 +38,6 @@
 #ifdef NGS_USE_HPP
 #define NGS_HPP_INLINE inline
 #else
-#define NGS_HPP_INILNE 
+#define NGS_HPP_INLINE 
 #endif
 #endif // !__HEAD_NGS_NGS_Config

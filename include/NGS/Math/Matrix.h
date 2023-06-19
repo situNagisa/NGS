@@ -16,15 +16,14 @@ public:
 	NGS_TYPE_DEFINE(Rectangle<Number>, rect);
 
 public:
-	constexpr
-		Matrix(
-			__num a = 1,
-			__num b = 0,
-			__num c = 0,
-			__num d = 1,
-			__num tx = 0,
-			__num ty = 0
-		) :
+	constexpr Matrix(
+		__num a = 1,
+		__num b = 0,
+		__num c = 0,
+		__num d = 1,
+		__num tx = 0,
+		__num ty = 0
+	) :
 		a(a),
 		b(b),
 		c(c),
@@ -32,8 +31,7 @@ public:
 		tx(tx),
 		ty(ty)
 	{}
-	constexpr
-		Matrix(__this_ref_cst other) = default;
+	constexpr Matrix(__this_ref_cst other) = default;
 
 	__this_ref operator=(__this_ref_cst) = default;
 
@@ -267,12 +265,12 @@ public:
 private:
 
 public:
-	__num a;
-	__num b;
-	__num c;
-	__num d;
-	__num tx;
-	__num ty;
+	__num a = {};
+	__num b = {};
+	__num c = {};
+	__num d = {};
+	__num tx = {};
+	__num ty = {};
 public:
 	inline constexpr static __num u = 0;
 	inline constexpr static __num v = 0;

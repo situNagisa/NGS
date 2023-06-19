@@ -50,7 +50,7 @@
 
 #include <ranges>
 #include <iterator>
-
+#include <regex>
 
 
 #ifdef NGS_CPP_20

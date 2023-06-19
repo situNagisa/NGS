@@ -15,19 +15,23 @@ inline void NGS_Assert(
 )
 {
 	if (b)return;
-	ngs::Debugger::PrintFormat(ngs::error,
-		""
-		"\n========================="
-		"\nERROR::[ %s ]"
-		"\n文件：%s"
-		"\n函数：%s"
-		"\n第 %d 行，第 %d 列"
-		"\n=========================\n",
-		text,
-		location.file_name(),
-		location.function_name(),
-		location.line(),
-		location.column()
+	ngs::Debugger::Print(
+		ngs::TextColor::RED,
+		ngs::Format(
+			""
+			"\n========================="
+			"\nERROR::[ %s ]"
+			"\n文件：%s"
+			"\n函数：%s"
+			"\n第 %d 行，第 %d 列"
+			"\n=========================\n",
+			text,
+			location.file_name(),
+			location.function_name(),
+			location.line(),
+			location.column()
+		),
+		ngs::TextColor::RESERT
 	);
 	abort();
 }

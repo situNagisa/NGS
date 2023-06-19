@@ -52,7 +52,7 @@ inline constexpr size_t ByteOf(size_t bitCount) {
 }
 
 static constexpr uint64 BitPerByte = 8;
-
+#undef _N
 template<uint64 _N>
 	requires (_N <= (sizeof(uint64) * BitPerByte))
 class BitSet {
@@ -61,7 +61,7 @@ public:
 	static constexpr uint64 ByteCount = (((BitCount) / BitPerByte) + (((BitCount) % BitPerByte) > 0));
 	using type = byte_<ByteCount>;
 
-	static constexpr type Mask = (BitCount == 64 ) ? static_cast<type>(~(uint64)0) : static_cast<type>((((uint64)1 << BitCount) - 1));
+	static constexpr type Mask = (BitCount == 64) ? static_cast<type>(~(uint64)0) : static_cast<type>((((uint64)1 << BitCount) - 1));
 
 
 	class Bit {
@@ -84,7 +84,7 @@ public:
 			return *this;
 		}
 		constexpr bool operator~()const noexcept { return !(static_cast<bool>(*this)); }
-        constexpr operator bool()const noexcept { return _set_ref._Get(_pos); }
+		constexpr operator bool()const noexcept { return _set_ref._Get(_pos); }
 
 	private:
 		Bit(__set_ref set_ref, size_t pos)
@@ -102,13 +102,16 @@ public:
 	constexpr BitSet(type data) : _data(data) {}
 	template<uint64 _N2>
 	constexpr BitSet(const BitSet<_N2>& other)
-		: BitSet(type(other))
+		: BitSet(type((typename BitSet<_N2>::type)other))
 	{}
 
 	constexpr bool operator==(__this_ref_cst other)const { return _Get() == other._Get(); }
 
 	constexpr operator type()const { return _Get(); }
-    constexpr __bit operator[](size_t index) { return Bit(*this, index); }
+	explicit(true) constexpr operator float32()const { return _Get() / ((float32)Mask); }
+	explicit(true) constexpr operator float64()const { return _Get() / ((float64)Mask); }
+
+	constexpr __bit operator[](size_t index) { return Bit(*this, index); }
 	constexpr bool operator[](size_t index)const { return _Get(index); }
 	constexpr bool test(size_t index)const {
 		if (index < 0 || index >= (BitCount))
@@ -177,12 +180,13 @@ public:
 		: BitSet<sizeof(uint64)* BitPerByte>()
 	{}
 
-	constexpr Flag(size_t index)
-		: BitSet<sizeof(uint64)* BitPerByte>(1ULL << index)
-	{}
 	template<size_t _N>
 	constexpr Flag(const BitSet<_N>& other)
 		: BitSet<sizeof(uint64)* BitPerByte>(typename BitSet<_N>::type(other))
+	{}
+
+	constexpr Flag(size_t index)
+		: BitSet<sizeof(uint64)* BitPerByte>(1ULL << index)
 	{}
 
 	template<Integral T>
@@ -191,6 +195,6 @@ public:
 
 constexpr Flag FLAG_ANY = {};
 
-#define NGS_FLAG(id,index) static constexpr _NGS Flag id = index
+#define NGS_FLAG(id,value) static constexpr _NGS Flag id{value}
 
 NGS_END

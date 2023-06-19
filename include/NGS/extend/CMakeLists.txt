@@ -1,4 +1,5 @@
 if(NGS_BUILD_HPP)
 	file(GLOB_RECURSE NGS_EXTEND_SRC ./*.hpp ./*.cpp)
-	target_sources(NGS PUBLIC ${NGS_EXTEND_SRC})
+	#target_sources(NGS PUBLIC ${NGS_EXTEND_SRC})
+	set(NGS_SRC ${NGS_SRC} ${NGS_EXTEND_SRC} PARENT_SCOPE)
 endif()

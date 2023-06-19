@@ -13,54 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="模块">
-      <UniqueIdentifier>{3773e10a-6297-4339-a6d9-2202f4b590a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\base">
-      <UniqueIdentifier>{ee97cda3-11ed-48f5-b6c9-3b67e26659eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\math">
-      <UniqueIdentifier>{0d19310b-53a4-4b39-afe2-37e8b8b079a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\extend">
-      <UniqueIdentifier>{1da9de14-e926-4143-8b4c-bb81d5c75eb4}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NGS.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\util.h">
-      <Filter>头文件\math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\matrix.h">
-      <Filter>头文件\math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\line.h">
-      <Filter>头文件\math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\rectangle.h">
-      <Filter>头文件\math</Filter>
-    </ClInclude>
-    <ClInclude Include="extend\stream.h">
-      <Filter>头文件\extend</Filter>
-    </ClInclude>
-    <ClInclude Include="extend\debug.h">
-      <Filter>头文件\extend</Filter>
-    </ClInclude>
-    <ClInclude Include="extend\parser.h">
-      <Filter>头文件\extend</Filter>
-    </ClInclude>
-    <ClInclude Include="Embedded\GPIO.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embeded\embedded.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embeded\io\IO.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embeded\bus\usb\UVC.h">
+    <ClInclude Include="algorithm\algorithm.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="algorithm\PID.h">
@@ -69,7 +24,10 @@
     <ClInclude Include="algorithm\PID.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="algorithm\algorithm.h">
+    <ClInclude Include="base\assert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\base.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\base_class.h">
@@ -78,22 +36,25 @@
     <ClInclude Include="base\bit.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="base\BTL.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="base\concepts.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\config.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\base.h">
+    <ClInclude Include="extend\console.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\console.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\file.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="base\library.h">
+    <ClInclude Include="base\log.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\STL.h">
@@ -105,88 +66,34 @@
     <ClInclude Include="base\type_trait.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="base\utility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="base\version.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\byte_array.h">
+    <ClInclude Include="embedded\bus\Bus.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\color.h">
+    <ClInclude Include="embedded\bus\i2c\I2C.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\event.h">
+    <ClInclude Include="embedded\bus\serial_port\SerialPort.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\extend.h">
+    <ClInclude Include="embedded\bus\spi\SPI.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\function.h">
+    <ClInclude Include="embedded\bus\uart\UART.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\memory.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="extend\movie.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="extend\setting.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="extend\timer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\vector.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\vector_expr.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="math\math.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embeded\io\GPIO.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embeded\io\PWM.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embeded\Interface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embeded\bus\Bus.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embeded\bus\i2c\I2C.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embeded\bus\spi\SPI.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="base\console.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="base\console.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsw\NSW.h">
+    <ClInclude Include="embedded\bus\usb\UVC.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="embedded\embedded.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="embedded\Interface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded\bus\i2c\I2C.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded\bus\spi\SPI.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded\bus\usb\UVC.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded\bus\Bus.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="embedded\io\GPIO.h">
@@ -198,22 +105,94 @@
     <ClInclude Include="embedded\io\PWM.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\uart\UART.h">
+    <ClInclude Include="extend\byte_array.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\bus\uart\UART.hpp">
+    <ClInclude Include="extend\color.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\depend.h">
+    <ClInclude Include="extend\debug.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\defined.h">
+    <ClInclude Include="extend\event.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\serial_port\SerialPort.h">
+    <ClInclude Include="extend\extend.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\bus\serial_port\SerialPort.hpp">
+    <ClInclude Include="extend\file.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\function.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\memory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\movie.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\parser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\setting.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\stream.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\timer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\line.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\math.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\rectangle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\rotation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\transform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector_post.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\container\tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\core\display_object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\core\stage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\depend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\NDA.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\depend.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nsl\file\device_file.h">
@@ -246,23 +225,55 @@
     <ClInclude Include="nsl\media\V4L2.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsl\defined.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\depend.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="nsl\NSL.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\assert.h">
+    <ClInclude Include="nsw\bus\serial_port\SerialPort.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\log.h">
+    <ClInclude Include="nsw\bus\uart\UART.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsw\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsw\depend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsw\NSW.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\core\bitmap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\core\sprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\core\shape.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\container\pool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\effect\blend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\type_info.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="embedded\CMakeLists.txt" />
+    <ClCompile Include="nda\core\display_object.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
 </Project>

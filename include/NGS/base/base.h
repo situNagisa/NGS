@@ -24,7 +24,8 @@
 #include "NGS/base/defined.h"
 
 #include "NGS/base/type_trait.h"
-#include "NGS/base/library.h"
+#include "NGS/base/type_info.h"
+#include "NGS/base/utility.h"
 #include "NGS/base/base_class.h"
 
 #include "NGS/base/bit.h"
@@ -32,10 +33,5 @@
 
 #include "NGS/base/template_mate.h"
 
-#include "NGS/base/console.h"
 #include "NGS/base/log.h"
 #include "NGS/base/assert.h"
-
-#ifdef NGS_USE_HPP
-#include "NGS/base/console.hpp"
-#endif

@@ -53,7 +53,7 @@ struct _V4l2Data {
 };
 
 bool V4L2::Open(const std::filesystem::path& path) {
-	_data = ngs::New(new _V4l2Data());
+	_data = NGS_NEW(new _V4l2Data());
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
 	if (!data.device.Open(path)) {
@@ -76,7 +76,7 @@ bool V4L2::Open(const std::filesystem::path& path) {
 err:;
 	if (data.device.IsOpened())data.device.Close();
 
-	ngs::Delete(&data);
+	NGS_DELETE(&data);
 	_data = nullptr;
 	return false;
 }
@@ -258,7 +258,7 @@ inline bool V4L2::Initialize()
 
 	//初始化当前指针，采集第一帧
 	{
-		data.currentBuffer = ngs::New(new v4l2_buffer());
+		data.currentBuffer = NGS_NEW(new v4l2_buffer());
 		v4l2_buffer& buffer = *data.currentBuffer;
 
 		buffer.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
@@ -328,7 +328,7 @@ inline bool V4L2::SetFrameRate(ngs::byte frameRate)
 inline bool V4L2::Read(ngs::void_ptr ptr)
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
-	ngs::Assert(data.currentBuffer);
+	NGS_Assert(data.currentBuffer);
 	v4l2_buffer buffer = *data.currentBuffer;
 
 	//ngs::nos.Log("V4L2::Read", "size:%d\n", buffer.bytesused);
@@ -347,7 +347,7 @@ inline const ngs::Point2s& V4L2::GetSize() const
 inline size_t V4L2::GetFrameBufferSize() const
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
-	ngs::Assert(data.currentBuffer);
+	NGS_Assert(data.currentBuffer);
 	return data.currentBuffer->bytesused;
 }
 

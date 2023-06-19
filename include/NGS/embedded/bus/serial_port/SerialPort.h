@@ -2,8 +2,6 @@
 
 #include "NGS/base/base.h"
 #include "NGS/embedded/bus/Bus.h"
-#include "NGS/nsw/defined.h"
-#include "NGS/nsw/depend.h"
 
 NGS_BEGIN
 

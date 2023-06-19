@@ -1,13 +1,13 @@
 #pragma once
 
-#include "NGS/base/base.h"
+#include "NGS/extend/console.h"
+
+//inline std::basic_ostream<ngs::nchar>& operator<<(std::basic_ostream<ngs::nchar>& os, ngs::TextColor color) {
+//	ngs::Console::SetTextColor(color);
+//	return os;
+//}
 
 NGS_BEGIN
-
-inline std::basic_ostream<nchar>& operator<<(std::basic_ostream<nchar>& os, Console::Color color) {
-	Console::SetTextColor(color);
-	return os;
-}
 
 template<typename T>
 class basic_ostream : public std::basic_ostream<T, std::char_traits<T>> {
@@ -24,7 +24,7 @@ va_start(args, format);				\
 vprint(buffer, format, args);		\
 va_end(args);						\
 _Self() << buffer;					\
-_SetTextColor(Console::Color::RESERT);	\
+_SetTextColor(TextColor::RESERT);	\
 //
 public:
 	NGS_TYPE_DEFINE(basic_ostream<T>, this);
@@ -46,77 +46,77 @@ public:
 
 	void Trace(nstring_view string) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		_SetTextColor(Console::Color::RESERT);
+		_SetTextColor(TextColor::RESERT);
 		_Self() << string;
-		_SetTextColor(Console::Color::RESERT);
+		_SetTextColor(TextColor::RESERT);
 #endif
 	}
 
 	void Trace(nchar_ptr_cst format, ...) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		PRINT(Console::Color::RESERT)
+		PRINT(TextColor::RESERT)
 #endif
 	}
 
 	void Log(nstring_view tag, nstring_view string) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		_SetTextColor(Console::Color::GREEN);
+		_SetTextColor(TextColor::GREEN);
 		_Self() << tag;
-		_SetTextColor(Console::Color::WHITE);
+		_SetTextColor(TextColor::WHITE);
 		_Self() << " -- " << string;
-		_SetTextColor(Console::Color::RESERT);
+		_SetTextColor(TextColor::RESERT);
 #endif
 	}
 
 	void Log(nstring_view tag, nchar_ptr_cst format, ...) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		_SetTextColor(Console::Color::GREEN);
+		_SetTextColor(TextColor::GREEN);
 		_Self() << tag;
-		_SetTextColor(Console::Color::WHITE);
+		_SetTextColor(TextColor::WHITE);
 		_Self() << " -- ";
-		PRINT(Console::Color::WHITE)
+		PRINT(TextColor::WHITE)
 #endif
 	}
 
 	void Message(nstring_view string) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		_SetTextColor(Console::Color::BLUE);
+		_SetTextColor(TextColor::BLUE);
 		_Self() << string;
-		_SetTextColor(Console::Color::RESERT);
+		_SetTextColor(TextColor::RESERT);
 #endif
 	}
 
 	void Message(nchar_ptr_cst format, ...) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		PRINT(Console::Color::BLUE)
+		PRINT(TextColor::BLUE)
 #endif
 	}
 
 	void Warning(nstring_view string) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		_SetTextColor(Console::Color::YELLOW);
+		_SetTextColor(TextColor::YELLOW);
 		_Self() << string;
-		_SetTextColor(Console::Color::RESERT);
+		_SetTextColor(TextColor::RESERT);
 #endif
 	}
 
 	void Warning(nchar_ptr_cst format, ...) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		PRINT(Console::Color::YELLOW)
+		PRINT(TextColor::YELLOW)
 #endif
 	}
 
 	void Error(nstring_view string) {
-		_SetTextColor(Console::Color::RED);
+		_SetTextColor(TextColor::RED);
 		_Self() << string;
-		_SetTextColor(Console::Color::RESERT);
+		_SetTextColor(TextColor::RESERT);
 	}
 
 	void Error(nchar_ptr_cst format, ...) {
-		PRINT(Console::Color::RED)
+		PRINT(TextColor::RED)
 	}
 private:
-	void _SetTextColor(Console::Color color) {
+	void _SetTextColor(TextColor color) {
 		Console::SetTextColor(color);
 	}
 	__this_ref _Self() { return *this; }

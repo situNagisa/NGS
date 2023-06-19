@@ -15,7 +15,7 @@ NSW_END
 NGS_BEGIN
 
 bool SerialPort::Open(pin_t port) {
-	_data = ngs::New(new nsw::_WindowsSerialPortData);
+	_data = NGS_NEW(new nsw::_WindowsSerialPortData);
 	auto& data = *reinterpret_cast<nsw::_WindowsSerialPortData*>(_data);
 	std::string portname = "\\\\.\\COM";
 	DCB dcbSerialParams = {};
@@ -57,7 +57,7 @@ err_state:;
 	CloseHandle(data.com);
 
 err_create:;
-	ngs::Delete(&data);
+	NGS_DELETE(&data);
 	_data = nullptr;
 	return false;
 }

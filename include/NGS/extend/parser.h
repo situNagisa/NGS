@@ -118,7 +118,7 @@ public:
 			In(((ngs::byte_ptr)data)[i]);
 	}
 	void In(ngs::byte data) {
-		//ngs::nos.Trace("0x%02x ", data);
+		//Debugger::PrintFormat("0x%02x ", data);
 		_data.push_back(data);
 	}
 	size_t Size()const { return _data.size(); }
@@ -136,14 +136,20 @@ private:
 		size_t length = _parser(_data);
 		if (length == protocols_parsers::size_lack)return false;
 		if (!length) {
+			/*Debugger::Print(TextColor::RED);
+			Debugger::PrintFormat("0x%02x ", _data.front());
+			Debugger::Print(TextColor::RESERT);*/
 			_data.pop_front();
 			return true;
 		}
 		ParsedSequence& parsed = _parsed.emplace();
+		//Debugger::Print(TextColor::GREEN);
 		for (size_t i = 0; i < length; i++) {
 			parsed[i] = (_data.front());
+			//Debugger::PrintFormat("0x%02x ", _data.front());
 			_data.pop_front();
 		}
+		//Debugger::PrintLine(TextColor::RESERT);
 		//ngs::nos.Log("ProtocolsParser::_Parse", "length:%d rest data size:%d\n", length, _data.size());
 		return true;
 	}

@@ -1,0 +1,17 @@
+file(GLOB_RECURSE NGS_SRC *.hpp *.cpp)
+add_library(nagisa ${NGS_SRC} ${PROJECT_INCLUDE_DIR})
+
+target_include_directories(nagisa 
+	PUBLIC 
+		${PROJECT_INCLUDE_DIR} 
+	PRIVATE 
+		${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+set_target_properties(nagisa PROPERTIES
+	CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED YES
+    CXX_EXTENSIONS NO
+    VERSION ${PROJECT_VERSION}
+    SOVERSION ${PROJECT_VERSION_MAJOR}
+)

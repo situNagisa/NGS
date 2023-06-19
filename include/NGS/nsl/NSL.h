@@ -16,10 +16,7 @@
 #include "NGS/nsl/media/frame_buffer.h"
 
 
-#ifdef NSL_USE_HEADER_IMPL
-
-#include "NGS/nsl/LinuxHeader.h"
-
+#ifdef NGS_USE_HPP
 #include "NGS/nsl/file/File.hpp"
 #include "NGS/nsl/io/GPIO.hpp"
 #include "NGS/nsl/io/MultiplexIO.hpp"

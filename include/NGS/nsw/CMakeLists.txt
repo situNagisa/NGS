@@ -1,4 +1,4 @@
 if(NGS_BUILD_HPP)
 	file(GLOB_RECURSE NGS_NSW_SRC *.hpp)
-	target_sources(NGS PRIVATE ${NGS_NSW_SRC})
+	target_sources(NGS PRIVATE ${NGS_NSW_SRC} PARENT_SCOPE)
 endif()

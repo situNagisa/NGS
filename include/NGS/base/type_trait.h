@@ -78,7 +78,7 @@ template<class First, class... Types>
 struct Disjuction<First, Types...> :_Disjuction<First::value, First, Types...>::type {};
 
 template<class...Traits>
-inline constexpr bool Disjuction_v = Disjuction<Traits...>::value;
+constexpr bool Disjuction_v = Disjuction<Traits...>::value;
 
 //
 //NGS_EXPORT
@@ -104,14 +104,14 @@ inline constexpr bool Disjuction_v = Disjuction<Traits...>::value;
 
 
 template<class A, class... Types>
-inline constexpr bool IsAnyOf = Disjuction_v<std::is_same<A, Types>...>;
+constexpr bool is_any_of = Disjuction_v<std::is_same<A, Types>...>;
 
 
 template<typename Type>
-struct TemplateEX;
+struct template_trait;
 
 template<template<typename...>class Template, typename ...Args>
-struct TemplateEX<Template<Args...>>
+struct template_trait<Template<Args...>>
 {
 	template<typename...NewArgs>
 	using type = Template<NewArgs...>;
@@ -126,29 +126,29 @@ struct TemplateEX<Template<Args...>>
 //=======================================
 
 template<typename Fn>
-struct FunctionTrait {};
+struct function_trait {};
 
-template<typename ReturnType, typename... Args>
-struct FunctionTrait<ReturnType(Args...)> {
-	using type = ReturnType(*)(Args...);
-	using return_type = ReturnType;
+template<typename _ReturnType, typename... Args>
+struct function_trait<_ReturnType(Args...)> {
+	using type = _ReturnType(*)(Args...);
+	using return_type = _ReturnType;
 
-	inline constexpr static size_t param_num = sizeof...(Args);
+	constexpr static size_t param_num = sizeof...(Args);
 };
 
-template<typename ReturnType, typename Class, typename... Args>
-struct FunctionTrait<ReturnType(Class::*)(Args...)> {
-	using type = ReturnType(*)(Class*, Args...);
-	using return_type = ReturnType;
+template<typename _ReturnType, typename _Class, typename... Args>
+struct function_trait<_ReturnType(_Class::*)(Args...)> {
+	using type = _ReturnType(*)(_Class*, Args...);
+	using return_type = _ReturnType;
 
-	inline constexpr static size_t param_num = sizeof...(Args);
+	constexpr static size_t param_num = sizeof...(Args);
 };
 
-template<typename Fn>
-using FunctionReturnType = typename FunctionTrait<Fn>::return_type;
+template<typename _Function>
+using function_return_t = typename function_trait<_Function>::return_type;
 
-template<typename Fn>
-inline constexpr size_t FunctionParamsNum = FunctionTrait<Fn>::param_num;
+template<typename _Function>
+constexpr static size_t functino_param_num_v = function_trait<_Function>::param_num;
 
 NGS_END
 NGS_END

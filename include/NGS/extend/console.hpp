@@ -1,7 +1,6 @@
 #pragma once
 
-#include "NGS/base/console.h"
-#include "NGS/base/config.h"
+#include "NGS/extend/console.h"
 
 #if NGS_PLATFORM == NGS_WINDOWS
 
@@ -10,6 +9,11 @@
 #endif
 
 NGS_BEGIN
+
+static bool _s_set_text_color = [] {
+	Debugger::set_text_color = Console::SetTextColor;
+	return true;
+}();
 
 #if NGS_PLATFORM == NGS_WINDOWS
 
@@ -32,37 +36,37 @@ LIGHT_MAGENTA = 13,
 LIGHT_YELLOW = 14,
 BRIGHT_WHITE = 15;
 
-NGS_HPP_INILNE void Console::SetTextColor(Console::Color color) {
+NGS_HPP_INLINE void Console::SetTextColor(TextColor color) {
 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	switch (color)
 	{
-	case Console::Color::RESERT:
+	case TextColor::RESERT:
 		SetConsoleTextAttribute(hConsole, WHITE | (BLACK << 4));
 		break;
-	case Console::Color::BLACK:
+	case TextColor::BLACK:
 		SetConsoleTextAttribute(hConsole, BLACK | (BLACK << 4));
 		break;
-	case Console::Color::RED:
+	case TextColor::RED:
 		SetConsoleTextAttribute(hConsole, RED | (BLACK << 4));
 		break;
-	case Console::Color::GREEN:
+	case TextColor::GREEN:
 		SetConsoleTextAttribute(hConsole, GREEN | (BLACK << 4));
 		break;
-	case Console::Color::YELLOW:
+	case TextColor::YELLOW:
 		SetConsoleTextAttribute(hConsole, YELLOW | (BLACK << 4));
 		break;
-	case Console::Color::BLUE:
+	case TextColor::BLUE:
 		SetConsoleTextAttribute(hConsole, BLUE | (BLACK << 4));
 		break;
-	case Console::Color::MAGENTA:
+	case TextColor::MAGENTA:
 		SetConsoleTextAttribute(hConsole, MAGENTA | (BLACK << 4));
 		break;
-	case Console::Color::CYAN:
+	case TextColor::CYAN:
 		SetConsoleTextAttribute(hConsole, CYAN | (BLACK << 4));
 		break;
-	case Console::Color::WHITE:
+	case TextColor::WHITE:
 		SetConsoleTextAttribute(hConsole, WHITE | (BLACK << 4));
 		break;
 	default:
@@ -70,33 +74,33 @@ NGS_HPP_INILNE void Console::SetTextColor(Console::Color color) {
 	}
 }
 
-NGS_HPP_INILNE void Console::SetBackgroundColor(Console::Color color) {
+NGS_HPP_INLINE void Console::SetBackgroundColor(TextColor color) {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	switch (color)
 	{
-	case Console::Color::BLACK:
+	case TextColor::BLACK:
 		SetConsoleTextAttribute(hConsole, BLACK | (BLACK << 4) | FOREGROUND_INTENSITY);
 		break;
-	case Console::Color::RED:
+	case TextColor::RED:
 		SetConsoleTextAttribute(hConsole, BLACK | (RED << 4) | FOREGROUND_INTENSITY);
 		break;
-	case Console::Color::GREEN:
+	case TextColor::GREEN:
 		SetConsoleTextAttribute(hConsole, BLACK | (GREEN << 4) | FOREGROUND_INTENSITY);
 		break;
-	case Console::Color::YELLOW:
+	case TextColor::YELLOW:
 		SetConsoleTextAttribute(hConsole, BLACK | (YELLOW << 4) | FOREGROUND_INTENSITY);
 		break;
-	case Console::Color::BLUE:
+	case TextColor::BLUE:
 		SetConsoleTextAttribute(hConsole, BLACK | (BLUE << 4) | FOREGROUND_INTENSITY);
 		break;
-	case Console::Color::MAGENTA:
+	case TextColor::MAGENTA:
 		SetConsoleTextAttribute(hConsole, BLACK | (MAGENTA << 4) | FOREGROUND_INTENSITY);
 		break;
-	case Console::Color::CYAN:
+	case TextColor::CYAN:
 		SetConsoleTextAttribute(hConsole, BLACK | (CYAN << 4) | FOREGROUND_INTENSITY);
 		break;
-	case Console::Color::WHITE:
+	case TextColor::WHITE:
 		SetConsoleTextAttribute(hConsole, BLACK | (WHITE << 4) | FOREGROUND_INTENSITY);
 		break;
 	default:
@@ -106,35 +110,35 @@ NGS_HPP_INILNE void Console::SetBackgroundColor(Console::Color color) {
 
 #else
 
-NGS_HPP_INILNE void Console::SetTextColor(Console::Color color) {
+NGS_HPP_INLINE void Console::SetTextColor(TextColor color) {
 	auto& os = std::cout;
 	switch (color)
 	{
-	case Console::Color::RESERT:
+	case TextColor::RESERT:
 		os << "\033[0m";
 		break;
-	case Console::Color::BLACK:
+	case TextColor::BLACK:
 		os << "\033[30m";
 		break;
-	case Console::Color::RED:
+	case TextColor::RED:
 		os << "\033[31m";
 		break;
-	case Console::Color::GREEN:
+	case TextColor::GREEN:
 		os << "\033[32m";
 		break;
-	case Console::Color::YELLOW:
+	case TextColor::YELLOW:
 		os << "\033[33m";
 		break;
-	case Console::Color::BLUE:
+	case TextColor::BLUE:
 		os << "\033[34m";
 		break;
-	case Console::Color::MAGENTA:
+	case TextColor::MAGENTA:
 		os << "\033[35m";
 		break;
-	case Console::Color::CYAN:
+	case TextColor::CYAN:
 		os << "\033[36m";
 		break;
-	case Console::Color::WHITE:
+	case TextColor::WHITE:
 		os << "\033[37m";
 		break;
 	default:
@@ -142,32 +146,32 @@ NGS_HPP_INILNE void Console::SetTextColor(Console::Color color) {
 	}
 }
 
-NGS_HPP_INILNE void Console::SetBackgroundColor(Console::Color color) {
+NGS_HPP_INLINE void Console::SetBackgroundColor(TextColor color) {
 	auto& os = std::cout;
 	switch (color)
 	{
-	case Console::Color::BLACK:
+	case TextColor::BLACK:
 		os << "\033[1m\033[30m";
 		break;
-	case Console::Color::RED:
+	case TextColor::RED:
 		os << "\033[1m\033[31m";
 		break;
-	case Console::Color::GREEN:
+	case TextColor::GREEN:
 		os << "\033[1m\033[32m";
 		break;
-	case Console::Color::YELLOW:
+	case TextColor::YELLOW:
 		os << "\033[1m\033[33m";
 		break;
-	case Console::Color::BLUE:
+	case TextColor::BLUE:
 		os << "\033[1m\033[34m";
 		break;
-	case Console::Color::MAGENTA:
+	case TextColor::MAGENTA:
 		os << "\033[1m\033[35m";
 		break;
-	case Console::Color::CYAN:
+	case TextColor::CYAN:
 		os << "\033[1m\033[36m";
 		break;
-	case Console::Color::WHITE:
+	case TextColor::WHITE:
 		os << "\033[1m\033[37m";
 		break;
 	default:

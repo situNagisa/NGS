@@ -104,8 +104,8 @@ public:
 	constexpr float WH_Ratio()const { return (float)width / height; }
 	constexpr float HW_Ratio()const { return (float)height / width; }
 public:
-	__num x, y;
-	__num width, height;
+	__num x{}, y{};
+	__num width{}, height{};
 };
 
 NGS_END

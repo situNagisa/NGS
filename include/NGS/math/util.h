@@ -49,10 +49,9 @@ template<_CPT Arithmetic T>inline constexpr T NearTo(T value, T aim, T speed) {
 	if (value > aim)
 		return (value - speed < aim) ? aim : value - speed;
 }
-template<_CPT SignedIntegral T>
-constexpr int8 Sign(T number) { return -(T)(((byte_<sizeof(T)>)number >> (BitsOf<T>() - 1)) << 1) + 1; }
-template<_CPT FloatingPoint T>
-constexpr int8 Sign(T floating) { return floating >= 0 ? 1 : -1; }
+
+constexpr int8 Sign(int64 number) { return -(int64)(((byte_<sizeof(int64)>)number >> (BitsOf<int64>() - 1)) << 1) + 1; }
+constexpr int8 Sign(float64 floating) { return floating >= 0 ? 1 : -1; }
 constexpr int8 Sign(bool b) { return (b << 1) - 1; }
 
 inline constexpr const float PI = 3.1415926f;
@@ -96,7 +95,19 @@ inline constexpr auto Ceil(_CPT Arithmetic auto floating) { return ::ceil(floati
 inline constexpr float AsRadian(int32 degree) { return degree * _degrees_to_radian; }
 inline constexpr int32 AsDegree(float radian) { return static_cast<int32>(radian * _radian_to_degrees); }
 
-constexpr auto Average(_CPT Integral auto a, _CPT Integral auto b) { return (a & b) + ((a ^ b) >> 1); }
+inline double AngleDifference(double angle1, double angle2) {
+	double difference = fmod((angle1 - angle2), 2 * std::numbers::pi);
+	if (difference > std::numbers::pi) {
+		difference -= 2 * std::numbers::pi;
+	}
+	else if (difference <= -std::numbers::pi) {
+		difference += 2 * std::numbers::pi;
+	}
+	return difference;
+}
+
+
+constexpr auto Average(Integral auto a, Integral auto b) { return (a & b) + ((a ^ b) >> 1); }
 
 template <typename T>
 constexpr T Sqrt(T x) {

@@ -25,9 +25,9 @@
 #define NGS_TYPE        inline namespace type{
 #define USE_NGS_TYPE    using namespace ::ngs::type;
 
-#define _TYT                ::ngs::typetrait::
-#define NGS_TYPE_TRAIT      namespace typetrait{
-#define USE_NGS_TYTR        using namespace ::NGS::typetrait;
+#define _TYT                ::ngs::type_trait::
+#define NGS_TYPE_TRAIT		namespace type_trait{
+#define USE_NGS_TYTR        using namespace ::NGS::type_trait;
 
 #define _CPT            ::ngs::cpt::
 #define NGS_CONCEPT     inline namespace cpt{
@@ -60,33 +60,6 @@ using id##_right_cst = const type&&;	\
 using id##_ptr = type*;             	\
 using id##_ptr_cst = const type*;		\
 //
-
-
-//#define NGS_DEFAULT_TYPE				\
-//NGS_TYPE_DEFINE(int,sign);              \
-//NGS_TYPE_DEFINE(unsigned int,unsign)    \
-//NGS_TYPE_DEFINE(size_t,size)			\
-////
-
-//#define NGS_GET(functionName,prop)\
-//auto functionName(){return prop;}
-//
-//#define NGS_SET(functionName,prop,type)\
-//void functionName(type v){prop = v;}
-//
-//#define NGS_GET_REF(functionName,prop)\
-//auto& functionName(){return prop;}\
-//auto& functionName()const {return prop;}
-//
-//#define NGS_FLAG_GET(functionName,flagName,bit)\
-//bool functionName()const{return Bits(flagName,bit);}
-//
-//#define NGS_FLAG_SET(functionName,flagName,bit)\
-//void functionName(_TYP BOOL v){Bits(flagName,bit,v);}
-//
-//#define NGS_FLAG(functionName,flagName,bit)\
-//bool functionName()const{return Bits(flagName,bit);}   \
-//void functionName(_TYP BOOL v){Bits(flagName,bit,v);}  
 
 //============================
 //设置

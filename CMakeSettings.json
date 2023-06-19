@@ -13,7 +13,7 @@
       "variables": [
         {
           "name": "NGS_BUILD_HPP",
-          "value": "False",
+          "value": "True",
           "type": "BOOL"
         }
       ]

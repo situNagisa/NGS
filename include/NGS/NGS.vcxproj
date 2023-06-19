@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -23,13 +23,22 @@
     <ClInclude Include="algorithm\PID.h" />
     <ClInclude Include="algorithm\PID.hpp" />
     <ClInclude Include="base\assert.h" />
+    <ClInclude Include="base\base.h" />
     <ClInclude Include="base\base_class.h" />
     <ClInclude Include="base\bit.h" />
+    <ClInclude Include="base\BTL.h" />
     <ClInclude Include="base\concepts.h" />
     <ClInclude Include="base\config.h" />
-    <ClInclude Include="base\base.h" />
+    <ClInclude Include="base\type_info.h" />
+    <ClInclude Include="extend\console.h" />
+    <ClInclude Include="extend\console.hpp" />
     <ClInclude Include="base\defined.h" />
     <ClInclude Include="base\log.h" />
+    <ClInclude Include="base\STL.h" />
+    <ClInclude Include="base\template_mate.h" />
+    <ClInclude Include="base\type_trait.h" />
+    <ClInclude Include="base\utility.h" />
+    <ClInclude Include="base\version.h" />
     <ClInclude Include="embedded\bus\Bus.h" />
     <ClInclude Include="embedded\bus\i2c\I2C.h" />
     <ClInclude Include="embedded\bus\serial_port\SerialPort.h" />
@@ -41,44 +50,41 @@
     <ClInclude Include="embedded\io\GPIO.h" />
     <ClInclude Include="embedded\io\IO.h" />
     <ClInclude Include="embedded\io\PWM.h" />
-    <ClInclude Include="base\console.h" />
-    <ClInclude Include="base\console.hpp" />
-    <ClInclude Include="extend\file.h" />
-    <ClInclude Include="base\library.h" />
-    <ClInclude Include="base\STL.h" />
-    <ClInclude Include="base\template_mate.h" />
-    <ClInclude Include="base\type_trait.h" />
-    <ClInclude Include="base\version.h" />
-    <ClInclude Include="extend\debug.h" />
-    <ClInclude Include="extend\stream.h" />
-    <ClInclude Include="embeded\bus\Bus.h" />
-    <ClInclude Include="embeded\bus\i2c\I2C.h" />
-    <ClInclude Include="embeded\bus\spi\SPI.h" />
-    <ClInclude Include="embeded\bus\usb\UVC.h" />
-    <ClInclude Include="embeded\embedded.h" />
-    <ClInclude Include="Embedded\GPIO.h" />
-    <ClInclude Include="embeded\Interface.h" />
-    <ClInclude Include="embeded\io\GPIO.h" />
-    <ClInclude Include="embeded\io\IO.h" />
-    <ClInclude Include="embeded\io\PWM.h" />
     <ClInclude Include="extend\byte_array.h" />
     <ClInclude Include="extend\color.h" />
+    <ClInclude Include="extend\debug.h" />
     <ClInclude Include="extend\event.h" />
     <ClInclude Include="extend\extend.h" />
+    <ClInclude Include="extend\file.h" />
     <ClInclude Include="extend\function.h" />
     <ClInclude Include="extend\memory.h" />
     <ClInclude Include="extend\movie.h" />
-    <ClInclude Include="extend\setting.h" />
-    <ClInclude Include="extend\timer.h" />
-    <ClInclude Include="Math\line.h" />
-    <ClInclude Include="math\math.h" />
-    <ClInclude Include="Math\util.h" />
-    <ClInclude Include="Math\matrix.h" />
-    <ClInclude Include="Math\rectangle.h" />
-    <ClInclude Include="Math\vector.h" />
-    <ClInclude Include="Math\vector_expr.h" />
-    <ClInclude Include="NGS.h" />
     <ClInclude Include="extend\parser.h" />
+    <ClInclude Include="extend\setting.h" />
+    <ClInclude Include="extend\stream.h" />
+    <ClInclude Include="extend\timer.h" />
+    <ClInclude Include="math\line.h" />
+    <ClInclude Include="math\math.h" />
+    <ClInclude Include="math\matrix.h" />
+    <ClInclude Include="math\rectangle.h" />
+    <ClInclude Include="math\rotation.h" />
+    <ClInclude Include="math\transform.h" />
+    <ClInclude Include="math\util.h" />
+    <ClInclude Include="math\vector.h" />
+    <ClInclude Include="math\vector_post.h" />
+    <ClInclude Include="nda\config.h" />
+    <ClInclude Include="nda\container\pool.h" />
+    <ClInclude Include="nda\container\tree.h" />
+    <ClInclude Include="nda\core\bitmap.h" />
+    <ClInclude Include="nda\core\display_object.h" />
+    <ClInclude Include="nda\core\shape.h" />
+    <ClInclude Include="nda\core\sprite.h" />
+    <ClInclude Include="nda\core\stage.h" />
+    <ClInclude Include="nda\defined.h" />
+    <ClInclude Include="nda\depend.h" />
+    <ClInclude Include="nda\effect\blend.h" />
+    <ClInclude Include="nda\NDA.h" />
+    <ClInclude Include="NGS.h" />
     <ClInclude Include="nsl\defined.h" />
     <ClInclude Include="nsl\depend.h" />
     <ClInclude Include="nsl\file\device_file.h" />
@@ -99,37 +105,40 @@
     <ClInclude Include="nsw\NSW.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="embedded\CMakeLists.txt" />
+    <ClCompile Include="nda\core\display_object.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{54660f90-c853-422e-b45b-b11c2b5c677c}</ProjectGuid>
+    <ProjectGuid>{405842b5-eb5e-4ab3-8514-d5f307fa72bf}</ProjectGuid>
     <RootNamespace>NGS</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -142,71 +151,38 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NGSBase.props" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaBase.props" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaLib.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NGSBase.props" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaBase.props" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaLib.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NGSBase.props" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaBase.props" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaLib.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NGSBase.props" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaBase.props" />
+    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaLib.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Temp\Compile\$(Platform)\$(Configuration)\</IntDir>
-    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Temp\Compile\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Temp\Compile\$(Platform)\$(Configuration)\</IntDir>
-    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)Temp\Compile\$(Platform)\$(Configuration)\</IntDir>
-    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc11</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(NAGISA_DIR);$(SolutionDir)Include;$(ProjectDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalBMIDirectories>$(SolutionDir)Module;%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <EnableModules>true</EnableModules>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world470d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -215,42 +191,32 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc11</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(NAGISA_DIR);$(SolutionDir)Include;$(ProjectDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalBMIDirectories>$(SolutionDir)Module;%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <EnableModules>true</EnableModules>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world470.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc11</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(NAGISA_DIR);$(SolutionDir)Include;$(ProjectDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalBMIDirectories>$(SolutionDir)Module;%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <EnableModules>true</EnableModules>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world470d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -259,22 +225,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc11</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(NAGISA_DIR);$(SolutionDir)Include;$(ProjectDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalBMIDirectories>$(SolutionDir)Module;%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
-      <EnableModules>true</EnableModules>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>
+      </SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world470.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

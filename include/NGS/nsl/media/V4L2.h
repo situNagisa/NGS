@@ -44,7 +44,7 @@ public:
 		std::pair<ngs::byte_ptr, size_t> pair = {};
 		auto& [data, size] = pair;
 		size = GetFrameBufferSize();
-		data = ngs::New(new ngs::byte[size](), size);
+		data = NGS_NEW_ARRAY(ngs::byte, size);
 		Read(data);
 		return pair;
 	}

@@ -11,7 +11,7 @@ struct _FrameBufferData {
 };
 
 bool FrameBuffer::Open(const std::filesystem::path& path) {
-	_data = ngs::New(new _FrameBufferData());
+	_data = NGS_NEW(new _FrameBufferData());
 	auto& data = *reinterpret_cast<_FrameBufferData*>(_data);
 
 	if (!_file.IsOpened() && !_file.Open(path)) {
@@ -50,7 +50,7 @@ inline void FrameBuffer::Close() {
 
 	_file.MemoryUnMap(_screen, GetSize());
 	_file.Close();
-	ngs::Delete(&data);
+	NGS_DELETE(&data);
 	_data = nullptr;
 }
 

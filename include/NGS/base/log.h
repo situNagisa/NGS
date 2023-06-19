@@ -4,7 +4,6 @@
 #include "NGS/base/STL.h"
 #include "NGS/base/config.h"
 #include "NGS/base/base_class.h"
-#include "NGS/base/console.h"
 
 NGS_BEGIN
 
@@ -15,6 +14,35 @@ enum DLevel {
 	warning,
 	error,
 	fatal,
+};
+
+#if NGS_COMPILER == NGS_MSVC
+#define vprint vsprintf_s
+#else
+#define vprint vsprintf
+#endif
+
+inline nstring Format(nchar_ptr_cst fmt, ...) {
+	nchar buffer[1024];
+	va_list args;
+	va_start(args, fmt);
+	vprint(buffer, fmt, args);
+	va_end(args);
+	return buffer;
+}
+
+#undef vprint
+
+enum class TextColor {
+	RESERT,
+	BLACK,
+	RED,
+	GREEN,
+	YELLOW,
+	BLUE,
+	MAGENTA,
+	CYAN,
+	WHITE,
 };
 
 class Debugger {
@@ -30,6 +58,10 @@ public:
 			Debugger::_disable++;
 			_disable = true;
 		}
+		void Enable() {
+			Debugger::_disable--;
+			_disable = false;
+		}
 	private:
 		ScopeHolder(const source_location& source)
 			: _line(source.line())
@@ -40,9 +72,12 @@ public:
 			Debugger::_Push(*this);
 		}
 		std::string GetFunctionName()const {
-			auto start = _function.find("(");
-			auto end = _function.rfind(" ", start) + 1;
-			return _function.substr(end, start - end);
+			std::regex function_name(R"(\b((<\s*)?[a-zA-Z_]\w*(\s*>)?\s*::\s*)*[a-zA-Z_]\w*\s*(\(\))?(?=\([^()]*\)))");
+			std::smatch match;
+			if (std::regex_search(_function, match, function_name)) {
+				return match[0].str();
+			}
+			return {};
 		}
 	public:
 		size_t _line = 0;
@@ -56,135 +91,88 @@ public:
 	static std::string GetCurrentFunctionName() { return _stack.back()->GetFunctionName(); }
 	static bool Enable() { return !_disable; }
 
-#if NGS_COMPILER == NGS_MSVC
-#define vprint vsprintf_s
-#else
-#define vprint vsprintf
-#endif
-
 	template<typename... Args>
 	static void Log(DLevel level, Args&&... args) {
-		if (_disable)return;
-		Console::Color color;
+		TextColor color;
 		switch (level)
 		{
 		case DLevel::trace:
-			color = Console::Color::WHITE;
+			color = TextColor::WHITE;
 			break;
 		case DLevel::debug:
-			color = Console::Color::GREEN;
+			color = TextColor::GREEN;
 			break;
 		case DLevel::info:
-			color = Console::Color::CYAN;
+			color = TextColor::CYAN;
 			break;
 		case DLevel::warning:
-			color = Console::Color::YELLOW;
+			color = TextColor::YELLOW;
 			break;
 		case DLevel::error:
-			color = Console::Color::RED;
+			color = TextColor::RED;
 			break;
 		case DLevel::fatal:
-			color = Console::Color::RED;
+			color = TextColor::RED;
 			break;
 		default:
 			break;
 		}
-		_Print(color, GetCurrentFunctionName(), Console::Color::WHITE, " -- ", args..., Console::Color::RESERT);
+		Print(color, GetCurrentFunctionName(), TextColor::WHITE, " -- ", std::forward<Args>(args)..., TextColor::RESERT);
 	}
 	template<typename... Args>
 	static void LogLine(DLevel level, Args&&... args) {
-		Log(level, args..., "\n");
+		Log(level, std::forward<Args>(args)..., "\n");
 	}
-	static void LogFormat(DLevel level, const char* format, ...) {
-		nchar buffer[1024];
-		va_list args;
-		va_start(args, format);
-		vprint(buffer, format, args);
-		va_end(args);
-		Log(level, buffer);
-	}
-
-	static void LogFormatLine(DLevel level, const char* format, ...) {
-		va_list args;
-		va_start(args, format);
-		LogFormat(level, format, args);
-		va_end(args);
-		_Print("\n");
-	}
-
 	template<typename... Args>
-	static void Print(DLevel level, Args&&... args) {
+	static void LogFormat(DLevel level, const char* fmt, Args&&... args) {
+		Log(level, Format(fmt, std::forward<Args>(args)...));
+	}
+	template<typename... Args>
+	static void LogFormatLine(DLevel level, const char* format, Args&&... args) {
+		LogFormat(level, format, std::forward<Args>(args)...);
+		PrintLine();
+	}
+
+	template<typename...Args>
+	static void Print(Args&&... args) {
 		if (_disable)return;
-		Console::Color color;
-		switch (level)
-		{
-		case DLevel::trace:
-			color = Console::Color::WHITE;
-			break;
-		case DLevel::debug:
-			color = Console::Color::GREEN;
-			break;
-		case DLevel::info:
-			color = Console::Color::CYAN;
-			break;
-		case DLevel::warning:
-			color = Console::Color::YELLOW;
-			break;
-		case DLevel::error:
-			color = Console::Color::RED;
-			break;
-		case DLevel::fatal:
-			color = Console::Color::RED;
-			break;
-		default:
-			break;
-		}
-		_Print(color, args..., Console::Color::RESERT);
+		_Print(std::forward<Args>(args)...);
 	}
 	template<typename... Args>
-	static void PrintLine(DLevel level, Args&&... args) {
-		Print(level, args..., "\n");
+	static void PrintLine(Args&&... args) {
+		Print(std::forward<Args>(args)..., "\n");
 	}
-	static void PrintFormat(DLevel level, const char* format, ...) {
-		nchar buffer[1024];
-		va_list args;
-		va_start(args, format);
-		vprint(buffer, format, args);
-		va_end(args);
-		Print(level, buffer);
+	template<typename... Args>
+	static void PrintFormat(const char* fmt, Args&&... args) {
+		Print(Format(fmt, std::forward<Args>(args)...));
 	}
-
-	static void PrintFormatLine(DLevel level, const char* format, ...) {
-		va_list args;
-		va_start(args, format);
-		PrintFormat(level, format, args);
-		va_end(args);
-		_Print("\n");
+	template<typename... Args>
+	static void PrintFormatLine(const char* format, Args&&... args) {
+		PrintFormat(format, std::forward<Args>(args)...);
+		PrintLine();
 	}
-#undef vprint
 public:
 	static void _Push(const ScopeHolder& holder) { _stack.push_back(&holder); }
 	static void _Pop() { _stack.pop_back(); }
 
 	template<typename T, typename... Args>
-
 	static void _Print(T&& obj, Args&&... args) {
-		std::cout << std::forward<T>(obj);
-		if constexpr (sizeof...(Args))_Print(args...);
-	}
+		if constexpr (std::same_as<std::decay_t<T>, TextColor>) {
+			set_text_color(obj);
+		}
+		else if constexpr (std::convertible_to<T, std::string>) {
+			std::cout << std::string(std::forward<T>(obj));
+		}
+		else {
+			std::cout << std::forward<T>(obj);
+		}
 
-	template<std::convertible_to<std::string> T, typename... Args>
-	static void _Print(T&& obj, Args&&... args) {
-		std::cout << std::string(std::forward<T>(obj));
-		if constexpr (sizeof...(Args))_Print(args...);
+		if constexpr (sizeof...(Args))_Print(std::forward<Args>(args)...);
 	}
-	template<typename... Args>
-	static void _Print(const Console::Color& color, Args&&... args) {
-		Console::SetTextColor(color);
-		if constexpr (sizeof...(Args))_Print(args...);
-	}
-
 public:
+	inline static std::function<void(TextColor)> set_text_color = [](TextColor) {};
+
+private:
 	inline static std::vector<const ScopeHolder*> _stack;
 	inline static size_t _disable = 0;
 };
@@ -193,41 +181,50 @@ public:
 
 #define NGS_SCOPE_CREATE auto _ngs_scope_holder = _NGS Debugger::Push()
 #define NGS_SCOPE_DISABLE NGS_SCOPE_CREATE;_ngs_scope_holder.Disable()
+#define NGS_SCOPE_ENABLE _ngs_scope_holder.Enable()
+
+#define _NGS_DEBUG_CALL(function, ...)			\
+do {											\
+	NGS_SCOPE_CREATE;							\
+	_NGS Debugger::function(__VA_ARGS__);		\
+} while (0)										\
+//
+
 #define NGS_LOG(level, ...)						\
-do {											\
-	NGS_SCOPE_CREATE;							\
-	_NGS Debugger::Log(level, ##__VA_ARGS__);	\
-} while (0)										\
-//
-
+_NGS_DEBUG_CALL(Log, _NGS level, ##__VA_ARGS__)	
 #define NGS_LOGL(level, ...)					\
-do {											\
-	NGS_SCOPE_CREATE;							\
-	_NGS Debugger::LogLine(level, ##__VA_ARGS__);\
-} while (0)										\
-//
+_NGS_DEBUG_CALL(LogLine, _NGS level, ##__VA_ARGS__)	
 #define NGS_LOGF(level, format, ...) 			\
-do {											\
-	NGS_SCOPE_CREATE;							\
-	_NGS Debugger::LogFormat(level,format, ##__VA_ARGS__);\
-} while (0)										\
+_NGS_DEBUG_CALL(LogFormat, _NGS level, format, ##__VA_ARGS__)	
+#define NGS_LOGFL(level, format, ...)					\
+_NGS_DEBUG_CALL(LogFormatLine, _NGS level, format, ##__VA_ARGS__)	\
 //
 
-#define NGS_LOGFL(level, format, ...)					\
-do {													\
-	NGS_SCOPE_CREATE;									\
-	_NGS Debugger::LogFormatLine(level,format, ##__VA_ARGS__);\
-} while (0)												\
+#define NGS_PRINT(...)							\
+_NGS_DEBUG_CALL(Print, ##__VA_ARGS__)			
+#define NGS_PRINTL(...)							\
+_NGS_DEBUG_CALL(PrintLine, ##__VA_ARGS__)		
+#define NGS_PRINTF(format, ...)					\
+_NGS_DEBUG_CALL(PrintFormat, format, ##__VA_ARGS__)	
+#define NGS_PRINTFL(format, ...)				\
+_NGS_DEBUG_CALL(PrintFormatLine, format, ##__VA_ARGS__)	\
 //
 
 #else
 
-#define NGS_DEBUG_SCOPE_HOLDER
-#define NGS_SCOPE_HOLDER_DISABLE
+#define NGS_SCOPE_CREATE
+#define NGS_SCOPE_DISABLE
+#define NGS_SCOPE_ENABLE
+
 #define NGS_LOG(level, ...) 
 #define NGS_LOGL(level, ...) 
 #define NGS_LOGF(level, format, ...) 
 #define NGS_LOGFL(level, format, ...)
+
+#define NGS_PRINT(...)
+#define NGS_PRINTL(...)
+#define NGS_PRINTF(format, ...)
+#define NGS_PRINTFL(format, ...)
 
 #endif
 

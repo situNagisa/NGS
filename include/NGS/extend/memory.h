@@ -5,192 +5,144 @@
 
 NGS_BEGIN
 
-class Allocator : public Singleton<Allocator>, public TypeDefined<Allocator>
-{
-public:
-	NGS_TYPE_DEFINE(size_t, size);
-	NGS_TYPE_DEFINE(uint64, bytes);
+struct Constructor {
+	template<class T, class... Args>
+	static void Construct(T* block, Args&&... args) { new(block)T(std::forward<Args>(args)...); }
+	template<class T, class... Args>
+	static T* Construct(Args&&... args) { return new T(std::forward<Args>(args)...); }
 
-#ifdef _DEBUG
-	NGS_TYPE_DEFINE(std::type_info, std_info);
+	template<class T, class... Args>
+	static constexpr T Construct(Args&&... args) { return T(std::forward<Args>(args)...); }
 
-	struct TypeInfo {
-		const std::type_info* std_info = nullptr;
-		__size size = 0;
-	};
-	NGS_TYPE_DEFINE(TypeInfo, info);
-	using __map = std::map<void*, __info>;
-#endif
+	template<class T, class... Args>
+	static T* Construct_Array(size_t count, Args&&... args) { return new T[count](std::forward<Args>(args)...); }
 
-private:
-	friend class Singleton<__this>;
-	Allocator() {};
-public:
 
-	template<typename T = byte>
-	T* Allocate(__size count = 1) {
-		auto block = reinterpret_cast<T*>(malloc(count * sizeof(T)));
-		_RecordAllocate(block, count);
-		return block;
-	}
-	void Free(void* block, __size count = 1) {
-		_RecordFree(block, count);
-		free(block);
-	}
+};
 
-	template<typename T, typename... Args>
-	T* Construct(Args&&...args) {
-		T* block = Allocate<T>();
-		new(block)T(std::forward<Args>(args)...);
-		return block;
-	}
-
-	template<typename T>
-	void Destory(T* block) {
-		if constexpr (std::is_same_v<T, void>) {
-			_RecordFree(block);
-			delete block;
-			return;
-		}
-		else {
-			block->~T();
-			Free(block);
-		}
-	}
-
-	template<typename T, typename... Args>
-	T* ConstructArray(__size count, Args&&...args) {
-		T* block = Allocate<T>(count);
-		for (__size i = 0; i < count; i++)
-			new(block + i)T(std::forward<Args>(args)...);
-
-		return block;
-	}
-
-	template<typename T>
-	void DestoryArray(T* block) {
-		__size count = SizeOf(block) / sizeof(T);
-		for (__size i = 0; i < count; i++)
-			block[i].~T();
-		Free(block, count);
-	}
-
-	template<typename T>
-	T* New(T* block, __size count = 1) {
-		_RecordAllocate(block, count);
-		return block;
-	}
-
-	template<typename T>
-	void Delete(T* block) { Destory(block); }
-
-	template<typename T>
-	void DeleteArray(T* block) { DestoryArray(block); }
-
-	void Show() {
-#if NGS_BUILD_TYPE == NGS_DEBUG
-		nos.Trace(
-			""
-			"=============================="
-			"\n已使用		%d bytes 内存"
-			"\n相比上次增长了	%d bytes"
-			"\n程序最大占用	%d bytes内存"
-			"\n=============================\n"
-			, _cur_used
-			, (int64)_cur_used - _show_record
-			, _max_used
-		);
-#endif  //_DEBUG
-	}
-
-private:
+struct Destructor {
 	template<class T>
-	void _RecordAllocate(T* block, __size count) {
-#if NGS_BUILD_TYPE == NGS_DEBUG
-		__info info;
-		info.size = count * sizeof(T);
-		info.std_info = &typeid(T);
-		_map[block] = info;
-		_cur_used += info.size;
+	static void Destruct(T* block) { delete block; }
 
-		if (_cur_used > _max_used)_max_used = _cur_used;
+	template<class T>
+	static void Destruct_Array(T* block) { delete[] block; }
 
-		nos << Console::Color::WHITE << "申请"
-			<< Console::Color::YELLOW << info.size << " bytes"
-			<< Console::Color::WHITE << "内存，\t地址： "
-			<< (block ? Console::Color::WHITE : Console::Color::RED) << (void*)block
-			<< Console::Color::WHITE << "\t类型："
-			<< Console::Color::CYAN << info.std_info->name()
-			<< Console::Color::RESERT;
-		;
-		if (count != 1)
-			nos.Trace("[%d]", count);
-		nos.Trace("\n");
-#endif
+	static void Destruct(std::ranges::random_access_range auto range) {
+		for (auto& item : range)
+			Destruct(item);
 	}
-	void _RecordFree(void* block, __size count = 1) {
-#ifdef _DEBUG
-		__info info = _map[block];
-		_map.erase(block);
-		_cur_used -= info.size;
+};
 
-		nos << Console::Color::WHITE << ("释放")
-			<< Console::Color::GREEN << info.size << " bytes"
-			<< Console::Color::WHITE << "内存，\t地址： "
-			<< (block ? Console::Color::WHITE : Console::Color::RED) << (void*)block
-			<< Console::Color::WHITE << "\t类型："
-			<< Console::Color::CYAN << info.std_info->name()
-			<< Console::Color::RESERT;
-		;
+class Allocator : public Singleton<Allocator> {
+public:
+	struct AllocatedInfo {
+		size_t count = 0;
+		size_t size = 0;
+		std::string type_name = {};
+		std::string function_name = {};
+		size_t column = 0;
+		size_t line = 0;
 
-		if (count != 1)
-			nos.Trace("[%d]", count);
-		nos.Trace("\n");
-#endif
+		operator std::string()const { return Format("%s%s", type_name.c_str(), count > 1 ? Format("[%d]", count).c_str() : ""); }
+	};
+private:
+	friend class Singleton<Allocator>;
+	Allocator() {
+		NGS_LOGL(debug, "allocator init");
 	}
-#ifdef _DEBUG
-	int64 _show_record = 0;
-	__bytes _max_used = 0;
-	__bytes _cur_used = 0;
+	~Allocator() {
+		NGS_LOGL(debug, "allocator destroy");
+	}
+public:
 
-	__map _map;
-#endif
+	void Show()const {
+		NGS_PRINTL();
+		NGS_PRINTL(TextColor::MAGENTA, "allocated memory:");
+		size_t used = 0;
+		for (auto& [block, info] : _allocated_info) {
+			NGS_PRINTL(
+				TextColor::GREEN, info, " ",
+				TextColor::WHITE, (void*)block,
+				TextColor::YELLOW, " [", info.size * info.count, "]",
+				TextColor::WHITE, "bytes -- ",
+				TextColor::CYAN, info.function_name,
+				TextColor::WHITE, Format("[%d,%d]", info.line, info.column),
+				TextColor::RESERT
+			);
+			used += info.size * info.count;
+		}
+		NGS_PRINTL(TextColor::MAGENTA, Format("used memory size:%d bytes", used));
+		NGS_PRINTL();
+	}
+
+	template<class T>
+	void Record_Allocate(T* block, size_t count = 1, source_location source = source_location::current()) {
+		auto& info = _allocated_info[block];
+		info.count = count;
+		info.size = sizeof(T);
+		info.type_name = NGS_GET_TYPE_NAME(T);
+		info.function_name = source.function_name();
+		info.column = source.column();
+		info.line = source.line();
+
+		NGS_PRINTL(
+			TextColor::WHITE, "allocated ",
+			TextColor::YELLOW, info.size * info.count, "bytes ",
+			TextColor::WHITE, "\taddress: ",
+			(block ? TextColor::WHITE : TextColor::RED), (void*)block,
+			TextColor::WHITE, "\ttype: ",
+			TextColor::CYAN, info,
+			TextColor::RESERT
+		);
+	}
+	void Record_Free(void* block) {
+		auto& info = _allocated_info[block];
+		NGS_PRINTL(
+			TextColor::WHITE, "freed     ",
+			TextColor::GREEN, info.size * info.count, "bytes ",
+			TextColor::WHITE, "\taddress: ",
+			(block ? TextColor::WHITE : TextColor::RED), (void*)block,
+			TextColor::WHITE, "\ttype: ",
+			TextColor::CYAN, info,
+			TextColor::RESERT
+		);
+		_allocated_info.erase(block);
+	}
+
+	const AllocatedInfo& GetAllocatedInfo(void* block)const { return _allocated_info.at(block); }
+	auto cbegin()const { return _allocated_info.cbegin(); }
+	auto cend()const { return _allocated_info.cend(); }
+private:
+
+private:
+	std::unordered_map<void_ptr, AllocatedInfo> _allocated_info = {};
 };
 
 
-inline
-void MemorySet(void* dst, byte value, size_t size) { memset(dst, value, size); }
+inline void MemorySet(void* dst, byte value, size_t size) { memset(dst, value, size); }
 
 template<_CPT UnsignedIntegral UINT>
-constexpr
-void
-MemorySet(UINT* dst, UINT value, size_t size) {
+constexpr void MemorySet(UINT* dst, UINT value, size_t size) {
 	//#pragma omp parallel for
 	for (int64 i = 0; i < size; i++)
 		dst[i] = value;
 }
 
-inline
-void
-MemoryCopy(void* dst, void_ptr_cst src, size_t size) { memcpy(dst, src, size); }
+inline void MemoryCopy(void* dst, void_ptr_cst src, size_t size) { memcpy(dst, src, size); }
 
 
-inline
-void
-MemoryMove(void* dst, void_ptr_cst src, size_t size) { memmove(dst, src, size); }
+inline void MemoryMove(void* dst, void_ptr_cst src, size_t size) { memmove(dst, src, size); }
 
 //实现基础逻辑，交换整形数据（最大可达八字节，即unsigned long long)
 template<_CPT UnsignedIntegral UINT>
-void
-MemorySwap(UINT& a, UINT& b) {
+void MemorySwap(UINT& a, UINT& b) {
 	a ^= b;
 	b ^= a;
 	a ^= b;
 }
 //实现n个整数类型的数据交换
 template<size_t N, _CPT UnsignedIntegral UINT>
-void
-MemorySwap(UINT* a, UINT* b) {
+void MemorySwap(UINT* a, UINT* b) {
 	//可用OpenMP或模板For优化这个for循环
 	for (size_t i = 0; i < N; i++) {
 		MemorySwap(a[i], b[i]);
@@ -198,8 +150,7 @@ MemorySwap(UINT* a, UINT* b) {
 }
 //同上，支持动态填写size参数，缺点是不能用For模板进行优化循环
 template<_CPT UnsignedIntegral UINT>
-void
-MemorySwap(UINT* a, UINT* b, size_t size) {
+void MemorySwap(UINT* a, UINT* b, size_t size) {
 	for (size_t i = 0; i < size; i++) {
 		MemorySwap(a[i], b[i]);
 	}
