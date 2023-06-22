@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "NGS/nda/defined.h"
 #include "NGS/nda/container/tree.h"
@@ -7,26 +7,26 @@
 NDA_BEGIN
 
 //================================================
-// ÏÔÊ¾¼Ü¹¹¿É²Î¿¼AS3µÄÏÔÊ¾¼Ü¹¹
-// ºËÐÄÀàÎªDisplayObject DisplayObjectContainer
-// Ò»¸öÎªÏÔÊ¾¶ÔÏó£¬Ò»¸öÎªÏÔÊ¾¶ÔÏóÈÝÆ÷£¬¶¼Ó¦Îª³éÏóÀà
-// ÏÔÊ¾¶ÔÏóÈÝÆ÷±¾Éí²»°üº¬ÈÎºÎÏÔÊ¾Í¼ÏñÐÅÏ¢£¨ÕâµãÓëAS3²»Í¬£©£¬Ö»°üº¬×ÓÏÔÊ¾¶ÔÏó»òÕß×ÓÏÔÊ¾¶ÔÏóÈÝÆ÷¡¢
+// æ˜¾ç¤ºæž¶æž„å¯å‚è€ƒAS3çš„æ˜¾ç¤ºæž¶æž„
+// æ ¸å¿ƒç±»ä¸ºDisplayObject DisplayObjectContainer
+// ä¸€ä¸ªä¸ºæ˜¾ç¤ºå¯¹è±¡ï¼Œä¸€ä¸ªä¸ºæ˜¾ç¤ºå¯¹è±¡å®¹å™¨ï¼Œéƒ½åº”ä¸ºæŠ½è±¡ç±»
+// æ˜¾ç¤ºå¯¹è±¡å®¹å™¨æœ¬èº«ä¸åŒ…å«ä»»ä½•æ˜¾ç¤ºå›¾åƒä¿¡æ¯ï¼ˆè¿™ç‚¹ä¸ŽAS3ä¸åŒï¼‰ï¼ŒåªåŒ…å«å­æ˜¾ç¤ºå¯¹è±¡æˆ–è€…å­æ˜¾ç¤ºå¯¹è±¡å®¹å™¨ã€
 // 
-// ×¢Òâ£º
-// µ±ÐèÒª¸Ä±äÏÔÊ¾¶ÔÏóµÄ ÏÔÊ¾ÊôÐÔ£¨ÀýÈçX£¬Y£¬ScaleµÈµÈ£© Ê±£¬ÐèÒªÏÈµ÷ÓÃÏÔÊ¾¶ÔÏóµÄRedrawº¯Êý
-// Èç¹û¸Ä±äÁËÏÔÊ¾¶ÔÏóµÄ´óÐ¡£¨ÏÔÊ¾¶ÔÏóÏà¶Ô¸¸ÈÝÆ÷ÖÐµÄ´óÐ¡£©£¬ÔòÐèÒªµ÷ÓÃResizeº¯Êý
+// æ³¨æ„ï¼š
+// å½“éœ€è¦æ”¹å˜æ˜¾ç¤ºå¯¹è±¡çš„ æ˜¾ç¤ºå±žæ€§ï¼ˆä¾‹å¦‚Xï¼ŒYï¼ŒScaleç­‰ç­‰ï¼‰ æ—¶ï¼Œéœ€è¦å…ˆè°ƒç”¨æ˜¾ç¤ºå¯¹è±¡çš„Redrawå‡½æ•°
+// å¦‚æžœæ”¹å˜äº†æ˜¾ç¤ºå¯¹è±¡çš„å¤§å°ï¼ˆæ˜¾ç¤ºå¯¹è±¡ç›¸å¯¹çˆ¶å®¹å™¨ä¸­çš„å¤§å°ï¼‰ï¼Œåˆ™éœ€è¦è°ƒç”¨Resizeå‡½æ•°
 // 
-// Resizeº¯Êý¾ßÓÐÒÔÏÂÂß¼­£º
-// ÈôÉèÖÃÄ³×ÓÏÔÊ¾¶ÔÏóµÄResizeÊôÐÔÎªTRUE£¬Ôò¸Ã×ÓÏÔÊ¾¶ÔÏóµÄËùÓÐ¸¸ÏÔÊ¾¶ÔÏó¶¼»á±»ÉèÖÃÎªTRUE
-// ²»ÐèÒªÓÃ»§ÉèÖÃResizeÊôÐÔÎªFALSE£¬ÒòÎªËûÓ¦¸ÃÔÚµ÷ÓÃResize()º¯Êýºó±»ÉèÖÃÎªFALSE
-// µ÷ÓÃResize()º¯Êýºó½ö½öÖ»½«×ÔÉíµÄResizeÊôÐÔÉèÖÃÎªFALSE£¬²¢²»»áÓ°Ïì¸¸ÏÔÊ¾¶ÔÏóÈÝÆ÷µÄResizeÊôÐÔ£¬µ«Òª×¢ÒâµÄÊÇ£¬Èç¹ûÏÔÊ¾¶ÔÏóÎªÈÝÆ÷µÄ»°£¬Ôò»áµÝ¹éµ÷ÓÃËùÓÐ×ÓÏÔÊ¾¶ÔÏóµÄResize()º¯Êý
-// ½á¹û¾ÍÊÇResizeº¯Êý¹ýºó×ÔÉíµÄResizeÊôÐÔÒÔ¼°ËùÓÐ×ÓÏÔÊ¾¶ÔÏóµÄResizeÊôÐÔ¶¼»á±»ÉèÖÃÎªFALSE
+// Resizeå‡½æ•°å…·æœ‰ä»¥ä¸‹é€»è¾‘ï¼š
+// è‹¥è®¾ç½®æŸå­æ˜¾ç¤ºå¯¹è±¡çš„Resizeå±žæ€§ä¸ºTRUEï¼Œåˆ™è¯¥å­æ˜¾ç¤ºå¯¹è±¡çš„æ‰€æœ‰çˆ¶æ˜¾ç¤ºå¯¹è±¡éƒ½ä¼šè¢«è®¾ç½®ä¸ºTRUE
+// ä¸éœ€è¦ç”¨æˆ·è®¾ç½®Resizeå±žæ€§ä¸ºFALSEï¼Œå› ä¸ºä»–åº”è¯¥åœ¨è°ƒç”¨Resize()å‡½æ•°åŽè¢«è®¾ç½®ä¸ºFALSE
+// è°ƒç”¨Resize()å‡½æ•°åŽä»…ä»…åªå°†è‡ªèº«çš„Resizeå±žæ€§è®¾ç½®ä¸ºFALSEï¼Œå¹¶ä¸ä¼šå½±å“çˆ¶æ˜¾ç¤ºå¯¹è±¡å®¹å™¨çš„Resizeå±žæ€§ï¼Œä½†è¦æ³¨æ„çš„æ˜¯ï¼Œå¦‚æžœæ˜¾ç¤ºå¯¹è±¡ä¸ºå®¹å™¨çš„è¯ï¼Œåˆ™ä¼šé€’å½’è°ƒç”¨æ‰€æœ‰å­æ˜¾ç¤ºå¯¹è±¡çš„Resize()å‡½æ•°
+// ç»“æžœå°±æ˜¯Resizeå‡½æ•°è¿‡åŽè‡ªèº«çš„Resizeå±žæ€§ä»¥åŠæ‰€æœ‰å­æ˜¾ç¤ºå¯¹è±¡çš„Resizeå±žæ€§éƒ½ä¼šè¢«è®¾ç½®ä¸ºFALSE
 // 
-// Redrawº¯Êý¾ßÓÐÒÔÏÂÂß¼­£º
-// Redrawº¯Êý±¾Éí²¢²»ÏñResize()º¯ÊýÄÇÑù°üº¬¼ÆËã£¬±ÈÆðResize£¬RedrawÔòËãÍêÍêÈ«È«µÄÒ»¸öÊôÐÔ£¬ÒòÎªÏÔÊ¾¶ÔÏó²»Ó¦Óë»æÖÆ¹¤×÷°ó¶¨ÔÚÒ»Æð£¬ÏÔÊ¾¶ÔÏóÖ»ÐèÒªÌá¹©»æÖÆËùÐèµÄÊý¾Ý¼´¿É
-// ÉèÖÃRedrawÊôÐÔÎªTRUEÊ±£¬ÈôÏÔÊ¾¶ÔÏóÎªÈÝÆ÷£¬Ôò×ÔÉíÒÔ¼°ËùÓÐµÄ×ÓÏÔÊ¾¶ÔÏóµÄRedrawÊôÐÔ¶¼»á±»ÉèÖÃÎªTRUE
-// ÉèÖÃRedrawÊôÐÔÎªFALSEÊ±£¬Ö»ÓÐ×ÔÉí»á±»ÉèÖÃÎªFALSE£¬ÈçÍ¬ResizeÊôÐÔ£¬ÓÃ»§ÔÚ»æÖÆÒÔÍâµÄµØ·½²¢²»ÐèÒªÉèÖÃRedrawÊôÐÔÎªFALSE
-// µ÷ÓÃRedraw()º¯Êý²»ÂÛ×ÔÉíÊÇ·ñÊÇÏÔÊ¾¶ÔÏóÈÝÆ÷¶¼Ö»ÉèÖÃ×ÔÉíµÄRedrawÊôÐÔÎªFALSE£¬ÇëÔÚ»æÖÆ½áÊøºóµ÷ÓÃRedrawº¯Êý
+// Redrawå‡½æ•°å…·æœ‰ä»¥ä¸‹é€»è¾‘ï¼š
+// Redrawå‡½æ•°æœ¬èº«å¹¶ä¸åƒResize()å‡½æ•°é‚£æ ·åŒ…å«è®¡ç®—ï¼Œæ¯”èµ·Resizeï¼ŒRedrawåˆ™ç®—å®Œå®Œå…¨å…¨çš„ä¸€ä¸ªå±žæ€§ï¼Œå› ä¸ºæ˜¾ç¤ºå¯¹è±¡ä¸åº”ä¸Žç»˜åˆ¶å·¥ä½œç»‘å®šåœ¨ä¸€èµ·ï¼Œæ˜¾ç¤ºå¯¹è±¡åªéœ€è¦æä¾›ç»˜åˆ¶æ‰€éœ€çš„æ•°æ®å³å¯
+// è®¾ç½®Redrawå±žæ€§ä¸ºTRUEæ—¶ï¼Œè‹¥æ˜¾ç¤ºå¯¹è±¡ä¸ºå®¹å™¨ï¼Œåˆ™è‡ªèº«ä»¥åŠæ‰€æœ‰çš„å­æ˜¾ç¤ºå¯¹è±¡çš„Redrawå±žæ€§éƒ½ä¼šè¢«è®¾ç½®ä¸ºTRUE
+// è®¾ç½®Redrawå±žæ€§ä¸ºFALSEæ—¶ï¼Œåªæœ‰è‡ªèº«ä¼šè¢«è®¾ç½®ä¸ºFALSEï¼Œå¦‚åŒResizeå±žæ€§ï¼Œç”¨æˆ·åœ¨ç»˜åˆ¶ä»¥å¤–çš„åœ°æ–¹å¹¶ä¸éœ€è¦è®¾ç½®Redrawå±žæ€§ä¸ºFALSE
+// è°ƒç”¨Redraw()å‡½æ•°ä¸è®ºè‡ªèº«æ˜¯å¦æ˜¯æ˜¾ç¤ºå¯¹è±¡å®¹å™¨éƒ½åªè®¾ç½®è‡ªèº«çš„Redrawå±žæ€§ä¸ºFALSEï¼Œè¯·åœ¨ç»˜åˆ¶ç»“æŸåŽè°ƒç”¨Redrawå‡½æ•°
 // 
 // 
 //===============================================
@@ -50,9 +50,10 @@ public:
 
 	DisplayObject(__this_ref_cst other) = default;
 	virtual ~DisplayObject() {
-		NGS_LOGFL(ngs::debug, "released display object %s", name.c_str());
+		NGS_LOGFL(debug, "released display object %s", name.c_str());
 		NGS_Assert(!Parent(), "the display object still active");
 	}
+	bool IsContainer()const { return dynamic_cast<__container_ptr_cst>(this); }
 
 	virtual __number Width()const = 0;
 	virtual void Width(__number value) { ScaleX((float32)value / Width()); }
@@ -111,9 +112,9 @@ public:
 
 private:
 	constexpr static const char _tab0[] = "   ";
-	constexpr static const char _tab1[] = " ©¦ ";
-	constexpr static const char _node0[] = " ©À©¤";
-	constexpr static const char _node1[] = " ©¸©¤";
+	constexpr static const char _tab1[] = " â”‚ ";
+	constexpr static const char _node0[] = " â”œâ”€";
+	constexpr static const char _node1[] = " â””â”€";
 
 	std::string _GetTreeStruct(std::string_view prefix)const;
 protected:

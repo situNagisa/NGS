@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/nsl/file/device_file.h"
 #include "NGS/nsl/defined.h"
@@ -44,7 +44,7 @@ public:
 		std::pair<ngs::byte_ptr, size_t> pair = {};
 		auto& [data, size] = pair;
 		size = GetFrameBufferSize();
-		data = NGS_NEW_ARRAY(ngs::byte, size);
+		NGS_NEW_ARR(data, size, ngs::byte)();
 		Read(data);
 		return pair;
 	}

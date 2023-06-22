@@ -1,4 +1,4 @@
-#include "NGL/fw/window.h"
+﻿#include "NGL/fw/window.h"
 #include "NGL/opengl.h"
 
 NGL_BEGIN
@@ -27,28 +27,28 @@ static void _sWindowPosCallback(GLFWwindow* window, int xpos, int ypos) {
 }
 NGS_HPP_INLINE Window::Window(std::string_view name, const Point2i& size)
 {
-	_data = NGS_NEW(new _WindowData());
+	NGS_NEW(_data, _WindowData)();
 	auto& data = *reinterpret_cast<_WindowData*>(_data);
 
-	_context = glfwCreateWindow(size.x, size.y, name.data(), nullptr, nullptr);
-	NGS_Assert(_context, "Failed to create GLFW window");
+	_handle = glfwCreateWindow(size.x, size.y, name.data(), nullptr, nullptr);
+	NGS_Assert(_handle, "Failed to create GLFW window");
 
 	auto pos = GetPosition();
 	data.bounds.Set(pos.x, pos.y, size.x, size.y);
-	NGS_Assert(!_s_window_callback_map.contains(_context));
-	_s_window_callback_map[_context] = { this,&data };
+	NGS_Assert(!_s_window_callback_map.contains(_handle));
+	_s_window_callback_map[_handle] = { this,&data };
 
-	glfwSetFramebufferSizeCallback(_context, _sFrameBufferSizeCallback);
-	glfwSetWindowSizeCallback(_context, _sWindowSizeCallback);
-	glfwSetWindowPosCallback(_context, _sWindowPosCallback);
+	glfwSetFramebufferSizeCallback(_handle, _sFrameBufferSizeCallback);
+	glfwSetWindowSizeCallback(_handle, _sWindowSizeCallback);
+	glfwSetWindowPosCallback(_handle, _sWindowPosCallback);
 }
 
 NGS_HPP_INLINE Window::~Window() noexcept
 {
 	auto& data = *reinterpret_cast<_WindowData*>(_data);
 
-	glfwDestroyWindow(_context);
-	_s_window_callback_map.erase(_context);
+	glfwDestroyWindow(_handle);
+	_s_window_callback_map.erase(_handle);
 	NGS_DELETE(&data);
 	_data = nullptr;
 }
@@ -56,29 +56,27 @@ NGS_HPP_INLINE bool Window::Open(size_t width, size_t height, std::string_view t
 {
 	SetSize(width, height);
 	SetTitle(title);
-	Active();
 	Show();
 	return true;
 }
 NGS_HPP_INLINE bool Window::IsOpened() const { return true; }
 NGS_HPP_INLINE void Window::Close() {}
-NGS_HPP_INLINE bool Window::ShouldClose() const noexcept { return glfwWindowShouldClose(_context); }
+NGS_HPP_INLINE bool Window::ShouldClose() const noexcept { return glfwWindowShouldClose(_handle); }
 
-NGS_HPP_INLINE bool Window::IsPress(int keycode)const noexcept { return glfwGetKey(_context, keycode) == GLFW_PRESS; }
-NGS_HPP_INLINE bool Window::IsRelease(int keycode)const noexcept { return glfwGetKey(_context, keycode) == GLFW_RELEASE; }
-NGS_HPP_INLINE bool Window::IsActive() const { return glfwGetCurrentContext() == _context; }
+NGS_HPP_INLINE bool Window::IsPress(int keycode)const noexcept { return glfwGetKey(_handle, keycode) == GLFW_PRESS; }
+NGS_HPP_INLINE bool Window::IsRelease(int keycode)const noexcept { return glfwGetKey(_handle, keycode) == GLFW_RELEASE; }
 
-NGS_HPP_INLINE void Window::SetTitle(std::string_view title) { glfwSetWindowTitle(_context, title.data()); }
-NGS_HPP_INLINE void Window::SetIcon(const std::vector<GLFWimage>& icons) { glfwSetWindowIcon(_context, icons.size(), icons.data()); }
-NGS_HPP_INLINE void Window::SetPosition(int x, int y) { glfwSetWindowPos(_context, x, y); }
-NGS_HPP_INLINE void Window::SetSize(int width, int height) { glfwSetWindowSize(_context, width, height); }
+NGS_HPP_INLINE void Window::SetTitle(std::string_view title) { glfwSetWindowTitle(_handle, title.data()); }
+//NGS_HPP_INLINE void Window::SetIcon(const std::vector<GLFWimage>& icons) { glfwSetWindowIcon(_handle, icons.size(), icons.data()); }
+NGS_HPP_INLINE void Window::SetPosition(int x, int y) { glfwSetWindowPos(_handle, x, y); }
+NGS_HPP_INLINE void Window::SetSize(int width, int height) { glfwSetWindowSize(_handle, width, height); }
 
-NGS_HPP_INLINE GLFWmonitor* Window::GetMonitor() const { return glfwGetWindowMonitor(_context); }
+NGS_HPP_INLINE GLFWmonitor* Window::GetMonitor() const { return glfwGetWindowMonitor(_handle); }
 NGS_HPP_INLINE ngs::Point2i Window::GetFramebufferSize() const
 {
 	auto& data = *reinterpret_cast<_WindowData*>(_data);
 	int width, height;
-	glfwGetFramebufferSize(_context, &width, &height);
+	glfwGetFramebufferSize(_handle, &width, &height);
 	data.framebuffer_size.Set(width, height);
 	return { width,height };
 }
@@ -87,7 +85,7 @@ NGS_HPP_INLINE ngs::Point2i Window::GetPosition() const
 {
 	auto& data = *reinterpret_cast<_WindowData*>(_data);
 	int x, y;
-	glfwGetWindowPos(_context, &x, &y);
+	glfwGetWindowPos(_handle, &x, &y);
 	data.bounds.x = x;
 	data.bounds.y = y;
 	return { x,y };
@@ -97,20 +95,19 @@ NGS_HPP_INLINE ngs::Point2i Window::GetSize() const
 {
 	auto& data = *reinterpret_cast<_WindowData*>(_data);
 	int width, height;
-	glfwGetWindowSize(_context, &width, &height);
+	glfwGetWindowSize(_handle, &width, &height);
 	data.bounds.width = width;
 	data.bounds.height = height;
 	return { width,height };
 }
 NGS_HPP_INLINE Rectangle<int> Window::GetBounds()const { return reinterpret_cast<_WindowData*>(_data)->bounds; }
 
-NGS_HPP_INLINE void Window::Iconify() { glfwIconifyWindow(_context); }
-NGS_HPP_INLINE void Window::Restore() { glfwRestoreWindow(_context); }
-NGS_HPP_INLINE void Window::Maximize() { glfwMaximizeWindow(_context); }
-NGS_HPP_INLINE void Window::Show() { glfwShowWindow(_context); }
-NGS_HPP_INLINE void Window::Hide() { glfwHideWindow(_context); }
-NGS_HPP_INLINE void Window::Focus() { glfwFocusWindow(_context); }
-NGS_HPP_INLINE void Window::Active() { glfwMakeContextCurrent(_context); }
-NGS_HPP_INLINE void Window::SwapBuffer() const { glfwSwapBuffers(_context); }
+NGS_HPP_INLINE void Window::Iconify() { glfwIconifyWindow(_handle); }
+NGS_HPP_INLINE void Window::Restore() { glfwRestoreWindow(_handle); }
+NGS_HPP_INLINE void Window::Maximize() { glfwMaximizeWindow(_handle); }
+NGS_HPP_INLINE void Window::Show() { glfwShowWindow(_handle); }
+NGS_HPP_INLINE void Window::Hide() { glfwHideWindow(_handle); }
+NGS_HPP_INLINE void Window::Focus() { glfwFocusWindow(_handle); }
+NGS_HPP_INLINE void Window::SwapBuffer() const { glfwSwapBuffers(_handle); }
 
 NGL_END

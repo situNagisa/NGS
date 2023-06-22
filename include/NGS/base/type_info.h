@@ -1,7 +1,6 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/defined.h"
-#include <boost/type_index.hpp>
 
 NGS_BEGIN
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/base.h"
 #include "NGS/extend/memory.h"
@@ -30,16 +30,27 @@ NGS_END
 
 #if NGS_BUILD_TYPE == NGS_DEBUG
 
-#define NGS_NEW(...)_NGS New(##__VA_ARGS__)
-#define NGS_NEW_ARRAY(type,count,...) _NGS New(new type[count](##__VA_ARGS__),count)
+#define NGS_NEW(ptr,...)											\
+ptr = (__VA_ARGS__*)std::malloc(sizeof(__VA_ARGS__));				\
+NGS_Assert(ptr,"nagisa new fail!");									\
+_NGS Allocator::I().Record_Allocate((__VA_ARGS__*)ptr, 1, #ptr);	\
+new(ptr)__VA_ARGS__													\
+//
+#define NGS_NEW_ARR(ptr,count,...)									\
+ptr = (__VA_ARGS__*)std::malloc(sizeof(__VA_ARGS__) * (count));		\
+NGS_Assert(ptr, "nagisa new array fail!");							\
+_NGS Allocator::I().Record_Allocate((__VA_ARGS__*)ptr, (count), #ptr); \
+new(ptr)__VA_ARGS__[(count)]										\
+//
+
 #define NGS_DELETE(block) _NGS Delete(block)
-#define NGS_DELETE_ARRAY(block) _NGS Delete_Array(block)
+#define NGS_DELETE_ARR(block) _NGS Delete_Array(block)
 
 #else
 
-#define NGS_NEW(...) (##__VA_ARGS__)
-#define NGS_NEW_ARRAY(type,count,...) new type[count](##__VA_ARGS__)
-#define NGS_DELETE(block) Destructor::Destruct(block)
-#define NGS_DELETE_ARRAY(block) Destructor::Destruct_Array(block)
+#define NGS_NEW(ptr,...) ptr = new __VA_ARGS__
+#define NGS_NEW_ARR(ptr,count,...) ptr = new __VA_ARGS__[count]
+#define NGS_DELETE(block) _NGS Destructor::Destruct(block)
+#define NGS_DELETE_ARR(block) _NGS Destructor::Destruct_Array(block)
 
 #endif

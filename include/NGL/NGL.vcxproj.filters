@@ -24,54 +24,69 @@
     <ClInclude Include="fw\window.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="gl\state\VAO.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="gl\shader\shader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="gl\state\VBO.h">
+    <ClInclude Include="gl\shader.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="NGL.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="gl\state\EBO.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="config.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="fw\opengl.h">
+    <ClInclude Include="fw\glfw.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="gl\context.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="fw\context.h">
+    <ClInclude Include="gl\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\render.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\vertex_array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="context.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\gl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\space.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\state.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\blend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\framebuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gl\renderbuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="gl\shader\shader.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="gl\state\VAO.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="gl\state\VBO.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="gl\state\EBO.cpp">
+    <ClCompile Include="gl\shader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="fw\window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="fw\opengl.cpp">
+    <ClCompile Include="fw\glfw.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="fw\context.cpp">
+    <ClCompile Include="gl\vertex_array.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="gl\render.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

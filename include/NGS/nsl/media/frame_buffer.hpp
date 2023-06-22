@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/nsl/media/frame_buffer.h"
 #include "NGS/nsl/depend.h"
@@ -11,7 +11,7 @@ struct _FrameBufferData {
 };
 
 bool FrameBuffer::Open(const std::filesystem::path& path) {
-	_data = NGS_NEW(new _FrameBufferData());
+	NGS_NEW(_data, _FrameBufferData)();
 	auto& data = *reinterpret_cast<_FrameBufferData*>(_data);
 
 	if (!_file.IsOpened() && !_file.Open(path)) {

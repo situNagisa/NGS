@@ -1,21 +1,18 @@
-#pragma once
+﻿#pragma once
 
 #include "NGL/defined.h"
 #include "NGL/opengl.h"
-#include "NGL/fw/context.h"
+#include "NGL/context.h"
 
 NGL_BEGIN
 
-class Window {
+class Window : public Context<GLFWwindow*> {
 public:
 
-private:
-	friend class Constructor;
-	friend class Destructor;
+public:
 	Window() : Window("", { 1,1 }) {};
 	Window(std::string_view name, const Point2i& size);
 	~Window()noexcept;
-public:
 
 	bool Open(size_t width, size_t height, std::string_view title);
 	bool IsOpened()const;
@@ -24,10 +21,9 @@ public:
 
 	bool IsPress(int keycode)const noexcept;
 	bool IsRelease(int keycode)const noexcept;
-	bool IsActive()const;
 
 	void SetTitle(std::string_view title);
-	void SetIcon(const std::vector<GLFWimage>& icons);
+	//void SetIcon(const std::vector<GLFWimage>& icons);
 	void SetPosition(int x, int y);
 	void SetPosition(const Point2i& pos) { SetPosition(pos.x, pos.y); }
 	void SetSize(int width, int height);
@@ -45,16 +41,9 @@ public:
 	void Show();
 	void Hide();
 	void Focus();
-	void Active();
 
 	void SwapBuffer()const;
-
-	friend class _GLFW;
-	friend class GLFW;
-
-	const GLFW_Context& GetContext()const { return _context; }
 private:
-	GLFW_Context _context = nullptr;
 	void_ptr _data = nullptr;
 };
 

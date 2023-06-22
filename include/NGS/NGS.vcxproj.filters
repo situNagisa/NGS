@@ -138,9 +138,6 @@
     <ClInclude Include="extend\setting.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\stream.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="extend\timer.h">
       <Filter>头文件</Filter>
     </ClInclude>

@@ -74,7 +74,7 @@ bool ngs::GPIO::Open(ngs::pin_t pin, Mode mode) {
 	using nsl::GPIO_DIR;
 
 	if (!_Export(pin)) return false;
-	_data = NGS_NEW(new nsl::GPIO_Data());
+	NGS_NEW(_data, nsl::GPIO_Data)();
 	nsl::GPIO_Data& data = *reinterpret_cast<nsl::GPIO_Data*>(_data);
 
 	//初始化设备文件

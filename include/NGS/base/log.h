@@ -4,6 +4,7 @@
 #include "NGS/base/STL.h"
 #include "NGS/base/config.h"
 #include "NGS/base/base_class.h"
+#include "NGS/base/utility.h"
 
 NGS_BEGIN
 
@@ -71,13 +72,9 @@ public:
 		{
 			Debugger::_Push(*this);
 		}
+
 		std::string GetFunctionName()const {
-			std::regex function_name(R"(\b((<\s*)?[a-zA-Z_]\w*(\s*>)?\s*::\s*)*[a-zA-Z_]\w*\s*(\(\))?(?=\([^()]*\)))");
-			std::smatch match;
-			if (std::regex_search(_function, match, function_name)) {
-				return match[0].str();
-			}
-			return {};
+			return ngs::GetFunctionName(_function);
 		}
 	public:
 		size_t _line = 0;

@@ -1,37 +1,29 @@
-#pragma once
+﻿#pragma once
 
 #include "NGL/defined.h"
 #include "NGL/opengl.h"
 #include "NGL/config.h"
-#include "NGL/fw/context.h"
+#include "NGL/context.h"
+#include "NGL/fw/window.h"
 
 NGL_BEGIN
 
 class Window;
 
-class GLFW : public Singleton<GLFW> {
+class GLFW : public Current<Window, GLFW> {
 public:
 	NGS_TYPE_DEFINE(Window, window);
 
 private:
-	friend class Singleton<GLFW>;
+	friend class base;
+	friend class Constructor;
 	GLFW(int major = NGL_OPENGL_MAJOR, int minor = NGL_OPENGL_MINOR);
-	~GLFW();
+	static void _SET_CURRENT_CONTEXT(context_type::handle_type window);
 public:
-
-#undef CreateWindow
-	__window_ptr CreateWindow();
-	void DestroyWindow(__window_ptr window);
-	__window_ptr GetCurrentWindow() { return _windows.at(GLFW_ContextManager::GetContext()); }
-	__window_ptr_cst GetCurrentWindow()const { return _windows.at(GLFW_ContextManager::GetContext()); }
-
-	bool ShouldClose()const;
+	~GLFW();
 
 	void PollEvents();
-private:
-
-private:
-	std::unordered_map<GLFW_Context, __window_ptr> _windows = {};
 };
+inline static auto glfw = Constructor::Construct<GLFW>();
 
 NGL_END

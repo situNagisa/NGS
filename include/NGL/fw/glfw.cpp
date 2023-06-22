@@ -1,4 +1,4 @@
-#include "NGL/fw/glfw.h"
+﻿#include "NGL/fw/glfw.h"
 #include "NGL/fw/window.h"
 
 NGL_BEGIN
@@ -17,34 +17,12 @@ NGS_HPP_INLINE GLFW::GLFW(int major, int minor) {
 
 NGS_HPP_INLINE GLFW::~GLFW()
 {
-	while (_windows.size()) {
-		auto& [gl_window, window] = *_windows.begin();
-		DestroyWindow(window);
-	}
 	glfwTerminate();
 }
 
-NGS_HPP_INLINE GLFW::__window_ptr GLFW::CreateWindow()
+void GLFW::_SET_CURRENT_CONTEXT(context_type::handle_type window)
 {
-	auto window = NGS_NEW(new Window());
-	_windows[window->GetContext()] = window;
-	return window;
-}
-
-NGS_HPP_INLINE void GLFW::DestroyWindow(__window_ptr window)
-{
-	_windows.erase(window->GetContext());
-	window->Close();
-	NGS_DELETE(window);
-}
-
-NGS_HPP_INLINE bool GLFW::ShouldClose() const
-{
-	for (auto pair : _windows) {
-		auto& window = *pair.second;
-		if (window.ShouldClose())return true;
-	}
-	return false;
+	glfwMakeContextCurrent(window);
 }
 
 NGS_HPP_INLINE void GLFW::PollEvents() { glfwPollEvents(); }

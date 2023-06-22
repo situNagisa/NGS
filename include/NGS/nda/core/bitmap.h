@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "NGS/nda/defined.h"
 #include "NGS/nda/core/display_object.h"
 
@@ -11,8 +11,10 @@ public:
 public:
 	BitmapData(size_t width, size_t height)
 		: _size({ width,height })
-		, _data(NGS_NEW_ARRAY(__color, width* height))
-	{}
+		, _data(nullptr)
+	{
+		NGS_NEW_ARR(_data, _size.x * _size.y, __color)();
+	}
 	BitmapData(size_t width, size_t height, __color_ptr_cst data)
 		: BitmapData(width, height)
 	{
@@ -29,7 +31,7 @@ public:
 	}
 	~BitmapData() {
 		if (_data)
-			ngs::Delete(_data);
+			NGS_DELETE_ARR(_data);
 	}
 
 	__this_ref operator=(__this_ref_cst other) {
@@ -57,7 +59,7 @@ private:
 	void _Resize(const Point2s& size) {
 		_Release();
 		_size = size;
-		_data = NGS_NEW_ARRAY(__color, _size.x * _size.y);
+		NGS_NEW_ARR(_data, _size.x * _size.y, __color)();
 	}
 	void _CopyData(__color_ptr_cst data) {
 		std::memcpy(_data, data, Size());

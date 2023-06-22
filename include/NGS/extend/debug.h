@@ -19,8 +19,8 @@ struct MeasureExecutionTime {
 	~MeasureExecutionTime() {
 		time_point end = clock::now();
 		auto count = std::chrono::duration_cast<time>(end - _start);
-		nos.Trace("\n=========================");
-		nos.Trace(
+		NGS_PRINT("\n=========================");
+		NGS_PRINTL(
 			""
 			"\n函数：%s"
 			"\n运行时间：%d"
@@ -29,13 +29,13 @@ struct MeasureExecutionTime {
 		);
 
 		if (!_message.empty()) {
-			nos.Trace(
+			NGS_PRINT(
 				""
 				"\n附加信息：%s"
 				, _message.c_str()
 			);
 		}
-		nos.Trace("\n=========================\n");
+		NGS_PRINTL("\n=========================");
 	}
 private:
 	time_point _start;

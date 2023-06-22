@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "NGS/nsl/media/V4L2.h"
 #include "NGS/nsl/depend.h"
@@ -53,7 +53,7 @@ struct _V4l2Data {
 };
 
 bool V4L2::Open(const std::filesystem::path& path) {
-	_data = NGS_NEW(new _V4l2Data());
+	NGS_NEW(_data, _V4l2Data)();
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
 	if (!data.device.Open(path)) {
@@ -195,7 +195,7 @@ inline void V4L2::Update() {
 
 	buffer.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	buffer.memory = V4L2_MEMORY_MMAP;
-	// ´Ó¶ÓÁĞÖĞÈ¡³öÒ»Ö¡Êı¾İ 
+	// ä»é˜Ÿåˆ—ä¸­å–å‡ºä¸€å¸§æ•°æ® 
 	if (!data.device.IOCtrl(VIDIOC_DQBUF, &buffer)) {
 		ngs::nos.Error("dequeue buffer fail!\n");
 		return;
@@ -207,7 +207,7 @@ inline bool V4L2::Initialize()
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
-	//³õÊ¼»¯Ö¡»º³å£¬ÉêÇëÄÚ´æÓ³Éä
+	//åˆå§‹åŒ–å¸§ç¼“å†²ï¼Œç”³è¯·å†…å­˜æ˜ å°„
 	{
 		v4l2_requestbuffers requestBuffer = {};
 		v4l2_buffer buffer = {};
@@ -247,7 +247,7 @@ inline bool V4L2::Initialize()
 		}
 	}
 
-	//¿ªÆôÉãÏñÍ·²É¼¯
+	//å¼€å¯æ‘„åƒå¤´é‡‡é›†
 	{
 		v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		if (!data.device.IOCtrl(VIDIOC_STREAMON, &type)) {
@@ -256,14 +256,14 @@ inline bool V4L2::Initialize()
 		}
 	}
 
-	//³õÊ¼»¯µ±Ç°Ö¸Õë£¬²É¼¯µÚÒ»Ö¡
+	//åˆå§‹åŒ–å½“å‰æŒ‡é’ˆï¼Œé‡‡é›†ç¬¬ä¸€å¸§
 	{
-		data.currentBuffer = NGS_NEW(new v4l2_buffer());
+		NGS_NEW(data.currentBuffer, v4l2_buffer)();
 		v4l2_buffer& buffer = *data.currentBuffer;
 
 		buffer.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		buffer.memory = V4L2_MEMORY_MMAP;
-		// ´Ó¶ÓÁĞÖĞÈ¡³öÒ»Ö¡Êı¾İ 
+		// ä»é˜Ÿåˆ—ä¸­å–å‡ºä¸€å¸§æ•°æ® 
 		if (!data.device.IOCtrl(VIDIOC_DQBUF, &buffer)) {
 			ngs::nos.Error("dequeue buffer fail!\n");
 			return false;

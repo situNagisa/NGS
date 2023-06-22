@@ -6,10 +6,9 @@
 NGS_BEGIN
 
 struct Constructor {
+
 	template<class T, class... Args>
-	static void Construct(T* block, Args&&... args) { new(block)T(std::forward<Args>(args)...); }
-	template<class T, class... Args>
-	static T* Construct(Args&&... args) { return new T(std::forward<Args>(args)...); }
+	static void Construct_Place(T* block, Args&&... args) { new(block)T(std::forward<Args>(args)...); }
 
 	template<class T, class... Args>
 	static constexpr T Construct(Args&&... args) { return T(std::forward<Args>(args)...); }
@@ -33,17 +32,30 @@ struct Destructor {
 	}
 };
 
+class SegmentManager {
+
+	struct ConstructorProxy {
+		NGS_TYPE_DEFINE(ConstructorProxy, proxy);
+
+		__proxy operator[](size_t n)const { return { size,id }; }
+
+		size_t size = 1;
+		std::string id = "";
+	};
+};
+
 class Allocator : public Singleton<Allocator> {
 public:
 	struct AllocatedInfo {
 		size_t count = 0;
 		size_t size = 0;
+		std::string id = "";
 		std::string type_name = {};
 		std::string function_name = {};
 		size_t column = 0;
 		size_t line = 0;
 
-		operator std::string()const { return Format("%s%s", type_name.c_str(), count > 1 ? Format("[%d]", count).c_str() : ""); }
+		operator std::string()const { return Format("%s%s %s", type_name.c_str(), count > 1 ? Format("[%d]", count).c_str() : "", id.c_str()); }
 	};
 private:
 	friend class Singleton<Allocator>;
@@ -76,10 +88,11 @@ public:
 	}
 
 	template<class T>
-	void Record_Allocate(T* block, size_t count = 1, source_location source = source_location::current()) {
+	void Record_Allocate(T* block, size_t count = 1, std::string_view id = "unnamed", source_location source = source_location::current()) {
 		auto& info = _allocated_info[block];
 		info.count = count;
 		info.size = sizeof(T);
+		info.id = id;
 		info.type_name = NGS_GET_TYPE_NAME(T);
 		info.function_name = source.function_name();
 		info.column = source.column();
@@ -108,15 +121,25 @@ public:
 		);
 		_allocated_info.erase(block);
 	}
-
+	size_t GetUsedBytes() const {
+		size_t used = 0;
+		for (auto& [block, info] : _allocated_info) {
+			used += info.size * info.count;
+		}
+		return used;
+	}
 	const AllocatedInfo& GetAllocatedInfo(void* block)const { return _allocated_info.at(block); }
-	auto cbegin()const { return _allocated_info.cbegin(); }
-	auto cend()const { return _allocated_info.cend(); }
+	auto begin()const { return _allocated_info.cbegin(); }
+	auto end()const { return _allocated_info.cend(); }
 private:
 
 private:
 	std::unordered_map<void_ptr, AllocatedInfo> _allocated_info = {};
 };
+namespace {
+	//保证allocator在main函数之前初始化
+	inline static auto& allocator = Allocator::I();
+}
 
 
 inline void MemorySet(void* dst, byte value, size_t size) { memset(dst, value, size); }

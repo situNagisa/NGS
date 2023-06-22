@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/nsw/depend.h"
 #include "NGS/nsw/defined.h"
@@ -15,7 +15,7 @@ NSW_END
 NGS_BEGIN
 
 bool SerialPort::Open(pin_t port) {
-	_data = NGS_NEW(new nsw::_WindowsSerialPortData);
+	NGS_NEW(_data, nsw::_WindowsSerialPortData)();
 	auto& data = *reinterpret_cast<nsw::_WindowsSerialPortData*>(_data);
 	std::string portname = "\\\\.\\COM";
 	DCB dcbSerialParams = {};
