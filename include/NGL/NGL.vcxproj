@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="api\texture.h" />
+    <ClInclude Include="gl\error.h" />
     <ClInclude Include="gl\framebuffer.h" />
     <ClInclude Include="gl\blend.h" />
     <ClInclude Include="config.h" />
@@ -40,11 +42,9 @@
     <ClInclude Include="gl\texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="api\texture.cpp" />
     <ClCompile Include="fw\glfw.cpp" />
     <ClCompile Include="fw\window.cpp" />
-    <ClCompile Include="gl\render.cpp" />
-    <ClCompile Include="gl\shader.cpp" />
-    <ClCompile Include="gl\vertex_array.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="gl\shader\point.frag" />

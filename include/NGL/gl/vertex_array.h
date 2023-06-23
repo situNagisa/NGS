@@ -3,6 +3,7 @@
 #include "NGL/defined.h"
 #include "NGL/opengl.h"
 #include "NGL/context.h"
+#include "NGL/gl/error.h"
 
 NGLGL_BEGIN
 
@@ -32,10 +33,12 @@ _NGL_DECALRE_CONTEXT(VertexArray, GLuint) {
  * @note 你无法直接创建顶点数组对象,你只能使用命名空间`::ngs::ngl::gl::vector_array`实例来使用顶点数组对象
  */
 _NGL_DECALRE_CURRENT(VertexArray) {
-	_NGL_CURRENT_DEFAULT_CONSTRUCTOR(VertexArray);
+	_NGL_CURRENT_DEFAULT_CONSTRUCTOR(VertexArray) { _NGL_CHECK(glBindVertexArray(context)); }
 public:
-	void Enable(int index);
-	void SetAttribPointer(size_t index, size_t size, void_ptr_cst offset, int type, int step, bool normalized = false);
+	void Enable(int index) { _NGL_CHECK(glEnableVertexAttribArray(index)); }
+	void SetAttribPointer(size_t index, size_t size, void_ptr_cst offset, int type, int step, bool normalized = false) {
+		_NGL_CHECK(glVertexAttribPointer(index, size, type, normalized, step, offset));
+	}
 
 	template<class... _VectorN>
 	void SetAttribPointer(bool normalized, bool enable = true) {

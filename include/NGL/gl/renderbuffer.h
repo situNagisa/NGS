@@ -59,17 +59,17 @@ enum class RenderbufferImageFormat {
 _NGL_DECALRE_CONTEXT(Renderbuffer, GLuint) {
 public:
 	constexpr static GLenum type = GL_RENDERBUFFER;
-	RenderbufferContext() { glGenRenderbuffers(1, &_handle); }
-	~RenderbufferContext() { glDeleteRenderbuffers(1, &_handle); }
+	RenderbufferContext() { _NGL_CHECK(glGenRenderbuffers(1, &_handle)); }
+	~RenderbufferContext() { _NGL_CHECK(glDeleteRenderbuffers(1, &_handle)); }
 };
 
 _NGL_DECALRE_CURRENT(Renderbuffer) {
 	constexpr static auto type = GL_RENDERBUFFER;
-	_NGL_CURRENT_DEFAULT_CONSTRUCTOR(Renderbuffer) { glBindRenderbuffer(type, context); }
+	_NGL_CURRENT_DEFAULT_CONSTRUCTOR(Renderbuffer) { _NGL_CHECK(glBindRenderbuffer(type, context)); }
 public:
 
 	void SetStorage(RenderbufferImageFormat internal_format, size_t width, size_t height) {
-		glRenderbufferStorage(type, (GLenum)internal_format, width, height);
+		_NGL_CHECK(glRenderbufferStorage(type, (GLenum)internal_format, width, height));
 	}
 };
 

@@ -3,29 +3,42 @@
 #include "NGL/defined.h"
 #include "NGL/opengl.h"
 #include "NGL/context.h"
+#include "NGL/gl/error.h"
 
 NGLGL_BEGIN
 
+enum class ShaderCodeType {
+	vertex = GL_VERTEX_SHADER,
+	fragment = GL_FRAGMENT_SHADER,
+	geometry = GL_GEOMETRY_SHADER,
+	compute = GL_COMPUTE_SHADER,
+	tess_control = GL_TESS_CONTROL_SHADER,
+	tess_evaluation = GL_TESS_EVALUATION_SHADER,
+};
 
 class _ShaderCode : public Context<GLuint> {
 public:
-	_ShaderCode(GLenum type, const char** codes, size_t length);
-	_ShaderCode(GLenum type, const char* code)
+	_ShaderCode(ShaderCodeType type, const char** codes, size_t count)
+		: _type(type)
+	{
+		_NGL_CHECK(_handle = glCreateShader((GLenum)type));
+		_NGL_CHECK(glShaderSource(_handle, count, codes, nullptr));
+	}
+	_ShaderCode(ShaderCodeType type, const char* code)
 		: _ShaderCode(type, &code, 1)
 	{}
-	_ShaderCode(GLenum type, std::ranges::random_access_range auto codes)
+	_ShaderCode(ShaderCodeType type, std::ranges::random_access_range auto codes)
 		: _ShaderCode(type, std::ranges::cdata(), std::ranges::size(codes))
 	{}
-	~_ShaderCode()noexcept;
+	~_ShaderCode()noexcept { _NGL_CHECK(glDeleteShader(_handle)); }
 
-	void Compile()const;
-	void CheckError(GLenum target)const;
+	void Compile()const { _NGL_CHECK(glCompileShader(_handle)); }
 
-	GLenum GetType()const { return _type; }
+	ShaderCodeType GetType()const { return _type; }
 private:
-	GLenum _type = {};
+	ShaderCodeType _type = {};
 };
-template<GLenum _Type>
+template<ShaderCodeType _Type>
 class ShaderCode : public _ShaderCode {
 public:
 	ShaderCode(const char** codes, size_t length)
@@ -38,37 +51,33 @@ public:
 		: _ShaderCode(_Type, std::ranges::cdata(codes), std::ranges::size(codes))
 	{}
 };
-using VectexShader = ShaderCode<GL_VERTEX_SHADER>;
-using FragmentShader = ShaderCode<GL_FRAGMENT_SHADER>;
-using GeometryShader = ShaderCode<GL_GEOMETRY_SHADER>;
-using ComputeShader = ShaderCode<GL_COMPUTE_SHADER>;
-using TessControlShader = ShaderCode<GL_TESS_CONTROL_SHADER>;
-using TessEvaluationShader = ShaderCode<GL_TESS_EVALUATION_SHADER>;
-
-class ShaderManager;
+using VertexShaderCode = ShaderCode<ShaderCodeType::vertex>;
+using FragmentShaderCode = ShaderCode<ShaderCodeType::fragment>;
+using GeometryShaderCode = ShaderCode<ShaderCodeType::geometry>;
+using ComputeShaderCode = ShaderCode<ShaderCodeType::compute>;
+using TessControlShaderCode = ShaderCode<ShaderCodeType::tess_control>;
+using TessEvaluationShaderCode = ShaderCode<ShaderCodeType::tess_evaluation>;
 
 _NGL_DECALRE_CONTEXT(Shader, GLuint) {
 public:
-	ShaderContext();
-	~ShaderContext()noexcept;
+	ShaderContext() { _NGL_CHECK(_handle = glCreateProgram()); }
+	~ShaderContext()noexcept { _NGL_CHECK(glDeleteProgram(_handle)); }
 
-	void Attach(const _ShaderCode & code);
-	void Link()const;
+	void Attach(const _ShaderCode & code) { _NGL_CHECK(glAttachShader(_handle, code.GetHandle())); }
+	void Link()const { _NGL_CHECK(glLinkProgram(_handle)); }
 
-	void CheckError(GLenum target)const;
-
-	GLint GetUniformLocation(std::string_view name)const;
+	GLint GetUniformLocation(std::string_view name)const { _NGL_CHECK(GLint loc = glGetUniformLocation(_handle, name.data())); return loc; }
 };
 
 _NGL_DECALRE_CURRENT(Shader) {
-	_NGL_CURRENT_DEFAULT_CONSTRUCTOR(Shader);
+	_NGL_CURRENT_DEFAULT_CONSTRUCTOR(Shader) { _NGL_CHECK(glUseProgram(context)); }
 public:
-	void SetUniform(std::string_view name, int value) noexcept;
-	void SetUniform(std::string_view name, float value) noexcept;
-	void SetUniform(std::string_view name, float v1, float v2) noexcept;
-	void SetUniform(std::string_view name, float v1, float v2, float v3) noexcept;
-	void SetUniform(std::string_view name, float v1, float v2, float v3, float v4) noexcept;
-	void SetUniformMatrix(std::string_view name, const float* value) noexcept;
+	void SetUniform(std::string_view name, int value) noexcept { _NGL_CHECK(glUniform1i(_context->GetUniformLocation(name), value)); }
+	void SetUniform(std::string_view name, float value) noexcept { _NGL_CHECK(glUniform1f(_context->GetUniformLocation(name), value)); }
+	void SetUniform(std::string_view name, float v1, float v2) noexcept { _NGL_CHECK(glUniform2f(_context->GetUniformLocation(name), v1, v2)); }
+	void SetUniform(std::string_view name, float v1, float v2, float v3) noexcept { _NGL_CHECK(glUniform3f(_context->GetUniformLocation(name), v1, v2, v3)); }
+	void SetUniform(std::string_view name, float v1, float v2, float v3, float v4) noexcept { _NGL_CHECK(glUniform4f(_context->GetUniformLocation(name), v1, v2, v3, v4)); }
+	void SetUniformMatrix(std::string_view name, const float* value) noexcept { _NGL_CHECK(glUniformMatrix4fv(_context->GetUniformLocation(name), 1, GL_FALSE, value)); }
 private:
 
 };

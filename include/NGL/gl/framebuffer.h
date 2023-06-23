@@ -5,6 +5,7 @@
 #include "NGL/gl/state.h"
 #include "NGL/gl/texture.h"
 #include "NGL/gl/renderbuffer.h"
+#include "NGL/gl/error.h"
 
 NGLGL_BEGIN
 
@@ -54,17 +55,17 @@ public:
 };
 
 _NGL_DECLARE_CURRENT_T(Framebuffer, FramebufferType) {
-	_NGL_CURRENT_DEFAULT_CONSTRUCTOR_T(Framebuffer) { glBindFramebuffer(_Type, context); }
+	_NGL_CURRENT_DEFAULT_CONSTRUCTOR_T(Framebuffer) { _NGL_CHECK(glBindFramebuffer(_Type, context)); }
 public:
 	FramebufferStatus GetStatus()const { return (FramebufferStatus)glCheckFramebufferStatus(_Type); }
 	bool IsComplete()const { return GetStatus() == FramebufferStatus::complete; }
 
 	void AttachRenderbuffer(FramebufferAttachment attachment, const RenderbufferContext & renderbuffer) {
-		glFramebufferRenderbuffer(_Type, (GLenum)attachment, renderbuffer.type, renderbuffer.GetHandle());
+		_NGL_CHECK(glFramebufferRenderbuffer(_Type, (GLenum)attachment, renderbuffer.type, renderbuffer.GetHandle()));
 	}
 	template<TextureType _Dim>
 	void AttachTexture(FramebufferAttachment attachment, const TextureContext<_Dim>&texture, GLint level = 0) {
-		glFramebufferTexture2D(_Type, (GLenum)attachment, texture.type, texture.GetHandle(), level);
+		_NGL_CHECK(glFramebufferTexture2D(_Type, (GLenum)attachment, texture.type, texture.GetHandle(), level));
 	}
 
 };

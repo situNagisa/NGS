@@ -328,7 +328,7 @@ inline bool V4L2::SetFrameRate(ngs::byte frameRate)
 inline bool V4L2::Read(ngs::void_ptr ptr)
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
-	NGS_Assert(data.currentBuffer);
+	NGS_ASSERT(data.currentBuffer);
 	v4l2_buffer buffer = *data.currentBuffer;
 
 	//ngs::nos.Log("V4L2::Read", "size:%d\n", buffer.bytesused);
@@ -347,7 +347,7 @@ inline const ngs::Point2s& V4L2::GetSize() const
 inline size_t V4L2::GetFrameBufferSize() const
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
-	NGS_Assert(data.currentBuffer);
+	NGS_ASSERT(data.currentBuffer);
 	return data.currentBuffer->bytesused;
 }
 

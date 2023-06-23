@@ -5,7 +5,7 @@ NGL_BEGIN
 
 NGS_HPP_INLINE GLFW::GLFW(int major, int minor) {
 	if (!glfwInit())
-		NGS_Assert(false, "glfw init fail!");
+		NGS_ASSERT(false, "glfw init fail!");
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);

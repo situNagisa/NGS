@@ -1,16 +1,15 @@
-#pragma once
+ï»¿#pragma once
 
 #include "NGS/base/defined.h"
 #include "NGS/base/config.h"
 #include "NGS/base/log.h"
 
+NGS_BEGIN
 
-
-#if NGS_BUILD_TYPE == NGS_DEBUG
-
-inline void NGS_Assert(
+inline void Assert(
 	bool b,
-	ngs::nchar_ptr_cst text = "logic error",
+	nchar_ptr_cst assert_text,
+	nchar_ptr_cst text = "logic error",
 	const ngs::source_location& location = ngs::source_location::current()
 )
 {
@@ -21,23 +20,36 @@ inline void NGS_Assert(
 			""
 			"\n========================="
 			"\nERROR::[ %s ]"
-			"\nÎÄ¼þ£º%s"
-			"\nº¯Êý£º%s"
-			"\nµÚ %d ÐÐ£¬µÚ %d ÁÐ"
+			"\næ–‡ä»¶ï¼š%s"
+			"\næ–­è¨€ï¼š%s"
+			"\nå‡½æ•°ï¼š%s"
+			"\nç¬¬ %d è¡Œï¼Œç¬¬ %d åˆ—"
 			"\n=========================\n",
 			text,
 			location.file_name(),
+			assert_text,
 			location.function_name(),
 			location.line(),
 			location.column()
 		),
 		ngs::TextColor::RESERT
 	);
+#if NGS_COMPILER == NGS_MSVC
+	__debugbreak();
+#else
 	abort();
+#endif
 }
+
+NGS_END
+
+
+#if NGS_BUILD_TYPE == NGS_DEBUG
+
+#define NGS_ASSERT(boolean,...) _NGS Assert(boolean, #boolean,__VA_ARGS__)
 
 #else
 
-#define NGS_Assert(...) ((void*)0)
+#define NGS_ASSERT(...) ((void*)0)
 
 #endif // _DEBUG

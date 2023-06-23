@@ -31,11 +31,11 @@ NGS_HPP_INLINE Window::Window(std::string_view name, const Point2i& size)
 	auto& data = *reinterpret_cast<_WindowData*>(_data);
 
 	_handle = glfwCreateWindow(size.x, size.y, name.data(), nullptr, nullptr);
-	NGS_Assert(_handle, "Failed to create GLFW window");
+	NGS_ASSERT(_handle, "Failed to create GLFW window");
 
 	auto pos = GetPosition();
 	data.bounds.Set(pos.x, pos.y, size.x, size.y);
-	NGS_Assert(!_s_window_callback_map.contains(_handle));
+	NGS_ASSERT(!_s_window_callback_map.contains(_handle));
 	_s_window_callback_map[_handle] = { this,&data };
 
 	glfwSetFramebufferSizeCallback(_handle, _sFrameBufferSizeCallback);

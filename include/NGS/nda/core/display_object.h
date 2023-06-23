@@ -51,7 +51,7 @@ public:
 	DisplayObject(__this_ref_cst other) = default;
 	virtual ~DisplayObject() {
 		NGS_LOGFL(debug, "released display object %s", name.c_str());
-		NGS_Assert(!Parent(), "the display object still active");
+		NGS_ASSERT(!Parent(), "the display object still active");
 	}
 	bool IsContainer()const { return dynamic_cast<__container_ptr_cst>(this); }
 

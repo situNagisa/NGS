@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/nda/defined.h"
 
@@ -59,8 +59,8 @@ void Tree::RemoveChild(__leaf_ref leaf) {
 }
 
 void Tree::AddChild(__leaf_ref child, size_t index) {
-	NGS_Assert(!child._parent, "can't add child that has parent!");
-	NGS_Assert(index <= _children.size(), "index out of range!");
+	NGS_ASSERT(!child._parent, "can't add child that has parent!");
+	NGS_ASSERT(index <= _children.size(), "index out of range!");
 	_children.insert(_children.begin() + index, &child);
 	child._parent = this;
 }

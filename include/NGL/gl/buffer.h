@@ -3,6 +3,7 @@
 #include "NGL/defined.h"
 #include "NGL/opengl.h"
 #include "NGL/context.h"
+#include "NGL/gl/error.h"
 
 
 NGLGL_BEGIN
@@ -27,9 +28,11 @@ enum class BufferUsage : GLenum {
 	stream_draw = GL_STREAM_DRAW,
 	stream_read = GL_STREAM_READ,
 	stream_copy = GL_STREAM_COPY,
+
 	static_draw = GL_STATIC_DRAW,
 	static_read = GL_STATIC_READ,
 	static_copy = GL_STATIC_COPY,
+
 	dynamic_draw = GL_DYNAMIC_DRAW,
 	dynamic_read = GL_DYNAMIC_READ,
 	dynamic_copy = GL_DYNAMIC_COPY,
@@ -55,11 +58,11 @@ _NGL_DECLARE_CURRENT_T(Buffer, BufferTarget) {
 	_NGL_CURRENT_DEFAULT_CONSTRUCTOR_T(Buffer) { glBindBuffer(type, context); }
 public:
 
-	void SetData(void_ptr_cst data, size_t size, BufferUsage usage = BufferUsage::static_draw) { glBufferData(type, size, data, (GLenum)usage); }
+	void SetData(void_ptr_cst data, size_t size, BufferUsage usage = BufferUsage::static_draw) { _NGL_CHECK(glBufferData(type, size, data, (GLenum)usage)); }
 	void SetData(std::ranges::random_access_range auto && data, BufferUsage usage = BufferUsage::static_draw) {
 		SetData(std::ranges::cdata(data), std::ranges::size(data) * sizeof(std::ranges::range_value_t<decltype(data)>), usage);
 	}
-	void DrawElements(GLenum mode, size_t count, GLenum type, void_ptr_cst offset = nullptr) { glDrawElements(mode, count, type, offset); }
+	void DrawElements(GLenum mode, size_t count, GLenum type, void_ptr_cst offset = nullptr) { _NGL_CHECK(glDrawElements(mode, count, type, offset)); }
 	template<SameAsAny<uint8, uint16, uint32> _T>
 	void DrawElements(BufferDrawMode mode, size_t count, void_ptr_cst offset = nullptr) { DrawElements((GLenum)mode, count, convert<_T>, offset); }
 
@@ -78,7 +81,7 @@ public:
 	DEFINE_DRAW_ELEMENTS(Patches, BufferDrawMode::patches);
 #undef DEFINE_DRAW_ELEMENTS
 
-	void DrawArrays(GLenum mode, size_t offset, size_t count) { glDrawArrays(mode, offset, count); }
+	void DrawArrays(GLenum mode, size_t offset, size_t count) { _NGL_CHECK(glDrawArrays(mode, offset, count)); }
 
 };
 

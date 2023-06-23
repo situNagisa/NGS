@@ -72,21 +72,21 @@
     <ClInclude Include="gl\renderbuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="gl\error.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="api\texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="gl\shader.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="fw\window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="fw\glfw.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="gl\vertex_array.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="gl\render.cpp">
+    <ClCompile Include="api\texture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
