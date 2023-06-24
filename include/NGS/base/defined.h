@@ -21,21 +21,20 @@
 #define NGS_END     };
 #define USE_NGS     using namespace ::ngs;
 
-#define _TYP            ::ngs::type::
+#define _NGS_TYP            ::ngs::type::
 #define NGS_TYPE        inline namespace type{
 #define USE_NGS_TYPE    using namespace ::ngs::type;
 
-#define _TYT                ::ngs::type_trait::
+#define _NGS_TYT                ::ngs::type_trait::
 #define NGS_TYPE_TRAIT		namespace type_trait{
 #define USE_NGS_TYTR        using namespace ::NGS::type_trait;
 
-#define _CPT            ::ngs::cpt::
+#define _NGS_CPT            ::ngs::cpt::
 #define NGS_CONCEPT     inline namespace cpt{
 #define USE_NGS_CONCEPT using namespace ::ngs::cpt;
 
-#define NGS_INTERNAL        ngs_internal
-#define NGS_INTERNAL_BEGIN  namespace ngs_internal{
-#define NGS_USE_INTERNAL    using namespace ::ngs::ngs_internal;
+#define _NGS_MPL 		  ::ngs::mpl::
+#define NGS_MPL_BEGIN	namespace mpl{
 
 
 #define NGS_TYPE_DEFINE(type,id)        \
@@ -98,21 +97,21 @@ _NGS_TYPE_DEFINE(std::string_view, nstring_view);
 using ostream = std::basic_ostream<nchar, std::char_traits<nchar> >;
 
 //int
-_NGS_TYPE_DEFINE(signed char, int8);
-_NGS_TYPE_DEFINE(signed short, int16);
-_NGS_TYPE_DEFINE(signed long, int32);
-_NGS_TYPE_DEFINE(signed long long, int64);
+_NGS_TYPE_DEFINE(std::int8_t, int8);
+_NGS_TYPE_DEFINE(std::int16_t, int16);
+_NGS_TYPE_DEFINE(std::int32_t, int32);
+_NGS_TYPE_DEFINE(std::int64_t, int64);
 
-_NGS_TYPE_DEFINE(unsigned char, uint8);
-_NGS_TYPE_DEFINE(unsigned short, uint16);
-_NGS_TYPE_DEFINE(unsigned long, uint32);
-_NGS_TYPE_DEFINE(unsigned long long, uint64);
+_NGS_TYPE_DEFINE(std::uint8_t, uint8);
+_NGS_TYPE_DEFINE(std::uint16_t, uint16);
+_NGS_TYPE_DEFINE(std::uint32_t, uint32);
+_NGS_TYPE_DEFINE(std::uint64_t, uint64);
 
 _NGS_TYPE_DEFINE(std::size_t, size_t);
 
 //float
-_NGS_TYPE_DEFINE(float, float32);
-_NGS_TYPE_DEFINE(double, float64);
+_NGS_TYPE_DEFINE(std::float_t, float32);
+_NGS_TYPE_DEFINE(std::double_t, float64);
 
 //byte
 //_NGS_TYPE_DEFINE(unsigned char, byte);
@@ -152,6 +151,26 @@ using source_location = std::source_location;
 #else
 using source_location = std::experimental::source_location;
 #endif
+
+#define NGS_DECLARE_TV(id,value_t)		\
+template<class>							\
+constexpr value_t id##_convert = {};	\
+template<value_t>						\
+struct _##id##Convert;					\
+template<value_t _Value>				\
+using id##_convert_t = typename _##id##Convert<_Value>::type;\
+//
+
+#define NGS_DEFINE_TV(id,value_t,type,value)	\
+template<>										\
+constexpr value_t id##_convert<type> = value;	\
+template<>										\
+struct _##id##Convert<value> { using type = type; }; \
+//
+
+
+
+
 
 NGS_END
 

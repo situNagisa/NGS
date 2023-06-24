@@ -18,14 +18,14 @@ inline constexpr uint64 bit(uint16 n) { return static_cast<uint64>(1) << n; }
 inline constexpr uint64 bit_max(uint16 bitCount) { return bit(bitCount) - 1; }
 
 template<bool B, class T>
-inline void Bits(T& p, Integral auto bit) {
+inline void Bits(T& p, CIntegral auto bit) {
 	if constexpr (B)
 		p |= (T)bit;
 	else
 		p &= ~(T)bit;
 }
 
-inline void Bits(auto& p, Integral auto bit, bool boolean) {
+inline void Bits(auto& p, CIntegral auto bit, bool boolean) {
 	if (boolean)
 		Bits<true>(p, bit);
 	else
@@ -33,7 +33,7 @@ inline void Bits(auto& p, Integral auto bit, bool boolean) {
 }
 
 template<class T>
-inline constexpr bool Bits(T p, Integral auto bit) { return p & (T)bit; }
+inline constexpr bool Bits(T p, CIntegral auto bit) { return p & (T)bit; }
 
 template<size_t start, size_t end>
 inline void Bits(auto& dest, auto source) {
@@ -189,7 +189,7 @@ public:
 		: BitSet<sizeof(uint64)* BitPerByte>(1ULL << index)
 	{}
 
-	template<Integral T>
+	template<CIntegral T>
 	constexpr operator T()const { return _Get(); }
 };
 

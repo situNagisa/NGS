@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 /*****************************************************************//**
  * \file   core.h
  * \brief
@@ -19,6 +19,7 @@
 #include "NGS/base/version.h"
 
 #include "NGS/base/STL.h"
+#include "NGS/base/BTL.h"
 #include "NGS/base/config.h"
 
 #include "NGS/base/defined.h"
@@ -35,3 +36,5 @@
 
 #include "NGS/base/log.h"
 #include "NGS/base/assert.h"
+
+#include "NGS/base/mpl/mpl.h"

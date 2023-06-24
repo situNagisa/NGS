@@ -1,11 +1,11 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/base.h"
 #include "NGS/math/vector.h"
 
 NGS_BEGIN
 
-template<_CPT Arithmetic Number>
+template<_NGS_CPT CArithmetic Number>
 class Line2D {
 public:
 	constexpr Line2D() = default;

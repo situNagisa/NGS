@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="api\shader.h" />
     <ClInclude Include="api\texture.h" />
     <ClInclude Include="gl\error.h" />
     <ClInclude Include="gl\framebuffer.h" />

@@ -80,9 +80,9 @@ public:
 	void Generate(void_ptr_cst data, GLsizei width, GLsizei height, GLenum element_t, GLint internalFormat, GLenum format, GLint level = 0) {
 		_NGL_CHECK(glTexImage2D(type, level, internalFormat, width, height, 0, format, element_t, data));
 	}
-	template<class _CacheAs = byte, ARGB_C _ARGB>
+	template<class _CacheAs = byte, CARGB _ARGB>
 	void Generate(const _ARGB * data, size_t width, size_t height, int level = 0) {
-		Generate(data, width, height, convert<_CacheAs>, convert<_ARGB>, convert<_ARGB>, level);
+		Generate(data, width, height, gl_convert<_CacheAs>, gl_convert<_ARGB>, gl_convert<_ARGB>, level);
 	}
 	void GenerateMipmap() { _NGL_CHECK(glGenerateMipmap(type)); }
 

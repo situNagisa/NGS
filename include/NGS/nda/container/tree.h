@@ -39,6 +39,15 @@ public:
 	size_t GetNumChildren(bool recursion = false)const;
 
 	bool Contain(__leaf_ref_cst display, bool recursion = false)const;
+
+	auto begin() { return _children.begin(); }
+	auto end() { return _children.end(); }
+	auto begin()const { return _children.begin(); }
+	auto end()const { return _children.end(); }
+	auto rbegin() { return _children.rbegin(); }
+	auto rend() { return _children.rend(); }
+	auto rbegin()const { return _children.rbegin(); }
+	auto rend()const { return _children.rend(); }
 protected:
 	__leaf_ptr _GetChild(size_t index) { return _children.at(index); }
 	__leaf_ptr_cst _GetChild(size_t index)const { return _children.at(index); }

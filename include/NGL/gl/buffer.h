@@ -63,11 +63,11 @@ public:
 		SetData(std::ranges::cdata(data), std::ranges::size(data) * sizeof(std::ranges::range_value_t<decltype(data)>), usage);
 	}
 	void DrawElements(GLenum mode, size_t count, GLenum type, void_ptr_cst offset = nullptr) { _NGL_CHECK(glDrawElements(mode, count, type, offset)); }
-	template<SameAsAny<uint8, uint16, uint32> _T>
-	void DrawElements(BufferDrawMode mode, size_t count, void_ptr_cst offset = nullptr) { DrawElements((GLenum)mode, count, convert<_T>, offset); }
+	template<CSameAsAny<uint8, uint16, uint32> _T>
+	void DrawElements(BufferDrawMode mode, size_t count, void_ptr_cst offset = nullptr) { DrawElements((GLenum)mode, count, gl_convert<_T>, offset); }
 
 #define DEFINE_DRAW_ELEMENTS(id,mode)				\
-	template<SameAsAny<uint8, uint16, uint32> _T>\
+	template<CSameAsAny<uint8, uint16, uint32> _T>\
 	void Draw##id(size_t count, void_ptr_cst offset = nullptr) { DrawElements<_T>(mode, count, offset); }\
 //
 

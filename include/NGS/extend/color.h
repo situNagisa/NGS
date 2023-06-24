@@ -23,7 +23,7 @@ enum class PixelFormat : ngs::uint32 {
 NGS_CONCEPT
 
 template<typename T>
-concept Channel_C = requires(T t) {
+concept CChannel = requires(T t) {
 	{ T::Count } -> std::convertible_to<size_t>;
 	{ T::Offset } -> std::convertible_to<size_t>;
 	{ T::Filter } -> std::convertible_to<size_t>;
@@ -47,7 +47,7 @@ struct Channel {
 		return static_cast<float64>(value) / Filter;
 	}
 
-	template<_CPT Channel_C _Channel>
+	template<CChannel _Channel>
 	static constexpr _Channel::type ConvertTo(type value) {
 		//这里很关键！一定要检测非0，不然常量表达式不通过
 		if constexpr (Filter)
@@ -60,7 +60,7 @@ struct Channel {
 	static constexpr Channel<_Count2, _Offset2>::type ConvertTo(type value) {
 		return ConvertTo < Channel<_Count2, _Offset2>>(value);
 	}
-	template<_CPT Channel_C _Channel>
+	template<CChannel _Channel>
 	static constexpr type ConvertFrom(_Channel::type value) {
 		//这里很关键！一定要检测非0，不然常量表达式不通过
 		if constexpr (_Channel::Filter)
@@ -74,7 +74,7 @@ struct Channel {
 		return ConvertFrom< Channel<_Count2, _Offset2>>(value);
 	}
 
-	static constexpr auto FilterColor(_CPT Integral auto color) {
+	static constexpr auto FilterColor(CIntegral auto color) {
 		return (color >> Offset) & Filter;
 	}
 private:
@@ -92,16 +92,16 @@ using Channel8 = Channel<8>;
 
 using StdChannel = Channel8;
 
-static_assert(_CPT Channel_C<StdChannel>);
+static_assert(CChannel<StdChannel>);
 NGS_END
 
 NGS_CONCEPT
 template<typename T>
-concept ARGB_C = requires(T t) {
-	requires Channel_C<typename T::A>;
-	requires Channel_C<typename T::R>;
-	requires Channel_C<typename T::G>;
-	requires Channel_C<typename T::B>;
+concept CARGB = requires(T t) {
+	requires CChannel<typename T::A>;
+	requires CChannel<typename T::R>;
+	requires CChannel<typename T::G>;
+	requires CChannel<typename T::B>;
 	requires std::integral<typename T::type>;
 
 { t.Alpha() } -> std::convertible_to<typename T::A::type>;
@@ -122,7 +122,7 @@ NGS_TYPE
 #undef _G
 #undef _B
 
-template<_CPT Channel_C _A, _CPT Channel_C _R, _CPT Channel_C _G, _CPT Channel_C _B>
+template<_NGS_CPT CChannel _A, _NGS_CPT CChannel _R, _NGS_CPT CChannel _G, _NGS_CPT CChannel _B>
 struct _basic_ARGB {
 public:
 	using A = _A;
@@ -162,7 +162,7 @@ public:
 	void StdBlue(StdChannel::type b) { Blue(B::template ConvertFrom<StdChannel>(b)); }
 
 
-	template<_CPT Channel_C _A2, _CPT Channel_C _R2, _CPT Channel_C _G2, _CPT Channel_C _B2>
+	template<_NGS_CPT CChannel _A2, _NGS_CPT CChannel _R2, _NGS_CPT CChannel _G2, _NGS_CPT CChannel _B2>
 	constexpr operator _basic_ARGB<_A2, _R2, _G2, _B2>()const {
 		return _basic_ARGB<_A2, _R2, _G2, _B2>(
 			StdAlpha(),
@@ -208,7 +208,7 @@ using ARGB8 = ARGB<0, 3, 3, 2>;
 
 using StdARGB = ARGB32;
 
-static_assert(_CPT ARGB_C<StdARGB>);
+static_assert(_NGS_CPT CARGB<StdARGB>);
 
 template<size_t _B, size_t _G, size_t _R, size_t _A>
 struct BGRA : public _basic_ARGB<Channel<_B, _G + _R + _A>, Channel<_G, _R + _A>, Channel<_R, _A>, Channel<_A, 0>> {
@@ -244,7 +244,7 @@ using BGRA8 = BGRA<0, 3, 3, 2>;
 
 using StdBGRA = BGRA32;
 
-static_assert(_CPT ARGB_C<StdBGRA>);
+static_assert(_NGS_CPT CARGB<StdBGRA>);
 
 struct HSV {
 	using HueType = byte;
@@ -370,13 +370,13 @@ public:
 
 	struct Blend {
 	public:
-		template<_CPT ARGB_C rgb = _TYP StdARGB>
+		template<_NGS_CPT CARGB rgb = _NGS_TYP StdARGB>
 		constexpr static typename rgb::A::type RGB_AlphaBlend(rgb::A::type alphaA, rgb::A::type alphaB) {
 			uint16 a = alphaA + 1;
 			uint16 b = alphaB + 1;
 			return a + b - ((a * b) >> rgb::A::count) - 1;
 		}
-		template<_CPT ARGB_C rgb = _TYP StdARGB>
+		template<_NGS_CPT CARGB rgb = _NGS_TYP StdARGB>
 		constexpr static __channel RGB_AlphaBlend(__channel fore, __channel back, __channel alphaF, __channel alphaB) {
 			constexpr auto alpha_bitcount = rgb::A::count;
 			constexpr auto alpha_bitmax = rgb::A::filter;
@@ -385,7 +385,7 @@ public:
 			return ((fore * alphaF + (back * alphaB * (alpha_bitmax - alphaF) >> alpha_bitcount)) * alpha_blend) >> (alpha_bitcount << 1);
 		}
 
-		template<_CPT ARGB_C rgb = _TYP StdARGB>
+		template<_NGS_CPT CARGB rgb = _NGS_TYP StdARGB>
 		constexpr static typename rgb::type RGB_AlphaBlend(rgb::type fore, rgb::type back) {
 			rgb result{ 0 };
 			rgb foreground = fore;
@@ -399,25 +399,39 @@ public:
 	};
 };
 
-template<_CPT ARGB_C rgb>
-struct RGB_Default {
-	inline constexpr static typename rgb::type
-		white = rgb(0xFF, 0xFF, 0xFF, 0xFF),//白色
-		black = rgb(0xFF, 0x00, 0x00, 0x00),//黑色
-		red = rgb(0xFF, 0xFF, 0x00, 0x00),//红色
-		green = rgb(0xFF, 0x00, 0xFF, 0x00),//绿色
-		blue = rgb(0xFF, 0x00, 0x00, 0xFF),//蓝色
-		cyan = rgb(0xFF, 0x00, 0xFF, 0xFF),//青色
-		purple = rgb(0xFF, 0xFF, 0x00, 0xFF),//紫色
-		yellow = rgb(0xFF, 0xFF, 0xFF, 0x00),//黄色
-		gray = rgb(0xFF, 0xC0, 0xC0, 0xC0),//灰色
-		orange = rgb(0xFF, 0xFF, 0x61, 0x00),//橙色
-		turquoise = rgb(0xFF, 0x40, 0xE0, 0xD0),//青蓝色
-		pink = rgb(0xFF, 0xFF, 0xC0, 0xCB),//粉色
-		transparency = rgb(0x00, 0x00, 0x00, 0x00)//透明
-		;
-};
+namespace color_constants {
+	template<class _Color>
+	constexpr auto white = _Color(StdARGB(0xFF, 0xFF, 0xFF, 0xFF));//白色
+	template<class _Color>
+	constexpr auto black = _Color(StdARGB(0xFF, 0x00, 0x00, 0x00));//黑色
+	template<class _Color>
+	constexpr auto red = _Color(StdARGB(0xFF, 0xFF, 0x00, 0x00));//红色
+	template<class _Color>
+	constexpr auto green = _Color(StdARGB(0xFF, 0x00, 0xFF, 0x00));//绿色
+	template<class _Color>
+	constexpr auto blue = _Color(StdARGB(0xFF, 0x00, 0x00, 0xFF));//蓝色
+	template<class _Color>
+	constexpr auto cyan = _Color(StdARGB(0xFF, 0x00, 0xFF, 0xFF));//青色
+	template<class _Color>
+	constexpr auto purple = _Color(StdARGB(0xFF, 0xFF, 0x00, 0xFF));//紫色
+	template<class _Color>
+	constexpr auto yellow = _Color(StdARGB(0xFF, 0xFF, 0xFF, 0x00));//黄色
+	template<class _Color>
+	constexpr auto gray = _Color(StdARGB(0xFF, 0x80, 0x80, 0x80));//灰色
+	template<class _Color>
+	constexpr auto lightgray = _Color(StdARGB(0xFF, 0xC0, 0xC0, 0xC0));//浅灰色
+	template<class _Color>
+	constexpr auto darkgray = _Color(StdARGB(0xFF, 0x40, 0x40, 0x40));//深灰色
+	template<class _Color>
+	constexpr auto transparent = _Color(StdARGB(0x00, 0x00, 0x00, 0x00));//透明色
+}
 
-
+using ColorConvert = mpl::bitmap<PixelFormat,
+	mpl::bitmap_item<ARGB8, (uint32)PixelFormat::ARGB8 >,
+	mpl::bitmap_item<ARGB15, (uint32)PixelFormat::ARGB15>,
+	mpl::bitmap_item<ARGB16, (uint32)PixelFormat::ARGB16>,
+	mpl::bitmap_item<ARGB24, (uint32)PixelFormat::ARGB24>,
+	mpl::bitmap_item<ARGB32, (uint32)PixelFormat::ARGB32>
+>;
 
 NGS_END

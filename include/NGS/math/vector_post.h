@@ -7,7 +7,7 @@ NGS_BEGIN
 
 template<
 	size_t N,
-	_CPT Arithmetic Number,
+	_NGS_CPT CArithmetic Number,
 	template<typename num>class Derived
 >class _Vector {
 private:
@@ -16,17 +16,17 @@ public:
 	inline constexpr static auto DIMENSIONAL = N;
 	using type = Number;
 
-	template<_CPT Arithmetic C> using __similar = _Vector<N, C, Derived>;
-	template<_CPT Arithmetic C> using __similar_ref = __similar<C>&;
-	template<_CPT Arithmetic C> using __similar_ref_cst = const __similar<C>&;
-	template<_CPT Arithmetic C> using __similar_ptr = __similar<C>*;
-	template<_CPT Arithmetic C> using __similar_ptr_cst = const __similar<C>*;
+	template<_NGS_CPT CArithmetic C> using __similar = _Vector<N, C, Derived>;
+	template<_NGS_CPT CArithmetic C> using __similar_ref = __similar<C>&;
+	template<_NGS_CPT CArithmetic C> using __similar_ref_cst = const __similar<C>&;
+	template<_NGS_CPT CArithmetic C> using __similar_ptr = __similar<C>*;
+	template<_NGS_CPT CArithmetic C> using __similar_ptr_cst = const __similar<C>*;
 
-	template<_CPT Arithmetic C> using __similar_d = Derived<C>;
-	template<_CPT Arithmetic C> using __similar_d_ref = __similar<C>&;
-	template<_CPT Arithmetic C> using __similar_d_ref_cst = const __similar<C>&;
-	template<_CPT Arithmetic C> using __similar_d_ptr = __similar<C>*;
-	template<_CPT Arithmetic C> using __similar_d_ptr_cst = const __similar<C>*;
+	template<_NGS_CPT CArithmetic C> using __similar_d = Derived<C>;
+	template<_NGS_CPT CArithmetic C> using __similar_d_ref = __similar<C>&;
+	template<_NGS_CPT CArithmetic C> using __similar_d_ref_cst = const __similar<C>&;
+	template<_NGS_CPT CArithmetic C> using __similar_d_ptr = __similar<C>*;
+	template<_NGS_CPT CArithmetic C> using __similar_d_ptr_cst = const __similar<C>*;
 
 
 	NGS_TYPE_DEFINE(___this, this);
@@ -43,7 +43,7 @@ public:
 		x(x)
 	{}
 	constexpr _Vector(__this_ref_cst) = default;
-	template<_CPT Arithmetic C>
+	template<_NGS_CPT CArithmetic C>
 	constexpr _Vector(__similar_ref_cst<C> other) { _Construct(other); }
 
 	//=======================================
@@ -52,7 +52,7 @@ public:
 	constexpr __num_ref    operator[](__size index) { return (&x)[index]; }
 	constexpr  __num_ref_cst operator[](__size index)const { return (&x)[index]; }
 
-	template<_CPT Arithmetic C>
+	template<_NGS_CPT CArithmetic C>
 	explicit(false) operator __similar_d<C>()const { return __similar_d<C>{*this}; }
 	operator __derived_ref_cst()const { return static_cast<__derived_ref_cst>(*this); }
 	operator __derived_ref() { return static_cast<__derived_ref>(*this); }
@@ -187,7 +187,7 @@ protected:
 		(((&x)[i] = args, i++), ...);
 	}
 
-	template<_CPT Arithmetic C>
+	template<_NGS_CPT CArithmetic C>
 	constexpr void _Construct(__similar_ref_cst<C> other) {
 		for (__size i = 0; i < DIMENSIONAL; i++)
 			(&x)[i] = static_cast<__num>(other[i]);
@@ -205,7 +205,7 @@ public:
 };
 
 
-template<_CPT Arithmetic Number = float>
+template<_NGS_CPT CArithmetic Number = float>
 class Vector2D : public _Vector<2, Number, Vector2D> {
 private:
 	using __base = _Vector<2, Number, Vector2D>;
@@ -244,7 +244,7 @@ public:
 public:
 	__num y = {};
 };
-template<_CPT Arithmetic Number>
+template<_NGS_CPT CArithmetic Number>
 using Point2_ = Vector2D<Number>;
 
 using Point2i = Point2_<int>;
@@ -252,7 +252,7 @@ using Point2f = Point2_<float>;
 using Point2lf = Point2_<double>;
 using Point2s = Point2_<size_t>;
 
-template<_CPT Arithmetic Number = float>
+template<_NGS_CPT CArithmetic Number = float>
 class Vector3D : public _Vector<3, Number, Vector3D> {
 private:
 	using __base = _Vector<3, Number, Vector3D>;
@@ -284,7 +284,7 @@ public:
 	__num z = {};
 };
 
-template<_CPT Arithmetic Number>
+template<_NGS_CPT CArithmetic Number>
 using Point3_ = Vector3D<Number>;
 
 using Point3i = Point3_<int>;
@@ -292,7 +292,7 @@ using Point3f = Point3_<float>;
 using Point3lf = Point3_<double>;
 using Point3s = Point3_<size_t>;
 
-template<_CPT Arithmetic Number = float>
+template<_NGS_CPT CArithmetic Number = float>
 class Vector4D : public _Vector<4, Number, Vector4D> {
 private:
 	using __base = _Vector<4, Number, Vector4D>;
@@ -315,7 +315,7 @@ public:
 	__num w = {};
 };
 
-template<_CPT Arithmetic Number>
+template<_NGS_CPT CArithmetic Number>
 using Point4_ = Vector4D<Number>;
 
 using Point4i = Point4_<int>;

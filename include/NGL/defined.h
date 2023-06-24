@@ -14,33 +14,18 @@
 
 NGL_BEGIN
 
-template<class>
-constexpr uint32 convert = 0;
+NGS_DECLARE_TV(gl, GLuint);
+NGS_DEFINE_TV(gl, GLuint, float32, GL_FLOAT);
+NGS_DEFINE_TV(gl, GLuint, float64, GL_DOUBLE);
+NGS_DEFINE_TV(gl, GLuint, int8, GL_BYTE);
+NGS_DEFINE_TV(gl, GLuint, uint8, GL_UNSIGNED_BYTE);
+NGS_DEFINE_TV(gl, GLuint, int16, GL_SHORT);
+NGS_DEFINE_TV(gl, GLuint, uint16, GL_UNSIGNED_SHORT);
+NGS_DEFINE_TV(gl, GLuint, int32, GL_INT);
+NGS_DEFINE_TV(gl, GLuint, uint32, GL_UNSIGNED_INT);
 
-template<uint32>
-struct _Convert;
-
-template<uint32 value>
-using convert_t = _Convert<value>::type;
-
-#define NGL_TYPE_VALUE_MAP(type_,value)		\
-template<>									\
-constexpr uint32 convert<type_> = value;	\
-template<>									\
-struct _Convert<value> { using type = type_; }\
-//
-
-NGL_TYPE_VALUE_MAP(float32, GL_FLOAT);
-NGL_TYPE_VALUE_MAP(float64, GL_DOUBLE);
-NGL_TYPE_VALUE_MAP(int8, GL_BYTE);
-NGL_TYPE_VALUE_MAP(uint8, GL_UNSIGNED_BYTE);
-NGL_TYPE_VALUE_MAP(int16, GL_SHORT);
-NGL_TYPE_VALUE_MAP(uint16, GL_UNSIGNED_SHORT);
-NGL_TYPE_VALUE_MAP(int32, GL_INT);
-NGL_TYPE_VALUE_MAP(uint32, GL_UNSIGNED_INT);
-
-NGL_TYPE_VALUE_MAP(ARGB24, GL_RGB);
-NGL_TYPE_VALUE_MAP(ARGB32, GL_RGBA);
+NGS_DEFINE_TV(gl, GLuint, ARGB24, GL_RGB8);
+NGS_DEFINE_TV(gl, GLuint, ARGB32, GL_RGBA8);
 
 #undef NGL_TYPE_VALUE_MAP
 

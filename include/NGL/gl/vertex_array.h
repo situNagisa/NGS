@@ -48,7 +48,7 @@ public:
 private:
 	template<class _VectorN, class... _VectorNs>
 	void _SetAttribPointer(size_t index, size_t offset, bool normalized, size_t step, bool enable) {
-		SetAttribPointer(index, _VectorN::DIMENSIONAL, (void_ptr_cst)offset, convert<typename _VectorN::type>, step, normalized);
+		SetAttribPointer(index, _VectorN::DIMENSIONAL, (void_ptr_cst)offset, gl_convert<typename _VectorN::type>, step, normalized);
 		if (enable)Enable(index);
 		if constexpr (sizeof...(_VectorNs))_SetAttribPointer<_VectorNs...>(index + 1, offset + sizeof(_VectorN), normalized, step, enable);
 	}

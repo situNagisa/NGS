@@ -7,17 +7,17 @@
 
 NGS_BEGIN
 
-template<_CPT Arithmetic number1, _CPT Arithmetic number2>
+template<_NGS_CPT CArithmetic number1, _NGS_CPT CArithmetic number2>
 using CompleteArithmetic = std::conditional_t<
 	(sizeof(number1) >= sizeof(number2)),
 	std::conditional_t <
 	(sizeof(number1) != sizeof(number2)),
 	number1,
 	std::conditional_t <
-	_CPT FloatingPoint<number1>,
+	_NGS_CPT CFloatingPoint<number1>,
 	number1,
 	std::conditional_t<
-	_CPT UnsignedIntegral<number1>,
+	_NGS_CPT CUnsignedIntegral<number1>,
 	number1,
 	number2
 	>
@@ -30,13 +30,13 @@ using CompleteArithmetic = std::conditional_t<
 template<
 	size_t start,
 	size_t end,
-	class Function,
+	class CFunction,
 	class...Args
 >
-	requires requires(Function f, size_t index, Args... args) {
+	requires requires(CFunction f, size_t index, Args... args) {
 	f(index, args...);
 }
-inline void For(Function fn, Args... args) {
+inline void For(CFunction fn, Args... args) {
 	fn(start, args...);
 	if constexpr (end - start >= 0 && start < end)
 		For<start + 1, end>(fn, args...);
@@ -46,11 +46,11 @@ inline void For(Function fn, Args... args) {
 /*
 NGS_EXPORT
 template<
-	_TYP SIZE_T16 start,
-	_TYP SIZE_T16 end,
+	_NGS_TYP SIZE_T16 start,
+	_NGS_TYP SIZE_T16 end,
 	class Lambda
 >
-NGS_INLINE _TYP VOID For(Lambda lambda) {
+NGS_INLINE _NGS_TYP VOID For(Lambda lambda) {
 	lambda(start);
 	if NGS_CONSTEXPR(end - start >= 0 && start < end)
 		For<start + 1, end>(lambda);
@@ -60,13 +60,13 @@ NGS_INLINE _TYP VOID For(Lambda lambda) {
 
 //NGS_EXPORT
 //template<
-//    _TYP SIZE_T16 start,
-//    _TYP SIZE_T16 end,
+//    _NGS_TYP SIZE_T16 start,
+//    _NGS_TYP SIZE_T16 end,
 //    class ReturnType,
 //    class Class,
-//    _CPT Integral UINT
+//    _NGS_CPT CIntegral UINT
 //>
-//NGS_INLINE _TYP VOID For(ReturnType(Class::*fn)(UINT), Class* p) {
+//NGS_INLINE _NGS_TYP VOID For(ReturnType(Class::*fn)(UINT), Class* p) {
 //    if NGS_CONSTEXPR(end - start >= 0) {
 //        (p->*fn)(start);
 //
@@ -83,10 +83,10 @@ NGS_INLINE _TYP VOID For(Lambda lambda) {
 //15以下可在编译期计算，受限于constexpr
 NGS_EXPORT
 template<
-	_TYP SIZE_T16 start,
-	_TYP SIZE_T16 end,
+	_NGS_TYP SIZE_T16 start,
+	_NGS_TYP SIZE_T16 end,
 	class ReturnType,
-	_CPT Integral UINT
+	_NGS_CPT CIntegral UINT
 >
 NGS_CONSTEXPR ReturnType For(ReturnType fn(UINT),ReturnType operate(ReturnType,ReturnType)) {
 	ReturnType result = fn(start);
@@ -106,8 +106,8 @@ NGS_CONSTEXPR ReturnType For(ReturnType fn(UINT),ReturnType operate(ReturnType,R
 //15以下可在编译期计算，受限于constexpr
 NGS_EXPORT
 template<
-	_TYP SIZE_T16 start,
-	_TYP SIZE_T16 end,
+	_NGS_TYP SIZE_T16 start,
+	_NGS_TYP SIZE_T16 end,
 	class Lambda,
 	class ReturnType
 >
@@ -129,8 +129,8 @@ NGS_CONSTEXPR ReturnType For(Lambda lambda, ReturnType operate(ReturnType, Retur
 //15以下可在编译期计算，受限于constexpr
 NGS_EXPORT
 template<
-	_TYP SIZE_T16 start,
-	_TYP SIZE_T16 end,
+	_NGS_TYP SIZE_T16 start,
+	_NGS_TYP SIZE_T16 end,
 	class Lambda,
 	class Operate
 >
@@ -151,11 +151,11 @@ NGS_CONSTEXPR auto For(Lambda lambda, Operate operate) {
 
 //NGS_EXPORT
 //template<
-//    _TYP SIZE_T16 start,
-//    _TYP SIZE_T16 end,
+//    _NGS_TYP SIZE_T16 start,
+//    _NGS_TYP SIZE_T16 end,
 //    class ReturnType,
 //    class Class,
-//    _CPT Integral UINT
+//    _NGS_CPT CIntegral UINT
 //>
 //NGS_CONSTEXPR ReturnType For(ReturnType(Class::* fn)(UINT), Class* p, ReturnType operate(ReturnType, ReturnType)) {
 //    if NGS_CONSTEXPR(end - start >= 0) {

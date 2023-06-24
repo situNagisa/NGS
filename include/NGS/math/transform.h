@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/base.h"
 #include "NGS/math/matrix.h"
@@ -6,7 +6,7 @@
 
 NGS_BEGIN
 
-template<Arithmetic _Number>
+template<CArithmetic _Number>
 struct Transform {
 public:
 	using type = _Number;

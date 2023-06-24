@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/base.h"
 #include "NGS/math/math.h"
@@ -53,7 +53,7 @@ namespace protocols_parsers {
 	template<typename _Struct, typename _Param>
 		requires requires() {
 		std::ranges::sized_range<_Param>;
-		_CPT protocols_parsable<_Struct, _Param>;
+		_NGS_CPT protocols_parsable<_Struct, _Param>;
 	}
 	size_t parse_struct(_Param data) {
 		size_t length = 0;

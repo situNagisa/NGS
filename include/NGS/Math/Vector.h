@@ -11,7 +11,7 @@ NGS_BEGIN
 
 template<
 	size_t _N,
-	_CPT Arithmetic _ElementType,
+	_NGS_CPT CArithmetic _ElementType,
 	class _Derived
 >
 class _Vector {
@@ -141,7 +141,7 @@ public:
 #undef _VECTOR_OPERATE_WITH_ELEMENT
 };
 
-template<_CPT Arithmetic _ElementType>
+template<_NGS_CPT CArithmetic _ElementType>
 class Vector2D : public _Vector<2, _ElementType, Vector2D<_ElementType>> {
 private:
 	using __base = _Vector<2, _ElementType, Vector2D<_ElementType>>;
@@ -200,7 +200,7 @@ public:
 		x, y;
 };
 
-template<_CPT Arithmetic Number>
+template<_NGS_CPT CArithmetic Number>
 using Point2_ = Vector2D<Number>;
 
 using Point2i = Point2_<int>;
@@ -208,7 +208,7 @@ using Point2f = Point2_<float>;
 using Point2lf = Point2_<double>;
 using Point2s = Point2_<size_t>;
 
-template<_CPT Arithmetic _ElementType>
+template<_NGS_CPT CArithmetic _ElementType>
 class Vector3D : public _Vector<3, _ElementType, Vector3D<_ElementType>> {
 private:
 	using __base = _Vector<3, _ElementType, Vector3D<_ElementType>>;
@@ -259,7 +259,7 @@ public:
 		x, y, z;
 };
 
-template<_CPT Arithmetic Number>
+template<_NGS_CPT CArithmetic Number>
 using Point3_ = Vector3D<Number>;
 
 using Point3i = Point3_<int>;
@@ -268,7 +268,7 @@ using Point3lf = Point3_<double>;
 using Point3s = Point3_<size_t>;
 
 
-template<_CPT Arithmetic _ElementType>
+template<_NGS_CPT CArithmetic _ElementType>
 class Vector4D : public _Vector<4, _ElementType, Vector4D<_ElementType>> {
 private:
 	using __base = _Vector<4, _ElementType, Vector4D<_ElementType>>;
@@ -313,7 +313,7 @@ public:
 		x, y, z, w;
 };
 
-template<_CPT Arithmetic Number>
+template<_NGS_CPT CArithmetic Number>
 using Point4_ = Vector4D<Number>;
 
 using Point4i = Point4_<int>;
@@ -322,7 +322,7 @@ using Point4lf = Point4_<double>;
 using Point4s = Point4_<size_t>;
 
 
-template<size_t _N, _CPT Arithmetic _ElementType>
+template<size_t _N, _NGS_CPT CArithmetic _ElementType>
 class VectorND : public _Vector<_N, _ElementType, VectorND<_N, _ElementType>> {
 private:
 	using __base = _Vector<_N, _ElementType, Vector3D<_ElementType>>;
@@ -332,7 +332,7 @@ private:
 #undef COMMA
 public:
 	constexpr VectorND() = default;
-	template<_CPT Arithmetic... Args>
+	template<_NGS_CPT CArithmetic... Args>
 	constexpr VectorND(Args... args)
 		: data({ args... })
 	{}

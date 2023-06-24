@@ -264,6 +264,42 @@
     <ClInclude Include="base\type_info.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="graphic\graph.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="graphic\api\window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="graphic\api\graphic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="graphic\api\renderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="graphic\api\image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="graphic\api\texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl_macro.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\mpl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\bitmap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\find.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\function.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\extraction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">

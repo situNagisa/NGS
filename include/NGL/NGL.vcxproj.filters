@@ -78,6 +78,9 @@
     <ClInclude Include="api\texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="api\shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fw\window.cpp">

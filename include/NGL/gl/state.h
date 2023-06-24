@@ -17,15 +17,18 @@ private:
 	friend class Constructor;
 	State() = default;
 public:
-	void Enable(Capabilities cap);
+	void Enable(Capabilities cap) { _NGL_CHECK(glEnable((GLenum)cap)); }
 	template<class T>
 	void Enable() { Enable(T::capability); }
 
-	void Disable(Capabilities cap);
+	void Disable(Capabilities cap) { _NGL_CHECK(glDisable((GLenum)cap)); }
 	template<class T>
 	void Disable() { Disable(T::capability); }
 
-	void Viewport(int32 x, int32 y, GLsizei width, GLsizei height);
+	void Viewport(int32 x, int32 y, GLsizei width, GLsizei height) {
+		_NGL_CHECK(glViewport(x, y, width, height));
+	}
+
 };
 
 NGLGL_END

@@ -7,7 +7,7 @@
 
 NGS_BEGIN
 
-template<_CPT Arithmetic Number = float>
+template<_NGS_CPT CArithmetic Number = float>
 class Matrix {
 public:
 	NGS_TYPE_DEFINE(Matrix<Number>, this);

@@ -1,4 +1,4 @@
-#pragma  once
+﻿#pragma  once
 
 #include "NGS/base/base.h"
 #include "NGS/math/util.h"
@@ -6,7 +6,7 @@
 
 NGS_BEGIN
 
-template<_CPT Arithmetic Number>
+template<_NGS_CPT CArithmetic Number>
 class Rectangle {
 public:
 
@@ -107,5 +107,8 @@ public:
 	__num x{}, y{};
 	__num width{}, height{};
 };
+using Rectanglei = Rectangle<int>;
+using Rectanglef = Rectangle<float>;
+using Rectangled = Rectangle<double>;
 
 NGS_END

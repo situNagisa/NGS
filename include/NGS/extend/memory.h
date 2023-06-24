@@ -144,7 +144,7 @@ namespace {
 
 inline void MemorySet(void* dst, byte value, size_t size) { memset(dst, value, size); }
 
-template<_CPT UnsignedIntegral UINT>
+template<_NGS_CPT CUnsignedIntegral UINT>
 constexpr void MemorySet(UINT* dst, UINT value, size_t size) {
 	//#pragma omp parallel for
 	for (int64 i = 0; i < size; i++)
@@ -157,14 +157,14 @@ inline void MemoryCopy(void* dst, void_ptr_cst src, size_t size) { memcpy(dst, s
 inline void MemoryMove(void* dst, void_ptr_cst src, size_t size) { memmove(dst, src, size); }
 
 //实现基础逻辑，交换整形数据（最大可达八字节，即unsigned long long)
-template<_CPT UnsignedIntegral UINT>
+template<_NGS_CPT CUnsignedIntegral UINT>
 void MemorySwap(UINT& a, UINT& b) {
 	a ^= b;
 	b ^= a;
 	a ^= b;
 }
 //实现n个整数类型的数据交换
-template<size_t N, _CPT UnsignedIntegral UINT>
+template<size_t N, _NGS_CPT CUnsignedIntegral UINT>
 void MemorySwap(UINT* a, UINT* b) {
 	//可用OpenMP或模板For优化这个for循环
 	for (size_t i = 0; i < N; i++) {
@@ -172,7 +172,7 @@ void MemorySwap(UINT* a, UINT* b) {
 	}
 }
 //同上，支持动态填写size参数，缺点是不能用For模板进行优化循环
-template<_CPT UnsignedIntegral UINT>
+template<_NGS_CPT CUnsignedIntegral UINT>
 void MemorySwap(UINT* a, UINT* b, size_t size) {
 	for (size_t i = 0; i < size; i++) {
 		MemorySwap(a[i], b[i]);
@@ -181,7 +181,7 @@ void MemorySwap(UINT* a, UINT* b, size_t size) {
 
 //Different 不同类型约束，此次确保T不为void
 //接口
-template<DifferentFrom<void> T>
+template<CDifferentFrom<void> T>
 void MemorySwap(T* a, T* b) {
 	constexpr auto rate = sizeof(T) / (sizeof(uint64));
 	constexpr auto modulo = sizeof(T) % (sizeof(uint64));
@@ -199,7 +199,7 @@ inline void ByteInverse(byte_ptr p, size_t size) {
 		MemorySwap(p + i, p + (size - 1 - i));
 }
 
-template<_CPT Integral T>
+template<_NGS_CPT CIntegral T>
 inline void ByteInverse(T& p) { ByteInverse(byte_ptr(&p), sizeof(T)); }
 
 #ifdef _MSC_VER

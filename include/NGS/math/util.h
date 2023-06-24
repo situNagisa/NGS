@@ -30,20 +30,20 @@ inline auto Min(auto a, auto b) { return a > b ? b : a; }
 
 
 /* 判断点是否在区间内 */
-template<_CPT Arithmetic T>
+template<_NGS_CPT CArithmetic T>
 bool In(T val, T low, T high) { return val >= low && val <= high; }
 
 /* 判断点是否在区间内 */
-template<_CPT Arithmetic T>
+template<_NGS_CPT CArithmetic T>
 bool Between(T val, T low, T high) { return val > low && val < high; }
 
 /* 点与区间的距离，若在区间内则为0 */
-template<_CPT Arithmetic T>inline T Distance(T val, T min, T max) { return Max(0, Max(min - val, val - max)); }
+template<_NGS_CPT CArithmetic T>inline T Distance(T val, T min, T max) { return Max(0, Max(min - val, val - max)); }
 /* 判断两区间是否相交 */
-template<_CPT Arithmetic T>inline bool IsCross(T min0, T max0, T min1, T max1) { return min1 <= max0 && min0 <= max1; }
+template<_NGS_CPT CArithmetic T>inline bool IsCross(T min0, T max0, T min1, T max1) { return min1 <= max0 && min0 <= max1; }
 
-template<_CPT Arithmetic T>inline T Clamp(T value, T low, T high) { return Max(low, Min(value, high)); }
-template<_CPT Arithmetic T>inline constexpr T NearTo(T value, T aim, T speed) {
+template<_NGS_CPT CArithmetic T>inline T Clamp(T value, T low, T high) { return Max(low, Min(value, high)); }
+template<_NGS_CPT CArithmetic T>inline constexpr T NearTo(T value, T aim, T speed) {
 	if (value < aim)
 		return (value + speed > aim) ? aim : value + speed;
 	if (value > aim)
@@ -58,14 +58,14 @@ inline constexpr const float PI = 3.1415926f;
 inline static constexpr float _degrees_to_radian = PI / 180;
 inline static constexpr float _radian_to_degrees = 180 / PI;
 
-auto Sin(_CPT Arithmetic auto radian) { return ::sin(radian); }
-auto Cos(_CPT Arithmetic auto radian) { return ::cos(radian); }
-auto Tan(_CPT Arithmetic auto radian) { return ::tan(radian); }
+auto Sin(_NGS_CPT CArithmetic auto radian) { return ::sin(radian); }
+auto Cos(_NGS_CPT CArithmetic auto radian) { return ::cos(radian); }
+auto Tan(_NGS_CPT CArithmetic auto radian) { return ::tan(radian); }
 
-constexpr auto Decimals(_CPT Arithmetic auto floating) {
+constexpr auto Decimals(_NGS_CPT CArithmetic auto floating) {
 	return floating - int64(floating);
 }
-consteval auto Power(_CPT Arithmetic auto value, size_t power) {
+consteval auto Power(_NGS_CPT CArithmetic auto value, size_t power) {
 	switch (power)
 	{
 	case 0:
@@ -80,7 +80,7 @@ consteval auto Power(_CPT Arithmetic auto value, size_t power) {
 	}
 	return value;
 }
-consteval auto Round(_CPT Arithmetic auto floating) {
+consteval auto Round(_NGS_CPT CArithmetic auto floating) {
 	constexpr auto d = floating - int64(floating);
 	if constexpr (d > 0.4) {
 		return int64(floating) + 1;
@@ -89,8 +89,8 @@ consteval auto Round(_CPT Arithmetic auto floating) {
 		return int64(floating);
 	}
 }
-inline constexpr auto Floor(_CPT Arithmetic auto floating) { return ::floor(floating); }
-inline constexpr auto Ceil(_CPT Arithmetic auto floating) { return ::ceil(floating); }
+inline constexpr auto Floor(_NGS_CPT CArithmetic auto floating) { return ::floor(floating); }
+inline constexpr auto Ceil(_NGS_CPT CArithmetic auto floating) { return ::ceil(floating); }
 
 inline constexpr float AsRadian(int32 degree) { return degree * _degrees_to_radian; }
 inline constexpr int32 AsDegree(float radian) { return static_cast<int32>(radian * _radian_to_degrees); }
@@ -107,7 +107,7 @@ inline double AngleDifference(double angle1, double angle2) {
 }
 
 
-constexpr auto Average(Integral auto a, Integral auto b) { return (a & b) + ((a ^ b) >> 1); }
+constexpr auto Average(CIntegral auto a, CIntegral auto b) { return (a & b) + ((a ^ b) >> 1); }
 
 template <typename T>
 constexpr T Sqrt(T x) {

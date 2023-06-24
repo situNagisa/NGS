@@ -29,6 +29,12 @@
     <ClInclude Include="base\BTL.h" />
     <ClInclude Include="base\concepts.h" />
     <ClInclude Include="base\config.h" />
+    <ClInclude Include="base\mpl\bitmap.h" />
+    <ClInclude Include="base\mpl\extraction.h" />
+    <ClInclude Include="base\mpl\find.h" />
+    <ClInclude Include="base\mpl\function.h" />
+    <ClInclude Include="base\mpl\mpl.h" />
+    <ClInclude Include="base\mpl_macro.h" />
     <ClInclude Include="base\type_info.h" />
     <ClInclude Include="extend\console.h" />
     <ClInclude Include="extend\console.hpp" />
@@ -62,6 +68,12 @@
     <ClInclude Include="extend\parser.h" />
     <ClInclude Include="extend\setting.h" />
     <ClInclude Include="extend\timer.h" />
+    <ClInclude Include="graphic\api\graphic.h" />
+    <ClInclude Include="graphic\api\image.h" />
+    <ClInclude Include="graphic\api\renderer.h" />
+    <ClInclude Include="graphic\api\texture.h" />
+    <ClInclude Include="graphic\graph.h" />
+    <ClInclude Include="graphic\api\window.h" />
     <ClInclude Include="math\line.h" />
     <ClInclude Include="math\math.h" />
     <ClInclude Include="math\matrix.h" />
