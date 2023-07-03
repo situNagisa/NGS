@@ -9,3 +9,4 @@
 #include "NGL/gl/framebuffer.h"
 #include "NGL/gl/error.h"
 #include "NGL/gl/vertex.h"
+#include "NGL/gl/state.h"

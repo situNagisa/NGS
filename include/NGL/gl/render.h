@@ -6,12 +6,19 @@
 
 NGLGL_BEGIN
 
+//enum class BitField : GLbitfield {
+//	color = GL_COLOR_BUFFER_BIT,
+//	depth = GL_DEPTH_BUFFER_BIT,
+//	stencil = GL_STENCIL_BUFFER_BIT,
+//};
+
 class Renderer {
 private:
 	friend class Constructor;
 	Renderer() = default;
 public:
 	void Clear(GLbitfield mask) { _NGL_CHECK(glClear(mask)); }
+
 	void ClearColor(StdRGBA argb) {
 		_NGL_CHECK(glClearColor(
 			(GLfloat)StdRGBA::R::Percent(argb.Red()),

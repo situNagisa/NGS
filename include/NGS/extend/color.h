@@ -98,21 +98,20 @@ NGS_END
 NGS_CONCEPT
 template<typename T>
 concept CARGB = requires(T t) {
-	requires CChannel<typename T::A>;
-	requires CChannel<typename T::R>;
-	requires CChannel<typename T::G>;
-	requires CChannel<typename T::B>;
-	requires std::integral<typename T::type>;
+	{ t.Alpha() } -> std::convertible_to<typename T::A::type>;
+	{ t.Red() } -> std::convertible_to<typename T::R::type>;
+	{ t.Green() } -> std::convertible_to<typename T::G::type>;
+	{ t.Blue() } -> std::convertible_to<typename T::B::type>;
+	{ t.StdAlpha() } -> std::convertible_to<StdChannel::type>;
+	{ t.StdRed() } -> std::convertible_to<StdChannel::type>;
+	{ t.StdGreen() } -> std::convertible_to<StdChannel::type>;
+	{ t.StdBlue() } -> std::convertible_to<StdChannel::type>;
 
-{ t.Alpha() } -> std::convertible_to<typename T::A::type>;
-{ t.Red() } -> std::convertible_to<typename T::R::type>;
-{ t.Green() } -> std::convertible_to<typename T::G::type>;
-{ t.Blue() } -> std::convertible_to<typename T::B::type>;
-{ t.StdAlpha() } -> std::convertible_to<StdChannel::type>;
-{ t.StdRed() } -> std::convertible_to<StdChannel::type>;
-{ t.StdGreen() } -> std::convertible_to<StdChannel::type>;
-{ t.StdBlue() } -> std::convertible_to<StdChannel::type>;
-
+		requires CChannel<typename T::A>;
+		requires CChannel<typename T::R>;
+		requires CChannel<typename T::G>;
+		requires CChannel<typename T::B>;
+		requires std::integral<typename T::type>;
 };
 NGS_END
 
@@ -126,7 +125,7 @@ NGS_TYPE
 #pragma warning(push)
 #pragma warning(disable:4309)
 #endif
-template<_NGS_CPT CChannel _A, _NGS_CPT CChannel _R, _NGS_CPT CChannel _G, _NGS_CPT CChannel _B>
+template<CChannel _A, CChannel _R, CChannel _G, CChannel _B>
 struct _basic_ARGB {
 public:
 	using A = _A;
@@ -143,6 +142,15 @@ public:
 
 	constexpr _basic_ARGB() = default;
 	constexpr _basic_ARGB(type value) : _value(value) {}
+	template<CChannel A, CChannel R, CChannel G, CChannel B>
+	constexpr _basic_ARGB(_basic_ARGB<A, R, G, B> color)
+		: _basic_ARGB(
+			(A::template ConvertFrom<StdChannel>(color.StdAlpha()) << A::Offset) |
+			(R::template ConvertFrom<StdChannel>(color.StdRed()) << R::Offset) |
+			(G::template ConvertFrom<StdChannel>(color.StdGreen()) << G::Offset) |
+			(B::template ConvertFrom<StdChannel>(color.StdBlue()) << B::Offset)
+		)
+	{}
 
 	operator type()const { return _value; }
 	constexpr type Value()const { return _value; }

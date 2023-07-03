@@ -2,6 +2,7 @@
 
 #include "NGL/defined.h"
 #include "NGL/context.h"
+#include "NGL/gl/error.h"
 
 NGLGL_BEGIN
 
@@ -26,7 +27,7 @@ public:
 	template<class T>
 	void Disable() { Disable(T::capability); }
 
-	void Viewport(int32 x, int32 y, GLsizei width, GLsizei height) {
+	void Viewport(int x, int y, size_t width, size_t height) {
 		_NGL_CHECK(glViewport(x, y, width, height));
 	}
 };

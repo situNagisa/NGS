@@ -21,11 +21,13 @@ public:
 template<class Derived>
 class Singleton {
 public:
+	using base = Singleton<Derived>;
+
 	static Derived& I() {
 		static Derived instance;
 		return instance;
 	}
-	static Derived* Instance() { return &I(); }
+	static Derived* INSTANCE() { return &I(); }
 };
 
 class DeleteCopy {

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="api\renderer.h" />
+    <ClInclude Include="api\renderer.hpp" />
     <ClInclude Include="api\shader.h" />
     <ClInclude Include="api\texture.h" />
     <ClInclude Include="api\vertex.h" />

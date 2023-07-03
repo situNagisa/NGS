@@ -49,10 +49,15 @@ public:
 		glfwGetWindowSize(_handle, &width, &height);
 		return { width,height };
 	}
-	Rectanglei GetFrameSize()const {
+	Rectanglei GetFrameBounds()const {
 		int left, top, right, bottom;
 		glfwGetWindowFrameSize(_handle, &left, &top, &right, &bottom);
 		return { left,top,right - left,bottom - top };
+	}
+	Rectanglei GetClientBounds()const {
+		auto pos = GetPosition();
+		auto size = GetSize();
+		return { pos,size };
 	}
 
 	void Active();
