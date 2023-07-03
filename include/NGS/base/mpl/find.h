@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "NGS/base/defined.h"
-#include "NGS/base/BTL.h"
+#include "NGS/base/boost/mpl.h"
 #include "NGS/base/mpl/mpl_macro.h"
 
 NGS_BEGIN
@@ -27,8 +27,8 @@ NGS_MPL_BEGIN
  *
  * @return 谓词的类型
  * @return 谓词的值
- */
-	NGS_mif(_FindIf, CPredicate _PredicateTrue, class... _Predicates) {
+*/
+NGS_mif(_FindIf, CPredicate _PredicateTrue, class... _Predicates) {
 	NGS_mreturn_t typename _PredicateTrue::type;
 	NGS_mreturn true;
 };
@@ -53,7 +53,7 @@ NGS_mif_case(_FindIf, CPredicate _PredicateFalse, CPredicate _Predicate, class..
  * @return 若找到则为 `true`，否则为`false`
  */
 template<template<class>class _Predicate, class _First, class... _Args>
-using find_if = typename _FindIf<_Predicate<_First>::value, _Predicate<_First>, _Predicate<_Args>...>;
+using find_if = _FindIf<_Predicate<_First>::value, _Predicate<_First>, _Predicate<_Args>...>;
 
 template<template<class>class _Predicate, class _First, class... _Args>
 using find_if_t = typename find_if<_Predicate, _First, _Args...>::type;

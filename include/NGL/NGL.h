@@ -1,10 +1,26 @@
 ﻿#pragma once
 
+#include "NGS/base/base.h"
+
+#if NGS_PLATFORM == NGS_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4244)
+#pragma warning(push)
+#pragma warning(disable: 4267)
+#endif
+
 #include "NGL/fw/glfw.h"
-#include "NGL/fw/window.h"
 
 #include "NGL/gl/gl.h"
 
+#include "NGL/api/shader.h"
+#include "NGL/api/texture.h"
+#include "NGL/api/vertex.h"
+
+#if NGS_PLATFORM == NGS_MSVC
+#pragma warning(pop)
+#pragma warning(pop)
+#endif
 
 #undef _NGL_DECALRE_CONTEXT
 #undef _NGL_DECALRE_CURRENT

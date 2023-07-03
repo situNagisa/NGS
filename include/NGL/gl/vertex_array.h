@@ -35,30 +35,7 @@ _NGL_DECALRE_CONTEXT(VertexArray, GLuint) {
 _NGL_DECALRE_CURRENT(VertexArray) {
 	_NGL_CURRENT_DEFAULT_CONSTRUCTOR(VertexArray) { _NGL_CHECK(glBindVertexArray(context)); }
 public:
-	void Enable(int index) { _NGL_CHECK(glEnableVertexAttribArray(index)); }
-	void SetAttribPointer(size_t index, size_t size, void_ptr_cst offset, int type, int step, bool normalized = false) {
-		_NGL_CHECK(glVertexAttribPointer(index, size, type, normalized, step, offset));
-	}
 
-	template<class... _VectorN>
-	void SetAttribPointer(bool normalized, bool enable = true) {
-		constexpr size_t step = _SizeOf<_VectorN...>();
-		_SetAttribPointer<_VectorN...>(0, 0, normalized, step, enable);
-	}
-private:
-	template<class _VectorN, class... _VectorNs>
-	void _SetAttribPointer(size_t index, size_t offset, bool normalized, size_t step, bool enable) {
-		SetAttribPointer(index, _VectorN::DIMENSIONAL, (void_ptr_cst)offset, gl_convert<typename _VectorN::type>, step, normalized);
-		if (enable)Enable(index);
-		if constexpr (sizeof...(_VectorNs))_SetAttribPointer<_VectorNs...>(index + 1, offset + sizeof(_VectorN), normalized, step, enable);
-	}
-
-	template<class _ElementType, class... _ElementTypes>
-	constexpr static size_t _SizeOf() {
-		size_t size = sizeof(_ElementType);
-		if constexpr (sizeof...(_ElementTypes)) size += _SizeOf<_ElementTypes...>();
-		return size;
-	}
 };
 _NGL_CURRENT_INSTANCE(vertex_array, VertexArray);
 

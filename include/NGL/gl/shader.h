@@ -27,8 +27,8 @@ public:
 	_ShaderCode(ShaderCodeType type, const char* code)
 		: _ShaderCode(type, &code, 1)
 	{}
-	_ShaderCode(ShaderCodeType type, std::ranges::random_access_range auto codes)
-		: _ShaderCode(type, std::ranges::cdata(), std::ranges::size(codes))
+	_ShaderCode(ShaderCodeType type, std::ranges::random_access_range auto&& codes)
+		: _ShaderCode(type, std::ranges::cdata(codes))
 	{}
 	~_ShaderCode()noexcept { _NGL_CHECK(glDeleteShader(_handle)); }
 
@@ -47,8 +47,8 @@ public:
 	ShaderCode(const char* code)
 		: _ShaderCode(_Type, &code, 1)
 	{}
-	ShaderCode(std::ranges::random_access_range auto codes)
-		: _ShaderCode(_Type, std::ranges::cdata(codes), std::ranges::size(codes))
+	ShaderCode(std::ranges::random_access_range auto&& codes)
+		: _ShaderCode(_Type, codes)
 	{}
 };
 using VertexShaderCode = ShaderCode<ShaderCodeType::vertex>;
@@ -64,7 +64,10 @@ public:
 	~ShaderContext()noexcept { _NGL_CHECK(glDeleteProgram(_handle)); }
 
 	void Attach(const _ShaderCode & code) { _NGL_CHECK(glAttachShader(_handle, code.GetHandle())); }
-	void Link()const { _NGL_CHECK(glLinkProgram(_handle)); }
+	void Link()const {
+		_NGL_CHECK(glLinkProgram(_handle));
+		_NGL_CHECK(glValidateProgram(_handle));
+	}
 
 	GLint GetUniformLocation(std::string_view name)const { _NGL_CHECK(GLint loc = glGetUniformLocation(_handle, name.data())); return loc; }
 };
@@ -77,7 +80,13 @@ public:
 	void SetUniform(std::string_view name, float v1, float v2) noexcept { _NGL_CHECK(glUniform2f(_context->GetUniformLocation(name), v1, v2)); }
 	void SetUniform(std::string_view name, float v1, float v2, float v3) noexcept { _NGL_CHECK(glUniform3f(_context->GetUniformLocation(name), v1, v2, v3)); }
 	void SetUniform(std::string_view name, float v1, float v2, float v3, float v4) noexcept { _NGL_CHECK(glUniform4f(_context->GetUniformLocation(name), v1, v2, v3, v4)); }
-	void SetUniformMatrix(std::string_view name, const float* value) noexcept { _NGL_CHECK(glUniformMatrix4fv(_context->GetUniformLocation(name), 1, GL_FALSE, value)); }
+
+	void SetUniform(std::string_view name, float32_ptr_cst value, size_t count) { _NGL_CHECK(glUniform1fv(_context->GetUniformLocation(name), count, value)); }
+	void SetUniform(std::string_view name, float64_ptr_cst value, size_t count) { _NGL_CHECK(glUniform1dv(_context->GetUniformLocation(name), count, value)); }
+	void SetUniform(std::string_view name, int32_ptr_cst value, size_t count) { _NGL_CHECK(glUniform1iv(_context->GetUniformLocation(name), count, value)); }
+	void SetUniform(std::string_view name, uint32_ptr_cst value, size_t count) { _NGL_CHECK(glUniform1uiv(_context->GetUniformLocation(name), count, value)); }
+
+	void SetUniformMatrix(std::string_view name, float32_ptr_cst value) noexcept { _NGL_CHECK(glUniformMatrix4fv(_context->GetUniformLocation(name), 1, GL_FALSE, value)); }
 private:
 
 };

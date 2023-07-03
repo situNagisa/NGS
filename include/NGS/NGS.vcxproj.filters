@@ -36,9 +36,6 @@
     <ClInclude Include="base\bit.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\BTL.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="base\concepts.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -282,7 +279,7 @@
     <ClInclude Include="graphic\api\texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\mpl_macro.h">
+    <ClInclude Include="base\mpl\mpl_macro.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\mpl\mpl.h">
@@ -297,7 +294,40 @@
     <ClInclude Include="base\mpl\function.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\mpl\extraction.h">
+    <ClInclude Include="base\mpl\template_extraction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithm\dynamic_program.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\utility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\concepts\sequence.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\concepts\meta_function.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\concepts\iterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\concepts\algorithm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\concepts\data_type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\concepts\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\boost\mpl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\boost\boost.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

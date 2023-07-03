@@ -1,4 +1,4 @@
-#pragma  once
+﻿#pragma  once
 
 #include "NGS/base/base.h"
 
@@ -122,6 +122,10 @@ NGS_TYPE
 #undef _G
 #undef _B
 
+#if NGS_PLATFORM == NGS_MSVC
+#pragma warning(push)
+#pragma warning(disable:4309)
+#endif
 template<_NGS_CPT CChannel _A, _NGS_CPT CChannel _R, _NGS_CPT CChannel _G, _NGS_CPT CChannel _B>
 struct _basic_ARGB {
 public:
@@ -129,9 +133,9 @@ public:
 	using R = _R;
 	using G = _G;
 	using B = _B;
-	using type = byte_<ByteOf(A::Count + R::Count + G::Count + B::Count)>;
+	using type = byte_<BitSet<A::Count + R::Count + G::Count + B::Count>::ByteCount>;
 
-	using std_type = byte_<ByteOf(StdChannel::Count) * 4>;
+	using std_type = byte_<BitSet<StdChannel::Count>::ByteCount * 4>;
 
 	static constexpr uint32
 		Filter = A::FilterWithOffset | R::FilterWithOffset | G::FilterWithOffset | B::FilterWithOffset
@@ -175,80 +179,72 @@ private:
 	type _value;
 };
 
-template<size_t _A, size_t _R, size_t _G, size_t _B>
-struct ARGB : public _basic_ARGB<Channel<_A, _R + _G + _B>, Channel<_R, _G + _B>, Channel<_G, _B>, Channel<_B, 0>> {
-	using base = _basic_ARGB<Channel<_A, _R + _G + _B>, Channel<_R, _G + _B>, Channel<_G, _B>, Channel<_B, 0>>;
-	using A = typename base::A;
-	using R = typename base::R;
-	using G = typename base::G;
-	using B = typename base::B;
+#define NGS_DEFINE_ARGB(c1,c2,c3,c4)		\
+template<size_t _##c1, size_t _##c2, size_t _##c3, size_t _##c4> \
+struct c1##c2##c3##c4 : public _basic_ARGB<Channel<_##c1, _##c2 + _##c3 + _##c4>, Channel<_##c2, _##c3 + _##c4>, Channel<_##c3, _##c4>, Channel<_##c4, 0>> { \
+	using base = _basic_ARGB<Channel<_##c1, _##c2 + _##c3 + _##c4>, Channel<_##c2, _##c3 + _##c4>, Channel<_##c3, _##c4>, Channel<_##c4, 0>>; \
+	using A = typename base::A;				\
+	using R = typename base::R;				\
+	using G = typename base::G;				\
+	using B = typename base::B;				\
+	using base::_basic_ARGB;				\
+	constexpr c1##c2##c3##c4(				\
+		StdChannel::type c1##_,				\
+		StdChannel::type c2##_,				\
+		StdChannel::type c3##_,				\
+		StdChannel::type c4##_				\
+	)										\
+	: base(\
+		(A::template ConvertFrom<StdChannel>(A_) << A::Offset) | \
+		(R::template ConvertFrom<StdChannel>(R_) << R::Offset) | \
+		(G::template ConvertFrom<StdChannel>(G_) << G::Offset) | \
+		(B::template ConvertFrom<StdChannel>(B_) << B::Offset) \
+		)									\
+	{}										\
+};											\
+using c1##c2##c3##c4##32 = c1##c2##c3##c4<8, 8, 8, 8>;	\
+using c1##c2##c3##c4##24 = c1##c2##c3##c4<0, 8, 8, 8>;	\
+using c1##c2##c3##c4##16 = c1##c2##c3##c4<0, 5, 6, 5>;	\
+using c1##c2##c3##c4##15 = c1##c2##c3##c4<1, 5, 5, 5>;	\
+using c1##c2##c3##c4##8 = c1##c2##c3##c4<0, 3, 3, 2>;	\
+using Std##c1##c2##c3##c4 = c1##c2##c3##c4##32;			\
+static_assert(_NGS_CPT CARGB<Std##c1##c2##c3##c4>)		\
+//
 
-	using base::_basic_ARGB;
+NGS_DEFINE_ARGB(A, R, G, B);
+NGS_DEFINE_ARGB(A, R, B, G);
+NGS_DEFINE_ARGB(A, G, R, B);
+NGS_DEFINE_ARGB(A, G, B, R);
+NGS_DEFINE_ARGB(A, B, R, G);
+NGS_DEFINE_ARGB(A, B, G, R);
 
-	constexpr ARGB(
-		StdChannel::type a,
-		StdChannel::type r,
-		StdChannel::type g,
-		StdChannel::type b
-	)
-		: base(
-			(A::template ConvertFrom<StdChannel>(a) << A::Offset) |
-			(R::template ConvertFrom<StdChannel>(r) << R::Offset) |
-			(G::template ConvertFrom<StdChannel>(g) << G::Offset) |
-			(B::template ConvertFrom<StdChannel>(b) << B::Offset)
-		)
-	{}
-};
+NGS_DEFINE_ARGB(R, A, G, B);
+NGS_DEFINE_ARGB(R, A, B, G);
+NGS_DEFINE_ARGB(R, G, A, B);
+NGS_DEFINE_ARGB(R, G, B, A);
+NGS_DEFINE_ARGB(R, B, A, G);
+NGS_DEFINE_ARGB(R, B, G, A);
 
-using ARGB32 = ARGB<8, 8, 8, 8>;
-using ARGB24 = ARGB<0, 8, 8, 8>;
-using ARGB16 = ARGB<0, 5, 6, 5>;
-using ARGB15 = ARGB<1, 5, 5, 5>;
-using ARGB8 = ARGB<0, 3, 3, 2>;
+NGS_DEFINE_ARGB(G, A, R, B);
+NGS_DEFINE_ARGB(G, A, B, R);
+NGS_DEFINE_ARGB(G, R, A, B);
+NGS_DEFINE_ARGB(G, R, B, A);
+NGS_DEFINE_ARGB(G, B, A, R);
+NGS_DEFINE_ARGB(G, B, R, A);
 
-using StdARGB = ARGB32;
+NGS_DEFINE_ARGB(B, A, R, G);
+NGS_DEFINE_ARGB(B, A, G, R);
+NGS_DEFINE_ARGB(B, R, A, G);
+NGS_DEFINE_ARGB(B, R, G, A);
+NGS_DEFINE_ARGB(B, G, A, R);
+NGS_DEFINE_ARGB(B, G, R, A);
 
-static_assert(_NGS_CPT CARGB<StdARGB>);
+#undef NGS_DEFINE_ARGB
 
-template<size_t _B, size_t _G, size_t _R, size_t _A>
-struct BGRA : public _basic_ARGB<Channel<_B, _G + _R + _A>, Channel<_G, _R + _A>, Channel<_R, _A>, Channel<_A, 0>> {
-	using base = _basic_ARGB<Channel<_B, _G + _R + _A>, Channel<_G, _R + _A>, Channel<_R, _A>, Channel<_A, 0>>;
-	using A = typename base::A;
-	using R = typename base::R;
-	using G = typename base::G;
-	using B = typename base::B;
-
-	using base::_basic_ARGB;
-
-	constexpr BGRA(
-		StdChannel::type b,
-		StdChannel::type g,
-		StdChannel::type r,
-		StdChannel::type a
-	)
-		: base(
-			(A::template ConvertFrom<StdChannel>(a) << A::Offset) |
-			(R::template ConvertFrom<StdChannel>(r) << R::Offset) |
-			(G::template ConvertFrom<StdChannel>(g) << G::Offset) |
-			(B::template ConvertFrom<StdChannel>(b) << B::Offset)
-		)
-	{}
-};
-
-
-using BGRA32 = BGRA<8, 8, 8, 8>;
-using BGRA24 = BGRA<0, 8, 8, 8>;
-using BGRA16 = BGRA<0, 5, 6, 5>;
-using BGRA15 = BGRA<1, 5, 5, 5>;
-using BGRA8 = BGRA<0, 3, 3, 2>;
-
-using StdBGRA = BGRA32;
-
-static_assert(_NGS_CPT CARGB<StdBGRA>);
 
 struct HSV {
 	using HueType = byte;
-	constexpr static auto HueRate = (bit_max(BitsOf<HueType>())) >= 360 ? 2 : 1;
+	constexpr static auto HueRate = (BitSet<sizeof(HueType) * BitPerByte>::Mask) >= 360 ? 2 : 1;
 
 	constexpr HSV() = default;
 	constexpr HSV(byte hue, float32 saturation, float32 value)
@@ -295,9 +291,9 @@ constexpr HSV Convert<ARGB24, HSV>(const ARGB24& argb) {
 		value
 		;
 
-	float32 r = ARGB24::R::Percent(argb.Red());
-	float32 g = ARGB24::G::Percent(argb.Green());
-	float32 b = ARGB24::B::Percent(argb.Blue());
+	float32 r = (float32)ARGB24::R::Percent(argb.Red());
+	float32 g = (float32)ARGB24::G::Percent(argb.Green());
+	float32 b = (float32)ARGB24::B::Percent(argb.Blue());
 
 	float32 max = std::max(r, std::max(g, b));
 	float32 min = std::min(r, std::min(g, b));
@@ -314,11 +310,11 @@ constexpr HSV Convert<ARGB24, HSV>(const ARGB24& argb) {
 	}
 
 	if (r == max)
-		hue = (g - b) / delta;
+		hue = byte((g - b) / delta);
 	else if (g == max)
-		hue = 2 + (b - r) / delta;
+		hue = byte(2 + (b - r) / delta);
 	else
-		hue = 4 + (r - g) / delta;
+		hue = byte(4 + (r - g) / delta);
 
 	hue *= 30 * HSV::HueRate;
 	if (hue < 0)
@@ -356,9 +352,9 @@ constexpr ARGB24 Convert <HSV, ARGB24>(const HSV& hsv) {
 	}
 	return ARGB24(
 		0,
-		ARGB24::R::ConvertFrom<StdChannel>(r * ARGB24::R::Filter),
-		ARGB24::G::ConvertFrom<StdChannel>(g * ARGB24::R::Filter),
-		ARGB24::B::ConvertFrom<StdChannel>(b * ARGB24::R::Filter)
+		ARGB24::R::ConvertFrom<StdChannel>(byte(r * ARGB24::R::Filter)),
+		ARGB24::G::ConvertFrom<StdChannel>(byte(g * ARGB24::R::Filter)),
+		ARGB24::B::ConvertFrom<StdChannel>(byte(b * ARGB24::R::Filter))
 	);
 }
 
@@ -433,5 +429,9 @@ using ColorConvert = mpl::bitmap<PixelFormat,
 	mpl::bitmap_item<ARGB24, (uint32)PixelFormat::ARGB24>,
 	mpl::bitmap_item<ARGB32, (uint32)PixelFormat::ARGB32>
 >;
+
+#if NGS_PLATFORM == NGS_MSVC
+#pragma warning(pop)
+#endif
 
 NGS_END

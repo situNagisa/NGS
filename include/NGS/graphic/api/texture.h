@@ -7,7 +7,7 @@ NGS_BEGIN
 
 template<class T>
 concept CTexture = requires(T t, const T t_cst) {
-	{ *t_cst.GetImage() } -> CImage;
+	//{ *t_cst.GetImage() } -> CImage;
 	{ t_cst.GetWidth() } -> std::convertible_to<size_t>;
 	{ t_cst.GetHeight() } -> std::convertible_to<size_t>;
 	{ t.SetWidth(0) };

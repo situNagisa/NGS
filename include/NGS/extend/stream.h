@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/extend/console.h"
 
@@ -125,7 +125,7 @@ private:
 
 
 #undef vprint
-#undef PRINT(color)
+#undef PRINT
 };
 
 using nostream = basic_ostream<nchar>;

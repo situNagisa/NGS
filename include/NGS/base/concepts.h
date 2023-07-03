@@ -8,6 +8,12 @@
 NGS_BEGIN
 NGS_CONCEPT
 
+template<class T, class U>
+concept CSameTemplate = mpl::is_same_template_v<T, U>;
+
+template<class T, template<class...>class _Template>
+concept CTemplateFrom = mpl::is_template_v<T, _Template>;
+
 template< class T, class... Types>
 concept CSameAsAny = mpl::is_any_of_v<T, Types...>;
 

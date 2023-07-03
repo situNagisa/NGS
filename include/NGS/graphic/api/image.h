@@ -25,8 +25,8 @@ public:
 		, height(other.height)
 		, format(other.format)
 	{
-		NGS_NEW_ARR
-			memcpy(_data, other._data, width * height * PixelFormatSize(format));
+		//NGS_NEW_ARR
+			//memcpy(_data, other._data, width * height * PixelFormatSize(format));
 	}
 
 public:

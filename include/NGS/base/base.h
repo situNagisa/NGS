@@ -19,7 +19,6 @@
 #include "NGS/base/version.h"
 
 #include "NGS/base/STL.h"
-#include "NGS/base/BTL.h"
 #include "NGS/base/config.h"
 
 #include "NGS/base/defined.h"

@@ -1,4 +1,4 @@
-#pragma  once
+﻿#pragma  once
 
 #include "NGS/base/base.h"
 
@@ -50,7 +50,7 @@ template<_NGS_CPT CArithmetic T>inline constexpr T NearTo(T value, T aim, T spee
 		return (value - speed < aim) ? aim : value - speed;
 }
 
-constexpr int8 Sign(int64 number) { return -(int64)(((byte_<sizeof(int64)>)number >> (BitsOf<int64>() - 1)) << 1) + 1; }
+constexpr int8 Sign(int64 number) { return -(int64)(((byte_<sizeof(int64)>)number >> (sizeof(int64) * BitPerByte - 1)) << 1) + 1; }
 constexpr int8 Sign(float64 floating) { return floating >= 0 ? 1 : -1; }
 constexpr int8 Sign(bool b) { return (b << 1) - 1; }
 

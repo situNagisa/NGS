@@ -86,7 +86,7 @@ public:
 	}
 	void GenerateMipmap() { _NGL_CHECK(glGenerateMipmap(type)); }
 
-	void Active(TextureSlot slot = TextureSlot::_0) { _NGL_CHECK(glActiveTexture((GLenum)slot)) }
+	void Active(TextureSlot slot = TextureSlot::_0) { _NGL_CHECK(glActiveTexture((GLenum)slot)); }
 	void Active(uint32 offset) { Active(TextureSlot::_0 + offset); }
 
 	void SetParameter(GLenum property, GLint value) { _NGL_CHECK(glTexParameteri(type, property, value)); }

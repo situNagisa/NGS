@@ -14,42 +14,47 @@
 
 NGS_BEGIN
 
-inline constexpr uint64 bit(uint16 n) { return static_cast<uint64>(1) << n; }
-inline constexpr uint64 bit_max(uint16 bitCount) { return bit(bitCount) - 1; }
+//inline constexpr uint64 bit(uint16 n) { return static_cast<uint64>(1) << n; }
+//inline constexpr uint64 bit_max(uint16 bitCount) { return bit(bitCount) - 1; }
 
-template<bool B, class T>
-inline void Bits(T& p, CIntegral auto bit) {
-	if constexpr (B)
-		p |= (T)bit;
-	else
-		p &= ~(T)bit;
-}
+//template<bool B, class T>
+//inline void Bits(T& p, CIntegral auto bit) {
+//	if constexpr (B)
+//		p |= (T)bit;
+//	else
+//		p &= ~(T)bit;
+//}
 
-inline void Bits(auto& p, CIntegral auto bit, bool boolean) {
-	if (boolean)
-		Bits<true>(p, bit);
-	else
-		Bits<false>(p, bit);
-}
+//inline void Bits(auto& p, CIntegral auto bit, bool boolean) {
+//	if (boolean)
+//		Bits<true>(p, bit);
+//	else
+//		Bits<false>(p, bit);
+//}
 
-template<class T>
-inline constexpr bool Bits(T p, CIntegral auto bit) { return p & (T)bit; }
+//template<class T>
+//inline constexpr bool Bits(T p, CIntegral auto bit) { return p & (T)bit; }
 
-template<size_t start, size_t end>
-inline void Bits(auto& dest, auto source) {
-	For<start, end>([&](uint16 i) {
-		bool b = Bits(source, bit(i));
-		Bits(dest, bit(i), b);
-		});
-}
+//template<size_t start, size_t end>
+//inline void Bits(auto& dest, auto source) {
+//	For<start, end>([&](uint16 i) {
+//		bool b = Bits(source, bit(i));
+//		Bits(dest, bit(i), b);
+//		});
+//}
 
 
-inline constexpr size_t BitsOf(auto target = 0) { return sizeof(target) * 8; }
-inline constexpr size_t ByteOf(size_t bitCount) {
-	constexpr auto byteBits = BitsOf<byte>();
-	if (bitCount % byteBits)return bitCount / byteBits + 1;
-	return bitCount / byteBits;
-}
+//inline constexpr size_t BitsOf(auto target = 0) { return sizeof(target) * 8; }
+//inline constexpr size_t ByteOf(size_t bitCount) {
+//	constexpr auto byteBits = BitsOf<byte>();
+//	if (bitCount % byteBits)return bitCount / byteBits + 1;
+//	return bitCount / byteBits;
+//}
+
+#if NGS_PLATFORM == NGS_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4293)
+#endif
 
 static constexpr uint64 BitPerByte = 8;
 #undef _N
@@ -61,7 +66,7 @@ public:
 	static constexpr uint64 ByteCount = (((BitCount) / BitPerByte) + (((BitCount) % BitPerByte) > 0));
 	using type = byte_<ByteCount>;
 
-	static constexpr type Mask = (BitCount == 64) ? static_cast<type>(~(uint64)0) : static_cast<type>((((uint64)1 << BitCount) - 1));
+	static constexpr type Mask = (BitCount >= 64) ? static_cast<type>(~(uint64)0) : static_cast<type>((((uint64)1 << BitCount) - 1));
 
 
 	class Bit {
@@ -173,6 +178,10 @@ private:
 
 	type _data;
 };
+
+#if NGS_PLATFORM == NGS_MSVC
+#pragma warning(pop)
+#endif
 
 class Flag : public BitSet<sizeof(uint64)* BitPerByte> {
 public:

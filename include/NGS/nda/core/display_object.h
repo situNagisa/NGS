@@ -53,7 +53,7 @@ public:
 		NGS_LOGFL(debug, "released display object %s", name.c_str());
 		NGS_ASSERT(!Parent(), "the display object still active");
 	}
-	bool IsContainer()const { return dynamic_cast<__container_ptr_cst>(this); }
+	bool IsContainer()const { return false; /*down_cast<__container>(this);*/ }
 
 	virtual __number Width()const = 0;
 	virtual void Width(__number value) { ScaleX((float32)value / Width()); }

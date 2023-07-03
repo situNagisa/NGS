@@ -21,9 +21,6 @@
     <ClInclude Include="opengl.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="fw\window.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="gl\shader.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -75,23 +72,18 @@
     <ClInclude Include="gl\error.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="api\texture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="api\shader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="fw\window.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="fw\glfw.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="api\texture.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+    <ClInclude Include="gl\vertex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="api\texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vertex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="gl\shader\point.frag" />

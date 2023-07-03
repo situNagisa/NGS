@@ -33,19 +33,45 @@ public:
 	__context Create() { return {}; }
 
 	void SetContextNull() {
-		_Derived::_SET_CURRENT_CONTEXT(0);
-		_context = nullptr;
+		NGS_ASSERT(_stack.empty());
+		_SetContextNull();
 	}
 	void SetContext(__context_ptr context) {
-		_Derived::_SET_CURRENT_CONTEXT(context->GetHandle());
-		_context = context;
+		NGS_ASSERT(_stack.empty());
+		_SetContext(context);
 	}
 	void SetContext(__context_ref context) { SetContext(&context); }
 	__context_ptr GetContext() { return _context; }
 	__context_ptr GetContext()const { return _context; }
 
+	void PushContext(__context_ptr context) {
+		_stack.push(_context);
+		_SetContext(context);
+	}
+	void PushContext(__context_ref context) { PushContext(&context); }
+	void PopContext() {
+		NGS_ASSERT(!_stack.empty());
+		_SetContext(_stack.top());
+		_stack.pop();
+	}
+	bool IsContext(__context_ptr_cst context)const { return _context == context; }
+	bool IsContext(__context_ref_cst context)const { return IsContext(&context); }
+private:
+	void _SetContextNull() {
+		_Derived::_SET_CURRENT_CONTEXT(0);
+		_context = nullptr;
+	}
+	void _SetContext(__context_ptr context) {
+		if (!context) {
+			_SetContextNull();
+			return;
+		}
+		_Derived::_SET_CURRENT_CONTEXT(context->GetHandle());
+		_context = context;
+	}
 protected:
 	__context_ptr _context = nullptr;
+	std::stack<__context_ptr> _stack = {};
 };
 #define _NGL_DECALRE_CONTEXT(type,handle)		\
 struct type##Context : Context<handle>			\
@@ -84,7 +110,7 @@ _NGL_CURRENT_DEFAULT_CONSTRUCTOR(template_t)						\
 //
 
 #define _NGL_CURRENT_INSTANCE(id,current)		\
-inline static auto id = Constructor::Construct<current>()\
+inline auto id = Constructor::Construct<current>()\
 //
 
 #define _NGL_SPECIALIZATION(template_t,template_enum,special_t,special_id)	\

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/extend/console.h"
 
@@ -10,10 +10,12 @@
 
 NGS_BEGIN
 
-static bool _s_set_text_color = [] {
-	Debugger::set_text_color = Console::SetTextColor;
-	return true;
-}();
+namespace {
+	inline bool _s_set_text_color = [] {
+		Debugger::set_text_color = Console::SetTextColor;
+		return true;
+	}();
+}
 
 #if NGS_PLATFORM == NGS_WINDOWS
 

@@ -5,17 +5,27 @@
 
 NGS_BEGIN
 
+#if NGS_COMPILER == NGS_MSVC
+#define vprint vsprintf_s
+#else
+#define vprint vsprintf
+#endif
+
+inline nstring Format(nchar_ptr_cst fmt, ...) {
+	nchar buffer[1024];
+	va_list args;
+	va_start(args, fmt);
+	vprint(buffer, fmt, args);
+	va_end(args);
+	return buffer;
+}
+
+#undef vprint
+
 template<typename T, typename Arg>
-inline constexpr auto&& any_cast(const Arg& arg) {
+constexpr auto&& any_cast(const Arg& arg) {
 	return const_cast<T>(*reinterpret_cast<const T*>(&arg));
 }
-inline std::string GetFunctionName(const std::string& function) {
-	std::regex function_name(R"(\b((<\s*)?[a-zA-Z_]\w*(\s*>)?\s*::\s*)*[a-zA-Z_]\w*\s*(\(\))?(?=\([^()]*\)))");
-	std::smatch match;
-	if (std::regex_search(function, match, function_name)) {
-		return match[0].str();
-	}
-	return {};
-}
+
 
 NGS_END

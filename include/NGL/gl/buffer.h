@@ -4,7 +4,7 @@
 #include "NGL/opengl.h"
 #include "NGL/context.h"
 #include "NGL/gl/error.h"
-
+#include "NGL/gl/vertex.h"
 
 NGLGL_BEGIN
 
@@ -82,6 +82,27 @@ public:
 #undef DEFINE_DRAW_ELEMENTS
 
 	void DrawArrays(GLenum mode, size_t offset, size_t count) { _NGL_CHECK(glDrawArrays(mode, offset, count)); }
+
+	void Enable(int index) { _NGL_CHECK(glEnableVertexAttribArray(index)); }
+	void SetAttribPointer(size_t index, size_t size, void_ptr_cst offset, int type, int step, bool normalized = false) {
+		_NGL_CHECK(glVertexAttribPointer(index, size, type, normalized, step, offset));
+	}
+	template<CTemplateFrom<gl::vertex> _Layout>
+	void SetAttribPointer(bool normalized = false, bool enable = true) {
+		using lay = _Layout;
+		for (size_t i = 0; i < lay::count; i++) {
+			SetAttribPointer(i, lay::counts[i], (void_ptr_cst)lay::offsets[i], lay::tv_bitmaps[i], lay::size, normalized);
+			if (enable)Enable(i);
+		}
+	}
+	template<class _Element, size_t _L0, size_t... _LN>
+	void SetAttribPointer(bool normalized = false, bool enable = true) {
+		SetAttribPointer< vertex_vector<_Element, _L0, _LN...>>(normalized, enable);
+	}
+	template<CTemplateFrom<layout> _LayoutUnit, CTemplateFrom<layout>... _LayoutUnits>
+	void SetAttribPointer(bool normalized = false, bool enable = true) {
+		SetAttribPointer<vertex<_LayoutUnit, _LayoutUnits...>>(normalized, enable);
+	}
 
 };
 

@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "NGL/defined.h"
+#include "NGL/context.h"
 
 NGLGL_BEGIN
 
@@ -28,7 +29,7 @@ public:
 	void Viewport(int32 x, int32 y, GLsizei width, GLsizei height) {
 		_NGL_CHECK(glViewport(x, y, width, height));
 	}
-
 };
+_NGL_CURRENT_INSTANCE(state, State);
 
 NGLGL_END

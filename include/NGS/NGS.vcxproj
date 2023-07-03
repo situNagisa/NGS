@@ -20,21 +20,31 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="algorithm\algorithm.h" />
+    <ClInclude Include="algorithm\dynamic_program.h" />
     <ClInclude Include="algorithm\PID.h" />
     <ClInclude Include="algorithm\PID.hpp" />
     <ClInclude Include="base\assert.h" />
     <ClInclude Include="base\base.h" />
     <ClInclude Include="base\base_class.h" />
     <ClInclude Include="base\bit.h" />
-    <ClInclude Include="base\BTL.h" />
+    <ClInclude Include="base\boost\boost.h" />
+    <ClInclude Include="base\boost\mpl.h" />
     <ClInclude Include="base\concepts.h" />
     <ClInclude Include="base\config.h" />
     <ClInclude Include="base\mpl\bitmap.h" />
-    <ClInclude Include="base\mpl\extraction.h" />
+    <ClInclude Include="base\mpl\concepts\algorithm.h" />
+    <ClInclude Include="base\mpl\concepts\concept.h" />
+    <ClInclude Include="base\mpl\concepts\data_type.h" />
+    <ClInclude Include="base\mpl\concepts\iterator.h" />
+    <ClInclude Include="base\mpl\concepts\meta_function.h" />
+    <ClInclude Include="base\mpl\concepts\sequence.h" />
+    <ClInclude Include="base\mpl\defined.h" />
+    <ClInclude Include="base\mpl\template_extraction.h" />
     <ClInclude Include="base\mpl\find.h" />
     <ClInclude Include="base\mpl\function.h" />
     <ClInclude Include="base\mpl\mpl.h" />
-    <ClInclude Include="base\mpl_macro.h" />
+    <ClInclude Include="base\mpl\mpl_macro.h" />
+    <ClInclude Include="base\mpl\utility.h" />
     <ClInclude Include="base\type_info.h" />
     <ClInclude Include="extend\console.h" />
     <ClInclude Include="extend\console.hpp" />

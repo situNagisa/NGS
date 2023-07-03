@@ -12,12 +12,12 @@ private:
 	Renderer() = default;
 public:
 	void Clear(GLbitfield mask) { _NGL_CHECK(glClear(mask)); }
-	void ClearColor(StdARGB argb) {
+	void ClearColor(StdRGBA argb) {
 		_NGL_CHECK(glClearColor(
-			StdARGB::R::Percent(argb.Red()),
-			StdARGB::G::Percent(argb.Green()),
-			StdARGB::B::Percent(argb.Blue()),
-			StdARGB::A::Percent(argb.Alpha())
+			(GLfloat)StdRGBA::R::Percent(argb.Red()),
+			(GLfloat)StdRGBA::G::Percent(argb.Green()),
+			(GLfloat)StdRGBA::B::Percent(argb.Blue()),
+			(GLfloat)StdRGBA::A::Percent(argb.Alpha())
 		));
 	}
 	void ClearDepth(GLdouble depth) { _NGL_CHECK(glClearDepth(depth)); }

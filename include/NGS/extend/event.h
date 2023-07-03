@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/base.h"
 #include "NGS/extend/function.h"

@@ -5,8 +5,8 @@
 
 NGS_BEGIN
 
-struct Constructor {
-
+class Constructor {
+public:
 	template<class T, class... Args>
 	static void Construct_Place(T* block, Args&&... args) { new(block)T(std::forward<Args>(args)...); }
 
@@ -19,7 +19,8 @@ struct Constructor {
 
 };
 
-struct Destructor {
+class Destructor {
+public:
 	template<class T>
 	static void Destruct(T* block) { delete block; }
 
@@ -210,33 +211,33 @@ inline
 ::size_t SizeOf(void* block) { return 0; }
 #endif
 
-template<size_t _COUNT>
+template<size_t _Count>
 class NumberAllocator {
 public:
-
+	NGS_TYPE_DEFINE(BitSet<_Count>, bits);
 public:
 
 	int64 Allocate() {
-		for (size_t i = 0; i < _COUNT; i++) {
-			if (Bits(_numbers, bit(i)))continue;
-			Bits<true>(_numbers, bit(i));
+		for (size_t i = 0; i < _Count; i++) {
+			if (_numbers[i])continue;
+			_numbers[i] = true;
 			return i;
 		}
 		return -1;
 	}
 	void Free(size_t number) {
-		Bits<false>(_numbers, number);
+		_numbers[number] = false;
 	}
 	bool IsAllocated(size_t number) const {
-		return Bits(_numbers, number);
+		return _numbers[number];
 	}
 	bool IsFull()const {
-		return _numbers == bit_max(_COUNT);
+		return typename __bits::type(_numbers) == __bits::Mask;
 	}
 private:
 
 private:
-	byte_<ByteOf(_COUNT) > _numbers = 0;
+	__bits _numbers = 0;
 
 };
 

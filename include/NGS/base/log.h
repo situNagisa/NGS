@@ -1,10 +1,11 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/defined.h"
 #include "NGS/base/STL.h"
 #include "NGS/base/config.h"
 #include "NGS/base/base_class.h"
 #include "NGS/base/utility.h"
+#include "NGS/base/type_info.h"
 
 NGS_BEGIN
 
@@ -16,23 +17,6 @@ enum DLevel {
 	error,
 	fatal,
 };
-
-#if NGS_COMPILER == NGS_MSVC
-#define vprint vsprintf_s
-#else
-#define vprint vsprintf
-#endif
-
-inline nstring Format(nchar_ptr_cst fmt, ...) {
-	nchar buffer[1024];
-	va_list args;
-	va_start(args, fmt);
-	vprint(buffer, fmt, args);
-	va_end(args);
-	return buffer;
-}
-
-#undef vprint
 
 enum class TextColor {
 	RESERT,
@@ -74,7 +58,7 @@ public:
 		}
 
 		std::string GetFunctionName()const {
-			return ngs::GetFunctionName(_function);
+			return ParseIdFactor::GetFunctionName(_function);
 		}
 	public:
 		size_t _line = 0;
@@ -176,13 +160,13 @@ private:
 
 #if NGS_BUILD_TYPE == NGS_DEBUG
 
-#define NGS_SCOPE_CREATE auto _ngs_scope_holder = _NGS Debugger::Push()
-#define NGS_SCOPE_DISABLE NGS_SCOPE_CREATE;_ngs_scope_holder.Disable()
-#define NGS_SCOPE_ENABLE _ngs_scope_holder.Enable()
+#define NGS_LOG_SCOPE_CREATE auto _ngs_scope_holder = _NGS Debugger::Push()
+#define NGS_LOG_SCOPE_DISABLE NGS_LOG_SCOPE_CREATE;_ngs_scope_holder.Disable()
+#define NGS_LOG_SCOPE_ENABLE _ngs_scope_holder.Enable()
 
 #define _NGS_DEBUG_CALL(function, ...)			\
 do {											\
-	NGS_SCOPE_CREATE;							\
+	NGS_LOG_SCOPE_CREATE;							\
 	_NGS Debugger::function(__VA_ARGS__);		\
 } while (0)										\
 //
@@ -209,9 +193,9 @@ _NGS_DEBUG_CALL(PrintFormatLine, format, ##__VA_ARGS__)	\
 
 #else
 
-#define NGS_SCOPE_CREATE
-#define NGS_SCOPE_DISABLE
-#define NGS_SCOPE_ENABLE
+#define NGS_LOG_SCOPE_CREATE
+#define NGS_LOG_SCOPE_DISABLE
+#define NGS_LOG_SCOPE_ENABLE
 
 #define NGS_LOG(level, ...) 
 #define NGS_LOGL(level, ...) 

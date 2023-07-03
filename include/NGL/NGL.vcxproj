@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="api\shader.h" />
     <ClInclude Include="api\texture.h" />
+    <ClInclude Include="api\vertex.h" />
     <ClInclude Include="gl\error.h" />
     <ClInclude Include="gl\framebuffer.h" />
     <ClInclude Include="gl\blend.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="gl\buffer.h" />
     <ClInclude Include="gl\context.h" />
     <ClInclude Include="gl\gl.h" />
+    <ClInclude Include="gl\vertex.h" />
     <ClInclude Include="gl\render.h" />
     <ClInclude Include="gl\renderbuffer.h" />
     <ClInclude Include="gl\space.h" />
@@ -37,15 +39,9 @@
     <ClInclude Include="gl\vertex_array.h" />
     <ClInclude Include="NGL.h" />
     <ClInclude Include="fw\glfw.h" />
-    <ClInclude Include="fw\window.h" />
     <ClInclude Include="opengl.h" />
     <ClInclude Include="gl\shader.h" />
     <ClInclude Include="gl\texture.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="api\texture.cpp" />
-    <ClCompile Include="fw\glfw.cpp" />
-    <ClCompile Include="fw\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="gl\shader\point.frag" />
