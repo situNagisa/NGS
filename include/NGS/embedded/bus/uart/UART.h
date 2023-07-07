@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/base.h"
-#include "NGS/embedded/bus/Bus.h"
+#include "NGS/embedded/bus/bus_base.h"
 
 NGS_BEGIN
 

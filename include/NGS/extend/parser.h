@@ -9,27 +9,49 @@ NGS_BEGIN
 
 NGS_CONCEPT
 
+/**
+ * @brief 指定一个`解析函数`的约束，该函数实例具有形式`size_t(_Param)`
+ *
+ * @tparam _Function	指定检测的函数对象类型，该函数的实例具有形式`size_t(_Param)`
+ * @tparam _Param		指定传递给该函数的参数类型
+*/
 template<typename _Function, typename _Param>
 concept protocols_parser_step = requires(_Function function, _Param param) {
-	std::invocable<_Function>;
-	std::ranges::sized_range< _Param>;
 	{function(param)} -> std::convertible_to<size_t>;
 };
 
+/**
+ * @brief 指定一个`可解析结构体`的约束
+ *
+ * @param Header	满足`sized_range`约束，其元素类型满足`convertible_to<byte>`约束，表示结构体需要以什么数据开头
+ * @param Size		可转换为`size_t`类型，表示结构体所能接收的数据长度
+ * @param Parse		满足`protocols_parser_step`约束，为一个函数，具有形式`size_t Parse(_Param)`或`size_t Parse<_Param>()`
+ *
+ * @tparam _Struct	检测的结构体
+ * @tparam _Param	传递给Parse参数的类型，满足`protocols_parser_step`约束
+ *
+ * @see `ngs::protocols_parser_step`
+ */
 template<typename _Struct, typename _Param>
 concept protocols_parsable = requires() {
 	{_Struct::Header} -> std::ranges::sized_range<>;
-	std::convertible_to<std::ranges::range_value_t<decltype(_Struct::Header)>, ngs::byte>;
 	{_Struct::Size} -> std::convertible_to<size_t>;
-	{_Struct::Parser} -> protocols_parser_step<_Param>;
-};
+		requires std::convertible_to<std::ranges::range_value_t<decltype(_Struct::Header)>, ngs::byte>;
+		requires std::ranges::sized_range< _Param>;
+} && (
+	requires() {
+		{_Struct::Parse} -> protocols_parser_step<_Param>;
+} || requires() {
+	{_Struct::template Parse<_Param>} -> protocols_parser_step<_Param>;
+}
+);
 
 NGS_END
 
 namespace protocols_parsers {
 	static constexpr size_t size_lack = std::numeric_limits<size_t>::max();
 
-	size_t parse_array(std::ranges::sized_range auto array, std::ranges::sized_range auto data) {
+	size_t parse_array(const std::ranges::sized_range auto& array, const std::ranges::sized_range auto& data) {
 		if (std::ranges::size(data) < std::ranges::size(array))return 0;
 		auto [result1, result2] = std::ranges::mismatch(array, data);
 		if (result1 == array.end()) {
@@ -38,24 +60,33 @@ namespace protocols_parsers {
 		return 0;
 	}
 	template<ngs::byte... _Array>
-	size_t parse_array(std::ranges::sized_range auto data) {
+	size_t parse_array(const std::ranges::sized_range auto& data) {
 		constexpr std::array<ngs::byte, sizeof...(_Array)> array = { _Array... };
 		return parse_array(array, data);
 	}
 	template<ngs::byte _Low, ngs::byte _High>
-	size_t parse_range(std::ranges::input_range auto data) {
+	size_t parse_range(const std::ranges::input_range auto& data) {
 		return ngs::In(*std::ranges::begin(data), _Low, _High);
 	}
 	template<ngs::byte... _Datas>
-	size_t parse_equal_of(std::ranges::input_range auto data) {
+	size_t parse_equal_of(const std::ranges::input_range auto& data) {
 		return ((*std::ranges::begin(data) == _Datas) || ...);
 	}
+	/**
+	 * @brief 按照`可解析结构体`解析数据流`_Param data`
+	 *
+	 * @tparam _Struct 满足`protocols_parsable`约束
+	 * @tparam _Param
+	 *
+	 * @param data 传递给`解析函数`的参数，满足`sized_range`约束
+	 *
+	 * @see `protocols_parsable`
+	 *
+	 * @return 解析的数据长度
+	 */
 	template<typename _Struct, typename _Param>
-		requires requires() {
-		std::ranges::sized_range<_Param>;
-		_NGS_CPT protocols_parsable<_Struct, _Param>;
-	}
-	size_t parse_struct(_Param data) {
+		requires protocols_parsable<_Struct, _Param>
+	size_t parse_struct(const _Param& data) {
 		size_t length = 0;
 		int result = 0;
 		if (std::ranges::size(data) < _Struct::Size)return size_lack;
@@ -64,7 +95,7 @@ namespace protocols_parsers {
 		if (!result)return 0;
 		length += result;
 
-		result = _Struct::Parser(data | std::views::take(_Struct::Size));
+		result = _Struct::Parse(data | std::views::take(_Struct::Size));
 		if (!result) return 0;
 		length += result;
 
@@ -159,6 +190,13 @@ private:
 	std::queue<ParsedSequence> _parsed = {};
 };
 
+/**
+ * @brief 按照结构体格式解析数据
+ *
+ * @tparam _Struct 满足`ngs::protocols_parsable`约束
+ *
+ * @see `ngs::protocols_parsable`
+ */
 template<typename _Struct>
 class ProtocolsStructParser : public ProtocolsParser<_Struct::Size> {
 private:

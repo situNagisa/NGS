@@ -1,16 +1,16 @@
-#include "NGS/Algorithm/PID.h"
+﻿#include "NGS/Algorithm/PID.h"
 
 NGS_BEGIN
 
-inline PID::PID(double p, double i, double d) {
+NGS_HPP_INLINE PID::PID(double p, double i, double d) {
 	_Initialize();
 	_P = p; _I = i; _D = d;
 }
-inline PID::PID(double p, double i, double d, double f) {
+NGS_HPP_INLINE PID::PID(double p, double i, double d, double f) {
 	_Initialize();
 	_P = p; _I = i; _D = d; _F = f;
 }
-inline void PID::_Initialize() {
+NGS_HPP_INLINE void PID::_Initialize() {
 	_P = 0;
 	_I = 0;
 	_D = 0;
@@ -31,12 +31,12 @@ inline void PID::_Initialize() {
 	_setpointRange = 0;
 }
 
-inline void PID::SetP(double p) {
+NGS_HPP_INLINE void PID::SetP(double p) {
 	_P = p;
 	_CheckSigns();
 }
 
-inline void PID::SetI(double i) {
+NGS_HPP_INLINE void PID::SetI(double i) {
 	if (_I != 0) {
 		_ErrorSum = _ErrorSum * _I / i;
 	}
@@ -53,29 +53,29 @@ inline void PID::SetI(double i) {
 	*/
 }
 
-inline void PID::SetD(double d) {
+NGS_HPP_INLINE void PID::SetD(double d) {
 	_D = d;
 	_CheckSigns();
 }
 
-inline void PID::SetF(double f) {
+NGS_HPP_INLINE void PID::SetF(double f) {
 	_F = f;
 	_CheckSigns();
 }
 
 
-inline void PID::SetPID(double p, double i, double d) {
+NGS_HPP_INLINE void PID::SetPID(double p, double i, double d) {
 	_P = p; _I = i; _D = d;
 	_CheckSigns();
 }
 
-inline void PID::SetPID(double p, double i, double d, double f) {
+NGS_HPP_INLINE void PID::SetPID(double p, double i, double d, double f) {
 	_P = p; _I = i; _D = d; _F = f;
 	_CheckSigns();
 }
 
 
-inline void PID::SetMaxIOutput(double maximum) {
+NGS_HPP_INLINE void PID::SetMaxIOutput(double maximum) {
 	/* Internally _maxError and Izone are similar, but scaled for different purposes.
 	 * The _maxError is generated for simplifying math, since calculations against
 	 * the max error are far more common than changing the _I term or Izone.
@@ -87,10 +87,10 @@ inline void PID::SetMaxIOutput(double maximum) {
 }
 
 
-inline void PID::SetOutputLimits(double output) { SetOutputLimits(-output, output); }
+NGS_HPP_INLINE void PID::SetOutputLimits(double output) { SetOutputLimits(-output, output); }
 
 
-inline void PID::SetOutputLimits(double minimum, double maximum) {
+NGS_HPP_INLINE void PID::SetOutputLimits(double minimum, double maximum) {
 	if (maximum < minimum)return;
 	_maxOutput = maximum;
 	_minOutput = minimum;
@@ -102,16 +102,16 @@ inline void PID::SetOutputLimits(double minimum, double maximum) {
 }
 
 
-inline void PID::SetDirection(bool _reversed) {
+NGS_HPP_INLINE void PID::SetDirection(bool _reversed) {
 	this->_reversed = _reversed;
 }
 
-inline void PID::SetSetpoint(double _setpoint) {
+NGS_HPP_INLINE void PID::SetSetpoint(double _setpoint) {
 	this->_setpoint = _setpoint;
 }
 
 
-inline double PID::GetOutput(double actual, double setPoint) {
+NGS_HPP_INLINE double PID::GetOutput(double actual, double setPoint) {
 	double output;
 	double Poutput;
 	double Ioutput;
@@ -201,33 +201,33 @@ inline double PID::GetOutput(double actual, double setPoint) {
 }
 
 
-inline double PID::GetOutput() {
+NGS_HPP_INLINE double PID::GetOutput() {
 	return GetOutput(_lastActual, _setpoint);
 }
 
 
-inline double PID::GetOutput(double actual) {
+NGS_HPP_INLINE double PID::GetOutput(double actual) {
 	return GetOutput(actual, _setpoint);
 }
 
 
-inline void PID::Reset() {
+NGS_HPP_INLINE void PID::Reset() {
 	_firstRun = true;
 	_ErrorSum = 0;
 }
 
 
-inline void PID::SetOutputRampRate(double rate) {
+NGS_HPP_INLINE void PID::SetOutputRampRate(double rate) {
 	_outputRampRate = rate;
 }
 
 
-inline void PID::SetSetpointRange(double range) {
+NGS_HPP_INLINE void PID::SetSetpointRange(double range) {
 	_setpointRange = range;
 }
 
 
-inline void PID::SetOutputFilter(double strength) {
+NGS_HPP_INLINE void PID::SetOutputFilter(double strength) {
 	if (strength == 0 || Clamp<double>(strength, 0, 1)) {
 		_outputFilter = strength;
 	}
@@ -237,7 +237,7 @@ inline void PID::SetOutputFilter(double strength) {
  * To operate correctly, all PID parameters require the same sign,
  * with that sign depending on the {@literal}_reversed value
  */
-inline void PID::_CheckSigns() {
+NGS_HPP_INLINE void PID::_CheckSigns() {
 	if (_reversed) {	//all values should be below zero
 		if (_P > 0) _P *= -1;
 		if (_I > 0) _I *= -1;

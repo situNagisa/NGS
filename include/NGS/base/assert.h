@@ -24,13 +24,13 @@ inline bool Assert(
 			""
 			"\n========================="
 			"\nERROR:: %s"
-			"\n文件：%s"
-			"\n断言：%s"
-			"\n函数：%s"
-			"\n  [调用方式]：%s"
-			"\n  [返回值  ]：%s"
-			"\n  [参数列表]：%s"
-			"\n第 %d 行，第 %d 列"
+			"\nfile    : %s"
+			"\nassert  : %s"
+			"\nfunction: %s"
+			"\n  [call   ]: %s"
+			"\n  [return ]: %s"
+			"\n  [params ]: %s"
+			"\nline %d,column %d"
 			"\n=========================\n",
 			text.data(),
 			location.file_name(),
@@ -59,7 +59,7 @@ NGS_END
 #endif
 
 #define NGS_ASSERT(boolean,...)					\
-if(_NGS Assert(boolean, #boolean,__VA_ARGS__))	\
+if(_NGS Assert(boolean, #boolean,##__VA_ARGS__))\
 _NGS_ASSERT_FAIL								\
 //
 

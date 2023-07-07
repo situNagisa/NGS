@@ -69,13 +69,13 @@
     <ClInclude Include="base\version.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\Bus.h">
+    <ClInclude Include="embedded\bus\bus_base.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="embedded\bus\i2c\I2C.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\serial_port\SerialPort.h">
+    <ClInclude Include="embedded\bus\serial_port\serial_port.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="embedded\bus\spi\SPI.h">
@@ -222,10 +222,10 @@
     <ClInclude Include="nsl\NSL.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\bus\serial_port\SerialPort.hpp">
+    <ClInclude Include="nsw\bus\serial_port.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\bus\uart\UART.hpp">
+    <ClInclude Include="nsw\bus\UART.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nsw\defined.h">
@@ -328,6 +328,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\boost\boost.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\bus\bus.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

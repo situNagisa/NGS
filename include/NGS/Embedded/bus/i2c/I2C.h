@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/base.h"
-#include "NGS/embedded/bus/Bus.h"
+#include "NGS/embedded/bus/bus_base.h"
 
 NGS_BEGIN
 
@@ -11,6 +11,13 @@ protected:
 	NGS_TYPE_DEFINE(I2C, base);
 
 public:
+	using address_type = __address;
+
+	enum class Flag {
+		write = 0,
+		read = 1,
+	};
+
 	static constexpr __address null_address = 0;
 public:
 	I2C();
@@ -23,23 +30,14 @@ public:
 	bool IsOpened()const override;
 	virtual void Close()override;
 
-	void Enable10bitAddress(bool enable) {
-		_filter = (__address)ngs::bit_max(enable ? 10 : 7);
-	}
-	void SetAddress(__address address) {
-		_address = address & _filter;
-	}
+	void Enable10bitAddress(bool enable) { _mask = enable ? BitSet<10>::Mask : BitSet<7>::Mask; }
+	void SetAddress(__address address) { _address = address & _mask; }
 protected:
-	enum class _RW {
-		Write = 0,
-		Read = 1,
-	};
-
-	__address _AddressWrite()const { return (_address << 1) | (int)_RW::Write; }
-	__address _AddressRead()const { return (_address << 1) | (int)_RW::Read; }
+	__address _AddressWrite()const { return (_address << 1) | (int)Flag::write; }
+	__address _AddressRead()const { return (_address << 1) | (int)Flag::read; }
 
 protected:
-	__address _filter = ngs::bit_max(7);
+	__address _mask = BitSet<7>::Mask;
 	__address _address = null_address;
 };
 
@@ -53,15 +51,52 @@ public:
 		max,
 	};
 public:
+	struct Message {
+		Flag flag{};
+		void_ptr_cst data = nullptr;
+		size_t count{};
+		void_ptr user_data = nullptr;
+	};
+	using __base::Open;
 	bool Open(pin_t SDA, pin_t SCL, __address address)override;
 
 	void SetACK(bool ack, ACK_Type type) { _ack = { ack,type }; }
 
 	using __base::Write;
-	size_t Write(ngs::byte_ptr_cst data, size_t size) override;
+	size_t Write(byte_ptr_cst data, size_t count) override {
+		Message message = {};
+		message.flag = Flag::write;
+		message.data = data;
+		message.count = count;
+		return Transfer(message);
+	}
 	using __base::Read;
-	size_t Read(ngs::byte_ptr data, size_t size)override;
+	size_t Read(byte_ptr data, size_t count)override {
+		Message message = {};
+		message.flag = Flag::read;
+		message.data = data;
+		message.count = count;
+		return Transfer(message);
+	}
+	size_t WriteRead(byte_ptr_cst write_data, size_t write_count, byte_ptr read_data, size_t read_count) {
+		Message message[] = { {
+				Flag::write,
+				write_data,
+				write_count
+			},{
+				Flag::read,
+				read_data,
+				read_count
+			}
+		};
+		return Transfer(message);
+	}
 
+	size_t Transfer(const Message* messages, size_t count);
+	size_t Transfer(const Message& message) { return Transfer(&message, 1); }
+	template<std::ranges::random_access_range _Rng>
+		requires std::same_as<std::ranges::range_value_t<_Rng>, Message>
+	size_t Transfer(const _Rng& messages) { return Transfer(std::ranges::cdata(messages), std::ranges::size(messages)); }
 protected:
 	std::pair<bool, ACK_Type> _ack = { false,ACK_Type::nack };
 };

@@ -153,6 +153,7 @@ public:
 public:
 	inline static std::function<void(TextColor)> set_text_color = [](TextColor) {};
 
+	inline static std::stack<std::string> prefix;
 private:
 	inline static std::vector<const ScopeHolder*> _stack;
 	inline static size_t _disable = 0;

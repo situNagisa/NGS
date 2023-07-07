@@ -89,7 +89,7 @@ private:
 	using calcurateType = std::conditional_t < std::floating_point<__ele>, ngs::float64, std::conditional_t<std::signed_integral<__ele>, ngs::int64, ngs::uint64>>;
 	static constexpr auto index_sequence = std::make_index_sequence<DIMENSIONAL>();
 protected:
-	_Vector() = default;
+	constexpr _Vector() = default;
 public:
 	//向下转换
 	operator __derived_ref() { return _AsChild(); }
@@ -141,7 +141,7 @@ public:
 #undef _VECTOR_OPERATE_WITH_ELEMENT
 };
 
-template<_NGS_CPT CArithmetic _ElementType>
+template<CArithmetic _ElementType>
 class Vector2D : public _Vector<2, _ElementType, Vector2D<_ElementType>> {
 private:
 	using __base = _Vector<2, _ElementType, Vector2D<_ElementType>>;
@@ -153,6 +153,9 @@ public:
 		: x(x)
 		, y(y)
 	{}
+
+	template<CArithmetic _NewElementType>
+	operator Vector2D<_NewElementType>()const { return Vector2D<_NewElementType>(x, y); }
 
 	template<size_t _Pos>
 	constexpr __ele_ref At() {
@@ -200,15 +203,16 @@ public:
 		x, y;
 };
 
-template<_NGS_CPT CArithmetic Number>
+template<CArithmetic Number>
 using Point2_ = Vector2D<Number>;
 
 using Point2i = Point2_<int>;
+using Point2u = Point2_<unsigned int>;
 using Point2f = Point2_<float>;
 using Point2lf = Point2_<double>;
 using Point2s = Point2_<size_t>;
 
-template<_NGS_CPT CArithmetic _ElementType>
+template<CArithmetic _ElementType>
 class Vector3D : public _Vector<3, _ElementType, Vector3D<_ElementType>> {
 private:
 	using __base = _Vector<3, _ElementType, Vector3D<_ElementType>>;
@@ -259,7 +263,7 @@ public:
 		x, y, z;
 };
 
-template<_NGS_CPT CArithmetic Number>
+template<CArithmetic Number>
 using Point3_ = Vector3D<Number>;
 
 using Point3i = Point3_<int>;

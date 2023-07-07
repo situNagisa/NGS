@@ -29,6 +29,7 @@
     <ClInclude Include="base\bit.h" />
     <ClInclude Include="base\boost\boost.h" />
     <ClInclude Include="base\boost\mpl.h" />
+    <ClInclude Include="base\boost\property_tree.h" />
     <ClInclude Include="base\concepts.h" />
     <ClInclude Include="base\config.h" />
     <ClInclude Include="base\mpl\bitmap.h" />
@@ -46,6 +47,7 @@
     <ClInclude Include="base\mpl\mpl_macro.h" />
     <ClInclude Include="base\mpl\utility.h" />
     <ClInclude Include="base\type_info.h" />
+    <ClInclude Include="embedded\bus\bus.h" />
     <ClInclude Include="extend\console.h" />
     <ClInclude Include="extend\console.hpp" />
     <ClInclude Include="base\defined.h" />
@@ -55,9 +57,9 @@
     <ClInclude Include="base\type_trait.h" />
     <ClInclude Include="base\utility.h" />
     <ClInclude Include="base\version.h" />
-    <ClInclude Include="embedded\bus\Bus.h" />
+    <ClInclude Include="embedded\bus\bus_base.h" />
     <ClInclude Include="embedded\bus\i2c\I2C.h" />
-    <ClInclude Include="embedded\bus\serial_port\SerialPort.h" />
+    <ClInclude Include="embedded\bus\serial_port\serial_port.h" />
     <ClInclude Include="embedded\bus\spi\SPI.h" />
     <ClInclude Include="embedded\bus\uart\UART.h" />
     <ClInclude Include="embedded\bus\usb\UVC.h" />
@@ -119,8 +121,8 @@
     <ClInclude Include="nsl\media\V4L2.h" />
     <ClInclude Include="nsl\media\V4L2.hpp" />
     <ClInclude Include="nsl\NSL.h" />
-    <ClInclude Include="nsw\bus\serial_port\SerialPort.hpp" />
-    <ClInclude Include="nsw\bus\uart\UART.hpp" />
+    <ClInclude Include="nsw\bus\serial_port.hpp" />
+    <ClInclude Include="nsw\bus\UART.hpp" />
     <ClInclude Include="nsw\defined.h" />
     <ClInclude Include="nsw\depend.h" />
     <ClInclude Include="nsw\NSW.h" />

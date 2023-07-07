@@ -14,7 +14,7 @@ NSW_END
 
 NGS_BEGIN
 
-bool SerialPort::Open(pin_t port) {
+NGS_HPP_INLINE bool SerialPort::Open(pin_t port) {
 	NGS_NEW(_data, nsw::_WindowsSerialPortData)();
 	auto& data = *reinterpret_cast<nsw::_WindowsSerialPortData*>(_data);
 	std::string portname = "\\\\.\\COM";
@@ -31,14 +31,14 @@ bool SerialPort::Open(pin_t port) {
 		FILE_ATTRIBUTE_NORMAL,
 		NULL);
 	if (data.com == INVALID_HANDLE_VALUE) {
-		ngs::nos.Error("opening %s - %d \n", portname.c_str(), GetLastError());
+		NGS_LOGFL(error, "opening %s - %d \n", portname.c_str(), GetLastError());
 		goto err_create;
 	}
 
 	dcbSerialParams.DCBlength = sizeof(dcbSerialParams);
 
 	if (!GetCommState(data.com, &dcbSerialParams)) {
-		ngs::nos.Error("getting state of %s - %d \n", portname.c_str(), GetLastError());
+		NGS_LOGFL(error, "getting state of %s - %d \n", portname.c_str(), GetLastError());
 		goto err_state;
 	}
 
@@ -48,7 +48,7 @@ bool SerialPort::Open(pin_t port) {
 	dcbSerialParams.Parity = NOPARITY;
 
 	if (!SetCommState(data.com, &dcbSerialParams)) {
-		ngs::nos.Error("setting state of %s - %d \n", portname.c_str(), GetLastError());
+		NGS_LOGFL(error, "setting state of %s - %d \n", portname.c_str(), GetLastError());
 		goto err_state;
 	}
 
@@ -62,12 +62,12 @@ err_create:;
 	return false;
 }
 
-inline bool SerialPort::IsOpened() const
+NGS_HPP_INLINE bool SerialPort::IsOpened() const
 {
 	return _data;
 }
 
-inline void SerialPort::Close()
+NGS_HPP_INLINE void SerialPort::Close()
 {
 	auto& data = *reinterpret_cast<nsw::_WindowsSerialPortData*>(_data);
 	CloseHandle(data.com);
@@ -75,24 +75,24 @@ inline void SerialPort::Close()
 	_data = nullptr;
 }
 
-inline size_t SerialPort::Write(ngs::byte_ptr_cst buffer, size_t size)
+NGS_HPP_INLINE size_t SerialPort::Write(ngs::byte_ptr_cst buffer, size_t size)
 {
 	auto& data = *reinterpret_cast<nsw::_WindowsSerialPortData*>(_data);
 	DWORD bytesWritten;
 	if (!WriteFile(data.com, buffer, size, &bytesWritten, NULL)) {
-		ngs::nos.Error("writing to port %d - %d \n", data.port, GetLastError());
+		NGS_LOGFL(error, "writing to port %d - %d \n", data.port, GetLastError());
 		return 0;
 	}
 
 	return bytesWritten;
 }
 
-inline size_t SerialPort::Read(ngs::byte_ptr buffer, size_t size)
+NGS_HPP_INLINE size_t SerialPort::Read(ngs::byte_ptr buffer, size_t size)
 {
 	auto& data = *reinterpret_cast<nsw::_WindowsSerialPortData*>(_data);
 	DWORD bytesRead;
 	if (!ReadFile(data.com, buffer, size, &bytesRead, NULL)) {
-		ngs::nos.Error("reading from port %d - %d \n", data.port, GetLastError());
+		NGS_LOGFL(error, "reading from port %d - %d \n", data.port, GetLastError());
 		return 0;
 	}
 

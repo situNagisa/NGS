@@ -26,5 +26,5 @@
 #include "NGS/extend/console.h"
 
 #ifdef NGS_USE_HPP
-#include "NGS/extend/console.hpp"
+#include "NGS/extend/extend.hpp"
 #endif

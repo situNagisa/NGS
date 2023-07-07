@@ -1,27 +1,24 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/base.h"
 
 NGS_BEGIN
 
 template<typename _Duration, typename _Clock>
-class Timer : public Singleton<Timer<_Duration, _Clock>> {
+class Timer {
 public:
 	using clock = _Clock;
 	using time_point = typename clock::time_point;
 	using duration = _Duration;
-private:
-	friend class Singleton<Timer<_Duration, _Clock>>;
 
-	Timer() = default;
 public:
 
 	void Update() {
-		auto now = GetNow();
+		auto now = GET_NOW();
 		_duration = std::chrono::duration_cast<duration>(now - _current);
 		_current = now;
 	}
-	static time_point GetNow() { return clock::now(); }
+	static time_point GET_NOW() { return clock::now(); }
 
 	duration GetDuration()const { return _duration; }
 	template<typename _Duration2>
@@ -44,10 +41,10 @@ public:
 		DelayCallUnit(__timer timer, StdTimer::duration delay)
 			: _timer(timer)
 			, _duration(delay)
-			, _current(StdTimer::GetNow())
+			, _current(StdTimer::GET_NOW())
 		{}
 		bool Update() {
-			auto now = StdTimer::GetNow();
+			auto now = StdTimer::GET_NOW();
 			if ((now - _current) < _duration)return false;
 			_timer();
 			return true;
