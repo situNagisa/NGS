@@ -70,21 +70,21 @@ public:
 
 	void Show()const {
 		NGS_PRINTL();
-		NGS_PRINTL(TextColor::MAGENTA, "allocated memory:");
+		NGS_PRINTL(TextColor::magenta, "allocated memory:");
 		size_t used = 0;
 		for (auto& [block, info] : _allocated_info) {
 			NGS_PRINTL(
-				TextColor::GREEN, info, " ",
-				TextColor::WHITE, (void*)block,
-				TextColor::YELLOW, " [", info.size * info.count, "]",
-				TextColor::WHITE, "bytes -- ",
-				TextColor::CYAN, info.function_name,
-				TextColor::WHITE, Format("[%d,%d]", info.line, info.column),
-				TextColor::RESERT
+				TextColor::green, info, " ",
+				TextColor::white, (void*)block,
+				TextColor::yellow, " [", info.size * info.count, "]",
+				TextColor::white, "bytes -- ",
+				TextColor::cyan, info.function_name,
+				TextColor::white, Format("[%d,%d]", info.line, info.column),
+				TextColor::reset
 			);
 			used += info.size * info.count;
 		}
-		NGS_PRINTL(TextColor::MAGENTA, Format("used memory size:%d bytes", used));
+		NGS_PRINTL(TextColor::magenta, Format("used memory size:%d bytes", used));
 		NGS_PRINTL();
 	}
 
@@ -100,25 +100,25 @@ public:
 		info.line = source.line();
 
 		NGS_PRINTL(
-			TextColor::WHITE, "allocated ",
-			TextColor::YELLOW, info.size * info.count, "bytes ",
-			TextColor::WHITE, "\taddress: ",
-			(block ? TextColor::WHITE : TextColor::RED), (void*)block,
-			TextColor::WHITE, "\ttype: ",
-			TextColor::CYAN, info,
-			TextColor::RESERT
+			TextColor::white, "allocated ",
+			TextColor::yellow, info.size * info.count, "bytes ",
+			TextColor::white, "\taddress: ",
+			(block ? TextColor::white : TextColor::red), (void*)block,
+			TextColor::white, "\ttype: ",
+			TextColor::cyan, info,
+			TextColor::reset
 		);
 	}
 	void Record_Free(void* block) {
 		auto& info = _allocated_info[block];
 		NGS_PRINTL(
-			TextColor::WHITE, "freed     ",
-			TextColor::GREEN, info.size * info.count, "bytes ",
-			TextColor::WHITE, "\taddress: ",
-			(block ? TextColor::WHITE : TextColor::RED), (void*)block,
-			TextColor::WHITE, "\ttype: ",
-			TextColor::CYAN, info,
-			TextColor::RESERT
+			TextColor::white, "freed     ",
+			TextColor::green, info.size * info.count, "bytes ",
+			TextColor::white, "\taddress: ",
+			(block ? TextColor::white : TextColor::red), (void*)block,
+			TextColor::white, "\ttype: ",
+			TextColor::cyan, info,
+			TextColor::reset
 		);
 		_allocated_info.erase(block);
 	}

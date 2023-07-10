@@ -12,9 +12,18 @@ NGS_BEGIN
 template<
 	size_t _N,
 	_NGS_CPT CArithmetic _ElementType,
-	class _Derived
+	class _Derived,
+	class = std::make_index_sequence<_N>
 >
-class _Vector {
+class _Vector;
+
+template<
+	size_t _N,
+	_NGS_CPT CArithmetic _ElementType,
+	class _Derived,
+	size_t... _I
+>
+class _Vector<_N, _ElementType, _Derived, std::index_sequence<_I...>> {
 
 #define _VECTOR_COMMA +
 #define _VECTOR_NOTHING 
@@ -155,7 +164,7 @@ public:
 	{}
 
 	template<CArithmetic _NewElementType>
-	operator Vector2D<_NewElementType>()const { return Vector2D<_NewElementType>(x, y); }
+	explicit(true) operator Vector2D<_NewElementType>()const { return { _NewElementType(x),_NewElementType(y) }; }
 
 	template<size_t _Pos>
 	constexpr __ele_ref At() {

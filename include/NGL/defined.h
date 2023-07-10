@@ -14,18 +14,20 @@
 
 NGL_BEGIN
 
-NGS_DECLARE_TV(gl, GLuint);
-NGS_DEFINE_TV(gl, GLuint, float32, GL_FLOAT);
-NGS_DEFINE_TV(gl, GLuint, float64, GL_DOUBLE);
-NGS_DEFINE_TV(gl, GLuint, int8, GL_BYTE);
-NGS_DEFINE_TV(gl, GLuint, uint8, GL_UNSIGNED_BYTE);
-NGS_DEFINE_TV(gl, GLuint, int16, GL_SHORT);
-NGS_DEFINE_TV(gl, GLuint, uint16, GL_UNSIGNED_SHORT);
-NGS_DEFINE_TV(gl, GLuint, int32, GL_INT);
-NGS_DEFINE_TV(gl, GLuint, uint32, GL_UNSIGNED_INT);
+using type_t = GLuint;
 
-NGS_DEFINE_TV(gl, GLuint, RGBA24, GL_RGB);
-NGS_DEFINE_TV(gl, GLuint, RGBA32, GL_RGBA);
+NGS_DECLARE_TV(gl, type_t);
+NGS_DEFINE_TV(gl, type_t, float32, GL_FLOAT);
+NGS_DEFINE_TV(gl, type_t, float64, GL_DOUBLE);
+NGS_DEFINE_TV(gl, type_t, int8, GL_BYTE);
+NGS_DEFINE_TV(gl, type_t, uint8, GL_UNSIGNED_BYTE);
+NGS_DEFINE_TV(gl, type_t, int16, GL_SHORT);
+NGS_DEFINE_TV(gl, type_t, uint16, GL_UNSIGNED_SHORT);
+NGS_DEFINE_TV(gl, type_t, int32, GL_INT);
+NGS_DEFINE_TV(gl, type_t, uint32, GL_UNSIGNED_INT);
+
+NGS_DEFINE_TV(gl, type_t, RGBA24, GL_RGB);
+NGS_DEFINE_TV(gl, type_t, RGBA32, GL_RGBA);
 
 #undef NGL_TYPE_VALUE_MAP
 

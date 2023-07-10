@@ -16,10 +16,11 @@
 #include "NGL/api/shader.h"
 #include "NGL/api/texture.h"
 #include "NGL/api/vertex.h"
+#include "NGL/api/vertex_array.h"
 #include "NGL/api/renderer.h"
 
 #if NGS_USE_HPP
-#include "NGL/api/renderer.hpp"
+#include "NGL/NGL.hpp"
 #endif
 
 #if NGS_PLATFORM == NGS_MSVC

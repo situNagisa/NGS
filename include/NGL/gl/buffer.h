@@ -47,6 +47,19 @@ enum class BufferDrawMode : GLenum {
 	triangle_fan = GL_TRIANGLE_FAN,
 	patches = GL_PATCHES,
 };
+enum class DrawMode : GLenum {
+	points = GL_POINTS,
+	line_strip = GL_LINE_STRIP,
+	line_loop = GL_LINE_LOOP,
+	lines = GL_LINES,
+	line_strip_adjacency = GL_LINE_STRIP_ADJACENCY,
+	lines_adjacency = GL_LINES_ADJACENCY,
+	triangle_strip = GL_TRIANGLE_STRIP,
+	triangle_fan = GL_TRIANGLE_FAN,
+	triangles = GL_TRIANGLES,
+	triangle_strip_adjacency = GL_TRIANGLE_STRIP_ADJACENCY,
+	triangles_adjacency = GL_TRIANGLES_ADJACENCY,
+};
 
 _NGL_DECALRE_CONTEXT(_Buffer, GLuint) {
 public:
@@ -62,47 +75,8 @@ public:
 	void SetData(std::ranges::random_access_range auto && data, BufferUsage usage = BufferUsage::static_draw) {
 		SetData(std::ranges::cdata(data), std::ranges::size(data) * sizeof(std::ranges::range_value_t<decltype(data)>), usage);
 	}
-	void DrawElements(GLenum mode, size_t count, GLenum type, void_ptr_cst offset = nullptr) { _NGL_CHECK(glDrawElements(mode, count, type, offset)); }
-	template<CSameAsAny<uint8, uint16, uint32> _T>
-	void DrawElements(BufferDrawMode mode, size_t count, void_ptr_cst offset = nullptr) { DrawElements((GLenum)mode, count, gl_convert<_T>, offset); }
-
-#define DEFINE_DRAW_ELEMENTS(id,mode)				\
-	template<CSameAsAny<uint8, uint16, uint32> _T>\
-	void Draw##id(size_t count, void_ptr_cst offset = nullptr) { DrawElements<_T>(mode, count, offset); }\
-//
-
-	DEFINE_DRAW_ELEMENTS(Points, BufferDrawMode::points);
-	DEFINE_DRAW_ELEMENTS(Lines, BufferDrawMode::lines);
-	DEFINE_DRAW_ELEMENTS(LineStrip, BufferDrawMode::line_strip);
-	DEFINE_DRAW_ELEMENTS(LineLoop, BufferDrawMode::line_loop);
-	DEFINE_DRAW_ELEMENTS(Triangles, BufferDrawMode::triangles);
-	DEFINE_DRAW_ELEMENTS(TriangleStrip, BufferDrawMode::triangle_strip);
-	DEFINE_DRAW_ELEMENTS(TriangleFan, BufferDrawMode::triangle_fan);
-	DEFINE_DRAW_ELEMENTS(Patches, BufferDrawMode::patches);
-#undef DEFINE_DRAW_ELEMENTS
-
-	void DrawArrays(GLenum mode, size_t offset, size_t count) { _NGL_CHECK(glDrawArrays(mode, offset, count)); }
-
-	void Enable(int index) { _NGL_CHECK(glEnableVertexAttribArray(index)); }
-	void SetAttribPointer(size_t index, size_t size, void_ptr_cst offset, int type, int step, bool normalized = false) {
-		_NGL_CHECK(glVertexAttribPointer(index, size, type, normalized, step, offset));
-	}
-	template<CTemplateFrom<gl::vertex> _Layout>
-	void SetAttribPointer(bool normalized = false, bool enable = true) {
-		using lay = _Layout;
-		for (size_t i = 0; i < lay::count; i++) {
-			SetAttribPointer(i, lay::counts[i], (void_ptr_cst)lay::offsets[i], lay::tv_bitmaps[i], lay::size, normalized);
-			if (enable)Enable(i);
-		}
-	}
-	template<class _Element, size_t _L0, size_t... _LN>
-	void SetAttribPointer(bool normalized = false, bool enable = true) {
-		SetAttribPointer< vertex_vector<_Element, _L0, _LN...>>(normalized, enable);
-	}
-	template<CTemplateFrom<layout> _LayoutUnit, CTemplateFrom<layout>... _LayoutUnits>
-	void SetAttribPointer(bool normalized = false, bool enable = true) {
-		SetAttribPointer<vertex<_LayoutUnit, _LayoutUnits...>>(normalized, enable);
-	}
+	void UpdateData(void_ptr_cst data, size_t offset, size_t size) { _NGL_CHECK(glBufferSubData(type, offset, size, data)); }
+	void UpdateData(void_ptr_cst data, size_t size) { UpdateData(data, 0, size); }
 
 };
 

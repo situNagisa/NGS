@@ -105,6 +105,6 @@ public:
 };
 inline static auto glfw = Constructor::Construct<GLFW>();
 
-void Window::Active() { glfw.SetContext(this); }
+inline void Window::Active() { glfw.SetContext(this); }
 
 NGL_END

@@ -333,6 +333,27 @@
     <ClInclude Include="embedded\bus\bus.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="algorithm\algorithm.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\boost\property_tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\extend.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NGS.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsl\NSL.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nsw\NSW.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\space_transform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">

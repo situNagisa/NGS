@@ -19,7 +19,7 @@ inline bool Assert(
 	auto [call, return_type, function_id, params] = ParseIdFactor::ParseFunction(location.function_name());
 
 	ngs::Debugger::Print(
-		ngs::TextColor::RED,
+		ngs::TextColor::red,
 		ngs::Format(
 			""
 			"\n========================="
@@ -42,7 +42,7 @@ inline bool Assert(
 			location.line(),
 			location.column()
 		),
-		ngs::TextColor::RESERT
+		ngs::TextColor::reset
 	);
 	return true;
 }

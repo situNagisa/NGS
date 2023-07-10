@@ -24,6 +24,7 @@
     <ClInclude Include="api\shader.h" />
     <ClInclude Include="api\texture.h" />
     <ClInclude Include="api\vertex.h" />
+    <ClInclude Include="api\vertex_array.h" />
     <ClInclude Include="gl\error.h" />
     <ClInclude Include="gl\framebuffer.h" />
     <ClInclude Include="gl\blend.h" />
@@ -41,6 +42,7 @@
     <ClInclude Include="gl\vertex_array.h" />
     <ClInclude Include="NGL.h" />
     <ClInclude Include="fw\glfw.h" />
+    <ClInclude Include="NGL.hpp" />
     <ClInclude Include="opengl.h" />
     <ClInclude Include="gl\shader.h" />
     <ClInclude Include="gl\texture.h" />

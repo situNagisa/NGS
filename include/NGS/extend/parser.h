@@ -167,20 +167,20 @@ private:
 		size_t length = _parser(_data);
 		if (length == protocols_parsers::size_lack)return false;
 		if (!length) {
-			/*Debugger::Print(TextColor::RED);
+			/*Debugger::Print(TextColor::red);
 			Debugger::PrintFormat("0x%02x ", _data.front());
-			Debugger::Print(TextColor::RESERT);*/
+			Debugger::Print(TextColor::reset);*/
 			_data.pop_front();
 			return true;
 		}
 		ParsedSequence& parsed = _parsed.emplace();
-		//Debugger::Print(TextColor::GREEN);
+		//Debugger::Print(TextColor::green);
 		for (size_t i = 0; i < length; i++) {
 			parsed[i] = (_data.front());
 			//Debugger::PrintFormat("0x%02x ", _data.front());
 			_data.pop_front();
 		}
-		//Debugger::PrintLine(TextColor::RESERT);
+		//Debugger::PrintLine(TextColor::reset);
 		//ngs::nos.Log("ProtocolsParser::_Parse", "length:%d rest data size:%d\n", length, _data.size());
 		return true;
 	}

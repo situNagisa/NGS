@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="algorithm\algorithm.h" />
+    <ClInclude Include="algorithm\algorithm.hpp" />
     <ClInclude Include="algorithm\dynamic_program.h" />
     <ClInclude Include="algorithm\PID.h" />
     <ClInclude Include="algorithm\PID.hpp" />
@@ -46,6 +47,7 @@
     <ClInclude Include="base\mpl\mpl.h" />
     <ClInclude Include="base\mpl\mpl_macro.h" />
     <ClInclude Include="base\mpl\utility.h" />
+    <ClInclude Include="base\space_transform.h" />
     <ClInclude Include="base\type_info.h" />
     <ClInclude Include="embedded\bus\bus.h" />
     <ClInclude Include="extend\console.h" />
@@ -73,6 +75,7 @@
     <ClInclude Include="extend\debug.h" />
     <ClInclude Include="extend\event.h" />
     <ClInclude Include="extend\extend.h" />
+    <ClInclude Include="extend\extend.hpp" />
     <ClInclude Include="extend\file.h" />
     <ClInclude Include="extend\function.h" />
     <ClInclude Include="extend\memory.h" />
@@ -108,6 +111,7 @@
     <ClInclude Include="nda\effect\blend.h" />
     <ClInclude Include="nda\NDA.h" />
     <ClInclude Include="NGS.h" />
+    <ClInclude Include="NGS.hpp" />
     <ClInclude Include="nsl\defined.h" />
     <ClInclude Include="nsl\depend.h" />
     <ClInclude Include="nsl\file\device_file.h" />
@@ -121,11 +125,13 @@
     <ClInclude Include="nsl\media\V4L2.h" />
     <ClInclude Include="nsl\media\V4L2.hpp" />
     <ClInclude Include="nsl\NSL.h" />
+    <ClInclude Include="nsl\NSL.hpp" />
     <ClInclude Include="nsw\bus\serial_port.hpp" />
     <ClInclude Include="nsw\bus\UART.hpp" />
     <ClInclude Include="nsw\defined.h" />
     <ClInclude Include="nsw\depend.h" />
     <ClInclude Include="nsw\NSW.h" />
+    <ClInclude Include="nsw\NSW.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp" />

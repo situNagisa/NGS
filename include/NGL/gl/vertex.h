@@ -19,6 +19,31 @@ NGS_mfunction(layout, class _Element, class _Integral) {
 template<class _Element, size_t _Count>
 using layout_c = layout<_Element, std::integral_constant<size_t, _Count>>;
 
+struct Layout {
+	constexpr Layout() = default;
+	constexpr Layout(size_t offset, type_t type, size_t count, size_t size)
+		: offset(offset)
+		, type(type)
+		, count(count)
+		, size(size)
+	{}
+	constexpr Layout(size_t offset, type_t type, size_t count, size_t size, bool normalized, bool enable)
+		: Layout(offset, type, count, size)
+	{
+		this->normalized = normalized;
+		this->enable = enable;
+	}
+
+	size_t offset{};
+
+	type_t type{};
+	size_t count{};
+	size_t size{};
+
+	bool normalized = false;
+	bool enable = true;
+};
+
 NGS_mfunction(vertex, class _Unit, class... _Units) {
 	NGS_mreturn_t boost::mpl::vector<_Unit, _Units...>;
 
@@ -43,6 +68,10 @@ NGS_mfunction(vertex, class _Unit, class... _Units) {
 
 	constexpr static std::array<size_t, count> offsets = []<size_t... I>(std::index_sequence<I...>) {
 		return std::array<size_t, count>{offset<I>...};
+	}(std::make_index_sequence<count>{});
+
+	constexpr static std::array<Layout, count> layouts = []<size_t... I>(std::index_sequence<I...>) {
+		return std::array<Layout, count>{Layout{offset<I>, tv_bitmaps[I], counts[I], sizes[I]}...};
 	}(std::make_index_sequence<count>{});
 };
 

@@ -24,7 +24,7 @@ va_start(args, format);				\
 vprint(buffer, format, args);		\
 va_end(args);						\
 _Self() << buffer;					\
-_SetTextColor(TextColor::RESERT);	\
+_SetTextColor(TextColor::reset);	\
 //
 public:
 	NGS_TYPE_DEFINE(basic_ostream<T>, this);
@@ -46,74 +46,74 @@ public:
 
 	void Trace(nstring_view string) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		_SetTextColor(TextColor::RESERT);
+		_SetTextColor(TextColor::reset);
 		_Self() << string;
-		_SetTextColor(TextColor::RESERT);
+		_SetTextColor(TextColor::reset);
 #endif
 	}
 
 	void Trace(nchar_ptr_cst format, ...) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		PRINT(TextColor::RESERT)
+		PRINT(TextColor::reset)
 #endif
 	}
 
 	void Log(nstring_view tag, nstring_view string) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		_SetTextColor(TextColor::GREEN);
+		_SetTextColor(TextColor::green);
 		_Self() << tag;
-		_SetTextColor(TextColor::WHITE);
+		_SetTextColor(TextColor::white);
 		_Self() << " -- " << string;
-		_SetTextColor(TextColor::RESERT);
+		_SetTextColor(TextColor::reset);
 #endif
 	}
 
 	void Log(nstring_view tag, nchar_ptr_cst format, ...) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		_SetTextColor(TextColor::GREEN);
+		_SetTextColor(TextColor::green);
 		_Self() << tag;
-		_SetTextColor(TextColor::WHITE);
+		_SetTextColor(TextColor::white);
 		_Self() << " -- ";
-		PRINT(TextColor::WHITE)
+		PRINT(TextColor::white)
 #endif
 	}
 
 	void Message(nstring_view string) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		_SetTextColor(TextColor::BLUE);
+		_SetTextColor(TextColor::blue);
 		_Self() << string;
-		_SetTextColor(TextColor::RESERT);
+		_SetTextColor(TextColor::reset);
 #endif
 	}
 
 	void Message(nchar_ptr_cst format, ...) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		PRINT(TextColor::BLUE)
+		PRINT(TextColor::blue)
 #endif
 	}
 
 	void Warning(nstring_view string) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		_SetTextColor(TextColor::YELLOW);
+		_SetTextColor(TextColor::yellow);
 		_Self() << string;
-		_SetTextColor(TextColor::RESERT);
+		_SetTextColor(TextColor::reset);
 #endif
 	}
 
 	void Warning(nchar_ptr_cst format, ...) {
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		PRINT(TextColor::YELLOW)
+		PRINT(TextColor::yellow)
 #endif
 	}
 
 	void Error(nstring_view string) {
-		_SetTextColor(TextColor::RED);
+		_SetTextColor(TextColor::red);
 		_Self() << string;
-		_SetTextColor(TextColor::RESERT);
+		_SetTextColor(TextColor::reset);
 	}
 
 	void Error(nchar_ptr_cst format, ...) {
-		PRINT(TextColor::RED)
+		PRINT(TextColor::red)
 	}
 private:
 	void _SetTextColor(TextColor color) {

@@ -90,6 +90,12 @@
     <ClInclude Include="api\renderer.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="NGL.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="api\vertex_array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="gl\shader\point.frag" />

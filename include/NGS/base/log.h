@@ -19,15 +19,15 @@ enum DLevel {
 };
 
 enum class TextColor {
-	RESERT,
-	BLACK,
-	RED,
-	GREEN,
-	YELLOW,
-	BLUE,
-	MAGENTA,
-	CYAN,
-	WHITE,
+	reset,
+	black,
+	red,
+	green,
+	yellow,
+	blue,
+	magenta,
+	cyan,
+	white,
 };
 
 class Debugger {
@@ -78,27 +78,27 @@ public:
 		switch (level)
 		{
 		case DLevel::trace:
-			color = TextColor::WHITE;
+			color = TextColor::white;
 			break;
 		case DLevel::debug:
-			color = TextColor::GREEN;
+			color = TextColor::green;
 			break;
 		case DLevel::info:
-			color = TextColor::CYAN;
+			color = TextColor::cyan;
 			break;
 		case DLevel::warning:
-			color = TextColor::YELLOW;
+			color = TextColor::yellow;
 			break;
 		case DLevel::error:
-			color = TextColor::RED;
+			color = TextColor::red;
 			break;
 		case DLevel::fatal:
-			color = TextColor::RED;
+			color = TextColor::red;
 			break;
 		default:
 			break;
 		}
-		Print(color, GetCurrentFunctionName(), TextColor::WHITE, " -- ", std::forward<Args>(args)..., TextColor::RESERT);
+		Print(color, GetCurrentFunctionName(), TextColor::white, " -- ", std::forward<Args>(args)..., TextColor::reset);
 	}
 	template<typename... Args>
 	static void LogLine(DLevel level, Args&&... args) {

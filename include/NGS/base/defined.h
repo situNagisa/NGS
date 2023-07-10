@@ -60,6 +60,12 @@ using id##_ptr = type*;             	\
 using id##_ptr_cst = const type*;		\
 //
 
+#if NGS_BUILD_TYPE == NGS_DEBUG
+#define NGS_DEBUG_EXPR(expr) expr
+#else
+#define NGS_DEBUG_EXPR(expr)
+#endif
+
 //============================
 //设置
 //============================
