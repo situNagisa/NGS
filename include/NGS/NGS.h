@@ -59,6 +59,10 @@
 #include "NGS/nsw/NSW.h"
 #endif
 
+#ifdef NGS_USE_NGL
+#include "NGS/ngl/NGL.h"
+#endif
+
 #if _MSC_VER
 
 //#pragma comment(lib,"NGS.lib")

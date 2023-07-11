@@ -75,13 +75,13 @@ private:
 	inline static std::unordered_map<handle_type, Window*> _handle_map = {};
 };
 
-class GLFW : public Current<Window, GLFW> {
+class GLFW : public Current<Window, GLFW>, public Singleton<GLFW> {
 public:
 	NGS_TYPE_DEFINE(Window, window);
 
 private:
-	friend class base;
-	friend class Constructor;
+	friend class Current<Window, GLFW>;
+	friend class Singleton<GLFW>;
 	GLFW(int major = NGL_OPENGL_MAJOR, int minor = NGL_OPENGL_MINOR) {
 		if (!glfwInit())
 			NGS_ASSERT(false, "glfw init fail!");
@@ -102,9 +102,9 @@ public:
 	~GLFW() { glfwTerminate(); }
 
 	void PollEvents() { glfwPollEvents(); }
+	void Terminate() { glfwTerminate(); }
 };
-inline static auto glfw = Constructor::Construct<GLFW>();
 
-inline void Window::Active() { glfw.SetContext(this); }
+inline void Window::Active() { GLFW::I().SetContext(this); }
 
 NGL_END

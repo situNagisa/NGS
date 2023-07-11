@@ -10,3 +10,7 @@
 #ifdef NGS_USE_NSW
 #include "NGS/nsw/NSW.hpp"
 #endif
+
+#ifdef NGS_USE_NGL
+#include "NGS/ngl/NGL.hpp"
+#endif

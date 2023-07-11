@@ -432,6 +432,9 @@
     <ClInclude Include="ngl\opengl.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">

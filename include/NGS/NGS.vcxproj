@@ -89,6 +89,7 @@
     <ClInclude Include="graphic\api\texture.h" />
     <ClInclude Include="graphic\graph.h" />
     <ClInclude Include="graphic\api\window.h" />
+    <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="math\line.h" />
     <ClInclude Include="math\math.h" />
     <ClInclude Include="math\matrix.h" />
