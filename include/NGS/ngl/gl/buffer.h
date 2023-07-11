@@ -1,10 +1,10 @@
 ﻿#pragma once
 
-#include "NGL/defined.h"
-#include "NGL/opengl.h"
-#include "NGL/context.h"
-#include "NGL/gl/error.h"
-#include "NGL/gl/vertex.h"
+#include "NGS/ngl/defined.h"
+#include "NGS/ngl/opengl.h"
+#include "NGS/ngl/context.h"
+#include "NGS/ngl/gl/error.h"
+#include "NGS/ngl/gl/vertex.h"
 
 NGLGL_BEGIN
 

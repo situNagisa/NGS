@@ -1,3 +1,3 @@
 ﻿#pragma once
 
-#include "NGL/api/renderer.hpp"
+#include "NGS/ngl/api/renderer.hpp"

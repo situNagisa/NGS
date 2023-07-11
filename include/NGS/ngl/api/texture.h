@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "NGL/defined.h"
-#include "NGL/opengl.h"
-#include "NGL/gl/gl.h"
+#include "NGS/ngl/defined.h"
+#include "NGS/ngl/opengl.h"
+#include "NGS/ngl/gl/gl.h"
 
 NGL_BEGIN
 
