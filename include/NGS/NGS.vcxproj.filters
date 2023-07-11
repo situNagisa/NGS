@@ -354,6 +354,84 @@
     <ClInclude Include="base\space_transform.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ngl\api\renderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\api\renderer.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\api\shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\api\texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\api\vertex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\api\vertex_array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\fw\glfw.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\blend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\error.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\framebuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\gl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\render.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\renderbuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\space.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\state.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\vertex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl\vertex_array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\context.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\NGL.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\NGL.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\opengl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">

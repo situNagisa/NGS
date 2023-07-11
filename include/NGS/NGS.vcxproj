@@ -110,6 +110,32 @@
     <ClInclude Include="nda\depend.h" />
     <ClInclude Include="nda\effect\blend.h" />
     <ClInclude Include="nda\NDA.h" />
+    <ClInclude Include="ngl\api\renderer.h" />
+    <ClInclude Include="ngl\api\renderer.hpp" />
+    <ClInclude Include="ngl\api\shader.h" />
+    <ClInclude Include="ngl\api\texture.h" />
+    <ClInclude Include="ngl\api\vertex.h" />
+    <ClInclude Include="ngl\api\vertex_array.h" />
+    <ClInclude Include="ngl\config.h" />
+    <ClInclude Include="ngl\context.h" />
+    <ClInclude Include="ngl\defined.h" />
+    <ClInclude Include="ngl\fw\glfw.h" />
+    <ClInclude Include="ngl\gl\blend.h" />
+    <ClInclude Include="ngl\gl\buffer.h" />
+    <ClInclude Include="ngl\gl\error.h" />
+    <ClInclude Include="ngl\gl\framebuffer.h" />
+    <ClInclude Include="ngl\gl\gl.h" />
+    <ClInclude Include="ngl\gl\render.h" />
+    <ClInclude Include="ngl\gl\renderbuffer.h" />
+    <ClInclude Include="ngl\gl\shader.h" />
+    <ClInclude Include="ngl\gl\space.h" />
+    <ClInclude Include="ngl\gl\state.h" />
+    <ClInclude Include="ngl\gl\texture.h" />
+    <ClInclude Include="ngl\gl\vertex.h" />
+    <ClInclude Include="ngl\gl\vertex_array.h" />
+    <ClInclude Include="ngl\NGL.h" />
+    <ClInclude Include="ngl\NGL.hpp" />
+    <ClInclude Include="ngl\opengl.h" />
     <ClInclude Include="NGS.h" />
     <ClInclude Include="NGS.hpp" />
     <ClInclude Include="nsl\defined.h" />
@@ -180,23 +206,23 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaBase.props" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaLib.props" />
+    <Import Project="C:\configure\visual_studio\NagisaBase.props" />
+    <Import Project="C:\configure\visual_studio\NagisaLib.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaBase.props" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaLib.props" />
+    <Import Project="C:\configure\visual_studio\NagisaBase.props" />
+    <Import Project="C:\configure\visual_studio\NagisaLib.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaBase.props" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaLib.props" />
+    <Import Project="C:\configure\visual_studio\NagisaBase.props" />
+    <Import Project="C:\configure\visual_studio\NagisaLib.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaBase.props" />
-    <Import Project="..\..\..\..\..\..\Configure\VisualStudio\NagisaLib.props" />
+    <Import Project="C:\configure\visual_studio\NagisaBase.props" />
+    <Import Project="C:\configure\visual_studio\NagisaLib.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
