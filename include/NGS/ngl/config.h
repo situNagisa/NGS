@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NGL/defined.h"
+#include "NGS/ngl/defined.h"
 
 #ifndef NGL_OPENGL_MAJOR
 #define NGL_OPENGL_MAJOR 3

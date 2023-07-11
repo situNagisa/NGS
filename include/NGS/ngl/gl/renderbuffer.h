@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "NGL/defined.h"
-#include "NGL/context.h"
+#include "NGS/ngl/defined.h"
+#include "NGS/ngl/context.h"
 
 NGLGL_BEGIN
 

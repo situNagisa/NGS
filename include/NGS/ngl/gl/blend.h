@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "NGL/defined.h"
-#include "NGL/gl/state.h"
+#include "NGS/ngl/defined.h"
+#include "NGS/ngl/gl/state.h"
 
 NGLGL_BEGIN
 

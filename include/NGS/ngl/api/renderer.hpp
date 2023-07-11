@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "NGL/api/renderer.h"
-#include "NGL/gl/gl.h"
-#include "NGL/fw/glfw.h"
+#include "NGS/ngl/api/renderer.h"
+#include "NGS/ngl/gl/gl.h"
+#include "NGS/ngl/fw/glfw.h"
 
 NGL_BEGIN
 
