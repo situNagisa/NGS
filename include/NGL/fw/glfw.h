@@ -1,9 +1,9 @@
 ﻿#pragma once
 
-#include "NGS/ngl/defined.h"
-#include "NGS/ngl/opengl.h"
-#include "NGS/ngl/config.h"
-#include "NGS/ngl/context.h"
+#include "NGL/defined.h"
+#include "NGL/opengl.h"
+#include "NGL/config.h"
+#include "NGL/context.h"
 
 NGL_BEGIN
 

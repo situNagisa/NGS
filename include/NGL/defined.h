@@ -4,7 +4,7 @@
 #include "NGS/extend/extend.h"
 #include "NGS/math/math.h"
 
-#include "NGS/ngl/opengl.h"
+#include "NGL/opengl.h"
 
 #define NGL_BEGIN NGS_BEGIN namespace ngl{
 #define NGL_END } NGS_END

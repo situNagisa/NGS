@@ -1,11 +1,11 @@
 ﻿#pragma once
 
-#include "NGS/ngl/defined.h"
-#include "NGS/ngl/context.h"
-#include "NGS/ngl/gl/state.h"
-#include "NGS/ngl/gl/texture.h"
-#include "NGS/ngl/gl/renderbuffer.h"
-#include "NGS/ngl/gl/error.h"
+#include "NGL/defined.h"
+#include "NGL/context.h"
+#include "NGL/gl/state.h"
+#include "NGL/gl/texture.h"
+#include "NGL/gl/renderbuffer.h"
+#include "NGL/gl/error.h"
 
 NGLGL_BEGIN
 

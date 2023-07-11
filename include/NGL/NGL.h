@@ -9,18 +9,18 @@
 #pragma warning(disable: 4267)
 #endif
 
-#include "NGS/ngl/fw/glfw.h"
+#include "NGL/fw/glfw.h"
 
-#include "NGS/ngl/gl/gl.h"
+#include "NGL/gl/gl.h"
 
-#include "NGS/ngl/api/shader.h"
-#include "NGS/ngl/api/texture.h"
-#include "NGS/ngl/api/vertex.h"
-#include "NGS/ngl/api/vertex_array.h"
-#include "NGS/ngl/api/renderer.h"
+#include "NGL/api/shader.h"
+#include "NGL/api/texture.h"
+#include "NGL/api/vertex.h"
+#include "NGL/api/vertex_array.h"
+#include "NGL/api/renderer.h"
 
 #if NGS_USE_HPP
-#include "NGS/ngl/NGL.hpp"
+#include "NGL/NGL.hpp"
 #endif
 
 #if NGS_PLATFORM == NGS_MSVC
