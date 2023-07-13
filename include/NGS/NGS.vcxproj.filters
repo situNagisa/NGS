@@ -435,6 +435,12 @@
     <ClInclude Include="imgui\imgui.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="extend\selector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\gl_enum.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">

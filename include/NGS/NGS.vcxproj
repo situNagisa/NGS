@@ -81,6 +81,7 @@
     <ClInclude Include="extend\memory.h" />
     <ClInclude Include="extend\movie.h" />
     <ClInclude Include="extend\parser.h" />
+    <ClInclude Include="extend\selector.h" />
     <ClInclude Include="extend\setting.h" />
     <ClInclude Include="extend\timer.h" />
     <ClInclude Include="graphic\api\graphic.h" />
@@ -134,6 +135,7 @@
     <ClInclude Include="ngl\gl\texture.h" />
     <ClInclude Include="ngl\gl\vertex.h" />
     <ClInclude Include="ngl\gl\vertex_array.h" />
+    <ClInclude Include="ngl\gl_enum.h" />
     <ClInclude Include="ngl\NGL.h" />
     <ClInclude Include="ngl\NGL.hpp" />
     <ClInclude Include="ngl\opengl.h" />

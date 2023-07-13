@@ -28,7 +28,8 @@ public:
 	}
 
 	void Close() { glfwSetWindowShouldClose(_handle, true); }
-	bool ShouldClose()const noexcept { return glfwWindowShouldClose(_handle); }
+	bool IsShouldClose()const noexcept { return glfwWindowShouldClose(_handle); }
+	void ShouldClose()const noexcept { glfwSetWindowShouldClose(_handle, GL_TRUE); }
 
 	void SetTitle(std::string_view title) { glfwSetWindowTitle(_handle, title.data()); }
 	//void SetIcon(const std::vector<GLFWimage>& icons);

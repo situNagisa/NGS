@@ -11,6 +11,12 @@ public:
 	using handle_type = _Handle;
 
 public:
+	Context() = default;
+	Context(Context&& other) {
+		_handle = other._handle;
+		other._handle = {};
+	}
+
 	handle_type GetHandle()const { return _handle; }
 
 	operator bool()const { return _handle; }
@@ -27,6 +33,7 @@ public:
 protected:
 	NGS_TYPE_DEFINE(context_type, context);
 	using base = Current<__context, _Derived>;
+	//using singleton_type = Singleton<_Derived>;
 public:
 	~Current() { _context = nullptr; }
 
@@ -77,11 +84,18 @@ protected:
 struct type##Context : Context<handle>			\
 //
 
+#define _NGL_CONTEXT_DEFAULT_CONSTRUCTOR(type)									\
+type##Context() { _NGL_CHECK(_GENERATE(_handle)); }								\
+type##Context(type##Context##&&) = default;										\
+~##type##Context() { if (!_handle)return; _NGL_CHECK(_DESTROY(_handle)); }		\
+//
+
 #define _NGL_DECALRE_CONTEXT_T(type,enum_type)	\
 template<enum_type _E>							\
 class type##Context : public _##type##Context{	\
 public:											\
 	constexpr static GLenum type = (GLenum)_E;	\
+	using _##type##Context::_##type##Context;	\
 }												\
 //
 
@@ -100,8 +114,8 @@ private:										\
 	friend class base;							\
 	friend class Constructor;					\
 	type() = default;							\
-	static void _SET_CURRENT_CONTEXT(typename base::context_type::handle_type context)\
-//
+static void _SET_CURRENT_CONTEXT(typename base::context_type::handle_type context)\
+
 
 #define _NGL_CURRENT_DEFAULT_CONSTRUCTOR_T(template_t)				\
 using base = Current<template_t##Context<_Type>, template_t<_Type>>;\
@@ -109,8 +123,10 @@ constexpr static GLenum type = (GLenum)_Type;						\
 _NGL_CURRENT_DEFAULT_CONSTRUCTOR(template_t)						\
 //
 
-#define _NGL_CURRENT_INSTANCE(id,current)		\
-inline auto id = Constructor::Construct<current>()\
+#define _NGL_CURRENT_INSTANCE(id,current)			\
+namespace instance{									\
+inline auto id = Constructor::Construct<current>();	\
+}													\
 //
 
 #define _NGL_SPECIALIZATION(template_t,template_enum,special_t,special_id)	\

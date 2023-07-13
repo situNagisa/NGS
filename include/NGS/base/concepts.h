@@ -8,6 +8,7 @@
 NGS_BEGIN
 NGS_CONCEPT
 
+
 template<class T, class U>
 concept CSameTemplate = mpl::is_same_template_v<T, U>;
 

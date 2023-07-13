@@ -4,12 +4,18 @@
 #include "NGS/ngl/opengl.h"
 #include "NGS/ngl/context.h"
 #include "NGS/ngl/gl/error.h"
+#include "NGS/ngl/gl/vertex.h"
+#include "NGS/ngl/gl_enum.h"
 
 NGLGL_BEGIN
 
+
 _NGL_DECALRE_CONTEXT(VertexArray, GLuint) {
-	VertexArrayContext() { glGenVertexArrays(1, &_handle); }
-	~VertexArrayContext() { glDeleteVertexArrays(1, &_handle); _handle = 0; }
+private:
+	static void _GENERATE(handle_type & handle) { glGenVertexArrays(1, &handle); }
+	static void _DESTROY(handle_type & handle) { glDeleteVertexArrays(1, &handle); }
+public:
+	_NGL_CONTEXT_DEFAULT_CONSTRUCTOR(VertexArray);
 };
 
 /**
@@ -51,33 +57,34 @@ public:
 	}
 	template<class _Element, size_t _L0, size_t... _LN>
 	void SetAttribPointer(bool normalized = false, bool enable = true) {
-		SetAttribPointer< vertex_vector<_Element, _L0, _LN...>>(normalized, enable);
+		SetAttribPointer<vertex_c<_Element, _L0, _LN...>>(normalized, enable);
 	}
 	template<CTemplateFrom<layout> _LayoutUnit, CTemplateFrom<layout>... _LayoutUnits>
 	void SetAttribPointer(bool normalized = false, bool enable = true) {
 		SetAttribPointer<vertex<_LayoutUnit, _LayoutUnits...>>(normalized, enable);
 	}
 
-	void DrawElements(GLenum mode, size_t count, GLenum type_, size_t offset = 0) { _NGL_CHECK(glDrawElements(mode, count, type_, (void_ptr_cst)offset)); }
+	void DrawElements(ElementDrawMode mode, size_t count, GLenum type_, size_t offset = 0) { _NGL_CHECK(glDrawElements((GLenum)mode, count, type_, (void_ptr_cst)offset)); }
 	template<CSameAsAny<uint8, uint16, uint32> _T>
-	void DrawElements(BufferDrawMode mode, size_t count, size_t offset = 0) { DrawElements((GLenum)mode, count, gl_convert<_T>, offset); }
+	void DrawElements(ElementDrawMode mode, size_t count, size_t offset = 0) { DrawElements(mode, count, gl_convert<_T>, offset); }
+	void DrawArrays(DrawMode mode, size_t offset, size_t count) { _NGL_CHECK(glDrawArrays((GLenum)mode, offset, count)); }
 
 #define DEFINE_DRAW_ELEMENTS(id,mode)				\
 	template<CSameAsAny<uint8, uint16, uint32> _T>\
 	void Draw##id(size_t count, size_t offset = 0) { DrawElements<_T>(mode, count, offset); }\
 //
 
-	DEFINE_DRAW_ELEMENTS(Points, BufferDrawMode::points);
-	DEFINE_DRAW_ELEMENTS(Lines, BufferDrawMode::lines);
-	DEFINE_DRAW_ELEMENTS(LineStrip, BufferDrawMode::line_strip);
-	DEFINE_DRAW_ELEMENTS(LineLoop, BufferDrawMode::line_loop);
-	DEFINE_DRAW_ELEMENTS(Triangles, BufferDrawMode::triangles);
-	DEFINE_DRAW_ELEMENTS(TriangleStrip, BufferDrawMode::triangle_strip);
-	DEFINE_DRAW_ELEMENTS(TriangleFan, BufferDrawMode::triangle_fan);
-	DEFINE_DRAW_ELEMENTS(Patches, BufferDrawMode::patches);
+	DEFINE_DRAW_ELEMENTS(Points, ElementDrawMode::points);
+	DEFINE_DRAW_ELEMENTS(Lines, ElementDrawMode::lines);
+	DEFINE_DRAW_ELEMENTS(LineStrip, ElementDrawMode::line_strip);
+	DEFINE_DRAW_ELEMENTS(LineLoop, ElementDrawMode::line_loop);
+	DEFINE_DRAW_ELEMENTS(Triangles, ElementDrawMode::triangles);
+	DEFINE_DRAW_ELEMENTS(TriangleStrip, ElementDrawMode::triangle_strip);
+	DEFINE_DRAW_ELEMENTS(TriangleFan, ElementDrawMode::triangle_fan);
+	DEFINE_DRAW_ELEMENTS(Patches, ElementDrawMode::patches);
 #undef DEFINE_DRAW_ELEMENTS
 
-	void DrawArrays(DrawMode mode, size_t offset, size_t count) { _NGL_CHECK(glDrawArrays((GLenum)mode, offset, count)); }
+
 };
 _NGL_CURRENT_INSTANCE(vertex_array, VertexArray);
 

@@ -4,17 +4,9 @@
 #include "NGS/ngl/opengl.h"
 #include "NGS/ngl/context.h"
 #include "NGS/ngl/gl/error.h"
+#include "NGS/ngl/gl_enum.h"
 
 NGLGL_BEGIN
-
-enum class ShaderCodeType {
-	vertex = GL_VERTEX_SHADER,
-	fragment = GL_FRAGMENT_SHADER,
-	geometry = GL_GEOMETRY_SHADER,
-	compute = GL_COMPUTE_SHADER,
-	tess_control = GL_TESS_CONTROL_SHADER,
-	tess_evaluation = GL_TESS_EVALUATION_SHADER,
-};
 
 class _ShaderCode : public Context<GLuint> {
 public:
@@ -30,9 +22,24 @@ public:
 	_ShaderCode(ShaderCodeType type, std::ranges::random_access_range auto&& codes)
 		: _ShaderCode(type, std::ranges::cdata(codes))
 	{}
-	~_ShaderCode()noexcept { _NGL_CHECK(glDeleteShader(_handle)); }
+	_ShaderCode(_ShaderCode&&) = default;
+	~_ShaderCode()noexcept { if (!_handle)return; _NGL_CHECK(glDeleteShader(_handle)); }
 
-	void Compile()const { _NGL_CHECK(glCompileShader(_handle)); }
+	void Compile()const {
+		_NGL_CHECK(glCompileShader(_handle));
+#if NGS_BUILD_TYPE == NGS_DEBUG
+		GLint compile_ok = GL_FALSE;
+		_NGL_CHECK(glGetShaderiv(_handle, GL_COMPILE_STATUS, &compile_ok));
+		if (compile_ok == GL_FALSE) {
+			GLint log_length;
+			_NGL_CHECK(glGetShaderiv(_handle, GL_INFO_LOG_LENGTH, &log_length));
+			std::string log{};
+			log.resize(log_length);
+			_NGL_CHECK(glGetShaderInfoLog(_handle, log_length, NULL, log.data()));
+			NGS_ASSERT(false, Format("compile %d shader code fail! %s", _type, log.c_str()));
+		}
+#endif
+	}
 
 	ShaderCodeType GetType()const { return _type; }
 private:
@@ -50,6 +57,7 @@ public:
 	ShaderCode(std::ranges::random_access_range auto&& codes)
 		: _ShaderCode(_Type, codes)
 	{}
+	ShaderCode(ShaderCode&&) = default;
 };
 using VertexShaderCode = ShaderCode<ShaderCodeType::vertex>;
 using FragmentShaderCode = ShaderCode<ShaderCodeType::fragment>;
@@ -59,14 +67,21 @@ using TessControlShaderCode = ShaderCode<ShaderCodeType::tess_control>;
 using TessEvaluationShaderCode = ShaderCode<ShaderCodeType::tess_evaluation>;
 
 _NGL_DECALRE_CONTEXT(Shader, GLuint) {
+private:
+	static void _GENERATE(handle_type & handle) { handle = glCreateProgram(); }
+	static void _DESTROY(handle_type & handle) { glDeleteProgram(handle); }
 public:
-	ShaderContext() { _NGL_CHECK(_handle = glCreateProgram()); }
-	~ShaderContext()noexcept { _NGL_CHECK(glDeleteProgram(_handle)); }
+	_NGL_CONTEXT_DEFAULT_CONSTRUCTOR(Shader);
 
 	void Attach(const _ShaderCode & code) { _NGL_CHECK(glAttachShader(_handle, code.GetHandle())); }
 	void Link()const {
 		_NGL_CHECK(glLinkProgram(_handle));
-		_NGL_CHECK(glValidateProgram(_handle));
+#if NGS_BUILD_TYPE == NGS_DEBUG
+		//_NGL_CHECK(glValidateProgram(_handle));
+		GLint status = GL_FALSE;
+		glGetProgramiv(_handle, GL_LINK_STATUS, &status);
+		NGS_ASSERT(status != GL_FALSE, "link shader fail!");
+#endif
 	}
 
 	GLint GetUniformLocation(std::string_view name)const { _NGL_CHECK(GLint loc = glGetUniformLocation(_handle, name.data())); return loc; }

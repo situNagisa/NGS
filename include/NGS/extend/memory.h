@@ -64,6 +64,7 @@ private:
 		NGS_LOGL(debug, "allocator init");
 	}
 	~Allocator() {
+		Show();
 		NGS_LOGL(debug, "allocator destroy");
 	}
 public:

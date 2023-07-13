@@ -7,317 +7,317 @@
 
 NGL_BEGIN
 
-using indices_t = uint32;
+_NGS_TYPE_DEFINE(uint32, indices_t);
 
-template<CTemplateFrom<gl::vertex> _Layout>
-class VertexBuffer;
-
-template<CTemplateFrom<gl::layout>... _Layouts>
-class VertexBuffer<gl::vertex<_Layouts...>> {
-private:
-	NGS_TYPE_DEFINE(gl::vertex<_Layouts...>, vertex);
-
-	template<CTemplateFrom<gl::layout> _LayoutUnit, class = std::make_index_sequence<_LayoutUnit::count>>
-	struct _Unit;
-
-	template<CTemplateFrom<gl::layout> _LayoutUnit, size_t... _I>
-	struct _Unit<_LayoutUnit, std::index_sequence<_I...>> {
-		template<size_t>
-		using element_type = typename _LayoutUnit::element_type;
-
-		template<std::ranges::random_access_range _Rng>
-			requires std::same_as<std::ranges::range_value_t<_Rng>, typename _LayoutUnit::element_type>
-		_Unit(const _Rng&& unit) {
-			NGS_ASSERT(std::ranges::size(unit) == _LayoutUnit::count);
-			std::memcpy(data, std::ranges::cdata(unit), sizeof(data));
-		}
-		constexpr _Unit(element_type<_I>... elements) : data{ elements... } {}
-
-		typename _LayoutUnit::element_type data[_LayoutUnit::count];
-	};
+template<size_t _CapacityCount>
+class Vertex : public gl::Vertex {
 public:
 
-	indices_t AddVertex(_Unit<_Layouts>... units) {
-		byte_ptr layout_start = nullptr;
-		{
-			size_t size = _data.size();
-			_data.resize(size + __vertex::size);
-			layout_start = _data.data() + size;
-		}
-		size_t i = 0;
-		((std::memcpy((layout_start + __vertex::offsets[i]), units.data, __vertex::template sizes[i]), ++i), ...);
-		NGS_ASSERT(_data.size() % __vertex::size == 0);
-		return indices_t((_data.size() / __vertex::size) - 1);
-	}
-	void AddTriangle(indices_t i1, indices_t i2, indices_t i3) {
-		_indices.push_back(i1);
-		_indices.push_back(i2);
-		_indices.push_back(i3);
-	}
-
-	void AddTriangle(_Unit<_Layouts>... units1, _Unit<_Layouts>... units2, _Unit<_Layouts>... units3) {
-		AddTriangle(AddVertex(units1...), AddVertex(units2...), AddVertex(units3...));
-	}
-	void AddQuad(_Unit<_Layouts>... left_top, _Unit<_Layouts>... right_top, _Unit<_Layouts>... left_down, _Unit<_Layouts>... right_down) {
-		size_t lt = AddVertex(left_top...);
-		size_t rt = AddVertex(right_top...);
-		size_t ld = AddVertex(left_down...);
-		size_t rd = AddVertex(right_down...);
-
-		AddTriangle(lt, rt, ld);
-		AddTriangle(rt, ld, rd);
-	}
-
-	byte_ptr GetData() { return _data.data(); }
-	byte_ptr_cst GetData()const { return _data.data(); }
-
-	size_t GetSize()const { return _data.size(); }
-
-	const std::vector<byte>& GetContainer()const { return _data; }
-	const std::vector<indices_t>& GetIndices()const { return _indices; }
-private:
-
-private:
-	std::vector<byte> _data = {};
-	std::vector<indices_t> _indices = {};
-};
-
-class VertexArrayBuffer {
-public:
-
-private:
-	friend class VertexArray;
-	VertexArrayBuffer(size_t max_count, const CVertex auto& vertex)
-		: vertex(vertex.usage, vertex.layouts, vertex.size)
-		, _buffer(nullptr)
-		, _max_count(max_count)
-		, _count(0)
+	Vertex(Usage usage, const_iterator begin, size_t count, size_t size)
+		: gl::Vertex(usage, begin, count, size)
+		, _data(nullptr)
 		, _is_reference(false)
 	{
-		NGS_NEW_ARR(_buffer, max_count * vertex.size, byte)();
-		_Construct();
+		NGS_NEW_ARR(_data, capacity(), byte);
 	}
-	VertexArrayBuffer(void_ptr buffer, size_t capacity, const CVertex auto& vertex)
-		: vertex(vertex.usage, vertex.layouts, vertex.size)
-		, _buffer((byte_ptr)buffer)
-		, _max_count(capacity / vertex.size)
-		, _count(_max_count)
+	Vertex(Usage usage, const_iterator begin, size_t count, size_t size, void_ptr data)
+		: gl::Vertex(usage, begin, count, size)
+		, _data((byte_ptr)data)
 		, _is_reference(true)
-	{
-		NGS_ASSERT(capacity % vertex.size == 0);
-		_Construct();
-	}
-	VertexArrayBuffer(std::ranges::random_access_range auto& buffer, const CVertex auto& vertex)
-		: VertexArrayBuffer(std::ranges::data(buffer), std::ranges::size(buffer) * sizeof(std::ranges::range_value_t<decltype(buffer)>), vertex)
 	{}
+	~Vertex() {
+		if (_is_reference)return;
+		NGS_DELETE_ARR(_data);
+	}
 public:
-	~VertexArrayBuffer() {
-		if (!_is_reference) {
-			NGS_DELETE_ARR(_buffer);
-		}
+	void Initialize() {
+		NGS_ASSERT(IsActive());
+		gl::instance::array_buffer.SetData(_data, capacity(), usage);
 	}
 
-	void Active() { gl::array_buffer.PushContext(_context); }
-	bool IsActive()const { return gl::array_buffer.IsContext(_context); }
-	void Deactivate() { gl::array_buffer.PopContext(); }
+	byte_ptr data() { return _data; }
+	byte_ptr_cst data()const { return _data; }
 
-	indices_t AddVertex(void_ptr_cst buffer) {
-		indices_t indices = _count;
-		std::memcpy(_buffer + _count * vertex.size, buffer, vertex.size);
-		_count++;
-		return indices;
-	}
+	size_t capacity()const { return _CapacityCount * step(); }
+	size_t capacity_count()const { return _CapacityCount; }
+
+	void Active() { gl::instance::array_buffer.SetContext(_context); }
+	bool IsActive()const { return gl::instance::array_buffer.IsContext(_context); }
+	void Deactivate() { gl::instance::array_buffer.SetContextNull(); }
+
 	void UpdateData(size_t offset, size_t count) {
 		NGS_ASSERT(IsActive());
-		NGS_ASSERT(offset + count <= _max_count, Format("the 'end'(offset + count = %d) out of range([0,%d])", offset + count, _max_count));
-		gl::array_buffer.UpdateData(_buffer, offset * vertex.size, count * vertex.size);
+		NGS_ASSERT(offset + count <= capacity_count(), Format("the 'end'(offset + count = %d) out of range([0,%d])", offset + count, capacity_count()));
+		gl::instance::array_buffer.UpdateData(_data, offset * step(), count * step());
 	}
 	void UpdateData(size_t count) { UpdateData(0, count); }
-	void UpdateData() { UpdateData(0, _count); }
 
-	size_t GetMaxCount()const { return _max_count; }
-	size_t GetCount()const { return _count; }
-
-	byte_ptr GetData() { return _buffer; }
-	byte_ptr_cst GetData()const { return _buffer; }
-public:
-	const DynamicVertex vertex;
-private:
-	void _Construct() {
-		Active();
-		gl::array_buffer.SetData(_buffer, _max_count * vertex.size, vertex.usage);
+	void Write(byte_ptr_cst write_data, size_t count, size_t offset = 0) {
+		NGS_ASSERT(offset + count <= capacity_count(), Format("the 'end'(offset + count = %d) out of range([0,%d])", offset + count, capacity_count()));
+		std::memcpy(_data + offset * step(), write_data, count * step());
 	}
-
-	bool _IsContext()const {
-		if (!IsActive()) return false;
-		return true;
+	void Write(const std::ranges::random_access_range auto& write_data, size_t offset = 0) {
+		NGS_ASSERT(std::ranges::size(write_data) * sizeof(std::ranges::range_value_t<decltype(write_data)>) % step() == 0);
+		Write(
+			std::ranges::cdata(write_data),
+			std::ranges::size(write_data) * sizeof(std::ranges::range_value_t<decltype(write_data)>) / step(),
+			offset
+		);
 	}
 private:
-	byte_ptr _buffer;
-	size_t _max_count = 0;
-	size_t _count = 0;
+	byte_ptr _data = nullptr;
 	bool _is_reference = false;
 
 	gl::ArrayBufferContext _context{};
 };
 
-//class VertexArrayBuffer {
-//private:
-//	friend class VertexArray;
-//	VertexArrayBuffer() = default;
-//public:
-//
-//	void Active() {
-//		gl::array_buffer.PushContext(_context);
-//		gl::element_buffer.PushContext(_element_buffer_context);
-//	}
-//	void Deactivate() {
-//		gl::array_buffer.PopContext();
-//		gl::element_buffer.PopContext();
-//	}
-//
-//	template<CTemplateFrom<gl::vertex> _Layout>
-//	void SetBuffer(void_ptr_cst buffer, size_t size, gl::BufferUsage usage = gl::BufferUsage::static_draw, bool normalized = false, bool enable = true) {
-//		NGS_ASSERT(_IsContext());
-//		gl::array_buffer.SetData(buffer, size, usage);
-//		gl::array_buffer.SetAttribPointer<_Layout>(normalized, enable);
-//	}
-//	template<CTemplateFrom<gl::vertex> _Layout>
-//	void SetBuffer(const std::ranges::random_access_range auto& range, gl::BufferUsage usage = gl::BufferUsage::static_draw, bool normalized = false, bool enable = true) {
-//		SetBuffer<_Layout>(std::ranges::cdata(range), std::ranges::size(range) * sizeof(std::ranges::range_value_t<decltype(range)>), usage, normalized, enable);
-//	}
-//
-//	template<CTemplateFrom<gl::vertex> _Layout>
-//	void SetBuffer(const VertexBuffer<_Layout>& buffer, gl::BufferUsage usage = gl::BufferUsage::static_draw, bool normalized = false, bool enable = true) {
-//		NGS_ASSERT(_IsContext());
-//		auto& data = buffer.GetContainer();
-//		SetBuffer<_Layout>(std::ranges::cdata(data), std::ranges::size(data), usage, normalized, enable);
-//		gl::element_buffer.SetData(buffer.GetIndices(), usage);
-//		_indices_count = buffer.GetIndices().size();
-//	}
-//
-//	void Draw() {
-//		gl::array_buffer.DrawElements<indices_t>(gl::BufferDrawMode::triangles, _indices_count, 0);
-//	}
-//private:
-//	bool _IsContext()const {
-//		if (!gl::array_buffer.IsContext(_context)) return false;
-//		if (!gl::element_buffer.IsContext(_element_buffer_context)) return false;
-//		return true;
-//	}
-//private:
-//	gl::ArrayBufferContext _context = {};
-//	gl::ElementBufferContext _element_buffer_context = {};
-//	size_t _indices_count = 0;
-//};
-
-class VertexArray {
+template<size_t _CapacityCount>
+class Indices {
 public:
-	~VertexArray() {
-		for (auto buffer : _buffers) {
-			NGS_DELETE(buffer);
-		}
-	}
-
-	void Active() { gl::vertex_array.PushContext(_context); }
-	bool IsActive()const { return gl::vertex_array.IsContext(_context); }
-	void Deactivate() { gl::vertex_array.PopContext(); }
-
-	VertexArrayBuffer& AddBuffer(size_t max_count, const CVertex auto& vertex) {
-		VertexArrayBuffer* vertex_buffer;
-		NGS_NEW(vertex_buffer, VertexArrayBuffer)(max_count, vertex);
-		_ContactBuffer(*vertex_buffer);
-		_buffers.push_back(vertex_buffer);
-		return *vertex_buffer;
-	}
-	template<CTemplateFrom<gl::vertex> _Vertex, gl::BufferUsage _Usage = gl::BufferUsage::static_draw>
-	VertexArrayBuffer& AddBuffer(size_t max_count) { return AddBuffer(max_count, StaticVertex<_Vertex, _Usage>{}); }
-	VertexArrayBuffer& AddBuffer(void_ptr buffer, size_t capacity, const CVertex auto& vertex) {
-		VertexArrayBuffer* vertex_buffer;
-		NGS_NEW(vertex_buffer, VertexArrayBuffer)(buffer, capacity, vertex);
-		_ContactBuffer(*vertex_buffer);
-		_buffers.push_back(vertex_buffer);
-		return *vertex_buffer;
-	}
-	template<CTemplateFrom<gl::vertex> _Vertex, gl::BufferUsage _Usage = gl::BufferUsage::static_draw>
-	VertexArrayBuffer& AddBuffer(void_ptr buffer, size_t capacity) { return AddBuffer(buffer, capacity, StaticVertex<_Vertex, _Usage>{}); }
-	VertexArrayBuffer& AddBuffer(std::ranges::random_access_range auto& buffer, const CVertex auto& vertex) {
-		VertexArrayBuffer* vertex_buffer;
-		NGS_NEW(vertex_buffer, VertexArrayBuffer)(buffer, vertex);
-		_ContactBuffer(*vertex_buffer);
-		_buffers.push_back(vertex_buffer);
-		return *vertex_buffer;
-	}
-	/**
-	 * @brief 添加一个顶点缓冲区至顶点数组
-	 *
-	 * @tparam _Vertex 顶点类型，请使用`gl::vertex`或`gl::vertex_vector`构建
-	 * @param buffer 顶点缓冲区，满足`std::ranges::random_access_range`概念
-	 *
-	 * @warning 返回的顶点缓冲区的生命周期与顶点数组相同，且顶点缓冲区处于活动状态，由于NGL中活动状态是栈结构，
-	 *			如果希望连续添加缓冲区，请使用完该函数后立即调用`VertexArrayBuffer::Deactivate`函数
-	 *
-	 * @return `VertexArrayBuffer&` 返回顶点缓冲区
-	 */
-	template<CTemplateFrom<gl::vertex> _Vertex, gl::BufferUsage _Usage = gl::BufferUsage::static_draw>
-	VertexArrayBuffer& AddBuffer(std::ranges::random_access_range auto& buffer) { return AddBuffer(buffer, StaticVertex<_Vertex, _Usage>{}); }
-
-	auto& GetBuffers() { return _buffers; }
-	const auto& GetBuffers()const { return _buffers; }
-
-	void DrawArrays(gl::DrawMode mode, size_t offset, size_t count) {
+	constexpr static size_t step = sizeof(indices_t);
+	constexpr static size_t capacity_count = _CapacityCount;
+public:
+	void Initialize(Usage usage) {
 		NGS_ASSERT(IsActive());
-		NGS_ASSERT(offset + count <= _GetLayoutCount());
-		gl::vertex_array.DrawArrays(mode, offset, count);
+		gl::instance::element_buffer.SetData(_indices, usage);
 	}
-	void DrawArrays(gl::DrawMode mode, size_t count) { DrawArrays(mode, 0, count); }
-	void DrawArrays(gl::DrawMode mode) { DrawArrays(mode, 0, _GetLayoutCount()); }
+
+	void Active() { gl::instance::element_buffer.SetContext(_context); }
+	bool IsActive()const { return gl::instance::element_buffer.IsContext(_context); }
+	void Deactivate() { gl::instance::element_buffer.SetContextNull(); }
 
 	void UpdateData(size_t offset, size_t count) {
-		for (auto buffer : _buffers) {
-			buffer->Active();
-			buffer->UpdateData(offset, count);
-			buffer->Deactivate();
-		}
+		NGS_ASSERT(IsActive());
+		NGS_ASSERT(offset + count <= capacity_count, Format("the 'end'(offset + count = %d) out of range([0,%d])", offset + count, capacity_count));
+		if (!_requires_update)return;
+		gl::instance::element_buffer.UpdateData(_indices.data(), offset * step, count * step);
+		_requires_update = false;
 	}
 	void UpdateData(size_t count) { UpdateData(0, count); }
-	void UpdateData() { UpdateData(0, _GetVertexCount()); }
-private:
-	void _ContactBuffer(VertexArrayBuffer& buffer) {
+	void UpdateData() { UpdateData(0, _indices_count); }
+
+	void Write(indices_t_ptr_cst write_data, size_t count, size_t offset) {
 		NGS_ASSERT(IsActive());
-		NGS_ASSERT(buffer.IsActive());
-		NGS_ASSERT(!buffer.vertex.layouts.empty());
-		NGS_DEBUG_EXPR(if (!_buffers.empty())NGS_ASSERT(_GetVertexCount() == buffer.GetMaxCount()));
-
-		size_t offset = _GetOffset();
-
-		for (size_t i = 0; i < buffer.vertex.layouts.size(); i++)
-		{
-			const auto& layout = buffer.vertex.layouts[i];
-			size_t index = i + offset;
-			gl::vertex_array.SetAttribPointer(index, layout.count, layout.offset, layout.type, buffer.vertex.size, layout.normalized);
-			if (layout.enable)gl::vertex_array.Enable(index);
-		}
+		NGS_ASSERT(offset + count <= capacity_count, Format("the 'end'(offset + count = %d) out of range([0,%d])", offset + count, capacity_count));
+		std::memcpy(_indices.data() + offset, write_data, count * step);
+		_indices_count += count;
+		_requires_update = true;
+	}
+	void Write(indices_t_ptr_cst write_data, size_t count) {
+		Write(write_data, count, _indices_count);
+	}
+	void Write(indices_t indice) {
+		Write(&indice, 1);
+	}
+	template<std::ranges::random_access_range _Rng>
+		requires std::same_as<indices_t, std::ranges::range_value_t<_Rng>>
+	void Write(_Rng&& write_data, size_t offset) {
+		NGS_ASSERT(std::ranges::size(write_data) * sizeof(std::ranges::range_value_t<decltype(write_data)>) % step == 0);
+		Write(
+			std::ranges::cdata(write_data),
+			std::ranges::size(write_data),
+			offset
+		);
+	}
+	template<std::ranges::random_access_range _Rng>
+		requires std::same_as<indices_t, std::ranges::range_value_t<_Rng>>
+	void Write(_Rng&& write_data) {
+		Write(write_data, _indices_count);
 	}
 
-	size_t _GetOffset() const {
-		size_t offset{};
-		for (auto buffer : _buffers) {
-			offset += buffer->vertex.size;
-		}
-		return offset;
+	void Clear() {
+		_indices_count = 0;
+		_requires_update = false;
 	}
-	size_t _GetLayoutCount() const {
-		size_t count{};
-		for (auto buffer : _buffers) {
-			count += buffer->vertex.layouts.size();
-		}
-		return count;
-	}
-	size_t _GetVertexCount()const { return _buffers.back()->GetMaxCount(); }
+
+	size_t size()const { return _indices_count; }
 private:
-	gl::VertexArrayContext _context{};
-	std::vector<VertexArrayBuffer*> _buffers;
+	std::array<indices_t, capacity_count> _indices{};
+	size_t _indices_count = 0;
+
+	bool _requires_update = false;
+
+	gl::ElementBufferContext _context{};
 };
+
+template<class, class, class, class, class...>
+class _VertexArray;
+
+template<size_t _CapacityCount, CTemplateFrom<gl::vertex> _Vertex, CTemplateFrom<gl::vertex>... _Vertexs, size_t... _VertexIt, size_t... _LayoutIt>
+class _VertexArray<
+	std::integral_constant<size_t, _CapacityCount>,
+	std::index_sequence<_VertexIt...>,
+	std::index_sequence<_LayoutIt...>,
+	_Vertex,
+	_Vertexs...
+> {
+private:
+	using _vertex_sequence = boost::mpl::vector<_Vertex, _Vertexs...>;
+public:
+	constexpr static size_t vertex_capacity_count = _CapacityCount;
+	constexpr static size_t triangle_capacity_count = vertex_capacity_count > 2 ? (vertex_capacity_count - 2) : 0;
+	constexpr static size_t indices_capacity_count = vertex_capacity_count > 2 ? 3 * triangle_capacity_count : vertex_capacity_count;
+
+	using vertex_array_type = gl::vertex<_Vertex, _Vertexs...>;
+	using vertex_type = Vertex<vertex_capacity_count>;
+	constexpr static size_t vertex_count = 1 + sizeof...(_Vertexs);
+
+	template<size_t _Index> using vertex_at_t = typename boost::mpl::at_c<_vertex_sequence, _Index>::type;
+	template<size_t _Index> using vertex_element_t = typename vertex_at_t<_Index>::template layout_at_t<0>::element_type;
+	template<size_t _Index> using vertex_param_t = const vertex_element_t<_Index>*;
+	template<size_t _Index> constexpr static size_t_ptr_cst vertex_layout_offset_ptr = vertex_at_t<_Index>::layout_offsets.data();
+
+	constexpr static std::array<size_t_ptr, vertex_count> vertex_layout_offsets = []<size_t... I>(std::index_sequence<I...>) {
+		return std::array<size_t_ptr, vertex_count>{const_cast<size_t_ptr>(vertex_layout_offset_ptr<I>)...};
+	}(std::make_index_sequence<vertex_count>{});
+
+	template<size_t _Index> using layout_at_t = vertex_array_type::template layout_at_t<_Index>;
+	constexpr static size_t layout_count = (_Vertex::layout_count + ... + _Vertexs::layout_count);
+
+
+	_VertexArray(Usage usage) {
+		((_vertexes[_VertexIt] = new vertex_type(
+			usage,
+			vertex_at_t<_VertexIt>::layouts.data(),
+			vertex_at_t<_VertexIt>::layouts.size(),
+			vertex_at_t<_VertexIt>::size
+		)), ...);
+		_Initialize(usage);
+	}
+	~_VertexArray() {
+		for (auto& vertex : _vertexes) {
+			delete vertex;
+		}
+	}
+
+	void Active() { gl::instance::vertex_array.PushContext(_context); }
+	bool IsActive()const { return gl::instance::vertex_array.IsContext(_context); }
+	void Deactivate() { gl::instance::vertex_array.PopContext(); }
+
+	bool IsEmpty()const { return _vertex_count == 0; }
+	bool IsFull()const { return _vertex_count == vertex_capacity_count; }
+
+	indices_t AddVertex(
+		const vertex_param_t<_VertexIt>&... vertex
+	) {
+		size_t index = _vertex_count;
+		((_vertexes[_VertexIt]->Write((byte_ptr_cst)vertex, 1, _vertex_count)), ...);
+		_vertex_count++;
+		return index;
+	}
+	template<size_t N>
+		requires (N >= 3)
+	void AddPolygon(const vertex_param_t<_VertexIt>&... va) {
+		std::vector<indices_t> indices{};
+		for (size_t i = 0; i < N; i++)
+		{
+			indices.push_back(AddVertex((va + i * vertex_at_t<_VertexIt>::element_count)...));
+		}
+		_AddPolygon(indices);
+	}
+
+	void AddTriangle(const vertex_param_t<_VertexIt>&... va) { AddPolygon<3>(va...); }
+	void AddQuad(const vertex_param_t<_VertexIt>&... va) { AddPolygon<4>(va...); }
+
+	void Draw() {
+		NGS_ASSERT(IsActive());
+		gl::instance::vertex_array.DrawTriangles<indices_t>(_indices.size());
+	}
+	void Draw(DrawMode mode) {
+		NGS_ASSERT(IsActive());
+		gl::instance::vertex_array.DrawArrays(mode, 0, _vertex_count);
+	}
+
+	void UpdateData(size_t offset, size_t count) {
+		for (auto& vertex : _vertexes) {
+			vertex->Active();
+			vertex->UpdateData(offset, count);
+		}
+		_indices.Active();
+		_indices.UpdateData();
+	}
+	void UpdateData(size_t count) { UpdateData(0, count); }
+	void UpdateData() { UpdateData(0, _vertex_count); }
+
+	void Clear() {
+		_vertex_count = 0;
+		_indices.Clear();
+	}
+	//========================
+	// container
+	//========================
+
+	constexpr bool empty()const { return size(); }
+
+	auto begin() { return _vertexes.begin(); }
+	auto begin()const { return _vertexes.begin(); }
+	auto end() { return _vertexes.end(); }
+	auto end()const { return _vertexes.end(); }
+
+	vertex_type& operator[](size_t n) { return *_vertexes[n]; }
+	const vertex_type& operator[](size_t n)const { return *_vertexes[n]; }
+
+	vertex_type& at(size_t n) { *_vertexes.at(n); }
+	const vertex_type& at(size_t n) const { *_vertexes.at(n); }
+	size_t size() const { return _vertexes.size(); }
+
+	size_t capacity()const { return vertex_capacity_count; }
+private:
+	void _Initialize(Usage usage) {
+		Active();
+		size_t index = 0;
+		for (size_t i = 0; i < vertex_count; i++)
+		{
+			auto& vertex = *_vertexes[i];
+			vertex.Active();
+			vertex.Initialize();
+			for (size_t j = 0; j < vertex.size(); j++)
+			{
+				auto& layout = vertex[j];
+				gl::instance::vertex_array.SetAttribPointer(
+					index,
+					vertex_array_type::layout_counts[index],
+					vertex_layout_offsets[i][j],
+					vertex_array_type::layout_tv_bitmaps[index],
+					vertex.step(),
+					layout.normalized
+				);
+				if (layout.enable)gl::instance::vertex_array.Enable(index);
+				index++;
+			}
+		}
+		_indices.Active();
+		_indices.Initialize(usage);
+		Deactivate();
+	}
+
+	void _AddPolygon(std::same_as<indices_t>auto... indice) {
+		std::vector<indices_t> indices{indice...};
+		_AddPolygon(indices);
+	}
+	void _AddPolygon(const std::vector<indices_t>& indices) {
+		NGS_ASSERT(IsActive());
+
+		for (size_t i = 1; i < indices.size() - 1; i++)
+		{
+			_indices.Write(indices[0]);
+			_indices.Write(indices[i]);
+			_indices.Write(indices[i + 1]);
+		}
+	}
+public:
+	std::array<vertex_type*, vertex_count> _vertexes{};
+	size_t _vertex_count = 0;
+
+	gl::VertexArrayContext _context{};
+	Indices<indices_capacity_count> _indices{};
+};
+
+template<size_t _CapacityCount, CTemplateFrom<gl::vertex> _Vertex, CTemplateFrom<gl::vertex>... _Vertexs>
+using VertexArray = _VertexArray <
+	std::integral_constant<size_t, _CapacityCount>,
+	std::make_index_sequence<(1 + sizeof...(_Vertexs))>,
+	std::make_index_sequence<(_Vertex::layout_count + ... + _Vertexs::layout_count)>,
+	_Vertex, _Vertexs...>;
 
 NGL_END
