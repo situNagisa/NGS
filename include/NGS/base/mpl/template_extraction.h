@@ -50,11 +50,5 @@ constexpr bool is_same_template_v = false;
 template<template<class...>class A, class... _Args1, class... _Args2>
 constexpr bool is_same_template_v<A<_Args1...>, A<_Args2...>> = true;
 
-template<class, template<class...>class>
-constexpr bool is_template_v = false;
-template<template<class...>class _Template, class... _Args>
-constexpr bool is_template_v<_Template<_Args...>, _Template> = true;
-
-
 NGS_END
 NGS_END

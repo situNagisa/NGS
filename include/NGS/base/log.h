@@ -117,6 +117,7 @@ public:
 	template<typename...Args>
 	static void Print(Args&&... args) {
 		if (_disable)return;
+		std::lock_guard<std::mutex> lock(_mutex);
 		_Print(std::forward<Args>(args)...);
 	}
 	template<typename... Args>
@@ -157,6 +158,7 @@ public:
 private:
 	inline static std::vector<const ScopeHolder*> _stack;
 	inline static size_t _disable = 0;
+	inline static std::mutex _mutex{};
 };
 
 #if NGS_BUILD_TYPE == NGS_DEBUG

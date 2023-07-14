@@ -5,7 +5,7 @@
 NGS_BEGIN
 
 #define NGS_mcst_t using
-#define NGS_mcst constexpr
+#define NGS_mcst constexpr static
 
 #define NGS_mfunction(meta_function,...)	\
 template<__VA_ARGS__>						\

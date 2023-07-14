@@ -441,6 +441,18 @@
     <ClInclude Include="ngl\gl_enum.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="base\mpl\struct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\concepts\same.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\sequence.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\memory_reinterpreter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">

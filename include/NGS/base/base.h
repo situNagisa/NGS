@@ -37,3 +37,4 @@
 #include "NGS/base/assert.h"
 
 #include "NGS/base/mpl/mpl.h"
+#include "NGS/base/memory_reinterpreter.h"
