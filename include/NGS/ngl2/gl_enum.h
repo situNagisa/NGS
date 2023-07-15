@@ -163,7 +163,7 @@ enum class RenderbufferImageFormat {
 	depth32F_stencil8 = GL_DEPTH32F_STENCIL8,
 };
 
-enum class ShaderType {
+enum class ShaderCodeType {
 	vertex = GL_VERTEX_SHADER,
 	fragment = GL_FRAGMENT_SHADER,
 	geometry = GL_GEOMETRY_SHADER,
@@ -290,14 +290,12 @@ enum class DrawMode : GLenum {
 	lines = GL_LINES,
 	line_strip = GL_LINE_STRIP,
 	line_loop = GL_LINE_LOOP,
-
 	line_strip_adjacency = GL_LINE_STRIP_ADJACENCY,
 	lines_adjacency = GL_LINES_ADJACENCY,
 
 	triangles = GL_TRIANGLES,
 	triangle_strip = GL_TRIANGLE_STRIP,
 	triangle_fan = GL_TRIANGLE_FAN,
-
 	triangle_strip_adjacency = GL_TRIANGLE_STRIP_ADJACENCY,
 	triangles_adjacency = GL_TRIANGLES_ADJACENCY,
 };

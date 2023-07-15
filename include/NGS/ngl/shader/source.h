@@ -1,0 +1,60 @@
+﻿#pragma once
+
+#include "NGS/ngl/defined.h"
+#include "NGS/ngl/opengl.h"
+#include "NGS/ngl/gl_enum.h"
+#include "NGS/ngl/base/state.h"
+#include "NGS/ngl/error.h"
+
+NGL_BEGIN
+NGL_OBJ_BEGIN
+class _ShaderSource : public State {
+public:
+	_ShaderSource(ShaderType type, const char** codes, size_t count)
+		: type(type)
+	{
+		_NGL_CHECK(_context = glCreateShader((GLenum)type));
+		_NGL_CHECK(glShaderSource(_context, count, codes, nullptr));
+	}
+	_ShaderSource(_ShaderSource&&) = default;
+	~_ShaderSource()noexcept {
+		if (!_context)return;
+		_NGL_CHECK(glDeleteShader(_context));
+	}
+
+	void Compile()const {
+		_NGL_CHECK(glCompileShader(_context));
+#if NGS_BUILD_TYPE == NGS_DEBUG
+		GLint compile_ok = GL_FALSE;
+		_NGL_CHECK(glGetShaderiv(_context, GL_COMPILE_STATUS, &compile_ok));
+		if (compile_ok == GL_FALSE) {
+			GLint log_length;
+			_NGL_CHECK(glGetShaderiv(_context, GL_INFO_LOG_LENGTH, &log_length));
+			std::string log{};
+			log.resize(log_length);
+			_NGL_CHECK(glGetShaderInfoLog(_context, log_length, NULL, log.data()));
+			NGS_ASSERT(false, Format("compile %d shader code fail! %s", type, log.c_str()));
+		}
+#endif
+	}
+
+	const ShaderType type;
+};
+
+template<ShaderType _Type>
+class ShaderSource : public _ShaderSource {
+public:
+	ShaderSource(ShaderSource&&) = default;
+	ShaderSource(const char** codes, size_t count)
+		: _ShdaerSource(_Type, codes, count)
+	{}
+};
+using VertexShader = ShaderSource<ShaderType::vertex>;
+using FragmentShader = ShaderSource<ShaderType::fragment>;
+using GeometryShader = ShaderSource<ShaderType::geometry>;
+using ComputeShader = ShaderSource<ShaderType::compute>;
+using TessControlShader = ShaderSource<ShaderType::tess_control>;
+using TessEvaluationShader = ShaderSource<ShaderType::tess_evaluation>;
+
+NGS_END
+NGL_END

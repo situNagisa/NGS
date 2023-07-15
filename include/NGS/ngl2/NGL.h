@@ -9,11 +9,15 @@
 #pragma warning(disable: 4267)
 #endif
 
-#include "NGS/ngl/glfw.h"
+#include "NGS/ngl/fw/glfw.h"
 
-#include "NGS/ngl/vertex/vertex.h"
-#include "NGS/ngl/vertex/vertex_array.h"
+#include "NGS/ngl/gl/gl.h"
 
+#include "NGS/ngl/api/shader.h"
+#include "NGS/ngl/api/texture.h"
+#include "NGS/ngl/api/vertex.h"
+#include "NGS/ngl/api/vertex_array.h"
+#include "NGS/ngl/api/renderer.h"
 
 #if NGS_USE_HPP
 #include "NGS/ngl/NGL.hpp"

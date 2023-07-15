@@ -9,15 +9,12 @@
 #define NGL_BEGIN NGS_BEGIN namespace ngl{
 #define NGL_END } NGS_END
 
-#define NGL_FAC_BEGIN namespace factories{
-#define NGL_BUF_BEGIN namespace buffers{
-#define NGL_OBJ_BEGIN namespace objects{
-#define NGL_TARGET_BEGIN namespace targets{
+#define NGLGL_BEGIN NGL_BEGIN namespace gl{
+#define NGLGL_END } NGL_END
 
 NGL_BEGIN
 
 using type_t = GLuint;
-using context_t = GLuint;
 
 NGS_DECLARE_TV(gl, type_t);
 NGS_DEFINE_TV(gl, type_t, float32, GL_FLOAT);
@@ -32,6 +29,7 @@ NGS_DEFINE_TV(gl, type_t, uint32, GL_UNSIGNED_INT);
 NGS_DEFINE_TV(gl, type_t, RGBA24, GL_RGB);
 NGS_DEFINE_TV(gl, type_t, RGBA32, GL_RGBA);
 
+#undef NGL_TYPE_VALUE_MAP
 
 NGL_END
 

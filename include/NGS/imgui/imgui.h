@@ -17,7 +17,7 @@ public:
 		ImGui::CreateContext();
 
 		bool success;
-		success = ImGui_ImplGlfw_InitForOpenGL(window.GetHandle(), true);
+		success = ImGui_ImplGlfw_InitForOpenGL(window.GetContext(), true);
 		NGS_ASSERT(success);
 		success = ImGui_ImplOpenGL3_Init(glsl_version.data());
 		NGS_ASSERT(success);
