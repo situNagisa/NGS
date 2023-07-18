@@ -56,7 +56,7 @@ template<class _Function>
 using function_return_t = NGS_mget_t(return_type, function_trait<_Function>);
 
 template<class _Function>
-constexpr size_t functino_params_v = NGS_mget_return(function_trait<_Function>);
+constexpr size_t function_params_v = NGS_mget_return(function_trait<_Function>);
 
 /**
  * @brief 包装函数，为元函数添加默认参数

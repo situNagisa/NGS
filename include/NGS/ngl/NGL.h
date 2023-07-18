@@ -11,8 +11,24 @@
 
 #include "NGS/ngl/glfw.h"
 
+//vertex
 #include "NGS/ngl/vertex/vertex.h"
-#include "NGS/ngl/vertex/vertex_array.h"
+#include "NGS/ngl/vertex/indices.h"
+#include "NGS/ngl/vertex/concepts.h"
+#include "NGS/ngl/vertex/vertex_format.h"
+#include "NGS/ngl/vertex/array/base.h"
+#include "NGS/ngl/vertex/array/array.h"
+#include "NGS/ngl/vertex/array/indices.h"
+#include "NGS/ngl/vertex/array/polygon.h"
+#include "NGS/ngl/vertex/array/line.h"
+
+//shader
+#include "NGS/ngl/shader/source.h"
+#include "NGS/ngl/shader/shader.h"
+
+//texture
+#include "NGS/ngl/texture/texture.h"
+
 
 
 #if NGS_USE_HPP
@@ -23,8 +39,3 @@
 #pragma warning(pop)
 #pragma warning(pop)
 #endif
-
-#undef _NGL_DECALRE_CONTEXT
-#undef _NGL_DECALRE_CURRENT
-#undef _NGL_CURRENT_DEFAULT_CONSTRUCTOR
-#undef _NGL_CURRENT_INSTANCE

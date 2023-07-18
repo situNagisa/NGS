@@ -3,6 +3,7 @@
 #include "NGS/ngl/defined.h"
 #include "NGS/ngl/base/target.h"
 #include "NGS/ngl/shader/source.h"
+#include "NGS/ngl/base/opengl.h"
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
@@ -12,7 +13,7 @@ NGL_TARGET_BEGIN
 
 class ShaderProgram : public Target<ShaderProgram, objects::Shader> {
 	friend class base;
-	void _Select(state_type* state);
+	static void _Select(state_type* state);
 };
 
 NGS_END
@@ -53,12 +54,29 @@ public:
 		NGS_ASSERT(status != GL_FALSE, "link shader fail!");
 #endif
 	}
+	void CompileAndLink(std::string_view vertex, std::string_view fragment, std::string_view geometry = "") {
+		VertexShader vs(vertex);
+		FragmentShader fs(fragment);
+		GeometryShader gs(geometry);
+
+		vs.Compile();
+		fs.Compile();
+
+		Attach(vs);
+		Attach(fs);
+
+		if (!geometry.empty()) {
+			gs.Compile();
+			Attach(gs);
+		}
+
+		Link();
+	}
 
 	uniform_offset_t GetUniformLocation(std::string_view name)const {
 		NGS_ASSERT(_uniforms.find(name.data()) != _uniforms.end(), "uniform not found!");
 		return _uniforms.at(name.data());
 	}
-
 private:
 	std::unordered_map<std::string, uniform_offset_t> _uniforms{};
 };

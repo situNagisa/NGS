@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 NGL_TARGET_BEGIN
-void ShaderProgram::_Select(state_type* state) { _NGL_CHECK(glUseProgram(state->GetContext())); }
+NGS_HPP_INLINE void ShaderProgram::_Select(state_type* state) { _NGL_CHECK(glUseProgram(state->GetContext())); }
 NGS_END
 
 

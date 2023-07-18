@@ -10,12 +10,19 @@ NGL_BEGIN
 NGL_OBJ_BEGIN
 class _ShaderSource : public State {
 public:
-	_ShaderSource(ShaderType type, const char** codes, size_t count)
+	_ShaderSource(ShaderType type, const GLchar* const* sources, size_t count)
 		: type(type)
 	{
 		_NGL_CHECK(_context = glCreateShader((GLenum)type));
-		_NGL_CHECK(glShaderSource(_context, count, codes, nullptr));
+		_NGL_CHECK(glShaderSource(_context, count, sources, nullptr));
 	}
+	_ShaderSource(ShaderType type, const GLchar* sources)
+		: type(type)
+	{
+		_NGL_CHECK(_context = glCreateShader((GLenum)type));
+		_NGL_CHECK(glShaderSource(_context, 1, &sources, nullptr));
+	}
+
 	_ShaderSource(_ShaderSource&&) = default;
 	~_ShaderSource()noexcept {
 		if (!_context)return;
@@ -45,8 +52,11 @@ template<ShaderType _Type>
 class ShaderSource : public _ShaderSource {
 public:
 	ShaderSource(ShaderSource&&) = default;
-	ShaderSource(const char** codes, size_t count)
-		: _ShdaerSource(_Type, codes, count)
+	ShaderSource(const nchar_ptr_cst* sources, size_t count)
+		: _ShaderSource(_Type, sources, count)
+	{}
+	ShaderSource(std::string_view source)
+		: _ShaderSource(_Type, source.data())
 	{}
 };
 using VertexShader = ShaderSource<ShaderType::vertex>;

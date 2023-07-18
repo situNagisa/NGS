@@ -125,7 +125,7 @@ struct ParseIdFactor {
 		std::regex regex{before(function_name, R"(\()")};
 		std::smatch match;
 		std::regex_search(function, match, regex);
-		if (match.empty())return {};
+		if (match.empty())return function;
 		id_ = match.begin()->str();
 		return id_;
 	}

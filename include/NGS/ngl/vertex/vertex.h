@@ -1,43 +1,96 @@
 ﻿#pragma once
 
-#include "NGS/ngl/defined.h"
-#include "NGS/ngl/base/buffer.h"
-#include "NGS/ngl/vertex/vertex_format.h"
-#include "NGS/ngl/error.h"
+#include "NGS/ngl/vertex/vertex_buffer.h"
 #include "NGS/ngl/base/opengl.h"
 
 NGL_BEGIN
-
+NGL_OBJ_BEGIN
+class VertexArrayBase;
+NGS_END
 NGL_BUF_BEGIN
 
-class Vertex : public Buffer {
+class Vertex : public DeleteCopy {
 public:
-	Vertex(void_ptr data, size_t count, Usage usage, const VertexFormat& format);
-	Vertex(size_t count, Usage usage, const VertexFormat& format);
+	using buffer_type = VertexBuffer;
+
+	Vertex(buffer_type** buffers, size_t count)
+		: _is_unique(false)
+	{
+		_buffers.resize(count);
+		std::memcpy(_buffers.data(), buffers, count * sizeof(buffer_type*));
+	}
+	template<std::ranges::range _Rng>
+		requires std::same_as<std::ranges::range_value_t<_Rng>, buffer_type*>
+	Vertex(_Rng&& buffers)
+		: _is_unique(false)
+	{
+		std::ranges::copy(std::forward<_Rng>(buffers), std::back_inserter(_buffers));
+	}
 	Vertex(Vertex&& other)
-		: Buffer(std::move(other))
-		, format(other.format)
-	{}
-	~Vertex();
+		: _is_unique(other._is_unique)
+		, _buffers(std::move(other._buffers))
+	{
+		other._is_unique = false;
+	}
 
-	void View(size_t count, size_t offset);
-	void Write(void_ptr_cst data, size_t count, size_t offset);
+	~Vertex() {
+		if (_is_unique) {
+			for (auto& buffer : _buffers) {
+				delete buffer;
+			}
+		}
+	}
+	void SetUnique(bool unique) { _is_unique = unique; }
 
-	const VertexFormat format;
+	void Update();
+
+	void SetVertexArray(objects::VertexArrayBase& vertex_array) { SetVertexArray(&vertex_array); }
+	void SetVertexArray(objects::VertexArrayBase* vertex_array);
+
+	const auto& GetAttrib(size_t attrib_index) const{ return _attribs[attrib_index]; }
+	size_t GetAttribCount()const { return _attribs.size(); }
+	size_t GetBufferCount()const { return _buffers.size(); }
+
+	auto begin() { return _buffers.begin(); }
+	auto begin()const { return _buffers.begin(); }
+	auto end() { return _buffers.end(); }
+	auto end()const { return _buffers.end(); }
+
+	buffer_type& operator[](size_t index) { return *_buffers[index]; }
+	const buffer_type& operator[](size_t index)const { return *_buffers[index]; }
+
+	size_t size()const { return _buffers.size(); }
+private:
+	struct _AttribFormat {
+		byte_ptr data;
+		const Attrib* format;
+		const buffer_type* buffer;
+	};
+
+	void _InitAttrib() {
+		for (auto& buffer : _buffers) {
+			for (auto& attrib : buffer->format.properties) {
+				_attribs.push_back(_AttribFormat{ buffer->GetData() + attrib.offset, &attrib,buffer });
+			}
+		}
+	}
+private:
+	bool _is_unique;
+	std::vector<buffer_type*> _buffers{};
+	std::vector<_AttribFormat> _attribs{};
+	objects::VertexArrayBase* _current_vertex_array = nullptr;
 };
 
 NGS_END
 NGL_FAC_BEGIN
-
-template<CTemplateFrom<mpl::meta_struct> _Struct>
-buffers::Vertex&& make_vertex(void_ptr data, size_t count, Usage usage) {
-	return buffers::Vertex(data, count, usage, make_vertex_format<_Struct>());
+template<CBuffer... _Buffers>
+buffers::Vertex make_vertex(size_t count, Usage usage) {
+	buffers::Vertex v{
+		std::array<buffers::VertexBuffer*, sizeof...(_Buffers)>{
+			(new buffers::VertexBuffer(factories::make_vertex_buffer<_Buffers>(count, usage)))...
+			} };
+	v.SetUnique(true);
+	return v;
 }
-
-template<CTemplateFrom<mpl::meta_struct> _Struct>
-buffers::Vertex&& make_vertex(size_t count, Usage usage) {
-	return buffers::Vertex(count, usage, make_vertex_format<_Struct>());
-}
-
 NGS_END
 NGL_END

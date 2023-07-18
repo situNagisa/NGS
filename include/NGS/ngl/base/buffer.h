@@ -8,7 +8,7 @@
 NGL_BEGIN
 NGL_BUF_BEGIN
 
-class Buffer : public State {
+class BufferObject : public State {
 public:
 	/**
 	 * @brief
@@ -18,7 +18,7 @@ public:
 	 * @param size
 	 * @param usage
 	 */
-	Buffer(BufferTarget target, void_ptr data, size_t size, Usage usage);
+	BufferObject(BufferTarget target, void_ptr data, size_t size, Usage usage);
 	/**
 	 * @brief
 	 *
@@ -26,9 +26,9 @@ public:
 	 * @param size
 	 * @param usage
 	 */
-	Buffer(BufferTarget target, size_t size, Usage usage);
-	Buffer(Buffer&& other);
-	~Buffer();
+	BufferObject(BufferTarget target, size_t size, Usage usage);
+	BufferObject(BufferObject&& other);
+	~BufferObject();
 
 	virtual void Update()override;
 	void View(size_t size, size_t offset);

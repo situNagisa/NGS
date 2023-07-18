@@ -11,14 +11,12 @@ using indices_t = uint32;
 
 NGL_BUF_BEGIN
 
-class Indices : public Buffer {
+class Indices : public BufferObject {
 public:
 	Indices(void_ptr data, size_t count, Usage usage);
 	Indices(size_t count, Usage usage);
-	Indices(Indices&& other)
-		: Buffer(std::move(other))
-	{}
-	~Indices();
+	Indices(Indices&&) = default;
+	~Indices() = default;
 
 	const indices_t* GetData()const { return std::launder(reinterpret_cast<const indices_t*>(_data)); }
 
@@ -28,23 +26,6 @@ public:
 	constexpr static type_t type = gl_convert<indices_t>;
 	constexpr static size_t format_size = sizeof(indices_t);
 };
-
-NGS_END
-NGL_FAC_BEGIN
-
-template<CTemplateFrom<mpl::meta_struct> _Struct>
-buffers::Indices* make_vertex(void_ptr data, size_t count, Usage usage) {
-	buffers::Vertex* vertex;
-	NGS_NEW(vertex, buffers::Vertex)(data, count, usage, make_vertex_format<_Struct>());
-	return vertex;
-}
-
-template<CTemplateFrom<mpl::meta_struct> _Struct>
-buffers::Indices* make_vertex(size_t count, Usage usage) {
-	buffers::Vertex* vertex;
-	NGS_NEW(vertex, buffers::Vertex)(count, usage, make_vertex_format<_Struct>());
-	return vertex;
-}
 
 NGS_END
 NGL_END

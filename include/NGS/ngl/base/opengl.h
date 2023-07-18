@@ -11,18 +11,31 @@ NGL_TARGET_BEGIN
 //vertex
 class VertexArray;
 
+//texture
+class Texture;
+
+//shader
+class ShaderProgram;
+
 NGS_END
 
 class OpenGL : public Singleton<OpenGL> {
 private:
 	friend class base;
 	OpenGL();
+	~OpenGL();
 public:
 
 	//vertex
-	targets::BufferTarget* buffer_target;
+	targets::BufferTarget* const buffer_target;
 
-	targets::VertexArray* vertex_array;
+	targets::VertexArray* const vertex_array;
+
+	//texture
+	targets::Texture* const texture;
+
+	//shader
+	targets::ShaderProgram* const shader;
 };
 
 NGL_END

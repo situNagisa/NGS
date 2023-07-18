@@ -354,103 +354,76 @@
     <ClInclude Include="base\space_transform.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl2\api\renderer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\api\renderer.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\api\shader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\api\texture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\api\vertex.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\api\vertex_array.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\fw\glfw.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\blend.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\buffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\error.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\framebuffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\gl.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\render.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\renderbuffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\shader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\space.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\state.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\texture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\vertex.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\gl\vertex_array.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\config.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\context.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\defined.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\NGL.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\NGL.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl2\opengl.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imgui.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="extend\selector.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl2\gl_enum.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="base\mpl\struct.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="base\mpl\concepts\same.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\mpl\sequence.h">
+    <ClInclude Include="base\memory_reinterpreter.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\memory_reinterpreter.h">
+    <ClInclude Include="ngl\base\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\base\buffer.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\base\buffer_target.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\base\object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\base\opengl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\base\opengl.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\base\state.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\base\target.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\shader.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\source.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\texture\texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\texture\texture.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\indices.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\indices.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\vertex_buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\vertex_buffer.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\vertex_format.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\error.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\glfw.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ngl\config.h">
@@ -471,85 +444,52 @@
     <ClInclude Include="ngl\opengl.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl\base\buffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\base\object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\base\state.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\base\target.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ngl\vertex\vertex.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl\vertex\indices.h">
+    <ClInclude Include="base\mpl\sequence\sequence.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl\vertex\vertex_format.h">
+    <ClInclude Include="base\mpl\sequence\at.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl\vertex\vertex_array.h">
+    <ClInclude Include="base\mpl\struct\spread.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl\error.h">
+    <ClInclude Include="base\mpl\struct\struct.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl\base\opengl.h">
+    <ClInclude Include="base\mpl\struct\var.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl\base\opengl.hpp">
+    <ClInclude Include="base\mpl\struct\vars.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\array\array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\concepts.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\array\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\array\base.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\array\indices.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\array\line.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\array\polygon.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\trait.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ngl\vertex\vertex.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\glfw.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\vertex\vertex_array.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\vertex\indices.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\base\buffer_target.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\base\buffer.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\vertex\vertex_array\indices_vertex.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\vertex\vertex_array\indices_vertex.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\vertex\vertex_array\polygon_vertex.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\vertex\vertex_array\polygon_vertex.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\vertex\vertex_array\line_vertex.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\vertex\vertex_array\line_vertex.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\shader\source.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\shader\shader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\shader\shader.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\texture\texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

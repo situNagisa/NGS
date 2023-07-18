@@ -14,8 +14,9 @@ public:
 	using state_type = _State;
 
 	void Select(_State& state) { Select(&state); }
-	void Select(_State* state) = { _current_state = state; _Derived::_Select(state); };
-	bool IsState(const _State& state) const { return _current_state == &state; }
+	void Select(_State* state) { _current_state = state; _Derived::_Select(state); };
+	bool IsState(const _State& state) const { return IsState(&state); }
+	bool IsState(const _State* state) const { return _current_state == state; }
 
 	bool operator==(const _State& state)const { return _current_state == &state; }
 

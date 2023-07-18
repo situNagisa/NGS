@@ -3,7 +3,6 @@
 #include "NGS/ngl/defined.h"
 #include "NGS/ngl/opengl.h"
 
-
 NGL_BEGIN
 
 enum class BlendFactors : GLenum {
@@ -227,7 +226,7 @@ enum class Filters : GLint {
 	linear_mipmap_linear = GL_LINEAR_MIPMAP_LINEAR,
 };
 
-enum class TextureType : GLenum {
+enum class TextureTarget : GLenum {
 	_1D = GL_TEXTURE_1D,
 	_2D = GL_TEXTURE_2D,
 	_3D = GL_TEXTURE_3D,
@@ -236,6 +235,7 @@ enum class TextureType : GLenum {
 	_rectangle = GL_TEXTURE_RECTANGLE,
 };
 enum class TextureSlot : GLenum {
+	null = 0,
 	_0 = GL_TEXTURE0,
 	_1 = GL_TEXTURE1,
 	_2 = GL_TEXTURE2,
@@ -268,8 +268,11 @@ enum class TextureSlot : GLenum {
 	_29 = GL_TEXTURE29,
 	_30 = GL_TEXTURE30,
 	_31 = GL_TEXTURE31,
+	end = _31 + 1,
+	begin = _0,
 };
-
+inline TextureSlot operator+(TextureSlot slot, uint32 offset) { return (TextureSlot)((uint32)slot + offset); }
+inline TextureSlot operator-(TextureSlot slot, uint32 offset) { return (TextureSlot)((uint32)slot - offset); }
 
 enum class ElementDrawMode : GLenum {
 	points = GL_POINTS,

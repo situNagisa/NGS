@@ -60,6 +60,19 @@ using id##_ptr = type*;             	\
 using id##_ptr_cst = const type*;		\
 //
 
+#define NGS_DEFINE_TYPE(id,...)			\
+using id##_t = ##__VA_ARGS__;			\
+using id##_cst = const id##_t;			\
+using id##_ref = id##_t&;				\
+using id##_ref_cst = const id##_t&;		\
+using id##_rref = id##_t&&;				\
+using id##_rref_cst = const id##_t&&;	\
+using id##_ptr = id##_t*;				\
+using id##_ptr_cst = const id##_t*		\
+//
+
+
+
 #if NGS_BUILD_TYPE == NGS_DEBUG
 #define NGS_DEBUG_EXPR(expr) expr
 #else
