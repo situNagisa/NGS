@@ -37,7 +37,7 @@ public:
 	VertexArrayBase(buffers::Vertex&& vertex)
 		: _vertex(std::move(vertex))
 	{
-		_NGL_CHECK(glGenVertexArrays(1, &_context));
+		NGL_CHECK(glGenVertexArrays(1, &_context));
 		_vertex.SetVertexArray(this);
 	}
 
@@ -50,7 +50,7 @@ public:
 	{}
 	virtual ~VertexArrayBase() {
 		if (!_context)return;
-		_NGL_CHECK(glDeleteVertexArrays(1, &_context));
+		NGL_CHECK(glDeleteVertexArrays(1, &_context));
 	}
 
 	virtual void Update() override {
@@ -59,10 +59,11 @@ public:
 		_vertex.Update();
 	}
 	virtual void Render() {
-		NGS_ASSERT(OpenGL::I().vertex_array->IsState(this));
+		if (!OpenGL::I().vertex_array->IsState(this))
+			OpenGL::I().vertex_array->Select(this);
 		if (_current_shader)
 			OpenGL::I().shader->Select(_current_shader);
-		_NGL_CHECK(glDrawArrays((GLenum)_draw_mode, _offset, _count));
+		NGL_CHECK(glDrawArrays((GLenum)_draw_mode, _offset, _count));
 	}
 protected:
 	template<class T>
@@ -141,6 +142,10 @@ public:
 	}
 	auto& GetVertexFormat() { return _vertex; }
 	const auto& GetVertexFormat()const { return _vertex; }
+
+	bool IsEmpty()const { return !_count; }
+
+	size_t GetCount()const { return _count; }
 protected:
 	GLenum _draw_mode = GL_POINTS;
 	buffers::Vertex _vertex;

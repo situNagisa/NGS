@@ -21,8 +21,8 @@ NGS_HPP_INLINE void Vertex::SetVertexArray(objects::VertexArrayBase* vertex_arra
 	for (auto& buffer : _buffers) {
 		OpenGL::I().buffer_target->Select(buffer);
 		for (auto& attrib : buffer->format.properties) {
-			_NGL_CHECK(glEnableVertexAttribArray(index));
-			_NGL_CHECK(glVertexAttribPointer(index, attrib.count, attrib.type, attrib.normalized, buffer->format.size, (void_ptr_cst)attrib.offset));
+			NGL_CHECK(glEnableVertexAttribArray(index));
+			NGL_CHECK(glVertexAttribPointer(index, attrib.count, attrib.type, attrib.normalized, buffer->format.size, (void_ptr_cst)attrib.offset));
 			index++;
 		}
 	}

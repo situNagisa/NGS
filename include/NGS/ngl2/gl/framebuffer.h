@@ -25,7 +25,7 @@ public:
 	bool IsComplete()const { return GetStatus() == FramebufferStatus::complete; }
 
 	void AttachRenderbuffer(FramebufferAttachment attachment, const RenderbufferContext & renderbuffer) {
-		//_NGL_CHECK(glFramebufferRenderbuffer(_Type, (GLenum)attachment, renderbuffer.type, renderbuffer.GetHandle()));
+		//NGL_CHECK(glFramebufferRenderbuffer(_Type, (GLenum)attachment, renderbuffer.type, renderbuffer.GetHandle()));
 	}
 	template<TextureType _Dim>
 	void AttachTexture(FramebufferAttachment attachment, const TextureContext<_Dim>&texture, GLint level = 0) {

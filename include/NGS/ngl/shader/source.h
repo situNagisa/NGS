@@ -13,33 +13,33 @@ public:
 	_ShaderSource(ShaderType type, const GLchar* const* sources, size_t count)
 		: type(type)
 	{
-		_NGL_CHECK(_context = glCreateShader((GLenum)type));
-		_NGL_CHECK(glShaderSource(_context, count, sources, nullptr));
+		NGL_CHECK(_context = glCreateShader((GLenum)type));
+		NGL_CHECK(glShaderSource(_context, count, sources, nullptr));
 	}
 	_ShaderSource(ShaderType type, const GLchar* sources)
 		: type(type)
 	{
-		_NGL_CHECK(_context = glCreateShader((GLenum)type));
-		_NGL_CHECK(glShaderSource(_context, 1, &sources, nullptr));
+		NGL_CHECK(_context = glCreateShader((GLenum)type));
+		NGL_CHECK(glShaderSource(_context, 1, &sources, nullptr));
 	}
 
 	_ShaderSource(_ShaderSource&&) = default;
 	~_ShaderSource()noexcept {
 		if (!_context)return;
-		_NGL_CHECK(glDeleteShader(_context));
+		NGL_CHECK(glDeleteShader(_context));
 	}
 
 	void Compile()const {
-		_NGL_CHECK(glCompileShader(_context));
+		NGL_CHECK(glCompileShader(_context));
 #if NGS_BUILD_TYPE == NGS_DEBUG
 		GLint compile_ok = GL_FALSE;
-		_NGL_CHECK(glGetShaderiv(_context, GL_COMPILE_STATUS, &compile_ok));
+		NGL_CHECK(glGetShaderiv(_context, GL_COMPILE_STATUS, &compile_ok));
 		if (compile_ok == GL_FALSE) {
 			GLint log_length;
-			_NGL_CHECK(glGetShaderiv(_context, GL_INFO_LOG_LENGTH, &log_length));
+			NGL_CHECK(glGetShaderiv(_context, GL_INFO_LOG_LENGTH, &log_length));
 			std::string log{};
 			log.resize(log_length);
-			_NGL_CHECK(glGetShaderInfoLog(_context, log_length, NULL, log.data()));
+			NGL_CHECK(glGetShaderInfoLog(_context, log_length, NULL, log.data()));
 			NGS_ASSERT(false, Format("compile %d shader code fail! %s", type, log.c_str()));
 		}
 #endif

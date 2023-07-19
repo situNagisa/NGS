@@ -12,7 +12,7 @@ class ImageGUI {
 public:
 
 public:
-	ImageGUI(std::string_view glsl_version, ngl::Window& window) {
+	ImageGUI(std::string_view glsl_version, ngl::objects::Window& window) {
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 

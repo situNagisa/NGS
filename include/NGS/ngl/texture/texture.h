@@ -34,10 +34,10 @@ public:
 		: target(target)
 	{
 		auto& opengl = OpenGL::I();
-		_NGL_CHECK(glGenTextures(1, &_context));
+		NGL_CHECK(glGenTextures(1, &_context));
 		opengl.texture->Select(this);
-		_NGL_CHECK(glTexImage2D((GLenum)target, mipmap_level, format, width, height, 0, format, gl_convert<byte>, data));
-		_NGL_CHECK(glGenerateMipmap((GLenum)target));
+		NGL_CHECK(glTexImage2D((GLenum)target, mipmap_level, format, width, height, 0, format, gl_convert<byte>, data));
+		NGL_CHECK(glGenerateMipmap((GLenum)target));
 	}
 	_Texture(_Texture&& other)
 		: State(std::move(other))
@@ -52,7 +52,7 @@ public:
 
 	virtual ~_Texture() {
 		if (!_context)return;
-		_NGL_CHECK(glDeleteTextures(1, &_context));
+		NGL_CHECK(glDeleteTextures(1, &_context));
 	}
 
 	virtual void Update()override {
@@ -65,13 +65,13 @@ private:
 		auto& opengl = OpenGL::I();
 		
 		if (!opengl.texture->IsState(this))opengl.texture->Select(this);
-		_NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_WRAP_S, (GLint)s));
-		_NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_WRAP_T, (GLint)t));
-		_NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_WRAP_R, (GLint)r));
-		_NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_MIN_FILTER, (GLint)min));
-		_NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_MAG_FILTER, (GLint)mag));
+		NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_WRAP_S, (GLint)s));
+		NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_WRAP_T, (GLint)t));
+		NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_WRAP_R, (GLint)r));
+		NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_MIN_FILTER, (GLint)min));
+		NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_MAG_FILTER, (GLint)mag));
 
-		if(slot != TextureSlot::null)_NGL_CHECK(glActiveTexture((GLenum)slot));
+		if(slot != TextureSlot::null)NGL_CHECK(glActiveTexture((GLenum)slot));
 	}
 public:
 	const TextureTarget target;

@@ -56,6 +56,11 @@ public:
 		glfwGetWindowSize(_context, &width, &height);
 		return { width,height };
 	}
+	Point2i GetFramebufferSize() const {
+		int bufferWidth, bufferHeight;
+		glfwGetFramebufferSize(_context, &bufferWidth, &bufferHeight);
+		return { bufferWidth,bufferHeight };
+	}
 	Rectanglei GetFrameBounds()const {
 		int left, top, right, bottom;
 		glfwGetWindowFrameSize(_context, &left, &top, &right, &bottom);

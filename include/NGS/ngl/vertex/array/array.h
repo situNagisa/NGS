@@ -30,8 +30,12 @@ public:
 
 	_VertexArray(size_t count, Usage usage)
 		: base(factories::make_vertex<_Buffers...>(count, usage))
+		, _max_count(count)
 	{}
-	_VertexArray(_VertexArray&& other) = default;
+	_VertexArray(_VertexArray&& other)
+		: base(std::move(other))
+		, _max_count(other._max_count)
+	{}
 
 protected:
 	template<size_t _Index> using _add_vertex_param_buffer_t = base::tag_buffer::type;
@@ -50,14 +54,18 @@ protected:
 #define _NGL_VAO_BUF_VIEW(meta_depend) meta_depend::template _add_vertex_param_container_t<_BufferIndex,std::span>...
 #define _NGL_VAO_BUF_CONTAINER(meta_depend) meta_depend::template _add_vertex_param_container_t<_BufferIndex,std::array>&&...
 
-#define _NGL_VAO_ATT_T(id,meta_depend) typename meta_depend::template _add_vertex_param_##id##_t<_AttribIndex>...
-#define _NGL_VAO_ATT_TRA_T(transform_type,meta_depend) typename meta_depend::template _add_vertex_param_transform_t<_AttribIndex,transform_type>...
+	//#define _NGL_VAO_ATT_T(id,meta_depend) typename meta_depend::template _add_vertex_param_##id##_t<_AttribIndex>...
+	//#define _NGL_VAO_ATT_TRA_T(transform_type,meta_depend) typename meta_depend::template _add_vertex_param_transform_t<_AttribIndex,transform_type>...
 public:
 	using base::AddVertexes;
 
 	void AddVertexes(size_t count, _NGL_VAO_BUF_T(buffers, this_t) buffers) { base::AddVertexes(count, std::array<typename base::tag_buffer::type, buffer_count>{std::launder(reinterpret_cast<base::tag_buffer::type>(buffers))...}); }
 	void AddVertexes(size_t count, _NGL_VAO_BUF_VIEW(this_t) buffers) { base::AddVertexes(count, std::array<typename base::tag_buffer::type, buffer_count>{std::launder(reinterpret_cast<base::tag_buffer::type>(std::ranges::cdata(buffers)))...}); }
 	void AddVertexes(size_t count, _NGL_VAO_BUF_CONTAINER(this_t) buffers) { base::AddVertexes(count, std::array<typename base::tag_buffer::type, buffer_count>{std::launder(reinterpret_cast<base::tag_buffer::type>(std::ranges::cdata(buffers)))...}); }
+
+	bool IsFull()const { return _count == _max_count; }
+private:
+	size_t _max_count;
 };
 
 #define _NGL_VAO_DERIVED_FROM(base_class,derived_class)				\

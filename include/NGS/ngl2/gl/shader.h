@@ -77,7 +77,7 @@ public:
 	void Link()const {
 		_NGL_CHECK(glLinkProgram(_handle));
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		//_NGL_CHECK(glValidateProgram(_handle));
+		//NGL_CHECK(glValidateProgram(_handle));
 		GLint status = GL_FALSE;
 		glGetProgramiv(_handle, GL_LINK_STATUS, &status);
 		NGS_ASSERT(status != GL_FALSE, "link shader fail!");

@@ -61,7 +61,7 @@ public:
 		NGS_ASSERT(OpenGL::I().vertex_array->IsState(this));
 		if (this->_current_shader)
 			OpenGL::I().shader->Select(this->_current_shader);
-		_NGL_CHECK(glDrawElements((GLenum)this->_draw_mode, _indices_count, (GLenum)_indices.type, (void_ptr_cst)0));
+		NGL_CHECK(glDrawElements((GLenum)this->_draw_mode, _indices_count, (GLenum)_indices.type, (void_ptr_cst)0));
 	}
 	virtual void Clear()override {
 		base::Clear();

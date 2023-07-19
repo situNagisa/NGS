@@ -14,7 +14,7 @@ public:
 	static ErrorCode GET() { return (ErrorCode)glGetError(); }
 };
 
-#define _NGL_CHECK(func)\
+#define NGL_CHECK(func)\
 ngl::Error::CLEAR();	\
 func;					\
 NGL_SHOW_GL_FUNC(func);	\

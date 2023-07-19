@@ -40,8 +40,6 @@
  //NGS_USE_NSL
  //NGS_USE_NSW
 
-#define NGS_USE_HPP 1
-
 #include "NGS/base/base.h"
 #include "NGS/extend/extend.h"
 #include "NGS/math/math.h"

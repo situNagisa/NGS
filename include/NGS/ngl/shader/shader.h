@@ -17,42 +17,46 @@ class ShaderProgram : public Target<ShaderProgram, objects::Shader> {
 };
 
 NGS_END
-
-NGL_OBJ_BEGIN
-
 using uniform_offset_t = GLint;
+NGL_OBJ_BEGIN
 
 class Shader : public State {
 public:
 	Shader(Shader&&) = default;
-	Shader() { _NGL_CHECK(_context = glCreateProgram()); }
+	Shader() { NGL_CHECK(_context = glCreateProgram()); }
 	Shader(size_t count, ...)
 		: Shader() {
 		va_list uniforms;
 		va_start(uniforms, count);
 		for (size_t i = 0; i < count; i++)
 		{
-			uniform_offset_t offset;
 			auto uniform = va_arg(uniforms, const char*);
-			_NGL_CHECK(offset = glGetUniformLocation(_context, uniform));
-			_uniforms.insert({ uniform,offset });
+			_uniforms.insert({ uniform,-1 });
 		}
 		va_end(uniforms);
 	}
+	template<std::convertible_to<const char*>... T>
+	Shader(T&&... properties)
+		: Shader(sizeof...(properties), std::forward<T>(properties)...)
+	{}
 	~Shader() {
 		if (!_context)return;
-		_NGL_CHECK(glDeleteProgram(_context));
+		NGL_CHECK(glDeleteProgram(_context));
 	}
 
-	void Attach(const _ShaderSource& code) { _NGL_CHECK(glAttachShader(_context, code.GetContext())); }
-	void Link()const {
-		_NGL_CHECK(glLinkProgram(_context));
+	void Attach(const _ShaderSource& code) { NGL_CHECK(glAttachShader(_context, code.GetContext())); }
+	void Link() {
+		NGL_CHECK(glLinkProgram(_context));
 #if NGS_BUILD_TYPE == NGS_DEBUG
-		//_NGL_CHECK(glValidateProgram(_context));
+		//NGL_CHECK(glValidateProgram(_context));
 		GLint status = GL_FALSE;
 		glGetProgramiv(_context, GL_LINK_STATUS, &status);
 		NGS_ASSERT(status != GL_FALSE, "link shader fail!");
 #endif
+		for (auto& [uniform, offset] : _uniforms) {
+			NGL_CHECK(offset = glGetUniformLocation(_context, uniform.c_str()));
+			NGS_ASSERT(offset != -1, Format("uniform %s not found!", uniform.c_str()));
+		}
 	}
 	void CompileAndLink(std::string_view vertex, std::string_view fragment, std::string_view geometry = "") {
 		VertexShader vs(vertex);

@@ -14,9 +14,9 @@ NGS_HPP_INLINE BufferObject::BufferObject(BufferTarget target, void_ptr data, si
 	, _update_begin(0)
 	, _update_size(size)
 {
-	_NGL_CHECK(glGenBuffers(1, &_context));
+	NGL_CHECK(glGenBuffers(1, &_context));
 	OpenGL::I().buffer_target->Select(this);
-	_NGL_CHECK(glBufferData((GLenum)target, size, nullptr, (GLenum)usage));
+	NGL_CHECK(glBufferData((GLenum)target, size, nullptr, (GLenum)usage));
 }
 NGS_HPP_INLINE BufferObject::BufferObject(BufferTarget target, size_t size, Usage usage)
 	: BufferObject(target, new byte[size](), size, usage)
@@ -37,7 +37,7 @@ NGS_HPP_INLINE BufferObject::BufferObject(BufferObject&& other)
 
 NGS_HPP_INLINE BufferObject::~BufferObject() {
 	if (!_context)return;
-	_NGL_CHECK(glDeleteBuffers(1, &_context));
+	NGL_CHECK(glDeleteBuffers(1, &_context));
 	if (!_is_reference)delete[] _data;
 }
 
@@ -45,8 +45,8 @@ NGS_HPP_INLINE void BufferObject::Update() {
 	if (!_required_update)return;
 	if (!_update_size)return;
 	State::Update();
-	_NGL_CHECK(glBindBuffer((GLenum)target, _context));
-	_NGL_CHECK(glBufferSubData((GLenum)target, _update_begin, _update_size, _data));
+	NGL_CHECK(glBindBuffer((GLenum)target, _context));
+	NGL_CHECK(glBufferSubData((GLenum)target, _update_begin, _update_size, _data));
 	_update_begin = _update_size = 0;
 }
 

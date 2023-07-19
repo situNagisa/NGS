@@ -17,6 +17,7 @@ public:
 	void Select(_State* state) { _current_state = state; _Derived::_Select(state); };
 	bool IsState(const _State& state) const { return IsState(&state); }
 	bool IsState(const _State* state) const { return _current_state == state; }
+	_State* GetCurrentState() { return _current_state; }
 
 	bool operator==(const _State& state)const { return _current_state == &state; }
 
