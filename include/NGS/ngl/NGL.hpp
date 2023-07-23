@@ -1,5 +1,9 @@
 ﻿#pragma once
 
+#include "NGS/base/base.hpp"
+#include "NGS/extend/extend.hpp"
+#include "NGS/math/math.hpp"
+
 //base
 #include "NGS/ngl/base/buffer.hpp"
 #include "NGS/ngl/base/opengl.hpp"

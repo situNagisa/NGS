@@ -74,7 +74,7 @@ public:
 
 	template<typename... Args>
 	static void Log(DLevel level, Args&&... args) {
-		TextColor color;
+		TextColor color = TextColor::white;
 		switch (level)
 		{
 		case DLevel::trace:

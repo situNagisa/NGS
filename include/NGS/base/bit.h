@@ -11,62 +11,42 @@
 #include "NGS/base/STL.h"
 #include "NGS/base/template_mate.h"
 
-
-NGS_BEGIN
-
-//inline constexpr uint64 bit(uint16 n) { return static_cast<uint64>(1) << n; }
-//inline constexpr uint64 bit_max(uint16 bitCount) { return bit(bitCount) - 1; }
-
-//template<bool B, class T>
-//inline void Bits(T& p, CIntegral auto bit) {
-//	if constexpr (B)
-//		p |= (T)bit;
-//	else
-//		p &= ~(T)bit;
-//}
-
-//inline void Bits(auto& p, CIntegral auto bit, bool boolean) {
-//	if (boolean)
-//		Bits<true>(p, bit);
-//	else
-//		Bits<false>(p, bit);
-//}
-
-//template<class T>
-//inline constexpr bool Bits(T p, CIntegral auto bit) { return p & (T)bit; }
-
-//template<size_t start, size_t end>
-//inline void Bits(auto& dest, auto source) {
-//	For<start, end>([&](uint16 i) {
-//		bool b = Bits(source, bit(i));
-//		Bits(dest, bit(i), b);
-//		});
-//}
-
-
-//inline constexpr size_t BitsOf(auto target = 0) { return sizeof(target) * 8; }
-//inline constexpr size_t ByteOf(size_t bitCount) {
-//	constexpr auto byteBits = BitsOf<byte>();
-//	if (bitCount % byteBits)return bitCount / byteBits + 1;
-//	return bitCount / byteBits;
-//}
-
 #if NGS_PLATFORM == NGS_MSVC
 #pragma warning(push)
 #pragma warning(disable: 4293)
 #endif
 
-static constexpr uint64 BitPerByte = 8;
+NGS_BEGIN
+
+namespace bit {
+	constexpr size_t bit_per_byte = 8;
+
+	template<CUnsignedIntegral _Int> constexpr _Int scope(size_t index) { return (_Int)1 << index; }
+	constexpr uint64 scope(size_t index) { return scope<uint64>(index); }
+
+	constexpr size_t as_byte(size_t bit_count) { return (((bit_count) / bit_per_byte) + (((bit_count) % bit_per_byte) > 0)); }
+	constexpr size_t as_bit(size_t byte_count) { return byte_count * bit_per_byte; }
+	template<class T> consteval size_t as_bit() { return as_bit(sizeof(T)); }
+
+	//template<CUnsignedIntegral _Int> constexpr _Int mask(CUnsignedIntegral auto bit_count) { return (bit_count >= as_bit<_Int>()) ? (_Int)(-1) : (scope<_Int>(bit_count) - 1); }
+	constexpr uint64 mask(CIntegral auto bit_count) { return (bit_count >= as_bit<uint64>()) ? (uint64)(-1) : (scope<uint64>(bit_count) - 1); }
+
+	constexpr auto set(auto bit_set, auto bit_scope, bool state) { return state ? bit_set | bit_scope : bit_set & ~bit_scope; }
+	constexpr auto get(auto bit_set, auto bit_scope) { return bit_set & bit_scope; }
+}
+
+
+
 #undef _N
 template<uint64 _N>
-	requires (_N <= (sizeof(uint64) * BitPerByte))
+	requires (_N <= bit::as_bit<uint64>())
 class BitSet {
 public:
 	static constexpr uint64 BitCount = _N;
-	static constexpr uint64 ByteCount = (((BitCount) / BitPerByte) + (((BitCount) % BitPerByte) > 0));
+	static constexpr uint64 ByteCount = bit::as_byte(BitCount);
 	using type = byte_<ByteCount>;
 
-	static constexpr type Mask = (BitCount >= 64) ? static_cast<type>(~(uint64)0) : static_cast<type>((((uint64)1 << BitCount) - 1));
+	static constexpr type Mask = bit::mask(BitCount);
 
 
 	class Bit {
@@ -151,7 +131,7 @@ public:
 	//constexpr type RotateLeft(size_t count)const { return std::rotl(_Get(), count); }
 	//constexpr type RotateRight(size_t count)const { return std::rotr(_Get(), count); }
 
-	constexpr size_t LeadingZero()const { return std::countl_zero(_Get()) - (ByteCount * BitPerByte - BitCount); }
+	constexpr size_t LeadingZero()const { return std::countl_zero(_Get()) - (bit::as_bit(ByteCount) - BitCount); }
 	constexpr size_t LeadingOne()const { return std::countl_one(_Get()); }
 	constexpr size_t TrailingZero()const { return std::countr_zero(_data); }
 	constexpr size_t TrailingOne()const { return std::countr_one(_data); }
@@ -164,38 +144,30 @@ public:
 	void Flip() { _data = ~_data; }
 
 protected:
-	void _ON(size_t index) { _data |= (1 << index); }
-	void _OFF(size_t index) { _data &= ~(1 << index); }
-	void _Set(size_t index, bool boolean) {
-		if (boolean)
-			_ON(index);
-		else
-			_OFF(index);
-	}
+	void _ON(size_t index) { _data = bit::set(_data, bit::scope(index), true); }
+	void _OFF(size_t index) { _data = bit::set(_data, bit::scope(index), false); }
+	void _Set(size_t index, bool boolean) { _data = bit::set(_data, bit::scope(index), boolean); }
+
 	constexpr type _Get()const { return _data & Mask; }
-	constexpr bool _Get(size_t index)const { return _data & (1 << index); }
+	constexpr bool _Get(size_t index)const { return bit::get(_data, bit::scope(index)); }
 private:
 
 	type _data;
 };
 
-#if NGS_PLATFORM == NGS_MSVC
-#pragma warning(pop)
-#endif
-
-class Flag : public BitSet<sizeof(uint64)* BitPerByte> {
+class Flag : public BitSet<bit::as_bit<uint64>()> {
 public:
 	constexpr Flag()
-		: BitSet<sizeof(uint64)* BitPerByte>()
+		: BitSet<bit::as_bit<uint64>()>()
 	{}
 
 	template<size_t _N>
 	constexpr Flag(const BitSet<_N>& other)
-		: BitSet<sizeof(uint64)* BitPerByte>(typename BitSet<_N>::type(other))
+		: BitSet<bit::as_bit<uint64>()>(typename BitSet<_N>::type(other))
 	{}
 
 	constexpr Flag(size_t index)
-		: BitSet<sizeof(uint64)* BitPerByte>(1ULL << index)
+		: BitSet<bit::as_bit<uint64>()>(1ULL << index)
 	{}
 
 	template<CIntegral T>
@@ -207,3 +179,8 @@ constexpr Flag FLAG_ANY = {};
 #define NGS_FLAG(id,value) static constexpr _NGS Flag id{value}
 
 NGS_END
+
+
+#if NGS_PLATFORM == NGS_MSVC
+#pragma warning(pop)
+#endif

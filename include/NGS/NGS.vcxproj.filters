@@ -492,6 +492,15 @@
     <ClInclude Include="ngl\vertex\vertex.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="base\base.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\embedded.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\math.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">

@@ -9,12 +9,7 @@ using pin_t = ngs::uint32;
 
 class EmbeddedObject : public DeleteCopy {
 public:
-	virtual ~EmbeddedObject() {
-		if (_data) {
-			ngs::Delete(_data);
-			_data = nullptr;
-		}
-	}
+	virtual ~EmbeddedObject(){}
 
 	virtual bool IsOpened()const = 0;
 	virtual void Close() = 0;

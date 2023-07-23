@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "NGS/base/base.h"
-#include "NGS/extend/stream.h"
 
 NGS_BEGIN
 
@@ -204,12 +203,10 @@ inline void ByteInverse(byte_ptr p, size_t size) {
 template<_NGS_CPT CIntegral T>
 inline void ByteInverse(T& p) { ByteInverse(byte_ptr(&p), sizeof(T)); }
 
-#ifdef _MSC_VER
-inline
-::size_t SizeOf(void* block) { return _msize(block); }
+#if NGS_COMPILER == NGS_MSVC && NGS_PLATFORM == NGS_WINDOWS
+inline size_t SizeOf(void* block) { return _msize(block); }
 #else
-inline
-::size_t SizeOf(void* block) { return 0; }
+inline size_t SizeOf(void* block) { return 0; }
 #endif
 
 template<size_t _Count>

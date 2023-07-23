@@ -252,7 +252,7 @@ NGS_DEFINE_ARGB(B, G, R, A);
 
 struct HSV {
 	using HueType = byte;
-	constexpr static auto HueRate = (BitSet<sizeof(HueType) * BitPerByte>::Mask) >= 360 ? 2 : 1;
+	constexpr static auto HueRate = (bit::mask(bit::as_bit<HueType>())) >= 360 ? 2 : 1;
 
 	constexpr HSV() = default;
 	constexpr HSV(byte hue, float32 saturation, float32 value)

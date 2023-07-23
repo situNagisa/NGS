@@ -20,14 +20,14 @@ namespace ngs_linux {
 	};
 	ngs::PixelFormat Convert(ngs::uint32 format) {
 		auto it = pixel_convert_map.find(format);
-		ngs::nos.Log("ngs_linux::Convert", "convert format 0x%x\n", format);
+		NGS_LOGFL(debug, "convert format 0x%x", format);
 		return it == pixel_convert_map.end() ? ngs::PixelFormat::unknown : it->second;
 	}
 	ngs::uint32 Convert(ngs::PixelFormat format) {
 		for (auto& i : pixel_convert_map) {
 			if (i.second == format)return i.first;
 		}
-		ngs::nos.Warning("unknown pixel format\n");
+		NGS_LOGFL(warning, "unknown pixel format");
 		return 0;
 	}
 }
@@ -57,18 +57,18 @@ bool V4L2::Open(const std::filesystem::path& path) {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
 	if (!data.device.Open(path)) {
-		ngs::nos.Error("V4L2 can't open device file %s!\n", path.string().c_str());
+		NGS_LOGFL(error, "V4L2 can't open device file %s!", path.string().c_str());
 		goto err;
 	}
 	if (!data.device.IOCtrl(VIDIOC_QUERYCAP, &data.cap)) {
-		ngs::nos.Error("V4L2 can't read capture!\n");
+		NGS_LOGFL(error, "V4L2 can't read capture!");
 		return false;
 	}
-	if (!ngs::Bits(data.cap.capabilities, V4L2_CAP_VIDEO_CAPTURE)) {
-		ngs::nos.Error("%s : No capture video device!\n", path.string().c_str());
+	if (!bit::get(data.cap.capabilities, V4L2_CAP_VIDEO_CAPTURE)) {
+		NGS_LOGFL(error, "%s : No capture video device!", path.string().c_str());
 		goto err;
 	}
-	ngs::nos.Log("V4L2::Open", "open %s successfully\n", path.string().c_str());
+	NGS_LOGFL(debug, "open %s successfully", path.string().c_str());
 
 	LoadDeviceDescription();
 
@@ -93,7 +93,7 @@ inline void V4L2::Close()
 
 	v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	if (!data.device.IOCtrl(VIDIOC_STREAMOFF, &type)) {
-		ngs::nos.Error("close buffer stream fail!\n");
+		NGS_LOGFL(error, "close buffer stream fail!");
 	}
 	data.device.Close();
 
@@ -102,7 +102,7 @@ inline void V4L2::Close()
 }
 
 inline void V4L2::LoadDeviceDescription() {
-	ngs::nos.Log("V4L2::Open", "load device's format descriptions!\n");
+	NGS_LOGFL(debug, "load device's format descriptions!");
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
 	v4l2_fmtdesc description = {};
@@ -131,7 +131,7 @@ inline void V4L2::LoadDeviceDescription() {
 
 		std::memcpy(format.description, description.description, sizeof(description.description));
 
-		ngs::nos.Log("V4L2::Open", "format 0x%x description %s\n", format.format, format.description);
+		NGS_LOGFL(debug, "format 0x%x description %s", format.format, format.description);
 
 		while (data.device.IOCtrl(VIDIOC_ENUM_FRAMESIZES, &frm_size)) {
 			frm_ival.index = 0;
@@ -144,11 +144,11 @@ inline void V4L2::LoadDeviceDescription() {
 			width = frm_size.discrete.width;
 			height = frm_size.discrete.height;
 
-			ngs::nos.Trace("size< %d,%d >\n", width, height);
+			NGS_LOGFL(debug, "size< %d,%d >", width, height);
 
 			while (data.device.IOCtrl(VIDIOC_ENUM_FRAMEINTERVALS, &frm_ival)) {
 				fps.push_back(frm_ival.discrete.numerator);
-				ngs::nos.Trace("\tfps<%d>\n", fps.back());
+				NGS_LOGFL(debug, "\tfps<%d>\n", fps.back());
 				frm_ival.index++;
 			}
 
@@ -156,7 +156,7 @@ inline void V4L2::LoadDeviceDescription() {
 		}
 		description.index++;
 	}
-	ngs::nos.Log("V4L2::LoadDeviceDescription", "descriptions %d\n", data.descriptions.size());
+	NGS_LOGFL(debug, "descriptions %d", data.descriptions.size());
 }
 
 inline std::vector<ngs::PixelFormat> V4L2::GetSupportPixelFormat() const
@@ -187,7 +187,7 @@ inline bool V4L2::IsSupport(ngs::PixelFormat f) const
 inline void V4L2::Update() {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 	if (!data.device.IOCtrl(VIDIOC_QBUF, data.currentBuffer)) {
-		ngs::nos.Error("queue buffer fail!\n");
+		NGS_LOGFL(error, "queue buffer fail!");
 		return;
 	}
 	//ngs::nos.Log("V4L2::Update", "dequeue buffer successfully!\n");
@@ -197,7 +197,7 @@ inline void V4L2::Update() {
 	buffer.memory = V4L2_MEMORY_MMAP;
 	// 从队列中取出一帧数据 
 	if (!data.device.IOCtrl(VIDIOC_DQBUF, &buffer)) {
-		ngs::nos.Error("dequeue buffer fail!\n");
+		NGS_LOGFL(error, "dequeue buffer fail!");
 		return;
 	}
 	//ngs::nos.Log("V4L2::Update", "queue buffer successfully!\n");
@@ -217,7 +217,7 @@ inline bool V4L2::Initialize()
 		requestBuffer.memory = V4L2_MEMORY_MMAP;
 
 		if (!data.device.IOCtrl(VIDIOC_REQBUFS, &requestBuffer)) {
-			ngs::nos.Error("allocate buffer fail!\n");
+			NGS_LOGFL(error, "allocate buffer fail!");
 			return false;
 		}
 
@@ -225,23 +225,23 @@ inline bool V4L2::Initialize()
 		buffer.memory = V4L2_MEMORY_MMAP;
 		for (buffer.index = 0; buffer.index < data.buffers.max_size(); buffer.index++) {
 			if (!data.device.IOCtrl(VIDIOC_QUERYBUF, &buffer)) {
-				ngs::nos.Error("allocate buffer fail!\n");
+				NGS_LOGFL(error, "allocate buffer fail!");
 				return false;
 			}
 			auto& cache = data.buffers.at(buffer.index);
 			cache.first = data.device.MemoryMap(buffer.length, PROT_READ | PROT_WRITE, MAP_SHARED, buffer.m.offset);
 			cache.second = buffer.length;
 			if (cache.first == MAP_FAILED) {
-				ngs::nos.Error("memory map error!\n");
+				NGS_LOGFL(error, "memory map error!");
 				return false;
 			}
 		}
-		ngs::nos.Log("V4L2::Initialize", "memory map successfully!\n");
+		NGS_LOGFL(debug, "memory map successfully!");
 
 		for (buffer.index = 0; buffer.index < data.buffers.max_size(); buffer.index++)
 		{
 			if (!data.device.IOCtrl(VIDIOC_QBUF, &buffer)) {
-				ngs::nos.Error("[%d] queue buffer fail!\n", buffer.index);
+				NGS_LOGFL(error, "[%d] queue buffer fail!", buffer.index);
 				return false;
 			}
 		}
@@ -251,7 +251,7 @@ inline bool V4L2::Initialize()
 	{
 		v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 		if (!data.device.IOCtrl(VIDIOC_STREAMON, &type)) {
-			ngs::nos.Error("open camera stream fail!\n");
+			NGS_LOGFL(error, "open camera stream fail!");
 			return false;
 		}
 	}
@@ -265,7 +265,7 @@ inline bool V4L2::Initialize()
 		buffer.memory = V4L2_MEMORY_MMAP;
 		// 从队列中取出一帧数据 
 		if (!data.device.IOCtrl(VIDIOC_DQBUF, &buffer)) {
-			ngs::nos.Error("dequeue buffer fail!\n");
+			NGS_LOGFL(error, "dequeue buffer fail!");
 			return false;
 		}
 	}
@@ -284,17 +284,17 @@ inline bool V4L2::SetFormat(size_t width, size_t height, ngs::PixelFormat p)
 	fmt.fmt.pix.height = height;
 	fmt.fmt.pix.pixelformat = pixel = ngs_linux::Convert(p);
 	if (!data.device.IOCtrl(VIDIOC_S_FMT, &fmt)) {
-		ngs::nos.Error("can't set frame format!\n");
+		NGS_LOGFL(error, "can't set frame format!");
 		return false;
 	}
 	if (fmt.fmt.pix.pixelformat != pixel) {
-		ngs::nos.Error("the device doesn't support 0x%02x format!\n", p);
+		NGS_LOGFL(error, "the device doesn't support 0x%02x format!", p);
 		return false;
 	}
 
 	data.size.x = fmt.fmt.pix.width;
 	data.size.y = fmt.fmt.pix.height;
-	ngs::nos.Log("V4L2::SetFormat", "video size %d,%d\n", data.size.x, data.size.y);
+	NGS_LOGFL(debug, "video size %d,%d", data.size.x, data.size.y);
 	return true;
 }
 
@@ -305,12 +305,12 @@ inline bool V4L2::SetFrameRate(ngs::byte frameRate)
 
 	streamParm.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
 	if (!data.device.IOCtrl(VIDIOC_G_PARM, &streamParm)) {
-		ngs::nos.Error("set frame rate fail!\n");
+		NGS_LOGFL(error, "set frame rate fail!");
 		return false;
 	}
 
-	if (!ngs::Bits(streamParm.parm.capture.capability, V4L2_CAP_TIMEPERFRAME)) {
-		ngs::nos.Warning("the device doesn't support frame rate set!\n");
+	if (!bit::get(streamParm.parm.capture.capability, V4L2_CAP_TIMEPERFRAME)) {
+		NGS_LOGFL(warning, "the device doesn't support frame rate set!");
 		return false;
 	}
 
@@ -318,7 +318,7 @@ inline bool V4L2::SetFrameRate(ngs::byte frameRate)
 	streamParm.parm.capture.timeperframe.denominator = frameRate;
 
 	if (!data.device.IOCtrl(VIDIOC_S_PARM, &streamParm)) {
-		ngs::nos.Error("set frame rate fail!\n");
+		NGS_LOGFL(error, "set frame rate fail!");
 		return false;
 	}
 

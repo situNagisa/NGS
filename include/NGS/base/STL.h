@@ -23,6 +23,7 @@
 #include <set>
 #include <variant>
 #include <stack>
+#include <span>
 
 #include <functional>
 

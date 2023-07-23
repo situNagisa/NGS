@@ -16,7 +16,7 @@ NGS_END
 NGL_TARGET_BEGIN
 
 class Texture : public Target<Texture, objects::_Texture> {
-	friend class base;
+	friend class Target<Texture, objects::_Texture>;
 	static void _Select(state_type* state);
 public:
 

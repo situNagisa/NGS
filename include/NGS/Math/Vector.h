@@ -3,9 +3,7 @@
 #include "NGS/base/base.h"
 #include <type_traits>
 
-/**
- * 还差最后一步，语法上已经没问题了，但在宏的传参上还有问题，msvc允许接收空参数，但是gcc不行
- */
+#undef _I
 
 NGS_BEGIN
 
@@ -21,9 +19,9 @@ template<
 	size_t _N,
 	_NGS_CPT CArithmetic _ElementType,
 	class _Derived,
-	size_t... _I
+	size_t... _Index
 >
-class _Vector<_N, _ElementType, _Derived, std::index_sequence<_I...>> {
+class _Vector<_N, _ElementType, _Derived, std::index_sequence<_Index...>> {
 
 #define _VECTOR_COMMA +
 #define _VECTOR_NOTHING 

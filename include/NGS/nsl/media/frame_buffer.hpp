@@ -15,24 +15,24 @@ bool FrameBuffer::Open(const std::filesystem::path& path) {
 	auto& data = *reinterpret_cast<_FrameBufferData*>(_data);
 
 	if (!_file.IsOpened() && !_file.Open(path)) {
-		ngs::nos.Error("open path %s fail!\b", path.string().c_str());
+		NGS_LOGFL(error, "open path %s fail!", path.string().c_str());
 		goto err_new;
 	}
 
 	if (!_file.IOCtrl(FBIOGET_VSCREENINFO, &data.var)) {
-		ngs::nos.Error("io ctrl var fail!\n");
+		NGS_LOGL(error, "io ctrl var fail!");
 		goto err_opened;
 	}
 	if (!_file.IOCtrl(FBIOGET_FSCREENINFO, &data.fix)) {
-		ngs::nos.Error("io ctrl fix fail!\n");
+		NGS_LOGL(error, "io ctrl fix fail!");
 		goto err_opened;
 	}
 
 	if (!(_screen = _file.MemoryMap(GetSize(), PROT_READ | PROT_WRITE, MAP_SHARED))) {
-		ngs::nos.Error("memory map fail!\n");
+		NGS_LOGFL(error, "memory map fail!");
 		goto err_opened;
 	}
-	ngs::nos.Log("FrameBuffer::Open", "successfully!\n");
+	NGS_LOGFL(debug, "successfully!");
 
 	return true;
 

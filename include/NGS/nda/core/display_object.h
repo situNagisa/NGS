@@ -125,10 +125,10 @@ private:
 
 
 
-__container_ptr DisplayObject::Parent() { return down_cast<__container>(Leaf::Parent()); }
-__container_ptr_cst DisplayObject::Parent()const { return down_cast<__container>(Leaf::Parent()); }
+inline __container_ptr DisplayObject::Parent() { return down_cast<__container>(Leaf::Parent()); }
+inline __container_ptr_cst DisplayObject::Parent()const { return down_cast<__container>(Leaf::Parent()); }
 
-std::optional<std::reference_wrapper<__display>> DisplayObjectContainer::GetChild(nstring_view name) {
+inline std::optional<std::reference_wrapper<__display>> DisplayObjectContainer::GetChild(nstring_view name) {
 	auto it = std::ranges::find_if(_GetChildren(), [&name](__leaf_ptr leaf) -> bool {
 		__display_ptr child = down_cast<__display>(leaf);
 		return child->name == name;
@@ -136,7 +136,7 @@ std::optional<std::reference_wrapper<__display>> DisplayObjectContainer::GetChil
 	if (it == _GetChildren().end())return {};
 	return std::reference_wrapper<__display>(*down_cast<__display>(*it));
 }
-std::optional<std::reference_wrapper<__display_cst>> DisplayObjectContainer::GetChild(nstring_view name)const {
+inline std::optional<std::reference_wrapper<__display_cst>> DisplayObjectContainer::GetChild(nstring_view name)const {
 	auto it = std::ranges::find_if(_GetChildren(), [&name](__leaf_ptr leaf) -> bool {
 		__display_ptr child = down_cast<__display>(leaf);
 		return child->name == name;
@@ -144,14 +144,14 @@ std::optional<std::reference_wrapper<__display_cst>> DisplayObjectContainer::Get
 	if (it == _GetChildren().end())return {};
 	return std::reference_wrapper<__display_cst>(*down_cast<__display_cst>(*it));
 }
-std::string DisplayObjectContainer::GetTreeStruct()const {
+inline std::string DisplayObjectContainer::GetTreeStruct()const {
 	std::string treeStruct = {};
 	treeStruct += name;
 	treeStruct += '\n';
 	treeStruct += _GetTreeStruct("");
 	return treeStruct;
 }
-std::string DisplayObjectContainer::_GetTreeStruct(std::string_view prefix)const {
+inline std::string DisplayObjectContainer::_GetTreeStruct(std::string_view prefix)const {
 	std::string treeStruct = {};
 	size_t numChildren = GetNumChildren();
 

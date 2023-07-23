@@ -26,6 +26,7 @@
     <ClInclude Include="algorithm\PID.hpp" />
     <ClInclude Include="base\assert.h" />
     <ClInclude Include="base\base.h" />
+    <ClInclude Include="base\base.hpp" />
     <ClInclude Include="base\base_class.h" />
     <ClInclude Include="base\bit.h" />
     <ClInclude Include="base\boost\boost.h" />
@@ -58,6 +59,7 @@
     <ClInclude Include="base\space_transform.h" />
     <ClInclude Include="base\type_info.h" />
     <ClInclude Include="embedded\bus\bus.h" />
+    <ClInclude Include="embedded\embedded.hpp" />
     <ClInclude Include="extend\console.h" />
     <ClInclude Include="extend\console.hpp" />
     <ClInclude Include="base\defined.h" />
@@ -101,6 +103,7 @@
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="math\line.h" />
     <ClInclude Include="math\math.h" />
+    <ClInclude Include="math\math.hpp" />
     <ClInclude Include="math\matrix.h" />
     <ClInclude Include="math\rectangle.h" />
     <ClInclude Include="math\rotation.h" />

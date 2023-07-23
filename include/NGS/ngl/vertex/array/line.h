@@ -43,12 +43,12 @@ public:
 	void AddBrokenLine(size_t count, _NGL_VAO_BUF_VIEW(base) buffers) { AddVertexes(count, std::array<typename base::tag_buffer::type, base::buffer_count>{std::launder(reinterpret_cast<base::tag_buffer::type>(std::ranges::cdata(buffers)))...}); }
 	void AddBrokenLine(size_t count, _NGL_VAO_BUF_CONTAINER(base) buffers) { AddVertexes(count, std::array<typename base::tag_buffer::type, base::buffer_count>{std::launder(reinterpret_cast<base::tag_buffer::type>(std::ranges::cdata(buffers)))...}); }
 
-	void AddLine(_NGL_VAO_BUF_T(buffers, base) buffers) { AddPolygon(2, buffers); }
+	void AddLine(_NGL_VAO_BUF_T(buffers, base) buffers) { AddPolygon(2, buffers...); }
 	void AddLine(
 		_NGL_VAO_BUF_T(buffers, base) start,
 		_NGL_VAO_BUF_T(buffers, base) end
 	) {
-		std::array<std::array<base::tag_buffer::type, base::buffer_count>, 2> points{{
+		std::array<std::array<typename base::tag_buffer::type, base::buffer_count>, 2> points{{
 			{ std::launder(reinterpret_cast<base::tag_buffer::type>(start))...},
 			{ std::launder(reinterpret_cast<base::tag_buffer::type>(end))... },
 			}};
@@ -58,7 +58,7 @@ public:
 		_NGL_VAO_BUF_VIEW(base) start,
 		_NGL_VAO_BUF_VIEW(base) end
 	) {
-		std::array<std::array<base::tag_buffer::type, base::buffer_count>, 2> points{{
+		std::array<std::array<typename base::tag_buffer::type, base::buffer_count>, 2> points{{
 			{ std::launder(reinterpret_cast<base::tag_buffer::type>(std::ranges::cdata(start)))...},
 			{ std::launder(reinterpret_cast<base::tag_buffer::type>(std::ranges::cdata(end)))... },
 			}};
@@ -68,7 +68,7 @@ public:
 		_NGL_VAO_BUF_CONTAINER(base) start,
 		_NGL_VAO_BUF_CONTAINER(base) end
 	) {
-		std::array<std::array<base::tag_buffer::type, base::buffer_count>, 2> points{{
+		std::array<std::array<typename base::tag_buffer::type, base::buffer_count>, 2> points{{
 			{ std::launder(reinterpret_cast<base::tag_buffer::type>(std::ranges::cdata(start)))...},
 			{ std::launder(reinterpret_cast<base::tag_buffer::type>(std::ranges::cdata(end)))... },
 			}};

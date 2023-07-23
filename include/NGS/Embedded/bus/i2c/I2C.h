@@ -21,9 +21,8 @@ public:
 	static constexpr __address null_address = 0;
 public:
 	I2C();
-	virtual ~I2C()override {
-		_address = 0;
-	}
+	virtual ~I2C()override;
+
 	virtual bool Open(pin_t SDA, pin_t SCL, __address address) = 0;
 	bool Open(pin_t SDA, pin_t SCL) { return Open(SDA, SCL, null_address); }
 
@@ -37,7 +36,7 @@ protected:
 	__address _AddressRead()const { return (_address << 1) | (int)Flag::read; }
 
 protected:
-	__address _mask = BitSet<7>::Mask;
+	__address _mask = bit::mask(7);
 	__address _address = null_address;
 };
 
@@ -95,7 +94,7 @@ public:
 	size_t Transfer(const Message* messages, size_t count);
 	size_t Transfer(const Message& message) { return Transfer(&message, 1); }
 	template<std::ranges::random_access_range _Rng>
-		requires std::same_as<std::ranges::range_value_t<_Rng>, Message>
+		requires std::convertible_to<std::ranges::range_value_t<_Rng>, Message>
 	size_t Transfer(const _Rng& messages) { return Transfer(std::ranges::cdata(messages), std::ranges::size(messages)); }
 protected:
 	std::pair<bool, ACK_Type> _ack = { false,ACK_Type::nack };

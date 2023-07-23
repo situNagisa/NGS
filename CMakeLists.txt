@@ -1,16 +1,22 @@
-cmake_minimum_required(VERSION 3.8)
+﻿cmake_minimum_required(VERSION 3.8)
 
-#set(CMAKE_CXX_STANDARD 20)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
-#set(CMAKE_EXE_LINKER_FLAGS "-static")
+project(NGS VERSION 0.1)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmodules-ts")
-set(CMAKE_EXE_LINKER_FLAGS "-static")
+include(GNUInstallDirs)
 
-project(NAGISA CXX)
+set(NGS_CMAKE_ROOT "$ENV{NAGISA_ROOT}/cmake" CACHE PATH "")
+include(${NGS_CMAKE_ROOT}/env.cmake)
 
-set(PROJECT_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
+add_subdirectory(src/NGS)
+add_subdirectory(test)
 
-#add_subdirectory(./include)
-add_subdirectory(src)
+option(NAGISA_BUILD_UNIT_TESTS "build unit test" OFF)
+
+if(NAGISA_BUILD_UNIT_TESTS)
+	add_subdirectory(unit_test)
+endif()
+
+install(
+	DIRECTORY ${NGS_SOLUTION_INCLUDE_DIR}/${PROJECT_NAME}
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)

@@ -5,7 +5,7 @@
 #include "NGS/base/utility.h"
 NGS_BEGIN
 
-#if NGS_COMPILER == NGS_GCC
+#if NGS_COMPILER == NGS_GCC && defined(NGS_GCC_USE_ABI)
 #include <cxxabi.h> 
 #define NGS_GET_TYPE_NAME(type)		\
 ([]()->std::string					\
@@ -122,9 +122,12 @@ struct ParseIdFactor {
 	}
 	static std::string GetFunctionName(const std::string& function) {
 		std::string id_;
-		std::regex regex{before(function_name, R"(\()")};
 		std::smatch match;
+
+		static auto function_regex = before(function_name, R"(\()");
+		std::regex regex{function_regex};
 		std::regex_search(function, match, regex);
+
 		if (match.empty())return function;
 		id_ = match.begin()->str();
 		return id_;

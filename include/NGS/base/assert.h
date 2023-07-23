@@ -65,6 +65,6 @@ _NGS_ASSERT_FAIL								\
 
 #else
 
-#define NGS_ASSERT(...) ((void*)0)
+#define NGS_ASSERT(...) 
 
 #endif // _DEBUG

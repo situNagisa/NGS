@@ -21,7 +21,7 @@ NGS_END
 
 class OpenGL : public Singleton<OpenGL> {
 private:
-	friend class base;
+	friend class Singleton<OpenGL>;
 	OpenGL();
 	~OpenGL();
 public:

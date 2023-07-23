@@ -36,6 +36,8 @@
 #define _NGS_MPL 		  ::ngs::mpl::
 #define NGS_MPL_BEGIN	namespace mpl{
 
+#define _NGS_PRIV_BEGIN namespace priv{
+
 
 #define NGS_TYPE_DEFINE(type,id)        \
 using __##id    = type;                 \

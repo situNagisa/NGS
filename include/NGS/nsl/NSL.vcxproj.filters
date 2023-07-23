@@ -63,5 +63,8 @@
     <ClInclude Include="media\frame_buffer.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="NSL.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

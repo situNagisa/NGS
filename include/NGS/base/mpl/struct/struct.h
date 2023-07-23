@@ -39,10 +39,9 @@ public:
 	NGS_mcst size_t size = (0 + ... + _var_t<_SVar>::size);
 private:
 	NGS_mcst std::array<size_t, count> _sizes = { { _var_t<_SVar>::size... } };
+	consteval static size_t _GET_OFFSET(size_t index) { return index ? _GET_OFFSET(index - 1) + _sizes[index - 1] : 0;}
 	template<size_t _Index>
-	NGS_mcst size_t _offset = _offset<_Index - 1> +_sizes[_Index - 1];
-	template<>
-	NGS_mcst size_t _offset<0> = 0;
+	NGS_mcst size_t _offset = _GET_OFFSET(_Index);
 public:
 	/** @brief 元变量对应的动态结构体数组（可动态访问） */
 	NGS_mcst std::array<member_var_d, count> vars = { member_var_d{_SVar::var::count, _SVar::var::size,_offset<_SVar::index>, }... };

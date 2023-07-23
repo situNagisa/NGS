@@ -12,7 +12,7 @@ NGS_END
 NGL_TARGET_BEGIN
 
 class ShaderProgram : public Target<ShaderProgram, objects::Shader> {
-	friend class base;
+	friend class Target<ShaderProgram, objects::Shader>;
 	static void _Select(state_type* state);
 };
 

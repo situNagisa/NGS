@@ -30,15 +30,15 @@ static bool _Export(ngs::pin_t pin) {
 		nsl::File exp("export");
 
 		if (!exp.OpenDirectory(nsl::GPIO_DIR, nsl::File::F_OPEN_WRITE_ONLY)) {
-			ngs::nos.Log("::_Export", "注册gpio %s 失败！\n", pin_s.c_str());
+			NGS_LOGFL(warning, "注册gpio %s 失败！\n", pin_s.c_str());
 			return false;
 		}
 
 		int ret = exp.Write(pin_s);
-		ngs::nos.Log("::_Export", "ret:%d size:%d\n", ret, pin_s.size());
+		NGS_LOGFL(debug, "ret:%d size:%d\n", ret, pin_s.size());
 		if (pin_s.size() != ret) {
 			exp.Close();
-			ngs::nos.Log("::_Export", "注册gpio %s 失败！\n", pin_s.c_str());
+			NGS_LOGFL(warning, "注册gpio %s 失败！\n", pin_s.c_str());
 			return false;
 		}
 		exp.Close();
@@ -54,14 +54,14 @@ static bool _UnExport(ngs::pin_t pin) {
 		nsl::File unExp("unexport");
 
 		if (!unExp.OpenDirectory(nsl::GPIO_DIR, nsl::File::F_OPEN_WRITE_ONLY)) {
-			ngs::nos.Log("::_UnExport", "注销gpio %s 失败！\n", pin_s.c_str());
+			NGS_LOGFL(warning, "注销gpio %s 失败！\n", pin_s.c_str());
 			return false;
 		}
 		int ret = unExp.Write(pin_s);
-		ngs::nos.Log("::_UnExport", "ret:%d size:%d\n", ret, pin_s.size());
+		NGS_LOGFL(debug, "ret:%d size:%d\n", ret, pin_s.size());
 		if (pin_s.size() != ret) {
 			unExp.Close();
-			ngs::nos.Log("::_UnExport", "注销gpio %s 失败！\n", pin_s.c_str());
+			NGS_LOGFL(warning, "注销gpio %s 失败！\n", pin_s.c_str());
 			return false;
 		}
 		unExp.Close();
@@ -90,7 +90,7 @@ bool ngs::GPIO::Open(ngs::pin_t pin, Mode mode) {
 	SetMode(mode);
 	if (!data.value.IsOpened())goto err;
 
-	ngs::nos.Log("GPIO::Open", "pin:%d successfully!\n", pin);
+	NGS_LOGFL(debug, "pin:%d successfully!\n", pin);
 
 	return true;
 err:;

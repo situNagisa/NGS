@@ -6,20 +6,20 @@
 NSL_BEGIN
 
 inline bool File::Access(__path_ref_cst path, AccessMode mode) {
-	ngs::nos.Log("File::Access", "flag:%x\n", mode);
+	NGS_LOGFL(debug,"flag:%x", mode);
 	return !access(path.string().c_str(), mode);
 }
 
 
 inline bool File::Open(__path_ref_cst path, OpenMode mode) {
 	_path = path;
-	ngs::nos.Log("File::Open", "flag:%x\n", mode);
+	NGS_LOGFL(debug, "flag:%x", mode);
 	_fd = open(path.string().c_str(), mode);
 
 	if (_fd < 0)
-		ngs::nos.Error("打开 %s 失败\n", path.string().c_str());
+		NGS_LOGFL(error, "打开 %s 失败", path.string().c_str());
 	else
-		ngs::nos.Log("File::Open", "打开 %s 成功!\n", path.string().c_str());
+		NGS_LOGFL(debug, "打开 %s 成功!", path.string().c_str());
 
 	return _fd >= 0;
 }

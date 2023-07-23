@@ -12,7 +12,22 @@
       "ctestCommandArgs": "",
       "variables": [
         {
-          "name": "NGS_BUILD_HPP",
+          "name": "NGS_USE_HPP",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "NAGISA_BUILD_UNIT_TESTS",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "COMPONENT_imgui",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "COMPONENT_nda",
           "value": "True",
           "type": "BOOL"
         }
@@ -42,13 +57,53 @@
       "variables": [
         {
           "name": "CMAKE_C_COMPILER",
-          "value": "${env.BIN_ROOT}/gcc.exe",
+          "value": "D:/Application/Complier/mingw64/bin/gcc.exe",
           "type": "STRING"
         },
         {
           "name": "CMAKE_CXX_COMPILER",
-          "value": "${env.BIN_ROOT}/g++.exe",
+          "value": "D:/Application/Complier/mingw64/bin/g++.exe",
           "type": "STRING"
+        },
+        {
+          "name": "NAGISA_BUILD_UNIT_TESTS",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "COMPONENT_esp",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "COMPONENT_nda",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "COMPONENT_nsl",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "COMPONENT_nsw",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "COMPONENT_graphic",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "COMPONENT_ngl",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "COMPONENT_imgui",
+          "value": "False",
+          "type": "BOOL"
         }
       ],
       "intelliSenseMode": "linux-gcc-x64"

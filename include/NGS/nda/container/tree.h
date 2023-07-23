@@ -20,7 +20,7 @@ protected:
 
 private:
 	__tree_ptr _parent = nullptr;
-	friend class __tree;
+	friend class Tree;
 };
 class Tree : virtual public Leaf {
 public:
@@ -58,41 +58,41 @@ private:
 	std::vector<__leaf_ptr> _children;
 };
 
-void Tree::AddChild(__leaf_ref leaf) {
+inline void Tree::AddChild(__leaf_ref leaf) {
 	AddChild(leaf, _children.size());
 }
-void Tree::RemoveChild(__leaf_ref leaf) {
+inline void Tree::RemoveChild(__leaf_ref leaf) {
 	int index = GetChildIndex(leaf);
 	if (index == -1)return;
 	RemoveChild(index);
 }
 
-void Tree::AddChild(__leaf_ref child, size_t index) {
+inline void Tree::AddChild(__leaf_ref child, size_t index) {
 	NGS_ASSERT(!child._parent, "can't add child that has parent!");
 	NGS_ASSERT(index <= _children.size(), "index out of range!");
 	_children.insert(_children.begin() + index, &child);
 	child._parent = this;
 }
 
-int Tree::GetChildIndex(__leaf_ref_cst child) const {
+inline int Tree::GetChildIndex(__leaf_ref_cst child) const {
 	auto it = std::ranges::find(_children, &child);
 	return it == _children.end() ? -1 : it - _children.begin();
 }
 
-void Tree::RemoveChild(size_t index) {
+inline void Tree::RemoveChild(size_t index) {
 	auto& child = *_GetChild(index);
 	child._parent = nullptr;
 	_children.erase(_children.begin() + index);
 }
 
-void Tree::RemoveChildren() {
+inline void Tree::RemoveChildren() {
 	for (auto child : _children) {
 		child->_parent = nullptr;
 	}
 	_children.clear();
 }
 
-size_t Tree::GetNumChildren(bool recursion) const {
+inline size_t Tree::GetNumChildren(bool recursion) const {
 	if (!recursion)return _children.size();
 	size_t num = _children.size();
 	for (auto& it : _children) {
@@ -103,7 +103,7 @@ size_t Tree::GetNumChildren(bool recursion) const {
 	return num;
 }
 
-bool Tree::Contain(__leaf_ref_cst display, bool recursion) const {
+inline bool Tree::Contain(__leaf_ref_cst display, bool recursion) const {
 	__tree_ptr_cst p = display.Parent();
 	do {
 		if (p == this)return true;

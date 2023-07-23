@@ -18,7 +18,7 @@ NGS_END
 NGL_TARGET_BEGIN
 
 class VertexArray : public Target < VertexArray, objects::VertexArrayBase > {
-	friend class base;
+	friend class Target < VertexArray, objects::VertexArrayBase >;
 	static void _Select(state_type* state);
 };
 

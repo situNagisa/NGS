@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/nda/defined.h"
 #include "NGS/nda/core/display_object.h"
