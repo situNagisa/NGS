@@ -8,7 +8,7 @@
 
 NSL_BEGIN
 
-int MultIO::Poll(int timeout) {
+NGS_HPP_INLINE int MultIO::Poll(int timeout) {
 	using p = pollfd;
 	std::vector<p> polls = {};
 	for (auto& i : _files) {

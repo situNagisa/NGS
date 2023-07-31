@@ -55,7 +55,7 @@ NGS_END
 #if NGS_COMPILER == NGS_MSVC
 #define _NGS_ASSERT_FAIL __debugbreak()
 #else
-#define _NGS_ASSERT_FAIL abort()
+#define _NGS_ASSERT_FAIL exit(1)
 #endif
 
 #define NGS_ASSERT(boolean,...)					\

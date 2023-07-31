@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/nsl/depend.h"
 #include "NGS/nsl/defined.h"
@@ -28,7 +28,7 @@ public:
 	using OpenMode = uint32;
 
 	static bool Access(__path_ref_cst path) {
-		Access(path, F_ACCESS_EXIST);
+		return Access(path, F_ACCESS_EXIST);
 	}
 	static bool Access(__path_ref_cst path, AccessMode flag);
 
@@ -72,10 +72,10 @@ public:
 	template<typename _Rng>
 		requires std::ranges::contiguous_range<_Rng>&& std::ranges::sized_range<_Rng>&& std::convertible_to<std::ranges::range_value_t<_Rng>, ngs::byte>
 	int Write(_Rng range) {
-		return Write((ngs::byte_ptr_cst)std::ranges::cdata(range), std::ranges::size(range));
+		return Write(std::ranges::cdata(range), std::ranges::size(range));
 	}
-	int Write(ngs::byte_ptr_cst data, size_t size);
-	int Read(ngs::byte_ptr data, size_t size);
+	int Write(void_ptr_cst data, size_t size);
+	int Read(void_ptr data, size_t size);
 
 	template<typename... Args>
 	int IOCtrlCode(ngs::uint32 request, Args&&... args) {

@@ -4,11 +4,11 @@
 #include "NGS/ngl/vertex/indices.h"
 #include "NGS/ngl/base/opengl.h"
 #include "NGS/ngl/shader/shader.h"
+#include "NGS/ngl/vertex/interface/IIndicesCtrl.h"
+#include "NGS/ngl/vertex/ctrl/vertex.h"
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
-
-constexpr size_t default_indices_count = size_t(-1);
 
 _NGL_VAO_DERIVED_FROM(VertexArray, IndicesVertexArray) {
 public:
@@ -17,36 +17,26 @@ public:
 
 	_IndicesVertexArray(_IndicesVertexArray && other)
 		: base(std::move(other))
-		, _indices(other._indices)
+		, _indices_ctrl(std::move(other._indices_ctrl))
 	{}
-	_IndicesVertexArray(size_t count, Usage usage, size_t indices_count = default_indices_count)
+	_IndicesVertexArray(size_t count, Usage usage, std::shared_ptr<IIndicesCtrl> indices_ctrl)
 		: base(count, usage)
-		, _indices(indices_count == default_indices_count ? count : indices_count, usage)
+		, _indices_ctrl(indices_ctrl)
 	{}
-protected:
-	void _AddIndices(size_t count) {
-		std::vector<indices_t> indices{};
-		for (size_t i = _indices_count; i < _indices_count + count; i++)
-		{
-			indices.push_back(i);
-		}
-		_AddIndices(indices);
-	}
-	template<std::ranges::random_access_range _Rng>
-		requires std::convertible_to<std::ranges::range_value_t<_Rng>, indices_t>
-	void _AddIndices(_Rng && indices) {
-		_indices.Write(std::ranges::cdata(indices), std::ranges::size(indices), _indices_count);
-		_indices_count += std::ranges::size(indices);
-	}
+	_IndicesVertexArray(size_t count, Usage usage)
+		: _IndicesVertexArray(count, usage, std::make_shared<VertexIndicesCtrl>(count, usage))
+	{}
 public:
+	void SetIndicesCtrl(std::shared_ptr<IIndicesCtrl>&indices_ctrl) { _indices_ctrl = indices_ctrl; }
+
 	template<CBufferRange<element_type> _BufRng>
 	void AddVertexes(size_t count, _BufRng && buffers) {
+		_indices_ctrl->AddSequence(base::_count, count);
 		base::AddVertexes(count, std::forward<_BufRng>(buffers));
-		_AddIndices(count);
 	}
 	void AddVertexes(CVertexRange<element_type> auto && vertexes, size_t count = 0) {
+		_indices_ctrl->AddSequence(base::_count, count);
 		base::AddVertexes(std::forward<decltype(vertexes)>(vertexes), count);
-		_AddIndices(count);
 	}
 	void AddVertexes(size_t count, _NGL_VAO_BUF_T(buffers, base) buffers) { AddVertexes(count, std::array<typename base::tag_buffer::type, base::buffer_count>{std::launder(reinterpret_cast<base::tag_buffer::type>(buffers))...}); }
 	void AddVertexes(size_t count, _NGL_VAO_BUF_VIEW(base) buffers) { AddVertexes(count, std::array<typename base::tag_buffer::type, base::buffer_count>{std::launder(reinterpret_cast<base::tag_buffer::type>(std::ranges::cdata(buffers)))...}); }
@@ -55,21 +45,19 @@ public:
 	virtual void Update()override {
 		if (!this->_required_update)return;
 		base::Update();
-		_indices.Update();
+		_indices_ctrl->GetIndices().Update();
 	}
 	virtual void Render()override {
-		NGS_ASSERT(OpenGL::I().vertex_array->IsState(this));
-		if (this->_current_shader)
-			OpenGL::I().shader->Select(this->_current_shader);
-		NGL_CHECK(glDrawElements((GLenum)this->_draw_mode, _indices_count, (GLenum)_indices.type, (void_ptr_cst)0));
+		if (!OpenGL::I().vertex_array->IsState(this))
+			OpenGL::I().vertex_array->Select(this);
+		NGL_CHECK(glDrawElements((GLenum)this->_draw_mode, _indices_ctrl->GetIndicesCount(), (GLenum)_indices_ctrl->GetIndices().type, (void_ptr_cst)0));
 	}
 	virtual void Clear()override {
 		base::Clear();
-		_indices_count = 0;
+		_indices_ctrl->Clear();
 	}
 protected:
-	buffers::Indices _indices;
-	size_t _indices_count = 0;
+	std::shared_ptr<IIndicesCtrl> _indices_ctrl = nullptr;
 };
 
 NGS_END

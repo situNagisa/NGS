@@ -152,6 +152,15 @@ public:
 		)
 	{}
 
+	template<CChannel A, CChannel R, CChannel G, CChannel B>
+	_basic_ARGB& operator=(const _basic_ARGB<A, R, G, B>& color) {
+		_value =
+			(A::template ConvertFrom<StdChannel>(color.StdAlpha()) << A::Offset) |
+			(R::template ConvertFrom<StdChannel>(color.StdRed()) << R::Offset) |
+			(G::template ConvertFrom<StdChannel>(color.StdGreen()) << G::Offset) |
+			(B::template ConvertFrom<StdChannel>(color.StdBlue()) << B::Offset);
+	}
+
 	operator type()const { return _value; }
 	constexpr type Value()const { return _value; }
 
@@ -184,7 +193,7 @@ public:
 		);
 	}
 private:
-	type _value;
+	type _value{};
 };
 
 #define NGS_DEFINE_ARGB(c1,c2,c3,c4)		\

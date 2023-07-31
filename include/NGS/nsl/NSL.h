@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#define NGS_USE_NSL 1
+
 #include "NGS/NGS.h"
 
 #if NGS_PLATFORM != NGS_LINUX

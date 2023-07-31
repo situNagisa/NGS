@@ -14,7 +14,7 @@
  * \date   June 2023
  *********************************************************************/
 
-#define NGS_CORE_BASE 1
+#define NGS_USE_BASE 1
 
 #include "NGS/base/version.h"
 

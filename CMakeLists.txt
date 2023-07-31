@@ -5,7 +5,7 @@ project(NGS VERSION 0.1)
 include(GNUInstallDirs)
 
 set(NGS_CMAKE_ROOT "$ENV{NAGISA_ROOT}/cmake" CACHE PATH "")
-include(${NGS_CMAKE_ROOT}/env.cmake)
+include(${NGS_CMAKE_ROOT}/NagisaEnvironment.cmake)
 
 add_subdirectory(src/NGS)
 add_subdirectory(test)

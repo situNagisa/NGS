@@ -51,11 +51,21 @@ public:
 		//NGL_CHECK(glValidateProgram(_context));
 		GLint status = GL_FALSE;
 		glGetProgramiv(_context, GL_LINK_STATUS, &status);
-		NGS_ASSERT(status != GL_FALSE, "link shader fail!");
+		if (status == GL_FALSE) {
+			GLint length;
+			glGetProgramiv(_context, GL_INFO_LOG_LENGTH, &length);
+			NGS_ASSERT(length, "get length fail!");
+			std::string info(length, 0);
+			glGetProgramInfoLog(_context, length, &length, info.data());
+			NGS_ASSERT(false, ngs::Format("link shader fail!\n %s", info.c_str()));
+		}
+
 #endif
 		for (auto& [uniform, offset] : _uniforms) {
 			NGL_CHECK(offset = glGetUniformLocation(_context, uniform.c_str()));
-			NGS_ASSERT(offset != -1, Format("uniform %s not found!", uniform.c_str()));
+			if (offset == -1) {
+				NGS_LOGFL(warning, "uniform %s not found!", uniform.c_str());
+			}
 		}
 	}
 	void CompileAndLink(std::string_view vertex, std::string_view fragment, std::string_view geometry = "") {
@@ -76,6 +86,7 @@ public:
 
 		Link();
 	}
+
 
 	uniform_offset_t GetUniformLocation(std::string_view name)const {
 		NGS_ASSERT(_uniforms.find(name.data()) != _uniforms.end(), "uniform not found!");

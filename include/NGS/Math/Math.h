@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 
 
-#define NGS_CORE_MATH
+#define NGS_USE_MATH 1
 
 #include "NGS/math/util.h"
 #include "NGS/math/vector.h"

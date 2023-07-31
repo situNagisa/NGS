@@ -6,7 +6,7 @@
 NSL_BEGIN
 
 namespace ngs_linux {
-	const std::unordered_map<ngs::uint32, ngs::PixelFormat> pixel_convert_map = {
+	NGS_HPP_INLINE const std::unordered_map<ngs::uint32, ngs::PixelFormat> pixel_convert_map = {
 		{V4L2_PIX_FMT_RGB332,ngs::PixelFormat::ARGB8},
 		{V4L2_PIX_FMT_RGB555,ngs::PixelFormat::ARGB15},
 		{V4L2_PIX_FMT_ARGB555,ngs::PixelFormat::ARGB15},
@@ -18,12 +18,12 @@ namespace ngs_linux {
 
 		{V4L2_PIX_FMT_YUYV,ngs::PixelFormat::ARGB16},
 	};
-	ngs::PixelFormat Convert(ngs::uint32 format) {
+	NGS_HPP_INLINE ngs::PixelFormat Convert(ngs::uint32 format) {
 		auto it = pixel_convert_map.find(format);
 		NGS_LOGFL(debug, "convert format 0x%x", format);
 		return it == pixel_convert_map.end() ? ngs::PixelFormat::unknown : it->second;
 	}
-	ngs::uint32 Convert(ngs::PixelFormat format) {
+	NGS_HPP_INLINE ngs::uint32 Convert(ngs::PixelFormat format) {
 		for (auto& i : pixel_convert_map) {
 			if (i.second == format)return i.first;
 		}
@@ -52,7 +52,7 @@ struct _V4l2Data {
 	v4l2_buffer* currentBuffer = nullptr;
 };
 
-bool V4L2::Open(const std::filesystem::path& path) {
+NGS_HPP_INLINE bool V4L2::Open(const std::filesystem::path& path) {
 	NGS_NEW(_data, _V4l2Data)();
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
@@ -81,9 +81,9 @@ err:;
 	return false;
 }
 
-inline bool V4L2::IsOpened() const { return _data; }
+NGS_HPP_INLINE bool V4L2::IsOpened() const { return _data; }
 
-inline void V4L2::Close()
+NGS_HPP_INLINE void V4L2::Close()
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
@@ -101,7 +101,7 @@ inline void V4L2::Close()
 	_data = nullptr;
 }
 
-inline void V4L2::LoadDeviceDescription() {
+NGS_HPP_INLINE void V4L2::LoadDeviceDescription() {
 	NGS_LOGFL(debug, "load device's format descriptions!");
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
@@ -159,7 +159,7 @@ inline void V4L2::LoadDeviceDescription() {
 	NGS_LOGFL(debug, "descriptions %d", data.descriptions.size());
 }
 
-inline std::vector<ngs::PixelFormat> V4L2::GetSupportPixelFormat() const
+NGS_HPP_INLINE std::vector<ngs::PixelFormat> V4L2::GetSupportPixelFormat() const
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 	std::vector<ngs::PixelFormat> formats;
@@ -172,7 +172,7 @@ inline std::vector<ngs::PixelFormat> V4L2::GetSupportPixelFormat() const
 	return formats;
 }
 
-inline bool V4L2::IsSupport(ngs::PixelFormat f) const
+NGS_HPP_INLINE bool V4L2::IsSupport(ngs::PixelFormat f) const
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 	std::vector<ngs::PixelFormat> formats;
@@ -184,7 +184,7 @@ inline bool V4L2::IsSupport(ngs::PixelFormat f) const
 	return false;
 }
 
-inline void V4L2::Update() {
+NGS_HPP_INLINE void V4L2::Update() {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 	if (!data.device.IOCtrl(VIDIOC_QBUF, data.currentBuffer)) {
 		NGS_LOGFL(error, "queue buffer fail!");
@@ -203,7 +203,7 @@ inline void V4L2::Update() {
 	//ngs::nos.Log("V4L2::Update", "queue buffer successfully!\n");
 }
 
-inline bool V4L2::Initialize()
+NGS_HPP_INLINE bool V4L2::Initialize()
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 
@@ -273,7 +273,7 @@ inline bool V4L2::Initialize()
 	return true;
 }
 
-inline bool V4L2::SetFormat(size_t width, size_t height, ngs::PixelFormat p)
+NGS_HPP_INLINE bool V4L2::SetFormat(size_t width, size_t height, ngs::PixelFormat p)
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 	v4l2_format fmt = {};
@@ -298,7 +298,7 @@ inline bool V4L2::SetFormat(size_t width, size_t height, ngs::PixelFormat p)
 	return true;
 }
 
-inline bool V4L2::SetFrameRate(ngs::byte frameRate)
+NGS_HPP_INLINE bool V4L2::SetFrameRate(ngs::byte frameRate)
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 	v4l2_streamparm streamParm = {};
@@ -325,7 +325,7 @@ inline bool V4L2::SetFrameRate(ngs::byte frameRate)
 	return true;
 }
 
-inline bool V4L2::Read(ngs::void_ptr ptr)
+NGS_HPP_INLINE bool V4L2::Read(ngs::void_ptr ptr)
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 	NGS_ASSERT(data.currentBuffer);
@@ -338,13 +338,13 @@ inline bool V4L2::Read(ngs::void_ptr ptr)
 	return true;
 }
 
-inline const ngs::Point2s& V4L2::GetSize() const
+NGS_HPP_INLINE const ngs::Point2s& V4L2::GetSize() const
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 	return data.size;
 }
 
-inline size_t V4L2::GetFrameBufferSize() const
+NGS_HPP_INLINE size_t V4L2::GetFrameBufferSize() const
 {
 	auto& data = *reinterpret_cast<_V4l2Data*>(_data);
 	NGS_ASSERT(data.currentBuffer);

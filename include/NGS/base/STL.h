@@ -53,6 +53,8 @@
 #include <iterator>
 #include <regex>
 
+#include <mutex>
+
 
 #ifdef NGS_CPP_20
 #include <source_location>

@@ -144,7 +144,7 @@
     <ClInclude Include="math\math.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\matrix.h">
+    <ClInclude Include="math\matrix_expr.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\rectangle.h">
@@ -181,45 +181,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nda\NDA.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\defined.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\depend.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\file\device_file.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\file\file.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\file\file.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\io\GPIO.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\io\MultiplexIO.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\io\MultiplexIO.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\media\frame_buffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\media\frame_buffer.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\media\V4L2.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\media\V4L2.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\NSL.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nsw\bus\serial_port.hpp">
@@ -343,9 +304,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="NGS.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nsl\NSL.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nsw\NSW.hpp">
@@ -499,6 +457,36 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\math.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\interface\IIndicesCtrl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\ctrl\vertex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\ctrl\line.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\ctrl\polygon.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\texture\image_view.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\ctrl\default.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\BTL.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\utils\renderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\utils\camera.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

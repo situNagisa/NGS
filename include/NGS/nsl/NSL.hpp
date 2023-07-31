@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "NGS/nsl/NSL.h"
+
 #include "NGS/nsl/file/File.hpp"
 #include "NGS/nsl/io/GPIO.hpp"
 #include "NGS/nsl/io/MultiplexIO.hpp"

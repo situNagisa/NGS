@@ -128,6 +128,9 @@ public:
 
 	__ele_ref operator[](size_t index) { return *(&(_AsChild().template At<0>()) + index); }
 	__ele_ref_cst operator[](size_t index) const { return *(&(_AsChild().template At<0>()) + index); }
+
+	__ele_ptr GetData() { return &(_AsChild().template At<0>()); }
+	__ele_ptr_cst GetData()const { return &(_AsChild().template At<0>()); }
 public:
 	constexpr __derived_ref _AsChild() { return *reinterpret_cast<__derived_ptr>(this); }
 	constexpr __derived_ref_cst _AsChild()const { return *reinterpret_cast<__derived_ptr_cst>(this); }

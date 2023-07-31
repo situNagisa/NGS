@@ -13,7 +13,7 @@ protected:
 public:
 	using address_type = __address;
 
-	enum class Flag {
+	enum class Flag : byte {
 		write = 0,
 		read = 1,
 	};
@@ -23,13 +23,56 @@ public:
 	I2C();
 	virtual ~I2C()override;
 
+	/**
+	 * @brief open i2c bus
+	 *
+	 * @param SDA
+	 * @param SCL
+	 * @param address
+	 * @return
+	 *		- true: success
+	 *		- false: failed
+	 */
 	virtual bool Open(pin_t SDA, pin_t SCL, __address address) = 0;
+	/**
+	 * @brief open i2c bus with default address(null_address)
+	 *
+	 * @see I2C::Open(pin_t SDA, pin_t SCL, __address address)
+	 * @see I2C::null_address
+	 *
+	 * @param SDA
+	 * @param SCL
+	 * @return
+	 *		- true: success
+	 *		- false: failed
+	 */
 	bool Open(pin_t SDA, pin_t SCL) { return Open(SDA, SCL, null_address); }
 
+	/**
+	 * @brief is opened or not
+	 *
+	 * @return
+	 *		-true: opened
+	 *		-false: not opened
+	 */
 	bool IsOpened()const override;
+	/**
+	 * @brief close i2c bus
+	 *
+	 */
 	virtual void Close()override;
 
+	/**
+	 * @brief enable 10bit address mode
+	 *
+	 * @param enable
+	 */
 	void Enable10bitAddress(bool enable) { _mask = enable ? BitSet<10>::Mask : BitSet<7>::Mask; }
+	/**
+	 * @brief set address
+	 *
+	 * @param address
+	 */
 	void SetAddress(__address address) { _address = address & _mask; }
 protected:
 	__address _AddressWrite()const { return (_address << 1) | (int)Flag::write; }
@@ -52,20 +95,51 @@ public:
 public:
 	struct Message {
 		Flag flag{};
-		void_ptr_cst data = nullptr;
+		// it is UB if you don't distinguish the const pointer
+		union {
+			void_ptr_cst write = nullptr;
+			void_ptr read;
+		}data;
 		size_t count{};
 		void_ptr user_data = nullptr;
 	};
 	using __base::Open;
+	/**
+	 * @brief open i2c bus
+	 *
+	 * @param SDA
+	 * @param SCL
+	 * @param address
+	 * @return
+	 *		- true: success
+	 * 		- false: failed
+	 */
 	bool Open(pin_t SDA, pin_t SCL, __address address)override;
 
+	/**
+	 * @brief set ack
+	 *
+	 * @see I2CMaster::ACK_Type
+	 *
+	 * @param ack is ack
+	 * @param type ack type
+	 */
 	void SetACK(bool ack, ACK_Type type) { _ack = { ack,type }; }
 
 	using __base::Write;
+	/**
+	 * @brief write data
+	 *
+	 * @param data
+	 * @param count
+	 * @return
+	 *		- > 0: success(It doesn't have to be write count, but try to make sure)
+	 *		- 0: failed
+	 */
 	size_t Write(byte_ptr_cst data, size_t count) override {
 		Message message = {};
 		message.flag = Flag::write;
-		message.data = data;
+		message.data.write = data;
 		message.count = count;
 		return Transfer(message);
 	}
@@ -73,7 +147,7 @@ public:
 	size_t Read(byte_ptr data, size_t count)override {
 		Message message = {};
 		message.flag = Flag::read;
-		message.data = data;
+		message.data.read = data;
 		message.count = count;
 		return Transfer(message);
 	}

@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 
-#include "NGS/embedded/embedded.hpp"
+#include "NGS/esp/ESP.h"
 
 #include "NGS/esp/bus/i2c/I2C.hpp"
 

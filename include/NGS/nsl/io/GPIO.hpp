@@ -69,7 +69,7 @@ static bool _UnExport(ngs::pin_t pin) {
 	return true;
 }
 
-bool ngs::GPIO::Open(ngs::pin_t pin, Mode mode) {
+NGS_HPP_INLINE bool ngs::GPIO::Open(ngs::pin_t pin, Mode mode) {
 	using nsl::GPIO_Data;
 	using nsl::GPIO_DIR;
 
@@ -106,11 +106,11 @@ err:;
 	return false;
 }
 
-bool ngs::GPIO::IsOpened()const {
+NGS_HPP_INLINE bool ngs::GPIO::IsOpened()const {
 	return _data;
 }
 
-void ngs::GPIO::Close() {
+NGS_HPP_INLINE void ngs::GPIO::Close() {
 	nsl::GPIO_Data& data = *reinterpret_cast<nsl::GPIO_Data*>(_data);
 
 	if (data.direction.IsOpened())data.direction.Close();
@@ -124,12 +124,12 @@ void ngs::GPIO::Close() {
 	_data = nullptr;
 }
 
-void ngs::GPIO::SetInterrupt(bool enable) {
+NGS_HPP_INLINE void ngs::GPIO::SetInterrupt(bool enable) {
 	if (enable)return;
 	nsl::GPIO_Data& data = *reinterpret_cast<nsl::GPIO_Data*>(_data);
 	data.edge.Write("none");
 }
-void ngs::GPIO::SetInterrupt(Interrupt type) {
+NGS_HPP_INLINE void ngs::GPIO::SetInterrupt(Interrupt type) {
 	nsl::GPIO_Data& data = *reinterpret_cast<nsl::GPIO_Data*>(_data);
 
 	switch (type)
@@ -158,7 +158,7 @@ void ngs::GPIO::SetInterrupt(Interrupt type) {
 	}
 }
 
-void ngs::GPIO::SetMode(Mode mode) {
+NGS_HPP_INLINE void ngs::GPIO::SetMode(Mode mode) {
 	nsl::GPIO_Data& data = *reinterpret_cast<nsl::GPIO_Data*>(_data);
 
 	nsl::File::OpenMode open_mode = {};
@@ -187,7 +187,7 @@ void ngs::GPIO::SetMode(Mode mode) {
 	data.value.OpenDirectory(data.directory, open_mode);
 }
 
-bool ngs::GPIO::Get()const {
+NGS_HPP_INLINE bool ngs::GPIO::Get()const {
 	nsl::GPIO_Data& data = *reinterpret_cast<nsl::GPIO_Data*>(_data);
 	char level = '0';
 	data.value.OffsetHead();
@@ -196,7 +196,7 @@ bool ngs::GPIO::Get()const {
 
 	return level == '1';
 }
-void ngs::GPIO::Set(bool level) {
+NGS_HPP_INLINE void ngs::GPIO::Set(bool level) {
 	nsl::GPIO_Data& data = *reinterpret_cast<nsl::GPIO_Data*>(_data);
 
 	if (level)

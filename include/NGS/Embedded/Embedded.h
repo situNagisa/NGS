@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#define NGS_CORE_EMBEDDED 1
+#define NGS_USE_EMBEDDED 1
 
 #include "NGS/embedded/interface.h"
 

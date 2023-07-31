@@ -7,6 +7,7 @@
 #include "NGS/ngl/gl_enum.h"
 #include "NGS/ngl/base/target.h"
 #include "NGS/ngl/base/opengl.h"
+#include "NGS/ngl/texture/image_view.h"
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
@@ -30,15 +31,18 @@ NGL_OBJ_BEGIN
 
 class _Texture : public State {
 public:
+	_Texture(TextureTarget target, const ImageView& image, size_t mipmap_level)
+		: _Texture(target, image.GetData(), image.GetSize().x, image.GetSize().y, image.GetFormat(), mipmap_level)
+	{}
+
 	_Texture(TextureTarget target, void_ptr_cst data, size_t width, size_t height, type_t format, size_t mipmap_level)
 		: target(target)
+		, _image(data, width, height, format)
 	{
-		auto& opengl = OpenGL::I();
 		NGL_CHECK(glGenTextures(1, &_context));
-		opengl.texture->Select(this);
-		NGL_CHECK(glTexImage2D((GLenum)target, mipmap_level, format, width, height, 0, format, gl_convert<byte>, data));
-		NGL_CHECK(glGenerateMipmap((GLenum)target));
+		_UpdateImage(mipmap_level);
 	}
+
 	_Texture(_Texture&& other)
 		: State(std::move(other))
 		, target(other.target)
@@ -48,6 +52,7 @@ public:
 		, t(other.t)
 		, r(other.r)
 		, slot(other.slot)
+		, _image(std::move(other._image))
 	{}
 
 	virtual ~_Texture() {
@@ -55,23 +60,38 @@ public:
 		NGL_CHECK(glDeleteTextures(1, &_context));
 	}
 
+	void SetImage(const ImageView& image, size_t mipmap_level) {
+		_image = image;
+		_UpdateImage(mipmap_level);
+	}
+	ImageView& GetImage() { return _image; }
+	const ImageView& GetImage()const { return _image; }
+
 	virtual void Update()override {
 		if (!_required_update)return;
 		State::Update();
 		_UpdateData();
 	}
-private:
+protected:
 	void _UpdateData() {
 		auto& opengl = OpenGL::I();
-		
-		if (!opengl.texture->IsState(this))opengl.texture->Select(this);
+
+		if (!opengl.texture->IsState(this))
+			opengl.texture->Select(this);
+
 		NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_WRAP_S, (GLint)s));
 		NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_WRAP_T, (GLint)t));
 		NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_WRAP_R, (GLint)r));
 		NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_MIN_FILTER, (GLint)min));
 		NGL_CHECK(glTexParameteri((GLenum)target, GL_TEXTURE_MAG_FILTER, (GLint)mag));
 
-		if(slot != TextureSlot::null)NGL_CHECK(glActiveTexture((GLenum)slot));
+	}
+	void _UpdateImage(size_t mipmap_level) {
+		auto& opengl = OpenGL::I();
+
+		opengl.texture->Select(this);
+		NGL_CHECK(glTexImage2D((GLenum)target, mipmap_level, _image.GetFormat(), _image.GetSize().x, _image.GetSize().y, 0, _image.GetFormat(), gl_convert<byte>, _image.GetData()));
+		NGL_CHECK(glGenerateMipmap((GLenum)target));
 	}
 public:
 	const TextureTarget target;
@@ -83,6 +103,8 @@ public:
 	Wraps r = Wraps::repeat;
 
 	TextureSlot slot = TextureSlot::null;
+private:
+	ImageView _image;
 };
 
 template<TextureTarget _Target>
@@ -92,6 +114,7 @@ public:
 	Texture(void_ptr_cst data, size_t width, size_t height, type_t format, size_t mipmap_level = 0) : _Texture(_Target, data, width, height, format, mipmap_level) {}
 	template<CSameAsAny<RGBA24, RGBA32> _RGBA>
 	Texture(const _RGBA* data, size_t width, size_t height, size_t mipmap_level = 0) : Texture(data, width, height, gl_convert<_RGBA>, mipmap_level) {}
+	Texture(const ImageView& image, size_t mipmap_level = 0) : Texture(image.GetData(), image.GetSize().x, image.GetSize().y, image.GetFormat(), mipmap_level) {}
 };
 
 using Texture1D = Texture<TextureTarget::_1D>;

@@ -45,7 +45,7 @@ err_new:;
 	return false;
 }
 
-inline void FrameBuffer::Close() {
+NGS_HPP_INLINE void FrameBuffer::Close() {
 	auto& data = *reinterpret_cast<_FrameBufferData*>(_data);
 
 	_file.MemoryUnMap(_screen, GetSize());
@@ -54,19 +54,19 @@ inline void FrameBuffer::Close() {
 	_data = nullptr;
 }
 
-inline size_t FrameBuffer::GetSize() const
+NGS_HPP_INLINE size_t FrameBuffer::GetSize() const
 {
 	auto& data = *reinterpret_cast<_FrameBufferData*>(_data);
 	return data.fix.line_length * data.var.yres;
 }
 
-inline size_t FrameBuffer::GetWidth() const
+NGS_HPP_INLINE size_t FrameBuffer::GetWidth() const
 {
 	auto& data = *reinterpret_cast<_FrameBufferData*>(_data);
 	return data.var.xres;
 }
 
-inline size_t FrameBuffer::GetHeight() const
+NGS_HPP_INLINE size_t FrameBuffer::GetHeight() const
 {
 	auto& data = *reinterpret_cast<_FrameBufferData*>(_data);
 	return data.var.yres;

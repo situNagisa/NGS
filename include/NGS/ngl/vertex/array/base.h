@@ -8,6 +8,7 @@
 #include "NGS/ngl/base/opengl.h"
 #include "NGS/ngl/shader/shader.h"
 #include "NGS/ngl/vertex/trait.h"
+#include "NGS/ngl/vertex/concepts.h"
 
 NGL_BEGIN
 
@@ -61,8 +62,6 @@ public:
 	virtual void Render() {
 		if (!OpenGL::I().vertex_array->IsState(this))
 			OpenGL::I().vertex_array->Select(this);
-		if (_current_shader)
-			OpenGL::I().shader->Select(_current_shader);
 		NGL_CHECK(glDrawArrays((GLenum)_draw_mode, _offset, _count));
 	}
 protected:
@@ -130,8 +129,7 @@ public:
 	}
 
 	void SetDrawMode(DrawMode mode) { _draw_mode = (GLenum)mode; }
-	void SetShader(Shader& shader) { SetShader(&shader); }
-	void SetShader(Shader* shader) { _current_shader = shader; }
+	DrawMode GetDrawMode()const { return (DrawMode)_draw_mode; }
 
 	virtual void Clear() { _count = 0; }
 
@@ -151,7 +149,6 @@ protected:
 	buffers::Vertex _vertex;
 	size_t _offset = 0;
 	size_t _count = 0;
-	Shader* _current_shader = nullptr;
 };
 
 NGS_END

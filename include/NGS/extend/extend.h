@@ -7,7 +7,7 @@
  * \date   June 2023
  *********************************************************************/
 
-#define NGS_CORE_EXTEND 1
+#define NGS_USE_EXTEND 1
 
 #include "NGS/extend/color.h"
 #include "NGS/extend/byte_array.h"

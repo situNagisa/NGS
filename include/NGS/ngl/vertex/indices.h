@@ -23,6 +23,17 @@ public:
 	void View(size_t count, size_t offset);
 	void Write(const indices_t* data, size_t count, size_t offset);
 
+	template<class _Rng>
+		requires std::ranges::random_access_range<_Rng>&& std::convertible_to<std::ranges::range_value_t<_Rng>, indices_t>
+	void AddIndices(size_t offset, _Rng&& rng) {
+		Write(std::ranges::cdata(rng), std::ranges::size(rng), offset);
+	}
+
+	size_t GetCapacity()const {
+		NGS_ASSERT(_size % format_size == 0);
+		return _size / format_size;
+	}
+
 	constexpr static type_t type = gl_convert<indices_t>;
 	constexpr static size_t format_size = sizeof(indices_t);
 };

@@ -1,8 +1,6 @@
 ﻿#pragma once
 
-#include "NGS/base/base.hpp"
-#include "NGS/extend/extend.hpp"
-#include "NGS/math/math.hpp"
+#include "NGS/ngl/NGL.h"
 
 //base
 #include "NGS/ngl/base/buffer.hpp"

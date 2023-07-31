@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "NGS/ngl/vertex/array/indices.h"
+#include "NGS/ngl/vertex/ctrl/polygon.h"
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
@@ -9,35 +10,20 @@ _NGL_VAO_DERIVED_FROM(IndicesVertexArray, PolygonVertexArray) {
 public:
 	using base = IndicesVertexArray<_Buffers...>;
 	using element_type = typename base::element_type;
-	using grandfather = typename base::base;
 
 	_PolygonVertexArray(_PolygonVertexArray&&) = default;
 	_PolygonVertexArray(size_t count, Usage usage)
-		: base(count, usage, 3 * (count - 2)) {
+		: base(count, usage, std::make_shared<PolygonIndicesCtrl>(count, usage)) {
 		NGS_ASSERT(count > 2);
 		base::SetDrawMode(DrawMode::triangles);
-	}
-private:
-	void _AddPolygon(size_t count) {
-		NGS_ASSERT(count > 2);
-		std::vector<indices_t> indices{};
-		for (size_t i = base::_indices_count + 1; i < base::_indices_count + count - 1; i++)
-		{
-			indices.push_back(base::_indices_count);
-			indices.push_back(i);
-			indices.push_back(i + 1);
-		}
-		base::_AddIndices(indices);
 	}
 public:
 	template<CBufferRange<element_type> _BufRng>
 	void AddPolygon(size_t count, _BufRng && buffers) {
-		grandfather::AddVertexes(count, std::forward<_BufRng>(buffers));
-		_AddPolygon(count);
+		base::AddVertexes(count, std::forward<_BufRng>(buffers));
 	}
 	void AddPolygon(CVertexRange<element_type> auto && vertexes, size_t count) {
-		grandfather::AddVertexes(std::forward<decltype(vertexes)>(vertexes), count);
-		_AddPolygon(count);
+		base::AddVertexes(std::forward<decltype(vertexes)>(vertexes), count);
 	}
 	void AddPolygon(size_t count, _NGL_VAO_BUF_T(buffers, base) buffers) { AddVertexes(count, std::array<typename base::tag_buffer::type, base::buffer_count>{std::launder(reinterpret_cast<base::tag_buffer::type>(buffers))...}); }
 	void AddPolygon(size_t count, _NGL_VAO_BUF_VIEW(base) buffers) { AddVertexes(count, std::array<typename base::tag_buffer::type, base::buffer_count>{std::launder(reinterpret_cast<base::tag_buffer::type>(std::ranges::cdata(buffers)))...}); }

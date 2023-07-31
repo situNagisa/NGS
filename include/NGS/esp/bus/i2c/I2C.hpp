@@ -157,11 +157,11 @@ NGS_HPP_INLINE size_t ngs::I2CMaster::Transfer(const Message* messages, size_t c
 		{
 		case Flag::read:
 			i2c_master_write_byte(iic.cmd, _AddressRead(), _ack.first);
-			i2c_master_read(iic.cmd, reinterpret_cast<uint8_t*>(const_cast<void_ptr>(message.data)), message.count, (i2c_ack_type_t)_ack.second);
+			i2c_master_read(iic.cmd, reinterpret_cast<uint8_t*>(message.data.read), message.count, (i2c_ack_type_t)_ack.second);
 			break;
 		case Flag::write:
 			i2c_master_write_byte(iic.cmd, _AddressWrite(), _ack.first);
-			i2c_master_write(iic.cmd, reinterpret_cast<const uint8_t*>(message.data), message.count, _ack.first);
+			i2c_master_write(iic.cmd, reinterpret_cast<const uint8_t*>(message.data.write), message.count, _ack.first);
 			break;
 		default:
 			NGS_LOGL(error, "i2c unknown flag");

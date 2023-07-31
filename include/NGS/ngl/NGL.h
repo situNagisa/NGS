@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#define NGS_USE_NGL
+
 #include "NGS/base/base.h"
 
 #if NGS_PLATFORM == NGS_MSVC
@@ -28,6 +30,10 @@
 
 //texture
 #include "NGS/ngl/texture/texture.h"
+
+//util
+#include "NGS/ngl/utils/renderer.h"
+#include "NGS/ngl/utils/camera.h"
 
 
 

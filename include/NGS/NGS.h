@@ -40,10 +40,21 @@
  //NGS_USE_NSL
  //NGS_USE_NSW
 
+#ifdef NGS_USE_BASE
 #include "NGS/base/base.h"
+#endif
+
+#ifdef NGS_USE_EXTEND
 #include "NGS/extend/extend.h"
+#endif
+
+#ifdef NGS_USE_MATH
 #include "NGS/math/math.h"
+#endif
+
+#ifdef NGS_USE_ALGORITHM
 #include "NGS/algorithm/algorithm.h"
+#endif
 
 #ifdef NGS_USE_EMBEDDED
 #include "NGS/embedded/embedded.h"
