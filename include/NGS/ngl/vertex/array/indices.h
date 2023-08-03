@@ -27,7 +27,7 @@ public:
 		: _IndicesVertexArray(count, usage, std::make_shared<VertexIndicesCtrl>(count, usage))
 	{}
 public:
-	void SetIndicesCtrl(std::shared_ptr<IIndicesCtrl>&indices_ctrl) { _indices_ctrl = indices_ctrl; }
+	void SetIndicesCtrl(const std::shared_ptr<IIndicesCtrl>&indices_ctrl) { _indices_ctrl = indices_ctrl; }
 
 	template<CBufferRange<element_type> _BufRng>
 	void AddVertexes(size_t count, _BufRng && buffers) {

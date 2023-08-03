@@ -115,6 +115,8 @@ public:
 	_VECTOR_OPERATE_WITH_ELEMENT(_DivideNumber, / );
 	_VECTOR_OPERATE_WITH_ELEMENT(_MultpilyNumber, *);
 	friend inline __derived operator*(__ele element, __this_ref_cst self) { return self * element; }
+	friend inline __derived operator/(__ele element, __this_ref_cst self) { return __derived{ element,element } / self; }
+
 
 	calcurateType operator%(__derived_ref_cst other) const { return _Dot(other, index_sequence); }
 

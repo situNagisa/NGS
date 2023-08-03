@@ -105,7 +105,7 @@
     <ClInclude Include="extend\byte_array.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\color.h">
+    <ClInclude Include="extend\color\color_old.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="extend\debug.h">
@@ -144,7 +144,7 @@
     <ClInclude Include="math\math.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\matrix_expr.h">
+    <ClInclude Include="math\matrix_exp.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\rectangle.h">
@@ -160,27 +160,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\vector_post.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\config.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\container\tree.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\core\display_object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\core\stage.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\defined.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\depend.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\NDA.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nsw\bus\serial_port.hpp">
@@ -202,21 +181,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\vector.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\core\bitmap.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\core\sprite.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\core\shape.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\container\pool.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="nda\effect\blend.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\type_info.h">
@@ -487,6 +451,258 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ngl\utils\camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\NDA.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\display\display.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\factory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\command_queue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\transform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\display\sprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\display\bitmap\bitmap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\color\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\color\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\color\primary_color.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\color\channel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\color\hsv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\color\color.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\enum\blend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\user_data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\NDA.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\display\stage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\display\bitmap\data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\display\bitmap\idata.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\display\bitmap\data_view.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\impl\opengl\opengl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\impl\opengl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\impl\opengl\space.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\interfaces\draw.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\impl\opengl\draw.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\impl\opengl\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\interfaces\interfaces.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector_exp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\promote_type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\base\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\matrix\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\base\concepts.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\mla.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\base\tag.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\matrix\tag.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\matrix\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\tag.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\matrix\concepts.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\unary\unary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\unary\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\base\traits.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\traits.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\constant.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\fundamental\int.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\fundamental.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\fundamental\uint.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\fundamental\floating.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\any.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\derived.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\concepts.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\unary\negate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\unary\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\unary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\unary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\unary\traits.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\plus.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\minus.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\multiplies.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\divides.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\assign\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\assign\assign.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\assign\plus.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\assign\minus.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\assign\multiplies.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\assign\divides.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\assign\swap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\unary\negate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\binary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\binary\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\scalar\binary\assign.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\binary\binary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\binary\traits.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\binary\plus.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

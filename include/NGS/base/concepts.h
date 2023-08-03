@@ -36,6 +36,10 @@ concept CFloatingPoint = std::is_floating_point_v<T>;
 template<class T>
 concept CArithmetic = std::is_arithmetic_v<T>;
 
+//exp
+template<class T>
+concept CPseudoArithmetic = CArithmetic<T>;
+
 template<class T>
 concept CFunction = std::is_function_v<T>;
 

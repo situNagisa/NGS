@@ -9,9 +9,23 @@ public:
 	Camera2D(float32 width, float32 height) : size(width, height) {}
 
 	std::array<float32, 3 * 3> GetMatrix3()const {
+		ngs::Matrix<ngs::float32> matrix;
+
+		matrix
+			.Scale(zoom / size.x, zoom / size.y)
+			.Translate(-center / size)
+			;
+
+		return {
+			matrix.a, matrix.b, 0,
+			matrix.c, matrix.d, 0,
+			matrix.tx, matrix.ty, 1,
+		};
+
+
 		auto zoom_size = size / zoom;
 		Point2f scale = Point2f{ 2, -2 } / zoom_size;
-		Point2f translate = -2 * (center * Point2f{ 1,-1 }) / zoom_size;
+		Point2f translate = -2 * (center * Point2f{ 1,-1 }) / size;
 		return {
 			scale.x,			0,				0,
 			0,					scale.y,		0,
@@ -21,7 +35,7 @@ public:
 	std::array<float32, 4 * 4> GetMatrix4()const {
 		auto zoom_size = size / zoom;
 		Point2f scale = Point2f{ 2, -2 } / zoom_size;
-		Point2f translate = -2 * (center * Point2f{ 1,-1 }) / zoom_size;
+		Point2f translate = -2 * (center * Point2f{ 1,-1 }) / size;
 		return {
 			scale.x,			0,				0,			0,
 			0,					scale.y,		0,			0,

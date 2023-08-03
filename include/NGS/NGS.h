@@ -56,6 +56,10 @@
 #include "NGS/algorithm/algorithm.h"
 #endif
 
+#ifdef NGS_USE_NDA
+#include "NGS/nda/NDA.h"
+#endif
+
 #ifdef NGS_USE_EMBEDDED
 #include "NGS/embedded/embedded.h"
 #endif

@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 
-#include "NGS/NGS.h"
+#include "NGS/base/base.h"
+#include "NGS/math/math.h"
 
 NGS_BEGIN
 

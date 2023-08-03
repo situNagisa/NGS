@@ -181,6 +181,9 @@ public:
 		return *this;
 	}
 
+	__this_ref Scale(__vector_ref_cst scale) {
+		return Scale(scale.x, scale.y);
+	}
 	__this_ref Scale(__num sx, __num sy) {
 		a *= sx;
 		b *= sy;

@@ -1,1 +1,1 @@
-﻿
+﻿#include "NGS/base/defined.h"

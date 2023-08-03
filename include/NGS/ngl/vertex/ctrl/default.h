@@ -5,12 +5,12 @@
 
 NGL_BEGIN
 
-class _DefaultIndicesCtrl : public IIndicesCtrl {
+class DefaultIndicesCtrl : public IIndicesCtrl {
 public:
-	_DefaultIndicesCtrl(size_t vertex_count, Usage usage)
+	DefaultIndicesCtrl(size_t vertex_count, Usage usage)
 		: _indices(vertex_count, usage)
 	{}
-	_DefaultIndicesCtrl(_DefaultIndicesCtrl&&) = default;
+	DefaultIndicesCtrl(DefaultIndicesCtrl&&) = default;
 
 	buffers::Indices& GetIndices()override { return _indices; }
 	const buffers::Indices& GetIndices()const override { return _indices; }

@@ -5,12 +5,12 @@
 
 NGL_BEGIN
 
-class VertexIndicesCtrl : public _DefaultIndicesCtrl {
+class VertexIndicesCtrl : public DefaultIndicesCtrl {
 private:
 
 public:
 	VertexIndicesCtrl(size_t vertex_count, Usage usage)
-		: _DefaultIndicesCtrl(vertex_count, usage)
+		: DefaultIndicesCtrl(vertex_count, usage)
 	{}
 	VertexIndicesCtrl(VertexIndicesCtrl&&) = default;
 

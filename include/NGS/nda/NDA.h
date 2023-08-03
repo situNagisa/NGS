@@ -1,9 +1,10 @@
 ﻿#pragma once
 
-#define NGS_USE_NDA 1
+#define NGS_USE_NDA (1)
 
-#include "NGS/nda/core/display_object.h"
-#include "NGS/nda/core/bitmap.h"
-#include "NGS/nda/core/shape.h"
-#include "NGS/nda/core/sprite.h"
-#include "NGS/nda/core/stage.h"
+#include "NGS/nda/defined.h"
+
+#include "NGS/nda/display/display.h"
+#include "NGS/nda/display/bitmap/bitmap.h"
+#include "NGS/nda/display/sprite.h"
+#include "NGS/nda/display/stage.h"

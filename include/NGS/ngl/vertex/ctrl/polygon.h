@@ -5,12 +5,12 @@
 
 NGL_BEGIN
 
-class PolygonIndicesCtrl : public _DefaultIndicesCtrl {
+class PolygonIndicesCtrl : public DefaultIndicesCtrl {
 private:
 
 public:
 	PolygonIndicesCtrl(size_t vertex_count, Usage usage)
-		: _DefaultIndicesCtrl(3 * (vertex_count - 2), usage)
+		: DefaultIndicesCtrl(3 * (vertex_count - 2), usage)
 	{}
 	PolygonIndicesCtrl(PolygonIndicesCtrl&&) = default;
 

@@ -1,27 +1,19 @@
-#pragma once
+﻿#pragma once
 
-#include "NGS/nda/depend.h"
-#include "NGS/nda/config.h"
+#include "NGS/extend/extend.h"
+#include "NGS/math/math.h"
 
 #define NDA_BEGIN NGS_BEGIN namespace nda{
 #define NDA_END } NGS_END
 
 NDA_BEGIN
 
-NGS_TYPE_DEFINE(NDA_NUMBER_TYPE, number);
-NGS_TYPE_DEFINE(Rectangle<__number>, rect);
-NGS_TYPE_DEFINE(Point2_<__number>, point);
-NGS_TYPE_DEFINE(Matrix<__number>, matrix);
-NGS_TYPE_DEFINE(Transform<__number>, transform);
+NGS_DEFINE_TYPE(number, float32);
+NGS_DEFINE_TYPE(rect, Rectangle<number_t>);
+NGS_DEFINE_TYPE(point, Point2_<number_t>);
+NGS_DEFINE_TYPE(matrix, Matrix<number_t>);
 
-NGS_TYPE_DEFINE(NDA_COLOR_TYPE, color);
-
-template<class _Derived, class _Base>
-	requires std::derived_from<_Derived, _Base>
-_Derived* down_cast(_Base* base) { return dynamic_cast<_Derived*>(base); }
-template<class _Derived, class _Base>
-	requires std::derived_from<_Derived, _Base>
-const _Derived* down_cast(const _Base* base) { return dynamic_cast<const _Derived*>(base); }
+NGS_DEFINE_TYPE(color, StdARGB);
 
 NDA_END
 

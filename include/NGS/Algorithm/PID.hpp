@@ -1,4 +1,4 @@
-﻿#include "NGS/Algorithm/PID.h"
+﻿#include "NGS/algorithm/PID.h"
 
 NGS_BEGIN
 

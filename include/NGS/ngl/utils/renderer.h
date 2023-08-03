@@ -52,7 +52,10 @@ public:
 			ARGB32::A::Percent(_background_color.Alpha())
 		));
 
-		if (_shader)_shader->Update();
+		if (_shader) {
+			_shader->Update();
+			OpenGL::I().shader->Select(*_shader);
+		}
 		if (_vertex_array) {
 			_vertex_array->Update();
 			_vertex_array->Render();

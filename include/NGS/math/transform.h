@@ -7,23 +7,22 @@
 NGS_BEGIN
 
 template<CArithmetic _Number>
-struct Transform {
+struct Transform2D {
 public:
-	using type = _Number;
+	using element_type = _Number;
 public:
 
-	const Point2_<type>& GetScale() const { return _scale; }
-	const Point2_<type>& GetOffset() const { return _offset; }
+	const Point2_<element_type>& GetScale() const { return _scale; }
+	const Point2_<element_type>& GetOffset() const { return _offset; }
 	ngs::float32 GetRotation() const { return _rotation; }
-	const Matrix<type>& GetMatrix()const { return _matrix; }
 
-	void SetScale(type x, type y) { _scale.Set(x, y); _matrix.Scale(x, y); }
-	void SetOffset(type x, type y) { _offset.Set(x, y); _matrix.Translate(x, y); }
+	void SetScale(element_type x, element_type y) { _scale.Set(x, y); _matrix.Scale(x, y); }
+	void SetOffset(element_type x, element_type y) { _offset.Set(x, y); _matrix.Translate(x, y); }
 	void SetRotation(ngs::float32 rotation) { _rotation = rotation; _matrix.Rotate(rotation); }
 private:
-	Matrix<type> _matrix = {};
-	Point2_<type> _scale = {};
-	Point2_<type> _offset = {};
+	Matrix<element_type> _matrix = {};
+	Point2_<element_type> _scale = {};
+	Point2_<element_type> _offset = {};
 	ngs::float32 _rotation = {};
 };
 

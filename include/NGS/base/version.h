@@ -128,14 +128,4 @@
 #endif
 
 
-//NGS_BEGIN
-
-//c++标准
-constexpr auto NGS_cppStandard = _NGS_CPP_STANDARD;
-
-constexpr auto NGS_baseVersion = 0.0;
-
-
-//NGS_END
-
 #endif // !__HEAD_NGS_NGS_Version
