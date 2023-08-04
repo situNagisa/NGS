@@ -56,7 +56,7 @@
 #include <mutex>
 
 
-#ifdef NGS_CPP_20
+#ifdef NGS_HAS_CPP_20
 #include <source_location>
 #else
 #include <experimental/source_location>
@@ -65,23 +65,23 @@
 //#include <format>
 
 namespace std {
-	template<typename T>
-	struct hash<unordered_set<T>> {
-		size_t operator()(const unordered_set<T>& s) const {
-			size_t seed = s.size();
-			for (const auto& i : s)
-				seed ^= hash<T>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-			return seed;
-		}
-	};
+template<typename T>
+struct hash<unordered_set<T>> {
+	size_t operator()(const unordered_set<T>& s) const {
+		size_t seed = s.size();
+		for (const auto& i : s)
+			seed ^= hash<T>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+		return seed;
+	}
+};
 
-	/*template<class _Element, ranges::range _Rng>
-		requires requires(basic_ostream<_Element> os, ranges::range_value_t<_Rng> v) { os << v; }
-	inline basic_ostream<_Element>& operator<<(basic_ostream<_Element>& os, _Rng&& container) {
-		os << "{";
-		for (auto&& i : container)
-			os << i << ",";
-		os << "}";
-		return os;
-	}*/
+/*template<class _Element, ranges::range _Rng>
+	requires requires(basic_ostream<_Element> os, ranges::range_value_t<_Rng> v) { os << v; }
+inline basic_ostream<_Element>& operator<<(basic_ostream<_Element>& os, _Rng&& container) {
+	os << "{";
+	for (auto&& i : container)
+		os << i << ",";
+	os << "}";
+	return os;
+}*/
 }

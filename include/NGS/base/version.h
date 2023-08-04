@@ -1,4 +1,4 @@
-//==========================================================================================================
+﻿//==========================================================================================================
 // @file	:	NGS/NGS_Version
 // @CLR		:	4.0.30319.42000
 // @author	:	NAGISA
@@ -6,9 +6,6 @@
 // @brief	:	
 //==========================================================================================================
 #pragma once
-
-#ifndef __HEAD_NGS_NGS_Version
-#define __HEAD_NGS_NGS_Version
 
 //_MSC_VER		MSVC
 //__clang__		clang
@@ -29,7 +26,7 @@
 #define NGS_PLATFORM NGS_ESP32
 #else
 #define NGS_PLATFORM 0
-#error "NGS: Unknown platform"
+#error "NGS: unknown platform"
 #endif
 
 
@@ -62,56 +59,51 @@
 #endif
 
 #if NGS_COMPILER == NGS_MSVC
+#if defined(_MSVC_LANG) && _MSVC_LANG > __cplusplus
 #define _NGS_CPP_STANDARD _MSVC_LANG
 #else
 #define _NGS_CPP_STANDARD __cplusplus
 #endif
+#else
+#define _NGS_CPP_STANDARD __cplusplus
+#endif
 
-#if _NGS_CPP_STANDARD >= 202300L
+#if _NGS_CPP_STANDARD >= 199711L
+#define NGS_HAS_CPP_03 1
+#endif
 
-#define NGS_CPP_23 1
+#if _NGS_CPP_STANDARD >= 201103L
+#define NGS_HAS_CPP_11 1
+#endif
+
+#if _NGS_CPP_STANDARD >= 201402L
+#define NGS_HAS_CPP_14 1
+#endif
+
+#if _NGS_CPP_STANDARD > 201402L
+#define NGS_HAS_CPP_17 1
+#endif
+
+#if _NGS_CPP_STANDARD > 201703L
+#define NGS_HAS_CPP_20 1
+#endif
+
+#if _NGS_CPP_STANDARD > 202002L
 #define NGS_HAS_CPP_23 1
-#define NGS_HAS_CPP_20 1
-#define NGS_HAS_CPP_17 1
-#define NGS_HAS_CPP_14 1
-#define NGS_HAS_CPP_11 1
-#define NGS_HAS_CPP_03 1
+#endif
 
-#elif _NGS_CPP_STANDARD >= 202002L
-
+#if NGS_HAS_CPP_23
+#define NGS_CPP_23 1
+#elif NGS_HAS_CPP_20
 #define NGS_CPP_20 1
-#define NGS_HAS_CPP_20 1
-#define NGS_HAS_CPP_17 1
-#define NGS_HAS_CPP_14 1
-#define NGS_HAS_CPP_11 1
-#define NGS_HAS_CPP_03 1
-
-#elif _NGS_CPP_STANDARD >= 201703L
-
+#elif NGS_HAS_CPP_17
 #define NGS_CPP_17 1
-#define NGS_HAS_CPP_17 1
-#define NGS_HAS_CPP_14 1
-#define NGS_HAS_CPP_11 1
-#define NGS_HAS_CPP_03 1
-
-#elif _NGS_CPP_STANDARD >= 201402L
-
+#elif NGS_HAS_CPP_14
 #define NGS_CPP_14 1
-#define NGS_HAS_CPP_14 1
-#define NGS_HAS_CPP_11 1
-#define NGS_HAS_CPP_03 1
-
-#elif _NGS_CPP_STANDARD >= 201103L
-
+#elif NGS_HAS_CPP_11
 #define NGS_CPP_11 1
-#define NGS_HAS_CPP_11 1
-#define NGS_HAS_CPP_03 1
-
-#elif _NGS_CPP_STANDARD >= 199711L
-
-#defined NGS_CPP_03 1
-#define NGS_HAS_CPP_03 1
-
+#elif NGS_HAS_CPP_03
+#define NGS_CPP_03 1
 #endif
 
 #if NGS_COMPILER == NGS_GCC
@@ -126,6 +118,3 @@
 #pragma message("WARNING: You need to implement DEPRECATED for this compiler")
 #define DEPRECATED(func) func
 #endif
-
-
-#endif // !__HEAD_NGS_NGS_Version

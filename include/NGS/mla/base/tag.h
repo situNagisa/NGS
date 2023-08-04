@@ -5,7 +5,7 @@
 NGS_MLA_BEGIN
 
 namespace tag {
-	struct unknown {};
+struct unknown {};
 }
 
 NGS_MLA_END

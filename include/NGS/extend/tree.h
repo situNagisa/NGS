@@ -48,7 +48,7 @@ namespace tree_struct {
 
 		int GetChildIndex(__child_ref child)const {
 			auto it = std::ranges::find(_children, &child);
-			return it == _children.end() ? -1 : it - _children.begin();
+			return it == _children.end() ? -1 : int(it - _children.begin());
 		}
 		size_t GetNumChildren()const { return _children.size(); }
 

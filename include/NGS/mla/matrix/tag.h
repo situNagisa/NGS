@@ -1,11 +1,18 @@
-#pragma once
+﻿#pragma once
 
-#include "NGS/math/linear_algebra/base/tag.h"
+#include "NGS/mla/base/tag.h"
 
-NGS_MATH_LINEAR_ALGEBRA_BEGIN
+NGS_MLA_BEGIN
 
 namespace tag {
-	struct matrix : unknown {};
+
+struct row : unknown {};
+struct column : unknown {};
+
+struct matrix : unknown {};
+struct matrix_container : matrix {};
+static_assert(std::derived_from<matrix_container, matrix>);
+
 }
 
-NGS_MATH_LINEAR_ALGEBRA_END
+NGS_MLA_END

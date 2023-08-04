@@ -5,6 +5,9 @@
 
 NGS_MLA_BEGIN
 
+template<CVectorExpression _Expression1, CVectorExpression _Expression2, template<class, class>class _Functor>
+using vector_binary_functor_trait_t = VectorBinary<_Expression1, _Expression2, _Functor<_Expression1, _Expression2>>;
+
 template<CVectorExpression _Expression1, CVectorExpression _Expression2, CScalarBinaryFunctor _Functor>
 struct vector_binary_scalar_traits {
 	using original_expression_type1 = _Expression1;

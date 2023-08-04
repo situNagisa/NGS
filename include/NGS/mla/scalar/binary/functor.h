@@ -36,6 +36,23 @@ public:
 		return result_type();
 	}
 };
+
+template<class _ElementType1, class _ElementType2>
+struct ScalarBinaryAssignFunctor {
+protected:
+	using self_type = ScalarBinaryAssignFunctor<_ElementType1, _ElementType2>;
+public:
+	using argument_type1 = typename scalar_traits<_ElementType1>::reference;
+	using argument_type2 = typename scalar_traits<_ElementType2>::const_reference;
+	using result_type = argument_type1;
+
+	constexpr static result_type apply(argument_type1 x, argument_type2 y) {
+		//static_assert(false, "ScalarBinaryFunctor::apply is not implemented");
+		return result_type();
+	}
+};
+
 NGS_CCPT_VERIFY(CScalarBinaryFunctor, ScalarBinaryFunctor<int, float>);
+NGS_CCPT_VERIFY(CScalarBinaryFunctor, ScalarBinaryAssignFunctor<int, float>);
 
 NGS_MLA_END

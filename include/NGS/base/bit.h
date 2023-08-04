@@ -46,7 +46,7 @@ public:
 	static constexpr uint64 ByteCount = bit::as_byte(BitCount);
 	using type = byte_<ByteCount>;
 
-	static constexpr type Mask = bit::mask(BitCount);
+	static constexpr type Mask = (type)bit::mask(BitCount);
 
 
 	class Bit {
@@ -146,7 +146,7 @@ public:
 protected:
 	void _ON(size_t index) { _data = bit::set(_data, bit::scope(index), true); }
 	void _OFF(size_t index) { _data = bit::set(_data, bit::scope(index), false); }
-	void _Set(size_t index, bool boolean) { _data = bit::set(_data, bit::scope(index), boolean); }
+	void _Set(size_t index, bool boolean) { _data = (type)bit::set(_data, bit::scope(index), boolean); }
 
 	constexpr type _Get()const { return _data & Mask; }
 	constexpr bool _Get(size_t index)const { return bit::get(_data, bit::scope(index)); }

@@ -11,8 +11,27 @@ private:
 public:
 	using self_type = scalar_traits<T>;
 
-	static typename base_type::real_type
-		real(typename base_type::const_reference t) { return t; }
+	using precision_type = typename base_type::real_type;
+};
+
+template<>
+struct scalar_traits<float> : type_traits<float> {
+private:
+	using base_type = typename scalar_traits::self_type;
+public:
+	using self_type = scalar_traits<float>;
+
+	using precision_type = double;
+};
+
+template<>
+struct scalar_traits<double> : type_traits<double> {
+private:
+	using base_type = typename scalar_traits::self_type;
+public:
+	using self_type = scalar_traits<double>;
+
+	using precision_type = long double;
 };
 
 NGS_MLA_END
