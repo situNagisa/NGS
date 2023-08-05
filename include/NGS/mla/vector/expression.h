@@ -2,9 +2,7 @@
 
 #include "NGS/mla/base/expression.h"
 #include "NGS/mla/vector/tag.h"
-
-#include <boost/stl_interfaces/iterator_interface.hpp>
-#include <boost/stl_interfaces/reverse_iterator.hpp>
+#include "NGS/mla/iterator_interface.h"
 
 
 NGS_MLA_BEGIN
@@ -38,40 +36,23 @@ public:
 	using type_category = tag::vector;
 	constexpr static size_t dimension = 0;
 
+	constexpr auto operator[](size_t i)const { return (*this)()(i); }
+
 	//=================
 	// iterator
 	//=================
 protected:
 	template<bool _Constant>
-	struct _iterator : boost::stl_interfaces::iterator_interface <
-		_iterator<_Constant>,
-		std::random_access_iterator_tag,
-		typename base_type::expression_type::element_type
-	> {
+	struct _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
 	private:
-		using _base_type = boost::stl_interfaces::iterator_interface<
-			_iterator<_Constant>,
-			std::random_access_iterator_tag,
-			typename base_type::expression_type::element_type
-		>;
-		using _element_type = typename base_type::expression_type::element_type;
-		using _expression_ptr = std::conditional_t<_Constant,const typename base_type::expression_type*,typename base_type::expression_type*>;
-		using _pointer = std::conditional_t<_Constant, const _element_type*, _element_type*>;
-		using _refence = std::conditional_t<_Constant, _element_type, _element_type&>;
-		using _self = _iterator<_Constant>;
-		using _difference_type = typename _base_type::difference_type;
+		using _base_type = ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type>;
+		using _self_type = _iterator<_Constant>;
+
+		NGS_minherit_t(_reference, _base_type);
 	public:
 		using _base_type::_base_type;
-		constexpr _iterator(_expression_ptr expr,_difference_type n) : _expr(expr),_n(n) {}
-		constexpr _iterator(_expression_ptr expr) : _iterator(expr,0) {}
 
-		_refence operator*()const { return (*_expr)()(_n); }
-		_self& operator+=(_difference_type n) { _n += n; return *this; }
-		_difference_type operator-(_self other)const { return _n - other._n; }
-
-	private:
-		_expression_ptr _expr = nullptr;
-		_difference_type _n = 0;
+		constexpr _reference operator*()const { return (*_base_type::_expr)()(_base_type::_n); }
 	};
 public:
 	using iterator = _iterator<false>;
@@ -79,17 +60,17 @@ public:
 	using reverse_iterator = boost::stl_interfaces::reverse_iterator<iterator>;
 	using const_reverse_iterator = boost::stl_interfaces::reverse_iterator<const_iterator>;
 
-	const_iterator begin()const { return const_iterator(&(*this)(), 0); }
-	const_iterator cbegin()const { return begin(); }
+	constexpr const_iterator begin()const { return const_iterator(&(*this)(), 0); }
+	constexpr const_iterator cbegin()const { return begin(); }
 
-	const_iterator end()const { return const_iterator(&(*this)(), base_type::expression_type::dimension); }
-	const_iterator cend()const { return end(); }
+	constexpr const_iterator end()const { return const_iterator(&(*this)(), base_type::expression_type::dimension); }
+	constexpr const_iterator cend()const { return end(); }
 
-	const_reverse_iterator rbegin()const { return const_reverse_iterator(end()); }
-	const_reverse_iterator crbegin()const { return rbegin(); }
+	constexpr const_reverse_iterator rbegin()const { return const_reverse_iterator(end()); }
+	constexpr const_reverse_iterator crbegin()const { return rbegin(); }
 
-	const_reverse_iterator rend()const { return const_reverse_iterator(begin()); }
-	const_reverse_iterator crend()const { return rend(); }
+	constexpr const_reverse_iterator rend()const { return const_reverse_iterator(begin()); }
+	constexpr const_reverse_iterator crend()const { return rend(); }
 };
 
 NGS_MLA_END

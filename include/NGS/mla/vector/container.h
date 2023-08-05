@@ -65,6 +65,11 @@ public:
 	constexpr VectorContainer(_element_i_t<_Index>... value) {
 		(((*this)()(_Index) = value), ...);
 	}
+	//===================
+	// access
+	//===================
+	constexpr element_type& operator[](size_t i) { return (*this)()(i); }
+	constexpr element_type operator[](size_t i)const { return (*this)()(i); }
 
 	//===================
 	// assign
@@ -74,11 +79,7 @@ public:
 		(((*this)()(_Index) = value), ...);
 		return (*this)();
 	}
-	typename base_type::expression_type& assign(const self_type& other) {
-		std::memcpy(&(*this)(), &other(), sizeof(element_type) * dimension);
-		return (*this)();
-	}
-	typename base_type::expression_type& assign(CVectorExpression auto&& expression) {
+	typename base_type::expression_type& assign(const CVectorExpression auto& expression) {
 		(((*this)()(_Index) = expression()(_Index)), ...);
 		return (*this)();
 	}

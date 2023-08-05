@@ -29,4 +29,7 @@ struct meta_function						\
 #define NGS_mget_return_t(...) NGS_mget_t(type,__VA_ARGS__)
 #define NGS_mget_return(...) NGS_mget(value,__VA_ARGS__)
 
+#define NGS_minherit_t(id,...) using id = typename __VA_ARGS__::id
+#define NGS_minherit(id,...) constexpr static auto id = __VA_ARGS__::id
+
 NGS_END
