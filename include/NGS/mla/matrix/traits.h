@@ -15,7 +15,10 @@ private:
 public:
 	using original_type = typename _Expression::expression_type;
 	using element_type = typename _Expression::element_type;
-	using closure_type = std::conditional_t<std::derived_from<typename original_type::type_category, tag::matrix_container>, const original_type&, const original_type>;
+	using closure_type = std::conditional_t<
+		std::derived_from<typename original_type::type_category, tag::matrix_container> && !std::is_rvalue_reference_v<_Expression>,
+		const original_type&,
+		const original_type>;
 
 	constexpr static size_t complexity = original_type::complexity;
 	constexpr static size_t row_count = original_type::row_count;

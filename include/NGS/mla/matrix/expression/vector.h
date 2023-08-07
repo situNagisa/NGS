@@ -1,56 +1,39 @@
 ﻿#pragma once
 
 #include "NGS/mla/matrix/expression/concept.h"
-#include "NGS/mla/vector/expression.h"
+#include "NGS/mla/vector/expression/concept.h"
 #include "NGS/mla/matrix/traits.h"
+#include "NGS/mla/vector/traits.h"
+#include "NGS/mla/matrix/expression/expression.h"
+#include "NGS/mla/vector/vector.h"
 
 NGS_MLA_BEGIN
 
-template<CMatrixExpression _Expressioin>
-struct MatrixRowVector : VectorExpression<MatrixRowVector<_Expressioin>> {
+template<CVectorExpression _Expression, CMatrixLayout _Layout = tag::row>
+struct MatrixVectorExpression : MatrixExpression<MatrixVectorExpression<_Expression, _Layout>> {
 private:
-	using base_type = MatrixRowVector::self_type;
+	using base_type = MatrixVectorExpression::self_type;
 protected:
-	using self_type = MatrixRowVector<_Expressioin>;
+	using self_type = MatrixVectorExpression<_Expression, _Layout>;
+	using closure_type = typename vector_traits<_Expression>::closure_type;
 public:
-	using element_type = typename matrix_traits<_Expressioin>::element_type;
-	constexpr static size_t dimension = matrix_traits<_Expressioin>::col_count;
-	constexpr static size_t complexity = matrix_traits<_Expressioin>::complexity + 1;
-private:
-	using _expression_closure_type = typename matrix_traits<_Expressioin>::closure_type;
-public:
-	constexpr MatrixRowVector(_expression_closure_type expression, size_t row) : _expression(expression), _row(row) {}
+	using element_type = typename vector_traits<_Expression>::element_type;
+	using layout_category = _Layout;
+
+	constexpr static size_t row_count = is_col_major<layout_category> ? vector_traits<_Expression>::dimension : 1;
+	constexpr static size_t col_count = is_row_major<layout_category> ? vector_traits<_Expression>::dimension : 1;
+	constexpr static size_t element_count = row_count * col_count;
+
+	constexpr explicit MatrixVectorExpression(closure_type expression)
+		: _expression(expression)
+	{}
 
 	using base_type::operator();
-	constexpr element_type operator()(size_t index)const { return _expression()(_row, index); }
-
+	constexpr element_type operator()(size_t row_index, size_t col_index)const {
+		return _expression()(layout_category::transform(row_index, col_index, row_count, col_count));
+	}
 private:
-	_expression_closure_type _expression;
-	size_t _row = 0;
+	closure_type _expression;
 };
-//verify
-
-template<CMatrixExpression _Expressioin>
-struct MatrixColVector : VectorExpression<MatrixColVector<_Expressioin>> {
-private:
-	using base_type = MatrixColVector::self_type;
-protected:
-	using self_type = MatrixColVector<_Expressioin>;
-public:
-	using element_type = typename matrix_traits<_Expressioin>::element_type;
-	constexpr static size_t dimension = matrix_traits<_Expressioin>::row_count;
-	constexpr static size_t complexity = matrix_traits<_Expressioin>::complexity + 1;
-private:
-	using _expression_closure_type = typename matrix_traits<_Expressioin>::closure_type;
-public:
-	constexpr MatrixColVector(_expression_closure_type expression, size_t col) : _expression(expression), _col(col) {}
-
-	using base_type::operator();
-	constexpr element_type operator()(size_t index)const { return _expression()(index, _col); }
-private:
-	_expression_closure_type _expression;
-	size_t _col = 0;
-};
-//verify
 
 NGS_MLA_END

@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "NGS/mla/base/traits.h"
-#include "NGS/mla/vector/expression.h"
+#include "NGS/mla/vector/expression/concept.h"
 #include "NGS/mla/vector/tag.h"
 
 NGS_MLA_BEGIN

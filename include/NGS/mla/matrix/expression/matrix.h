@@ -1,204 +1,112 @@
 ﻿#pragma once
 
-#include "NGS/mla/matrix/expression/concept.h"
-#include "NGS/mla/iterator_interface.h"
-#include "NGS/mla/matrix/expression/vector.h"
+#include "NGS/mla/matrix/expression/container.h"
+#include "NGS/mla/matrix/traits.h"
 
 NGS_MLA_BEGIN
 
-template<ccpt::CRPT<CMatrixExpression<>> _Expression>
-struct MatrixExpression : Expression<_Expression> {
+template<
+	size_t _Row, size_t _Col,
+	class _ElementType,
+	class _Layout = tag::row,
+	class = std::make_index_sequence<_Col* _Row>,
+	class = std::make_index_sequence<_Row>,
+	class = std::make_index_sequence<_Col>>
+	struct Matrix;
+
+template<
+	size_t _Row, size_t _Col,
+	class _ElementType,
+	class _Layout,
+	size_t... _Index,
+	size_t... _RowIndex,
+	size_t... _ColIndex>
+struct Matrix<
+	_Row, _Col,
+	_ElementType,
+	_Layout,
+	std::index_sequence<_Index...>,
+	std::index_sequence<_RowIndex...>,
+	std::index_sequence<_ColIndex...>>
+	: MatrixContainer<
+	//derived
+	Matrix<
+	_Row, _Col,
+	_ElementType,
+	_Layout,
+	std::index_sequence<_Index...>,
+	std::index_sequence<_RowIndex...>,
+	std::index_sequence<_ColIndex...>>,
+	//row,column
+	std::integral_constant<size_t, _Row>, std::integral_constant<size_t, _Col>,
+	_ElementType,
+	_Layout,
+	//index_sequence
+	std::index_sequence<_Index...>,
+	std::index_sequence<_RowIndex...>,
+	std::index_sequence<_ColIndex...>
+	>{
+public:
+	using base_type = Matrix::self_type;
+protected:
+	using self_type = Matrix<
+		_Row, _Col,
+		_ElementType,
+		_Layout,
+		std::index_sequence<_Index...>,
+		std::index_sequence<_RowIndex...>,
+		std::index_sequence<_ColIndex...>>;
+public:
+	using expression_type = typename matrix_traits<base_type>::original_type;
+	using element_type = typename matrix_traits<base_type>::element_type;
+	NGS_minherit_t(layout_category, base_type);
+	NGS_minherit(row_count, base_type);
+	NGS_minherit(col_count, base_type);
+public:
+	constexpr Matrix() = default;
+	template<CMatrixExpression _Expression>
+		requires (is_similar<expression_type, _Expression>)
+	constexpr Matrix(const _Expression& expression) {
+		for (size_t row_index = 0; row_index < row_count; row_index++)
+		{
+			for (size_t col_index = 0; col_index < col_count; col_index++)
+			{
+				(*this)()(row_index, col_index) = expression()(row_index, col_index);
+			}
+		}
+	}
+	constexpr Matrix(typename base_type::template _element_i_t<_Index>... value) {
+		(((*this)()(_Index) = value), ...);
+	}
+
+	//===============
+	// API
+	//===============
+
+	using base_type::operator();
+	constexpr element_type& operator()(size_t index) { return _data[index]; }
+	constexpr const element_type& operator()(size_t index)const { return _data[index]; }
+
+	constexpr element_type& operator()(size_t row_index, size_t col_index) {
+		return _data[layout_category::transform(row_index, col_index, row_count, col_count)];
+	}
+	constexpr const element_type& operator()(size_t row_index, size_t col_index)const {
+		return _data[layout_category::transform(row_index, col_index, row_count, col_count)];
+	}
+	using base_type::assign;
+	constexpr expression_type& assign(size_t index, element_type element) {
+		(*this)()(index) = element;
+		return (*this)();
+	}
+	constexpr expression_type& assign(size_t row_index, size_t col_index, element_type element) {
+		(*this)()(row_index, col_index) = element;
+		return (*this)();
+	}
+
 private:
-	using base_type = MatrixExpression::self_type;
-protected:
-	using self_type = MatrixExpression<_Expression>;
-public:
-	using type_category = tag::matrix;
-	constexpr static size_t row_count = 0;
-	constexpr static size_t col_count = 0;
-	constexpr static size_t element_count = 0;
-
-	constexpr auto row(size_t row_index)const { return MatrixRowVector<typename base_type::expression_type>((*this)(), row_index); }
-	constexpr auto column(size_t col_index)const { return MatrixColVector<typename base_type::expression_type>((*this)(), col_index); }
-
-	constexpr auto operator[](size_t row_index)const { return row(row_index); }
-	//=================
-	// iterator
-	//=================
-	/*
-protected:
-	template<bool _Constant>
-	struct _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
-	private:
-		using _base_type = ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type>;
-		using _self_type = _iterator<_Constant>;
-
-		NGS_minherit_t(_reference, _base_type);
-	public:
-		using _base_type::_base_type;
-
-		_reference operator*()const { return (*_base_type::_expr)()(_base_type::_n); }
-	};
-public:
-	using iterator = _iterator<false>;
-	using const_iterator = _iterator<true>;
-	using reverse_iterator = boost::stl_interfaces::reverse_iterator<iterator>;
-	using const_reverse_iterator = boost::stl_interfaces::reverse_iterator<const_iterator>;
-
-	const_iterator begin()const { return const_iterator(&(*this)(), 0); }
-	const_iterator cbegin()const { return begin(); }
-
-	const_iterator end()const { return const_iterator(&(*this)(), base_type::expression_type::element_count); }
-	const_iterator cend()const { return end(); }
-
-	const_reverse_iterator rbegin()const { return const_reverse_iterator(end()); }
-	const_reverse_iterator crbegin()const { return rbegin(); }
-
-	const_reverse_iterator rend()const { return const_reverse_iterator(begin()); }
-	const_reverse_iterator crend()const { return rend(); }
-
-protected:
-	enum class _iterator_type {
-		row,
-		column,
-	};
-	template<bool _Constant, _iterator_type _IteratorType>
-	struct _element_iterator : random_access_iterator<_element_iterator<_Constant, _IteratorType>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
-	private:
-		using _base_type = ngs::mla::random_access_iterator<_element_iterator<_Constant, _IteratorType>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type>;
-		using _self_type = _element_iterator<_Constant, _IteratorType>;
-
-		NGS_minherit_t(_reference, _base_type);
-		NGS_minherit_t(_expression_ptr, _base_type);
-		NGS_minherit_t(_difference_type, _base_type);
-	public:
-		constexpr static _iterator_type iterator_type = _IteratorType;
-
-		using _base_type::_base_type;
-		_element_iterator(_expression_ptr expr, _difference_type n, _difference_type index)
-			: _base_type(expr, n)
-			, _index(index)
-		{}
-
-		_reference operator*()const {
-			if constexpr (iterator_type == _iterator_type::row) {
-				return (*_base_type::_expr)()(_index, _base_type::_n);
-			}
-			else if constexpr (iterator_type == _iterator_type::column) {
-				return (*_base_type::_expr)()(_base_type::_n, _index);
-			}
-			else {
-				return (*_base_type::_expr)()(_index, _base_type::_n);
-			}
-		}
-	private:
-		_difference_type _index{};
-	};
-	template<bool _Constant, bool _Reverse, _iterator_type _IteratorType>
-	struct _iterator_iterator :
-		random_access_iterator<
-		_iterator_iterator<_Constant, _Reverse, _IteratorType>,
-		_Constant,
-		typename base_type::expression_type,
-		std::conditional_t<_Reverse, boost::stl_interfaces::reverse_iterator<_element_iterator<_Constant, _IteratorType>>, _element_iterator<_Constant, _IteratorType>>
-		> {
-	private:
-		using _base_type = ngs::mla::random_access_iterator<
-			_iterator_iterator<_Constant, _Reverse, _IteratorType>,
-			_Constant,
-			typename base_type::expression_type,
-			std::conditional_t<_Reverse, boost::stl_interfaces::reverse_iterator<_element_iterator<_Constant, _IteratorType>>, _element_iterator<_Constant, _IteratorType>>
-		>;
-		using _self_type = _iterator_iterator<_Constant, _Reverse, _IteratorType>;
-
-		NGS_minherit_t(_element_type, _base_type);
-		NGS_minherit_t(_expression_type, _base_type);
-	public:
-		constexpr static _iterator_type iterator_type = _IteratorType;
-		constexpr static bool is_reverse = _Reverse;
-
-		_element_type operator*()const {
-			using it = _element_iterator<_Constant, _IteratorType>;
-			if constexpr (is_reverse) {
-				if constexpr (iterator_type == _iterator_type::row) {
-					return _element_type(it(_base_type::_expr, _expression_type::col_count, _base_type::_n));
-				}
-				else if constexpr (iterator_type == _iterator_type::column) {
-					return _element_type(it(_base_type::_expr, _expression_type::row_count, _base_type::_n));
-				}
-			}
-			else {
-				return it(_base_type::_expr, 0, _base_type::_n);
-			}
-		}
-	};
-public:
-	using row_iterator = _iterator_iterator<false, false, _iterator_type::column>;
-	using const_row_iterator = _iterator_iterator<true, false, _iterator_type::column>;
-	using row_reverse_iterator = _iterator_iterator<false, true, _iterator_type::column>;
-	using const_row_reverse_iterator = _iterator_iterator<true, true, _iterator_type::column>;
-
-	using reverse_row_iterator = boost::stl_interfaces::reverse_iterator<row_iterator>;
-	using const_reverse_row_iterator = boost::stl_interfaces::reverse_iterator<const_row_iterator>;
-	using reverse_row_reverse_iterator = boost::stl_interfaces::reverse_iterator<row_reverse_iterator>;
-	using const_reverse_row_reverse_iterator = boost::stl_interfaces::reverse_iterator<const_row_reverse_iterator>;
-
-	using col_iterator = _iterator_iterator<false, false, _iterator_type::row>;
-	using const_col_iterator = _iterator_iterator<true, false, _iterator_type::row>;
-	using col_reverse_iterator = _iterator_iterator<false, true, _iterator_type::row>;
-	using const_col_reverse_iterator = _iterator_iterator<true, true, _iterator_type::row>;
-
-	using reverse_col_iterator = boost::stl_interfaces::reverse_iterator<col_iterator>;
-	using const_reverse_col_iterator = boost::stl_interfaces::reverse_iterator<const_col_iterator>;
-	using reverse_col_reverse_iterator = boost::stl_interfaces::reverse_iterator<col_reverse_iterator>;
-	using const_reverse_col_reverse_iterator = boost::stl_interfaces::reverse_iterator<const_col_reverse_iterator>;
-
-	//========================
-	// r(1)xxx_r(2)xxx
-	// r1 - 内层是否反转
-	// r2 - 外层是否反转
-	//========================
-
-	const_row_iterator row_begin()const { return const_row_iterator(&(*this)(), 0); }
-	const_row_iterator row_cbegin()const { return row_begin(); }
-	const_row_iterator row_end()const { return const_row_iterator(&(*this)(), base_type::expression_type::col_count); }
-	const_row_iterator row_cend()const { return row_end(); }
-
-	const_reverse_row_iterator row_rbegin()const { return const_reverse_row_iterator(row_end()); }
-	const_reverse_row_iterator row_crbegin()const { return row_rbegin(); }
-	const_reverse_row_iterator row_rend()const { return const_reverse_row_iterator(row_begin()); }
-	const_reverse_row_iterator row_crend()const { return row_rend(); }
-
-	const_row_reverse_iterator rrow_begin()const { return const_row_reverse_iterator(row_end()); }
-	const_row_reverse_iterator rrow_cbegin()const { return rrow_begin(); }
-	const_row_reverse_iterator rrow_end()const { return const_row_reverse_iterator(row_begin()); }
-	const_row_reverse_iterator rrow_cend()const { return rrow_end(); }
-
-	const_reverse_row_reverse_iterator rrow_rbegin()const { return const_reverse_row_reverse_iterator(row_begin()); }
-	const_reverse_row_reverse_iterator rrow_crbegin()const { return rrow_rbegin(); }
-	const_reverse_row_reverse_iterator rrow_rend()const { return const_reverse_row_reverse_iterator(row_end()); }
-	const_reverse_row_reverse_iterator rrow_crend()const { return rrow_rend(); }
-
-	const_col_iterator col_begin()const { return const_col_iterator(&(*this)(), 0); }
-	const_col_iterator col_cbegin()const { return col_begin(); }
-	const_col_iterator col_end()const { return const_col_iterator(&(*this)(), base_type::expression_type::row_count); }
-	const_col_iterator col_cend()const { return col_end(); }
-
-	const_reverse_col_iterator col_rbegin()const { return const_reverse_col_iterator(col_end()); }
-	const_reverse_col_iterator col_crbegin()const { return col_rbegin(); }
-	const_reverse_col_iterator col_rend()const { return const_reverse_col_iterator(col_begin()); }
-	const_reverse_col_iterator col_crend()const { return col_rend(); }
-
-	const_col_reverse_iterator rcol_begin()const { return const_col_reverse_iterator(col_end()); }
-	const_col_reverse_iterator rcol_cbegin()const { return rcol_begin(); }
-	const_col_reverse_iterator rcol_end()const { return const_col_reverse_iterator(col_begin()); }
-	const_col_reverse_iterator rcol_cend()const { return rcol_end(); }
-
-	const_reverse_col_reverse_iterator rcol_rbegin()const { return const_reverse_col_reverse_iterator(col_begin()); }
-	const_reverse_col_reverse_iterator rcol_crbegin()const { return rcol_rbegin(); }
-	const_reverse_col_reverse_iterator rcol_rend()const { return const_reverse_col_reverse_iterator(col_end()); }
-	const_reverse_col_reverse_iterator rcol_crend()const { return rcol_rend(); }
-	*/
+	element_type _data[row_count * col_count]{};
 };
+
+NGS_CCPT_VERIFY(CMatrixContainer, Matrix<3, 3, float>);
 
 NGS_MLA_END

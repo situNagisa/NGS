@@ -1,20 +1,30 @@
 ﻿#pragma once
 
-#include "NGS/mla/matrix/expression/matrix.h"
+#include "NGS/mla/matrix/expression/expression.h"
 #include "NGS/mla/matrix/traits.h"
 
 NGS_MLA_BEGIN
 
+/**
+ * @brief
+ *
+ * @concept derived_drom CMatrixExpression
+ *
+ * @property type layout_category *
+ * @property element_type operator()(size_t i)const
+ * @property _Container& assign(const CMatrixExpression&) *
+ *
+*/
 template<class _Container = void>
-concept CMatrixContainer = CMatrixExpression<_Container> && requires(_Container container, const _Container container_cst) {
+concept CMatrixContainer = CMatrixExpression<_Container> && requires(_Container container, const _Container container_cst, typename _Container::element_type element, size_t index, size_t row_index, size_t col_index) {
 	typename _Container::layout_category;
 
-
-	{ container(0) } -> std::convertible_to<typename _Container::element_type>;
 	{ container_cst(0) } -> std::convertible_to<typename _Container::element_type>;
 
 	{ container.assign(container_cst) } -> std::convertible_to<_Container&>;
-		requires (sizeof(_Container) == (sizeof(typename matrix_traits<_Container>::element_type) * matrix_traits<_Container>::col_count * matrix_traits<_Container>::row_count));
+	{ container.assign(index, element) } -> std::convertible_to<_Container&>;
+	{ container.assign(row_index, col_index, element) } -> std::convertible_to<_Container&>;
+	//	requires (sizeof(_Container) == (sizeof(typename matrix_traits<_Container>::element_type) * matrix_traits<_Container>::col_count * matrix_traits<_Container>::row_count));
 };
 
 
@@ -68,6 +78,7 @@ public:
 
 	using element_type = _ElementType;
 	using layout_category = _Layout;
+	using type_category = tag::matrix_container;
 	constexpr static size_t row_count = _Row;
 	constexpr static size_t col_count = _Col;
 	constexpr static size_t element_count = row_count * col_count;
@@ -78,29 +89,9 @@ public:
 	constexpr static size_t minor_count = is_row_major<layout_category> ? col_count : row_count;
 protected:
 	template<size_t _Index> using _element_i_t = element_type;
-	template<size_t _RowI, size_t _ColI> using _element_r_c_t = element_type;
+	template<size_t _Index,class _Type> using _convert_t = _Type;
 public:
 	constexpr MatrixContainer() = default;
-	template<CMatrixExpression _Expression>
-		requires (is_similar<expression_type, _Expression>)
-	constexpr MatrixContainer(const _Expression& expression) {
-		for (size_t row_index = 0; row_index < row_count; row_index++)
-		{
-			for (size_t col_index = 0; col_index < col_count; col_index++)
-			{
-				(*this)()(row_index, col_index) = expression()(row_index, col_index);
-			}
-		}
-	}
-	constexpr MatrixContainer(_element_i_t<_Index>... value) {
-		for (size_t row_index = 0; row_index < row_count; row_index++)
-		{
-			for (size_t col_index = 0; col_index < col_count; col_index++)
-			{
-				(*this)()(row_index, col_index) = value;
-			}
-		}
-	}
 	//===============
 	// access
 	//===============
@@ -126,38 +117,33 @@ public:
 	//===============
 
 	using base_type::operator();
-	constexpr element_type& operator()(size_t i);
-	constexpr const element_type& operator()(size_t i)const;
-
-	constexpr element_type& operator()(size_t row_index, size_t col_index);
-	constexpr const element_type& operator()(size_t i, size_t j)const;
+	constexpr element_type operator()(size_t i)const;
+	constexpr element_type operator()(size_t i, size_t j)const;
 
 	//================
 	// assign
 	//================
-	expression_type& assign(_element_i_t<_Index>... value) {
-		(((*this)()(_Index) = value), ...);
-		return (*this)();
-	}
+	constexpr expression_type& assign(size_t index, element_type element) { return (*this)(); }
+	constexpr expression_type& assign(size_t row_index, size_t col_index, element_type element) { return (*this)(); }
+
 	template<CMatrixExpression _Expression>
 		requires (is_similar<expression_type, _Expression>)
-	expression_type& assign(const _Expression& expression) {
+	constexpr expression_type& assign(const _Expression& expression) {
 		for (size_t row_index = 0; row_index < row_count; row_index++)
 		{
 			for (size_t col_index = 0; col_index < col_count; col_index++)
 			{
-				(*this)()(row_index, col_index) = expression()(row_index, col_index);
+				assign(row_index, col_index, expression()(row_index, col_index));
 			}
 		}
 		return (*this)();
 	}
 	expression_type& assign(const expression_type& expression) {
-		std::memcpy(this, &expression, sizeof(element_type) * element_count);
+		std::memcpy(this, &expression, sizeof(expression));
 	}
-	template<CMatrixExpression _Expression>
-		requires (is_similar<expression_type, _Expression>)
-	expression_type& operator=(const _Expression& expression) { return assign(expression); }
-	expression_type& operator=(const expression_type& expression) { return assign(expression); }
+	template<class T>
+		requires requires(expression_type expression,T t) { { expresssion.assign(t) }; }
+	expression_type& operator=(T&& target) { return assign(std::forward<T>(target)); }
 
 	//=================
 	// iterator

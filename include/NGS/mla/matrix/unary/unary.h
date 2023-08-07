@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "NGS/mla/matrix/expression/matrix.h"
-#include "NGS/mla/matrix/container.h"
+#include "NGS/mla/matrix/expression/expression.h"
+#include "NGS/mla/matrix/expression/container.h"
 #include "NGS/mla/matrix/unary/functor.h"
 #include "NGS/mla/matrix/traits.h"
 

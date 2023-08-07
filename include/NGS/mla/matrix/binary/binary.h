@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "NGS/mla/matrix/expression/matrix.h"
-#include "NGS/mla/matrix/container.h"
+#include "NGS/mla/matrix/expression/expression.h"
+#include "NGS/mla/matrix/expression/container.h"
 #include "NGS/mla/matrix/binary/functor.h"
 
 NGS_MLA_BEGIN
@@ -47,7 +47,7 @@ private:
 template<
 	CMatrixExpression _Expression1, CMatrixExpression _Expression2,
 	CMatrixBinaryFunctor<_Expression1, _Expression2> _Functor,
-	size_t _Row = matrix_traits<_Expression2>::row_count,
+	size_t _Row = matrix_traits<_Expression1>::row_count,
 	size_t _Col = matrix_traits<_Expression2>::col_count>
 using matrix_binary_t = MatrixBinary<_Expression1, _Expression2, _Functor, std::integral_constant<size_t, _Row>, std::integral_constant<size_t, _Col>>;
 //verify
@@ -56,7 +56,7 @@ using matrix_binary_t = MatrixBinary<_Expression1, _Expression2, _Functor, std::
 template<
 	CMatrixExpression _Expression1, CMatrixExpression _Expression2,
 	template<class, class>class _Functor,
-	size_t _Row = matrix_traits<_Expression2>::row_count,
+	size_t _Row = matrix_traits<_Expression1>::row_count,
 	size_t _Col = matrix_traits<_Expression2>::col_count>
 using matrix_binary_scalar_t = matrix_binary_t<
 	_Expression1, _Expression2,

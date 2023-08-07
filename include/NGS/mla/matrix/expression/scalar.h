@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "NGS/mla/matrix/expression/matrix.h"
+#include "NGS/mla/matrix/expression/expression.h"
 
 NGS_MLA_BEGIN
 
