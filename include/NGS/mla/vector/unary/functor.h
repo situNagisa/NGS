@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "NGS/mla/vector/expression.h"
+#include "NGS/mla/vector/expression/expression.h"
 #include "NGS/mla/scalar/unary/functor.h"
 
 NGS_MLA_BEGIN

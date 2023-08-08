@@ -5,7 +5,7 @@
 #include "NGS/mla/matrix/traits.h"
 #include "NGS/mla/vector/traits.h"
 #include "NGS/mla/matrix/expression/expression.h"
-#include "NGS/mla/vector/vector.h"
+#include "NGS/mla/vector/expression/expression.h"
 
 NGS_MLA_BEGIN
 

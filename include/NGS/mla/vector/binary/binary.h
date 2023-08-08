@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "NGS/mla/vector/expression.h"
-#include "NGS/mla/vector/container.h"
+#include "NGS/mla/vector/expression/expression.h"
+#include "NGS/mla/vector/expression/container.h"
 #include "NGS/mla/vector/binary/functor.h"
 
 NGS_MLA_BEGIN

@@ -9,6 +9,7 @@
 #include "NGS/mla/matrix/unary/operator/access.h"
 #include "NGS/mla/matrix/expression/vector.h"
 #include "NGS/mla/scalar/expression/concept.h"
+#include "NGS/mla/vector/unary/operator/homogen.h"
 
 NGS_MLA_BEGIN
 
@@ -86,19 +87,34 @@ constexpr auto multiplies_vector(const _Vector& vector, const _Matrix& matrix) {
 	using vector_t = MatrixVectorExpression<_Vector, tag::row>;
 	return multiplies(vector_t(vector), matrix);
 }
+template<CMatrixExpression _Matrix, CVectorExpression _Vector>
+	requires (matrix_traits<_Matrix>::col_count == vector_traits<_Vector>::dimension + 1)
+constexpr auto multiplies_vector(const _Matrix& matrix, const _Vector& vector) {
+	using vector_t = VectorHomogenousExpression<_Vector>;
+	using matrix_t = MatrixVectorExpression<vector_t, tag::column>;
+	return multiplies(matrix, matrix_t(vector_t(vector)));
+}
+template<CMatrixExpression _Matrix, CVectorExpression _Vector>
+	requires (matrix_traits<_Matrix>::row_count == vector_traits<_Vector>::dimension + 1)
+constexpr auto multiplies_vector(const _Vector& vector, const _Matrix& matrix) {
+	using vector_t = VectorHomogenousExpression<_Vector>;
+	using matrix_t = MatrixVectorExpression<vector_t, tag::row>;
+	return multiplies(matrix_t(vector_t(vector)), matrix);
+}
+
 template<CMatrixContainer _Container, CVectorExpression _Vector>
-	requires (matrix_traits<_Container>::col_count == vector_traits<_Vector>::dimension)
-_Container& multiplies_assign(_Container& container, const _Vector& vector) { return container.assign(multiplies_vector(container, vector)); }
+	requires (matrix_traits<_Container>::col_count == vector_traits<_Vector>::dimension) || (matrix_traits<_Container>::col_count == vector_traits<_Vector>::dimension + 1)
+_Container & multiplies_assign(_Container & container, const _Vector & vector) { return container.assign(multiplies_vector(container, vector)); }
 
 template<CMatrixExpression _Matrix, CVectorExpression _Vector>
-	requires (matrix_traits<_Matrix>::col_count == vector_traits<_Vector>::dimension)
-constexpr auto operator*(const _Matrix& matrix, const _Vector& vector) { return multiplies_vector(matrix, vector); }
+	requires (matrix_traits<_Matrix>::col_count == vector_traits<_Vector>::dimension) || (matrix_traits<_Matrix>::col_count == vector_traits<_Vector>::dimension + 1)
+constexpr auto operator*(const _Matrix & matrix, const _Vector & vector) { return multiplies_vector(matrix, vector); }
 template<CMatrixExpression _Matrix, CVectorExpression _Vector>
-	requires (matrix_traits<_Matrix>::row_count == vector_traits<_Vector>::dimension)
-constexpr auto operator*(const _Vector& vector, const _Matrix& matrix) { return multiplies_vector(vector, matrix); }
+	requires (matrix_traits<_Matrix>::row_count == vector_traits<_Vector>::dimension) || (matrix_traits<_Matrix>::row_count == vector_traits<_Vector>::dimension + 1)
+constexpr auto operator*(const _Vector & vector, const _Matrix & matrix) { return multiplies_vector(vector, matrix); }
 template<CMatrixContainer _Container, CVectorExpression _Vector>
-	requires (matrix_traits<_Container>::col_count == vector_traits<_Vector>::dimension)
-_Container& operator*=(_Container& container, const _Vector& vector) { return multiplies_assign(container, vector); }
+	requires (matrix_traits<_Container>::col_count == vector_traits<_Vector>::dimension) || (matrix_traits<_Container>::col_count == vector_traits<_Vector>::dimension + 1)
+_Container & operator*=(_Container & container, const _Vector & vector) { return multiplies_assign(container, vector); }
 
 
 NGS_MLA_END

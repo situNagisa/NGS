@@ -17,3 +17,5 @@
 #include "NGS/base/mpl/mpl_macro.h"
 
 #include "NGS/base/mpl/concepts/concept.h"
+
+#include "NGS/base/mpl/sequence_params.h"

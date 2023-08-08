@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "NGS/mla/vector/expression.h"
+#include "NGS/mla/vector/expression/expression.h"
 
 NGS_MLA_BEGIN
 
@@ -14,9 +14,12 @@ NGS_MLA_BEGIN
  * @property sizeof == (sizeof(element_type) * dimension)
 */
 template<class _Container = void>
-concept CVectorContainer = CVectorExpression<_Container> && requires(_Container expr, const _Container expr_cst, VectorExpression<typename _Container::expression_type> other) {
+concept CVectorContainer = requires(_Container expr, const _Container expr_cst, VectorExpression<typename _Container::expression_type> other, size_t index, typename _Container::element_type element) {
 	{ expr.assign(expr) } -> std::convertible_to<_Container&>;
-		requires sizeof(typename _Container::expression_type) == (sizeof(typename _Container::element_type) * _Container::dimension);
+	{ expr.assign(index, element) } -> std::convertible_to<_Container&>;
+	{ expr.assign(index, expr_cst) } -> std::convertible_to<_Container&>;
+		requires  CVectorExpression<_Container>;
+	//	requires sizeof(typename _Container::expression_type) == (sizeof(typename _Container::element_type) * _Container::dimension);
 };
 
 template<ccpt::CRPT<CVectorContainer<>> _Derived, ccpt::UInt _Dim, class _ElementType, class = std::make_index_sequence<_Dim::value>>
@@ -40,56 +43,45 @@ class VectorContainer<
 private:
 	using base_type = typename VectorContainer::self_type;
 protected:
-	using self_type = VectorContainer<_Derived, std::integral_constant<size_t, _Dim>, _ElementType, std::index_sequence<_Index...>>;
+	using self_type = VectorContainer;
 public:
+	NGS_minherit_t(expression_type, base_type);
+
 	using element_type = _ElementType;
 	using type_category = tag::vector_container;
 	constexpr static size_t dimension = _Dim;
 
-protected:
-	template<size_t _I>using _element_i_t = element_type;
 public:
-	constexpr VectorContainer() {
-		//(((*this)()(_Index) = 0), ...);
-	}
-	/**
-	 * @brief construct from expression
-	 *
-	 * @param expression
-	 */
-	template<CVectorExpression _Expression>
-		requires (dimension == _Expression::expression_type::dimension)
-	constexpr VectorContainer(const _Expression& expression) {
-		(((*this)()(_Index) = expression()(_Index)), ...);
-	}
-	constexpr VectorContainer(_element_i_t<_Index>... value) {
-		(((*this)()(_Index) = value), ...);
-	}
+	constexpr VectorContainer() = default;
 	//===================
 	// access
 	//===================
-	constexpr element_type& operator[](size_t i) { return (*this)()(i); }
+	//constexpr element_type& operator[](size_t i) { return (*this)()(i); }
 	constexpr element_type operator[](size_t i)const { return (*this)()(i); }
 
 	//===================
 	// assign
 	//===================
-
-	typename base_type::expression_type& assign(_element_i_t<_Index>... value) {
-		(((*this)()(_Index) = value), ...);
+	constexpr expression_type& assign(size_t index, element_type element) { return (*this)(); }
+	constexpr expression_type& assign(size_t index, const CVectorExpression auto& expression) { return (*this)().assign(index, expression()(index)); }
+	constexpr expression_type& assign(mpl::sequence_params_t<_Index, element_type>... value) {
+		(((*this)().assign((_Index, value))), ...);
 		return (*this)();
 	}
-	typename base_type::expression_type& assign(const CVectorExpression auto& expression) {
-		(((*this)()(_Index) = expression()(_Index)), ...);
+	constexpr expression_type& assign(const CVectorExpression auto& expression) {
+		(((*this)().assign(_Index, expression()(_Index))), ...);
 		return (*this)();
 	}
-
-	typename base_type::expression_type& operator=(const self_type& other) {
-		return assign(other);
+	expression_type& assign(const expression_type& other) {
+		std::memcpy(this, &other, sizeof(expression_type));
 	}
-	template<CVectorExpression T>
-	typename base_type::expression_type& operator=(T&& expression) {
-		return assign(std::forward<T>(expression));
+
+	expression_type& operator=(const self_type& other) {
+		return (*this)().assign(other);
+	}
+	template<CVectorExpression _Expression>
+	expression_type& operator=(const _Expression& expression) {
+		return (*this)().assign(expression);
 	}
 	//=================
 	// iterator
@@ -110,8 +102,8 @@ public:
 	//==================
 
 	using base_type::operator();
-	constexpr element_type& operator()(size_t i);
-	constexpr const element_type& operator()(size_t i)const;
+	//constexpr element_type& operator()(size_t i);
+	constexpr element_type operator()(size_t i)const;
 };
 
 NGS_MLA_END

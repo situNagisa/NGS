@@ -579,7 +579,7 @@
     <ClInclude Include="mla\vector\expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\vector.h">
+    <ClInclude Include="mla\vector\expression\vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="mla\vector\unary\unary.h">
@@ -681,7 +681,7 @@
     <ClInclude Include="mla\scalar\binary\operator.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\container.h">
+    <ClInclude Include="mla\vector\expression\container.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="mla\vector\scalar_expression.h">
@@ -814,6 +814,42 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="mla\matrix\binary\operator\scale.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\matrix\binary\operator\rotate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\binary\operator\basic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\binary\operator\compare.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\binary\operator\product.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\binary\operator\rotate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\mpl\sequence_params.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\expression\homogen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\unary\operator\negate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\unary\operator\length.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\unary\operator\normalize.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\unary\operator\view.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mla\vector\unary\operator\homogen.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

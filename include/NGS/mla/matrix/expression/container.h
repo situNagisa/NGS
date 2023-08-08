@@ -24,6 +24,7 @@ concept CMatrixContainer = CMatrixExpression<_Container> && requires(_Container 
 	{ container.assign(container_cst) } -> std::convertible_to<_Container&>;
 	{ container.assign(index, element) } -> std::convertible_to<_Container&>;
 	{ container.assign(row_index, col_index, element) } -> std::convertible_to<_Container&>;
+	{ container.assign(row_index, col_index, container_cst) } -> std::convertible_to<_Container&>;
 	//	requires (sizeof(_Container) == (sizeof(typename matrix_traits<_Container>::element_type) * matrix_traits<_Container>::col_count * matrix_traits<_Container>::row_count));
 };
 
@@ -125,6 +126,7 @@ public:
 	//================
 	constexpr expression_type& assign(size_t index, element_type element) { return (*this)(); }
 	constexpr expression_type& assign(size_t row_index, size_t col_index, element_type element) { return (*this)(); }
+	constexpr expression_type& assign(size_t row_index, size_t col_index, const CMatrixExpression auto& expression) { return (*this)().assign(row_index, col_index, expression()(row_index, col_index)); }
 
 	template<CMatrixExpression _Expression>
 		requires (is_similar<expression_type, _Expression>)
@@ -133,7 +135,7 @@ public:
 		{
 			for (size_t col_index = 0; col_index < col_count; col_index++)
 			{
-				assign(row_index, col_index, expression()(row_index, col_index));
+				(*this)().assign(row_index, col_index, expression);
 			}
 		}
 		return (*this)();

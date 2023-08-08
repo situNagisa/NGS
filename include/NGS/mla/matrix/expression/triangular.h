@@ -58,7 +58,7 @@ public:
 		{
 			for (size_t col_index = 0; col_index < col_count; col_index++)
 			{
-				assign(row_index, col_index, expression()(row_index, col_index));
+				assign(row_index, col_index, expression);
 			}
 		}
 	}
@@ -90,6 +90,12 @@ public:
 	constexpr expression_type& assign(size_t row_index, size_t col_index, element_type element) {
 		if (_HasElement(row_index, col_index)) {
 			_data[_Transform(row_index, col_index)] = element;
+		}
+		return (*this)();
+	}
+	constexpr expression_type& assign(size_t row_index, size_t col_index, const CMatrixExpression auto& expression) {
+		if (_HasElement(row_index, col_index)) {
+			_data[_Transform(row_index, col_index)] = expression()(row_index, col_index);
 		}
 		return (*this)();
 	}

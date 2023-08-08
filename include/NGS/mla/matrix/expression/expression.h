@@ -2,7 +2,7 @@
 
 #include "NGS/mla/matrix/expression/concept.h"
 #include "NGS/mla/iterator_interface.h"
-#include "NGS/mla/vector/expression.h"
+#include "NGS/mla/vector/expression/expression.h"
 #include "NGS/mla/matrix/traits.h"
 
 NGS_MLA_BEGIN

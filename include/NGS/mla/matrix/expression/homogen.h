@@ -45,7 +45,7 @@ public:
 
 	constexpr HomogeneousMatrix() = default;
 	constexpr HomogeneousMatrix(typename base_type::template _element_i_t<_Index>... value) {
-		((assign(_Index, value)), ...);
+		(((*this)().assign(_Index, value)), ...);
 	}
 	template<CMatrixExpression _Expression>
 		requires is_similar<expression_type, _Expression> || (is_row_major<homogen_category> && _Expression::col_count == dimension && _Expression::row_count == dimension - 1)
@@ -56,7 +56,7 @@ public:
 			{
 				for (size_t col_index = 0; col_index < col_count; col_index++)
 				{
-					assign(row_index, col_index, expression()(row_index, col_index));
+					(*this)().assign(row_index, col_index, expression);
 				}
 			}
 		}
@@ -65,7 +65,7 @@ public:
 			{
 				for (size_t col_index = 0; col_index < col_count - 1; col_index++)
 				{
-					assign(row_index, col_index, expression()(row_index, col_index));
+					(*this)().assign(row_index, col_index, expression);
 				}
 			}
 		}
@@ -101,6 +101,17 @@ public:
 		else if constexpr (is_col_major<homogen_category>) {
 			if (col_index != col_count - 1)
 				_data[layout_category::transform(col_index, row_index, dimension, dimension - 1)] = element;
+		}
+		return (*this)();
+	}
+	constexpr expression_type& assign(size_t row_index, size_t col_index, const CMatrixExpression auto& expression) {
+		if constexpr (is_row_major<homogen_category>) {
+			if (row_index != row_count - 1)
+				_data[layout_category::transform(row_index, col_index, dimension - 1, dimension)] = expression()(row_index, col_index);
+		}
+		else if constexpr (is_col_major<homogen_category>) {
+			if (col_index != col_count - 1)
+				_data[layout_category::transform(col_index, row_index, dimension, dimension - 1)] = expression()(row_index, col_index);
 		}
 		return (*this)();
 	}

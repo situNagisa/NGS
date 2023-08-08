@@ -1,27 +1,47 @@
 ﻿#pragma once
 
-#include "NGS/mla/vector/container.h"
+#include "NGS/mla/vector/expression/container.h"
 
 NGS_MLA_BEGIN
 
-template<size_t _Dim, class _ElementType>
-class Vector : public VectorContainer<Vector<_Dim, _ElementType>, std::integral_constant<size_t, _Dim>, _ElementType> {
+template<size_t _Dimension, class _ElementType, class = std::make_index_sequence<_Dimension>>
+class Vector;
+
+template<size_t _Dimension, class _ElementType, size_t... _Index>
+class Vector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<Vector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
 private:
 	using base_type = typename Vector::self_type;
 protected:
-	using self_type = Vector<_Dim, _ElementType>;
+	using self_type = Vector;
 public:
-	using element_type = typename base_type::element_type;
+	NGS_minherit_t(element_type, base_type);
+	NGS_minherit_t(expression_type, base_type);
 
-	using base_type::base_type;
+	NGS_minherit(dimension, base_type);
+
+	constexpr Vector() = default;
+	template<CVectorExpression _Expression>
+		requires (dimension == _Expression::expression_type::dimension)
+	constexpr Vector(const _Expression& expression) {
+		(((*this)().assign(_Index, expression)), ...);
+	}
+	constexpr Vector(mpl::sequence_params_t<_Index, element_type>... value) {
+		(((*this)().assign(_Index, value)), ...);
+	}
 
 	using base_type::operator();
 
 	constexpr element_type& operator()(size_t i) { return _data[i]; }
 	constexpr const element_type& operator()(size_t i)const { return _data[i]; }
 
+	using base_type::assign;
+	constexpr expression_type& assign(size_t index, element_type element) {
+		_data[index] = element;
+		return (*this)();
+	}
+
 private:
-	element_type _data[base_type::dimension];
+	element_type _data[base_type::dimension]{};
 };
 NGS_CCPT_VERIFY(CVectorContainer, Vector<3, int>);
 
