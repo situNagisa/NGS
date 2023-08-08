@@ -2,7 +2,7 @@
 
 #include "NGS/base/defined.h"
 #include "NGS/base/boost/mpl.h"
-#include "NGS/base/STL.h"
+#include "NGS/base/basic.h"
 
 NGS_BEGIN
 NGS_MPL_BEGIN

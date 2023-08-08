@@ -8,7 +8,7 @@
 #pragma  once
 
 #include "NGS/base/defined.h"
-#include "NGS/base/STL.h"
+#include "NGS/base/basic.h"
 
 NGS_BEGIN
 

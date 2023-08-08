@@ -4,3 +4,4 @@
 #include "NGS/math/mla/matrix/binary/operator/multiplies.h"
 #include "NGS/math/mla/matrix/binary/operator/translate.h"
 #include "NGS/math/mla/matrix/binary/operator/scale.h"
+#include "NGS/math/mla/matrix/binary/operator/compare.h"

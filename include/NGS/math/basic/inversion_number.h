@@ -14,7 +14,7 @@ constexpr auto inversion_number(const std::ranges::forward_range auto& sequence)
 	return result;
 }
 constexpr auto inversion_number(const std::convertible_to<size_t> auto&... sequence) {
-	return inversion_number(std::array<size_t, sizeof...(sequence)>(sequence...);
+	return inversion_number(std::array<size_t, sizeof...(sequence)>(sequence...));
 }
 
 NGS_MATH_END

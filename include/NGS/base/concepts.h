@@ -1,8 +1,7 @@
 ﻿#pragma once
 
 #include "NGS/base/defined.h"
-#include "NGS/base/STL.h"
-#include "NGS/base/type_trait.h"
+#include "NGS/base/basic.h"
 #include "NGS/base/mpl/mpl.h"
 
 NGS_BEGIN

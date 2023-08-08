@@ -8,8 +8,8 @@
 #pragma once
 
 #include "NGS/base/defined.h"
-#include "NGS/base/STL.h"
-#include "NGS/base/template_mate.h"
+#include "NGS/base/concepts.h"
+#include "NGS/base/basic.h"
 
 #if NGS_PLATFORM == NGS_MSVC
 #pragma warning(push)
@@ -19,20 +19,22 @@
 NGS_BEGIN
 
 namespace bit {
-	constexpr size_t bit_per_byte = 8;
 
-	template<CUnsignedIntegral _Int> constexpr _Int scope(size_t index) { return (_Int)1 << index; }
-	constexpr uint64 scope(size_t index) { return scope<uint64>(index); }
+constexpr size_t bit_per_byte = 8;
 
-	constexpr size_t as_byte(size_t bit_count) { return (((bit_count) / bit_per_byte) + (((bit_count) % bit_per_byte) > 0)); }
-	constexpr size_t as_bit(size_t byte_count) { return byte_count * bit_per_byte; }
-	template<class T> consteval size_t as_bit() { return as_bit(sizeof(T)); }
+template<CUnsignedIntegral _Int> constexpr _Int scope(size_t index) { return (_Int)1 << index; }
+constexpr uint64 scope(size_t index) { return scope<uint64>(index); }
 
-	//template<CUnsignedIntegral _Int> constexpr _Int mask(CUnsignedIntegral auto bit_count) { return (bit_count >= as_bit<_Int>()) ? (_Int)(-1) : (scope<_Int>(bit_count) - 1); }
-	constexpr uint64 mask(CIntegral auto bit_count) { return (bit_count >= as_bit<uint64>()) ? (uint64)(-1) : (scope<uint64>(bit_count) - 1); }
+constexpr size_t as_byte(size_t bit_count) { return (((bit_count) / bit_per_byte) + (((bit_count) % bit_per_byte) > 0)); }
+constexpr size_t as_bit(size_t byte_count) { return byte_count * bit_per_byte; }
+template<class T> consteval size_t as_bit() { return as_bit(sizeof(T)); }
 
-	constexpr auto set(auto bit_set, auto bit_scope, bool state) { return state ? bit_set | bit_scope : bit_set & ~bit_scope; }
-	constexpr auto get(auto bit_set, auto bit_scope) { return bit_set & bit_scope; }
+//template<CUnsignedIntegral _Int> constexpr _Int mask(CUnsignedIntegral auto bit_count) { return (bit_count >= as_bit<_Int>()) ? (_Int)(-1) : (scope<_Int>(bit_count) - 1); }
+constexpr uint64 mask(CIntegral auto bit_count) { return (bit_count >= as_bit<uint64>()) ? (uint64)(-1) : (scope<uint64>(bit_count) - 1); }
+
+constexpr auto set(auto bit_set, auto bit_scope, bool state) { return state ? bit_set | bit_scope : bit_set & ~bit_scope; }
+constexpr auto get(auto bit_set, auto bit_scope) { return bit_set & bit_scope; }
+
 }
 
 

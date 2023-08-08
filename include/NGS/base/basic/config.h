@@ -10,7 +10,7 @@
 #ifndef __HEAD_NGS_NGS_Config
 #define __HEAD_NGS_NGS_Config
 
-#include "NGS/base/version.h"
+#include "NGS/base/basic/version.h"
 
 #ifdef NGS_HAS_CPP_17
 #define NGS_INLINE inline

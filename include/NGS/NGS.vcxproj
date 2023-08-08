@@ -28,12 +28,14 @@
     <ClInclude Include="base\base.h" />
     <ClInclude Include="base\base.hpp" />
     <ClInclude Include="base\base_class.h" />
+    <ClInclude Include="base\basic.h" />
     <ClInclude Include="base\bit.h" />
     <ClInclude Include="base\boost\boost.h" />
     <ClInclude Include="base\boost\mpl.h" />
     <ClInclude Include="base\boost\property_tree.h" />
     <ClInclude Include="base\concepts.h" />
-    <ClInclude Include="base\config.h" />
+    <ClInclude Include="base\basic\config.h" />
+    <ClInclude Include="base\defined.h" />
     <ClInclude Include="base\memory_reinterpreter.h" />
     <ClInclude Include="base\mpl\bitmap.h" />
     <ClInclude Include="base\mpl\concepts\algorithm.h" />
@@ -58,7 +60,6 @@
     <ClInclude Include="base\mpl\mpl.h" />
     <ClInclude Include="base\mpl\mpl_macro.h" />
     <ClInclude Include="base\mpl\utility.h" />
-    <ClInclude Include="base\space_transform.h" />
     <ClInclude Include="base\type_info.h" />
     <ClInclude Include="concepts\any.h" />
     <ClInclude Include="concepts\concepts.h" />
@@ -81,13 +82,11 @@
     <ClInclude Include="extend\color\primary_color.h" />
     <ClInclude Include="extend\console.h" />
     <ClInclude Include="extend\console.hpp" />
-    <ClInclude Include="base\defined.h" />
+    <ClInclude Include="base\basic\defined.h" />
     <ClInclude Include="base\log.h" />
-    <ClInclude Include="base\STL.h" />
-    <ClInclude Include="base\template_mate.h" />
-    <ClInclude Include="base\type_trait.h" />
+    <ClInclude Include="base\basic\STL.h" />
     <ClInclude Include="base\utility.h" />
-    <ClInclude Include="base\version.h" />
+    <ClInclude Include="base\basic\version.h" />
     <ClInclude Include="embedded\bus\bus_base.h" />
     <ClInclude Include="embedded\bus\i2c\I2C.h" />
     <ClInclude Include="embedded\bus\serial_port\serial_port.h" />
@@ -143,6 +142,7 @@
     <ClInclude Include="math\mla\matrix\binary\macro_end.h" />
     <ClInclude Include="math\mla\matrix\binary\operator.h" />
     <ClInclude Include="math\mla\matrix\binary\operator\basic.h" />
+    <ClInclude Include="math\mla\matrix\binary\operator\compare.h" />
     <ClInclude Include="math\mla\matrix\binary\operator\multiplies.h" />
     <ClInclude Include="math\mla\matrix\binary\operator\rotate.h" />
     <ClInclude Include="math\mla\matrix\binary\operator\scale.h" />
@@ -255,6 +255,7 @@
     <ClInclude Include="nda\NDA.hpp" />
     <ClInclude Include="nda\transform.h" />
     <ClInclude Include="extend\user_data.h" />
+    <ClInclude Include="ngf\defined.h" />
     <ClInclude Include="ngl\base\buffer.h" />
     <ClInclude Include="ngl\base\buffer.hpp" />
     <ClInclude Include="ngl\base\buffer_target.h" />

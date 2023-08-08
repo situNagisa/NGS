@@ -88,9 +88,6 @@ public:
 
 	constexpr static size_t major_count = is_row_major<layout_category> ? row_count : col_count;
 	constexpr static size_t minor_count = is_row_major<layout_category> ? col_count : row_count;
-protected:
-	template<size_t _Index> using _element_i_t = element_type;
-	template<size_t _Index,class _Type> using _convert_t = _Type;
 public:
 	constexpr MatrixContainer() = default;
 	//===============
@@ -131,11 +128,22 @@ public:
 	template<CMatrixExpression _Expression>
 		requires (is_similar<expression_type, _Expression>)
 	constexpr expression_type& assign(const _Expression& expression) {
-		for (size_t row_index = 0; row_index < row_count; row_index++)
-		{
+		if constexpr (is_row_major<layout_category>) {
+			for (size_t row_index = 0; row_index < row_count; row_index++)
+			{
+				for (size_t col_index = 0; col_index < col_count; col_index++)
+				{
+					(*this)().assign(row_index, col_index, expression);
+				}
+			}
+		}
+		else if constexpr (is_col_major<layout_category>) {
 			for (size_t col_index = 0; col_index < col_count; col_index++)
 			{
-				(*this)().assign(row_index, col_index, expression);
+				for (size_t row_index = 0; row_index < row_count; row_index++)
+				{
+					(*this)().assign(row_index, col_index, expression);
+				}
 			}
 		}
 		return (*this)();

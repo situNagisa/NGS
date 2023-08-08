@@ -44,8 +44,30 @@ public:
 	using homogen_category = _HomoLayout;
 
 	constexpr HomogeneousMatrix() = default;
-	constexpr HomogeneousMatrix(typename base_type::template _element_i_t<_Index>... value) {
-		((assign(_Index, value)), ...);
+	constexpr HomogeneousMatrix(mpl::sequence_params_t<_Index, element_type>... value) {
+		std::array<element_type, element_count> values{value...};
+		size_t index = 0;
+		if constexpr (is_row_major<homogen_category>) {
+			for (size_t row_index = 0; row_index < row_count - 1 && index < sizeof...(value); row_index++)
+			{
+				for (size_t col_index = 0; col_index < col_count && index < sizeof...(value); col_index++)
+				{
+					(*this)().assign(row_index, col_index, values[index]);
+					index++;
+				}
+			}
+		}
+		else if constexpr (is_col_major<homogen_category>) {
+			for (size_t row_index = 0; row_index < row_count && index < sizeof...(value); row_index++)
+			{
+				for (size_t col_index = 0; col_index < col_count - 1 && index < sizeof...(value); col_index++)
+				{
+					(*this)().assign(row_index, col_index, values[index]);
+					index++;
+				}
+			}
+		}
+
 	}
 	template<CMatrixExpression _Expression>
 		requires is_similar<expression_type, _Expression> || (is_row_major<homogen_category> && _Expression::col_count == dimension && _Expression::row_count == dimension - 1)

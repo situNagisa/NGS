@@ -16,6 +16,10 @@
 #define NGS_MAC		(3)
 #define NGS_ESP32	(4)
 
+#ifdef __cplusplus
+#define NGS_CPP (1)
+#endif
+
 #if defined(_WIN32) || defined(_WIN64)
 #define NGS_PLATFORM NGS_WINDOWS
 #elif defined(__linux__)
@@ -28,6 +32,7 @@
 #define NGS_PLATFORM 0
 #error "NGS: unknown platform"
 #endif
+
 
 
 #define NGS_MSVC	(1)

@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "NGS/base/defined.h"
-#include "NGS/base/STL.h"
+#include "NGS/base/basic.h"
 
 NGS_BEGIN
 
@@ -21,11 +21,5 @@ inline nstring Format(nchar_ptr_cst fmt, ...) {
 }
 
 #undef vprint
-
-template<typename T, typename Arg>
-constexpr auto&& any_cast(const Arg& arg) {
-	return const_cast<T>(*reinterpret_cast<const T*>(&arg));
-}
-
 
 NGS_END

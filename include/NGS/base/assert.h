@@ -1,7 +1,7 @@
 ﻿#pragma once
 
+#include "NGS/base/basic.h"
 #include "NGS/base/defined.h"
-#include "NGS/base/config.h"
 #include "NGS/base/log.h"
 #include "NGS/base/utility.h"
 #include "NGS/base/type_info.h"

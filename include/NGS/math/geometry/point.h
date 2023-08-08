@@ -44,6 +44,20 @@ public:
 	float64 ArcSin()const { return std::asin(Sin()); }
 	float64 ArcCos()const { return std::acos(Cos()); }
 
+	//====================
+	// compatibility
+	//====================
+
+	constexpr auto Length()const { return mla::length(*this); }
+	constexpr auto LengthSquared()const { return mla::length_squared(*this); }
+
+	void Set(element_type x, element_type y) {
+		this->x = x;
+		this->y = y;
+	}
+
+
+public:
 	element_type x;
 	element_type y;
 };

@@ -9,7 +9,7 @@ NGS_BEGIN
 
 template<
 	size_t _N,
-	_NGS_CPT CArithmetic _ElementType,
+	CArithmetic _ElementType,
 	class _Derived,
 	class = std::make_index_sequence<_N>
 >
@@ -17,7 +17,7 @@ class _Vector;
 
 template<
 	size_t _N,
-	_NGS_CPT CArithmetic _ElementType,
+	CArithmetic _ElementType,
 	class _Derived,
 	size_t... _Index
 >
@@ -284,7 +284,7 @@ using Point3lf = Point3_<double>;
 using Point3s = Point3_<size_t>;
 
 
-template<_NGS_CPT CArithmetic _ElementType>
+template< CArithmetic _ElementType>
 class Vector4D : public _Vector<4, _ElementType, Vector4D<_ElementType>> {
 private:
 	using __base = _Vector<4, _ElementType, Vector4D<_ElementType>>;
@@ -329,7 +329,7 @@ public:
 		x, y, z, w;
 };
 
-template<_NGS_CPT CArithmetic Number>
+template< CArithmetic Number>
 using Point4_ = Vector4D<Number>;
 
 using Point4i = Point4_<int>;
@@ -338,7 +338,7 @@ using Point4lf = Point4_<double>;
 using Point4s = Point4_<size_t>;
 
 
-template<size_t _N, _NGS_CPT CArithmetic _ElementType>
+template<size_t _N, CArithmetic _ElementType>
 class VectorND : public _Vector<_N, _ElementType, VectorND<_N, _ElementType>> {
 private:
 	using __base = _Vector<_N, _ElementType, Vector3D<_ElementType>>;
@@ -348,7 +348,7 @@ private:
 #undef COMMA
 public:
 	constexpr VectorND() = default;
-	template<_NGS_CPT CArithmetic... Args>
+	template< CArithmetic... Args>
 	constexpr VectorND(Args... args)
 		: data({ args... })
 	{}

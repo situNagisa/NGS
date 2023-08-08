@@ -62,8 +62,17 @@ public:
 			}
 		}
 	}
-	constexpr TriangularMatrix(typename base_type::template _element_i_t<_Index>... value) {
-		((_data[_Index] = value), ...);
+	constexpr TriangularMatrix(mpl::sequence_params_t<_Index, element_type>... value) {
+		std::array<element_type, element_count> values{value...};
+		size_t index = 0;
+		for (size_t row_index = 0; row_index < row_count && index < sizeof...(value); row_index++)
+		{
+			for (size_t col_index = 0; col_index < col_count && index < sizeof...(value); col_index++)
+			{
+				(*this)().assign(row_index, col_index, values[index]);
+				index++;
+			}
+		}
 	}
 
 	using base_type::operator();

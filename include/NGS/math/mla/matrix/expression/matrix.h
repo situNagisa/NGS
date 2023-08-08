@@ -62,21 +62,40 @@ public:
 	NGS_minherit_t(layout_category, base_type);
 	NGS_minherit(row_count, base_type);
 	NGS_minherit(col_count, base_type);
+	NGS_minherit(element_count, base_type);
 public:
 	constexpr Matrix() = default;
 	template<CMatrixExpression _Expression>
 		requires (is_similar<expression_type, _Expression>)
 	constexpr Matrix(const _Expression& expression) {
+		if constexpr (is_row_major<layout_category>) {
+			for (size_t row_index = 0; row_index < row_count; row_index++)
+			{
+				for (size_t col_index = 0; col_index < col_count; col_index++)
+				{
+					(*this)().assign(row_index, col_index, expression);
+				}
+			}
+		}
+		else if constexpr (is_col_major<layout_category>) {
+			for (size_t col_index = 0; col_index < col_count; col_index++)
+			{
+				for (size_t row_index = 0; row_index < row_count; row_index++)
+				{
+					(*this)().assign(row_index, col_index, expression);
+				}
+			}
+		}
+	}
+	constexpr Matrix(mpl::sequence_params_t<_Index, element_type>... value) {
+		std::array<element_type, element_count> values{value...};
 		for (size_t row_index = 0; row_index < row_count; row_index++)
 		{
 			for (size_t col_index = 0; col_index < col_count; col_index++)
 			{
-				(*this)()(row_index, col_index) = expression()(row_index, col_index);
+				(*this)().assign(row_index, col_index, values[tag::row::transform(row_index, col_index, row_count, col_count)]);
 			}
 		}
-	}
-	constexpr Matrix(typename base_type::template _element_i_t<_Index>... value) {
-		(((*this)()(_Index) = value), ...);
 	}
 
 	//===============

@@ -103,7 +103,7 @@ public:
 	void StdBlue(StdChannel::type b) { Blue(B::template ConvertFrom<StdChannel>(b)); }
 
 
-	template<_NGS_CPT CChannel _A2, _NGS_CPT CChannel _R2, _NGS_CPT CChannel _G2, _NGS_CPT CChannel _B2>
+	template<CChannel _A2, CChannel _R2, CChannel _G2, CChannel _B2>
 	constexpr operator PrimaryColor<_A2, _R2, _G2, _B2>()const {
 		return PrimaryColor<_A2, _R2, _G2, _B2>(
 			StdAlpha(),

@@ -7,7 +7,7 @@
 //==========================================================================================================
 #pragma  once
 
-#include "NGS/base/version.h"
+#include "NGS/base/basic/version.h"
 
 #include <type_traits>
 #include <typeinfo>
@@ -65,6 +65,7 @@
 //#include <format>
 
 namespace std {
+
 template<typename T>
 struct hash<unordered_set<T>> {
 	size_t operator()(const unordered_set<T>& s) const {
@@ -84,4 +85,5 @@ inline basic_ostream<_Element>& operator<<(basic_ostream<_Element>& os, _Rng&& c
 	os << "}";
 	return os;
 }*/
+
 }

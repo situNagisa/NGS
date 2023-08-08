@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "NGS/base/base.h"
+#include "NGS/base/basic.h"
 
 #define NGS_CCPT_BEGIN NGS_BEGIN namespace ccpt{
 #define NGS_CCPT_END } NGS_END

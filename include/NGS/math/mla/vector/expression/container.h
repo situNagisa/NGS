@@ -25,14 +25,6 @@ concept CVectorContainer = requires(_Container expr, const _Container expr_cst, 
 template<ccpt::CRPT<CVectorContainer<>> _Derived, ccpt::UInt _Dim, class _ElementType, class = std::make_index_sequence<_Dim::value>>
 class VectorContainer;
 
-/**
- * @brief
- *
- * @warning 请尽量不要依赖此基类的赋值类构造函数，此基类并没有任何内存占用，
- *			内存申请在子类，也就意味着调用此基类的赋值类构造函数会初始化子类的内存，
- *			可能会导致未定义行为（由于作者水平限制并不能确定这是否是未定义行为），若图方便想使用的话，
- *			请不要在初始化子类的成员变量（此基类会完成初始化）。
- */
 template<ccpt::CRPT<CVectorContainer<>> _Derived, size_t _Dim, class _ElementType, size_t... _Index>
 class VectorContainer<
 	_Derived,
@@ -64,10 +56,10 @@ public:
 	//===================
 	constexpr expression_type& assign(size_t index, element_type element) { return (*this)(); }
 	constexpr expression_type& assign(size_t index, const CVectorExpression auto& expression) { return (*this)().assign(index, expression()(index)); }
-	constexpr expression_type& assign(mpl::sequence_params_t<_Index, element_type>... value) {
+	/*constexpr expression_type& assign(mpl::sequence_params_t<_Index, element_type>... value) {
 		(((*this)().assign((_Index, value))), ...);
 		return (*this)();
-	}
+	}*/
 	constexpr expression_type& assign(const CVectorExpression auto& expression) {
 		(((*this)().assign(_Index, expression()(_Index))), ...);
 		return (*this)();

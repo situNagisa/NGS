@@ -39,7 +39,7 @@
     <ClInclude Include="base\concepts.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\config.h">
+    <ClInclude Include="base\basic\config.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="extend\console.h">
@@ -48,25 +48,19 @@
     <ClInclude Include="extend\console.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\defined.h">
+    <ClInclude Include="base\basic\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\log.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\STL.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="base\template_mate.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="base\type_trait.h">
+    <ClInclude Include="base\basic\STL.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\utility.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\version.h">
+    <ClInclude Include="base\basic\version.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="embedded\bus\bus_base.h">
@@ -268,9 +262,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nsw\NSW.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="base\space_transform.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui.h">
@@ -877,6 +868,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\geometry\transform_matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\basic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngf\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\binary\operator\compare.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
