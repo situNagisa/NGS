@@ -138,16 +138,13 @@
     <ClInclude Include="extend\timer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\line.h">
+    <ClInclude Include="math\geometry\line.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\math.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\matrix_exp.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="math\rectangle.h">
+    <ClInclude Include="math\geometry\rectangle.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\rotation.h">
@@ -159,7 +156,7 @@
     <ClInclude Include="math\util.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector_post.h">
+    <ClInclude Include="math\geometry\vector_old.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nsw\bus\serial_port.hpp">
@@ -180,7 +177,7 @@
     <ClInclude Include="NGS.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector.h">
+    <ClInclude Include="math\geometry\vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\type_info.h">
@@ -441,10 +438,7 @@
     <ClInclude Include="ngl\vertex\ctrl\default.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\BTL.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="math\matrix.h">
+    <ClInclude Include="math\geometry\matrix_old.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ngl\utils\renderer.h">
@@ -540,64 +534,61 @@
     <ClInclude Include="nda\interfaces\interfaces.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector_exp.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="base\mpl\promote_type.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\base\expression.h">
+    <ClInclude Include="math\mla\base\expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression.h">
+    <ClInclude Include="math\mla\matrix\expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\base\concepts.h">
+    <ClInclude Include="math\mla\base\concepts.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\defined.h">
+    <ClInclude Include="math\mla\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\mla.h">
+    <ClInclude Include="math\mla\mla.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\base\tag.h">
+    <ClInclude Include="math\mla\base\tag.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\tag.h">
+    <ClInclude Include="math\mla\matrix\tag.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\container.h">
+    <ClInclude Include="math\mla\matrix\expression\container.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\tag.h">
+    <ClInclude Include="math\mla\vector\tag.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\expression.h">
+    <ClInclude Include="math\mla\vector\expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\expression\vector.h">
+    <ClInclude Include="math\mla\vector\expression\vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\unary\unary.h">
+    <ClInclude Include="math\mla\vector\unary\unary.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar\unary\functor.h">
+    <ClInclude Include="math\mla\scalar\unary\functor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\base\traits.h">
+    <ClInclude Include="math\mla\base\traits.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar\traits.h">
+    <ClInclude Include="math\mla\scalar\traits.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="concepts\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\constant.h">
+    <ClInclude Include="concepts\fundamental\constant.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="concepts\fundamental\int.h">
@@ -621,235 +612,271 @@
     <ClInclude Include="concepts\concepts.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar\unary\negate.h">
+    <ClInclude Include="math\mla\scalar\unary\negate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\unary\functor.h">
+    <ClInclude Include="math\mla\vector\unary\functor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector.h">
+    <ClInclude Include="math\mla\vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\unary.h">
+    <ClInclude Include="math\mla\vector\unary.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar.h">
+    <ClInclude Include="math\mla\scalar.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar\unary.h">
+    <ClInclude Include="math\mla\scalar\unary.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\unary\traits.h">
+    <ClInclude Include="math\mla\vector\unary\traits.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar\binary.h">
+    <ClInclude Include="math\mla\scalar\binary.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar\binary\functor.h">
+    <ClInclude Include="math\mla\scalar\binary\functor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\unary\operator.h">
+    <ClInclude Include="math\mla\vector\unary\operator.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary.h">
+    <ClInclude Include="math\mla\vector\binary.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary\functor.h">
+    <ClInclude Include="math\mla\vector\binary\functor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary\binary.h">
+    <ClInclude Include="math\mla\vector\binary\binary.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary\traits.h">
+    <ClInclude Include="math\mla\vector\binary\traits.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary\macro_begin.h">
+    <ClInclude Include="math\mla\vector\binary\macro_begin.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary\macro_end.h">
+    <ClInclude Include="math\mla\vector\binary\macro_end.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar\binary\macro_begin.h">
+    <ClInclude Include="math\mla\scalar\binary\macro_begin.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar\binary\macro_end.h">
+    <ClInclude Include="math\mla\scalar\binary\macro_end.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary\operator.h">
+    <ClInclude Include="math\mla\vector\binary\operator.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar\binary\operator.h">
+    <ClInclude Include="math\mla\scalar\binary\operator.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\expression\container.h">
+    <ClInclude Include="math\mla\vector\expression\container.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\scalar_expression.h">
+    <ClInclude Include="math\mla\vector\scalar_expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\traits.h">
+    <ClInclude Include="math\mla\vector\traits.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\io.h">
+    <ClInclude Include="math\mla\vector\io.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\point.h">
+    <ClInclude Include="math\geometry\point.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\traits.h">
+    <ClInclude Include="math\mla\matrix\traits.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\matrix.h">
+    <ClInclude Include="math\mla\matrix\expression\matrix.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix.h">
+    <ClInclude Include="math\mla\matrix.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary.h">
+    <ClInclude Include="math\mla\matrix\unary.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary.h">
+    <ClInclude Include="math\mla\matrix\binary.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\unary.h">
+    <ClInclude Include="math\mla\matrix\unary\unary.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\functor.h">
+    <ClInclude Include="math\mla\matrix\unary\functor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\io.h">
+    <ClInclude Include="math\mla\matrix\io.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\iterator_interface.h">
+    <ClInclude Include="math\mla\iterator_interface.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\operator.h">
+    <ClInclude Include="math\mla\matrix\unary\operator.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\operator\negate.h">
+    <ClInclude Include="math\mla\matrix\unary\operator\negate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\operator\transpose.h">
+    <ClInclude Include="math\mla\matrix\unary\operator\transpose.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary\functor.h">
+    <ClInclude Include="math\mla\matrix\binary\functor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary\binary.h">
+    <ClInclude Include="math\mla\matrix\binary\binary.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary\operator.h">
+    <ClInclude Include="math\mla\matrix\binary\operator.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary\operator\basic.h">
+    <ClInclude Include="math\mla\matrix\binary\operator\basic.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary\macro_begin.h">
+    <ClInclude Include="math\mla\matrix\binary\macro_begin.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary\macro_end.h">
+    <ClInclude Include="math\mla\matrix\binary\macro_end.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary\operator\multiplies.h">
+    <ClInclude Include="math\mla\matrix\binary\operator\multiplies.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\concept.h">
+    <ClInclude Include="math\mla\matrix\expression\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\scalar.h">
+    <ClInclude Include="math\mla\matrix\expression\scalar.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\vector.h">
+    <ClInclude Include="math\mla\matrix\expression\vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\expression.h">
+    <ClInclude Include="math\mla\matrix\expression\expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\identity.h">
+    <ClInclude Include="math\mla\matrix\expression\identity.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\square.h">
+    <ClInclude Include="math\mla\matrix\expression\square.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\zero.h">
+    <ClInclude Include="math\mla\matrix\expression\zero.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\operator\access.h">
+    <ClInclude Include="math\mla\matrix\unary\operator\access.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\operator\minor.h">
+    <ClInclude Include="math\mla\matrix\unary\operator\minor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\operator\determinant.h">
+    <ClInclude Include="math\mla\matrix\unary\operator\determinant.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\operator\gauss_elimination.h">
+    <ClInclude Include="math\mla\matrix\unary\operator\gauss_elimination.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\triangular.h">
+    <ClInclude Include="math\mla\matrix\expression\triangular.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\operator\triangular.h">
+    <ClInclude Include="math\mla\matrix\unary\operator\triangular.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\expression\concept.h">
+    <ClInclude Include="math\mla\vector\expression\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\expression\expression.h">
+    <ClInclude Include="math\mla\vector\expression\expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\scalar\expression\concept.h">
+    <ClInclude Include="math\mla\scalar\expression\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary\operator\translate.h">
+    <ClInclude Include="math\mla\matrix\binary\operator\translate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\operator\view.h">
+    <ClInclude Include="math\mla\matrix\unary\operator\view.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\unary\operator\homogen.h">
+    <ClInclude Include="math\mla\matrix\unary\operator\homogen.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\expression\homogen.h">
+    <ClInclude Include="math\mla\matrix\expression\homogen.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary\operator\scale.h">
+    <ClInclude Include="math\mla\matrix\binary\operator\scale.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\matrix\binary\operator\rotate.h">
+    <ClInclude Include="math\mla\matrix\binary\operator\rotate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary\operator\basic.h">
+    <ClInclude Include="math\mla\vector\binary\operator\basic.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary\operator\compare.h">
+    <ClInclude Include="math\mla\vector\binary\operator\compare.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary\operator\product.h">
+    <ClInclude Include="math\mla\vector\binary\operator\product.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\binary\operator\rotate.h">
+    <ClInclude Include="math\mla\vector\binary\operator\rotate.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\mpl\sequence_params.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\expression\homogen.h">
+    <ClInclude Include="math\mla\vector\expression\homogen.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\unary\operator\negate.h">
+    <ClInclude Include="math\mla\vector\unary\operator\negate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\unary\operator\length.h">
+    <ClInclude Include="math\mla\vector\unary\operator\length.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\unary\operator\normalize.h">
+    <ClInclude Include="math\mla\vector\unary\operator\normalize.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\unary\operator\view.h">
+    <ClInclude Include="math\mla\vector\unary\operator\view.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mla\vector\unary\operator\homogen.h">
+    <ClInclude Include="math\mla\vector\unary\operator\homogen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\basic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\verify.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\basic\factorial.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\basic\permutate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\basic\combine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\basic\basic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\basic\inversion_number.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\fundamental\fundamental.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\geometry.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\geometry\rectangle_old.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\geometry\transform_matrix.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
