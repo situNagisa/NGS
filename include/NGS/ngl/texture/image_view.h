@@ -13,9 +13,8 @@ public:
 		: _data(reinterpret_cast<byte_ptr_cst>(data))
 		, _size(width, height)
 		, _format(format)
-	{
+	{}
 
-	}
 	template<class T>
 		requires (gl_convert<T> != 0)
 	ImageView(const T* data, size_t width, size_t height)

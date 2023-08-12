@@ -82,6 +82,22 @@ private:
 	}
 };
 
+struct _GaussianElimination {
+	constexpr _GaussianElimination() = default;
+
+	template<CSquareMatrix _Expression>
+	constexpr auto operator()(const _Expression& expression)const {
+		constexpr size_t dimension = _Expression::row_count;
+		if constexpr (dimension == 1) {
+			return expression;
+		}
+		else {
+			return MatrixGaussianElimination<_Expression>(expression);
+		}
+	}
+};
+//inline constexpr _GaussianElimination gaussian_elimination{};
+
 template<CSquareMatrix _Expression>
 constexpr auto gaussian_elimination(const _Expression& expression) {
 	constexpr size_t dimension = _Expression::row_count;

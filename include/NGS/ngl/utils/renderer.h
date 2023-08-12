@@ -1,83 +1,57 @@
 ﻿#pragma once
 
-#include "NGS/ngl/defined.h"
-#include "NGS/ngl/vertex/array/base.h"
-#include "NGS/ngl/shader/shader.h"
+#include "NGS/ngl/environment/environment.h"
+#include "NGS/ngl/environment/shader.h"
+#include "NGS/ngl/environment/vertex_array.h"
 
 NGL_BEGIN
 
 class Renderer {
 public:
-	NGS_FLAG(flag_clear, 0);
 
 public:
+	void SetFlag(const BitSet<8>& flag) { _vertex_array.SetFlag(flag); }
+	auto GetFlag() { return _vertex_array.GetFlag(); }
 
-	auto& GetVertexArray() { return _vertex_array; }
-	const auto& GetVertexArray()const { return _vertex_array; }
-	auto& GetShader() { return _shader; }
-	const auto& GetShader()const { return _shader; }
+	auto& GetVertexArray() { return _vertex_array.GetVertexArray(); }
+	const auto& GetVertexArray()const { return _vertex_array.GetVertexArray(); }
+	auto& GetShader() { return _shader.GetShader(); }
+	const auto& GetShader()const { return _shader.GetShader(); }
 
-	void SetVertexArray(const std::shared_ptr<objects::VertexArrayBase>& vertex_array) { _vertex_array = vertex_array; }
-	void SetShader(const std::shared_ptr<objects::Shader>& shader) { _shader = shader; }
-
-	void Enable(Capabilities c) { _capabilities.insert(c); }
-	void Disable(Capabilities c) { _capabilities.erase(c); }
-	bool IsEnabled(Capabilities c)const { return _capabilities.find(c) != _capabilities.end(); }
-
-	void Viewport(const Rectanglei& viewport) { _viewport = viewport; }
-
-	void SetBackgroundColor(ARGB32 argb) { _background_color = argb; }
-	auto GetBackgroundColor()const { return _background_color; }
-
-	void SetClearBitfield(GLbitfield bitfield) { _clear_bitfield = bitfield; }
-	auto GetClearBitfield()const { return _clear_bitfield; }
+	void SetVertexArray(const std::shared_ptr<objects::VertexArrayBase>& vertex_array) { _vertex_array.SetVertexArray(vertex_array); }
+	void SetShader(const std::shared_ptr<objects::Shader>& shader) { _shader.SetShader(shader); }
 
 	void Render() {
-		for (auto c : _capabilities) {
-			NGL_CHECK(glEnable((GLenum)c));
+		for (auto& environment : environments) {
+			environment->Build();
 		}
 
-		if (_viewport.Area()) {
-			NGL_CHECK(glViewport(_viewport.x, _viewport.y, _viewport.width, _viewport.height));
-		}
+		_shader.Build();
+		_vertex_array.Build();
 
-		if (_clear_bitfield) {
-			NGL_CHECK(glClear(_clear_bitfield));
-		}
+		_vertex_array.Destroy();
 
-		NGL_CHECK(glClearColor(
-			ARGB32::R::Percent(_background_color.Red()),
-			ARGB32::G::Percent(_background_color.Green()),
-			ARGB32::B::Percent(_background_color.Blue()),
-			ARGB32::A::Percent(_background_color.Alpha())
-		));
-
-		if (_shader) {
-			_shader->Update();
-			OpenGL::I().shader->Select(*_shader);
-		}
-		if (_vertex_array) {
-			_vertex_array->Update();
-			_vertex_array->Render();
-			if (_flag[0])
-				_vertex_array->Clear();
-		}
-
-		for (auto c : _capabilities) {
-			NGL_CHECK(glDisable((GLenum)c));
+		for (auto& environment : environments) {
+			environment->Destroy();
 		}
 	}
 
+	template<std::derived_from<env::IEnvironment> T, class... _Args> requires std::constructible_from<T, _Args...>
+	T& AddEnvironment(_Args&&... args) {
+		auto environment = std::make_shared<T>(std::forward<_Args>(args)...);
+		environments.push_back(environment);
+		return *environment;
+	}
+	template<std::derived_from<env::IEnvironment> T>
+	T& AddEnvironment(std::shared_ptr<T>&& shared_ptr) {
+		environments.push_back(std::move(shared_ptr));
+		return *shared_ptr;
+	}
+public:
+	std::vector<std::shared_ptr<env::IEnvironment>> environments{};
 private:
-	std::shared_ptr<objects::VertexArrayBase> _vertex_array = nullptr;
-	std::shared_ptr<objects::Shader> _shader = nullptr;
-
-	Rectanglei _viewport{};
-	std::unordered_set<Capabilities> _capabilities{};
-	ARGB32 _background_color{};
-	GLbitfield _clear_bitfield = 0;
-
-	BitSet<8> _flag = flag_clear;
+	env::VertexArray _vertex_array{};
+	env::Shader _shader{};
 };
 
 NGL_END

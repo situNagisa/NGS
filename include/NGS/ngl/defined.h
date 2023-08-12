@@ -3,8 +3,9 @@
 #include "NGS/base/base.h"
 #include "NGS/extend/extend.h"
 #include "NGS/math/math.h"
-
 #include "NGS/ngl/opengl.h"
+
+#include <boost/static_string.hpp>
 
 #define NGL_BEGIN NGS_BEGIN namespace ngl{
 #define NGL_END } NGS_END
@@ -34,5 +35,3 @@ NGS_DEFINE_TV(gl, type_t, RGBA32, GL_RGBA);
 
 
 NGL_END
-
-namespace ngl = ::ngs::ngl;

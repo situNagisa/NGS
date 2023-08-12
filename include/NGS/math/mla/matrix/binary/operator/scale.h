@@ -6,11 +6,13 @@
 #include "NGS/math/mla/vector/traits.h"
 
 #include "NGS/math/mla/matrix/expression/homogen.h"
+#include "NGS/math/mla/vector/unary/operator/homogen.h"
+#include "NGS/math/mla/matrix/expression/identity.h"
 
 NGS_MLA_BEGIN
 
 template<CHomogeneousMatrix _Matrix, CVectorExpression _Vector>
-	requires (_Matrix::dimension - 1 == vector_traits<_Vector>::dimension)
+	requires (_Matrix::dimension == vector_traits<_Vector>::dimension)
 struct MatrixScale : MatrixExpression<MatrixScale<_Matrix, _Vector>> {
 private:
 	using base_type = MatrixScale::self_type;
@@ -58,9 +60,20 @@ private:
 };
 
 template<CHomogeneousMatrix _Matrix, CVectorExpression _Vector> requires (_Matrix::dimension - 1 == vector_traits<_Vector>::dimension)
-constexpr auto scale(const _Matrix& matrix, const _Vector& vector) { return MatrixScale<_Matrix, _Vector>(matrix, vector); }
+constexpr auto scale(const _Matrix& matrix, const _Vector& vector) {
+	using vector_t = VectorHomogenousExpression<_Vector>;
+	return MatrixScale<_Matrix, vector_t>(matrix, vector_t(vector));
+}
 template<CHomogeneousMatrix _Matrix, CVectorExpression _Vector> requires (_Matrix::dimension - 1 == vector_traits<_Vector>::dimension)
-constexpr auto scale(const _Vector& vector, const _Matrix& matrix) { return MatrixScale<_Matrix, _Vector>(matrix, vector); }
+constexpr auto scale(const _Vector& vector, const _Matrix& matrix) {
+	using vector_t = VectorHomogenousExpression<_Vector>;
+	return MatrixScale<_Matrix, vector_t>(matrix, vector_t(vector));
+}
+template<CMatrixLayout _Layout = tag::row, CVectorExpression _Vector>
+constexpr auto scale(const _Vector& vector) {
+	using matrix_t = HomogeneousMatrix<_Vector::dimension + 1, typename _Vector::element_type, tag::row, _Layout>;
+	return scale(matrix_t(identity_matrix_v<matrix_t::dimension, typename matrix_t::element_type>), vector);
+}
 template<CHomogeneousMatrix _Container, CVectorExpression _Vector> requires (_Container::dimension - 1 == vector_traits<_Vector>::dimension) && CMatrixContainer<_Container>
 _Container& scale_assign(_Container& container, const _Vector& vector) {
 	if constexpr (is_row_major<typename _Container::homogen_category>) {

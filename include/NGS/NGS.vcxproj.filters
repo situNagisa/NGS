@@ -867,7 +867,7 @@
     <ClInclude Include="math\geometry\rectangle_old.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\geometry\transform_matrix.h">
+    <ClInclude Include="math\geometry\transform.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\defined.h">
@@ -880,6 +880,129 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\mla\matrix\binary\operator\compare.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\impl\opengl\draw\base\unit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\impl\opengl\draw\image\unit\image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\impl\opengl\draw\image\unit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="nda\impl\opengl\draw\image\drawer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\binary\operator\pipeline.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\texture\pool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\expression\static.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\vector\expression\static.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\glsl\uniform\uniform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\glsl\uniform\array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\glsl\uniform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\environment.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\capability\capability.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\viewport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\clear.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\background.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\vertex_array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\capability\blend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\blend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\usage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\error_code.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\image_format.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\capabilities.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\wraps.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\filters.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\draw.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\capability.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\capability\manager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\capability\capabilities.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\glfw\glfw.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\glfw\window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\glfw\cursor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\glfw\monitor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\cursor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\glfw\image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\glfw\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

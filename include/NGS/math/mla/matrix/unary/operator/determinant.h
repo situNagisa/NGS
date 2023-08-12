@@ -8,6 +8,24 @@
 
 NGS_MLA_BEGIN
 
+struct _Determinant {
+	constexpr _Determinant() = default;
+
+	template<CSquareMatrix _Expression>
+	constexpr auto operator()(const _Expression& expression)const {
+		using element_type = typename matrix_traits<_Expression>::element_type;
+		using container_type = triangular_matrix_t<_Expression::row_count, element_type>;
+		element_type result{ 1 };
+		container_type U = gaussian_elimination(expression);
+		for (size_t i = 0; i < container_type::dimension; i++)
+		{
+			result *= U(i, i);
+		}
+		return result;
+	}
+};
+//inline constexpr _Determinant determinant{};
+
 template<CSquareMatrix _Expression>
 constexpr auto determinant(const _Expression& expression) {
 	using element_type = typename matrix_traits<_Expression>::element_type;

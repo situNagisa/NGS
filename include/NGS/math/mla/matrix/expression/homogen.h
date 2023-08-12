@@ -137,7 +137,6 @@ public:
 		}
 		return (*this)();
 	}
-
 private:
 	element_type _data[dimension * (dimension - 1)]{};
 };

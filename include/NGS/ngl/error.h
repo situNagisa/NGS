@@ -15,12 +15,12 @@ public:
 };
 
 #define NGL_CHECK(func)\
-ngl::Error::CLEAR();	\
+ngs::ngl::Error::CLEAR();	\
 func;					\
 NGL_SHOW_GL_FUNC(func);	\
 do{						\
-	auto code = ngl::Error::GET();\
-	NGS_ASSERT(ngl::Error::GET() == ngl::ErrorCode::no_error, ngs::Format("OpenGL Error code %d", code).c_str());\
+	auto code = ngs::ngl::Error::GET();\
+	NGS_ASSERT(ngs::ngl::Error::GET() == ngs::ngl::ErrorCode::no_error, ngs::Format("OpenGL Error code %d", code).c_str());\
 } while (false)			\
 //
 

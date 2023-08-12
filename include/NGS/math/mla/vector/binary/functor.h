@@ -46,19 +46,16 @@ private:
 		typename vector_traits<_Expression2>::element_type
 	>;
 public:
-	static_assert(vector_traits<_Expression1>::dimension == vector_traits<_Expression2>::dimension && vector_traits<_Expression1>::dimension == 3, "the expression's dimension should be same with 3");
+	//static_assert(vector_traits<_Expression1>::dimension == vector_traits<_Expression2>::dimension && vector_traits<_Expression1>::dimension == 3, "the expression's dimension should be same with 3");
 
 	constexpr static result_type apply(expression_closure_type1 expr1, expression_closure_type2 expr2, size_t i) {
-		switch (i)
-		{
-		case 0:
+		if (i == 0)
 			return expr1()(1) * expr2()(2) - expr1()(2) * expr2()(1);
-		case 1:
+		else if(i == 1)
 			return expr1()(2) * expr2()(0) - expr1()(0) * expr2()(2);
-		case 2:
+		else if(i == 2)
 			return expr1()(0) * expr2()(1) - expr1()(1) * expr2()(0);
-		}
-		return {};
+		return 0;
 	}
 };
 

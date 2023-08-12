@@ -150,10 +150,17 @@ public:
 	}
 	expression_type& assign(const expression_type& expression) {
 		std::memcpy(this, &expression, sizeof(expression));
+		return (*this)();
 	}
+	//template<CMatrixExpression _Expression> requires (is_similar<expression_type, _Expression>)
+	//expression_type& operator=(const _Expression& target) { return (*this)().assign(target); }
+	//template<CMatrixExpression _Expression> requires (is_similar<expression_type, _Expression>)
+	//expression_type& operator=(_Expression&& target) { return (*this)().assign(target); }
+
+	//expression_type& operator=(const expression_type& target) { return (*this)().assign(target); }
 	template<class T>
-		requires requires(expression_type expression,T t) { { expresssion.assign(t) }; }
-	expression_type& operator=(T&& target) { return assign(std::forward<T>(target)); }
+	expression_type& operator=(T&& target) { return (*this)().assign(std::forward<T>(target)); }
+	expression_type& operator=(const self_type& target) { return (*this)().assign(target); }
 
 	//=================
 	// iterator

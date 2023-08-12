@@ -11,3 +11,4 @@
 #include "NGS/math/mla/matrix/expression/identity.h"
 #include "NGS/math/mla/matrix/expression/triangular.h"
 #include "NGS/math/mla/matrix/expression/homogen.h"
+#include "NGS/math/mla/matrix/expression/static.h"

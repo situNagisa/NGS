@@ -78,6 +78,24 @@ using id##_ptr_cst = const id##_t*		\
 #define NGS_DEBUG_IF(condition,expr) 
 #endif
 
+#if NGS_PLATFORM == NGS_WINDOWS
+#ifdef NGS_API_EXPORT
+#define NGS_API __declspec(dllexport)
+#else
+#define NGS_API __declspec(dllimport)
+#endif
+#elif NGS_PLATFORM == NGS_LINUX
+#ifdef NGS_API_EXPORT
+#define NGS_API __attribute__((visibility("default")))
+#else
+#define NGS_API
+#endif
+#else
+#define NGS_API
+#endif
+
+
+
 //============================
 //设置
 //============================

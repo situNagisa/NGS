@@ -8,6 +8,9 @@ NDA_BEGIN
 
 class DisplayObject : virtual public tree_struct::IChild {
 public:
+	friend class DisplayObjectContainer;
+
+	DisplayObject() = default;
 	DisplayObject(nstring_view name)
 		: name(name)
 	{}
@@ -15,11 +18,14 @@ public:
 
 	virtual std::string ToString()const { return name.empty() ? "display" : name; }
 
+	DisplayObjectContainer* GetParent() { return std::launder(reinterpret_cast<DisplayObjectContainer*>(_parent)); }
+	const DisplayObjectContainer* GetParent()const { return std::launder(reinterpret_cast<DisplayObjectContainer*>(_parent)); }
+
 public:
 	std::string name{};
 	Transform transform{};
 	BlendMode blend_mode = BlendMode::normal;
-	UserData user_data{};
+	mutable UserData user_data{};
 };
 
 class DisplayObjectContainer : public DisplayObject, virtual public tree_struct::IParent {
@@ -31,6 +37,17 @@ public:
 
 	__display_ptr GetChild(size_t index) { return dynamic_cast<__display_ptr>(_children[index]); }
 	__display_ptr_cst GetChild(size_t index) const { return dynamic_cast<__display_ptr_cst>(_children[index]); }
+
+	size_t GetNumChildrenRecurse()const {
+		size_t number = 0;
+		for (auto& child : _children) {
+			number++;
+			auto container = dynamic_cast<__container_ptr_cst>(child);
+			if (!container)continue;
+			number += container->GetNumChildrenRecurse();
+		}
+		return number;
+	}
 
 	virtual std::string ToString()const override { return Format("%s:[%d]", name.empty() ? "display_container" : name.c_str(), GetNumChildren()); }
 	std::string GetTreeStruct()const {

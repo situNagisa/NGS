@@ -5,15 +5,12 @@
 #include "NGS/math/mla/scalar/expression/concept.h"
 NGS_MLA_BEGIN
 
-template<CHomogeneousMatrix _Container, CScalarExpression _ScalarExpression>
-	requires (_Container::dimension == 2)
-_Container& rotate_assign(_Container& container, _ScalarExpression angle) {
-	if constexpr (is_row_major<typename _Container::homogen_category>) {
-
-	}
-	else if constexpr (is_col_major<typename _Container::homogen_category>) {
-
-	}
+template<CMatrixLayout _Layout = tag::row, CScalarExpression _ScalarExpression>
+constexpr auto rotate(_ScalarExpression angle) {
+	return HomogeneousMatrix<3, _ScalarExpression, tag::row, _Layout>(
+		std::cos(angle), -std::sin(angle), 0,
+		std::sin(angle), std::cos(angle), 0
+	);
 }
 
 NGS_MLA_END

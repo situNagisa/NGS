@@ -42,6 +42,12 @@ public:
 		NGL_CHECK(glGenTextures(1, &_context));
 		_UpdateImage(mipmap_level);
 	}
+	_Texture(TextureTarget target)
+		: target(target)
+		, _image(nullptr, 0, 0, 0)
+	{
+		NGL_CHECK(glGenTextures(1, &_context));
+	}
 
 	_Texture(_Texture&& other)
 		: State(std::move(other))
@@ -60,7 +66,7 @@ public:
 		NGL_CHECK(glDeleteTextures(1, &_context));
 	}
 
-	void SetImage(const ImageView& image, size_t mipmap_level) {
+	void SetImage(const ImageView& image, size_t mipmap_level = 0) {
 		_image = image;
 		_UpdateImage(mipmap_level);
 	}
@@ -98,9 +104,9 @@ public:
 
 	Filters min = Filters::linear_mipmap_linear;
 	Filters mag = Filters::linear;
-	Wraps s = Wraps::repeat;
-	Wraps t = Wraps::repeat;
-	Wraps r = Wraps::repeat;
+	Wraps s = Wraps::clamp_to_edge;
+	Wraps t = Wraps::clamp_to_edge;
+	Wraps r = Wraps::clamp_to_edge;
 
 	TextureSlot slot = TextureSlot::null;
 private:
@@ -115,6 +121,7 @@ public:
 	template<CSameAsAny<RGBA24, RGBA32> _RGBA>
 	Texture(const _RGBA* data, size_t width, size_t height, size_t mipmap_level = 0) : Texture(data, width, height, gl_convert<_RGBA>, mipmap_level) {}
 	Texture(const ImageView& image, size_t mipmap_level = 0) : Texture(image.GetData(), image.GetSize().x, image.GetSize().y, image.GetFormat(), mipmap_level) {}
+	Texture() : _Texture(_Target) {}
 };
 
 using Texture1D = Texture<TextureTarget::_1D>;

@@ -6,9 +6,10 @@ NDA_BEGIN
 
 struct Transform {
 public:
-
-	
-
+	matrix_t GetMatrix()const {
+		matrix_t matrix = identity_matrix;
+		return mla::translate(position + offset) * mla::rotate(rotation) * mla::scale(scale);
+	}
 public:
 	Point2f position{};
 

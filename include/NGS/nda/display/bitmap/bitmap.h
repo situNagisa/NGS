@@ -11,6 +11,10 @@ NDA_BEGIN
 class Bitmap : public DisplayObject {
 public:
 	using DisplayObject::DisplayObject;
+	Bitmap(IBitmapData* bitmap_data)
+		: bitmap_data(bitmap_data)
+	{}
+
 	virtual ~Bitmap()override {}
 
 	IBitmapData* bitmap_data = nullptr;

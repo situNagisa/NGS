@@ -30,11 +30,14 @@
 
 //texture
 #include "NGS/ngl/texture/texture.h"
+#include "NGS/ngl/texture/pool.h"
+#include "NGS/ngl/texture/image_view.h"
 
 //util
 #include "NGS/ngl/utils/renderer.h"
 #include "NGS/ngl/utils/camera.h"
 
+#include "NGS/ngl/environment.h"
 
 
 #if NGS_USE_HPP

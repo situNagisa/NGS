@@ -4,6 +4,7 @@
 #include "NGS/ngl/base/target.h"
 #include "NGS/ngl/shader/source.h"
 #include "NGS/ngl/base/opengl.h"
+#include "NGS/ngl/shader/glsl/uniform.h"
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
@@ -17,7 +18,6 @@ class ShaderProgram : public Target<ShaderProgram, objects::Shader> {
 };
 
 NGS_END
-using uniform_offset_t = GLint;
 NGL_OBJ_BEGIN
 
 class Shader : public State {
