@@ -170,10 +170,10 @@ protected:
 	struct _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, element_type> {
 	private:
 		using _base_type = ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, element_type>;
-		NGS_minherit_t(_reference, _base_type);
+		NGS_minherit_t(_element_type, _base_type);
 	public:
 		using _base_type::_base_type;
-		_reference operator*()const { return (*_base_type::_expr)()(_base_type::_n); }
+		_element_type operator*()const { return (*_base_type::_expr)()(_base_type::_n); }
 	};
 public:
 	using iterator = _iterator<false>;

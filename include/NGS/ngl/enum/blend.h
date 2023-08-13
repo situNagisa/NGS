@@ -4,6 +4,23 @@
 
 NGL_BEGIN
 
+enum class BlendMode {
+	normal,
+	layer,
+	multiply,
+	screen,
+	lighten,
+	darken,
+	difference,
+	add,
+	substract,
+	invert,
+	alpha,
+	erase,
+	overlay,
+	hardlight,
+	shader,
+};
 enum class BlendFactors : GLenum {
 	zero = GL_ZERO,
 	one = GL_ONE,

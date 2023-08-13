@@ -66,6 +66,7 @@ public:
 	}
 	expression_type& assign(const expression_type& other) {
 		std::memcpy(this, &other, sizeof(expression_type));
+		return (*this)();
 	}
 
 	expression_type& operator=(const self_type& other) {

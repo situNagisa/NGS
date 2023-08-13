@@ -31,3 +31,5 @@
 
 #include "NGS/base/mpl/mpl.h"
 #include "NGS/base/memory_reinterpreter.h"
+
+#include "NGS/base/is_as.h"

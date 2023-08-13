@@ -7,25 +7,11 @@
 //==========================================================================================================
 #pragma once
 
-#ifndef __HEAD_NGS_NGS_Config
-#define __HEAD_NGS_NGS_Config
-
 #include "NGS/base/basic/version.h"
 
-#ifdef NGS_HAS_CPP_17
-#define NGS_INLINE inline
-#elif //NGS_HAS_CPP17
-#define NGS_INLINE
-#endif  //NGS_HAS_CPP17
-
-#ifdef NGS_HAS_CPP_17
-
-
-#elif //NGS_HAS_CPP17
-
-
-#endif  //NGS_HAS_CPP17
-
+//===============
+// build type
+//===============
 #define NGS_DEBUG 0
 #define NGS_RELEASE 1
 
@@ -35,9 +21,51 @@
 #define NGS_BUILD_TYPE NGS_RELEASE
 #endif
 
+//===============
+// attribute
+//===============
+
+#if NGS_COMPILER == NGS_MSVC
+#define NGS_NO_RETURN __declspec(noreturn)
+#define NGS_ALWAYS_INLINE __forceinline
+#define NGS_NO_INLINE __declspec(noinline)
+#else
+#define NGS_NO_RETURN __attribute__((noreturn))
+#define NGS_ALWAYS_INLINE __attribute__((always_inline))
+#define NGS_NO_INLINE __attribute__((noinline))
+#endif
+
+#define NGS_NO_DISCARD [[nodiscard]]
+
+//===============
+// hpp
+//===============
+
 #ifdef NGS_USE_HPP
 #define NGS_HPP_INLINE inline
 #else
 #define NGS_HPP_INLINE 
 #endif
-#endif // !__HEAD_NGS_NGS_Config
+
+//===============
+// dll
+//===============
+
+#if NGS_PLATFORM == NGS_WINDOWS
+#define NGS_API_EXPORT __declspec(dllexport)
+#define NGS_API_IMPORT __declspec(dllimport)
+#else
+#define NGS_API_EXPORT __attribute__((__visibility__("default")))
+#define NGS_API_IMPORT __attribute__((__visibility__("default")))
+#endif
+
+#ifdef NGS_DYNAMIC_LIBRARY_EXPORTS
+#define NGS_API NGS_API_EXPORT
+#elif defined(NGS_DYNAMIC_LIBRARY_IMPORTS)
+#define NGS_API NGS_API_IMPORT
+#endif
+
+
+
+
+
