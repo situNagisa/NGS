@@ -43,7 +43,7 @@ NGS_COLOR_SPACE_BEGIN
 #endif
 
 template<CChannel _A, CChannel _R, CChannel _G, CChannel _B>
-struct PrimaryColor {
+struct NGS_API PrimaryColor {
 public:
 	using A = _A;
 	using R = _R;
@@ -102,6 +102,12 @@ public:
 	constexpr StdChannel::type StdBlue()const { return B::template ConvertTo<StdChannel>(Blue()); }
 	void StdBlue(StdChannel::type b) { Blue(B::template ConvertFrom<StdChannel>(b)); }
 
+	constexpr auto AlphaPercent()const { return A::Percent(Alpha()); }
+	constexpr auto RedPercent()const { return R::Percent(Red()); }
+	constexpr auto GreenPercent()const { return G::Percent(Green()); }
+	constexpr auto BluePercent()const { return B::Percent(Blue()); }
+
+
 
 	template<CChannel _A2, CChannel _R2, CChannel _G2, CChannel _B2>
 	constexpr operator PrimaryColor<_A2, _R2, _G2, _B2>()const {
@@ -118,7 +124,7 @@ private:
 
 #define NGS_DEFINE_ARGB(c1,c2,c3,c4)		\
 template<size_t _##c1, size_t _##c2, size_t _##c3, size_t _##c4> \
-struct c1##c2##c3##c4 : public PrimaryColor<Channel<_##c1, _##c2 + _##c3 + _##c4>, Channel<_##c2, _##c3 + _##c4>, Channel<_##c3, _##c4>, Channel<_##c4, 0>> { \
+struct NGS_API c1##c2##c3##c4 : public PrimaryColor<Channel<_##c1, _##c2 + _##c3 + _##c4>, Channel<_##c2, _##c3 + _##c4>, Channel<_##c3, _##c4>, Channel<_##c4, 0>> { \
 	using base = PrimaryColor<Channel<_##c1, _##c2 + _##c3 + _##c4>, Channel<_##c2, _##c3 + _##c4>, Channel<_##c3, _##c4>, Channel<_##c4, 0>>; \
 	using A = typename base::A;				\
 	using R = typename base::R;				\

@@ -7,7 +7,7 @@
 
 NGL_ENV_BEGIN
 
-class VertexArray final : public IEnvironment {
+class NGS_API  VertexArray final : public IEnvironment {
 public:
 	NGS_FLAG(flag_clear, 0);
 public:
@@ -19,13 +19,13 @@ public:
 	const auto& GetVertexArray()const { return _vertex_array; }
 
 	void SetFlag(const BitSet<8>& flag) { _flag = flag; }
-	auto GetFlag() { return _flag; }
+	auto GetFlag()const { return _flag; }
 
-	void Build() override {
+	virtual void Build() override {
 		_vertex_array->Update();
 		_vertex_array->Render();
 	}
-	void Destroy() override {
+	virtual void Destroy() override {
 		if (_flag[0])
 			_vertex_array->Clear();
 	}

@@ -7,7 +7,7 @@ NGL_BEGIN
 NGL_OBJ_BEGIN
 
 
-class Object : public State {
+class NGS_API  Object : public State {
 public:
 	using State::State;
 	Object(Object&&) = default;

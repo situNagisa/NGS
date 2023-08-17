@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "NGS/base/defined.h"
-#include "NGS/base/basic.h"
 #include "NGS/base/utility.h"
 NGS_BEGIN
 
@@ -24,19 +23,19 @@ NGS_BEGIN
 #define NGS_GET_TYPE_NAME(type) ([]()->std::string { return typeid(type).name(); }())
 #endif
 
-template<class T>
-struct _Check {
+template<class  T>
+struct NGS_API _Check {
 	static std::string name() { return NGS_GET_TYPE_NAME(T); }
 };
 
-//template<class T>
-//struct _Check<const T> : _Check<T> {
+//template<class  T>
+//struct NGS_API _Check<const T> : _Check<T> {
 //	static std::string name() { return "const " + _Check<T>::name(); }
 //};
 
 
-template<class T>
-class TypeInfo {
+template<class  T>
+class NGS_API  TypeInfo {
 public:
 	TypeInfo() = default;
 
@@ -48,7 +47,7 @@ inline std::string check_type(void) {
 	return NGS_GET_TYPE_NAME(T);
 }
 
-struct ParseIdFactor {
+struct NGS_API ParseIdFactor {
 	static std::string bracket(const std::string& str) {
 		return std::string(R"(()") + str + R"())";
 	}
@@ -84,7 +83,7 @@ struct ParseIdFactor {
 	static std::tuple<std::string, std::string, std::string, std::string> ParseFunction(const std::string& function) {
 		std::string param{};
 		{
-			std::regex regex{parameter};
+			std::regex regex{ parameter };
 			std::smatch match;
 			std::regex_search(function, match, regex);
 			if (match.empty())return {};
@@ -92,7 +91,7 @@ struct ParseIdFactor {
 		}
 		std::string id_{};
 		{
-			std::regex regex{before(function_name, R"(\()")};
+			std::regex regex{ before(function_name, R"(\()") };
 			std::smatch match;
 			std::regex_search(function, match, regex);
 			if (match.empty())return {};
@@ -100,14 +99,14 @@ struct ParseIdFactor {
 		}
 		std::string call{};
 		{
-			std::regex regex{calling_convention};
+			std::regex regex{ calling_convention };
 			std::smatch match;
 			std::regex_search(function, match, regex);
 			if (!match.empty())call = match.begin()->str();
 		}
 		std::string return_type{};
 		if (!call.empty()) {
-			std::regex regex{before(type + R"(\s*)", call)};
+			std::regex regex{ before(type + R"(\s*)", call) };
 			std::smatch match;
 			std::regex_search(function, match, regex);
 			if (!match.empty())return_type = match.begin()->str();
@@ -125,7 +124,7 @@ struct ParseIdFactor {
 		std::smatch match;
 
 		static auto function_regex = before(function_name, R"(\()");
-		std::regex regex{function_regex};
+		std::regex regex{ function_regex };
 		std::regex_search(function, match, regex);
 
 		if (match.empty())return function;

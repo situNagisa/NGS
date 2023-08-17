@@ -5,8 +5,8 @@
 
 NGS_MATH_BEGIN
 
-template<class _ElementType>
-struct Point2 : mla::VectorContainer<Point2<_ElementType>, std::integral_constant<size_t, 2>, _ElementType> {
+template<class  _ElementType>
+struct NGS_API Point2 : mla::VectorContainer<Point2<_ElementType>, std::integral_constant<size_t, 2>, _ElementType> {
 private:
 	using base_type = typename Point2::self_type;
 protected:
@@ -90,8 +90,8 @@ using Point2d = Point2<double>;
 using Point2s = Point2<size_t>;
 
 
-template<class _ElementType>
-struct Point3 : mla::VectorContainer<Point3<_ElementType>, std::integral_constant<size_t, 3>, _ElementType> {
+template<class  _ElementType>
+struct NGS_API Point3 : mla::VectorContainer<Point3<_ElementType>, std::integral_constant<size_t, 3>, _ElementType> {
 private:
 	using base_type = typename Point3::self_type;
 protected:

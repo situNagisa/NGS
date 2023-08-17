@@ -11,13 +11,13 @@
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
-class _Texture;
+class NGS_API  _Texture;
 NGS_END
 
 NGL_TARGET_BEGIN
 
-class Texture : public Target<Texture, objects::_Texture> {
-	friend class Target<Texture, objects::_Texture>;
+class NGS_API  Texture : public Target<Texture, objects::_Texture> {
+	friend class  Target<Texture, objects::_Texture>;
 	static void _Select(state_type* state);
 public:
 
@@ -29,7 +29,7 @@ NGL_OBJ_BEGIN
 
 #undef min
 
-class _Texture : public State {
+class NGS_API  _Texture : public State {
 public:
 	_Texture(TextureTarget target, const ImageView& image, size_t mipmap_level)
 		: _Texture(target, image.GetData(), image.GetSize().x, image.GetSize().y, image.GetFormat(), mipmap_level)
@@ -114,7 +114,7 @@ private:
 };
 
 template<TextureTarget _Target>
-class Texture : public _Texture {
+class NGS_API  Texture : public _Texture {
 public:
 	Texture(Texture&&) = default;
 	Texture(void_ptr_cst data, size_t width, size_t height, type_t format, size_t mipmap_level = 0) : _Texture(_Target, data, width, height, format, mipmap_level) {}

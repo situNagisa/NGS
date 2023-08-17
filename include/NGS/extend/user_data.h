@@ -4,7 +4,7 @@
 
 NGS_BEGIN
 
-struct UserData {
+struct NGS_API UserData {
 	void_ptr user_data = nullptr;
 	void_ptr other_data = nullptr;
 };

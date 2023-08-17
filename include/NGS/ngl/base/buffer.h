@@ -8,7 +8,7 @@
 NGL_BEGIN
 NGL_BUF_BEGIN
 
-class BufferObject : public State {
+class NGS_API  BufferObject : public State {
 public:
 	/**
 	 * @brief
@@ -28,12 +28,16 @@ public:
 	 */
 	BufferObject(BufferTarget target, size_t size, Usage usage);
 	BufferObject(BufferObject&& other);
-	~BufferObject();
+	virtual ~BufferObject() override;
 
 	virtual void Update()override;
 	void View(size_t size, size_t offset);
 	void Write(void_ptr_cst data, size_t size, size_t offset);
 
+	void Resize(size_t size);
+	void Resize(size_t size, Usage usage);
+
+	void SetUsage(Usage usage);
 public:
 	const BufferTarget target;
 protected:
@@ -42,6 +46,7 @@ protected:
 	bool _is_reference;
 	size_t _update_begin;
 	size_t _update_size;
+	Usage _usage;
 };
 
 NGS_END

@@ -5,7 +5,7 @@
 NGL_BEGIN
 
 
-enum class ErrorCode {
+enum class  ErrorCode {
 	no_error = GL_NO_ERROR,
 	invalid_enum = GL_INVALID_ENUM,
 	invalid_value = GL_INVALID_VALUE,

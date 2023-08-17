@@ -5,7 +5,7 @@
 
 NGL_BEGIN
 
-class LineIndicesCtrl : public DefaultIndicesCtrl {
+class NGS_API  LineIndicesCtrl : public DefaultIndicesCtrl {
 private:
 
 public:

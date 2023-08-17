@@ -10,7 +10,7 @@ NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression, CVectorExpression _AngleExpression>
 	requires (_Expression::dimension == _AngleExpression::dimension)
-struct VectorRotateExpression : VectorExpression<VectorRotateExpression<_Expression, CVectorExpression>> {
+struct NGS_API VectorRotateExpression : VectorExpression<VectorRotateExpression<_Expression, CVectorExpression>> {
 private:
 	using base_type = VectorRotateExpression::self_type;
 protected:

@@ -4,7 +4,7 @@
 
 NDA_IMPL_OPENGL_BEGIN
 
-struct ImageDrawUnit : IDrawUnit {
+struct NGS_API ImageDrawUnit : IDrawUnit {
 	using base_type = IDrawUnit;
 
 	ImageDrawUnit(Bitmap* bitmap)

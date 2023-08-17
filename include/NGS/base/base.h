@@ -16,7 +16,6 @@
 
 #define NGS_USE_BASE 1
 
-#include "NGS/base/basic.h"
 #include "NGS/base/defined.h"
 
 #include "NGS/base/type_info.h"
@@ -28,8 +27,5 @@
 
 #include "NGS/base/log.h"
 #include "NGS/base/assert.h"
-
-#include "NGS/base/mpl/mpl.h"
-#include "NGS/base/memory_reinterpreter.h"
 
 #include "NGS/base/is_as.h"

@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-struct State : DeleteCopy {
+struct NGS_API State : DeleteCopy {
 	using state_type = State;
 
 	State() = default;

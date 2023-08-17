@@ -16,7 +16,7 @@ NGS_MLA_BEGIN
  *
  * @property static function element_type apply(const _Expression&, size_t)
 */
-template<class T, class _Expression1, class _Expression2>
+template<class  T, class  _Expression1, class  _Expression2>
 concept CMatrixBinaryFunctor = CMatrixExpression<_Expression1> && CMatrixExpression<_Expression2> &&
 	requires(_Expression1 expr1, const _Expression1 expr1_cst, _Expression2 expr2, const _Expression2 & expr2_cst, size_t row_index, size_t col_index) {
 		{ T::apply(expr1_cst, expr2_cst, row_index, col_index) } -> std::convertible_to<mpl::promote_t<typename _Expression1::element_type, typename _Expression2::element_type>>;
@@ -25,7 +25,7 @@ concept CMatrixBinaryFunctor = CMatrixExpression<_Expression1> && CMatrixExpress
 template<CMatrixExpression _Expression1, CMatrixExpression _Expression2, CScalarBinaryFunctor _Functor>
 	requires requires(typename matrix_traits<_Expression1>::element_type e1, typename matrix_traits<_Expression2>::element_type e2) {
 		{ _Functor::apply(e1, e2) } -> std::convertible_to< mpl::promote_t<typename _Expression1::element_type, typename _Expression2::element_type>>;
-}struct MatrixBinaryScalarFunctor {
+}struct NGS_API MatrixBinaryScalarFunctor {
 private:
 	using expression_type1 = _Expression1;
 	using expression_type2 = _Expression2;

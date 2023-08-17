@@ -10,7 +10,7 @@
 NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression, CMatrixLayout _Layout = tag::row>
-struct MatrixVectorExpression : MatrixExpression<MatrixVectorExpression<_Expression, _Layout>> {
+struct NGS_API MatrixVectorExpression : MatrixExpression<MatrixVectorExpression<_Expression, _Layout>> {
 private:
 	using base_type = MatrixVectorExpression::self_type;
 protected:

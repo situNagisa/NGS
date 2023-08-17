@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "NGS/base/basic.h"
 #include "NGS/base/defined.h"
 #include "NGS/base/log.h"
 #include "NGS/base/utility.h"
@@ -58,10 +57,21 @@ NGS_END
 #define _NGS_ASSERT_FAIL exit(1)
 #endif
 
+#if NGS_COMPILER == NGS_GCC
+
 #define NGS_ASSERT(boolean,...)					\
 if(_NGS Assert(boolean, #boolean,##__VA_ARGS__))\
 _NGS_ASSERT_FAIL								\
 //
+
+#else
+
+#define NGS_ASSERT(boolean,...)					\
+if(_NGS Assert(boolean, #boolean,  __VA_ARGS__))\
+_NGS_ASSERT_FAIL								\
+//
+
+#endif
 
 #else
 

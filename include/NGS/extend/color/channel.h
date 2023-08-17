@@ -21,7 +21,7 @@ NGS_END
 NGS_COLOR_SPACE_BEGIN
 
 template<size_t _Count, size_t _Offset = 0>
-struct Channel {
+struct NGS_API Channel {
 	static constexpr size_t Count = _Count;
 	static constexpr size_t Offset = _Offset;
 

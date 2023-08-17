@@ -6,8 +6,8 @@ NGS_BEGIN
 
 namespace tree_struct {
 
-class IChild {
-	friend class IParent;
+class NGS_API  IChild {
+	friend class  IParent;
 public:
 	virtual ~IChild() = default;
 
@@ -19,7 +19,7 @@ protected:
 	IParent* _parent = nullptr;
 };
 
-class IParent {
+class NGS_API  IParent {
 private:
 	NGS_DEFINE_TYPE(__child, IChild);
 	NGS_DEFINE_TYPE(__container, IParent);
@@ -62,11 +62,11 @@ protected:
 	std::vector<IChild*> _children{};
 };
 
-class Leaf : virtual public IChild {
+class NGS_API  Leaf : virtual public IChild {
 
 };
 
-class Tree : virtual public IChild, virtual public IParent {
+class NGS_API  Tree : virtual public IChild, virtual public IParent {
 public:
 
 private:

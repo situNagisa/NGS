@@ -5,9 +5,9 @@
 
 NGS_BEGIN
 
-class GPIO : public IO {
+class NGS_API  GPIO : public IO {
 public:
-	enum class Mode {
+	enum class  Mode {
 		disable,
 		input,
 		output,
@@ -15,13 +15,13 @@ public:
 		input_output_open_drain,
 		input_output,
 	};
-	enum class Pull {
+	enum class  Pull {
 		pullup,
 		pulldown,
 		pullup_pulldown,
 		floating,
 	};
-	enum class Interrupt {
+	enum class  Interrupt {
 		disable,
 		positive,
 		nagative,

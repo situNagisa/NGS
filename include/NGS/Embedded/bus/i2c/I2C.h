@@ -5,7 +5,7 @@
 
 NGS_BEGIN
 
-class I2C : public BusSync<BusBase::Type::half_duplex> {
+class NGS_API  I2C : public BusSync<BusBase::Type::half_duplex> {
 protected:
 	NGS_TYPE_DEFINE(ngs::uint16, address);
 	NGS_TYPE_DEFINE(I2C, base);
@@ -13,7 +13,7 @@ protected:
 public:
 	using address_type = __address;
 
-	enum class Flag : byte {
+	enum class  Flag : byte {
 		write = 0,
 		read = 1,
 	};
@@ -84,16 +84,16 @@ protected:
 };
 
 
-class I2CMaster : public I2C {
+class NGS_API  I2CMaster : public I2C {
 public:
-	enum class ACK_Type {
+	enum class  ACK_Type {
 		ack = 0x0,			/*!< I2C ack for each byte read */
 		nack = 0x1,			/*!< I2C nack for each byte read */
 		last_nack = 0x2,	/*!< I2C nack for the last byte*/
 		max,
 	};
 public:
-	struct Message {
+	struct NGS_API Message {
 		Flag flag{};
 		// it is UB if you don't distinguish the const pointer
 		union {
@@ -174,7 +174,7 @@ protected:
 	std::pair<bool, ACK_Type> _ack = { false,ACK_Type::nack };
 };
 
-class I2CSlave : public I2C {
+class NGS_API  I2CSlave : public I2C {
 public:
 
 public:

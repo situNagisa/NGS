@@ -4,7 +4,7 @@
 
 NGS_CCPT_BEGIN
 
-template<class T = void>
+template<class  T = void>
 concept Float = Constant<T> && std::is_floating_point_v<typename T::value_type>;
 
 template<double _Value>

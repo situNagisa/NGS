@@ -7,10 +7,10 @@
 
 NGS_CCPT_BEGIN
 
-template<class T>
+template<class  T>
 concept Numeric = Int<T> || UInt<T> || Float<T>;
 
-template<class T>
+template<class  T>
 concept Fundamental = Numeric<T>;
 
 NGS_CCPT_END

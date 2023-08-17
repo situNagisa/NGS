@@ -28,50 +28,59 @@
     <ClInclude Include="base\base.h" />
     <ClInclude Include="base\base.hpp" />
     <ClInclude Include="base\base_class.h" />
-    <ClInclude Include="base\basic.h" />
+    <ClInclude Include="basic\basic.h" />
     <ClInclude Include="base\bit.h" />
-    <ClInclude Include="base\boost\boost.h" />
-    <ClInclude Include="base\boost\mpl.h" />
-    <ClInclude Include="base\boost\property_tree.h" />
     <ClInclude Include="base\concepts.h" />
-    <ClInclude Include="base\basic\config.h" />
+    <ClInclude Include="basic\config.h" />
     <ClInclude Include="base\defined.h" />
-    <ClInclude Include="base\memory_reinterpreter.h" />
-    <ClInclude Include="base\mpl\bitmap.h" />
-    <ClInclude Include="base\mpl\concepts\algorithm.h" />
-    <ClInclude Include="base\mpl\concepts\concept.h" />
-    <ClInclude Include="base\mpl\concepts\data_type.h" />
-    <ClInclude Include="base\mpl\concepts\iterator.h" />
-    <ClInclude Include="base\mpl\concepts\meta_function.h" />
-    <ClInclude Include="base\mpl\concepts\same.h" />
-    <ClInclude Include="base\mpl\concepts\sequence.h" />
-    <ClInclude Include="base\mpl\defined.h" />
-    <ClInclude Include="base\mpl\promote_type.h" />
-    <ClInclude Include="base\mpl\sequence\sequence.h" />
-    <ClInclude Include="base\mpl\sequence\at.h" />
-    <ClInclude Include="base\mpl\sequence_params.h" />
-    <ClInclude Include="base\mpl\struct\spread.h" />
-    <ClInclude Include="base\mpl\struct\struct.h" />
-    <ClInclude Include="base\mpl\struct\var.h" />
-    <ClInclude Include="base\mpl\struct\vars.h" />
-    <ClInclude Include="base\mpl\template_extraction.h" />
-    <ClInclude Include="base\mpl\find.h" />
-    <ClInclude Include="base\mpl\function.h" />
-    <ClInclude Include="base\mpl\mpl.h" />
-    <ClInclude Include="base\mpl\mpl_macro.h" />
-    <ClInclude Include="base\mpl\utility.h" />
+    <ClInclude Include="base\is_as.h" />
+    <ClInclude Include="extend\memory_reinterpreter.h" />
     <ClInclude Include="base\type_info.h" />
     <ClInclude Include="concepts\any.h" />
     <ClInclude Include="concepts\concepts.h" />
+    <ClInclude Include="concepts\fundamental\bool.h" />
     <ClInclude Include="concepts\fundamental\constant.h" />
     <ClInclude Include="concepts\defined.h" />
     <ClInclude Include="concepts\derived.h" />
     <ClInclude Include="concepts\fundamental.h" />
     <ClInclude Include="concepts\fundamental\floating.h" />
+    <ClInclude Include="concepts\functor.h" />
     <ClInclude Include="concepts\fundamental\fundamental.h" />
     <ClInclude Include="concepts\fundamental\int.h" />
     <ClInclude Include="concepts\fundamental\uint.h" />
+    <ClInclude Include="concepts\predicate.h" />
     <ClInclude Include="concepts\verify.h" />
+    <ClInclude Include="dl\defined.h" />
+    <ClInclude Include="dl\display.h" />
+    <ClInclude Include="dl\display.hpp" />
+    <ClInclude Include="dl\display\basic.h" />
+    <ClInclude Include="dl\display\bitmap.h" />
+    <ClInclude Include="dl\display\bitmap\bitmap.h" />
+    <ClInclude Include="dl\display\bitmap\data.h" />
+    <ClInclude Include="dl\display\bitmap\data.hpp" />
+    <ClInclude Include="dl\display\bitmap\idata.h" />
+    <ClInclude Include="dl\display\bitmap\view.h" />
+    <ClInclude Include="dl\display\display.h" />
+    <ClInclude Include="dl\display\get_display_stage.h" />
+    <ClInclude Include="dl\display\shape.hpp" />
+    <ClInclude Include="dl\display\shape.h" />
+    <ClInclude Include="dl\display\shape\graphic.h" />
+    <ClInclude Include="dl\display\shape\graphic.hpp" />
+    <ClInclude Include="dl\display\shape\graphic\command.h" />
+    <ClInclude Include="dl\display\shape\graphic\command.hpp" />
+    <ClInclude Include="dl\display\shape\graphic\graphic.h" />
+    <ClInclude Include="dl\display\shape\shape.h" />
+    <ClInclude Include="dl\display\shape\shape.hpp" />
+    <ClInclude Include="dl\display\sprite.h" />
+    <ClInclude Include="dl\display\stage.h" />
+    <ClInclude Include="dl\dl.h" />
+    <ClInclude Include="dl\dl.hpp" />
+    <ClInclude Include="dl\enum.h" />
+    <ClInclude Include="dl\enum\blend_mode.h" />
+    <ClInclude Include="dl\enum\graphic_command.h" />
+    <ClInclude Include="dl\graphic\api.h" />
+    <ClInclude Include="dl\graphic\listen.h" />
+    <ClInclude Include="dl\transform.h" />
     <ClInclude Include="embedded\bus\bus.h" />
     <ClInclude Include="embedded\embedded.hpp" />
     <ClInclude Include="extend\color\channel.h" />
@@ -82,11 +91,11 @@
     <ClInclude Include="extend\color\primary_color.h" />
     <ClInclude Include="extend\console.h" />
     <ClInclude Include="extend\console.hpp" />
-    <ClInclude Include="base\basic\defined.h" />
+    <ClInclude Include="basic\defined.h" />
     <ClInclude Include="base\log.h" />
-    <ClInclude Include="base\basic\STL.h" />
+    <ClInclude Include="basic\STL.h" />
     <ClInclude Include="base\utility.h" />
-    <ClInclude Include="base\basic\version.h" />
+    <ClInclude Include="basic\version.h" />
     <ClInclude Include="embedded\bus\bus_base.h" />
     <ClInclude Include="embedded\bus\i2c\I2C.h" />
     <ClInclude Include="embedded\bus\serial_port\serial_port.h" />
@@ -129,6 +138,7 @@
     <ClInclude Include="extend\command_queue.h" />
     <ClInclude Include="math\defined.h" />
     <ClInclude Include="math\geometry.h" />
+    <ClInclude Include="math\geometry\circle.h" />
     <ClInclude Include="math\geometry\rectangle_old.h" />
     <ClInclude Include="math\geometry\transform.h" />
     <ClInclude Include="math\mla.h" />
@@ -237,6 +247,32 @@
     <ClInclude Include="math\util.h" />
     <ClInclude Include="math\geometry\vector.h" />
     <ClInclude Include="math\geometry\vector_old.h" />
+    <ClInclude Include="mpl\container.h" />
+    <ClInclude Include="mpl\container\vector.h" />
+    <ClInclude Include="mpl\container\vector\algorithm\size_of.h" />
+    <ClInclude Include="mpl\defined.h" />
+    <ClInclude Include="mpl\meta_struct.h" />
+    <ClInclude Include="mpl\meta_struct\meta_struct.h" />
+    <ClInclude Include="mpl\meta_struct\meta_struct\meta_struct.h" />
+    <ClInclude Include="mpl\meta_struct\meta_struct\variable_adapter.h" />
+    <ClInclude Include="mpl\meta_struct\spread.h" />
+    <ClInclude Include="mpl\meta_struct\variable.h" />
+    <ClInclude Include="mpl\mpl.h" />
+    <ClInclude Include="mpl\container\vector\algorithm.h" />
+    <ClInclude Include="mpl\container\vector\algorithm\find.h" />
+    <ClInclude Include="mpl\container\vector\algorithm\push_back.h" />
+    <ClInclude Include="mpl\container\vector\algorithm\push_back_range.h" />
+    <ClInclude Include="mpl\container\vector\algorithm\push_front.h" />
+    <ClInclude Include="mpl\container\vector\algorithm\push_front_range.h" />
+    <ClInclude Include="mpl\container\vector\vector.h" />
+    <ClInclude Include="mpl\utils.h" />
+    <ClInclude Include="mpl\utils\function.h" />
+    <ClInclude Include="mpl\utils\is_same_with_any_of.h" />
+    <ClInclude Include="mpl\utils\precision.h" />
+    <ClInclude Include="mpl\utils\promote.h" />
+    <ClInclude Include="mpl\utils\sequence_params.h" />
+    <ClInclude Include="mpl\utils\size_of.h" />
+    <ClInclude Include="mpl\utils\template.h" />
     <ClInclude Include="nda\defined.h" />
     <ClInclude Include="nda\display\bitmap\bitmap.h" />
     <ClInclude Include="nda\display\bitmap\data.h" />
@@ -293,6 +329,7 @@
     <ClInclude Include="ngl\environment\capability\capability.h" />
     <ClInclude Include="ngl\environment\capability\manager.h" />
     <ClInclude Include="ngl\environment\clear.h" />
+    <ClInclude Include="ngl\environment\manager.h" />
     <ClInclude Include="ngl\environment\shader.h" />
     <ClInclude Include="ngl\environment\vertex_array.h" />
     <ClInclude Include="ngl\environment\viewport.h" />
@@ -351,10 +388,31 @@
     <ClInclude Include="nsw\NSW.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dl\display\display.hpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="dl\display\get_display_stage.hpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="dl\transform.hpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="nda\core\display_object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -420,7 +478,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NGS_USE_HPP;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -437,7 +495,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NGS_USE_HPP;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -454,7 +512,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NGS_USE_HPP;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -471,7 +529,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NGS_USE_HPP;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>

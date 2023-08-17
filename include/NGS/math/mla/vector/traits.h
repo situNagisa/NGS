@@ -7,7 +7,7 @@
 NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression>
-struct vector_traits : type_traits<_Expression> {
+struct NGS_API vector_traits : type_traits<_Expression> {
 private:
 	using base_type = typename vector_traits::self_type;
 public:

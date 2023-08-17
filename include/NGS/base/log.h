@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "NGS/base/defined.h"
-#include "NGS/base/basic.h"
 #include "NGS/base/base_class.h"
 #include "NGS/base/utility.h"
 #include "NGS/base/type_info.h"
@@ -17,7 +16,7 @@ enum DLevel {
 	fatal,
 };
 
-enum class TextColor {
+enum class  TextColor {
 	reset,
 	black,
 	red,
@@ -29,11 +28,11 @@ enum class TextColor {
 	white,
 };
 
-class Debugger {
+class NGS_API  Debugger {
 public:
-	class ScopeHolder : DeleteCopy {
+	class  ScopeHolder : DeleteCopy {
 	public:
-		friend class Debugger;
+		friend class  Debugger;
 		~ScopeHolder() {
 			if (_disable)Debugger::_disable--;
 			Debugger::_Pop();

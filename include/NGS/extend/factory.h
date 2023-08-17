@@ -4,15 +4,15 @@
 
 NGS_BEGIN
 
-template<class _Target>
-class Factory {
+template<class  _Target>
+class NGS_API  Factory {
 
 public:
 
 	~Factory() {
 		Clear();
 	}
-	template<class _T, class... _Args>
+	template<class  _T, class ... _Args>
 		requires std::constructible_from<_T, _Args...>&& std::is_base_of_v<_Target, _T>
 	_T* Create(_Args&&... args) {
 		_T* ptr;

@@ -5,7 +5,7 @@
 
 NDA_BEGIN
 
-class Sprite : public DisplayObjectContainer {
+class NGS_API  Sprite : public DisplayObjectContainer {
 public:
 	using DisplayObjectContainer::DisplayObjectContainer;
 	virtual ~Sprite()override {}

@@ -4,7 +4,7 @@
 
 NGS_BEGIN
 
-class FilePath {
+class NGS_API  FilePath {
 public:
 #if NGS_PLATFORM == NGS_WINDOWS
 	static constexpr char SEPARATOR = '\\';

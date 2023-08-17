@@ -4,8 +4,8 @@
 
 NGS_MLA_BEGIN
 
-template<class T>
-struct type_traits {
+template<class  T>
+struct NGS_API type_traits {
 	using self_type = type_traits<T>;
 	using value_type = T;
 	using const_reference = const T&;

@@ -4,7 +4,7 @@
 
 NGS_CCPT_BEGIN
 
-template<class T = void>
+template<class  T = void>
 concept Int = Constant<T> && std::is_integral_v<typename T::value_type>;
 
 template<long long _Value>

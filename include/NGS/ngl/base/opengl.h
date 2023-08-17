@@ -9,19 +9,19 @@ NGL_BEGIN
 NGL_TARGET_BEGIN
 
 //vertex
-class VertexArray;
+class NGS_API  VertexArray;
 
 //texture
-class Texture;
+class NGS_API  Texture;
 
 //shader
-class ShaderProgram;
+class NGS_API  ShaderProgram;
 
 NGS_END
 
-class OpenGL : public Singleton<OpenGL> {
+class NGS_API  OpenGL : public Singleton<OpenGL> {
 private:
-	friend class Singleton<OpenGL>;
+	friend class  Singleton<OpenGL>;
 	OpenGL();
 	~OpenGL();
 public:

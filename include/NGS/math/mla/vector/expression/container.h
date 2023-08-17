@@ -13,7 +13,7 @@ NGS_MLA_BEGIN
  * @property function assign(CVectorExpression auto&&);
  * @property sizeof == (sizeof(element_type) * dimension)
 */
-template<class _Container = void>
+template<class  _Container = void>
 concept CVectorContainer = requires(_Container expr, const _Container expr_cst, VectorExpression<typename _Container::expression_type> other, size_t index, typename _Container::element_type element) {
 	{ expr.assign(expr) } -> std::convertible_to<_Container&>;
 	{ expr.assign(index, element) } -> std::convertible_to<_Container&>;
@@ -22,11 +22,11 @@ concept CVectorContainer = requires(_Container expr, const _Container expr_cst, 
 	//	requires sizeof(typename _Container::expression_type) == (sizeof(typename _Container::element_type) * _Container::dimension);
 };
 
-template<ccpt::CRPT<CVectorContainer<>> _Derived, ccpt::UInt _Dim, class _ElementType, class = std::make_index_sequence<_Dim::value>>
-class VectorContainer;
+template<ccpt::CRPT<CVectorContainer<>> _Derived, ccpt::UInt _Dim, class  _ElementType, class  = std::make_index_sequence<_Dim::value>>
+class NGS_API  VectorContainer;
 
-template<ccpt::CRPT<CVectorContainer<>> _Derived, size_t _Dim, class _ElementType, size_t... _Index>
-class VectorContainer<
+template<ccpt::CRPT<CVectorContainer<>> _Derived, size_t _Dim, class  _ElementType, size_t... _Index>
+class NGS_API  VectorContainer<
 	_Derived,
 	std::integral_constant<size_t, _Dim>,
 	_ElementType,

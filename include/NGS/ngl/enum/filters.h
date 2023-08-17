@@ -5,7 +5,7 @@
 NGL_BEGIN
 
 
-enum class Filters : GLint {
+enum class  Filters : GLint {
 	nearest = GL_NEAREST,
 	linear = GL_LINEAR,
 	nearest_mipmap_nearest = GL_NEAREST_MIPMAP_NEAREST,

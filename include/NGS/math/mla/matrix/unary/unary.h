@@ -8,7 +8,7 @@
 NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expression, CMatrixUnaryFunctor<_Expression> _Functor, ccpt::UInt _Row, ccpt::UInt _Col>
-class MatrixUnary : public MatrixExpression<MatrixUnary<_Expression, _Functor, _Row, _Col>> {
+class NGS_API  MatrixUnary : public MatrixExpression<MatrixUnary<_Expression, _Functor, _Row, _Col>> {
 private:
 	using base_type = typename MatrixUnary::self_type;
 protected:
@@ -44,7 +44,7 @@ using matrix_unary_functor_t = MatrixUnary<
 	std::integral_constant<size_t, _Row>, std::integral_constant<size_t, _Col>
 >;
 
-template<CMatrixExpression _Expression, template<class>class _Functor, size_t _Row = matrix_traits<_Expression>::row_count, size_t _Col = matrix_traits<_Expression>::col_count>
+template<CMatrixExpression _Expression, template<class >class  _Functor, size_t _Row = matrix_traits<_Expression>::row_count, size_t _Col = matrix_traits<_Expression>::col_count>
 using matrix_unary_scalar_functor_t = matrix_unary_functor_t<
 	_Expression,
 	MatrixUnaryScalarFunctor<_Expression, _Functor<typename matrix_traits<_Expression>::element_type>>,

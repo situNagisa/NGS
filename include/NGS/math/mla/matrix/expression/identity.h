@@ -4,8 +4,8 @@
 
 NGS_MLA_BEGIN
 
-template<ccpt::UInt _Dim, class _ElementType>
-struct IdentityMatrix : SquareMatrix<IdentityMatrix<_Dim, _ElementType>, _Dim> {
+template<ccpt::UInt _Dim, class  _ElementType>
+struct NGS_API IdentityMatrix : SquareMatrix<IdentityMatrix<_Dim, _ElementType>, _Dim> {
 private:
 	using base_type = IdentityMatrix::self_type;
 protected:
@@ -20,9 +20,9 @@ public:
 		return row_index == col_index ? element_type(1) : element_type(0);
 	}
 };
-template<size_t _Dimension, class _ElementType>
+template<size_t _Dimension, class  _ElementType>
 using identity_matrix_t = IdentityMatrix<std::integral_constant<size_t, _Dimension>, _ElementType>;
-template<size_t _Dimension, class _ElementType>
+template<size_t _Dimension, class  _ElementType>
 constexpr identity_matrix_t<_Dimension, _ElementType> identity_matrix_v{};
 
 NGS_CCPT_VERIFY(CSquareMatrix, identity_matrix_t<3, int>);

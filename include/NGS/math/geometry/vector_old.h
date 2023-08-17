@@ -8,8 +8,8 @@ NGS_BEGIN
 template<
 	size_t N,
 	_NGS_CPT CArithmetic Number,
-	template<typename num>class Derived
->class _Vector {
+	template<typename num>class  Derived
+>class  _Vector {
 private:
 	using ___this = _Vector<N, Number, Derived>;
 public:
@@ -206,7 +206,7 @@ public:
 
 
 template<_NGS_CPT CArithmetic Number = float>
-class Vector2D : public _Vector<2, Number, Vector2D> {
+class NGS_API  Vector2D : public _Vector<2, Number, Vector2D> {
 private:
 	using __base = _Vector<2, Number, Vector2D>;
 public:
@@ -253,7 +253,7 @@ using Point2lf = Point2_<double>;
 using Point2s = Point2_<size_t>;
 
 template<_NGS_CPT CArithmetic Number = float>
-class Vector3D : public _Vector<3, Number, Vector3D> {
+class NGS_API  Vector3D : public _Vector<3, Number, Vector3D> {
 private:
 	using __base = _Vector<3, Number, Vector3D>;
 public:
@@ -293,7 +293,7 @@ using Point3lf = Point3_<double>;
 using Point3s = Point3_<size_t>;
 
 template<_NGS_CPT CArithmetic Number = float>
-class Vector4D : public _Vector<4, Number, Vector4D> {
+class NGS_API  Vector4D : public _Vector<4, Number, Vector4D> {
 private:
 	using __base = _Vector<4, Number, Vector4D>;
 public:

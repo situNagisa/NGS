@@ -7,7 +7,7 @@
 
 NGL_FW_BEGIN
 
-class Window : public DeleteCopy {
+class NGS_API  Window : public DeleteCopy {
 public:
 	using context_t = GLFWwindow*;
 public:
@@ -111,7 +111,7 @@ public:\
 	using glfw_##function_name_lower##_callback_t = void(Window*, __VA_ARGS__);\
 private:\
 	std::function<glfw_##function_name_lower##_callback_t> _##function_name_lower##_callback = nullptr;\
-	template<class... T>\
+	template<class ... T>\
 	static void _glfw_##function_name_lower##_callback_wrapper(context_t context, T... args) {\
 		auto it = _handle_map.find(context);\
 		NGS_ASSERT(it != _handle_map.end());\

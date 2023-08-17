@@ -9,7 +9,7 @@ NGS_MLA_BEGIN
 
 template<CSquareMatrix _Expression, CMatrixLayout _Layout = tag::row>
 	requires (_Expression::row_count > 1)
-struct MatrixGaussianElimination : triangular_matrix_t<_Expression::row_count, typename _Expression::element_type, tag::upper, _Layout> {
+struct NGS_API MatrixGaussianElimination : triangular_matrix_t<_Expression::row_count, typename _Expression::element_type, tag::upper, _Layout> {
 private:
 	using base_type = typename MatrixGaussianElimination::self_type;
 protected:
@@ -82,7 +82,7 @@ private:
 	}
 };
 
-struct _GaussianElimination {
+struct NGS_API _GaussianElimination {
 	constexpr _GaussianElimination() = default;
 
 	template<CSquareMatrix _Expression>

@@ -8,8 +8,8 @@
 NGL_BEGIN
 NGL_TARGET_BEGIN
 
-class BufferTarget : public Target<BufferTarget, buffers::BufferObject> {
-	friend class Target<BufferTarget, buffers::BufferObject>;
+class NGS_API  BufferTarget : public Target<BufferTarget, buffers::BufferObject> {
+	friend class  Target<BufferTarget, buffers::BufferObject>;
 	static void _Select(state_type* buffer) { NGL_CHECK(glBindBuffer((GLenum)buffer->target, buffer->GetContext())); }
 };
 

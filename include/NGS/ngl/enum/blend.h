@@ -1,27 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/ngl/defined.h"
 
 NGL_BEGIN
 
-enum class BlendMode {
-	normal,
-	layer,
-	multiply,
-	screen,
-	lighten,
-	darken,
-	difference,
-	add,
-	substract,
-	invert,
-	alpha,
-	erase,
-	overlay,
-	hardlight,
-	shader,
-};
-enum class BlendFactors : GLenum {
+enum class  BlendFactors : GLenum {
 	zero = GL_ZERO,
 	one = GL_ONE,
 	src_color = GL_SRC_COLOR,
@@ -38,12 +21,32 @@ enum class BlendFactors : GLenum {
 	one_minus_constant_alpha = GL_ONE_MINUS_CONSTANT_ALPHA,
 	src_alpha_saturate = GL_SRC_ALPHA_SATURATE,
 };
-enum class BlendEquations : GLenum {
+enum class  BlendEquations : GLenum {
 	add = GL_FUNC_ADD,
 	subtract = GL_FUNC_SUBTRACT,
 	reverse_subtract = GL_FUNC_REVERSE_SUBTRACT,
 	min = GL_MIN,
 	max = GL_MAX,
 };
+
+struct NGS_API BlendMode {
+	BlendFactors src_factor;
+	BlendFactors dst_factor;
+	BlendEquations equation;
+};
+
+namespace blend_mode {
+
+constexpr static BlendMode normal = { BlendFactors::one, BlendFactors::zero, BlendEquations::add };
+constexpr static BlendMode alpha = { BlendFactors::src_alpha, BlendFactors::one_minus_src_alpha, BlendEquations::add };
+constexpr static BlendMode add = { BlendFactors::src_alpha, BlendFactors::one, BlendEquations::add };
+constexpr static BlendMode subtract = { BlendFactors::src_alpha, BlendFactors::one, BlendEquations::subtract };
+constexpr static BlendMode multiply = { BlendFactors::dst_color, BlendFactors::zero, BlendEquations::add };
+constexpr static BlendMode screen = { BlendFactors::one, BlendFactors::one_minus_src_color, BlendEquations::add };
+constexpr static BlendMode erase = { BlendFactors::zero, BlendFactors::one_minus_src_alpha, BlendEquations::subtract };
+//constexpr static BlendMode mask = { BlendFactors::zero, BlendFactors::src_alpha, BlendEquations::zero };
+constexpr static BlendMode below = { BlendFactors::one_minus_dst_alpha, BlendFactors::dst_alpha, BlendEquations::add };
+
+}
 
 NGL_END

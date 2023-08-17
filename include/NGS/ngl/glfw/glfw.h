@@ -7,13 +7,13 @@
 
 NGL_BEGIN
 NGL_TARGET_BEGIN
-class GLFW : public Target<GLFW, fw::Window>, public Singleton<GLFW> {
+class NGS_API  GLFW : public Target<GLFW, fw::Window>, public Singleton<GLFW> {
 public:
 	NGS_TYPE_DEFINE(fw::Window, window);
 
 private:
-	friend class Target<GLFW, fw::Window>;
-	friend class Singleton<GLFW>;
+	friend class  Target<GLFW, fw::Window>;
+	friend class  Singleton<GLFW>;
 	GLFW(int major = NGL_OPENGL_MAJOR, int minor = NGL_OPENGL_MINOR) {
 		if (!glfwInit())
 			NGS_ASSERT(false, "glfw init fail!");

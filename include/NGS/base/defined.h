@@ -1,3 +1,5 @@
-#pragma once
+﻿#pragma once
 
-#include "NGS/base/basic.h"
+#include "NGS/basic/basic.h"
+#include "NGS/concepts/concepts.h"
+#include "NGS/mpl/mpl.h"

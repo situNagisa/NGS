@@ -12,7 +12,7 @@ NGS_MLA_BEGIN
  * @property type result_type
  * @property static function result_type apply(argument_type)
 */
-template<class T>
+template<class  T>
 concept CScalarUnaryFunctor = requires(typename T::argument_type argument) {
 	typename T::argument_type;
 	typename T::result_type;
@@ -20,8 +20,8 @@ concept CScalarUnaryFunctor = requires(typename T::argument_type argument) {
 	{ T::apply(argument) } -> std::convertible_to<typename T::result_type>;
 };
 
-template<class _ElementType>
-struct ScalarUnaryFunctor {
+template<class  _ElementType>
+struct NGS_API ScalarUnaryFunctor {
 protected:
 	using self_type = ScalarUnaryFunctor<_ElementType>;
 public:

@@ -8,7 +8,7 @@
 NGS_BEGIN
 
 template<_NGS_CPT CArithmetic Number = float>
-class Matrix {
+class NGS_API  Matrix {
 public:
 	NGS_TYPE_DEFINE(Matrix<Number>, this);
 	NGS_TYPE_DEFINE(Number, num);

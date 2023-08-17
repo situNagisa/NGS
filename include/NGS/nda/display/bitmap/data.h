@@ -5,7 +5,7 @@
 
 NDA_BEGIN
 
-class BitmapData : public IBitmapData {
+class NGS_API  BitmapData : public IBitmapData {
 public:
 	BitmapData(void_ptr data, color_space::PixelFormat format, size_t width, size_t height)
 		: _data(reinterpret_cast<byte_ptr>(data), width* height* format.size)

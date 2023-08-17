@@ -7,7 +7,7 @@
 NGS_BEGIN
 
 template<CArithmetic _Number>
-struct Transform2D {
+struct NGS_API Transform2D {
 public:
 	using element_type = _Number;
 public:

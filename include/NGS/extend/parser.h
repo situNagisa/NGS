@@ -107,7 +107,7 @@ namespace protocols_parsers {
 #undef _S
 
 template<size_t _N>
-class ProtocolsParser {
+class NGS_API  ProtocolsParser {
 public:
 	NGS_TYPE_DEFINE(ProtocolsParser<_N>, this);
 	using ParsedSequence = std::conditional_t<_N != 0, std::array<ngs::byte, _N>, std::vector<ngs::byte>>;
@@ -198,7 +198,7 @@ private:
  * @see `ngs::protocols_parsable`
  */
 template<typename _Struct>
-class ProtocolsStructParser : public ProtocolsParser<_Struct::Size> {
+class NGS_API  ProtocolsStructParser : public ProtocolsParser<_Struct::Size> {
 private:
 	NGS_TYPE_DEFINE(ProtocolsParser<_Struct::Size>, base);
 public:

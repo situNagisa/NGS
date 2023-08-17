@@ -16,7 +16,7 @@ NGS_MLA_BEGIN
  * @property expression_type& operator()();
  * @property const expression_type& operator()()const;
 */
-template<class T>
+template<class  T>
 concept CExpression = requires(T t, const T t_cst) {
 	typename T::expression_type;
 	typename T::type_category;
@@ -26,7 +26,7 @@ concept CExpression = requires(T t, const T t_cst) {
 };
 
 template<ccpt::CRPT _Expression>
-struct Expression {
+struct NGS_API Expression {
 protected:
 	using self_type = Expression<_Expression>;
 public:

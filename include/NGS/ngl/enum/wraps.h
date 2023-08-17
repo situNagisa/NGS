@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-enum class Wraps : GLint {
+enum class  Wraps : GLint {
 	repeat = GL_REPEAT,
 	mirrored_repeat = GL_MIRRORED_REPEAT,
 	clamp_to_edge = GL_CLAMP_TO_EDGE,

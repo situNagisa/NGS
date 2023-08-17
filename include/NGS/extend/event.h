@@ -4,7 +4,7 @@
 #include "NGS/extend/function.h"
 
 NGS_BEGIN
-class Event : public TypeDefined<Event> {
+class NGS_API  Event : public TypeDefined<Event> {
 public:
 	NGS_TYPE_DEFINE(nstring, string);
 	NGS_TYPE_DEFINE(nstring_view, view);
@@ -53,7 +53,7 @@ public:
 	{}
 #endif
 
-	template<class T>
+	template<class  T>
 	T& CurrentTarget() { return *reinterpret_cast<T*>(currentTarget); }
 
 	__type_cst type;
@@ -62,9 +62,9 @@ public:
 	void_ptr param = nullptr;
 };
 
-class EventQueue : public TypeDefined<EventQueue> {
+class NGS_API  EventQueue : public TypeDefined<EventQueue> {
 public:
-	friend class EventDispatcher;
+	friend class  EventDispatcher;
 
 	NGS_TYPE_DEFINE(Event, evt);
 	NGS_TYPE_DEFINE(size_t, size);
@@ -86,7 +86,7 @@ private:
 	__cache _queue;
 };
 
-struct EventListener {
+struct NGS_API EventListener {
 	NGS_TYPE_DEFINE(EventListener, this);
 	NGS_TYPE_DEFINE(void_ptr, target);
 	NGS_TYPE_DEFINE(Event, evt);
@@ -112,7 +112,7 @@ struct EventListener {
 	}
 };
 
-class EventDispatcher : public TypeDefined<EventDispatcher> {
+class NGS_API  EventDispatcher : public TypeDefined<EventDispatcher> {
 public:
 	NGS_TYPE_DEFINE(nstring, string);
 	NGS_TYPE_DEFINE(nstring_view, string_v);

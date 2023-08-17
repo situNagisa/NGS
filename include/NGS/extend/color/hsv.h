@@ -4,7 +4,7 @@
 
 NGS_COLOR_SPACE_BEGIN
 
-struct HSV {
+struct NGS_API HSV {
 	using HueType = byte;
 	constexpr static auto HueRate = (bit::mask(bit::as_bit<HueType>())) >= 360 ? 2 : 1;
 

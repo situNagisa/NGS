@@ -5,7 +5,7 @@
 
 NGS_BEGIN
 
-class UVC {
+class NGS_API  UVC {
 public:
 
 public:

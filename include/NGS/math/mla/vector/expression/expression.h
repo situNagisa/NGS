@@ -8,7 +8,7 @@
 NGS_MLA_BEGIN
 
 template<ccpt::CRPT<CVectorExpression<void>> _Expression>
-class VectorExpression : public Expression<_Expression> {
+class NGS_API  VectorExpression : public Expression<_Expression> {
 private:
 	using base_type = typename VectorExpression::self_type;
 protected:
@@ -24,7 +24,7 @@ public:
 	//=================
 protected:
 	template<bool _Constant>
-	struct _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
+	struct NGS_API _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
 	private:
 		using _base_type = ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type>;
 		using _self_type = _iterator<_Constant>;

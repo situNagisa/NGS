@@ -8,7 +8,7 @@
 
 NGL_BEGIN
 
-class IIndicesCtrl {
+class NGS_API  IIndicesCtrl {
 public:
 
 	virtual buffers::Indices& GetIndices() = 0;

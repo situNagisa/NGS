@@ -6,7 +6,7 @@
 
 NGL_FW_BEGIN
 
-class Cursor : DeleteCopy{
+class NGS_API  Cursor : DeleteCopy{
 public:
 	using self_type = Cursor;
 	using context_type = GLFWcursor*;

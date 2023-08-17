@@ -16,7 +16,7 @@ NGS_MLA_BEGIN
  * @property type element_type
  * @property function element_type operator()(size_t)const;
 */
-template<class T = void>
+template<class  T = void>
 concept CVectorExpression = CExpression<T> && requires(T expr, const T expr_cst) {
 	typename T::element_type;
 	{ T::dimension } -> std::convertible_to<size_t>;

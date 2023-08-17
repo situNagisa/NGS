@@ -5,7 +5,7 @@
 
 NSW_BEGIN
 
-struct _WindowsSerialPortData {
+struct NGS_API _WindowsSerialPortData {
 	HANDLE com = INVALID_HANDLE_VALUE;
 	pin_t port = 0;
 };

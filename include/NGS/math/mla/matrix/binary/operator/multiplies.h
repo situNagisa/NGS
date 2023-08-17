@@ -45,7 +45,7 @@ _Container& operator*=(_Container& container, _ScalarExpression scalar) { return
 //=====================
 
 template<CMatrixExpression _Left, CMatrixExpression _Right>
-struct MatrixMultipliesFunctor {
+struct NGS_API MatrixMultipliesFunctor {
 private:
 	using left_t = typename matrix_traits<_Left>::original_type;
 	using right_t = typename matrix_traits<_Right>::original_type;

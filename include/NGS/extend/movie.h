@@ -9,7 +9,7 @@ NGS_BEGIN
 * @brief 帧数范围为[1,?)（非0）
 * @brief 请调用Update函数实时刷新影片剪辑
 */
-class Movie {
+class NGS_API  Movie {
 public:
 	NGS_FLAG(IS_PLAYING, 0);
 	NGS_FLAG(IS_INVERT_PLAY, 1);

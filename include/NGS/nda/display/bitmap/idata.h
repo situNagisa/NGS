@@ -4,7 +4,7 @@
 
 NDA_BEGIN
 
-class IBitmapData {
+class NGS_API  IBitmapData {
 public:
 
 	virtual byte_ptr_cst GetData()const = 0;

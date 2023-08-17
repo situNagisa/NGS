@@ -16,7 +16,7 @@
 
 NGL_BEGIN
 
-enum class FramebufferStatus : GLenum {
+enum class  FramebufferStatus : GLenum {
 	complete = GL_FRAMEBUFFER_COMPLETE,
 	undefined = GL_FRAMEBUFFER_UNDEFINED,
 	incomplete_attachment = GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT,
@@ -27,7 +27,7 @@ enum class FramebufferStatus : GLenum {
 	incomplete_multisample = GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE,
 	incomplete_layer_targets = GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS,
 };
-enum class FramebufferAttachment : GLenum {
+enum class  FramebufferAttachment : GLenum {
 	color0 = GL_COLOR_ATTACHMENT0,
 	color1 = GL_COLOR_ATTACHMENT1,
 	color2 = GL_COLOR_ATTACHMENT2,
@@ -49,7 +49,7 @@ enum class FramebufferAttachment : GLenum {
 	depth_stencil = GL_DEPTH_STENCIL_ATTACHMENT,
 };
 
-enum class FramebufferType : GLenum {
+enum class  FramebufferType : GLenum {
 	framebuffer = GL_FRAMEBUFFER,
 	read = GL_READ_FRAMEBUFFER,
 	draw = GL_DRAW_FRAMEBUFFER,

@@ -96,11 +96,11 @@ constexpr ARGB24 Convert <HSV, ARGB24>(const HSV& hsv) {
 
 NGS_END
 
-class Color {
+class NGS_API  Color {
 public:
 	NGS_TYPE_DEFINE(uint8, channel);
 
-	struct Blend {
+	struct NGS_API Blend {
 	public:
 		template<_NGS_CPT CARGB rgb = _NGS_TYP StdARGB>
 		constexpr static typename rgb::A::type RGB_AlphaBlend(rgb::A::type alphaA, rgb::A::type alphaB) {
@@ -132,29 +132,29 @@ public:
 };
 
 namespace color_constants {
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto white = _Color(StdARGB(0xFF, 0xFF, 0xFF, 0xFF));//白色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto black = _Color(StdARGB(0xFF, 0x00, 0x00, 0x00));//黑色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto red = _Color(StdARGB(0xFF, 0xFF, 0x00, 0x00));//红色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto green = _Color(StdARGB(0xFF, 0x00, 0xFF, 0x00));//绿色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto blue = _Color(StdARGB(0xFF, 0x00, 0x00, 0xFF));//蓝色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto cyan = _Color(StdARGB(0xFF, 0x00, 0xFF, 0xFF));//青色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto purple = _Color(StdARGB(0xFF, 0xFF, 0x00, 0xFF));//紫色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto yellow = _Color(StdARGB(0xFF, 0xFF, 0xFF, 0x00));//黄色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto gray = _Color(StdARGB(0xFF, 0x80, 0x80, 0x80));//灰色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto lightgray = _Color(StdARGB(0xFF, 0xC0, 0xC0, 0xC0));//浅灰色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto darkgray = _Color(StdARGB(0xFF, 0x40, 0x40, 0x40));//深灰色
-	template<class _Color>
+	template<class  _Color>
 	constexpr auto transparent = _Color(StdARGB(0x00, 0x00, 0x00, 0x00));//透明色
 }
 

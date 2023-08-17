@@ -6,7 +6,7 @@
 
 NGL_ENV_BEGIN
 
-class Capabilities final : public IEnvironment {
+class NGS_API  Capabilities final : public IEnvironment {
 public:
 	void Enable(Capability c) { _capabilities.insert(c); }
 	void Disable(Capability c) { _capabilities.erase(c); }

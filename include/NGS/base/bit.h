@@ -9,7 +9,6 @@
 
 #include "NGS/base/defined.h"
 #include "NGS/base/concepts.h"
-#include "NGS/base/basic.h"
 
 #if NGS_PLATFORM == NGS_MSVC
 #pragma warning(push)
@@ -27,7 +26,7 @@ constexpr uint64 scope(size_t index) { return scope<uint64>(index); }
 
 constexpr size_t as_byte(size_t bit_count) { return (((bit_count) / bit_per_byte) + (((bit_count) % bit_per_byte) > 0)); }
 constexpr size_t as_bit(size_t byte_count) { return byte_count * bit_per_byte; }
-template<class T> consteval size_t as_bit() { return as_bit(sizeof(T)); }
+template<class  T> consteval size_t as_bit() { return as_bit(sizeof(T)); }
 
 //template<CUnsignedIntegral _Int> constexpr _Int mask(CUnsignedIntegral auto bit_count) { return (bit_count >= as_bit<_Int>()) ? (_Int)(-1) : (scope<_Int>(bit_count) - 1); }
 constexpr uint64 mask(CIntegral auto bit_count) { return (bit_count >= as_bit<uint64>()) ? (uint64)(-1) : (scope<uint64>(bit_count) - 1); }
@@ -42,7 +41,7 @@ constexpr auto get(auto bit_set, auto bit_scope) { return bit_set & bit_scope; }
 #undef _N
 template<uint64 _N>
 	requires (_N <= bit::as_bit<uint64>())
-class BitSet {
+class NGS_API  BitSet {
 public:
 	static constexpr uint64 BitCount = _N;
 	static constexpr uint64 ByteCount = bit::as_byte(BitCount);
@@ -51,11 +50,11 @@ public:
 	static constexpr type Mask = (type)bit::mask(BitCount);
 
 
-	class Bit {
+	class  Bit {
 		NGS_TYPE_DEFINE(BitSet<BitCount>, set);
 		NGS_TYPE_DEFINE(Bit, this);
 
-		friend class BitSet<BitCount>;
+		friend class  BitSet<BitCount>;
 	public:
 		constexpr ~Bit()noexcept {}
 
@@ -102,7 +101,7 @@ public:
 	constexpr bool operator[](size_t index)const { return _Get(index); }
 	constexpr bool test(size_t index)const {
 		if (index < 0 || index >= (BitCount))
-			throw std::out_of_range{"index out of range!"};
+			throw std::out_of_range{ "index out of range!" };
 		return _Get(index);
 	}
 
@@ -157,7 +156,7 @@ private:
 	type _data;
 };
 
-class Flag : public BitSet<bit::as_bit<uint64>()> {
+class NGS_API  Flag : public BitSet<bit::as_bit<uint64>()> {
 public:
 	constexpr Flag()
 		: BitSet<bit::as_bit<uint64>()>()

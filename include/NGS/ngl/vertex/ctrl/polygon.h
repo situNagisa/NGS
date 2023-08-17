@@ -5,7 +5,7 @@
 
 NGL_BEGIN
 
-class PolygonIndicesCtrl : public DefaultIndicesCtrl {
+class NGS_API  PolygonIndicesCtrl : public DefaultIndicesCtrl {
 private:
 
 public:

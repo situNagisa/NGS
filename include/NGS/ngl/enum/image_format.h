@@ -5,7 +5,7 @@
 NGL_BEGIN
 
 
-enum class RenderbufferImageFormat {
+enum class  RenderbufferImageFormat {
 	depth_component = GL_DEPTH_COMPONENT,
 	depth_stencil = GL_DEPTH_STENCIL,
 	stencil_index = GL_STENCIL_INDEX,

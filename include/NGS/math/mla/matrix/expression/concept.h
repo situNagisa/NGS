@@ -20,7 +20,7 @@ NGS_MLA_BEGIN
  * @property CVectorExpression row(size_t); *
  * @property CVectorExpression column(size_t); *
 */
-template<class _Expression = void>
+template<class  _Expression = void>
 concept CMatrixExpression = CExpression<_Expression> && requires(_Expression matrix, const _Expression matrix_cst, size_t row_index, size_t col_index) {
 	typename _Expression::element_type;
 	{ _Expression::row_count } -> std::convertible_to<size_t>;

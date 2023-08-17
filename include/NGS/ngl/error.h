@@ -7,7 +7,7 @@
 
 NGL_BEGIN
 
-class Error {
+class NGS_API  Error {
 public:
 	static void CLEAR() { while (glGetError()); }
 

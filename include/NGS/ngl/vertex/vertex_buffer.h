@@ -10,18 +10,26 @@ NGL_BEGIN
 
 NGL_BUF_BEGIN
 
-class VertexBuffer : public BufferObject {
+class NGS_API  VertexBuffer : public BufferObject {
+private:
+	using base_type = BufferObject;
 public:
+	
 	VertexBuffer(void_ptr data, size_t count, Usage usage, const Buffer& format);
 	VertexBuffer(size_t count, Usage usage, const Buffer& format);
 	VertexBuffer(VertexBuffer&& other)
-		: BufferObject(std::move(other))
+		: base_type(std::move(other))
 		, format(other.format)
 	{}
-	~VertexBuffer() = default;
+	virtual ~VertexBuffer() override = default;
 
 	void View(size_t count, size_t offset);
 	void Write(void_ptr_cst data, size_t count, size_t offset);
+
+	void Resize(size_t count);
+	void Resize(size_t count, Usage usage);
+
+	void SetUsage(Usage usage);
 
 	byte_ptr GetData() { return _data; }
 	byte_ptr_cst GetData()const { return _data; }

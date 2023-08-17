@@ -13,7 +13,7 @@ NGS_MLA_BEGIN
 
 template<CHomogeneousMatrix _Matrix, CVectorExpression _Vector>
 	requires (_Matrix::dimension == vector_traits<_Vector>::dimension)
-struct MatrixScale : MatrixExpression<MatrixScale<_Matrix, _Vector>> {
+struct NGS_API MatrixScale : MatrixExpression<MatrixScale<_Matrix, _Vector>> {
 private:
 	using base_type = MatrixScale::self_type;
 protected:

@@ -6,7 +6,7 @@
 NGS_BEGIN
 
 
-class UART : public BusAsync<BusBase::Type::full_duplex> {
+class NGS_API  UART : public BusAsync<BusBase::Type::full_duplex> {
 public:
 	NGS_TYPE_DEFINE(BusAsync<BusBase::Type::full_duplex>, base);
 public:

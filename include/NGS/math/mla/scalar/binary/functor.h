@@ -13,7 +13,7 @@ NGS_MLA_BEGIN
  * @property type result_type
  * @property static function result_type apply(argument_type)
 */
-template<class T>
+template<class  T>
 concept CScalarBinaryFunctor = requires(typename T::argument_type1 argument1, typename T::argument_type2 argument2) {
 	typename T::argument_type1;
 	typename T::argument_type2;
@@ -22,8 +22,8 @@ concept CScalarBinaryFunctor = requires(typename T::argument_type1 argument1, ty
 	{ T::apply(argument1, argument2) } -> std::convertible_to<typename T::result_type>;
 };
 
-template<class _ElementType1, class _ElementType2>
-struct ScalarBinaryFunctor {
+template<class  _ElementType1, class  _ElementType2>
+struct NGS_API ScalarBinaryFunctor {
 protected:
 	using self_type = ScalarBinaryFunctor<_ElementType1, _ElementType2>;
 public:
@@ -37,8 +37,8 @@ public:
 	}
 };
 
-template<class _ElementType1, class _ElementType2>
-struct ScalarBinaryAssignFunctor {
+template<class  _ElementType1, class  _ElementType2>
+struct NGS_API ScalarBinaryAssignFunctor {
 protected:
 	using self_type = ScalarBinaryAssignFunctor<_ElementType1, _ElementType2>;
 public:

@@ -4,8 +4,8 @@
 
 NGS_MLA_BEGIN
 
-template<class _ElementType>
-struct ScalarNegateFunctor : ScalarUnaryFunctor<_ElementType> {
+template<class  _ElementType>
+struct NGS_API ScalarNegateFunctor : ScalarUnaryFunctor<_ElementType> {
 private:
 	using base_type = typename ScalarNegateFunctor::self_type;
 public:

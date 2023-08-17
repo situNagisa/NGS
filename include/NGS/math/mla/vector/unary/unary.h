@@ -8,7 +8,7 @@
 NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression, CVectorUnaryFunctor<_Expression> _Functor>
-class VectorUnary : public VectorExpression<VectorUnary<_Expression, _Functor>> {
+class NGS_API  VectorUnary : public VectorExpression<VectorUnary<_Expression, _Functor>> {
 private:
 	using base_type = typename VectorUnary::self_type;
 protected:

@@ -3,8 +3,8 @@
 #include "NGS/math/mla/scalar/binary/functor.h"
 
 #define NGS_MLA_SCALAR_BINARY_FUNCTOR(op,functor,base)	\
-template<class _ElementType1, class _ElementType2>		\
-struct functor : base<_ElementType1, _ElementType2> {	\
+template<class  _ElementType1, class  _ElementType2>		\
+struct NGS_API functor : base<_ElementType1, _ElementType2> {	\
 private:												\
 	using base_type = typename functor::self_type;		\
 public:													\

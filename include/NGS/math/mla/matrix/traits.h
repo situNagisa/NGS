@@ -7,7 +7,7 @@
 NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expression>
-struct matrix_traits : type_traits<_Expression> {
+struct NGS_API matrix_traits : type_traits<_Expression> {
 private:
 	using base_type = typename matrix_traits::self_type;
 private:
@@ -29,12 +29,12 @@ public:
 template<CMatrixExpression _Expression1, CMatrixExpression _Expression2>
 constexpr bool is_similar = matrix_traits<_Expression1>::row_count == matrix_traits<_Expression2>::row_count && matrix_traits<_Expression1>::col_count == matrix_traits<_Expression2>::col_count;
 
-template<class> constexpr bool is_row_major = false;
+template<class > constexpr bool is_row_major = false;
 template<std::derived_from<tag::row> _Layout> constexpr bool is_row_major<_Layout> = true;
 template<CMatrixExpression _Expression> requires (matrix_traits<_Expression>::is_container)
 constexpr bool is_row_major<_Expression> = is_row_major<typename matrix_traits<_Expression>::original_type::layout_category>;
 
-template<class> constexpr bool is_col_major = false;
+template<class > constexpr bool is_col_major = false;
 template<std::derived_from<tag::column> _Layout> constexpr bool is_col_major<_Layout> = true;
 template<CMatrixExpression _Expression> requires (matrix_traits<_Expression>::is_container)
 constexpr bool is_col_major<_Expression> = is_col_major<typename matrix_traits<_Expression>::original_type::layout_category>;

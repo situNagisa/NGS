@@ -5,19 +5,19 @@
 
 NGS_MLA_BEGIN
 
-template<class _Expression>
+template<class  _Expression>
 concept CHomogeneousMatrix = requires() {
 	typename _Expression::homogen_category;
 	{ _Expression::dimension } -> std::convertible_to<size_t>;
 		requires CMatrixExpression<_Expression>;
 };
 
-template<size_t _Dimension, CScalarExpression _ElementType, CMatrixLayout _Layout = tag::row, CMatrixLayout _HomoLayout = _Layout, class = std::make_index_sequence<_Dimension* (_Dimension - 1)>>
-struct HomogeneousMatrix;
+template<size_t _Dimension, CScalarExpression _ElementType, CMatrixLayout _Layout = tag::row, CMatrixLayout _HomoLayout = _Layout, class  = std::make_index_sequence<_Dimension* (_Dimension - 1)>>
+struct NGS_API HomogeneousMatrix;
 
 template<size_t _Dimension, CScalarExpression _ElementType, CMatrixLayout _Layout, CMatrixLayout _HomoLayout, size_t... _Index>
 	requires (_Dimension > 1)
-struct HomogeneousMatrix<
+struct NGS_API HomogeneousMatrix<
 	_Dimension,
 	_ElementType, _Layout, _HomoLayout,
 	std::index_sequence<_Index...>> :

@@ -7,7 +7,7 @@ NGS_MLA_BEGIN
 
 template<size_t _Row, size_t _Col, CScalarExpression _ElementType, _ElementType... _Element>
 	requires (_Row* _Col == sizeof...(_Element))
-struct StaticMatrix : MatrixExpression<StaticMatrix<_Row, _Col, _ElementType, _Element...>> {
+struct NGS_API StaticMatrix : MatrixExpression<StaticMatrix<_Row, _Col, _ElementType, _Element...>> {
 private:
 	using base_type = StaticMatrix::self_type;
 protected:

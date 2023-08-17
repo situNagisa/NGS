@@ -8,24 +8,24 @@ NGL_BEGIN
 NGL_OBJ_BEGIN
 
 template<class, class, CBuffer...>
-class _VertexArray;
+class NGS_API  _VertexArray;
 
 template<CBuffer... _Buffers, size_t... _BufferIndex, size_t... _AttribIndex>
-class _VertexArray<std::index_sequence<_BufferIndex...>, std::index_sequence<_AttribIndex...>, _Buffers...> : public VertexArrayBase {
+class NGS_API  _VertexArray<std::index_sequence<_BufferIndex...>, std::index_sequence<_AttribIndex...>, _Buffers...> : public VertexArrayBase {
 private:
-	using _sequence = boost::mpl::vector<_Buffers...>;
-	using _var_sequence = mpl::meta_struct_vars_t<typename _Buffers::base...>;
+	using _sequence = mpl::vector<_Buffers...>;
+	using _var_sequence = typename mpl::spread_struct_t<mpl::struct_<mpl::var_<typename _Buffers::base>...>>::variable_types;
 public:
 	using base = VertexArrayBase;
-	using this_t = _VertexArray<std::index_sequence<_BufferIndex...>, std::index_sequence<_AttribIndex...>, _Buffers...>;
+	using this_t = _VertexArray;
 	constexpr static size_t element_count = (_Buffers::element_count + ...);
 	constexpr static size_t buffer_count = sizeof...(_BufferIndex);
 	constexpr static size_t attrib_count = sizeof...(_AttribIndex);
 
-	template<size_t _Index> using buffer_at_t = typename boost::mpl::at_c<_sequence, _Index>::type;
+	template<size_t _Index> using buffer_at_t = typename _sequence::template at_c<_Index>;
 	template<size_t _Index> using buffer_element_type = typename buffer_at_t<_Index>::element_type;
 
-	template<size_t _Index> using attrib_at_t = typename boost::mpl::at_c<_var_sequence, _Index>::type;
+	template<size_t _Index> using attrib_at_t = typename _var_sequence::template at_c<_Index>;
 	template<size_t _Index> using attrib_element_type = typename attrib_at_t<_Index>::element_type;
 
 	_VertexArray(size_t count, Usage usage)
@@ -43,9 +43,9 @@ protected:
 	template<size_t _Index> using _add_vertex_param_buffers_t = const buffer_element_type<_Index>*;
 	template<size_t _Index> using _add_vertex_param_attribs_t = const attrib_element_type<_Index>*;
 
-	template<size_t _Index, class T> using _add_vertex_param_transform_t = T&&;
+	template<size_t _Index, class  T> using _add_vertex_param_transform_t = T&&;
 
-	template<size_t _Index, template<class, size_t>class _C>
+	template<size_t _Index, template<class, size_t>class  _C>
 	using _add_vertex_param_container_t = _C<buffer_element_type<_Index>, buffer_at_t<_Index>::element_count>;
 
 #define _NGL_VAO_BUF_T(id,meta_depend) typename meta_depend::template _add_vertex_param_##id##_t<_BufferIndex>...
@@ -69,12 +69,12 @@ private:
 };
 
 #define _NGL_VAO_DERIVED_FROM(base_class,derived_class)				\
-template<class, class, CBuffer...>									\
-class _##derived_class;												\
+template<class , class , CBuffer...>									\
+class NGS_API  _##derived_class;												\
 template<CBuffer... _Buffers>										\
 using derived_class = _##derived_class<std::index_sequence_for<_Buffers...>, std::make_index_sequence<(_Buffers::count + ...)>, _Buffers...>;\
 template<CBuffer... _Buffers, size_t... _BufferIndex, size_t... _AttribIndex>\
-class _##derived_class<std::index_sequence<_BufferIndex...>, std::index_sequence<_AttribIndex...>, _Buffers...> : public base_class<_Buffers...>\
+class NGS_API  _##derived_class<std::index_sequence<_BufferIndex...>, std::index_sequence<_AttribIndex...>, _Buffers...> : public base_class<_Buffers...>\
 //
 
 template<CBuffer... _Buffers>

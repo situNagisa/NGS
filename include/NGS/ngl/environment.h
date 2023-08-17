@@ -2,6 +2,7 @@
 
 #include "NGS/ngl/environment/environment.h"
 #include "NGS/ngl/environment/capability.h"
+#include "NGS/ngl/environment/manager.h"
 
 #include "NGS/ngl/environment/viewport.h"
 #include "NGS/ngl/environment/clear.h"

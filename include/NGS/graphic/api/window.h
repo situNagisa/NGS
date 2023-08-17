@@ -5,7 +5,7 @@
 NGS_BEGIN
 
 
-template<class T>
+template<class  T>
 concept CWindow = requires(T t, const T t_cst) {
 	{ t("name", Point2i(0, 0)) };
 	{ t("name", Rectanglei(0, 0, 0, 0)) };

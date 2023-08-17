@@ -9,7 +9,7 @@
 
 NGS_COLOR_SPACE_BEGIN
 
-enum class PixelType : uint32 {
+enum class  PixelType : uint32 {
 	unknown,
 
 	ARGB8,
@@ -23,7 +23,7 @@ enum class PixelType : uint32 {
 	YUYV,
 };
 
-struct PixelFormat {
+struct NGS_API PixelFormat {
 	size_t size;
 };
 

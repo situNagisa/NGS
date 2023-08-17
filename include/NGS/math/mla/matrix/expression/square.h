@@ -4,14 +4,14 @@
 
 NGS_MLA_BEGIN
 
-template<class _Expression>
+template<class  _Expression>
 concept CSquareMatrix = requires() {
 	requires CMatrixExpression<_Expression>;
 	requires _Expression::row_count == _Expression::col_count;
 };
 
 template<ccpt::CRPT<CMatrixExpression<>> _Expression, ccpt::UInt _Dim>
-struct SquareMatrix : MatrixExpression<_Expression> {
+struct NGS_API SquareMatrix : MatrixExpression<_Expression> {
 private:
 	using base_type = SquareMatrix::self_type;
 protected:

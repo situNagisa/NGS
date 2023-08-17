@@ -7,7 +7,7 @@ NGS_BEGIN
 #if NGS_BUILD_TYPE == NGS_DEBUG
 
 template<typename time = std::chrono::microseconds, typename clock = std::chrono::high_resolution_clock>
-struct MeasureExecutionTime {
+struct NGS_API MeasureExecutionTime {
 	using time_point = typename clock::time_point;
 
 	MeasureExecutionTime(std::string message = "", const source_location& location = source_location::current())
@@ -45,7 +45,7 @@ private:
 #else
 
 template<typename time = std::chrono::microseconds, typename clock = std::chrono::high_resolution_clock>
-struct MeasureExecutionTime {
+struct NGS_API MeasureExecutionTime {
 	MeasureExecutionTime(std::string message = "", source_location location = source_location::current()) {}
 };
 

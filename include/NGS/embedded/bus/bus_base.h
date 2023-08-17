@@ -5,9 +5,9 @@
 
 NGS_BEGIN
 
-class BusBase : public EmbeddedObject {
+class NGS_API  BusBase : public EmbeddedObject {
 public:
-	enum class Type {
+	enum class  Type {
 		simplex,
 		half_duplex,
 		full_duplex,
@@ -36,13 +36,13 @@ private:
 };
 
 template<BusBase::Type _Type>
-class BusSync : public BusBase {
+class NGS_API  BusSync : public BusBase {
 public:
 	static constexpr typename BusBase::Type type = _Type;
 };
 
 template<BusBase::Type _Type>
-class BusAsync : public BusBase {
+class NGS_API  BusAsync : public BusBase {
 	static constexpr typename BusBase::Type type = _Type;
 };
 

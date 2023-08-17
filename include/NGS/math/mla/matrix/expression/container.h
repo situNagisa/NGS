@@ -15,7 +15,7 @@ NGS_MLA_BEGIN
  * @property _Container& assign(const CMatrixExpression&) *
  *
 */
-template<class _Container = void>
+template<class  _Container = void>
 concept CMatrixContainer = CMatrixExpression<_Container> && requires(_Container container, const _Container container_cst, typename _Container::element_type element, size_t index, size_t row_index, size_t col_index) {
 	typename _Container::layout_category;
 
@@ -32,12 +32,12 @@ concept CMatrixContainer = CMatrixExpression<_Container> && requires(_Container 
 template<
 	ccpt::CRPT<CMatrixContainer<>> _Derived,
 	ccpt::UInt _Row, ccpt::UInt _Col,
-	class _ElementType,
-	class _Layout,
-	class = std::make_index_sequence<_Col::value* _Row::value>,
-	class = std::make_index_sequence<_Row::value>,
-	class = std::make_index_sequence<_Col::value>>
-	struct MatrixContainer;
+	class  _ElementType,
+	class  _Layout,
+	class  = std::make_index_sequence<_Col::value* _Row::value>,
+	class  = std::make_index_sequence<_Row::value>,
+	class  = std::make_index_sequence<_Col::value>>
+	struct NGS_API MatrixContainer;
 
 /**
  * @brief
@@ -50,12 +50,12 @@ template<
 template<
 	ccpt::CRPT<CMatrixContainer<>> _Derived,
 	size_t _Row, size_t _Col,
-	class _ElementType,
-	class _Layout,
+	class  _ElementType,
+	class  _Layout,
 	size_t... _Index,
 	size_t... _RowIndex,
 	size_t... _ColIndex>
-struct MatrixContainer<
+struct NGS_API MatrixContainer<
 	_Derived,
 	std::integral_constant<size_t, _Row>, std::integral_constant<size_t, _Col>,
 	_ElementType,
@@ -158,7 +158,7 @@ public:
 	//expression_type& operator=(_Expression&& target) { return (*this)().assign(target); }
 
 	//expression_type& operator=(const expression_type& target) { return (*this)().assign(target); }
-	template<class T>
+	template<class  T>
 	expression_type& operator=(T&& target) { return (*this)().assign(std::forward<T>(target)); }
 	expression_type& operator=(const self_type& target) { return (*this)().assign(target); }
 
@@ -167,7 +167,7 @@ public:
 	//=================
 protected:
 	template<bool _Constant>
-	struct _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, element_type> {
+	struct NGS_API _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, element_type> {
 	private:
 		using _base_type = ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, element_type>;
 		NGS_minherit_t(_element_type, _base_type);

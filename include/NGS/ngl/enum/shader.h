@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-enum class ShaderType {
+enum class  ShaderType {
 	vertex = GL_VERTEX_SHADER,
 	fragment = GL_FRAGMENT_SHADER,
 	geometry = GL_GEOMETRY_SHADER,

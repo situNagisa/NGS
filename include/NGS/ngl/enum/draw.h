@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-enum class ElementDrawMode : GLenum {
+enum class  ElementDrawMode : GLenum {
 	points = GL_POINTS,
 
 	lines = GL_LINES,
@@ -17,7 +17,7 @@ enum class ElementDrawMode : GLenum {
 
 	patches = GL_PATCHES,
 };
-enum class DrawMode : GLenum {
+enum class  DrawMode : GLenum {
 	points = GL_POINTS,
 
 	lines = GL_LINES,

@@ -5,7 +5,7 @@
 
 NGS_BEGIN
 
-class IRenderer {
+class NGS_API  IRenderer {
 public:
 
 public:

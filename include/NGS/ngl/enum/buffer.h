@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-enum class BufferTarget : GLenum {
+enum class  BufferTarget : GLenum {
 	array = GL_ARRAY_BUFFER,
 	atomic_counter = GL_ATOMIC_COUNTER_BUFFER,
 	copy_read = GL_COPY_READ_BUFFER,

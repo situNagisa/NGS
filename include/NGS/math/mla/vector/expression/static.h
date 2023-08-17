@@ -6,7 +6,7 @@
 NGS_MLA_BEGIN
 
 template<CScalarExpression _ElementType, _ElementType... _Element>
-struct StaticVector : VectorExpression<StaticVector<_ElementType, _Element...>> {
+struct NGS_API StaticVector : VectorExpression<StaticVector<_ElementType, _Element...>> {
 private:
 	using base_type = StaticVector::self_type;
 protected:

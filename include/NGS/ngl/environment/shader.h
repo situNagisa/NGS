@@ -5,7 +5,7 @@
 
 NGL_ENV_BEGIN
 
-class Shader final : public IEnvironment {
+class NGS_API  Shader final : public IEnvironment {
 public:
 	Shader() = default;
 	Shader(const std::shared_ptr<objects::Shader>& shader) :_shader(shader) {}
@@ -14,7 +14,7 @@ public:
 	auto& GetShader() { return _shader; }
 	const auto& GetShader()const { return _shader; }
 
-	void Build() override {
+	virtual void Build() override {
 		_shader->Update();
 		OpenGL::I().shader->Select(*_shader);
 	}

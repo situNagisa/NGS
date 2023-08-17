@@ -8,15 +8,16 @@ NGL_BUF_BEGIN
 
 NGS_HPP_INLINE BufferObject::BufferObject(BufferTarget target, void_ptr data, size_t size, Usage usage)
 	: target(target)
-	, _data(reinterpret_cast<byte_ptr>(data))
+	, _data(static_cast<byte_ptr>(data))
 	, _size(size)
 	, _is_reference(true)
 	, _update_begin(0)
 	, _update_size(size)
+	, _usage(usage)
 {
 	NGL_CHECK(glGenBuffers(1, &_context));
 	OpenGL::I().buffer_target->Select(this);
-	NGL_CHECK(glBufferData((GLenum)target, size, nullptr, (GLenum)usage));
+	NGL_CHECK(glBufferData(static_cast<GLenum>(target), size, nullptr, static_cast<GLenum>(usage)));
 }
 NGS_HPP_INLINE BufferObject::BufferObject(BufferTarget target, size_t size, Usage usage)
 	: BufferObject(target, new byte[size](), size, usage)
@@ -31,6 +32,7 @@ NGS_HPP_INLINE BufferObject::BufferObject(BufferObject&& other)
 	, _is_reference(other._is_reference)
 	, _update_begin(other._update_begin)
 	, _update_size(other._update_size)
+	, _usage(other._usage)
 {
 	other._data = nullptr;
 }
@@ -45,8 +47,8 @@ NGS_HPP_INLINE void BufferObject::Update() {
 	if (!_required_update)return;
 	if (!_update_size)return;
 	State::Update();
-	NGL_CHECK(glBindBuffer((GLenum)target, _context));
-	NGL_CHECK(glBufferSubData((GLenum)target, _update_begin, _update_size, _data));
+	NGL_CHECK(glBindBuffer(static_cast<GLenum>(target), _context));
+	NGL_CHECK(glBufferSubData(static_cast<GLenum>(target), _update_begin, _update_size, _data));
 	_update_begin = _update_size = 0;
 }
 
@@ -66,6 +68,33 @@ NGS_HPP_INLINE void BufferObject::Write(void_ptr_cst data, size_t size, size_t o
 	View(max - min, min);
 }
 
+NGS_HPP_INLINE void BufferObject::Resize(size_t size)
+{
+	const auto new_data = new byte[size]();
+	std::memcpy(new_data, _data, std::min(_size, size));
+
+	if (!_is_reference) {
+		delete[] _data;
+	}
+
+	_data = new_data;
+	View(size, 0);
+	OpenGL::I().buffer_target->Select(this);
+	NGL_CHECK(glBufferData(static_cast<GLenum>(target), size, nullptr, static_cast<GLenum>(_usage)));
+}
+
+NGS_HPP_INLINE void BufferObject::Resize(size_t size, Usage usage)
+{
+	_usage = usage;
+	Resize(size);
+}
+
+NGS_HPP_INLINE void BufferObject::SetUsage(Usage usage)
+{
+	Resize(_size, usage);
+}
+
 
 NGS_END
+
 NGL_END

@@ -14,7 +14,7 @@ template<CMatrixExpression _Expression,
 	requires _OffsetRow::value + _Dimension::value <= _Expression::row_count;
 	requires _OffsetCol::value + _Dimension::value <= _Expression::col_count;
 }
-struct MatrixView : MatrixExpression<MatrixView<_Expression, _OffsetRow, _OffsetCol, _Dimension>> {
+struct NGS_API MatrixView : MatrixExpression<MatrixView<_Expression, _OffsetRow, _OffsetCol, _Dimension>> {
 private:
 	using base_type = MatrixView::self_type;
 protected:

@@ -5,11 +5,11 @@
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
-class VertexArrayBase;
+class NGS_API  VertexArrayBase;
 NGS_END
 NGL_BUF_BEGIN
 
-class Vertex : public DeleteCopy {
+class NGS_API  Vertex : public DeleteCopy {
 public:
 	using buffer_type = VertexBuffer;
 
@@ -21,12 +21,12 @@ public:
 	}
 	template<std::ranges::range _Rng>
 		requires std::same_as<std::ranges::range_value_t<_Rng>, buffer_type*>
-	Vertex(_Rng&& buffers)
+	explicit Vertex(_Rng&& buffers)
 		: _is_unique(false)
 	{
 		std::ranges::copy(std::forward<_Rng>(buffers), std::back_inserter(_buffers));
 	}
-	Vertex(Vertex&& other)
+	Vertex(Vertex&& other) noexcept
 		: _is_unique(other._is_unique)
 		, _buffers(std::move(other._buffers))
 	{
@@ -35,7 +35,7 @@ public:
 
 	~Vertex() {
 		if (_is_unique) {
-			for (auto& buffer : _buffers) {
+			for (const auto& buffer : _buffers) {
 				delete buffer;
 			}
 		}
@@ -60,15 +60,21 @@ public:
 	const buffer_type& operator[](size_t index)const { return *_buffers[index]; }
 
 	size_t size()const { return _buffers.size(); }
+
+	void resize(size_t vertex_count) {
+		for (const auto& buffer : _buffers) {
+			buffer->Resize(vertex_count);
+		}
+	}
 private:
-	struct _AttribFormat {
+	struct NGS_API _AttribFormat {
 		byte_ptr data;
 		const Attrib* format;
 		const buffer_type* buffer;
 	};
 
 	void _InitAttrib() {
-		for (auto& buffer : _buffers) {
+		for (const auto& buffer : _buffers) {
 			for (auto& attrib : buffer->format.properties) {
 				_attribs.push_back(_AttribFormat{ buffer->GetData() + attrib.offset, &attrib,buffer });
 			}

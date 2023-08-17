@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-enum class TextureTarget : GLenum {
+enum class  TextureTarget : GLenum {
 	_1D = GL_TEXTURE_1D,
 	_2D = GL_TEXTURE_2D,
 	_3D = GL_TEXTURE_3D,
@@ -12,7 +12,7 @@ enum class TextureTarget : GLenum {
 	_2D_array = GL_TEXTURE_2D_ARRAY,
 	_rectangle = GL_TEXTURE_RECTANGLE,
 };
-enum class TextureSlot : GLenum {
+enum class  TextureSlot : GLenum {
 	null = 0,
 	_0 = GL_TEXTURE0,
 	_1 = GL_TEXTURE1,

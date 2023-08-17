@@ -19,7 +19,7 @@ public:
 		: base(std::move(other))
 		, _indices_ctrl(std::move(other._indices_ctrl))
 	{}
-	_IndicesVertexArray(size_t count, Usage usage, std::shared_ptr<IIndicesCtrl> indices_ctrl)
+	_IndicesVertexArray(size_t count, Usage usage, const std::shared_ptr<IIndicesCtrl>& indices_ctrl)
 		: base(count, usage)
 		, _indices_ctrl(indices_ctrl)
 	{}

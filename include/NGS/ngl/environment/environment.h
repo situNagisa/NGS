@@ -7,10 +7,13 @@
 
 NGL_ENV_BEGIN
 
-class IEnvironment {
+class NGS_API  IEnvironment {
 public:
+	virtual ~IEnvironment() = default;
+
 	virtual void Build() {};
 	virtual void Destroy() {};
+
 };
 
 NGL_ENV_END

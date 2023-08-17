@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-enum class Capability {
+enum class  Capability {
 	blend = GL_BLEND,
 	clip_distance0 = GL_CLIP_DISTANCE0,
 	clip_distance1 = GL_CLIP_DISTANCE1,

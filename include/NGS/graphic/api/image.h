@@ -4,7 +4,7 @@
 
 NGS_BEGIN
 
-class Image {
+class NGS_API  Image {
 public:
 
 public:

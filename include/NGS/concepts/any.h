@@ -4,7 +4,7 @@
 
 NGS_CCPT_BEGIN
 
-template<class T = void>
+template<class  T = void>
 concept Any = true;
 
 NGS_CCPT_END

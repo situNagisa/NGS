@@ -8,19 +8,19 @@
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
-class Shader;
+class NGS_API  Shader;
 NGS_END
 NGL_TARGET_BEGIN
 
-class ShaderProgram : public Target<ShaderProgram, objects::Shader> {
-	friend class Target<ShaderProgram, objects::Shader>;
+class NGS_API  ShaderProgram : public Target<ShaderProgram, objects::Shader> {
+	friend class  Target<ShaderProgram, objects::Shader>;
 	static void _Select(state_type* state);
 };
 
 NGS_END
 NGL_OBJ_BEGIN
 
-class Shader : public State {
+class NGS_API  Shader : public State {
 public:
 	Shader(Shader&&) = default;
 	Shader() { NGL_CHECK(_context = glCreateProgram()); }

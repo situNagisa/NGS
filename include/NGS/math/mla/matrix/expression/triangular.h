@@ -6,19 +6,19 @@ NGS_MLA_BEGIN
 
 template<
 	ccpt::UInt _Dimension,
-	class _ElementType,
+	class  _ElementType,
 	CMatrixTriangularTag _Category = tag::upper,
 	CMatrixLayout _Layout = tag::row,
-	class = std::make_index_sequence<_Dimension::value* (_Dimension::value + 1) / 2>>
-	struct TriangularMatrix;
+	class  = std::make_index_sequence<_Dimension::value* (_Dimension::value + 1) / 2>>
+	struct NGS_API TriangularMatrix;
 
 template<
 	ccpt::UInt _Dimension,
-	class _ElementType,
+	class  _ElementType,
 	CMatrixTriangularTag _Category,
 	CMatrixLayout _Layout,
 	size_t... _Index
->struct TriangularMatrix<
+>struct NGS_API TriangularMatrix<
 	_Dimension,
 	_ElementType,
 	_Category,
@@ -118,7 +118,7 @@ private:
 	element_type _data[size]{};
 };
 
-template<size_t _Dimension, class _ElementType, CMatrixTriangularTag _Category = tag::upper, CMatrixLayout _Layout = tag::row>
+template<size_t _Dimension, class  _ElementType, CMatrixTriangularTag _Category = tag::upper, CMatrixLayout _Layout = tag::row>
 using triangular_matrix_t = TriangularMatrix<std::integral_constant<size_t, _Dimension>, _ElementType, _Category, _Layout>;
 
 NGS_CCPT_VERIFY(CMatrixContainer, triangular_matrix_t<3, int>);

@@ -4,8 +4,8 @@
 
 NGS_MLA_BEGIN
 
-template<ccpt::UInt _Row, ccpt::UInt _Col, class _ElementType>
-class MatrixScalarExpression : public MatrixExpression<MatrixScalarExpression<_Row, _Col, _ElementType>> {
+template<ccpt::UInt _Row, ccpt::UInt _Col, class  _ElementType>
+class NGS_API  MatrixScalarExpression : public MatrixExpression<MatrixScalarExpression<_Row, _Col, _ElementType>> {
 private:
 	using base_type = typename MatrixScalarExpression::self_type;
 protected:
@@ -26,7 +26,7 @@ public:
 private:
 	element_type _scalar;
 };
-template<size_t _Row, size_t _Col, class _ElementType>
+template<size_t _Row, size_t _Col, class  _ElementType>
 using matrix_scalar_expression_t = MatrixScalarExpression<std::integral_constant<size_t, _Row>, std::integral_constant<size_t, _Col>, _ElementType>;
 
 NGS_CCPT_VERIFY(CMatrixExpression, matrix_scalar_expression_t<3, 3, int>);

@@ -6,7 +6,7 @@
 
 NGS_BEGIN
 
-struct Rotation
+struct NGS_API Rotation
 {
 	Rotation() = default;
 	Rotation(float angle)

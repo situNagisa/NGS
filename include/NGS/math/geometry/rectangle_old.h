@@ -7,7 +7,7 @@
 NGS_MATH_BEGIN
 
 template<CArithmetic Number>
-class Rectangle {
+class NGS_API  Rectangle {
 public:
 
 	NGS_TYPE_DEFINE(Rectangle<Number>, this);

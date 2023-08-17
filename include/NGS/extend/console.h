@@ -4,7 +4,7 @@
 
 NGS_BEGIN
 
-class Console {
+class NGS_API  Console {
 public:
 
 public:

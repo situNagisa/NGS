@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-enum class Usage : GLenum {
+enum class  Usage : GLenum {
 	stream_draw = GL_STREAM_DRAW,
 	stream_read = GL_STREAM_READ,
 	stream_copy = GL_STREAM_COPY,

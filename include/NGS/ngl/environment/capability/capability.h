@@ -6,7 +6,7 @@
 
 NGL_ENV_BEGIN
 
-struct ICapability : public IEnvironment {
+struct NGS_API ICapability : public IEnvironment {
 public:
 	virtual Capability GetDependCapability()const = 0;
 };

@@ -6,7 +6,7 @@
 
 NGL_BEGIN
 
-class Renderer {
+class NGS_API  Renderer {
 public:
 
 public:
@@ -22,33 +22,11 @@ public:
 	void SetShader(const std::shared_ptr<objects::Shader>& shader) { _shader.SetShader(shader); }
 
 	void Render() {
-		for (auto& environment : environments) {
-			environment->Build();
-		}
-
 		_shader.Build();
 		_vertex_array.Build();
 
 		_vertex_array.Destroy();
-
-		for (auto& environment : environments) {
-			environment->Destroy();
-		}
 	}
-
-	template<std::derived_from<env::IEnvironment> T, class... _Args> requires std::constructible_from<T, _Args...>
-	T& AddEnvironment(_Args&&... args) {
-		auto environment = std::make_shared<T>(std::forward<_Args>(args)...);
-		environments.push_back(environment);
-		return *environment;
-	}
-	template<std::derived_from<env::IEnvironment> T>
-	T& AddEnvironment(std::shared_ptr<T>&& shared_ptr) {
-		environments.push_back(std::move(shared_ptr));
-		return *shared_ptr;
-	}
-public:
-	std::vector<std::shared_ptr<env::IEnvironment>> environments{};
 private:
 	env::VertexArray _vertex_array{};
 	env::Shader _shader{};

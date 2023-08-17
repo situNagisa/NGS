@@ -7,21 +7,21 @@ NGS_MLA_BEGIN
 
 template<
 	size_t _Row, size_t _Col,
-	class _ElementType,
-	class _Layout = tag::row,
-	class = std::make_index_sequence<_Col* _Row>,
-	class = std::make_index_sequence<_Row>,
-	class = std::make_index_sequence<_Col>>
-	struct Matrix;
+	class  _ElementType,
+	class  _Layout = tag::row,
+	class  = std::make_index_sequence<_Col* _Row>,
+	class  = std::make_index_sequence<_Row>,
+	class  = std::make_index_sequence<_Col>>
+	struct NGS_API Matrix;
 
 template<
 	size_t _Row, size_t _Col,
-	class _ElementType,
-	class _Layout,
+	class  _ElementType,
+	class  _Layout,
 	size_t... _Index,
 	size_t... _RowIndex,
 	size_t... _ColIndex>
-struct Matrix<
+struct NGS_API Matrix<
 	_Row, _Col,
 	_ElementType,
 	_Layout,

@@ -7,7 +7,7 @@
 NGS_MLA_BEGIN
 
 template<CSquareMatrix _Expression>
-struct MatrixMinor : SquareMatrix<MatrixMinor<_Expression>, std::integral_constant<size_t, _Expression::row_count>> {
+struct NGS_API MatrixMinor : SquareMatrix<MatrixMinor<_Expression>, std::integral_constant<size_t, _Expression::row_count>> {
 private:
 	using base_type = MatrixMinor::self_type;
 protected:

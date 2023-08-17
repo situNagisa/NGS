@@ -9,7 +9,7 @@ NGS_MLA_BEGIN
 
 
 template<CMatrixExpression _Expressioin>
-struct MatrixRowVector : VectorExpression<MatrixRowVector<_Expressioin>> {
+struct NGS_API MatrixRowVector : VectorExpression<MatrixRowVector<_Expressioin>> {
 private:
 	using base_type = MatrixRowVector::self_type;
 protected:
@@ -33,7 +33,7 @@ private:
 //verify
 
 template<CMatrixExpression _Expressioin>
-struct MatrixColVector : VectorExpression<MatrixColVector<_Expressioin>> {
+struct NGS_API MatrixColVector : VectorExpression<MatrixColVector<_Expressioin>> {
 private:
 	using base_type = MatrixColVector::self_type;
 protected:
@@ -56,7 +56,7 @@ private:
 //verify
 
 template<ccpt::CRPT<CMatrixExpression<>> _Expression>
-struct MatrixExpression : Expression<_Expression> {
+struct NGS_API MatrixExpression : Expression<_Expression> {
 private:
 	using base_type = MatrixExpression::self_type;
 protected:
@@ -77,7 +77,7 @@ public:
 	/*
 protected:
 	template<bool _Constant>
-	struct _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
+	struct NGS_API _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
 	private:
 		using _base_type = ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type>;
 		using _self_type = _iterator<_Constant>;
@@ -107,12 +107,12 @@ public:
 	const_reverse_iterator crend()const { return rend(); }
 
 protected:
-	enum class _iterator_type {
+	enum class  _iterator_type {
 		row,
 		column,
 	};
 	template<bool _Constant, _iterator_type _IteratorType>
-	struct _element_iterator : random_access_iterator<_element_iterator<_Constant, _IteratorType>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
+	struct NGS_API _element_iterator : random_access_iterator<_element_iterator<_Constant, _IteratorType>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
 	private:
 		using _base_type = ngs::mla::random_access_iterator<_element_iterator<_Constant, _IteratorType>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type>;
 		using _self_type = _element_iterator<_Constant, _IteratorType>;
@@ -144,7 +144,7 @@ protected:
 		_difference_type _index{};
 	};
 	template<bool _Constant, bool _Reverse, _iterator_type _IteratorType>
-	struct _iterator_iterator :
+	struct NGS_API _iterator_iterator :
 		random_access_iterator<
 		_iterator_iterator<_Constant, _Reverse, _IteratorType>,
 		_Constant,

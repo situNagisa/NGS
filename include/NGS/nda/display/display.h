@@ -6,9 +6,9 @@
 
 NDA_BEGIN
 
-class DisplayObject : virtual public tree_struct::IChild {
+class NGS_API  DisplayObject : virtual public tree_struct::IChild {
 public:
-	friend class DisplayObjectContainer;
+	friend class  DisplayObjectContainer;
 
 	DisplayObject() = default;
 	DisplayObject(nstring_view name)
@@ -28,7 +28,7 @@ public:
 	mutable UserData user_data{};
 };
 
-class DisplayObjectContainer : public DisplayObject, virtual public tree_struct::IParent {
+class NGS_API  DisplayObjectContainer : public DisplayObject, virtual public tree_struct::IParent {
 private:
 	NGS_DEFINE_TYPE(__display, DisplayObject);
 	NGS_DEFINE_TYPE(__container, DisplayObjectContainer);

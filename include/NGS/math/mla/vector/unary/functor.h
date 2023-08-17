@@ -14,7 +14,7 @@ NGS_MLA_BEGIN
  *
  * @property static function element_type apply(const _Expression&, size_t)
 */
-template<class T, class _Expression>
+template<class  T, class  _Expression>
 concept CVectorUnaryFunctor = CVectorExpression<_Expression> &&
 	requires(_Expression expr, const _Expression expr_cst) {
 		{ T::apply(expr_cst, 0) } -> std::convertible_to<typename _Expression::element_type>;
@@ -22,7 +22,7 @@ concept CVectorUnaryFunctor = CVectorExpression<_Expression> &&
 template<CVectorExpression _Expression, CScalarUnaryFunctor _Functor>
 	requires requires(_Expression e) {
 		{ _Functor::apply(e()(0)) } -> std::convertible_to<typename _Expression::element_type>;
-}struct VectorUnaryScalarFunctor {
+}struct NGS_API VectorUnaryScalarFunctor {
 private:
 	using expression_type = _Expression;
 	using functor_type = _Functor;

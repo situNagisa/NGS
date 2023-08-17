@@ -4,8 +4,8 @@
 
 NGS_MLA_BEGIN
 
-template<ccpt::UInt _Dim, class _ElementType>
-class VectorScalarExpression : public VectorExpression<VectorScalarExpression<_Dim, _ElementType>> {
+template<ccpt::UInt _Dim, class  _ElementType>
+class NGS_API  VectorScalarExpression : public VectorExpression<VectorScalarExpression<_Dim, _ElementType>> {
 private:
 	using base_type = typename VectorScalarExpression::self_type;
 protected:
@@ -26,7 +26,7 @@ private:
 };
 NGS_CCPT_VERIFY(CVectorExpression, VectorScalarExpression<std::integral_constant<size_t, 3>, int>);
 
-template<size_t _Dim, class _ElementType>
+template<size_t _Dim, class  _ElementType>
 using vector_scalar_expression_t = VectorScalarExpression<std::integral_constant<size_t, _Dim>, _ElementType>;
 
 NGS_MLA_END

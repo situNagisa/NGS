@@ -4,7 +4,7 @@
 
 NDA_BEGIN
 
-enum class BlendMode {
+enum class  BlendMode {
 	normal,
 	layer,
 	multiply,

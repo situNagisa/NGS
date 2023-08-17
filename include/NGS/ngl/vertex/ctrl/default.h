@@ -5,7 +5,7 @@
 
 NGL_BEGIN
 
-class DefaultIndicesCtrl : public IIndicesCtrl {
+class NGS_API  DefaultIndicesCtrl : public IIndicesCtrl {
 public:
 	DefaultIndicesCtrl(size_t vertex_count, Usage usage)
 		: _indices(vertex_count, usage)

@@ -8,7 +8,7 @@
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
-class _ShaderSource : public State {
+class NGS_API  _ShaderSource : public State {
 public:
 	_ShaderSource(ShaderType type, const GLchar* const* sources, size_t count)
 		: type(type)
@@ -49,7 +49,7 @@ public:
 };
 
 template<ShaderType _Type>
-class ShaderSource : public _ShaderSource {
+class NGS_API  ShaderSource : public _ShaderSource {
 public:
 	ShaderSource(ShaderSource&&) = default;
 	ShaderSource(const nchar_ptr_cst* sources, size_t count)

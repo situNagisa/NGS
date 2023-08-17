@@ -6,7 +6,7 @@
 
 NGL_ENV_BEGIN
 
-class CapabilityManager : public IEnvironment{
+class NGS_API  CapabilityManager : public IEnvironment{
 public:
 	auto& GetServer() { return _server; }
 	const auto& GetServer()const { return _server; }
@@ -22,7 +22,7 @@ public:
 		_server.Destroy();
 	}
 
-	template<std::derived_from<ICapability> T, class... _Args>requires std::constructible_from<T, _Args...>
+	template<std::derived_from<ICapability> T, class ... _Args>requires std::constructible_from<T, _Args...>
 	T& AddCapability(_Args&&... args) {
 		auto capability = std::make_shared<T>(std::forward<_Args>(args)...);
 		_capabilities.push_back(capability);

@@ -7,7 +7,7 @@ NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression, size_t _Dimension = _Expression::dimension, size_t _Offset = 0>
 	requires (_Offset + _Dimension <= _Expression::dimension)
-struct VectorView : VectorExpression<VectorView<_Expression, _Dimension, _Offset>> {
+struct NGS_API VectorView : VectorExpression<VectorView<_Expression, _Dimension, _Offset>> {
 private:
 	using base_type = VectorView::self_type;
 protected:

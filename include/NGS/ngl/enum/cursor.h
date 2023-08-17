@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-enum class CursorShape : int {
+enum class  CursorShape : int {
 	arrow = GLFW_ARROW_CURSOR,
 	ibeam = GLFW_IBEAM_CURSOR,
 	crosshair = GLFW_CROSSHAIR_CURSOR,

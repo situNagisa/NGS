@@ -4,7 +4,7 @@
 
 NGS_BEGIN
 
-class ByteArray {
+class NGS_API  ByteArray {
 public:
 
 public:

@@ -13,13 +13,13 @@
 NGL_BEGIN
 
 NGL_OBJ_BEGIN
-class VertexArrayBase;
+class NGS_API  VertexArrayBase;
 NGS_END
 
 NGL_TARGET_BEGIN
 
-class VertexArray : public Target < VertexArray, objects::VertexArrayBase > {
-	friend class Target < VertexArray, objects::VertexArrayBase >;
+class NGS_API  VertexArray : public Target < VertexArray, objects::VertexArrayBase > {
+	friend class  Target < VertexArray, objects::VertexArrayBase >;
 	static void _Select(state_type* state);
 };
 
@@ -27,7 +27,7 @@ NGS_END
 
 NGL_OBJ_BEGIN
 
-class VertexArrayBase : public Object {
+class NGS_API  VertexArrayBase : public Object {
 public:
 	using element_type = byte;
 	using tag_attrib = tag::Attrib<byte>;
@@ -44,8 +44,8 @@ public:
 
 	VertexArrayBase(VertexArrayBase&& other)
 		: Object(std::move(other))
-		, _vertex(std::move(other._vertex))
 		, _draw_mode(other._draw_mode)
+		, _vertex(std::move(other._vertex))
 		, _offset(other._offset)
 		, _count(other._count)
 	{}
@@ -65,7 +65,7 @@ public:
 		NGL_CHECK(glDrawArrays((GLenum)_draw_mode, _offset, _count));
 	}
 protected:
-	template<class T>
+	template<class  T>
 		requires std::ranges::forward_range<T> || std::is_pointer_v<T>
 	static auto _GET_BEGIN(T && range, size_t constrain_size = 0) {
 		if constexpr (std::ranges::forward_range<decltype(range)>) {
@@ -95,7 +95,7 @@ public:
 		{
 			auto& buffer = _vertex[i];
 			buffer.Write(*it, count, _count);
-			it++;
+			++it;
 		}
 		_count += count;
 		RequiredUpdate();
@@ -120,10 +120,10 @@ public:
 			for (size_t i = 0; i < _vertex.GetBufferCount(); i++) {
 				auto& buffer = _vertex[i];
 				buffer.Write(*it, 1, _count);
-				it++;
+				++it;
 			}
 			_count++;
-			v_it++;
+			++v_it;
 		}
 		RequiredUpdate();
 	}

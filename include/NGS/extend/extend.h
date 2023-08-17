@@ -29,6 +29,8 @@
 
 #include "NGS/extend/console.h"
 
+#include "NGS/extend/memory_reinterpreter.h"
+
 #ifdef NGS_USE_HPP
 #include "NGS/extend/extend.hpp"
 #endif

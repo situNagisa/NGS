@@ -7,8 +7,8 @@
 NGL_BEGIN
 NGL_TARGET_BEGIN
 
-template<class _Derived, class _State>
-class Target {
+template<class  _Derived, class  _State>
+class NGS_API  Target {
 public:
 	using base = Target<_Derived, _State>;
 	using state_type = _State;

@@ -8,20 +8,21 @@
 #pragma  once
 
 #include "NGS/base/defined.h"
-#include "NGS/base/basic.h"
 
 NGS_BEGIN
 
-template<class This>
-class TypeDefined {
+template<class  This>
+class NGS_API  TypeDefined {
 public:
 	NGS_TYPE_DEFINE(This, this);
 };
 
-template<class Derived>
-class Singleton {
+template<class  Derived>
+class NGS_API  Singleton {
+protected:
+	using self_type = Singleton;
 public:
-	using base = Singleton<Derived>;
+	using base = self_type;
 
 	static Derived& I() {
 		static Derived instance;
@@ -30,7 +31,7 @@ public:
 	static Derived* INSTANCE() { return &I(); }
 };
 
-class DeleteCopy {
+class NGS_API  DeleteCopy {
 public:
 	DeleteCopy() = default;
 	DeleteCopy(const DeleteCopy&) = delete;

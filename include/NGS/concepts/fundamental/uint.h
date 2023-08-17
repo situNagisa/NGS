@@ -4,7 +4,7 @@
 
 NGS_CCPT_BEGIN
 
-template<class T = void>
+template<class  T = void>
 concept UInt = Constant<T> && std::is_unsigned_v<typename T::value_type>;
 
 template<unsigned long long _Value>

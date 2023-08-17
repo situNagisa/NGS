@@ -4,26 +4,26 @@
 
 NGS_BEGIN
 
-class Constructor {
+class NGS_API  Constructor {
 public:
-	template<class T, class... Args>
+	template<class  T, class ... Args>
 	static void Construct_Place(T* block, Args&&... args) { new(block)T(std::forward<Args>(args)...); }
 
-	template<class T, class... Args>
+	template<class  T, class ... Args>
 	static constexpr T Construct(Args&&... args) { return T(std::forward<Args>(args)...); }
 
-	template<class T, class... Args>
+	template<class  T, class ... Args>
 	static T* Construct_Array(size_t count, Args&&... args) { return new T[count](std::forward<Args>(args)...); }
 
 
 };
 
-class Destructor {
+class NGS_API  Destructor {
 public:
-	template<class T>
+	template<class  T>
 	static void Destruct(T* block) { delete block; }
 
-	template<class T>
+	template<class  T>
 	static void Destruct_Array(T* block) { delete[] block; }
 
 	static void Destruct(std::ranges::random_access_range auto range) {
@@ -32,9 +32,9 @@ public:
 	}
 };
 
-class SegmentManager {
+class NGS_API  SegmentManager {
 
-	struct ConstructorProxy {
+	struct NGS_API ConstructorProxy {
 		NGS_TYPE_DEFINE(ConstructorProxy, proxy);
 
 		__proxy operator[](size_t n)const { return { size,id }; }
@@ -44,9 +44,9 @@ class SegmentManager {
 	};
 };
 
-class Allocator : public Singleton<Allocator> {
+class NGS_API  Allocator : public Singleton<Allocator> {
 public:
-	struct AllocatedInfo {
+	struct NGS_API AllocatedInfo {
 		size_t count = 0;
 		size_t size = 0;
 		std::string id = "";
@@ -58,7 +58,7 @@ public:
 		operator std::string()const { return Format("%s%s %s", type_name.c_str(), count > 1 ? Format("[%d]", count).c_str() : "", id.c_str()); }
 	};
 private:
-	friend class Singleton<Allocator>;
+	friend class  Singleton<Allocator>;
 	Allocator() {
 		NGS_LOGL(debug, "allocator init");
 	}
@@ -88,7 +88,7 @@ public:
 		NGS_PRINTL();
 	}
 
-	template<class T>
+	template<class  T>
 	void Record_Allocate(T* block, size_t count = 1, std::string_view id = "unnamed", source_location source = source_location::current()) {
 		auto& info = _allocated_info[block];
 		info.count = count;
@@ -212,7 +212,7 @@ inline size_t SizeOf(void* block) { return 0; }
 #endif
 
 template<size_t _Count>
-class NumberAllocator {
+class NGS_API  NumberAllocator {
 public:
 	NGS_TYPE_DEFINE(BitSet<_Count>, bits);
 public:

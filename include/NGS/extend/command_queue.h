@@ -4,7 +4,7 @@
 
 NGS_BEGIN
 
-class CommandQueue {
+class NGS_API  CommandQueue {
 public:
 	using element_type = std::function<void()>;
 

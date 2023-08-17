@@ -5,7 +5,7 @@
 NGS_BEGIN
 
 template<typename _Duration, typename _Clock>
-class Timer {
+class NGS_API  Timer {
 public:
 	using clock = _Clock;
 	using time_point = typename clock::time_point;
@@ -32,11 +32,11 @@ private:
 
 using StdTimer = Timer< std::chrono::nanoseconds, std::chrono::high_resolution_clock>;
 
-class DelayCall : public Singleton<DelayCall> {
+class NGS_API  DelayCall : public Singleton<DelayCall> {
 public:
 	NGS_TYPE_DEFINE(std::function<void()>, timer);
 
-	class DelayCallUnit {
+	class  DelayCallUnit {
 	public:
 		DelayCallUnit(__timer timer, StdTimer::duration delay)
 			: _timer(timer)
@@ -55,7 +55,7 @@ public:
 		StdTimer::time_point _current = {};
 	};
 private:
-	friend class Singleton<DelayCall>;
+	friend class  Singleton<DelayCall>;
 	DelayCall() = default;
 public:
 	void Update() {

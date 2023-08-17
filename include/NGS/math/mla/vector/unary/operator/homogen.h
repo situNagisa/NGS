@@ -6,7 +6,7 @@
 NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression>
-class VectorHomogenousExpression : public VectorExpression<VectorHomogenousExpression<_Expression>> {
+class NGS_API  VectorHomogenousExpression : public VectorExpression<VectorHomogenousExpression<_Expression>> {
 private:
 	using base_type = VectorHomogenousExpression::self_type;
 protected:

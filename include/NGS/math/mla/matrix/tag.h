@@ -5,13 +5,13 @@
 NGS_MLA_BEGIN
 
 namespace tag {
-struct matrix : unknown {};
-struct matrix_container : matrix {};
+struct NGS_API matrix : unknown {};
+struct NGS_API matrix_container : matrix {};
 static_assert(std::derived_from<matrix_container, matrix>);
 }
 
 
-template<class T>
+template<class  T>
 concept CMatrixLayout = requires(size_t index, size_t row_index, size_t col_index, size_t row_count, size_t col_count) {
 	{ T::transform(row_index, col_index, row_count, col_count) } -> std::same_as<size_t>;
 	{ T::inverse_transform(index, row_count, col_count) } -> std::same_as<std::pair<size_t, size_t>>;
@@ -20,7 +20,7 @@ concept CMatrixLayout = requires(size_t index, size_t row_index, size_t col_inde
 namespace tag {
 
 
-struct row : unknown {
+struct NGS_API row : unknown {
 	constexpr static size_t transform(size_t row_index, size_t col_index, size_t /*row_count*/, size_t col_count) {
 		return row_index * col_count + col_index;
 	}
@@ -29,7 +29,7 @@ struct row : unknown {
 	}
 };
 NGS_CCPT_VERIFY(CMatrixLayout, row);
-struct column : unknown {
+struct NGS_API column : unknown {
 	constexpr static size_t transform(size_t row_index, size_t col_index, size_t row_count, size_t /*col_count*/) {
 		return col_index * row_count + row_index;
 	}
@@ -41,7 +41,7 @@ NGS_CCPT_VERIFY(CMatrixLayout, column);
 
 }
 
-template<class T>
+template<class  T>
 concept CMatrixTriangularTag = requires(size_t index, size_t row_index, size_t col_index, size_t row_count, size_t col_count) {
 	{ T::has_element(row_index, col_index, row_count, col_count) } -> std::convertible_to<bool>;
 	{ T::template has_element<tag::row>(index, row_count, col_count) } -> std::convertible_to<bool>;
@@ -51,7 +51,7 @@ concept CMatrixTriangularTag = requires(size_t index, size_t row_index, size_t c
 
 namespace tag {
 
-struct lower : unknown {
+struct NGS_API lower : unknown {
 	constexpr static bool has_element(size_t row_index, size_t col_index, size_t row_count, size_t col_count) {
 		return row_index >= col_index;
 	}
@@ -85,7 +85,7 @@ struct lower : unknown {
 };
 NGS_CCPT_VERIFY(CMatrixTriangularTag, lower);
 
-struct upper : unknown {
+struct NGS_API upper : unknown {
 	constexpr static bool has_element(size_t row_index, size_t col_index, size_t row_count, size_t col_count) {
 		return row_index <= col_index;
 	}

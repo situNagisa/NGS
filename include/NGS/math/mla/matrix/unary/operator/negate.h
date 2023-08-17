@@ -5,7 +5,7 @@
 
 NGS_MLA_BEGIN
 
-struct _Negate {
+struct NGS_API _Negate {
 	constexpr _Negate() = default;
 	template<CMatrixExpression _Expression>
 	constexpr auto operator()(const _Expression& expression) const {

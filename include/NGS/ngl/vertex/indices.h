@@ -11,7 +11,7 @@ using indices_t = uint32;
 
 NGL_BUF_BEGIN
 
-class Indices : public BufferObject {
+class NGS_API  Indices : public BufferObject {
 public:
 	Indices(void_ptr data, size_t count, Usage usage);
 	Indices(size_t count, Usage usage);
@@ -23,7 +23,7 @@ public:
 	void View(size_t count, size_t offset);
 	void Write(const indices_t* data, size_t count, size_t offset);
 
-	template<class _Rng>
+	template<class  _Rng>
 		requires std::ranges::random_access_range<_Rng>&& std::convertible_to<std::ranges::range_value_t<_Rng>, indices_t>
 	void AddIndices(size_t offset, _Rng&& rng) {
 		Write(std::ranges::cdata(rng), std::ranges::size(rng), offset);

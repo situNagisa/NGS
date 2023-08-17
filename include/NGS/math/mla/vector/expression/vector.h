@@ -4,11 +4,11 @@
 
 NGS_MLA_BEGIN
 
-template<size_t _Dimension, class _ElementType, class = std::make_index_sequence<_Dimension>>
-class Vector;
+template<size_t _Dimension, class  _ElementType, class  = std::make_index_sequence<_Dimension>>
+class NGS_API  Vector;
 
-template<size_t _Dimension, class _ElementType, size_t... _Index>
-class Vector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<Vector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
+template<size_t _Dimension, class  _ElementType, size_t... _Index>
+class NGS_API  Vector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<Vector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
 private:
 	using base_type = typename Vector::self_type;
 protected:
@@ -50,10 +50,10 @@ constexpr Vector<3, int> _test_vector{1, 2, 3};
 static_assert(_test_vector(0) == 1 && _test_vector(1) == 2 && _test_vector(2) == 3, "undefined behavior");
 }
 
-template<class _ElementType> using Vector1 = Vector<1, _ElementType>;
-template<class _ElementType> using Vector2 = Vector<2, _ElementType>;
-template<class _ElementType> using Vector3 = Vector<3, _ElementType>;
-template<class _ElementType> using Vector4 = Vector<4, _ElementType>;
+template<class  _ElementType> using Vector1 = Vector<1, _ElementType>;
+template<class  _ElementType> using Vector2 = Vector<2, _ElementType>;
+template<class  _ElementType> using Vector3 = Vector<3, _ElementType>;
+template<class  _ElementType> using Vector4 = Vector<4, _ElementType>;
 
 using Vector1i = Vector1<int>;
 using Vector1f = Vector1<float>;

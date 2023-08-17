@@ -5,7 +5,7 @@
 
 NGL_BEGIN
 
-class ImageView {
+class NGS_API  ImageView {
 private:
 
 public:
@@ -15,14 +15,14 @@ public:
 		, _format(format)
 	{}
 
-	template<class T>
+	template<class  T>
 		requires (gl_convert<T> != 0)
 	ImageView(const T* data, size_t width, size_t height)
 		: ImageView(data, width, height, gl_convert<T>)
 	{}
 
 	auto GetData()const { return _data; }
-	template<class T>
+	template<class  T>
 	const T* GetData()const { return std::launder(reinterpret_cast<const T*>(_data)); }
 
 	const ngs::Point2s& GetSize()const { return _size; }

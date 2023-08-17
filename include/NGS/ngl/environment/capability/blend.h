@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/ngl/environment/capability/capability.h"
 #include "NGS/ngl/error.h"
@@ -6,27 +6,29 @@
 
 NGL_ENV_BEGIN
 
-class Blend final : public ICapability {
+class NGS_API Blend final : public ICapability {
 public:
-	void SetEquations(BlendEquations equations) { _equations = equations; }
-	auto GetEquations()const { return _equations; }
+	void SetBlendMode(const BlendMode& blend) { _blend_mode = blend; }
+	auto& GetBlendMode() { return _blend_mode; }
+	const auto& GetBlendMode()const { return _blend_mode; }
 
-	void SetSource(BlendFactors source) { _source = source; }
-	auto GetSource()const { return _source; }
+	void SetEquations(BlendEquations equations) { _blend_mode.equation = equations; }
+	auto GetEquations()const { return _blend_mode.equation; }
 
-	void SetDestination(BlendFactors destination) { _destination = destination; }
-	auto GetDestination()const { return _destination; }
+	void SetSource(BlendFactors source) { _blend_mode.src_factor = source; }
+	auto GetSource()const { return _blend_mode.src_factor; }
 
-	void Build() override {
-		NGL_CHECK(glBlendFunc((GLenum)_source, (GLenum)_destination));
-		NGL_CHECK(glBlendEquation((GLenum)_equations));
+	void SetDestination(BlendFactors destination) { _blend_mode.dst_factor = destination; }
+	auto GetDestination()const { return _blend_mode.dst_factor; }
+
+	virtual void Build() override {
+		NGL_CHECK(glBlendFunc(static_cast<GLenum>(_blend_mode.src_factor), static_cast<GLenum>(_blend_mode.dst_factor)));
+		NGL_CHECK(glBlendEquation(static_cast<GLenum>(_blend_mode.equation)));
 	}
 
-	constexpr Capability GetDependCapability()const override{ return Capability::blend; }
-public:
-	BlendEquations _equations = BlendEquations::add;
-	BlendFactors _source = BlendFactors::one;
-	BlendFactors _destination = BlendFactors::zero;
+	constexpr virtual Capability GetDependCapability()const override { return Capability::blend; }
+private:
+	BlendMode _blend_mode = blend_mode::normal;
 };
 
 NGL_ENV_END

@@ -5,7 +5,7 @@
 
 NGL_FW_BEGIN
 
-class Image : DeleteCopy {
+class NGS_API  Image : DeleteCopy {
 public:
 	using self_type = Image;
 public:

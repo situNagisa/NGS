@@ -10,7 +10,7 @@ template<
 	CMatrixExpression _Expression1, CMatrixExpression _Expression2,
 	CMatrixBinaryFunctor<_Expression1, _Expression2> _Functor,
 	ccpt::UInt _Row, ccpt::UInt _Col
->class MatrixBinary : public MatrixExpression<MatrixBinary<_Expression1, _Expression2, _Functor, _Row, _Col>> {
+>class  MatrixBinary : public MatrixExpression<MatrixBinary<_Expression1, _Expression2, _Functor, _Row, _Col>> {
 private:
 	using base_type = typename MatrixBinary::self_type;
 protected:
@@ -55,7 +55,7 @@ using matrix_binary_t = MatrixBinary<_Expression1, _Expression2, _Functor, std::
 
 template<
 	CMatrixExpression _Expression1, CMatrixExpression _Expression2,
-	template<class, class>class _Functor,
+	template<class , class >class  _Functor,
 	size_t _Row = matrix_traits<_Expression1>::row_count,
 	size_t _Col = matrix_traits<_Expression2>::col_count>
 using matrix_binary_scalar_t = matrix_binary_t<
