@@ -20,7 +20,8 @@ class NGS_API  ShaderProgram : public Target<ShaderProgram, objects::Shader> {
 NGS_END
 NGL_OBJ_BEGIN
 
-class NGS_API  Shader : public State {
+class NGS_API Shader : public State {
+	NGS_menvironment(Shader);
 public:
 	Shader(Shader&&) = default;
 	Shader() { NGL_CHECK(_context = glCreateProgram()); }
@@ -39,7 +40,7 @@ public:
 	Shader(T&&... properties)
 		: Shader(sizeof...(properties), std::forward<T>(properties)...)
 	{}
-	~Shader() {
+	virtual ~Shader() override {
 		if (!_context)return;
 		NGL_CHECK(glDeleteProgram(_context));
 	}
@@ -94,6 +95,37 @@ public:
 	}
 private:
 	std::unordered_map<std::string, uniform_offset_t> _uniforms{};
+};
+
+template<CUniformTuple... _Tuples>
+class NGS_API ShaderUniform : public Shader {
+	NGS_menvironment(ShaderUniform);
+public:
+	using uniforms_type = uniforms_<_Tuples...>;
+	using base_type::base_type;
+	constexpr ShaderUniform()
+		: base_type(_Tuples::name.c_str()...)
+	{}
+
+	virtual void Update() override {
+		if (!_required_update)return;
+		base_type::Update();
+		//(_UpdateUniform<_Tuples>(), ...);
+	}
+	template<static_string _Id>
+	constexpr auto Get() {
+		RequiredUpdate();
+		return _uniforms.template Get<_Id>();
+	}
+private:
+	template<CUniformTuple _Tuple>
+	void _UpdateUniform() {
+		const auto location = GetUniformLocation(std::string_view(_Tuple::name));
+		const auto span = Get<_Tuple::name>();
+		map::gl_set_uniform<typename _Tuple::element_type, _Tuple::dimension, _Tuple::element_count>(location, span.data());
+	}
+public:
+	uniforms_type _uniforms{};
 };
 
 NGS_END

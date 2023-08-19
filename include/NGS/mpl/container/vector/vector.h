@@ -6,10 +6,11 @@ NGS_MPL_BEGIN
 
 template<class _Sequence>
 concept CVector = requires(_Sequence sequence, const _Sequence sequence_cst) {
+	{ _Sequence::size } -> std::convertible_to<size_t>;
+} && (!_Sequence::size || requires(_Sequence sequence, const _Sequence sequence_cst) {
 	typename _Sequence::template at<ccpt::uint_<0>>;
 	typename _Sequence::template at_c<0>;
-	{ _Sequence::size } -> std::convertible_to<size_t>;
-};
+});
 
 NGS_mfunction(vector, class... _Element) : protected std::tuple<_Element...>{
 private:

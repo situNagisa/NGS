@@ -5,6 +5,9 @@
 NGL_BEGIN
 
 struct NGS_API State : DeleteCopy {
+protected:
+	using self_type = State;
+public:
 	using state_type = State;
 
 	State() = default;

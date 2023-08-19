@@ -8,9 +8,9 @@ template<class _MetaStruct = void>
 concept CMetaStruct = requires() {
 	{ _MetaStruct::count } -> std::convertible_to<size_t>;
 	{ _MetaStruct::size } -> std::convertible_to<size_t>;
-	{ _MetaStruct::variables } -> std::convertible_to<std::array<variable_d, _MetaStruct::count>>;
+	{ _MetaStruct::variables } -> std::convertible_to<std::array<meta_variable_d, _MetaStruct::count>>;
 
-		requires CVariable<typename _MetaStruct::template variable_at<0>>;
+		requires CMetaVariable<typename _MetaStruct::template variable_at<0>>;
 		requires CVector<typename _MetaStruct::variable_types>;
 };
 
@@ -38,7 +38,7 @@ private:
 	NGS_mcst size_t _offset = _GET_OFFSET(_Index);
 public:
 	/** @brief 元变量对应的动态结构体数组（可动态访问） */
-	NGS_mcst std::array<variable_d, count> variables = { variable_d{_Adapters::variable_type::element_count, _Adapters::variable_type::size,_offset<_Adapters::index>, }... };
+	NGS_mcst std::array<meta_variable_d, count> variables = { meta_variable_d{_Adapters::variable_type::element_count, _Adapters::variable_type::size,_offset<_Adapters::index>, }... };
 private:
 	byte _data[size];
 };
@@ -47,21 +47,27 @@ private:
 // factory
 //================
 
-NGS_mfunction(_make_meta_struct, class, CVariable...);
-NGS_mfunction(_make_meta_struct, CVariable... _Variables, size_t... _Index) < std::index_sequence<_Index...>, _Variables... > {
-	NGS_mcst_t result_type = meta_struct<_variable_adapter_c<_Variables, _Index>...>;
+NGS_mfunction(_transform_to_variable, class _Type) {
+	using result_type = std::conditional_t<CMetaVariable<_Type>, _Type, meta_variable_c<_Type, 1>>;
 };
-template<CVariable... _Variables>
+template<class _Type>
+using _transform_to_variable_t = typename _transform_to_variable<_Type>::result_type;
+
+NGS_mfunction(_make_meta_struct, class, class...);
+NGS_mfunction(_make_meta_struct, class... _Variables, size_t... _Index) < std::index_sequence<_Index...>, _Variables... > {
+	NGS_mcst_t result_type = meta_struct<_variable_adapter_c<_transform_to_variable_t<_Variables>, _Index > ... > ;
+};
+template<class... _Variables>
 using _make_meta_struct_t = typename _make_meta_struct<std::index_sequence_for<_Variables...>, _Variables...>::result_type;
 
 //================
 // alias
 //================
 
-template<CVariable... _Variables>
+template<class... _Variables>
 using meta_struct_c = _make_meta_struct_t<_Variables...>;
 
-template<CVariable... _Variables>
+template<class... _Variables>
 using struct_ = meta_struct_c<_Variables...>;
 
 //================
@@ -71,7 +77,7 @@ using struct_ = meta_struct_c<_Variables...>;
 struct NGS_API meta_struct_d {
 	size_t count;
 	size_t size;
-	std::span<const variable_d> vars;
+	std::span<const meta_variable_d> vars;
 };
 
 template<CMetaStruct _MetaStruct>

@@ -13,7 +13,11 @@ class NGS_API MemoryReinterpreter;
 
 /**
  * @brief 按元结构体所描述的内存重解释
- *
+ *	
+ * @concept ngs::mpl::CMetaStruct
+ * 
+ * @tparam _MetaStruct 元结构体，用于描述内存布局
+ * 
  * @warning 重解释的内存必须是有效的，且不能有内存对齐，否则行为未定义
  */
 template<mpl::CMetaStruct _MetaStruct, size_t ..._VarIndex>
@@ -23,11 +27,19 @@ protected:
 public:
 	using meta_struct_type = mpl::spread_struct_t<_MetaStruct>;
 	template<size_t _Index> using var = typename meta_struct_type::template variable_at<_Index>;
+	constexpr static size_t memory_size = meta_struct_type::size;
 
 	constexpr MemoryReinterpreter(void_ptr memory)
 		: _memory(static_cast<byte_ptr>(memory))
 	{}
 
+	/**
+	 * @brief 获取变量
+	 * 
+	 * @tparam _Index 变量索引
+	 * 
+	 * @return 
+	 */
 	template<size_t _Index>
 	constexpr typename var<_Index>::element_type* Get() {
 		return std::launder(reinterpret_cast<typename var<_Index>::element_type*>(_memory + meta_struct_type::variables[_Index].offset));
@@ -49,8 +61,14 @@ public:
 	constexpr byte_ptr Get(size_t index) { return Get<byte>(index); }
 	constexpr byte_ptr_cst Get(size_t index)const { return Get<byte>(index); }
 
-	constexpr size_t size() const { return meta_struct_type::count; }
+	constexpr size_t GetSize()const { return meta_struct_type::size; }
+	constexpr size_t GetVariableCount()const { return meta_struct_type::count; }
 
+	//=============
+	// range
+	//=============
+
+	constexpr size_t size() const { return GetVariableCount(); }
 private:
 	template<bool _Constant>
 	struct NGS_API _Iterator : boost::stl_interfaces::iterator_interface <
@@ -112,6 +130,19 @@ private:
 NGS_END
 
 namespace std {
+
+template<size_t _Index, ngs::mpl::CMetaStruct _MetaStruct>
+constexpr auto get(ngs::MemoryReinterpreter<_MetaStruct>& ptr) {
+	return ptr.template get<_Index>();
+}
+template<class _Type, ngs::mpl::CMetaStruct _MetaStruct>
+constexpr auto get(ngs::MemoryReinterpreter<_MetaStruct>& ptr, size_t index) {
+	return ptr.template get<_Type>(index);
+}
+template<ngs::mpl::CMetaStruct _MetaStruct>
+constexpr auto get(ngs::MemoryReinterpreter<_MetaStruct>& ptr, size_t index) {
+	return ptr.get(index);
+}
 
 template<size_t _Index, ngs::mpl::CMetaStruct _MetaStruct>
 constexpr auto get(const ngs::MemoryReinterpreter<_MetaStruct>& ptr) {

@@ -828,12 +828,6 @@
     <ClInclude Include="math\mla\vector\expression\static.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl\shader\glsl\uniform\uniform.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ngl\shader\glsl\uniform\array.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ngl\shader\glsl\uniform.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -1071,7 +1065,7 @@
     <ClInclude Include="mpl\utils\promote.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mpl\meta_struct\variable.h">
+    <ClInclude Include="mpl\meta_struct\meta_variable.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="mpl\meta_struct\meta_struct.h">
@@ -1114,6 +1108,84 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="mpl\utils\precision.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\static_string.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\iterator_interface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\vector\algorithm\transform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\set.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\set\set.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\set\algorithm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\set\algorithm\insert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\functor\equal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\vector\algorithm\filter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\vector\algorithm\push.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\functor\no_transform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\vector\algorithm\at.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\functor\contain.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\vector\algorithm\unique.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\vector\algorithm\view.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\map.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\map\map.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\pair.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\map\key_value_pair.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\functor\find_if.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\container\set\algorithm\find_if.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\glsl\uniform\tuple.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\glsl\uniform\manager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\glsl\uniform\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\glsl\uniform\location.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

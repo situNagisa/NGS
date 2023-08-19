@@ -10,7 +10,7 @@
 private:										   \
 	using base_type = typename target::self_type;  \
 protected:										   \
-	using self_type = target;					   \
+	using self_type = target					   \
 //
 
 #define NGS_mcst_t using

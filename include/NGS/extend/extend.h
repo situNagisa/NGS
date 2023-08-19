@@ -26,6 +26,7 @@
 #include "NGS/extend/command_queue.h"
 #include "NGS/extend/factory.h"
 #include "NGS/extend/user_data.h"
+#include "NGS/extend/static_string.h"
 
 #include "NGS/extend/console.h"
 

@@ -89,7 +89,7 @@ struct NGS_API Buffer {
 
 NGL_FAC_BEGIN
 
-template<mpl::CVariable _Var>
+template<mpl::CMetaVariable _Var>
 Attrib _make_attrib() {
 	Attrib property{};
 	property.type = gl_convert<typename _Var::element_type>;

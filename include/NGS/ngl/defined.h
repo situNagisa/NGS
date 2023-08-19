@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "NGS/base/base.h"
+#include "NGS/mpl/mpl.h"
 #include "NGS/extend/extend.h"
 #include "NGS/math/math.h"
 #include "NGS/ngl/opengl.h"
