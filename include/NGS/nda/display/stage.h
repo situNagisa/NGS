@@ -10,7 +10,7 @@ class NGS_API  Stage : public Sprite, public DeleteCopy {
 public:
 	using Sprite::Sprite;
 
-	virtual std::string ToString()const override { return Format("%s:[%d]", name.empty() ? "stage" : name.c_str(), GetNumChildren()); }
+	virtual std::string ToString()const override { return format("%s:[%d]", name.empty() ? "stage" : name.c_str(), GetNumChildren()); }
 };
 
 inline Stage* get_display_stage(DisplayObject* display) {

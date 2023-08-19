@@ -104,7 +104,7 @@ public:
 	}
 	template<typename... Args>
 	static void LogFormat(DLevel level, const char* fmt, Args&&... args) {
-		Log(level, Format(fmt, std::forward<Args>(args)...));
+		Log(level, format(fmt, std::forward<Args>(args)...));
 	}
 	template<typename... Args>
 	static void LogFormatLine(DLevel level, const char* format, Args&&... args) {
@@ -124,7 +124,7 @@ public:
 	}
 	template<typename... Args>
 	static void PrintFormat(const char* fmt, Args&&... args) {
-		Print(Format(fmt, std::forward<Args>(args)...));
+		Print(format(fmt, std::forward<Args>(args)...));
 	}
 	template<typename... Args>
 	static void PrintFormatLine(const char* format, Args&&... args) {

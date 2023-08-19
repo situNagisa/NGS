@@ -27,6 +27,7 @@
 //shader
 #include "NGS/ngl/shader/source.h"
 #include "NGS/ngl/shader/shader.h"
+#include "NGS/ngl/shader/shader_uniform.h"
 
 //texture
 #include "NGS/ngl/texture/texture.h"

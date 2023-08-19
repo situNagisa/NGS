@@ -49,7 +49,7 @@ public:
 		return number;
 	}
 
-	virtual std::string ToString()const override { return Format("%s:[%d]", name.empty() ? "display_container" : name.c_str(), GetNumChildren()); }
+	virtual std::string ToString()const override { return format("%s:[%d]", name.empty() ? "display_container" : name.c_str(), GetNumChildren()); }
 	std::string GetTreeStruct()const {
 		std::string treeStruct = {};
 		treeStruct += name;

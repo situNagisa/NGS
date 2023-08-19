@@ -57,15 +57,15 @@ struct NGS_API ParseIdFactor {
 	}
 	static std::string before(const std::string& str, const std::string& before) {
 		using namespace std::string_literals;
-		return bracket(Format("%s(?=%s)", str.c_str(), before.c_str()));
+		return bracket(format("%s(?=%s)", str.c_str(), before.c_str()));
 	}
 	static std::string after(const std::string& str, const std::string& after) {
 		using namespace std::string_literals;
-		return bracket(Format("(?<=%s)%s", after.c_str(), str.c_str()));
+		return bracket(format("(?<=%s)%s", after.c_str(), str.c_str()));
 	}
 	static std::string between(const std::string& before, const std::string& str, const std::string& after) {
 		using namespace std::string_literals;
-		return bracket(Format("(?<=%s)%s(?=%s)", before.c_str(), str.c_str(), after.c_str()));
+		return bracket(format("(?<=%s)%s(?=%s)", before.c_str(), str.c_str(), after.c_str()));
 	}
 
 	inline static const std::string calling_convention = or_("__cdecl", "__stdcall", "__fastcall", "__vectorcall");
@@ -77,7 +77,7 @@ struct NGS_API ParseIdFactor {
 
 
 	inline static const std::string type = id_with_namespace;
-	inline static const std::string parameter = bracket(Format(R"(\(\s*(%s(,%s)*)?\s*\))", type.c_str(), type.c_str()));// bracket(std::string{R"((\(\s*)"} + type + R"(\s*, \s*)" + type + R"(\s*) * ? \))");
+	inline static const std::string parameter = bracket(format(R"(\(\s*(%s(,%s)*)?\s*\))", type.c_str(), type.c_str()));// bracket(std::string{R"((\(\s*)"} + type + R"(\s*, \s*)" + type + R"(\s*) * ? \))");
 	inline static const std::string function_name = bracket(namespace_ + or_(id, operator_overloading));
 
 	static std::tuple<std::string, std::string, std::string, std::string> ParseFunction(const std::string& function) {

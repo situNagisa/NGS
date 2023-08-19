@@ -14,14 +14,15 @@ public:
 		template<class _Type>
 		using predicate_type = _Equal<_Type, kv_pair_<_With, void>>;
 	};
-private:
+public:
 	template<class _Key>
 	constexpr static auto _GET_INDEX_OF_KEY() {
 		using high_p = high_order_predicate<_Key>;
 		using result_type = find_if_t<base_type, high_order_predicate<_Key>::template predicate_type>;
-		static_assert(find_if_t<base_type, high_p::template predicate_type>::value != -1, "The key is not found in the map.");
-		return std::declval<result_type>();
+		//static_assert(find_if_t<base_type, high_p::template predicate_type>::value != -1, "The key is not found in the map.");
+		return declval<result_type>();
 	}
+
 	template<ccpt::Int _Index>
 	constexpr static auto _GET_VALUE_TYPE() {
 		if constexpr (_Index::value == -1) {
@@ -29,7 +30,7 @@ private:
 			return void();
 		}
 		else {
-			return std::declval<typename base_type::template element_at_c<static_cast<size_t>(_Index::value)>::value_type>();
+			return declval<typename base_type::template element_at_c<static_cast<size_t>(_Index::value)>::value_type>();
 		}
 	}
 public:

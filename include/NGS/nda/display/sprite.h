@@ -10,7 +10,7 @@ public:
 	using DisplayObjectContainer::DisplayObjectContainer;
 	virtual ~Sprite()override {}
 
-	virtual std::string ToString()const override { return Format("%s:[%d]", name.empty() ? "sprite" : name.c_str(), GetNumChildren()); }
+	virtual std::string ToString()const override { return format("%s:[%d]", name.empty() ? "sprite" : name.c_str(), GetNumChildren()); }
 };
 
 NDA_END

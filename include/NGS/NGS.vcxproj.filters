@@ -1188,6 +1188,9 @@
     <ClInclude Include="ngl\shader\glsl\uniform\location.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ngl\shader\shader_uniform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">

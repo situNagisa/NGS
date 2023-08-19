@@ -58,7 +58,7 @@ public:
 			NGS_ASSERT(length, "get length fail!");
 			std::string info(length, 0);
 			glGetProgramInfoLog(_context, length, &length, info.data());
-			NGS_ASSERT(false, ngs::Format("link shader fail!\n %s", info.c_str()));
+			NGS_ASSERT(false, ngs::format("link shader fail!\n %s", info.c_str()));
 		}
 
 #endif
@@ -97,36 +97,6 @@ private:
 	std::unordered_map<std::string, uniform_offset_t> _uniforms{};
 };
 
-template<CUniformTuple... _Tuples>
-class NGS_API ShaderUniform : public Shader {
-	NGS_menvironment(ShaderUniform);
-public:
-	using uniforms_type = uniforms_<_Tuples...>;
-	using base_type::base_type;
-	constexpr ShaderUniform()
-		: base_type(_Tuples::name.c_str()...)
-	{}
-
-	virtual void Update() override {
-		if (!_required_update)return;
-		base_type::Update();
-		//(_UpdateUniform<_Tuples>(), ...);
-	}
-	template<static_string _Id>
-	constexpr auto Get() {
-		RequiredUpdate();
-		return _uniforms.template Get<_Id>();
-	}
-private:
-	template<CUniformTuple _Tuple>
-	void _UpdateUniform() {
-		const auto location = GetUniformLocation(std::string_view(_Tuple::name));
-		const auto span = Get<_Tuple::name>();
-		map::gl_set_uniform<typename _Tuple::element_type, _Tuple::dimension, _Tuple::element_count>(location, span.data());
-	}
-public:
-	uniforms_type _uniforms{};
-};
 
 NGS_END
 NGL_END

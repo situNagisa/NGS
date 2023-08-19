@@ -18,7 +18,7 @@ concept CSet = requires(_Associative sequence, const _Associative sequence_cst) 
 	typename _Associative::template insert<void>;
 };
 
-NGS_mfunction(set, template<class...>class _Equal = identically_equal, class... _Element);
+NGS_mfunction(set, template<class...>class _Equal = equal, class... _Element);
 
 NGS_mfunction(set, template<class, class>class _Equal, class... _Element) < _Equal, _Element... > {
 public:
@@ -44,7 +44,7 @@ public:
 	template<size_t _Index> using element_at_c = element_at<ccpt::uint_<_Index>>;
 };
 template<class... _Elements>
-using set_ = set<identically_equal, _Elements...>;
+using set_ = set<equal, _Elements...>;
 
 NGS_CCPT_VERIFY(CSet, set_<int, float>);
 

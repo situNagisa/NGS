@@ -11,7 +11,7 @@ class NGS_API  Error {
 public:
 	static void CLEAR() { while (glGetError()); }
 
-	static ErrorCode GET() { return (ErrorCode)glGetError(); }
+	static ErrorCode GET() { return static_cast<ErrorCode>(glGetError()); }
 };
 
 #define NGL_CHECK(func)\
@@ -20,7 +20,7 @@ func;					\
 NGL_SHOW_GL_FUNC(func);	\
 do{						\
 	auto code = ngs::ngl::Error::GET();\
-	NGS_ASSERT(ngs::ngl::Error::GET() == ngs::ngl::ErrorCode::no_error, ngs::Format("OpenGL Error code %d", code).c_str());\
+	NGS_ASSERT(ngs::ngl::Error::GET() == ngs::ngl::ErrorCode::no_error, ngs::format("OpenGL Error code %d", code).c_str());\
 } while (false)			\
 //
 

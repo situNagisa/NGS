@@ -374,6 +374,7 @@
     <ClInclude Include="ngl\shader\glsl\uniform\tuple.h" />
     <ClInclude Include="ngl\shader\shader.h" />
     <ClInclude Include="ngl\shader\shader.hpp" />
+    <ClInclude Include="ngl\shader\shader_uniform.h" />
     <ClInclude Include="ngl\shader\source.h" />
     <ClInclude Include="ngl\environment\environment.h" />
     <ClInclude Include="ngl\texture\image_view.h" />

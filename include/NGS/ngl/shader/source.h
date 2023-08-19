@@ -13,13 +13,13 @@ public:
 	_ShaderSource(ShaderType type, const GLchar* const* sources, size_t count)
 		: type(type)
 	{
-		NGL_CHECK(_context = glCreateShader((GLenum)type));
+		NGL_CHECK(_context = glCreateShader(static_cast<GLenum>(type)));
 		NGL_CHECK(glShaderSource(_context, count, sources, nullptr));
 	}
 	_ShaderSource(ShaderType type, const GLchar* sources)
 		: type(type)
 	{
-		NGL_CHECK(_context = glCreateShader((GLenum)type));
+		NGL_CHECK(_context = glCreateShader(static_cast<GLenum>(type)));
 		NGL_CHECK(glShaderSource(_context, 1, &sources, nullptr));
 	}
 
@@ -40,7 +40,7 @@ public:
 			std::string log{};
 			log.resize(log_length);
 			NGL_CHECK(glGetShaderInfoLog(_context, log_length, NULL, log.data()));
-			NGS_ASSERT(false, Format("compile %d shader code fail! %s", type, log.c_str()));
+			NGS_ASSERT(false, format("compile %d shader code fail! %s", type, log.c_str()));
 		}
 #endif
 	}

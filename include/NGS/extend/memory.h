@@ -55,7 +55,7 @@ public:
 		size_t column = 0;
 		size_t line = 0;
 
-		operator std::string()const { return Format("%s%s %s", type_name.c_str(), count > 1 ? Format("[%d]", count).c_str() : "", id.c_str()); }
+		operator std::string()const { return format("%s%s %s", type_name.c_str(), count > 1 ? format("[%d]", count).c_str() : "", id.c_str()); }
 	};
 private:
 	friend class  Singleton<Allocator>;
@@ -79,12 +79,12 @@ public:
 				TextColor::yellow, " [", info.size * info.count, "]",
 				TextColor::white, "bytes -- ",
 				TextColor::cyan, info.function_name,
-				TextColor::white, Format("[%d,%d]", info.line, info.column),
+				TextColor::white, format("[%d,%d]", info.line, info.column),
 				TextColor::reset
 			);
 			used += info.size * info.count;
 		}
-		NGS_PRINTL(TextColor::magenta, Format("used memory size:%d bytes", used));
+		NGS_PRINTL(TextColor::magenta, format("used memory size:%d bytes", used));
 		NGS_PRINTL();
 	}
 

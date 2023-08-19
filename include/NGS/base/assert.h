@@ -19,7 +19,7 @@ inline bool Assert(
 
 	ngs::Debugger::Print(
 		ngs::TextColor::red,
-		ngs::Format(
+		ngs::format(
 			""
 			"\n========================="
 			"\nERROR:: %s"

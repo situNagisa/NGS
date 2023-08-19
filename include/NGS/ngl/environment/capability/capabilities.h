@@ -14,12 +14,12 @@ public:
 
 	void Build() override {
 		for (auto c : _capabilities) {
-			NGL_CHECK(glEnable((GLenum)c));
+			NGL_CHECK(glEnable(static_cast<GLenum>(c)));
 		}
 	}
 	void Destroy() override {
 		for (auto c : _capabilities) {
-			NGL_CHECK(glDisable((GLenum)c));
+			NGL_CHECK(glDisable(static_cast<GLenum>(c)));
 		}
 	}
 
