@@ -11,7 +11,7 @@ NGS_MLA_BEGIN
 struct NGS_API _Determinant {
 	constexpr _Determinant() = default;
 
-	template<CSquareMatrix _Expression>
+	template<CMatrixSquare _Expression>
 	constexpr auto operator()(const _Expression& expression)const {
 		using element_type = typename matrix_traits<_Expression>::element_type;
 		using container_type = triangular_matrix_t<_Expression::row_count, element_type>;
@@ -26,7 +26,7 @@ struct NGS_API _Determinant {
 };
 //inline constexpr _Determinant determinant{};
 
-template<CSquareMatrix _Expression>
+template<CMatrixSquare _Expression>
 constexpr auto determinant(const _Expression& expression) {
 	using element_type = typename matrix_traits<_Expression>::element_type;
 	using container_type = triangular_matrix_t<_Expression::row_count, element_type>;

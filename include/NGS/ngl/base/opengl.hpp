@@ -5,6 +5,7 @@
 #include "NGS/ngl/base/buffer_target.h"
 #include "NGS/ngl/texture/texture.hpp"
 #include "NGS/ngl/shader/shader.h"
+#include "NGS/ngl/framebuffer/framebuffer.h"
 
 NGL_BEGIN
 
@@ -13,6 +14,8 @@ NGS_HPP_INLINE OpenGL::OpenGL()
 	, vertex_array(new targets::VertexArray())
 	, texture(new targets::Texture())
 	, shader(new targets::ShaderProgram())
+	, framebuffer(new targets::Framebuffer())
+	, renderbuffer(new targets::Renderbuffer())
 {
 	NGS_LOGL(debug, "OpenGL init:");
 	GLint max_uniforms;
@@ -40,6 +43,8 @@ NGS_HPP_INLINE OpenGL::~OpenGL()
 	delete vertex_array;
 	delete texture;
 	delete shader;
+	delete framebuffer;
+	delete renderbuffer;
 }
 
 NGL_END

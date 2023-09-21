@@ -1,5 +1,6 @@
 #pragma once
 
+#include "NGS/mpl/defined.h"
 #include "NGS/mpl/container/set/set.h"
 #include "NGS/mpl/container/map/key_value_pair.h"
 #include "NGS/mpl/container/set/algorithm/find_if.h"
@@ -20,7 +21,7 @@ public:
 		using high_p = high_order_predicate<_Key>;
 		using result_type = find_if_t<base_type, high_order_predicate<_Key>::template predicate_type>;
 		//static_assert(find_if_t<base_type, high_p::template predicate_type>::value != -1, "The key is not found in the map.");
-		return declval<result_type>();
+		return ::ngs::declval<result_type>();
 	}
 
 	template<ccpt::Int _Index>
@@ -30,7 +31,7 @@ public:
 			return void();
 		}
 		else {
-			return declval<typename base_type::template element_at_c<static_cast<size_t>(_Index::value)>::value_type>();
+			return ::ngs::declval<typename base_type::template element_at_c<static_cast<size_t>(_Index::value)>::value_type>();
 		}
 	}
 public:

@@ -57,9 +57,6 @@
     <ClInclude Include="basic\STL.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\utility.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="basic\version.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -147,7 +144,7 @@
     <ClInclude Include="math\transform.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\util.h">
+    <ClInclude Include="math\utils\util.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\geometry\vector_old.h">
@@ -408,7 +405,7 @@
     <ClInclude Include="extend\color\hsv.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="extend\color\color.h">
+    <ClInclude Include="extend\color.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="nda\enum\blend.h">
@@ -591,7 +588,7 @@
     <ClInclude Include="math\mla\vector\expression\container.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\mla\vector\scalar_expression.h">
+    <ClInclude Include="math\mla\vector\expression\scalar.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\mla\vector\traits.h">
@@ -744,7 +741,7 @@
     <ClInclude Include="math\mla\vector\unary\operator\negate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\mla\vector\unary\operator\length.h">
+    <ClInclude Include="math\mla\vector\unary\operator\modulus.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\mla\vector\unary\operator\normalize.h">
@@ -1189,6 +1186,240 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ngl\shader\shader_uniform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\framebuffer\renderbuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\framebuffer\framebuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\framebuffer\framebuffer.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\enum\framebuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\framebuffer\attachment.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\framebuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\color\color.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\framebuffer.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\framebuffer\renderbuffer.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\environment\framebuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\basic\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mst\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mst\set\expression\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mst\set\expression\infinite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mst\set\expression\finite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mst\set\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\bind.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\format.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\declval.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\unary\operator\look_to.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\unary\operator\as_vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\geometry\quaternion\quaternion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\geometry\quaternion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\geometry\quaternion\multiply.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\geometry\quaternion\conjugate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\utils\axis.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\vector\binary\operator\angle_between.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\vector\unary\operator\polar_angle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\vector\unary\operator\trigonometric.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\binary\operator\multiplies\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\binary\operator\multiplies\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\binary\operator\multiplies\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\binary\operator\multiplies\multiplicative.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\transform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\unary\operator\inverse.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\_3d\lorentz.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\matrix\expression\diagonal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\numbers.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\geometry\rectangle_3d.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\axis.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\_3d\direction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\tag.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\tag\chirality.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\tag\coordinate_old.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\tag\axis.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\tag\coordinate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\vector\binary\operator\is_same_direction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\vector\binary\operator\is_collinear.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mla\vector\binary\operator\is_vertical.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="concepts\none.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\_3d\projection\perspective.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\_3d.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\_3d\projection.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\_3d\projection\orthographic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\transform.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\coordinate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\coordinate.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic\direction\direction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\axis.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\axis\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\axis\support.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\axis\axis.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\base\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic\screen\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic\screen\screen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic\direction\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\base\coordinate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic\direction\support.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic\screen\support.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic\direction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic\screen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinate\orthographic\orthographic.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -27,7 +27,7 @@ private:
 	}
 	static void _Select(state_type* window) {
 		glfwMakeContextCurrent(window->GetContext());
-		static bool success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		static bool success = gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
 		NGS_ASSERT(success);
 	}
 public:

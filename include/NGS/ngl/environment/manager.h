@@ -7,13 +7,13 @@ NGL_ENV_BEGIN
 class NGS_API  EnvironmentManager : public IEnvironment {
 public:
 	virtual void Build()override {
-		for (const auto& environment : environments) {
-			environment->Build();
+		for (auto i = environments.cbegin(); i != environments.cend(); i++) {
+			(*i)->Build();
 		}
 	}
 	virtual void Destroy()override {
-		for (const auto& environment : environments) {
-			environment->Destroy();
+		for (auto i = environments.crbegin(); i != environments.crend(); i++) {
+			(*i)->Destroy();
 		}
 	}
 

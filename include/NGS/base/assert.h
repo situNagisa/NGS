@@ -2,7 +2,7 @@
 
 #include "NGS/base/defined.h"
 #include "NGS/base/log.h"
-#include "NGS/base/utility.h"
+#include "NGS/base/format.h"
 #include "NGS/base/type_info.h"
 
 NGS_BEGIN

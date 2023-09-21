@@ -99,4 +99,7 @@ private:
 
 
 NGS_END
+
+NGS_GL_GET_TARGET_FUNCTION(targets::ShaderProgram, objects::Shader, shader);
+
 NGL_END

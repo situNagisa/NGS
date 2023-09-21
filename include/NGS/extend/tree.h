@@ -6,8 +6,10 @@ NGS_BEGIN
 
 namespace tree_struct {
 
+class NGS_API IParent;
+
 class NGS_API  IChild {
-	friend class  IParent;
+	friend IParent;
 public:
 	virtual ~IChild() = default;
 

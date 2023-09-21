@@ -9,10 +9,7 @@ NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expression, CMatrixUnaryFunctor<_Expression> _Functor, ccpt::UInt _Row, ccpt::UInt _Col>
 class NGS_API  MatrixUnary : public MatrixExpression<MatrixUnary<_Expression, _Functor, _Row, _Col>> {
-private:
-	using base_type = typename MatrixUnary::self_type;
-protected:
-	using self_type = MatrixUnary<_Expression, _Functor, _Row, _Col>;
+	NGS_menvironment(MatrixUnary);
 public:
 	using expression_type = typename base_type::expression_type;
 private:

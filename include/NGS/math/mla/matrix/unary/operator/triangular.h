@@ -12,15 +12,12 @@ template<CMatrixExpression _Expression,
 	ccpt::UInt _OffsetCol = std::integral_constant<size_t, 0>,
 	ccpt::UInt _Dimension = std::integral_constant<size_t, _Expression::row_count>
 >requires requires() {
-	requires CSquareMatrix<_Expression>;
+	requires CMatrixSquare<_Expression>;
 	requires _OffsetRow::value + _Dimension::value <= _Expression::row_count;
 	requires _OffsetCol::value + _Dimension::value <= _Expression::col_count;
 }
 struct NGS_API TriangularMatrixAdapter : MatrixExpression<TriangularMatrixAdapter<_Expression, _Category, _OffsetRow, _OffsetCol, _Dimension>> {
-private:
-	using base_type = TriangularMatrixAdapter::self_type;
-protected:
-	using self_type = TriangularMatrixAdapter<_Expression, _Category, _OffsetRow, _OffsetCol, _Dimension>;
+	NGS_menvironment(TriangularMatrixAdapter);
 public:
 	using element_type = typename _Expression::element_type;
 	using triangular_category = _Category;

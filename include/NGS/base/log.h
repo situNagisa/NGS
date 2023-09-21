@@ -2,7 +2,7 @@
 
 #include "NGS/base/defined.h"
 #include "NGS/base/base_class.h"
-#include "NGS/base/utility.h"
+#include "NGS/base/format.h"
 #include "NGS/base/type_info.h"
 
 NGS_BEGIN
@@ -167,9 +167,9 @@ private:
 
 #define _NGS_DEBUG_CALL(function, ...)			\
 do {											\
-	NGS_LOG_SCOPE_CREATE;							\
+	NGS_LOG_SCOPE_CREATE;						\
 	_NGS Debugger::function(__VA_ARGS__);		\
-} while (0)										\
+} while (false)									\
 //
 
 #define NGS_LOG(level, ...)						\

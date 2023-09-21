@@ -28,6 +28,7 @@ NGS_END
 NGL_OBJ_BEGIN
 
 class NGS_API  VertexArrayBase : public Object {
+	NGS_menvironment(VertexArrayBase);
 public:
 	using element_type = byte;
 	using tag_attrib = tag::Attrib<byte>;
@@ -42,14 +43,15 @@ public:
 		_vertex.SetVertexArray(this);
 	}
 
-	VertexArrayBase(VertexArrayBase&& other)
+	VertexArrayBase(VertexArrayBase&& other) noexcept
 		: Object(std::move(other))
 		, _draw_mode(other._draw_mode)
 		, _vertex(std::move(other._vertex))
 		, _offset(other._offset)
 		, _count(other._count)
 	{}
-	virtual ~VertexArrayBase() {
+	virtual ~VertexArrayBase() override
+	{
 		if (!_context)return;
 		NGL_CHECK(glDeleteVertexArrays(1, &_context));
 	}
@@ -60,8 +62,8 @@ public:
 		_vertex.Update();
 	}
 	virtual void Render() {
-		if (!OpenGL::I().vertex_array->IsState(this))
-			OpenGL::I().vertex_array->Select(this);
+		if (!is_bind(this))
+			bind(this);
 		NGL_CHECK(glDrawArrays((GLenum)_draw_mode, _offset, _count));
 	}
 protected:
@@ -128,8 +130,8 @@ public:
 		RequiredUpdate();
 	}
 
-	void SetDrawMode(DrawMode mode) { _draw_mode = (GLenum)mode; }
-	DrawMode GetDrawMode()const { return (DrawMode)_draw_mode; }
+	void     SetDrawMode(DrawMode mode) { _draw_mode = static_cast<GLenum>(mode); }
+	DrawMode GetDrawMode()const { return static_cast<DrawMode>(_draw_mode); }
 
 	virtual void Clear() { _count = 0; }
 
@@ -152,4 +154,7 @@ protected:
 };
 
 NGS_END
+
+NGS_GL_GET_TARGET_FUNCTION(targets::VertexArray, objects::VertexArrayBase, vertex_array);
+
 NGL_END

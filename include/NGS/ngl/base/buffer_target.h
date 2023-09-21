@@ -10,7 +10,7 @@ NGL_TARGET_BEGIN
 
 class NGS_API  BufferTarget : public Target<BufferTarget, buffers::BufferObject> {
 	friend class  Target<BufferTarget, buffers::BufferObject>;
-	static void _Select(state_type* buffer) { NGL_CHECK(glBindBuffer((GLenum)buffer->target, buffer->GetContext())); }
+	static void _Select(state_type* buffer) { NGL_CHECK(glBindBuffer(static_cast<GLenum>(buffer->target), buffer->GetContext())); }
 };
 
 

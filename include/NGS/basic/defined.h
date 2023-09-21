@@ -25,6 +25,8 @@
 
 #define NGS_CONCEPT     inline namespace cpt{
 
+#define NGS_ARGS_PACKAGE(...) __VA_ARGS__
+
 //#define NGS_MPL_BEGIN	namespace mpl{
 
 #define _NGS_PRIV_BEGIN namespace priv{
@@ -54,7 +56,7 @@ using id##_ptr_cst = const type*;		\
 //
 
 #define NGS_DEFINE_TYPE(id,...)			\
-using id##_t = ##__VA_ARGS__;			\
+using id##_t = __VA_ARGS__;				\
 using id##_cst = const id##_t;			\
 using id##_ref = id##_t&;				\
 using id##_ref_cst = const id##_t&;		\

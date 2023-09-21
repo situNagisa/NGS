@@ -48,7 +48,7 @@ NGS_HPP_INLINE bool PWM::Open(ngs::pin_t pin) {
 	if (ret != ESP_OK) {
 		s_timers.Free((size_t)timer);
 		s_channels.Free((size_t)channel);
-		ngs::Delete(&data);
+		ngs::delete_(&data);
 		_data = nullptr;
 		return false;
 	}
@@ -66,7 +66,7 @@ NGS_HPP_INLINE bool PWM::Open(ngs::pin_t pin) {
 	if (ret != ESP_OK) {
 		s_timers.Free((size_t)timer);
 		s_channels.Free((size_t)channel);
-		ngs::Delete(&data);
+		ngs::delete_(&data);
 		_data = nullptr;
 		return false;
 	}

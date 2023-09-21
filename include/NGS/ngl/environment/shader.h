@@ -16,7 +16,8 @@ public:
 
 	virtual void Build() override {
 		_shader->Update();
-		OpenGL::I().shader->Select(*_shader);
+		if (!is_bind(*_shader))
+			bind(*_shader);
 	}
 
 public:

@@ -7,15 +7,12 @@ NGS_MLA_BEGIN
 
 template<CScalarExpression _ElementType, _ElementType... _Element>
 struct NGS_API StaticVector : VectorExpression<StaticVector<_ElementType, _Element...>> {
-private:
-	using base_type = StaticVector::self_type;
-protected:
-	using self_type = StaticVector;
+	NGS_menvironment(StaticVector);
 public:
 	using element_type = _ElementType;
 
 	constexpr static size_t dimension = sizeof...(_Element);
-	constexpr static std::array<element_type, dimension> data{_Element...};
+	constexpr static std::array<element_type, dimension> data{ _Element... };
 
 	using base_type::operator();
 	constexpr element_type operator()(size_t index)const { return data[index]; }

@@ -6,13 +6,18 @@
 NGS_BEGIN
 NGS_CONCEPT
 
-template<typename T>
-concept CChannel = requires(T t) {
-	{ T::Count } -> std::convertible_to<size_t>;
-	{ T::Offset } -> std::convertible_to<size_t>;
-	{ T::Filter } -> std::convertible_to<size_t>;
-	{ T::FilterWithOffset } -> std::convertible_to<size_t>;
-	std::is_integral_v<typename T::type>;
+template<typename _Type>
+concept CChannel = requires(_Type t) {
+	{ _Type::count } -> std::convertible_to<size_t>;
+	{ _Type::offset } -> std::convertible_to<size_t>;
+	{ _Type::filter } -> std::convertible_to<size_t>;
+	{ _Type::filter_with_offset } -> std::convertible_to<size_t>;
+	std::is_integral_v<typename _Type::type>;
+
+	//{ _Type::PERCENT(0) } -> std::convertible_to<float64>;
+	//{ _Type::template CONVERT_TO<_Type> };
+	//{ _Type::template CONVERT_FROM<_Type> };
+	//{ _Type::FILTER_COLOR(0) };
 };
 
 NGS_END
@@ -22,47 +27,47 @@ NGS_COLOR_SPACE_BEGIN
 
 template<size_t _Count, size_t _Offset = 0>
 struct NGS_API Channel {
-	static constexpr size_t Count = _Count;
-	static constexpr size_t Offset = _Offset;
+	static constexpr size_t count = _Count;
+	static constexpr size_t offset = _Offset;
 
-	using type = BitSet<Count>::type;
+	using type = typename BitSet<count>::type;
 
-	static constexpr type Filter = BitSet<Count>::Mask;
-	static constexpr  size_t FilterWithOffset = Filter << Offset;
+	static constexpr type filter = BitSet<count>::Mask;
+	static constexpr  size_t filter_with_offset = filter << offset;
 
-	static constexpr float64 Percent(type value) {
-		return static_cast<float64>(value) / Filter;
+	static constexpr float64 PERCENT(type value) {
+		return static_cast<float64>(value) / filter;
 	}
 
 	template<CChannel _Channel>
-	static constexpr _Channel::type ConvertTo(type value) {
+	static constexpr typename _Channel::type CONVERT_TO(type value) {
 		//这里很关键！一定要检测非0，不然常量表达式不通过
-		if constexpr (Filter)
+		if constexpr (filter)
 			//这里也很关键！顺序不能改！常量表达式中不允许浮点数转换为整数，所以必须先乘再除
-			return (size_t)value * _Channel::Filter / Filter;
+			return static_cast<size_t>(value) * _Channel::filter / filter;
 		else
 			return 0;
 	}
 	template<size_t _Count2, size_t _Offset2>
-	static constexpr Channel<_Count2, _Offset2>::type ConvertTo(type value) {
-		return ConvertTo < Channel<_Count2, _Offset2>>(value);
+	static constexpr typename Channel<_Count2, _Offset2>::type CONVERT_TO(type value) {
+		return CONVERT_TO < Channel<_Count2, _Offset2>>(value);
 	}
 	template<CChannel _Channel>
-	static constexpr type ConvertFrom(_Channel::type value) {
+	static constexpr type CONVERT_FROM(typename _Channel::type value) {
 		//这里很关键！一定要检测非0，不然常量表达式不通过
-		if constexpr (_Channel::Filter)
+		if constexpr (_Channel::filter)
 			//这里也很关键！顺序不能改！常量表达式中不允许浮点数转换为整数，所以必须先乘再除
-			return value * Filter / _Channel::Filter;
+			return value * filter / _Channel::filter;
 		else
 			return 0;
 	}
 	template<size_t _Count2, size_t _Offset2>
-	static constexpr type ConvertFrom(Channel<_Count2, _Offset2>::type value) {
-		return ConvertFrom< Channel<_Count2, _Offset2>>(value);
+	static constexpr type CONVERT_FROM(typename Channel<_Count2, _Offset2>::type value) {
+		return CONVERT_FROM< Channel<_Count2, _Offset2>>(value);
 	}
 
-	static constexpr auto FilterColor(CIntegral auto color) {
-		return (color >> Offset) & Filter;
+	static constexpr auto FILTER_COLOR(CIntegral auto color) {
+		return (color >> offset) & filter;
 	}
 private:
 	Channel() = default;

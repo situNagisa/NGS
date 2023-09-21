@@ -10,10 +10,7 @@ NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expressioin>
 struct NGS_API MatrixRowVector : VectorExpression<MatrixRowVector<_Expressioin>> {
-private:
-	using base_type = MatrixRowVector::self_type;
-protected:
-	using self_type = MatrixRowVector<_Expressioin>;
+	NGS_menvironment(MatrixRowVector);
 public:
 	using element_type = typename matrix_traits<_Expressioin>::element_type;
 	constexpr static size_t dimension = matrix_traits<_Expressioin>::col_count;
@@ -34,10 +31,7 @@ private:
 
 template<CMatrixExpression _Expressioin>
 struct NGS_API MatrixColVector : VectorExpression<MatrixColVector<_Expressioin>> {
-private:
-	using base_type = MatrixColVector::self_type;
-protected:
-	using self_type = MatrixColVector<_Expressioin>;
+	NGS_menvironment(MatrixColVector);
 public:
 	using element_type = typename matrix_traits<_Expressioin>::element_type;
 	constexpr static size_t dimension = matrix_traits<_Expressioin>::row_count;
@@ -55,18 +49,18 @@ private:
 };
 //verify
 
-template<ccpt::CRPT<CMatrixExpression<>> _Expression>
+template<ccpt::CRPT<(bool)CMatrixExpression<>> _Expression>
 struct NGS_API MatrixExpression : Expression<_Expression> {
-private:
-	using base_type = MatrixExpression::self_type;
-protected:
-	using self_type = MatrixExpression<_Expression>;
+	NGS_menvironment(MatrixExpression);
 public:
 	using type_category = tag::matrix;
 	constexpr static size_t row_count = 0;
 	constexpr static size_t col_count = 0;
 	constexpr static size_t element_count = 0;
 
+	constexpr ~MatrixExpression() {
+		;
+	}
 	constexpr auto row(size_t row_index)const { return MatrixRowVector<typename base_type::expression_type>((*this)(), row_index); }
 	constexpr auto column(size_t col_index)const { return MatrixColVector<typename base_type::expression_type>((*this)(), col_index); }
 

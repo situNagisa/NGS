@@ -13,10 +13,10 @@ public:
 
 	void Build() override {
 		NGL_CHECK(glClearColor(
-			ARGB32::R::Percent(_background_color.Red()),
-			ARGB32::G::Percent(_background_color.Green()),
-			ARGB32::B::Percent(_background_color.Blue()),
-			ARGB32::A::Percent(_background_color.Alpha())
+			ARGB32::R::PERCENT(_background_color.Red()),
+			ARGB32::G::PERCENT(_background_color.Green()),
+			ARGB32::B::PERCENT(_background_color.Blue()),
+			ARGB32::A::PERCENT(_background_color.Alpha())
 		));
 	}
 

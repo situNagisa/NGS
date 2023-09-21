@@ -13,38 +13,43 @@ NGS_MLA_BEGIN
  * @property function assign(CVectorExpression auto&&);
  * @property sizeof == (sizeof(element_type) * dimension)
 */
-template<class  _Container = void>
-concept CVectorContainer = requires(_Container expr, const _Container expr_cst, VectorExpression<typename _Container::expression_type> other, size_t index, typename _Container::element_type element) {
-	{ expr.assign(expr) } -> std::convertible_to<_Container&>;
-	{ expr.assign(index, element) } -> std::convertible_to<_Container&>;
-	{ expr.assign(index, expr_cst) } -> std::convertible_to<_Container&>;
-		requires  CVectorExpression<_Container>;
-	//	requires sizeof(typename _Container::expression_type) == (sizeof(typename _Container::element_type) * _Container::dimension);
-};
+NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CVectorContainer, is_vector_container,
+	CVectorExpression,
+	requires(_Type expr, size_t index, typename _Type::element_type element) {
+		{ expr.assign(index, element) } -> std::convertible_to<_Type&>;
+		{ expr.assign(index, expr) } -> std::convertible_to<_Type&>;
+		{ expr.assign(expr) } -> std::convertible_to<_Type&>;
+});
 
-template<ccpt::CRPT<CVectorContainer<>> _Derived, ccpt::UInt _Dim, class  _ElementType, class  = std::make_index_sequence<_Dim::value>>
+template<ccpt::CRPT<(bool)CVectorContainer<>> _Derived, ccpt::UInt _Dim, class  _ElementType, class = std::make_index_sequence<_Dim::value>>
 class NGS_API  VectorContainer;
 
-template<ccpt::CRPT<CVectorContainer<>> _Derived, size_t _Dim, class  _ElementType, size_t... _Index>
+template<ccpt::CRPT<(bool)CVectorContainer<>> _Derived, ccpt::UInt _Dim, class  _ElementType, size_t... _Index>
 class NGS_API  VectorContainer<
 	_Derived,
-	std::integral_constant<size_t, _Dim>,
+	_Dim,
 	_ElementType,
 	std::index_sequence<_Index...>
 > : public VectorExpression<_Derived> {
-private:
-	using base_type = typename VectorContainer::self_type;
-protected:
-	using self_type = VectorContainer;
+	NGS_menvironment(VectorContainer);
 public:
 	NGS_minherit_t(expression_type, base_type);
 
 	using element_type = _ElementType;
 	using type_category = tag::vector_container;
-	constexpr static size_t dimension = _Dim;
+	constexpr static size_t dimension = _Dim::value;
 
 public:
+	using base_type::base_type;
 	constexpr VectorContainer() = default;
+	//template<mla::CVectorExpression _Expression>
+	//	requires (dimension <= _Expression::dimension)
+	//constexpr VectorContainer(const _Expression& expression) {
+	//	for (size_t i = 0; i < dimension; i++)
+	//	{
+	//		assign(i, expression);
+	//	}
+	//}
 	//===================
 	// access
 	//===================

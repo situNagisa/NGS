@@ -2,6 +2,7 @@
 
 #include "NGS/math/mla/matrix/tag.h"
 #include "NGS/math/mla/matrix/expression.h"
+#include "NGS/math/mla/matrix/io.h"
 
 #include "NGS/math/mla/matrix/expression/matrix.h"
 

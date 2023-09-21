@@ -71,7 +71,7 @@ NGS_HPP_INLINE void SerialPort::Close()
 {
 	auto& data = *reinterpret_cast<nsw::_WindowsSerialPortData*>(_data);
 	CloseHandle(data.com);
-	ngs::Delete(&data);
+	ngs::delete_(&data);
 	_data = nullptr;
 }
 

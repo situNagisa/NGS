@@ -9,3 +9,4 @@
 #include "NGS/ngl/environment/background.h"
 #include "NGS/ngl/environment/shader.h"
 #include "NGS/ngl/environment/vertex_array.h"
+#include "NGS/ngl/environment/framebuffer.h"

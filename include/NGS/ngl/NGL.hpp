@@ -17,3 +17,5 @@
 
 //texture
 #include "NGS/ngl/texture/texture.hpp"
+
+#include "NGS/ngl/framebuffer.hpp"

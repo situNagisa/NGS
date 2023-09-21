@@ -7,13 +7,13 @@ NGS_BEGIN
 class NGS_API  Constructor {
 public:
 	template<class  T, class ... Args>
-	static void Construct_Place(T* block, Args&&... args) { new(block)T(std::forward<Args>(args)...); }
+	static void CONSTRUCT_PLACE(T* block, Args&&... args) { new(block)T(std::forward<Args>(args)...); }
 
 	template<class  T, class ... Args>
-	static constexpr T Construct(Args&&... args) { return T(std::forward<Args>(args)...); }
+	static constexpr T CONSTRUCT(Args&&... args) { return T(std::forward<Args>(args)...); }
 
 	template<class  T, class ... Args>
-	static T* Construct_Array(size_t count, Args&&... args) { return new T[count](std::forward<Args>(args)...); }
+	static T* CONSTRUCT_ARRAY(size_t count, Args&&... args) { return new T[count](std::forward<Args>(args)...); }
 
 
 };
@@ -21,14 +21,14 @@ public:
 class NGS_API  Destructor {
 public:
 	template<class  T>
-	static void Destruct(T* block) { delete block; }
+	static void DESTRUCT(T* block) { delete block; }
 
 	template<class  T>
-	static void Destruct_Array(T* block) { delete[] block; }
+	static void DESTRUCT_ARRAY(T* block) { delete[] block; }
 
-	static void Destruct(std::ranges::random_access_range auto range) {
+	static void DESTRUCT(std::ranges::random_access_range auto range) {
 		for (auto& item : range)
-			Destruct(item);
+			DESTRUCT(item);
 	}
 };
 
@@ -40,7 +40,7 @@ class NGS_API  SegmentManager {
 		__proxy operator[](size_t n)const { return { size,id }; }
 
 		size_t size = 1;
-		std::string id = "";
+		std::string id{};
 	};
 };
 
@@ -49,7 +49,7 @@ public:
 	struct NGS_API AllocatedInfo {
 		size_t count = 0;
 		size_t size = 0;
-		std::string id = "";
+		std::string id{};
 		std::string type_name = {};
 		std::string function_name = {};
 		size_t column = 0;
@@ -75,7 +75,7 @@ public:
 		for (auto& [block, info] : _allocated_info) {
 			NGS_PRINTL(
 				TextColor::green, info, " ",
-				TextColor::white, (void*)block,
+				TextColor::white, static_cast<void*>(block),
 				TextColor::yellow, " [", info.size * info.count, "]",
 				TextColor::white, "bytes -- ",
 				TextColor::cyan, info.function_name,
@@ -103,7 +103,7 @@ public:
 			TextColor::white, "allocated ",
 			TextColor::yellow, info.size * info.count, "bytes ",
 			TextColor::white, "\taddress: ",
-			(block ? TextColor::white : TextColor::red), (void*)block,
+			(block ? TextColor::white : TextColor::red), static_cast<void*>(block),
 			TextColor::white, "\ttype: ",
 			TextColor::cyan, info,
 			TextColor::reset
@@ -145,70 +145,71 @@ inline static auto& allocator = Allocator::I();
 }
 
 
-inline void MemorySet(void* dst, byte value, size_t size) { memset(dst, value, size); }
+//inline void MemorySet(void* dst, byte value, size_t size) { memset(dst, value, size); }
 
-template< CUnsignedIntegral UINT>
+/*template< CUnsignedIntegral UINT>
 constexpr void MemorySet(UINT* dst, UINT value, size_t size) {
 	//#pragma omp parallel for
 	for (int64 i = 0; i < size; i++)
 		dst[i] = value;
-}
+}*/
 
-inline void MemoryCopy(void* dst, void_ptr_cst src, size_t size) { memcpy(dst, src, size); }
+//inline void MemoryCopy(void* dst, void_ptr_cst src, size_t size) { memcpy(dst, src, size); }
 
 
-inline void MemoryMove(void* dst, void_ptr_cst src, size_t size) { memmove(dst, src, size); }
+//inline void MemoryMove(void* dst, void_ptr_cst src, size_t size) { memmove(dst, src, size); }
 
 //实现基础逻辑，交换整形数据（最大可达八字节，即unsigned long long)
 template< CUnsignedIntegral UINT>
-void MemorySwap(UINT& a, UINT& b) {
+void memory_swap(UINT& a, UINT& b) {
 	a ^= b;
 	b ^= a;
 	a ^= b;
 }
+
 //实现n个整数类型的数据交换
 template<size_t N, CUnsignedIntegral UINT>
-void MemorySwap(UINT* a, UINT* b) {
+void memory_swap(UINT* a, UINT* b) {
 	//可用OpenMP或模板For优化这个for循环
 	for (size_t i = 0; i < N; i++) {
-		MemorySwap(a[i], b[i]);
+		memory_swap(a[i], b[i]);
 	}
 }
 //同上，支持动态填写size参数，缺点是不能用For模板进行优化循环
 template< CUnsignedIntegral UINT>
-void MemorySwap(UINT* a, UINT* b, size_t size) {
+void memory_swap(UINT* a, UINT* b, size_t size) {
 	for (size_t i = 0; i < size; i++) {
-		MemorySwap(a[i], b[i]);
+		memory_swap(a[i], b[i]);
 	}
 }
 
 //Different 不同类型约束，此次确保T不为void
 //接口
 template<CDifferentFrom<void> T>
-void MemorySwap(T* a, T* b) {
+void memory_swap(T* a, T* b) {
 	constexpr auto rate = sizeof(T) / (sizeof(uint64));
 	constexpr auto modulo = sizeof(T) % (sizeof(uint64));
 
 	if constexpr (rate)
 		//交换数据前rate * 8个字节
-		MemorySwap<rate>(reinterpret_cast<uint64_ptr>(a), reinterpret_cast<uint64_ptr>(b));
+		memory_swap<rate>(reinterpret_cast<uint64_ptr>(a), reinterpret_cast<uint64_ptr>(b));
 	if constexpr (modulo)
 		//交换剩下没交换的字节
-		MemorySwap<modulo>(reinterpret_cast<byte_ptr>(a), reinterpret_cast<byte_ptr>(b));
+		memory_swap<modulo>(reinterpret_cast<byte_ptr>(a), reinterpret_cast<byte_ptr>(b));
 }
 
-inline void ByteInverse(byte_ptr p, size_t size) {
+/*inline void ByteInverse(byte_ptr p, size_t size) {
 	for (size_t i = 0, len = size / 2; i < len; i++)
-		MemorySwap(p + i, p + (size - 1 - i));
-}
+		memory_swap(p + i, p + (size - 1 - i));
+}*/
 
-template< CIntegral T>
-inline void ByteInverse(T& p) { ByteInverse(byte_ptr(&p), sizeof(T)); }
+/*template< CIntegral T>
+inline void ByteInverse(T& p) { ByteInverse(byte_ptr(&p), sizeof(T)); }*/
 
 #if NGS_COMPILER == NGS_MSVC && NGS_PLATFORM == NGS_WINDOWS
-inline size_t SizeOf(void* block) { return _msize(block); }
+//inline size_t SizeOf(void* block) { return _msize(block); }
 #else
-inline size_t SizeOf(void* block) { return 0; }
+//inline size_t SizeOf(void* block) { return 0; }
 #endif
 
 template<size_t _Count>

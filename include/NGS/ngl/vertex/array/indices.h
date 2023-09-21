@@ -19,7 +19,7 @@ public:
 		: base(std::move(other))
 		, _indices_ctrl(std::move(other._indices_ctrl))
 	{}
-	_IndicesVertexArray(size_t count, Usage usage, const std::shared_ptr<IIndicesCtrl>& indices_ctrl)
+	_IndicesVertexArray(size_t count, Usage usage, const std::shared_ptr<IIndicesCtrl>&indices_ctrl)
 		: base(count, usage)
 		, _indices_ctrl(indices_ctrl)
 	{}
@@ -34,7 +34,7 @@ public:
 		_indices_ctrl->AddSequence(base::_count, count);
 		base::AddVertexes(count, std::forward<_BufRng>(buffers));
 	}
-	void AddVertexes(CVertexRange<element_type> auto && vertexes, size_t count = 0) {
+	void AddVertexes(const CVertexRange<element_type> auto & vertexes, size_t count = 0) {
 		_indices_ctrl->AddSequence(base::_count, count);
 		base::AddVertexes(std::forward<decltype(vertexes)>(vertexes), count);
 	}
@@ -48,9 +48,13 @@ public:
 		_indices_ctrl->GetIndices().Update();
 	}
 	virtual void Render()override {
-		if (!OpenGL::I().vertex_array->IsState(this))
-			OpenGL::I().vertex_array->Select(this);
-		NGL_CHECK(glDrawElements((GLenum)this->_draw_mode, _indices_ctrl->GetIndicesCount(), (GLenum)_indices_ctrl->GetIndices().type, (void_ptr_cst)0));
+		if (!is_bind(this))
+			bind(this);
+		NGL_CHECK(glDrawElements(
+			static_cast<GLenum>(this->_draw_mode),
+			_indices_ctrl->GetIndicesCount(),
+			static_cast<GLenum>(_indices_ctrl->GetIndices().type),
+			nullptr));
 	}
 	virtual void Clear()override {
 		base::Clear();

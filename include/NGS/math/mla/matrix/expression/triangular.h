@@ -9,7 +9,7 @@ template<
 	class  _ElementType,
 	CMatrixTriangularTag _Category = tag::upper,
 	CMatrixLayout _Layout = tag::row,
-	class  = std::make_index_sequence<_Dimension::value* (_Dimension::value + 1) / 2>>
+	class = std::make_index_sequence<_Dimension::value* (_Dimension::value + 1) / 2>>
 	struct NGS_API TriangularMatrix;
 
 template<
@@ -34,10 +34,7 @@ template<
 	_ElementType,
 	_Layout
 > {
-private:
-	using base_type = TriangularMatrix::self_type;
-protected:
-	using self_type = TriangularMatrix;
+	NGS_menvironment(TriangularMatrix);
 public:
 	NGS_minherit_t(element_type, base_type);
 	NGS_minherit_t(layout_category, base_type);
@@ -63,7 +60,7 @@ public:
 		}
 	}
 	constexpr TriangularMatrix(mpl::sequence_params_t<_Index, element_type>... value) {
-		std::array<element_type, element_count> values{value...};
+		std::array<element_type, element_count> values{ value... };
 		size_t index = 0;
 		for (size_t row_index = 0; row_index < row_count && index < sizeof...(value); row_index++)
 		{

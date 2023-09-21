@@ -54,7 +54,7 @@ public:
 #endif
 
 	template<class  T>
-	T& CurrentTarget() { return *reinterpret_cast<T*>(currentTarget); }
+	T& CurrentTarget() { return *static_cast<T*>(currentTarget); }
 
 	__type_cst type;
 	__target target = nullptr;

@@ -1,18 +1,16 @@
 ﻿#pragma once
 
-#include "NGS/math/mla/vector/expression/expression.h"
+#include "NGS/math/mla/config.h"
+#include "NGS/math/mla/matrix/expression/concept.h"
 
 NGS_MLA_BEGIN
 
-template<CTemplateFrom<std::basic_ostream> _Ostream, CVectorExpression _Expression>
+template<CTemplateFrom<std::basic_ostream> _Ostream, CMatrixExpression _Expression>
 _Ostream& operator<<(_Ostream& os, const _Expression& expr) {
-	os << "(";
-	for (auto it = std::ranges::begin(expr); it != std::ranges::end(expr); it++)
+	for (size_t row_index = 0; row_index < _Expression::row_count; row_index++)
 	{
-		os << *it << ((it != std::ranges::end(expr) - 1) ? ", " : "");
+		os << expr.row(row_index) << NGS_MLA_MATRIX_IO_SEPARATOR;
 	}
-
-	os << ")";
 	return os;
 }
 

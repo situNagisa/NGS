@@ -14,14 +14,16 @@ public:
 	static ErrorCode GET() { return static_cast<ErrorCode>(glGetError()); }
 };
 
-#define NGL_CHECK(func)\
-ngs::ngl::Error::CLEAR();	\
-func;					\
-NGL_SHOW_GL_FUNC(func);	\
-do{						\
-	auto code = ngs::ngl::Error::GET();\
-	NGS_ASSERT(ngs::ngl::Error::GET() == ngs::ngl::ErrorCode::no_error, ngs::format("OpenGL Error code %d", code).c_str());\
-} while (false)			\
+#define NGL_CHECK(func)																												\
+do{																																	\
+	ngs::ngl::Error::CLEAR();																										\
+	func;																															\
+	NGL_SHOW_GL_FUNC(func);																											\
+	do {																															\
+		auto code = ngs::ngl::Error::GET();																							\
+		NGS_ASSERT(ngs::ngl::Error::GET() == ngs::ngl::ErrorCode::no_error, ngs::format("OpenGL Error code %d", code).c_str());		\
+	} while (false);																												\
+}while(false)																														\
 //
 
 NGL_END

@@ -97,7 +97,7 @@ NGS_HPP_INLINE void V4L2::Close()
 	}
 	data.device.Close();
 
-	ngs::Delete(&data);
+	ngs::delete_(&data);
 	_data = nullptr;
 }
 

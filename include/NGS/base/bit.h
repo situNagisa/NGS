@@ -47,7 +47,7 @@ public:
 	static constexpr uint64 ByteCount = bit::as_byte(BitCount);
 	using type = byte_<ByteCount>;
 
-	static constexpr type Mask = (type)bit::mask(BitCount);
+	static constexpr type Mask = static_cast<type>(bit::mask(BitCount));
 
 
 	class  Bit {
@@ -88,14 +88,14 @@ public:
 	constexpr BitSet(type data) : _data(data) {}
 	template<uint64 _N2>
 	constexpr BitSet(const BitSet<_N2>& other)
-		: BitSet(type((typename BitSet<_N2>::type)other))
+		: BitSet(type(static_cast<typename BitSet<_N2>::type>(other)))
 	{}
 
 	constexpr bool operator==(__this_ref_cst other)const { return _Get() == other._Get(); }
 
 	constexpr operator type()const { return _Get(); }
-	explicit(true) constexpr operator float32()const { return _Get() / ((float32)Mask); }
-	explicit(true) constexpr operator float64()const { return _Get() / ((float64)Mask); }
+	explicit(true) constexpr operator float32()const { return _Get() / static_cast<float32>(Mask); }
+	explicit(true) constexpr operator float64()const { return _Get() / static_cast<float64>(Mask); }
 
 	constexpr __bit operator[](size_t index) { return Bit(*this, index); }
 	constexpr bool operator[](size_t index)const { return _Get(index); }
@@ -147,7 +147,7 @@ public:
 protected:
 	void _ON(size_t index) { _data = bit::set(_data, bit::scope(index), true); }
 	void _OFF(size_t index) { _data = bit::set(_data, bit::scope(index), false); }
-	void _Set(size_t index, bool boolean) { _data = (type)bit::set(_data, bit::scope(index), boolean); }
+	void _Set(size_t index, bool boolean) { _data = static_cast<type>(bit::set(_data, bit::scope(index), boolean)); }
 
 	constexpr type _Get()const { return _data & Mask; }
 	constexpr bool _Get(size_t index)const { return bit::get(_data, bit::scope(index)); }

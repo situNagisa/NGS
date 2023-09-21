@@ -9,10 +9,7 @@ NGS_MLA_BEGIN
 
 template<ccpt::CRPT<CVectorExpression<void>> _Expression>
 class NGS_API  VectorExpression : public Expression<_Expression> {
-private:
-	using base_type = typename VectorExpression::self_type;
-protected:
-	using self_type = VectorExpression<_Expression>;
+	NGS_menvironment(VectorExpression);
 public:
 	using type_category = tag::vector;
 	constexpr static size_t dimension = 0;

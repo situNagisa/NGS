@@ -17,9 +17,9 @@ public:
 	
 	VertexBuffer(void_ptr data, size_t count, Usage usage, const Buffer& format);
 	VertexBuffer(size_t count, Usage usage, const Buffer& format);
-	VertexBuffer(VertexBuffer&& other)
+	VertexBuffer(VertexBuffer&& other) noexcept
 		: base_type(std::move(other))
-		, format(other.format)
+		  , format(other.format)
 	{}
 	virtual ~VertexBuffer() override = default;
 

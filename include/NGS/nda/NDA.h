@@ -1,6 +1,8 @@
 ﻿#pragma once
 
+#ifndef NGS_USE_NDA
 #define NGS_USE_NDA (1)
+#endif
 
 #include "NGS/nda/defined.h"
 

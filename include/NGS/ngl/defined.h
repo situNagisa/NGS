@@ -20,6 +20,8 @@ NGL_BEGIN
 
 using type_t = GLuint;
 using context_t = GLuint;
+using internal_format_t = GLint;
+using format_t = GLenum;
 
 NGS_DECLARE_TV(gl, type_t);
 NGS_DEFINE_TV(gl, type_t, float32, GL_FLOAT);

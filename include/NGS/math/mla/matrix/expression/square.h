@@ -4,18 +4,15 @@
 
 NGS_MLA_BEGIN
 
-template<class  _Expression>
-concept CSquareMatrix = requires() {
-	requires CMatrixExpression<_Expression>;
-	requires _Expression::row_count == _Expression::col_count;
-};
+NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CMatrixSquare,is_square_matrix,
+	CMatrixExpression,
+	requires() {
+	requires _Type::row_count == _Type::col_count;
+});
 
-template<ccpt::CRPT<CMatrixExpression<>> _Expression, ccpt::UInt _Dim>
+template<ccpt::CRPT<(bool)CMatrixExpression<>> _Expression, ccpt::UInt _Dim>
 struct NGS_API SquareMatrix : MatrixExpression<_Expression> {
-private:
-	using base_type = SquareMatrix::self_type;
-protected:
-	using self_type = SquareMatrix<_Expression, _Dim>;
+	NGS_menvironment(SquareMatrix);
 public:
 	constexpr static size_t row_count = _Dim::value;
 	constexpr static size_t col_count = _Dim::value;

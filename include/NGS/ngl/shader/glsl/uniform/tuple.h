@@ -20,6 +20,11 @@ NGS_mfunction(uniform_tuple, static_string _Name, class _Type, size_t _Dimension
 	constexpr static auto name = _Name;
 	constexpr static size_t dimension = _Dimension;
 
+	/**
+	 * \brief 若维度为1，则返回原始类型，否则返回数组
+	 * 
+	 * \return 
+	 */
 	using element_type = decltype([] {
 		if constexpr (dimension == 1) {
 			return declval<_Type>();

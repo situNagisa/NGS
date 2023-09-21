@@ -8,10 +8,10 @@ struct NGS_API State : DeleteCopy {
 protected:
 	using self_type = State;
 public:
-	using state_type = State;
+	using state_type = self_type;
 
 	State() = default;
-	State(State&& other)
+	State(self_type&& other) noexcept
 		: _context(other._context)
 	{
 		other._context = 0;
@@ -23,7 +23,7 @@ public:
 
 	context_t GetContext()const { return _context; }
 protected:
-	bool _required_update = false;
+	bool _required_update = true;
 	context_t _context = 0;
 };
 

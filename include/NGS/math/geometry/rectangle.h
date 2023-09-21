@@ -49,15 +49,15 @@ public:
 	//===============
 	// binary
 	//===============
-	template<class  _ElementType>
-	constexpr bool IsIntersect(const Rectangle<_ElementType>& other)const {
-		using promote_type = mpl::promote_t<element_type, _ElementType>;
+	template<class  __ElementType>
+	constexpr bool IsIntersect(const Rectangle<__ElementType>& other)const {
+		using promote_type = mpl::promote_t<element_type, __ElementType>;
 		return IsCross< promote_type>(Left(), Right(), other.Left(), other.Right()) && IsCross<promote_type>(Top(), Bottom(), other.Top(), other.Bottom());
 	}
 
-	template<class  _ElementType>
-	constexpr auto Intersect(const Rectangle<_ElementType>& other)const {
-		using result_type = mpl::promote_t<element_type, typename Rectangle<_ElementType>::element_type>;
+	template<class  __ElementType>
+	constexpr auto Intersect(const Rectangle<__ElementType>& other)const {
+		using result_type = mpl::promote_t<element_type, typename Rectangle<__ElementType>::element_type>;
 		if (!IsIntersect(other))return Rectangle<result_type>{};
 		return Rectangle<result_type>(
 			std::max<result_type>(Left(), other.Left()),
@@ -66,12 +66,12 @@ public:
 			std::min<result_type>(Bottom(), other.Bottom())
 		);
 	}
-	template<class  _ElementType>
-	constexpr self_type& operator&=(const Rectangle<_ElementType>& other) { return (*this) = Intersect(other); }
+	template<class  __ElementType>
+	constexpr self_type& operator&=(const Rectangle<__ElementType>& other) { return (*this) = Intersect(other); }
 
-	template<class  _ElementType>
-	constexpr auto Union(const Rectangle<_ElementType>& other)const {
-		using result_type = mpl::promote_t<element_type, typename Rectangle<_ElementType>::element_type>;
+	template<class  __ElementType>
+	constexpr auto Union(const Rectangle<__ElementType>& other)const {
+		using result_type = mpl::promote_t<element_type, typename Rectangle<__ElementType>::element_type>;
 		return Rectangle<result_type>(
 			std::min<result_type>(Left(), other.Left()),
 			std::min<result_type>(Top(), other.Top()),
@@ -79,15 +79,15 @@ public:
 			std::max<result_type>(Bottom(), other.Bottom())
 		);
 	}
-	template<class  _ElementType>
-	constexpr self_type& operator|=(const Rectangle<_ElementType>& other) { return (*this) = Union(other); }
+	template<class  __ElementType>
+	constexpr self_type& operator|=(const Rectangle<__ElementType>& other) { return (*this) = Union(other); }
 
 	constexpr bool Contain(element_type x, element_type y)const { return In(x, Left(), Right()) && In(y, Top(), Bottom()); }
 	constexpr bool Contain(const point_type& point)const { return Contain(point.x, point.y); }
 	constexpr bool Contain(const self_type& other)const { return Contain(other.LeftTop()) && Contain(other.RightBottom()); }
 
-	template<class  _ElementType>
-	constexpr bool operator==(const Rectangle<_ElementType>& other)const { return x == other.x && y == other.y && width == other.width && height == other.height; }
+	template<class  __ElementType>
+	constexpr bool operator==(const Rectangle<__ElementType>& other)const { return x == other.x && y == other.y && width == other.width && height == other.height; }
 	//==============
 	// assign
 	//==============
@@ -140,16 +140,16 @@ public:
 };
 
 template<class  _ElementType1, class  _ElementType2>
-inline constexpr bool IsIntersect(const Rectangle<_ElementType1>& a, const Rectangle<_ElementType2>& b) { return a.IsIntersect(b); }
+constexpr bool is_intersect(const Rectangle<_ElementType1>& a, const Rectangle<_ElementType2>& b) { return a.IsIntersect(b); }
 template<class  _ElementType1, class  _ElementType2>
-inline constexpr auto Intersect(const Rectangle<_ElementType1>& a, const Rectangle<_ElementType2>& b) { return a.Intersect(b); }
+constexpr auto intersect(const Rectangle<_ElementType1>& a, const Rectangle<_ElementType2>& b) { return a.Intersect(b); }
 template<class  _ElementType1, class  _ElementType2>
-inline constexpr auto operator&(const Rectangle<_ElementType1>& a, const Rectangle<_ElementType2>& b) { return Intersect(a, b); }
+constexpr auto operator&(const Rectangle<_ElementType1>& a, const Rectangle<_ElementType2>& b) { return intersect(a, b); }
 
 template<class  _ElementType1, class  _ElementType2>
-inline constexpr auto Union(const Rectangle<_ElementType1>& a, const Rectangle<_ElementType2>& b) { return a.Union(b); }
+constexpr auto union_(const Rectangle<_ElementType1>& a, const Rectangle<_ElementType2>& b) { return a.Union(b); }
 template<class  _ElementType1, class  _ElementType2>
-inline constexpr auto operator|(const Rectangle<_ElementType1>& a, const Rectangle<_ElementType2>& b) { return Union(a, b); }
+constexpr auto operator|(const Rectangle<_ElementType1>& a, const Rectangle<_ElementType2>& b) { return union_(a, b); }
 
 using Rectanglei = Rectangle<int>;
 using Rectanglef = Rectangle<float>;

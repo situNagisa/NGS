@@ -19,7 +19,7 @@
 #include "NGS/base/defined.h"
 
 #include "NGS/base/type_info.h"
-#include "NGS/base/utility.h"
+#include "NGS/base/format.h"
 #include "NGS/base/base_class.h"
 
 #include "NGS/base/bit.h"

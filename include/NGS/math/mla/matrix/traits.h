@@ -8,13 +8,12 @@ NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expression>
 struct NGS_API matrix_traits : type_traits<_Expression> {
-private:
-	using base_type = typename matrix_traits::self_type;
-private:
-	using self_type = matrix_traits<_Expression>;
+	NGS_menvironment(matrix_traits);
 public:
-	using original_type = typename _Expression::expression_type;
-	using element_type = typename _Expression::element_type;
+	using expression_type = std::remove_cvref_t<_Expression>;
+
+	using original_type = typename expression_type::expression_type;
+	using element_type = typename expression_type::element_type;
 	using closure_type = std::conditional_t<
 		std::derived_from<typename original_type::type_category, tag::matrix_container> && !std::is_rvalue_reference_v<_Expression>,
 		const original_type&,
@@ -39,7 +38,7 @@ template<std::derived_from<tag::column> _Layout> constexpr bool is_col_major<_La
 template<CMatrixExpression _Expression> requires (matrix_traits<_Expression>::is_container)
 constexpr bool is_col_major<_Expression> = is_col_major<typename matrix_traits<_Expression>::original_type::layout_category>;
 
-template<CMatrixExpression _Expression>
-constexpr bool is_square_matrix = matrix_traits<_Expression>::col_count == matrix_traits<_Expression>::row_count;
+//template<CMatrixExpression _Expression>
+//constexpr bool is_square_matrix = matrix_traits<_Expression>::col_count == matrix_traits<_Expression>::row_count;
 
 NGS_MLA_END

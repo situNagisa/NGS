@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/ngl/defined.h"
 
@@ -51,7 +51,7 @@ enum class  RenderbufferImageFormat {
 	depth_component24 = GL_DEPTH_COMPONENT24,
 	depth_component32 = GL_DEPTH_COMPONENT32,
 	depth_component32F = GL_DEPTH_COMPONENT32F,
-	depth24_stencil = GL_DEPTH24_STENCIL8,
+	depth24_stencil8 = GL_DEPTH24_STENCIL8,
 	depth32F_stencil8 = GL_DEPTH32F_STENCIL8,
 };
 

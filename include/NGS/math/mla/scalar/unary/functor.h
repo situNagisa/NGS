@@ -23,7 +23,7 @@ concept CScalarUnaryFunctor = requires(typename T::argument_type argument) {
 template<class  _ElementType>
 struct NGS_API ScalarUnaryFunctor {
 protected:
-	using self_type = ScalarUnaryFunctor<_ElementType>;
+	using self_type = ScalarUnaryFunctor;
 public:
 	using argument_type = typename scalar_traits<_ElementType>::const_reference;
 	using result_type = typename scalar_traits<_ElementType>::real_type;

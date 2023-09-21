@@ -101,7 +101,7 @@ err:;
 
 	_UnExport(data.pin);
 
-	ngs::Delete(&data);
+	ngs::delete_(&data);
 	_data = nullptr;
 	return false;
 }

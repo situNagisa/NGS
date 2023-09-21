@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "NGS/base/defined.h"
-#include "NGS/base/utility.h"
+#include "NGS/base/format.h"
 NGS_BEGIN
 
 #if NGS_COMPILER == NGS_GCC && defined(NGS_GCC_USE_ABI)

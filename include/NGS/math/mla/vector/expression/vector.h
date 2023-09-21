@@ -9,10 +9,7 @@ class NGS_API  Vector;
 
 template<size_t _Dimension, class  _ElementType, size_t... _Index>
 class NGS_API  Vector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<Vector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
-private:
-	using base_type = typename Vector::self_type;
-protected:
-	using self_type = Vector;
+	NGS_menvironment(Vector);
 public:
 	NGS_minherit_t(element_type, base_type);
 	NGS_minherit_t(expression_type, base_type);
@@ -40,10 +37,15 @@ public:
 		return (*this)();
 	}
 
-private:
+	constexpr element_type* data(){ return _data; }
+	constexpr const element_type* data()const{ return _data; }
+
+public:
+	//这里将其设置为公有变量是为了让Vector可以作为非类型模板参数
 	element_type _data[base_type::dimension]{};
 };
-NGS_CCPT_VERIFY(CVectorContainer, Vector<3, int>);
+
+
 
 namespace {
 constexpr Vector<3, int> _test_vector{1, 2, 3};

@@ -39,7 +39,7 @@ bool FrameBuffer::Open(const std::filesystem::path& path) {
 err_opened:;
 	_file.Close();
 err_new:;
-	ngs::Delete(&data);
+	ngs::delete_(&data);
 	_data = nullptr;
 
 	return false;

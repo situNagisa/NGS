@@ -9,7 +9,9 @@
 
 #define NGS_USE_EXTEND 1
 
-#include "NGS/extend/color/color.h"
+#include "NGS/base/base.h"
+
+#include "NGS/extend/color.h"
 #include "NGS/extend/byte_array.h"
 #include "NGS/extend/timer.h"
 #include "NGS/extend/event.h"

@@ -15,28 +15,29 @@ NGS_MLA_BEGIN
  * @property _Container& assign(const CMatrixExpression&) *
  *
 */
-template<class  _Container = void>
-concept CMatrixContainer = CMatrixExpression<_Container> && requires(_Container container, const _Container container_cst, typename _Container::element_type element, size_t index, size_t row_index, size_t col_index) {
-	typename _Container::layout_category;
+NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CMatrixContainer,is_matrix_container,
+	CMatrixExpression,
+	requires(_Type container, const _Type container_cst, typename _Type::element_type element, size_t index, size_t row_index, size_t col_index) {
+	typename _Type::layout_category;
 
-	{ container_cst(0) } -> std::convertible_to<typename _Container::element_type>;
+	{ container_cst(0) } -> std::convertible_to<typename _Type::element_type>;
 
-	{ container.assign(container_cst) } -> std::convertible_to<_Container&>;
-	{ container.assign(index, element) } -> std::convertible_to<_Container&>;
-	{ container.assign(row_index, col_index, element) } -> std::convertible_to<_Container&>;
-	{ container.assign(row_index, col_index, container_cst) } -> std::convertible_to<_Container&>;
-	//	requires (sizeof(_Container) == (sizeof(typename matrix_traits<_Container>::element_type) * matrix_traits<_Container>::col_count * matrix_traits<_Container>::row_count));
-};
+	{ container.assign(container_cst) } -> std::convertible_to<_Type&>;
+	{ container.assign(index, element) } -> std::convertible_to<_Type&>;
+	{ container.assign(row_index, col_index, element) } -> std::convertible_to<_Type&>;
+	{ container.assign(row_index, col_index, container_cst) } -> std::convertible_to<_Type&>;
+	//	requires (sizeof(_Container) == (sizeof(typename matrix_traits<_Type>::element_type) * matrix_traits<_Type>::col_count * matrix_traits<_Type>::row_count));
+});
 
 
 template<
-	ccpt::CRPT<CMatrixContainer<>> _Derived,
+	ccpt::CRPT<(bool)CMatrixContainer<>> _Derived,
 	ccpt::UInt _Row, ccpt::UInt _Col,
 	class  _ElementType,
 	class  _Layout,
-	class  = std::make_index_sequence<_Col::value* _Row::value>,
-	class  = std::make_index_sequence<_Row::value>,
-	class  = std::make_index_sequence<_Col::value>>
+	class = std::make_index_sequence<_Col::value* _Row::value>,
+	class = std::make_index_sequence<_Row::value>,
+	class = std::make_index_sequence<_Col::value>>
 	struct NGS_API MatrixContainer;
 
 /**
@@ -48,8 +49,8 @@ template<
  *			请不要在初始化子类的成员变量（此基类会完成初始化）。
  */
 template<
-	ccpt::CRPT<CMatrixContainer<>> _Derived,
-	size_t _Row, size_t _Col,
+	ccpt::CRPT<(bool)CMatrixContainer<>> _Derived,
+	ccpt::UInt _Row, ccpt::UInt _Col,
 	class  _ElementType,
 	class  _Layout,
 	size_t... _Index,
@@ -57,31 +58,21 @@ template<
 	size_t... _ColIndex>
 struct NGS_API MatrixContainer<
 	_Derived,
-	std::integral_constant<size_t, _Row>, std::integral_constant<size_t, _Col>,
+	_Row,_Col,
 	_ElementType,
 	_Layout,
 	std::index_sequence<_Index...>,
 	std::index_sequence<_RowIndex...>,
 	std::index_sequence<_ColIndex...>>
 	: MatrixExpression<_Derived>{
-public:
-	using base_type = MatrixContainer::self_type;
-protected:
-	using self_type = MatrixContainer<
-		_Derived,
-		std::integral_constant<size_t, _Row>, std::integral_constant<size_t, _Col>,
-		_ElementType,
-		_Layout,
-		std::index_sequence<_Index...>,
-		std::index_sequence<_RowIndex...>,
-		std::index_sequence<_ColIndex...>>;
+	NGS_menvironment(MatrixContainer);
 public:
 
 	using element_type = _ElementType;
 	using layout_category = _Layout;
 	using type_category = tag::matrix_container;
-	constexpr static size_t row_count = _Row;
-	constexpr static size_t col_count = _Col;
+	constexpr static size_t row_count = _Row::value;
+	constexpr static size_t col_count = _Col::value;
 	constexpr static size_t element_count = row_count * col_count;
 
 	using expression_type = typename base_type::expression_type;

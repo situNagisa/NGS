@@ -7,10 +7,8 @@ NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression>
 class NGS_API  VectorHomogenousExpression : public VectorExpression<VectorHomogenousExpression<_Expression>> {
-private:
-	using base_type = VectorHomogenousExpression::self_type;
+	NGS_menvironment(VectorHomogenousExpression);
 protected:
-	using self_type = VectorHomogenousExpression;
 	using closure_type = typename vector_traits<_Expression>::closure_type;
 public:
 	constexpr static size_t dimension = vector_traits<_Expression>::dimension + 1;

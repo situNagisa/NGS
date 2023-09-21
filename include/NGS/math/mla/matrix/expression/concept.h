@@ -20,19 +20,20 @@ NGS_MLA_BEGIN
  * @property CVectorExpression row(size_t); *
  * @property CVectorExpression column(size_t); *
 */
-template<class  _Expression = void>
-concept CMatrixExpression = CExpression<_Expression> && requires(_Expression matrix, const _Expression matrix_cst, size_t row_index, size_t col_index) {
-	typename _Expression::element_type;
-	{ _Expression::row_count } -> std::convertible_to<size_t>;
-	{ _Expression::col_count } -> std::convertible_to<size_t>;
-	{ _Expression::element_count } -> std::convertible_to<size_t>;
+NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CMatrixExpression,is_matrix_expression,
+	CExpression,
+	requires(_Type matrix, const _Type matrix_cst, size_t row_index, size_t col_index) {
+	typename _Type::element_type;
+	{ _Type::row_count } -> std::convertible_to<size_t>;
+	{ _Type::col_count } -> std::convertible_to<size_t>;
+	{ _Type::element_count } -> std::convertible_to<size_t>;
 
-	{ matrix_cst(row_index, col_index) } -> std::convertible_to<typename _Expression::element_type>;
+	{ matrix_cst(row_index, col_index) } -> std::convertible_to<typename _Type::element_type>;
 
 	//{ matrix_cst().row(row_index) };
 	//{ matrix_cst().column(col_index) };
 
-		requires std::derived_from<typename _Expression::type_category, tag::matrix>;
-};
+		requires std::derived_from<typename _Type::type_category, tag::matrix>;
+});
 
 NGS_MLA_END

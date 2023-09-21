@@ -11,10 +11,8 @@ NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression, CMatrixLayout _Layout = tag::row>
 struct NGS_API MatrixVectorExpression : MatrixExpression<MatrixVectorExpression<_Expression, _Layout>> {
-private:
-	using base_type = MatrixVectorExpression::self_type;
+	NGS_menvironment(MatrixVectorExpression);
 protected:
-	using self_type = MatrixVectorExpression<_Expression, _Layout>;
 	using closure_type = typename vector_traits<_Expression>::closure_type;
 public:
 	using element_type = typename vector_traits<_Expression>::element_type;

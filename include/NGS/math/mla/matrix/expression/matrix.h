@@ -9,9 +9,9 @@ template<
 	size_t _Row, size_t _Col,
 	class  _ElementType,
 	class  _Layout = tag::row,
-	class  = std::make_index_sequence<_Col* _Row>,
-	class  = std::make_index_sequence<_Row>,
-	class  = std::make_index_sequence<_Col>>
+	class = std::make_index_sequence<_Col* _Row>,
+	class = std::make_index_sequence<_Row>,
+	class = std::make_index_sequence<_Col>>
 	struct NGS_API Matrix;
 
 template<
@@ -46,20 +46,12 @@ struct NGS_API Matrix<
 	std::index_sequence<_RowIndex...>,
 	std::index_sequence<_ColIndex...>
 	>{
+	NGS_menvironment(Matrix);
 public:
-	using base_type = Matrix::self_type;
-protected:
-	using self_type = Matrix<
-		_Row, _Col,
-		_ElementType,
-		_Layout,
-		std::index_sequence<_Index...>,
-		std::index_sequence<_RowIndex...>,
-		std::index_sequence<_ColIndex...>>;
-public:
-	using expression_type = typename matrix_traits<base_type>::original_type;
-	using element_type = typename matrix_traits<base_type>::element_type;
 	NGS_minherit_t(layout_category, base_type);
+	NGS_minherit_t(expression_type, base_type);
+	NGS_minherit_t(element_type, base_type);
+
 	NGS_minherit(row_count, base_type);
 	NGS_minherit(col_count, base_type);
 	NGS_minherit(element_count, base_type);
@@ -88,7 +80,7 @@ public:
 		}
 	}
 	constexpr Matrix(mpl::sequence_params_t<_Index, element_type>... value) {
-		std::array<element_type, element_count> values{value...};
+		std::array<element_type, element_count> values{ value... };
 		for (size_t row_index = 0; row_index < row_count; row_index++)
 		{
 			for (size_t col_index = 0; col_index < col_count; col_index++)

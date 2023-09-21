@@ -6,10 +6,7 @@ NGS_MLA_BEGIN
 
 template<ccpt::UInt _Row, ccpt::UInt _Col, class  _ElementType>
 class NGS_API  MatrixScalarExpression : public MatrixExpression<MatrixScalarExpression<_Row, _Col, _ElementType>> {
-private:
-	using base_type = typename MatrixScalarExpression::self_type;
-protected:
-	using self_type = MatrixScalarExpression<_Row, _Col, _ElementType>;
+	NGS_menvironment(MatrixScalarExpression);
 public:
 	using element_type = _ElementType;
 	constexpr static size_t row_count = _Row::value;

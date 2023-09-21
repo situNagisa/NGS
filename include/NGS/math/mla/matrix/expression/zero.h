@@ -6,10 +6,7 @@ NGS_MLA_BEGIN
 
 template<ccpt::UInt _Row, ccpt::UInt _Col, class  _ElementType>
 struct NGS_API ZeroMatrix : MatrixExpression<ZeroMatrix<_Row, _Col, _ElementType>> {
-private:
-	using base_type = ZeroMatrix::self_type;
-protected:
-	using self_type = ZeroMatrix<_Row, _Col, _ElementType>;
+	NGS_menvironment(ZeroMatrix);
 public:
 	using element_type = _ElementType;
 	constexpr static size_t row_count = _Row::value;

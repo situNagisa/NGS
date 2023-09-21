@@ -33,6 +33,10 @@ struct NGS_API BlendMode {
 	BlendFactors src_factor;
 	BlendFactors dst_factor;
 	BlendEquations equation;
+
+	constexpr bool operator==(const BlendMode& other) const {
+		return src_factor == other.src_factor && dst_factor == other.dst_factor && equation == other.equation;
+	}
 };
 
 namespace blend_mode {

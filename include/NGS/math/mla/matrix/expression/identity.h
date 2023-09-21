@@ -6,10 +6,7 @@ NGS_MLA_BEGIN
 
 template<ccpt::UInt _Dim, class  _ElementType>
 struct NGS_API IdentityMatrix : SquareMatrix<IdentityMatrix<_Dim, _ElementType>, _Dim> {
-private:
-	using base_type = IdentityMatrix::self_type;
-protected:
-	using self_type = IdentityMatrix<_Dim, _ElementType>;
+	NGS_menvironment(IdentityMatrix);
 public:
 	using element_type = _ElementType;
 	NGS_minherit(row_count, base_type);
@@ -25,6 +22,6 @@ using identity_matrix_t = IdentityMatrix<std::integral_constant<size_t, _Dimensi
 template<size_t _Dimension, class  _ElementType>
 constexpr identity_matrix_t<_Dimension, _ElementType> identity_matrix_v{};
 
-NGS_CCPT_VERIFY(CSquareMatrix, identity_matrix_t<3, int>);
+NGS_CCPT_VERIFY(CMatrixSquare, identity_matrix_t<3, int>);
 
 NGS_MLA_END

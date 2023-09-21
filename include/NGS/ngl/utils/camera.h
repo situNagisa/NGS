@@ -9,9 +9,7 @@ public:
 	Camera2D(float32 width, float32 height) : size(width, height) {}
 
 	auto GetMatrix3()const {
-		mla::HomogeneousMatrix<3, float32> matrix = mla::identity_matrix_v<3, float32>;
-
-		return mla::translate(matrix, -center / size)* mla::scale(matrix, zoom / size);
+		return mla::translate(-center / size) * mla::scale(zoom / size);
 	}
 	std::array<float32, 4 * 4> GetMatrix4()const {
 		auto zoom_size = size / zoom;

@@ -7,3 +7,6 @@
 #include "NGS/math/mla/matrix/unary/operator/determinant.h"
 #include "NGS/math/mla/matrix/unary/operator/view.h"
 #include "NGS/math/mla/matrix/unary/operator/minor.h"
+#include "NGS/math/mla/matrix/unary/operator/look_to.h"
+#include "NGS/math/mla/matrix/unary/operator/as_vector.h"
+#include "NGS/math/mla/matrix/unary/operator/inverse.h"

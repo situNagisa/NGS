@@ -2,6 +2,7 @@
 
 #include "NGS/extend/color/defined.h"
 #include "NGS/extend/color/channel.h"
+#include "NGS/extend/color/color.h"
 
 #undef RGB
 
@@ -25,6 +26,7 @@ concept CPrimaryColor = requires(T t) {
 		requires CChannel<typename T::G>;
 		requires CChannel<typename T::B>;
 		requires std::integral<typename T::type>;
+		requires CColor<T>;
 };
 
 NGS_END
@@ -44,72 +46,86 @@ NGS_COLOR_SPACE_BEGIN
 
 template<CChannel _A, CChannel _R, CChannel _G, CChannel _B>
 struct NGS_API PrimaryColor {
+protected:
+	using self_type = PrimaryColor;
 public:
 	using A = _A;
 	using R = _R;
 	using G = _G;
 	using B = _B;
-	using type = byte_<bit::as_byte(A::Count + R::Count + G::Count + B::Count)>;
+	using type = byte_<bit::as_byte(A::count + R::count + G::count + B::count)>;
 
-	using std_type = byte_<bit::as_byte(StdChannel::Count) * 4>;
+	using std_type = byte_<bit::as_byte(StdChannel::count) * 4>;
 
 	static constexpr uint32
-		Filter = A::FilterWithOffset | R::FilterWithOffset | G::FilterWithOffset | B::FilterWithOffset
+		Filter = A::filter_with_offset | R::filter_with_offset | G::filter_with_offset | B::filter_with_offset
 		;
 	static constexpr PixelFormat Format{
-		.size = bit::as_byte(A::Count + R::Count + G::Count + B::Count),
+		.size = bit::as_byte(A::count + R::count + G::count + B::count),
 	};
 
 	constexpr PrimaryColor() = default;
-	constexpr PrimaryColor(type value) : _value(value) {}
+	explicit(false) constexpr PrimaryColor(type value) : _value(value) {}
+
 	template<CChannel A, CChannel R, CChannel G, CChannel B>
-	constexpr PrimaryColor(PrimaryColor<A, R, G, B> color)
+	explicit(false) constexpr PrimaryColor(const PrimaryColor<A, R, G, B>& color)
 		: PrimaryColor(
-			(A::template ConvertFrom<StdChannel>(color.StdAlpha()) << A::Offset) |
-			(R::template ConvertFrom<StdChannel>(color.StdRed()) << R::Offset) |
-			(G::template ConvertFrom<StdChannel>(color.StdGreen()) << G::Offset) |
-			(B::template ConvertFrom<StdChannel>(color.StdBlue()) << B::Offset)
+			(A::template CONVERT_FROM<StdChannel>(color.StdAlpha()) << A::offset) |
+			(R::template CONVERT_FROM<StdChannel>(color.StdRed()) << R::offset) |
+			(G::template CONVERT_FROM<StdChannel>(color.StdGreen()) << G::offset) |
+			(B::template CONVERT_FROM<StdChannel>(color.StdBlue()) << B::offset)
 		)
 	{}
 
 	template<CChannel A, CChannel R, CChannel G, CChannel B>
 	PrimaryColor& operator=(const PrimaryColor<A, R, G, B>& color) {
 		_value =
-			(A::template ConvertFrom<StdChannel>(color.StdAlpha()) << A::Offset) |
-			(R::template ConvertFrom<StdChannel>(color.StdRed()) << R::Offset) |
-			(G::template ConvertFrom<StdChannel>(color.StdGreen()) << G::Offset) |
-			(B::template ConvertFrom<StdChannel>(color.StdBlue()) << B::Offset);
+			(A::template CONVERT_FROM<StdChannel>(color.StdAlpha()) << A::offset) |
+			(R::template CONVERT_FROM<StdChannel>(color.StdRed()) << R::offset) |
+			(G::template CONVERT_FROM<StdChannel>(color.StdGreen()) << G::offset) |
+			(B::template CONVERT_FROM<StdChannel>(color.StdBlue()) << B::offset);
+		return *this;
 	}
 
-	operator type()const { return _value; }
+	/*template<CChannel A, CChannel R, CChannel G, CChannel B>
+	explicit(false) constexpr operator PrimaryColor<A, R, G, B>()const {
+		return PrimaryColor<A, R, G, B>(
+			(A::template CONVERT_FROM<StdChannel>(StdAlpha()) << A::offset) |
+			(R::template CONVERT_FROM<StdChannel>(StdRed()) << R::offset) |
+			(G::template CONVERT_FROM<StdChannel>(StdGreen()) << G::offset) |
+			(B::template CONVERT_FROM<StdChannel>(StdBlue()) << B::offset)
+		);
+	}*/
+
+	explicit(true) operator type()const { return _value; }
 	constexpr type Value()const { return _value; }
 
-	constexpr A::type Alpha() const { return ((_value >> A::Offset) & A::Filter); }
-	void Alpha(A::type a) { _value = ((a << A::Offset) & A::FilterWithOffset) | (_value & ~A::FilterWithOffset); }
-	constexpr R::type Red() const { return ((_value >> R::Offset) & R::Filter); }
-	void Red(R::type r) { _value = ((r << R::Offset) & R::FilterWithOffset) | (_value & ~R::FilterWithOffset); }
-	constexpr G::type Green() const { return ((_value >> G::Offset) & G::Filter); }
-	void Green(G::type g) { _value = ((g << G::Offset) & G::FilterWithOffset) | (_value & ~G::FilterWithOffset); }
-	constexpr B::type Blue() const { return ((_value >> B::Offset) & B::Filter); }
-	void Blue(B::type b) { _value = ((b << B::Offset) & B::FilterWithOffset) | (_value & ~B::FilterWithOffset); }
+	constexpr typename A::type Alpha() const { return ((_value >> A::offset) & A::filter); }
+	void Alpha(typename A::type a) { _value = ((a << A::offset) & A::filter_with_offset) | (_value & ~A::filter_with_offset); }
+	constexpr typename R::type Red() const { return ((_value >> R::offset) & R::filter); }
+	void Red(typename R::type r) { _value = ((r << R::offset) & R::filter_with_offset) | (_value & ~R::filter_with_offset); }
+	constexpr typename G::type Green() const { return ((_value >> G::offset) & G::filter); }
+	void Green(typename G::type g) { _value = ((g << G::offset) & G::filter_with_offset) | (_value & ~G::filter_with_offset); }
+	constexpr typename B::type Blue() const { return ((_value >> B::offset) & B::filter); }
+	void Blue(typename B::type b) { _value = ((b << B::offset) & B::filter_with_offset) | (_value & ~B::filter_with_offset); }
 
-	constexpr StdChannel::type StdAlpha()const { return A::template ConvertTo<StdChannel>(Alpha()); }
-	void StdAlpha(StdChannel::type a) { Alpha(A::template ConvertFrom<StdChannel>(a)); }
-	constexpr StdChannel::type StdRed()const { return R::template ConvertTo<StdChannel>(Red()); }
-	void StdRed(StdChannel::type r) { Red(R::template ConvertFrom<StdChannel>(r)); }
-	constexpr StdChannel::type StdGreen()const { return G::template ConvertTo<StdChannel>(Green()); }
-	void StdGreen(StdChannel::type g) { Green(G::template ConvertFrom<StdChannel>(g)); }
-	constexpr StdChannel::type StdBlue()const { return B::template ConvertTo<StdChannel>(Blue()); }
-	void StdBlue(StdChannel::type b) { Blue(B::template ConvertFrom<StdChannel>(b)); }
+	constexpr StdChannel::type StdAlpha()const { return A::template CONVERT_TO<StdChannel>(Alpha()); }
+	void StdAlpha(StdChannel::type a) { Alpha(A::template CONVERT_FROM<StdChannel>(a)); }
+	constexpr StdChannel::type StdRed()const { return R::template CONVERT_TO<StdChannel>(Red()); }
+	void StdRed(StdChannel::type r) { Red(R::template CONVERT_FROM<StdChannel>(r)); }
+	constexpr StdChannel::type StdGreen()const { return G::template CONVERT_TO<StdChannel>(Green()); }
+	void StdGreen(StdChannel::type g) { Green(G::template CONVERT_FROM<StdChannel>(g)); }
+	constexpr StdChannel::type StdBlue()const { return B::template CONVERT_TO<StdChannel>(Blue()); }
+	void StdBlue(StdChannel::type b) { Blue(B::template CONVERT_FROM<StdChannel>(b)); }
 
-	constexpr auto AlphaPercent()const { return A::Percent(Alpha()); }
-	constexpr auto RedPercent()const { return R::Percent(Red()); }
-	constexpr auto GreenPercent()const { return G::Percent(Green()); }
-	constexpr auto BluePercent()const { return B::Percent(Blue()); }
+	constexpr auto AlphaPercent()const { return A::PERCENT(Alpha()); }
+	constexpr auto RedPercent()const { return R::PERCENT(Red()); }
+	constexpr auto GreenPercent()const { return G::PERCENT(Green()); }
+	constexpr auto BluePercent()const { return B::PERCENT(Blue()); }
 
 
 
-	template<CChannel _A2, CChannel _R2, CChannel _G2, CChannel _B2>
+	/*template<CChannel _A2, CChannel _R2, CChannel _G2, CChannel _B2>
 	constexpr operator PrimaryColor<_A2, _R2, _G2, _B2>()const {
 		return PrimaryColor<_A2, _R2, _G2, _B2>(
 			StdAlpha(),
@@ -117,7 +133,7 @@ public:
 			StdGreen(),
 			StdBlue()
 		);
-	}
+	}*/
 private:
 	type _value{};
 };
@@ -125,23 +141,24 @@ private:
 #define NGS_DEFINE_ARGB(c1,c2,c3,c4)		\
 template<size_t _##c1, size_t _##c2, size_t _##c3, size_t _##c4> \
 struct NGS_API c1##c2##c3##c4 : public PrimaryColor<Channel<_##c1, _##c2 + _##c3 + _##c4>, Channel<_##c2, _##c3 + _##c4>, Channel<_##c3, _##c4>, Channel<_##c4, 0>> { \
-	using base = PrimaryColor<Channel<_##c1, _##c2 + _##c3 + _##c4>, Channel<_##c2, _##c3 + _##c4>, Channel<_##c3, _##c4>, Channel<_##c4, 0>>; \
-	using A = typename base::A;				\
-	using R = typename base::R;				\
-	using G = typename base::G;				\
-	using B = typename base::B;				\
-	using base::PrimaryColor;				\
+	NGS_menvironment(c1##c2##c3##c4);		\
+public:										\
+	using A = typename base_type::A;		\
+	using R = typename base_type::R;		\
+	using G = typename base_type::G;		\
+	using B = typename base_type::B;		\
+	using base_type::base_type;				\
 	constexpr c1##c2##c3##c4(				\
 		StdChannel::type c1##_,				\
 		StdChannel::type c2##_,				\
 		StdChannel::type c3##_,				\
 		StdChannel::type c4##_				\
 	)										\
-	: base(\
-		(A::template ConvertFrom<StdChannel>(A_) << A::Offset) | \
-		(R::template ConvertFrom<StdChannel>(R_) << R::Offset) | \
-		(G::template ConvertFrom<StdChannel>(G_) << G::Offset) | \
-		(B::template ConvertFrom<StdChannel>(B_) << B::Offset) \
+	: base_type(\
+		(A::template CONVERT_FROM<StdChannel>(A_) << A::offset) | \
+		(R::template CONVERT_FROM<StdChannel>(R_) << R::offset) | \
+		(G::template CONVERT_FROM<StdChannel>(G_) << G::offset) | \
+		(B::template CONVERT_FROM<StdChannel>(B_) << B::offset) \
 		)									\
 	{}										\
 };											\
@@ -187,5 +204,19 @@ NGS_DEFINE_ARGB(B, G, R, A);
 #if NGS_PLATFORM == NGS_MSVC
 #pragma warning(pop)
 #endif
+
+template<CPrimaryColor _Color>
+struct ColorConstants<_Color> {
+	//static constexpr _Color white = ARGB32(0xFFFFFFFF);
+	//static constexpr _Color black = ARGB32(0xFF000000);
+	//static constexpr _Color red = ARGB32(0xFFFF0000);
+	//static constexpr _Color green = ARGB32(0xFF00FF00);
+	//static constexpr _Color blue = ARGB32(0xFF0000FF);
+	//static constexpr _Color yellow = ARGB32(0xFFFFFF00);
+	//static constexpr _Color cyan = ARGB32(0xFF00FFFF);
+	//static constexpr _Color magenta = ARGB32(0xFFFF00FF);
+	//static constexpr _Color transparent = ARGB32(0x00000000);
+};
+//NGS_CCPT_VERIFY(CColorConstants, ColorConstants<RGBA32>);
 
 NGS_COLOR_SPACE_END

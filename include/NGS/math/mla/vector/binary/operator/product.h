@@ -10,10 +10,7 @@ NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression1, CVectorExpression _Expression2>
 	requires (_Expression1::dimension == _Expression2::dimension)
-constexpr mpl::promote_t<
-	typename vector_traits<_Expression1>::element_type,
-	typename vector_traits<_Expression2>::element_type
-> product_inner(const _Expression1& expr1, const _Expression2& expr2) {
+constexpr auto product_inner(const _Expression1& expr1, const _Expression2& expr2) {
 	using element_type1 = typename vector_traits<_Expression1>::element_type;
 	using element_type2 = typename vector_traits<_Expression2>::element_type;
 	using promote_type = mpl::promote_t<element_type1, element_type2>;

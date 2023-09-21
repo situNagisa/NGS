@@ -10,6 +10,10 @@
 #define NGL_OPENGL_MINOR 3
 #endif
 
+#ifndef NGL_UNIFORM_MATRIX_TRANSPOSE
+#define NGL_UNIFORM_MATRIX_TRANSPOSE GL_TRUE
+#endif
+
 #ifndef NGL_SHOW_GL_FUNC_MSG
 #define NGL_SHOW_GL_FUNC(func) 
 #else

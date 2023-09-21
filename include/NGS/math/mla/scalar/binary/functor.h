@@ -13,19 +13,19 @@ NGS_MLA_BEGIN
  * @property type result_type
  * @property static function result_type apply(argument_type)
 */
-template<class  T>
-concept CScalarBinaryFunctor = requires(typename T::argument_type1 argument1, typename T::argument_type2 argument2) {
-	typename T::argument_type1;
-	typename T::argument_type2;
-	typename T::result_type;
+template<class  _Type>
+concept CScalarBinaryFunctor = requires(typename _Type::argument_type1 argument1, typename _Type::argument_type2 argument2) {
+	typename _Type::argument_type1;
+	typename _Type::argument_type2;
+	typename _Type::result_type;
 
-	{ T::apply(argument1, argument2) } -> std::convertible_to<typename T::result_type>;
+	{ _Type::apply(argument1, argument2) } -> std::convertible_to<typename _Type::result_type>;
 };
 
 template<class  _ElementType1, class  _ElementType2>
 struct NGS_API ScalarBinaryFunctor {
 protected:
-	using self_type = ScalarBinaryFunctor<_ElementType1, _ElementType2>;
+	using self_type = ScalarBinaryFunctor;
 public:
 	using argument_type1 = typename scalar_traits<_ElementType1>::const_reference;
 	using argument_type2 = typename scalar_traits<_ElementType2>::const_reference;

@@ -6,12 +6,9 @@
 
 NGS_MLA_BEGIN
 
-template<CSquareMatrix _Expression>
+template<CMatrixSquare _Expression>
 struct NGS_API MatrixMinor : SquareMatrix<MatrixMinor<_Expression>, std::integral_constant<size_t, _Expression::row_count>> {
-private:
-	using base_type = MatrixMinor::self_type;
-protected:
-	using self_type = MatrixMinor<_Expression>;
+	NGS_menvironment(MatrixMinor);
 public:
 	using element_type = typename _Expression::element_type;
 private:
@@ -35,7 +32,7 @@ private:
 	size_t _col_index = 0;
 };
 
-template<CSquareMatrix _Expression>
+template<CMatrixSquare _Expression>
 constexpr auto minor(const _Expression& expression, size_t row, size_t column) {
 	return MatrixMinor<_Expression>(expression, row, column);
 }

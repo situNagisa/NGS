@@ -11,11 +11,11 @@ static_assert(std::derived_from<matrix_container, matrix>);
 }
 
 
-template<class  T>
-concept CMatrixLayout = requires(size_t index, size_t row_index, size_t col_index, size_t row_count, size_t col_count) {
-	{ T::transform(row_index, col_index, row_count, col_count) } -> std::same_as<size_t>;
-	{ T::inverse_transform(index, row_count, col_count) } -> std::same_as<std::pair<size_t, size_t>>;
-};
+NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT(CMatrixLayout,is_matrix_layout,
+	requires(size_t index, size_t row_index, size_t col_index, size_t row_count, size_t col_count) {
+	{ _Type::transform(row_index, col_index, row_count, col_count) } -> std::same_as<size_t>;
+	{ _Type::inverse_transform(index, row_count, col_count) } -> std::same_as<std::pair<size_t, size_t>>;
+});
 
 namespace tag {
 
@@ -41,13 +41,13 @@ NGS_CCPT_VERIFY(CMatrixLayout, column);
 
 }
 
-template<class  T>
-concept CMatrixTriangularTag = requires(size_t index, size_t row_index, size_t col_index, size_t row_count, size_t col_count) {
-	{ T::has_element(row_index, col_index, row_count, col_count) } -> std::convertible_to<bool>;
-	{ T::template has_element<tag::row>(index, row_count, col_count) } -> std::convertible_to<bool>;
-	{ T::template transform<tag::row>(index, row_count, col_count) } -> std::convertible_to<size_t>;
-	{ T::template transform<tag::row>(row_index, col_index, row_count, col_count) } -> std::convertible_to<size_t>;
-};
+NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT(CMatrixTriangularTag,is_matrix_triangular_tag,
+	requires(size_t index, size_t row_index, size_t col_index, size_t row_count, size_t col_count) {
+	{ _Type::has_element(row_index, col_index, row_count, col_count) } -> std::convertible_to<bool>;
+	{ _Type::template has_element<tag::row>(index, row_count, col_count) } -> std::convertible_to<bool>;
+	{ _Type::template transform<tag::row>(index, row_count, col_count) } -> std::convertible_to<size_t>;
+	{ _Type::template transform<tag::row>(row_index, col_index, row_count, col_count) } -> std::convertible_to<size_t>;
+});
 
 namespace tag {
 

@@ -1,6 +1,8 @@
 ﻿#pragma once
 
-#define NGS_USE_NGL
+#ifndef NGS_USE_HPP
+#define NGS_USE_NGL (1)
+#endif
 
 #include "NGS/base/base.h"
 
@@ -39,6 +41,8 @@
 #include "NGS/ngl/utils/camera.h"
 
 #include "NGS/ngl/environment.h"
+
+#include "NGS/ngl/framebuffer.h"
 
 
 #if NGS_USE_HPP

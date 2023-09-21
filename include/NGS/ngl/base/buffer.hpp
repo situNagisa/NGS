@@ -16,7 +16,7 @@ NGS_HPP_INLINE BufferObject::BufferObject(BufferTarget target, void_ptr data, si
 	, _usage(usage)
 {
 	NGL_CHECK(glGenBuffers(1, &_context));
-	OpenGL::I().buffer_target->Select(this);
+	bind(this);
 	NGL_CHECK(glBufferData(static_cast<GLenum>(target), size, nullptr, static_cast<GLenum>(usage)));
 }
 NGS_HPP_INLINE BufferObject::BufferObject(BufferTarget target, size_t size, Usage usage)
@@ -79,7 +79,7 @@ NGS_HPP_INLINE void BufferObject::Resize(size_t size)
 
 	_data = new_data;
 	View(size, 0);
-	OpenGL::I().buffer_target->Select(this);
+	bind(this);
 	NGL_CHECK(glBufferData(static_cast<GLenum>(target), size, nullptr, static_cast<GLenum>(_usage)));
 }
 

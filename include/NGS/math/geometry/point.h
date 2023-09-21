@@ -7,14 +7,12 @@ NGS_MATH_BEGIN
 
 template<class  _ElementType>
 struct NGS_API Point2 : mla::VectorContainer<Point2<_ElementType>, std::integral_constant<size_t, 2>, _ElementType> {
-private:
-	using base_type = typename Point2::self_type;
-protected:
-	using self_type = Point2<_ElementType>;
+	NGS_menvironment(Point2);
 public:
 	NGS_minherit_t(element_type, base_type);
 	NGS_minherit_t(expression_type, base_type);
 
+	using base_type::base_type;
 	constexpr Point2(element_type x, element_type y)
 		: x(x)
 		, y(y)
@@ -56,8 +54,8 @@ public:
 
 	constexpr float64 Tan()const { return y / x; }
 	constexpr float64 Cot()const { return x / y; }
-	constexpr float64 Sin()const { return y / mla::length(*this); }
-	constexpr float64 Cos()const { return x / mla::length(*this); }
+	constexpr float64 Sin()const { return y / mla::modulus(*this); }
+	constexpr float64 Cos()const { return x / mla::modulus(*this); }
 
 	float64 ArcTan()const { return std::atan2(y, x); }
 	float64 ArcCot()const { return std::atan2(x, y); }
@@ -68,15 +66,16 @@ public:
 	// compatibility
 	//====================
 
-	constexpr auto Length()const { return mla::length(*this); }
-	constexpr auto LengthSquared()const { return mla::length_squared(*this); }
+	constexpr auto Length()const { return mla::modulus(*this); }
+	constexpr auto LengthSquared()const { return mla::modulus_squared(*this); }
 
 	void Set(element_type x, element_type y) {
 		this->x = x;
 		this->y = y;
 	}
 
-
+	constexpr element_type* data() { return &x; }
+	constexpr const element_type* data()const { return &x; }
 public:
 	element_type x = 0;
 	element_type y = 0;
@@ -92,12 +91,10 @@ using Point2s = Point2<size_t>;
 
 template<class  _ElementType>
 struct NGS_API Point3 : mla::VectorContainer<Point3<_ElementType>, std::integral_constant<size_t, 3>, _ElementType> {
-private:
-	using base_type = typename Point3::self_type;
-protected:
-	using self_type = Point2<_ElementType>;
+	NGS_menvironment(Point3);
 public:
-	using element_type = typename base_type::element_type;
+	NGS_minherit_t(element_type, base_type);
+	NGS_minherit_t(expression_type, base_type);
 
 	using base_type::base_type;
 	constexpr Point3(element_type x, element_type y, element_type z)
@@ -113,10 +110,48 @@ public:
 		: Point3(expression()(0), expression()(1), expression()(2))
 	{}
 
-	using base_type::operator();
+	using base_type::assign;
+	constexpr expression_type& assign(size_t index, element_type element) {
+		if (index == 0) {
+			x = element;
+		}
+		else if (index == 1) {
+			y = element;
+		}
+		else if (index == 2) {
+			z = element;
+		}
+		return (*this)();
+	}
 
-	constexpr element_type& operator()(size_t i) { return *(&x + i); }
-	constexpr const element_type& operator()(size_t i)const { return *(&x + i); }
+	using base_type::operator();
+	constexpr element_type& operator()(size_t i) {
+		if (i == 0) {
+			return x;
+		}
+		if (i == 1) {
+			return y;
+		}
+		if (i == 2) {
+			return z;
+		}
+		return x;
+	}
+	constexpr element_type operator()(size_t i)const {
+		if (i == 0) {
+			return x;
+		}
+		if (i == 1) {
+			return y;
+		}
+		if (i == 2) {
+			return z;
+		}
+		return 0;
+	}
+
+	constexpr element_type* data() { return &x; }
+	constexpr const element_type* data()const { return &x; }
 
 	element_type x = 0;
 	element_type y = 0;

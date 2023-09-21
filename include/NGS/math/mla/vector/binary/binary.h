@@ -8,10 +8,7 @@ NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression1, CVectorExpression _Expression2, CVectorBinaryFunctor<_Expression1, _Expression2> _Functor>
 class NGS_API  VectorBinary : public VectorExpression<VectorBinary<_Expression1, _Expression2, _Functor>> {
-private:
-	using base_type = typename VectorBinary::self_type;
-protected:
-	using self_type = VectorBinary<_Expression1, _Expression2, _Functor>;
+	NGS_menvironment(VectorBinary);
 public:
 	using expression_type = typename base_type::expression_type;
 private:

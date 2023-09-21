@@ -6,7 +6,7 @@
 
 NGL_ENV_BEGIN
 
-class NGS_API  Viewport final : public IEnvironment {
+class NGS_API Viewport final : public IEnvironment {
 public:
 
 	void Build() override {

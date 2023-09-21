@@ -30,9 +30,9 @@ public:
 			_vertex_array->Clear();
 	}
 
-public:
+private:
 	std::shared_ptr<objects::VertexArrayBase> _vertex_array = nullptr;
-	BitSet<8> _flag = flag_clear;
+	BitSet<8> _flag{};
 };
 
 NGL_ENV_END
