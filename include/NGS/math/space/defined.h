@@ -3,9 +3,10 @@
 #include "NGS/basic/basic.h"
 #include "NGS/concepts/concepts.h"
 #include "NGS/mpl/mpl.h"
+#include "NGS/math/defined.h"
 
-#define NGS_COORDINATE_BEGIN NGS_BEGIN namespace coordinates {
-#define NGS_COORDINATE_END } NGS_END
+#define NGS_COORDINATE_BEGIN NGS_MATH_BEGIN namespace space {
+#define NGS_COORDINATE_END } NGS_MATH_END
 
 #define NGS_COORDINATE_SUPPORT_BEGIN NGS_COORDINATE_BEGIN inline namespace support{
 #define NGS_COORDINATE_SUPPORT_END } NGS_COORDINATE_END

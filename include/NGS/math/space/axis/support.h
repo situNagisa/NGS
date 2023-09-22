@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NGS/coordinate/axis/axis.h"
+#include "NGS/math/space/axis/axis.h"
 
 NGS_COORDINATE_SUPPORT_BEGIN
 

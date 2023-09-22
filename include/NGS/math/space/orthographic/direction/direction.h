@@ -1,9 +1,9 @@
 #pragma once
 
-#include "NGS/coordinate/defined.h"
-#include "NGS/coordinate/base/coordinate.h"
-#include "NGS/coordinate/orthographic/orthographic.h"
-#include "NGS/coordinate/orthographic/direction/concept.h"
+#include "NGS/math/space/defined.h"
+#include "NGS/math/space/base/coordinate.h"
+#include "NGS/math/space/orthographic/orthographic.h"
+#include "NGS/math/space/orthographic/direction/concept.h"
 
 NGS_COORDINATE_BEGIN
 

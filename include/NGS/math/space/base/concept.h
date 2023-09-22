@@ -1,7 +1,7 @@
 #pragma once
 
-#include "NGS/coordinate/defined.h"
-#include "NGS/coordinate/axis/concept.h"
+#include "NGS/math/space/defined.h"
+#include "NGS/math/space/axis/concept.h"
 
 NGS_COORDINATE_BEGIN
 

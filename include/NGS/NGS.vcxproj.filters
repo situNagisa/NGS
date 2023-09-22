@@ -141,9 +141,6 @@
     <ClInclude Include="math\rotation.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\transform.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="math\utils\util.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -463,9 +460,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\mla\defined.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="math\mla\mla.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\mla\base\tag.h">
@@ -1320,21 +1314,6 @@
     <ClInclude Include="transform\_3d\direction.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="transform\tag.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="transform\tag\chirality.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="transform\tag\coordinate_old.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="transform\tag\axis.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="transform\tag\coordinate.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="math\mla\vector\binary\operator\is_same_direction.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -1362,64 +1341,64 @@
     <ClInclude Include="transform\transform.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\coordinate.h">
+    <ClInclude Include="math\space.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\coordinate.hpp">
+    <ClInclude Include="math\space\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\defined.h">
+    <ClInclude Include="math\space\orthographic\direction\direction.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic\direction\direction.h">
+    <ClInclude Include="math\space\axis.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\axis.h">
+    <ClInclude Include="math\space\axis\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\axis\concept.h">
+    <ClInclude Include="math\space\axis\support.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\axis\support.h">
+    <ClInclude Include="math\space\axis\axis.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\axis\axis.h">
+    <ClInclude Include="math\space\base\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\base\concept.h">
+    <ClInclude Include="math\space\orthographic\screen\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic\screen\concept.h">
+    <ClInclude Include="math\space\orthographic\screen\screen.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic\screen\screen.h">
+    <ClInclude Include="math\space\orthographic\direction\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic\direction\concept.h">
+    <ClInclude Include="math\space\base\coordinate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\base\coordinate.h">
+    <ClInclude Include="math\space\orthographic\direction\support.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic\direction\support.h">
+    <ClInclude Include="math\space\orthographic\screen\support.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic\screen\support.h">
+    <ClInclude Include="math\space\orthographic\direction.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic\direction.h">
+    <ClInclude Include="math\space\orthographic\screen.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic\screen.h">
+    <ClInclude Include="math\space\orthographic.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic.h">
+    <ClInclude Include="math\space\orthographic\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic\concept.h">
+    <ClInclude Include="math\space\orthographic\orthographic.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="coordinate\orthographic\orthographic.h">
+    <ClInclude Include="math\utils\base_vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

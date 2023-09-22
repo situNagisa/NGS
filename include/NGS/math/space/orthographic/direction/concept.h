@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NGS/coordinate/orthographic/concept.h"
+#include "NGS/math/space/orthographic/concept.h"
 
 NGS_COORDINATE_BEGIN
 

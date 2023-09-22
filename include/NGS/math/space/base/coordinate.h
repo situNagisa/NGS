@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NGS/coordinate/base/concept.h"
+#include "NGS/math/space/base/concept.h"
 
 NGS_COORDINATE_BEGIN
 
