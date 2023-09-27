@@ -10,7 +10,7 @@ template<space::CAxis _Axis,size_t _Dimension,mla::CScalarExpression _ElementTyp
 constexpr auto base_vector() {
 	using vector_type = mla::Vector<_Dimension, _ElementType>;
 	vector_type result{};
-	result(_Axis::dimension) = _Axis::sign;
+	result(_Axis::dimension) = 1;// _Axis::sign;
 	return result;
 }
 

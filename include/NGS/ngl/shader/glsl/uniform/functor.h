@@ -81,34 +81,44 @@ constexpr auto matrix4x2 = convert_to_dimension<4, 2>;
 constexpr auto matrix4x3 = convert_to_dimension<4, 3>;
 constexpr auto matrix4x4 = convert_to_dimension<4, 4>;
 
-template<class _Type, size_t _Dimension = 1, size_t _Count = 1>
-inline void gl_set_uniform(uniform_offset_t location, const _Type* data) {
-	if constexpr (is_matrix_dimension<_Dimension>) {
-		constexpr auto row_col = convert_to_matrix_row_col<_Dimension>;
-		auto gl_uniform = get_gl_set_uniform_matrix<_Type, row_col.x, row_col.y>::value;
-		gl_uniform(location, _Count, NGL_UNIFORM_MATRIX_TRANSPOSE, data);
+template<class _Type, size_t _Count = 1>
+void gl_set_uniform(uniform_offset_t location, void_ptr_cst data) {
+	if constexpr (mla::CStandardMatrix<_Type>) {
+		auto gl_uniform = get_gl_set_uniform_matrix<typename _Type::element_type, _Type::row_count, _Type::col_count>::value;
+		auto data_temp = static_cast<const typename _Type::element_type*>(data);
+		gl_uniform(location, _Count, NGL_UNIFORM_MATRIX_TRANSPOSE, data_temp);
+	}
+	else if constexpr (mla::CStandardVector<_Type>) {
+		auto data_temp = static_cast<const typename _Type::element_type*>(data);
+		if constexpr (_Count > 1) {
+			get_gl_set_uniform<typename _Type::element_type, _Type::dimension, _Count>::value(location, _Count, data_temp);
+		}
+		else if constexpr (_Count == 1) {
+			if constexpr (_Type::dimension == 1) {
+				get_gl_set_uniform<typename _Type::element_type, 1, 1>::value(location, data_temp[0]);
+			}
+			else if constexpr (_Type::dimension == 2) {
+				get_gl_set_uniform<typename _Type::element_type, 2, 1>::value(location, data_temp[0], data_temp[1]);
+			}
+			else if constexpr (_Type::dimension == 3) {
+				get_gl_set_uniform<typename _Type::element_type, 3, 1>::value(location, data_temp[0], data_temp[1], data_temp[2]);
+			}
+			else if constexpr (_Type::dimension == 4) {
+				get_gl_set_uniform<typename _Type::element_type, 4, 1>::value(location, data_temp[0], data_temp[1], data_temp[2], data_temp[3]);
+			}
+		}
+	}
+	else if constexpr (mla::CScalarExpression<_Type>) {
+		auto data_temp = static_cast<const _Type*>(data);
+		if constexpr (_Count > 1) {
+			get_gl_set_uniform<_Type, 1, _Count>::value(location, _Count, data_temp);
+		}
+		else if constexpr (_Count == 1) {
+			get_gl_set_uniform<_Type, 1, 1>::value(location, data_temp[0]);
+		}
 	}
 	else {
-		if constexpr (_Count == 1) {
-			if constexpr (_Dimension == 1) {
-				get_gl_set_uniform<_Type, 1, 1>::value(location, data[0]);
-			}
-			else if constexpr (_Dimension == 2) {
-				get_gl_set_uniform<_Type, 2, 1>::value(location, data[0], data[1]);
-			}
-			else if constexpr (_Dimension == 3) {
-				get_gl_set_uniform<_Type, 3, 1>::value(location, data[0], data[1], data[2]);
-			}
-			else if constexpr (_Dimension == 4) {
-				get_gl_set_uniform<_Type, 4, 1>::value(location, data[0], data[1], data[2], data[3]);
-			}
-			else {
 
-			}
-		}
-		else {
-			get_gl_set_uniform<_Type, _Dimension, _Count>::value(location, _Count, data);
-		}
 	}
 }
 

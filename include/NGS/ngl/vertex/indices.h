@@ -25,8 +25,11 @@ public:
 
 	template<class  _Rng>
 		requires std::ranges::random_access_range<_Rng>&& std::convertible_to<std::ranges::range_value_t<_Rng>, indices_t>
-	void AddIndices(size_t offset, _Rng&& rng) {
+	void AddIndices(size_t offset, const _Rng& rng) {
 		Write(std::ranges::cdata(rng), std::ranges::size(rng), offset);
+	}
+	void AddIndices(size_t offset, const std::same_as<indices_t> auto&... rng) {
+		AddIndices(offset, std::array{ rng... });
 	}
 
 	size_t GetCapacity()const {

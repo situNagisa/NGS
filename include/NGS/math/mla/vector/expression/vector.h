@@ -4,6 +4,13 @@
 
 NGS_MLA_BEGIN
 
+NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CStandardVector, is_standard_vector,
+	CVectorContainerSize,
+	requires(const _Type vector_cst,_Type vector) {
+		{ vector_cst.data() } -> std::convertible_to<const typename _Type::element_type*>;
+		{ vector.data() } -> std::convertible_to<typename _Type::element_type*>;
+});
+
 template<size_t _Dimension, class  _ElementType, class  = std::make_index_sequence<_Dimension>>
 class NGS_API  Vector;
 
@@ -28,29 +35,21 @@ public:
 
 	using base_type::operator();
 
-	constexpr element_type& operator()(size_t i) { return _data[i]; }
-	constexpr const element_type& operator()(size_t i)const { return _data[i]; }
+	constexpr element_type& operator()(size_t i) { return source[i]; }
+	constexpr const element_type& operator()(size_t i)const { return source[i]; }
 
 	using base_type::assign;
 	constexpr expression_type& assign(size_t index, element_type element) {
-		_data[index] = element;
+		source[index] = element;
 		return (*this)();
 	}
 
-	constexpr element_type* data(){ return _data; }
-	constexpr const element_type* data()const{ return _data; }
+	constexpr element_type* data(){ return source; }
+	constexpr const element_type* data()const{ return source; }
 
 public:
-	//这里将其设置为公有变量是为了让Vector可以作为非类型模板参数
-	element_type _data[base_type::dimension]{};
+	element_type source[base_type::dimension]{};
 };
-
-
-
-namespace {
-constexpr Vector<3, int> _test_vector{1, 2, 3};
-static_assert(_test_vector(0) == 1 && _test_vector(1) == 2 && _test_vector(2) == 3, "undefined behavior");
-}
 
 template<class  _ElementType> using Vector1 = Vector<1, _ElementType>;
 template<class  _ElementType> using Vector2 = Vector<2, _ElementType>;
@@ -80,5 +79,10 @@ using Vector4f = Vector4<float>;
 using Vector4d = Vector4<double>;
 using Vector4u = Vector4<unsigned>;
 using Vector4s = Vector4<size_t>;
+
+NGS_CCPT_VERIFY(CStandardVector, Vector1i);
+NGS_CCPT_VERIFY(CStandardVector, Vector2f);
+NGS_CCPT_VERIFY(CStandardVector, Vector3d);
+NGS_CCPT_VERIFY(CStandardVector, Vector4s);
 
 NGS_MLA_END

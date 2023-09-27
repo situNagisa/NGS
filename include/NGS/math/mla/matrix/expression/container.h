@@ -8,7 +8,7 @@ NGS_MLA_BEGIN
 /**
  * @brief
  *
- * @concept derived_drom CMatrixExpression
+ * @concept derived_from CMatrixExpression
  *
  * @property type layout_category *
  * @property element_type operator()(size_t i)const
@@ -26,7 +26,18 @@ NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CMatrixContainer,is_matrix_container,
 	{ container.assign(index, element) } -> std::convertible_to<_Type&>;
 	{ container.assign(row_index, col_index, element) } -> std::convertible_to<_Type&>;
 	{ container.assign(row_index, col_index, container_cst) } -> std::convertible_to<_Type&>;
-	//	requires (sizeof(_Container) == (sizeof(typename matrix_traits<_Type>::element_type) * matrix_traits<_Type>::col_count * matrix_traits<_Type>::row_count));
+});
+
+/**
+ * @brief
+ *
+ * @concept derived_from CMatrixContainer
+ *
+*/
+NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CMatrixContainerSize, is_matrix_container_size,
+	CMatrixContainer,
+	requires() {
+		requires (sizeof(_Type) == (sizeof(typename _Type::element_type) * _Type::col_count * _Type::row_count));
 });
 
 

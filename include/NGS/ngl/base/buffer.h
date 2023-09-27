@@ -13,7 +13,7 @@ public:
 	/**
 	 * @brief
 	 *
-	 * @param type
+	 * @param target
 	 * @param data
 	 * @param size
 	 * @param usage
@@ -22,7 +22,7 @@ public:
 	/**
 	 * @brief
 	 *
-	 * @param type
+	 * @param target
 	 * @param size
 	 * @param usage
 	 */

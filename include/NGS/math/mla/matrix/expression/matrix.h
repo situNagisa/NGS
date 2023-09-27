@@ -5,6 +5,13 @@
 
 NGS_MLA_BEGIN
 
+NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CStandardMatrix, is_standard_matrix,
+	CMatrixContainerSize,
+	requires(const _Type matrix_cst, _Type matrix) {
+		{ matrix_cst.data() } -> std::convertible_to<const typename _Type::element_type*>;
+		{ matrix.data() } -> std::convertible_to<typename _Type::element_type*>;
+});
+
 template<
 	size_t _Row, size_t _Col,
 	class  _ElementType,
@@ -95,14 +102,14 @@ public:
 	//===============
 
 	using base_type::operator();
-	constexpr element_type& operator()(size_t index) { return _data[index]; }
-	constexpr const element_type& operator()(size_t index)const { return _data[index]; }
+	constexpr element_type& operator()(size_t index) { return source[index]; }
+	constexpr const element_type& operator()(size_t index)const { return source[index]; }
 
 	constexpr element_type& operator()(size_t row_index, size_t col_index) {
-		return _data[layout_category::transform(row_index, col_index, row_count, col_count)];
+		return source[layout_category::transform(row_index, col_index, row_count, col_count)];
 	}
 	constexpr const element_type& operator()(size_t row_index, size_t col_index)const {
-		return _data[layout_category::transform(row_index, col_index, row_count, col_count)];
+		return source[layout_category::transform(row_index, col_index, row_count, col_count)];
 	}
 	using base_type::assign;
 	constexpr expression_type& assign(size_t index, element_type element) {
@@ -113,9 +120,10 @@ public:
 		(*this)()(row_index, col_index) = element;
 		return (*this)();
 	}
-
-private:
-	element_type _data[row_count * col_count]{};
+	constexpr element_type* data() { return source; }
+	constexpr const element_type* data()const { return source; }
+public:
+	element_type source[row_count * col_count]{};
 };
 
 NGS_CCPT_VERIFY(CMatrixContainer, Matrix<3, 3, float>);

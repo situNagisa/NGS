@@ -32,6 +32,7 @@
 
 #include "NGS/extend/console.h"
 
+#include "NGS/extend/meta_variable_wrapper.h"
 #include "NGS/extend/memory_reinterpreter.h"
 
 #ifdef NGS_USE_HPP

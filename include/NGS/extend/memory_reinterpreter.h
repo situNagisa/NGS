@@ -2,6 +2,7 @@
 
 #include "NGS/base/defined.h"
 #include "NGS/base/concepts.h"
+#include "NGS/extend/meta_variable_wrapper.h"
 
 #include <boost/stl_interfaces/iterator_interface.hpp>
 #include <boost/stl_interfaces/reverse_iterator.hpp>
@@ -33,6 +34,9 @@ public:
 		: _memory(static_cast<byte_ptr>(memory))
 	{}
 
+	constexpr void Rebind(void_ptr memory){
+		_memory = static_cast<byte_ptr>(memory);
+	}
 	/**
 	 * @brief 获取变量
 	 * 
@@ -41,12 +45,18 @@ public:
 	 * @return 
 	 */
 	template<size_t _Index>
-	constexpr typename var<_Index>::element_type* Get() {
-		return std::launder(reinterpret_cast<typename var<_Index>::element_type*>(_memory + meta_struct_type::variables[_Index].offset));
+	constexpr auto Get() {
+		using v = var<_Index>;
+		using e = typename var<_Index>::element_type;
+		auto p = std::launder(reinterpret_cast<e*>(_memory + meta_struct_type::variables[_Index].offset));
+		return meta_variable_wrapper<v,ccpt::bool_<false>>(p);
 	}
 	template<size_t _Index>
-	constexpr const typename var<_Index>::element_type* Get()const {
-		return std::launder(reinterpret_cast<const typename var<_Index>::element_type*>(_memory + meta_struct_type::variables[_Index].offset));
+	constexpr auto Get()const {
+		using v = var<_Index>;
+		using e = typename var<_Index>::element_type;
+		auto p = std::launder(reinterpret_cast<const e*>(_memory + meta_struct_type::variables[_Index].offset));
+		return meta_variable_wrapper<v,ccpt::bool_<true>>(p);
 	}
 
 	template<class _Type>
@@ -122,10 +132,19 @@ public:
 	constexpr const_reverse_iterator_type rend()const { return const_reverse_iterator_type(begin()); }
 	constexpr const_reverse_iterator_type crbegin()const { return rbegin(); }
 	constexpr const_reverse_iterator_type crend()const { return crend(); }
-
 private:
 	byte_ptr _memory;
 };
+
+template<mpl::CMetaStruct _MetaStruct, size_t ..._VarIndex>
+constexpr std::string to_string(const MemoryReinterpreter<_MetaStruct, std::index_sequence<_VarIndex...>>& ptr) {
+	std::string str;
+	str += "{";
+	bool first = true;
+	((str += (first ? "" : ", ") + to_string(ptr.template Get<_VarIndex>()), first = false), ...);
+	str += "}";
+	return str;
+}
 
 NGS_END
 

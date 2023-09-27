@@ -6,8 +6,7 @@
 NGL_BEGIN
 
 class NGS_API  PolygonIndicesCtrl : public DefaultIndicesCtrl {
-private:
-
+	NGS_menvironment(PolygonIndicesCtrl);
 public:
 	PolygonIndicesCtrl(size_t vertex_count, Usage usage)
 		: DefaultIndicesCtrl(3 * (vertex_count - 2), usage)

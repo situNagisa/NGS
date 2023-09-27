@@ -29,3 +29,4 @@
 #include "NGS/base/assert.h"
 
 #include "NGS/base/is_as.h"
+#include "NGS/base/to_string.h"

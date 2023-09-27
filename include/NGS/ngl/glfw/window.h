@@ -69,10 +69,10 @@ public:
 		glfwGetFramebufferSize(_context, &bufferWidth, &bufferHeight);
 		return { bufferWidth,bufferHeight };
 	}
-	Rectanglei GetFrameBounds()const {
+	std::pair<Point2i, Point2i> GetWindowFrameSize()const {
 		int left, top, right, bottom;
 		glfwGetWindowFrameSize(_context, &left, &top, &right, &bottom);
-		return { left,top,right - left,bottom - top };
+		return { Point2i(top,bottom), Point2i(left,right) };
 	}
 	Rectanglei GetClientBounds()const {
 		auto pos = GetPosition();

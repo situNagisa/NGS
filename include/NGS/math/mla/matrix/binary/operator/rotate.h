@@ -49,8 +49,8 @@ constexpr auto rotate(_Angle angle, const _Axis& axis_temp) {
 	using vector_type = Vector<3, element_type>;
 	using matrix_type = HomogeneousMatrix<4, element_type, _Layout>;
 
-	const auto cos = std::cos(static_cast<element_type>(angle));
-	const auto sin = std::sin(static_cast<element_type>(angle));
+	const auto cos = std::cos(static_cast<element_type>(-angle));
+	const auto sin = std::sin(static_cast<element_type>(-angle));
 
 	const vector_type axis = normalize(axis_temp);
 	const vector_type temp = (1 - cos) * axis;

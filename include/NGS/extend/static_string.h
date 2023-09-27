@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "NGS/base/base.h"
 
@@ -79,9 +79,9 @@ public:
 	constexpr const_reverse_iterator crend()const noexcept { return const_reverse_iterator(begin()); }
 
 	/**
-	 * \brief  ÒÔ char_size ¸ö ch µÄ¸±±¾Ìæ»»ÄÚÈİ¡£
+	 * \brief  ä»¥ char_size ä¸ª ch çš„å‰¯æœ¬æ›¿æ¢å†…å®¹ã€‚
 	 *
-	 * \param ch ÓÃÒÔ³õÊ¼»¯×Ö·û´®µÄ×Ö·ûµÄÖµ
+	 * \param ch ç”¨ä»¥åˆå§‹åŒ–å­—ç¬¦ä¸²çš„å­—ç¬¦çš„å€¼
 	 * \return
 	 */
 	constexpr closure_type assign(value_type ch) {
@@ -91,9 +91,9 @@ public:
 		return *this;
 	}
 	/**
-	 * \brief ÒÔ str µÄ¸±±¾Ìæ»»ÄÚÈİ¡£µÈ¼ÛÓÚ *this = str; ¡£
+	 * \brief ä»¥ str çš„å‰¯æœ¬æ›¿æ¢å†…å®¹ã€‚ç­‰ä»·äº *this = str; ã€‚
 	 *
-	 * \param str ÓÃ×÷Ô´ÒÔ³õÊ¼»¯×Ö·ûµÄ string
+	 * \param str ç”¨ä½œæºä»¥åˆå§‹åŒ–å­—ç¬¦çš„ string
 	 * \return
 	 */
 	constexpr closure_type assign(const_closure_type str) {
@@ -103,11 +103,11 @@ public:
 		return *this;
 	}
 	/**
-	 * \brief ÒÔ str µÄ×Ó´® [pos, pos+count) Ìæ»»ÄÚÈİ¡£ÈôÇëÇóµÄ×Ó´®Ô½¹ı string Î²£¬»òÈô count == char_size £¬Ôò²úÉúµÄ×Ó´®ÊÇ [pos, str.size()) ¡£
+	 * \brief ä»¥ str çš„å­ä¸² [pos, pos+count) æ›¿æ¢å†…å®¹ã€‚è‹¥è¯·æ±‚çš„å­ä¸²è¶Šè¿‡ string å°¾ï¼Œæˆ–è‹¥ count == char_size ï¼Œåˆ™äº§ç”Ÿçš„å­ä¸²æ˜¯ [pos, str.size()) ã€‚
 	 *
-	 * \param str ÓÃ×÷Ô´ÒÔ³õÊ¼»¯×Ö·ûµÄ string
-	 * \param pos ÒªÈ¡µÄÊ××Ö·ûÏÂ±ê
-	 * \param count  ²úÉúµÄ string ´óĞ¡
+	 * \param str ç”¨ä½œæºä»¥åˆå§‹åŒ–å­—ç¬¦çš„ string
+	 * \param pos è¦å–çš„é¦–å­—ç¬¦ä¸‹æ ‡
+	 * \param count  äº§ç”Ÿçš„ string å¤§å°
 	 * \return
 	 */
 	constexpr closure_type assign(const_closure_type str, size_type pos, size_type count = npos) {
@@ -119,9 +119,9 @@ public:
 		return *this;
 	}
 	/**
-	 * \brief ÒÔ str µÄ¸±±¾Ìæ»»ÄÚÈİ¡£µÈ¼ÛÓÚ *this = str; ¡£
+	 * \brief ä»¥ str çš„å‰¯æœ¬æ›¿æ¢å†…å®¹ã€‚ç­‰ä»·äº *this = str; ã€‚
 	 *
-	 * \param str ÓÃ×÷Ô´ÒÔ³õÊ¼»¯×Ö·ûµÄ string
+	 * \param str ç”¨ä½œæºä»¥åˆå§‹åŒ–å­—ç¬¦çš„ string
 	 * \return
 	 */
 	constexpr closure_type assign(const value_type(&str)[char_size]) noexcept {
@@ -133,22 +133,26 @@ public:
 	}
 
 	/**
-	 * \brief ·µ»Øµ½Î»ÓÚÖ¸¶¨Î»ÖÃ pos µÄ×Ö·ûµÄÒıÓÃ
+	 * \brief è¿”å›åˆ°ä½äºæŒ‡å®šä½ç½® pos çš„å­—ç¬¦çš„å¼•ç”¨
 	 *
-	 * \param pos Òª·µ»ØµÄ×Ö·ûÎ»ÖÃ
-	 * \return µ½ÇëÇóµÄ×Ö·ûµÄÒıÓÃ¡£
+	 * \param pos è¦è¿”å›çš„å­—ç¬¦ä½ç½®
+	 * \return åˆ°è¯·æ±‚çš„å­—ç¬¦çš„å¼•ç”¨ã€‚
 	 */
 	constexpr reference at(size_type pos) { return source[pos]; }
 	constexpr const_reference at(size_type pos)const { return source[pos]; }
 
+#if NGS_COMPILER == NGS_MSVC
+#pragma warning(push)
+#pragma warning(disable: 4172)
+#endif
 	/**
-	 * \brief ÔÚ pos < size() Ê±·µ»Øµ½Î»ÓÚÖ¸¶¨Î»ÖÃ pos µÄ×Ö·ûµÄÒıÓÃ£¬»òÔÚ pos == size() Ê±·µ»Øµ½ÓµÓĞÖµ CharT() µÄ×Ö·û£¨¿Õ×Ö·û£©µÄÒıÓÃ¡£²»½øĞĞ±ß½ç¼ì²é¡£
-	 * Èç¹û pos > size()£¬ÄÇÃ´ĞĞÎªÎ´¶¨Òå¡£
+	 * \brief åœ¨ pos < size() æ—¶è¿”å›åˆ°ä½äºæŒ‡å®šä½ç½® pos çš„å­—ç¬¦çš„å¼•ç”¨ï¼Œæˆ–åœ¨ pos == size() æ—¶è¿”å›åˆ°æ‹¥æœ‰å€¼ CharT() çš„å­—ç¬¦ï¼ˆç©ºå­—ç¬¦ï¼‰çš„å¼•ç”¨ã€‚ä¸è¿›è¡Œè¾¹ç•Œæ£€æŸ¥ã€‚
+	 * å¦‚æœ pos > size()ï¼Œé‚£ä¹ˆè¡Œä¸ºæœªå®šä¹‰ã€‚
 	 *
-	 * \warning ¶ÔÓÚÖØÔØ (1)£¬Èç¹û pos == size()£¬ÄÇÃ´·µ»ØµÄÒıÓÃÖ¸´úµÄ¶ÔÏó±»ĞŞ¸Ä³É CharT() ÒÔÍâµÄÖµµÄ (C++11 Æğ)ĞĞÎªÎ´¶¨Òå¡£
+	 * \warning å¯¹äºé‡è½½ (1)ï¼Œå¦‚æœ pos == size()ï¼Œé‚£ä¹ˆè¿”å›çš„å¼•ç”¨æŒ‡ä»£çš„å¯¹è±¡è¢«ä¿®æ”¹æˆ CharT() ä»¥å¤–çš„å€¼çš„ (C++11 èµ·)è¡Œä¸ºæœªå®šä¹‰ã€‚
 	 *
-	 * \param pos Òª·µ»ØµÄ×Ö·ûÎ»ÖÃ
-	 * \return ÔÚ pos < size() Ê±·µ»Ø *(begin() + pos)£¬»òÔÚ pos == size() Ê±·µ»Øµ½ CharT() µÄÒıÓÃ¡£
+	 * \param pos è¦è¿”å›çš„å­—ç¬¦ä½ç½®
+	 * \return åœ¨ pos < size() æ—¶è¿”å› *(begin() + pos)ï¼Œæˆ–åœ¨ pos == size() æ—¶è¿”å›åˆ° CharT() çš„å¼•ç”¨ã€‚
 	 */
 	constexpr reference operator[](size_type pos) {
 		if (pos < size()) {
@@ -162,19 +166,21 @@ public:
 		}
 		return value_type();
 	}
-
+#if NGS_COMPILER == NGS_MSVC
+#pragma warning(pop)
+#endif
 	/**
-	 * \brief ·µ»Øµ½ string ÖĞÊ××Ö·ûµÄÒıÓÃ¡£Èô empty() == true ÔòĞĞÎªÎ´¶¨Òå
+	 * \brief è¿”å›åˆ° string ä¸­é¦–å­—ç¬¦çš„å¼•ç”¨ã€‚è‹¥ empty() == true åˆ™è¡Œä¸ºæœªå®šä¹‰
 	 *
-	 * \return µ½Ê××Ö·ûµÄÒıÓÃ£¬µÈ¼ÛÓÚ operator[](0) ¡£
+	 * \return åˆ°é¦–å­—ç¬¦çš„å¼•ç”¨ï¼Œç­‰ä»·äº operator[](0) ã€‚
 	 */
 	constexpr reference front() { return (*this)[0]; }
 	constexpr const_reference front()const { return (*this)[0]; }
 
 	/**
-	 * \brief ·µ»Ø×Ö·û´®ÖĞµÄÄ©×Ö·û¡£Èô empty() == true ÔòĞĞÎªÎ´¶¨Òå¡£
+	 * \brief è¿”å›å­—ç¬¦ä¸²ä¸­çš„æœ«å­—ç¬¦ã€‚è‹¥ empty() == true åˆ™è¡Œä¸ºæœªå®šä¹‰ã€‚
 	 *
-	 * \return µ½Ä©×Ö·ûµÄÒıÓÃ£¬µÈ¼ÛÓÚ operator[](size() - 1) ¡£
+	 * \return åˆ°æœ«å­—ç¬¦çš„å¼•ç”¨ï¼Œç­‰ä»·äº operator[](size() - 1) ã€‚
 	 */
 	constexpr reference back() { return (*this)[size() - 1]; }
 	constexpr const_reference back()const { return (*this)[size() - 1]; }
@@ -202,7 +208,7 @@ public:
 };
 
 template<std::size_t _N>
-using static_string = basic_static_string<_N,char, std::char_traits<char>>;
+using static_string = basic_static_string<_N, char, std::char_traits<char>>;
 template<std::size_t _N>
 using static_wstring = basic_static_string<_N, wchar_t, std::char_traits<wchar_t>>;
 template<std::size_t _N>
@@ -214,5 +220,8 @@ using static_u8string = basic_static_string<_N, char8_t, std::char_traits<char8_
 
 //template<size_t _N,class _CharType>
 //basic_static_string(_CharType(&)[_N]) -> basic_static_string<_N, std::decay_t<_CharType>>;
+
+//template<size_t _N>
+//constexpr std::string to_string(const static_string<_N>& str) { return std::string(str.source); }
 
 NGS_END

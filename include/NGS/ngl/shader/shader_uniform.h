@@ -10,9 +10,6 @@ class NGS_API ShaderUniform : public Shader {
 	NGS_menvironment(ShaderUniform);
 public:
 	using uniforms_type = uniforms_<_Tuples...>;
-
-	template<static_string _Id>
-	using uniform_type = typename uniforms_type::template uniform_type<_Id>;
 public:
 
 	using base_type::base_type;
@@ -24,7 +21,7 @@ public:
 		if (!_required_update)return;
 		base_type::Update();
 		bind(this);
-		((map::gl_set_uniform<typename _Tuples::original_type, _Tuples::dimension, _Tuples::element_count>(GetUniformLocation(std::string_view(_Tuples::name)), _GetPointer<_Tuples::name>())), ...);
+		((map::gl_set_uniform<typename _Tuples::element_type, _Tuples::element_count>(GetUniformLocation(std::string_view(_Tuples::name)), _GetPointer<_Tuples::name>())), ...);
 	}
 	/**
 	 * \brief 获取对应变量
@@ -46,12 +43,11 @@ public:
 	}
 	template<static_string _Id>
 	void SetUniform(auto&& param) {
-		if constexpr (std::ranges::range<decltype(param)>) {
-			std::ranges::copy(param, GetUniform<_Id>().begin());
-		}
-		else {
-			*GetUniform<_Id>() = param;
-		}
+		GetUniform<_Id>() = std::forward<decltype(param)>(param);
+	}
+
+	friend std::string to_string(const self_type& shader) {
+		return to_string(shader._uniforms);
 	}
 private:
 	template<static_string _Id>
@@ -63,7 +59,7 @@ private:
 	void _UpdateUniform() {
 		const auto location = GetUniformLocation(std::string_view(_Tuple::name));
 		const auto span = GetUniform<_Tuple::name>();
-		map::gl_set_uniform<typename _Tuple::original_type, _Tuple::dimension, _Tuple::element_count>(location, span.data());
+		map::gl_set_uniform<typename _Tuple::element_type, _Tuple::element_count>(location, span.data());
 	}
 private:
 	uniforms_type _uniforms{};

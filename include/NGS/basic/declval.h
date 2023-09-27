@@ -4,7 +4,7 @@
 
 NGS_BEGIN
 
-#if NGS_COMPILER == NGS_COMPILER_MSVC
+#if NGS_COMPILER == NGS_MSVC
 #pragma warning(push)
 #pragma warning(disable: 6011)
 #endif
@@ -22,7 +22,7 @@ constexpr std::add_rvalue_reference_t<_Type> declval() {
 	return std::move(*ptr);
 }
 
-#if NGS_COMPILER == NGS_COMPILER_MSVC
+#if NGS_COMPILER == NGS_MSVC
 #pragma warning(pop)
 #endif
 

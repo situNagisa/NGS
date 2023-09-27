@@ -48,7 +48,7 @@ concept _RANL = requires(T t) {
 	{ t.IsOpened() } -> std::same_as<bool>;
 	{ t.Close() } -> std::same_as<void>;
 }
-&& std::convertible_to< typename mpl::function_trait<decltype(T::Open)>::return_type, bool>
+&& std::convertible_to<typename mpl::function_trait<decltype(T::Open)>::return_type, bool>
 ;
 
 template<class  T, class ... Args>

@@ -1,5 +1,5 @@
-#pragma once
+﻿#pragma once
 
-#include "NGS/math/utils/util.h"
-#include "NGS/math/utils/axis.h"
-#include "NGS/math/utils/base_vector.h"
+#include "./utils/util.h"
+#include "./utils/axis.h"
+#include "./utils/base_vector.h"

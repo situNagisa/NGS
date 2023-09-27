@@ -1296,7 +1296,7 @@
     <ClInclude Include="math\mla\matrix\unary\operator\inverse.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="transform\_3d\lorentz.h">
+    <ClInclude Include="transform\3d\lorentz.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\mla\matrix\expression\diagonal.h">
@@ -1311,7 +1311,7 @@
     <ClInclude Include="transform\axis.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="transform\_3d\direction.h">
+    <ClInclude Include="transform\3d\direction.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\mla\vector\binary\operator\is_same_direction.h">
@@ -1326,16 +1326,16 @@
     <ClInclude Include="concepts\none.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="transform\_3d\projection\perspective.h">
+    <ClInclude Include="transform\3d\projection\perspective.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="transform\_3d.h">
+    <ClInclude Include="transform\3d.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="transform\_3d\projection.h">
+    <ClInclude Include="transform\3d\projection.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="transform\_3d\projection\orthographic.h">
+    <ClInclude Include="transform\3d\projection\orthographic.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="transform\transform.hpp">
@@ -1347,7 +1347,7 @@
     <ClInclude Include="math\space\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic\direction\direction.h">
+    <ClInclude Include="math\space\cartesian\3d\direction\direction.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\space\axis.h">
@@ -1365,40 +1365,76 @@
     <ClInclude Include="math\space\base\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic\screen\concept.h">
+    <ClInclude Include="math\space\cartesian\3d\screen\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic\screen\screen.h">
+    <ClInclude Include="math\space\cartesian\3d\screen\screen.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic\direction\concept.h">
+    <ClInclude Include="math\space\cartesian\3d\direction\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\space\base\coordinate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic\direction\support.h">
+    <ClInclude Include="math\space\cartesian\3d\direction\support.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic\screen\support.h">
+    <ClInclude Include="math\space\cartesian\3d\screen\support.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic\direction.h">
+    <ClInclude Include="math\space\cartesian\3d\direction.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic\screen.h">
+    <ClInclude Include="math\space\cartesian\3d\screen.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic.h">
+    <ClInclude Include="math\space\cartesian.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic\concept.h">
+    <ClInclude Include="math\space\cartesian\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\space\orthographic\orthographic.h">
+    <ClInclude Include="math\space\cartesian\cartesian.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\utils\base_vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="base\to_string.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extend\meta_variable_wrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\space\cartesian\3d\functor\chirality.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\space\cartesian\3d\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\space\cartesian\support.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\space\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\space\cartesian\3d\chirality.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\space\cartesian\3d.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\space\cartesian\3d\3d.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\space\cartesian\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\space\cartesian\3d\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="transform\coordinate.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

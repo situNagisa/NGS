@@ -2,7 +2,7 @@
 
 #include "NGS/math/space/defined.h"
 
-NGS_COORDINATE_BEGIN
+NGS_SPACE_BEGIN
 
 template<class _Axis>
 inline constexpr bool _is_axis = requires{
@@ -23,4 +23,4 @@ template<class _Axis> concept CAxisY = CAxis<_Axis> && CAxisDimensionEqual<_Axis
 template<class _Axis> concept CAxisZ = CAxis<_Axis> && CAxisDimensionEqual<_Axis,2>;
 template<class _Axis> concept CAxisW = CAxis<_Axis> && CAxisDimensionEqual<_Axis,3>;
 
-NGS_COORDINATE_END
+NGS_SPACE_END

@@ -1,10 +1,12 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/math/space/base/concept.h"
 
-NGS_COORDINATE_BEGIN
+NGS_SPACE_BEGIN
 
 template<CAxis... _Axes>
-struct coordinate {};
+struct coordinate {
+	using axes_type = mpl::vector<_Axes...>;
+};
 
-NGS_COORDINATE_END
+NGS_SPACE_END

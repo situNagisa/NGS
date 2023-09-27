@@ -4,6 +4,7 @@
 #include "NGS/base/base_class.h"
 #include "NGS/base/format.h"
 #include "NGS/base/type_info.h"
+#include "NGS/base/to_string.h"
 
 NGS_BEGIN
 
@@ -137,15 +138,16 @@ public:
 
 	template<typename T, typename... Args>
 	static void _Print(T&& obj, Args&&... args) {
-		if constexpr (std::same_as<std::decay_t<T>, TextColor>) {
+		if constexpr (std::same_as<std::remove_cvref_t<T>, TextColor>) {
 			set_text_color(obj);
 		}
-		else if constexpr (std::convertible_to<T, std::string>) {
-			std::cout << std::string(std::forward<T>(obj));
+		else if constexpr (requires{ std::cout << to_string(std::forward<T>(obj)); }) {
+			std::cout << to_string(std::forward<T>(obj));
 		}
 		else {
 			std::cout << std::forward<T>(obj);
 		}
+		
 
 		if constexpr (sizeof...(Args))_Print(std::forward<Args>(args)...);
 	}

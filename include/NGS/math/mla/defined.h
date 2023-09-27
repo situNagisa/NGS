@@ -2,6 +2,7 @@
 
 #include "NGS/math/defined.h"
 #include "NGS/math/basic.h"
+#include "NGS/math/space.h"
 
 #define NGS_MLA_BEGIN NGS_MATH_BEGIN namespace linear_algebra {
 #define NGS_MLA_END } NGS_MATH_END

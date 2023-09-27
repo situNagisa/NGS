@@ -4,7 +4,7 @@
 
 NGS_TRANSFORM_BEGIN
 
-template<space::CScreenCoordinate _Coordinate, mla::CScalarExpression _ElementType = float32, mla::CMatrixLayout _Layout = mla::tag::row>
+template<space::cartesian::d3::CScreen _Coordinate, mla::CScalarExpression _ElementType = float32, mla::CMatrixLayout _Layout = mla::tag::row>
 constexpr auto orthographic(
 	const mla::CVectorDimensionEqual<3> auto& src_min,
 	const mla::CVectorDimensionEqual<3> auto& src_max,
@@ -31,7 +31,7 @@ constexpr auto orthographic(
 	xyz[index_v](index_v) = sign_v * k[index_v];
 	xyz[index_d](index_d) = sign_d * k[index_d];
 
-	vector_type offset = dst_min - src_min * vector_type(xyz[0][0], xyz[1][1],xyz[2][2]);
+	vector_type offset = dst_min - src_min * vector_type(xyz[0][0], xyz[1][1], xyz[2][2]);
 
 	return matrix_type(
 		xyz[0](0), xyz[0](1), xyz[0](2), offset(0),

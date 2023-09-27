@@ -2,7 +2,7 @@
 
 #include "NGS/math/space/axis/concept.h"
 
-NGS_COORDINATE_BEGIN
+NGS_SPACE_BEGIN
 
 template<int _Sign, size_t _Dimension>
 struct axis {
@@ -10,4 +10,4 @@ struct axis {
 	static constexpr size_t dimension = _Dimension;
 };
 
-NGS_COORDINATE_END
+NGS_SPACE_END

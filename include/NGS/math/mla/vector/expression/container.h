@@ -21,6 +21,17 @@ NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CVectorContainer, is_vector_container,
 		{ expr.assign(expr) } -> std::convertible_to<_Type&>;
 });
 
+/**
+ * @brief vector container concept
+ *
+ * @concept derived_from CVectorContainer
+*/
+NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CVectorContainerSize, is_vector_container_size,
+	CVectorContainer,
+	requires() {
+	requires sizeof(_Type) == sizeof(typename _Type::element_type) * _Type::dimension;
+});
+
 template<ccpt::CRPT<(bool)CVectorContainer<>> _Derived, ccpt::UInt _Dim, class  _ElementType, class = std::make_index_sequence<_Dim::value>>
 class NGS_API  VectorContainer;
 

@@ -1,3 +1,4 @@
-#pragma once
+﻿#pragma once
 
-#include "NGS/transform/_3d.h"
+#include "./3d.h"
+#include "./coordinate.h"
