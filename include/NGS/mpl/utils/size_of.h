@@ -4,8 +4,20 @@
 
 NGS_MPL_BEGIN
 
-NGS_mfunction(size_of, class _Type) {
-	NGS_mcst_t result_type = ccpt::uint_<sizeof(_Type)>;
+NGS_mfunction(size_of, class _Type,ccpt::UInt _Align = ccpt::uint_<0>) {
+	NGS_mcst_t result_type = decltype([] {
+		if constexpr (!_Align::value || !std::is_fundamental_v<_Type>) {
+			return declval<ccpt::uint_<sizeof(_Type)>>();
+		}
+		else {
+			if constexpr (sizeof(_Type) % _Align::value) {
+				return declval<ccpt::uint_<sizeof(_Type) + _Align::value - sizeof(_Type) % _Align::value>>();
+			}
+			else {
+				return declval<ccpt::uint_<sizeof(_Type)>>();
+			}
+		}
+		}());
 };
 
 template<class _Type>

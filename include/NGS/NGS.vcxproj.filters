@@ -1437,6 +1437,114 @@
     <ClInclude Include="transform\coordinate.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="meta_struct\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\meta_struct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\variable\variable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\structure.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\type_name.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\enum_name.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\layout.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\align.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\offset.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\size\size_of.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\precessor\type_defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\precessor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\precessor\debug_if.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\precessor\type_value_convert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\align\constant.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\align\is_align.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\align\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\align\align_of.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\size.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="layout\align\align_as.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\variable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\variable\dynamic_data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\variable\traits.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\structure\describe\describe.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\structure\flatten.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\basic\power.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\variable\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\structure\storage\storage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\structure\storage\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\structure\describe.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\structure\storage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\structure\structure.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\structure\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="meta_struct\type\structure\wrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">
@@ -1457,5 +1565,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="meta_struct\type\structure\describe\concept.h" />
   </ItemGroup>
 </Project>

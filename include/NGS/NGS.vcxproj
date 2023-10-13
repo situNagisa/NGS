@@ -24,6 +24,18 @@
     <ClInclude Include="algorithm\dynamic_program.h" />
     <ClInclude Include="algorithm\PID.h" />
     <ClInclude Include="algorithm\PID.hpp" />
+    <ClInclude Include="basic\precessor.h" />
+    <ClInclude Include="basic\precessor\debug_if.h" />
+    <ClInclude Include="basic\precessor\type_defined.h" />
+    <ClInclude Include="basic\precessor\type_value_convert.h" />
+    <ClInclude Include="layout\align.h" />
+    <ClInclude Include="layout\align\align_as.h" />
+    <ClInclude Include="layout\align\concept.h" />
+    <ClInclude Include="layout\align\constant.h" />
+    <ClInclude Include="layout\align\align_of.h" />
+    <ClInclude Include="layout\align\is_align.h" />
+    <ClInclude Include="layout\layout.h" />
+    <ClInclude Include="layout\defined.h" />
     <ClInclude Include="base\assert.h" />
     <ClInclude Include="base\base.h" />
     <ClInclude Include="base\base.hpp" />
@@ -31,9 +43,15 @@
     <ClInclude Include="base\to_string.h" />
     <ClInclude Include="basic\declval.h" />
     <ClInclude Include="base\format.h" />
+    <ClInclude Include="basic\enum_name.h" />
     <ClInclude Include="basic\numbers.h" />
+    <ClInclude Include="basic\type_name.h" />
     <ClInclude Include="concepts\none.h" />
     <ClInclude Include="extend\meta_variable_wrapper.h" />
+    <ClInclude Include="layout\offset.h" />
+    <ClInclude Include="layout\size.h" />
+    <ClInclude Include="layout\size\size_of.h" />
+    <ClInclude Include="math\basic\power.h" />
     <ClInclude Include="math\space\axis.h" />
     <ClInclude Include="math\space\axis\concept.h" />
     <ClInclude Include="math\space\axis\axis.h" />
@@ -310,6 +328,20 @@
     <ClInclude Include="math\utils\util.h" />
     <ClInclude Include="math\geometry\vector.h" />
     <ClInclude Include="math\geometry\vector_old.h" />
+    <ClInclude Include="meta_struct\type.h" />
+    <ClInclude Include="meta_struct\type\structure\concept.h" />
+    <ClInclude Include="meta_struct\type\structure\describe.h" />
+    <ClInclude Include="meta_struct\type\structure\flatten.h" />
+    <ClInclude Include="meta_struct\type\structure\storage.h" />
+    <ClInclude Include="meta_struct\type\structure\storage\storage.h" />
+    <ClInclude Include="meta_struct\type\structure\storage\concept.h" />
+    <ClInclude Include="meta_struct\type\structure\structure.h" />
+    <ClInclude Include="meta_struct\type\structure\describe\describe.h" />
+    <ClInclude Include="meta_struct\type\variable.h" />
+    <ClInclude Include="meta_struct\type\variable\concept.h" />
+    <ClInclude Include="meta_struct\type\variable\dynamic_data.h" />
+    <ClInclude Include="meta_struct\type\variable\traits.h" />
+    <ClInclude Include="meta_struct\type\structure\wrapper.h" />
     <ClInclude Include="mpl\container.h" />
     <ClInclude Include="mpl\container\map.h" />
     <ClInclude Include="mpl\container\map\key_value_pair.h" />
@@ -482,6 +514,10 @@
     <ClInclude Include="nsw\depend.h" />
     <ClInclude Include="nsw\NSW.h" />
     <ClInclude Include="nsw\NSW.hpp" />
+    <ClInclude Include="meta_struct\defined.h" />
+    <ClInclude Include="meta_struct\meta_struct.h" />
+    <ClInclude Include="meta_struct\type\structure.h" />
+    <ClInclude Include="meta_struct\type\variable\variable.h" />
     <ClInclude Include="transform\axis.h" />
     <ClInclude Include="transform\coordinate.h" />
     <ClInclude Include="transform\defined.h" />
@@ -520,6 +556,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="meta_struct\type\structure\describe\concept.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

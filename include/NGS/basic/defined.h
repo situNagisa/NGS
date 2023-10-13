@@ -11,12 +11,13 @@
 #define __HEAD_NGS_NGS_Defined
 
 
-#include "NGS/basic/STL.h"
+#include "./STL.h"
+#include "./precessor.h"
 
 //============================
 //命名空间
 //============================
-#define _NGS        ::ngs::
+#define _NGS ::ngs::
 #define NGS_BEGIN   namespace ngs{
 #define NGS_END     };
 
@@ -27,62 +28,6 @@
 
 #define NGS_ARGS_PACKAGE(...) __VA_ARGS__
 
-//#define NGS_MPL_BEGIN	namespace mpl{
-
-#define _NGS_PRIV_BEGIN namespace priv{
-
-
-#define NGS_TYPE_DEFINE(type,id)        \
-using __##id    = type;                 \
-using __##id##_cst = const type;        \
-using __##id##_ref = type&;             \
-using __##id##_ref_cst = const type&;   \
-using __##id##_right = type&&;			\
-using __##id##_right_cst = const type&&;\
-using __##id##_ptr = type*;             \
-using __##id##_ptr_cst = const type*;	\
-//
-
-
-#define _NGS_TYPE_DEFINE(type,id)   	\
-using id    = type;                 	\
-using id##_cst = const type;        	\
-using id##_ref = type&;             	\
-using id##_ref_cst = const type&;   	\
-using id##_right = type&&;				\
-using id##_right_cst = const type&&;	\
-using id##_ptr = type*;             	\
-using id##_ptr_cst = const type*;		\
-//
-
-#define NGS_DEFINE_TYPE(id,...)			\
-using id##_t = __VA_ARGS__;				\
-using id##_cst = const id##_t;			\
-using id##_ref = id##_t&;				\
-using id##_ref_cst = const id##_t&;		\
-using id##_rref = id##_t&&;				\
-using id##_rref_cst = const id##_t&&;	\
-using id##_ptr = id##_t*;				\
-using id##_ptr_cst = const id##_t*		\
-//
-
-
-
-#if NGS_BUILD_TYPE == NGS_DEBUG
-#define NGS_DEBUG_EXPR(expr) expr
-#else
-#define NGS_DEBUG_EXPR(expr)
-#endif
-
-#if NGS_BUILD_TYPE == NGS_DEBUG
-#define NGS_DEBUG_IF(condition,expr) if(condition){expr;}
-#else
-#define NGS_DEBUG_IF(condition,expr) 
-#endif
-
-//============================
-//设置
-//============================
 #ifdef NGS_CPP
 
 #define NGS_C       extern "C"
@@ -96,9 +41,6 @@ using id##_ptr_cst = const id##_t*		\
 #define NGS_C_END   
 
 #endif
-//============================
-//补充
-//============================
 
 NGS_TYPE_BEGIN
 
@@ -111,8 +53,6 @@ _NGS_TYPE_DEFINE(char, nchar);
 
 _NGS_TYPE_DEFINE(std::string, nstring);
 _NGS_TYPE_DEFINE(std::string_view, nstring_view);
-
-using ostream = std::basic_ostream<nchar, std::char_traits<nchar> >;
 
 //int
 _NGS_TYPE_DEFINE(std::int8_t, int8);
@@ -171,23 +111,6 @@ using source_location = std::source_location;
 #else
 using source_location = std::experimental::source_location;
 #endif
-
-#define NGS_DECLARE_TV(id,value_t)		\
-template<class >							\
-constexpr value_t id##_convert = {};	\
-template<value_t>						\
-struct NGS_API _##id##Convert;					\
-template<value_t _Value>				\
-using id##_convert_t = typename _##id##Convert<_Value>::type;\
-//
-
-#define NGS_DEFINE_TV(id,value_t,type,value)	\
-template<>										\
-constexpr value_t id##_convert<type> = value;	\
-template<>										\
-struct NGS_API _##id##Convert<value> { using type = type; }; \
-//
-
 
 NGS_END
 

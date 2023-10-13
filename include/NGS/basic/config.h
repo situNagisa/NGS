@@ -15,10 +15,14 @@
 #define NGS_DEBUG 0
 #define NGS_RELEASE 1
 
+#ifndef NGS_BUILD_TYPE
+
 #if defined(_DEBUG) || defined(Debug)
 #define NGS_BUILD_TYPE NGS_DEBUG
 #else
 #define NGS_BUILD_TYPE NGS_RELEASE
+#endif
+
 #endif
 
 //===============

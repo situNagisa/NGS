@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "NGS/math/basic/permutate.h"
+#include "./permutate.h"
 
 NGS_MATH_BEGIN
 

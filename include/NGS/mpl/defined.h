@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "NGS/basic/basic.h"
-#include "NGS/base/base.h"
+//#include "NGS/base/base.h"
 #include "NGS/concepts/concepts.h"
 
 #define NGS_MPL_BEGIN NGS_BEGIN namespace mpl{

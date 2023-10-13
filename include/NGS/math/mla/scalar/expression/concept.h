@@ -5,6 +5,6 @@
 NGS_MLA_BEGIN
 
 template<class  _Expression>
-concept CScalarExpression = CArithmetic<_Expression>;
+concept CScalarExpression = std::is_arithmetic_v<_Expression>;
 
 NGS_MLA_END
