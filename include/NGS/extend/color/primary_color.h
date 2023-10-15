@@ -42,6 +42,8 @@ NGS_COLOR_SPACE_BEGIN
 #if NGS_PLATFORM == NGS_MSVC
 #pragma warning(push)
 #pragma warning(disable:4309)
+#pragma warning(push)
+#pragma warning(disable:4333)
 #endif
 
 template<CChannel _A, CChannel _R, CChannel _G, CChannel _B>
@@ -202,6 +204,7 @@ NGS_DEFINE_ARGB(B, G, R, A);
 #undef NGS_DEFINE_ARGB
 
 #if NGS_PLATFORM == NGS_MSVC
+#pragma warning(pop)
 #pragma warning(pop)
 #endif
 

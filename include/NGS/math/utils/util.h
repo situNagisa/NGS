@@ -63,21 +63,7 @@ inline constexpr auto _radian_to_degrees = 180 / std::numbers::pi;
 constexpr auto decimals(CArithmetic auto floating) {
 	return floating - static_cast<int64>(floating);
 }
-consteval auto power(CArithmetic auto value, size_t power) {
-	switch (power)
-	{
-	case 0:
-		return 1;
-		break;
-	case 1:
-		break;
-	default:
-		for (size_t i = 1; i < power; i++)
-			value *= value;
-		break;
-	}
-	return value;
-}
+
 consteval auto round(CArithmetic auto floating) {
 	constexpr auto d = decimals(floating);
 	if constexpr (d > 0.4) {

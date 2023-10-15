@@ -4,6 +4,8 @@
 
 NGS_LAYOUT_BEGIN
 
+#undef max
+
 template<size_t _Count>
 constexpr size_t align_of(const std::array<size_t, _Count>& aligns) { return std::ranges::max(aligns); }
 
