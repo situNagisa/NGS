@@ -6,7 +6,7 @@ NGS_MLA_BEGIN
 
 template<ccpt::UInt _Dim, class  _ElementType>
 class NGS_API  VectorScalarExpression : public VectorExpression<VectorScalarExpression<_Dim, _ElementType>> {
-	NGS_menvironment(VectorScalarExpression);
+	NGS_MPL_ENVIRON(VectorScalarExpression);
 public:
 	using element_type = _ElementType;
 	constexpr static size_t dimension = _Dim::value;

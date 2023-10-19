@@ -42,9 +42,9 @@ class NGS_API  VectorContainer<
 	_ElementType,
 	std::index_sequence<_Index...>
 > : public VectorExpression<_Derived> {
-	NGS_menvironment(VectorContainer);
+	NGS_MPL_ENVIRON(VectorContainer);
 public:
-	NGS_minherit_t(expression_type, base_type);
+	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
 
 	using element_type = _ElementType;
 	using type_category = tag::vector_container;

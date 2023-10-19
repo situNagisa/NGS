@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "NGS/ngl/defined.h"
-#include "NGS/ngl/vertex/vertex_format.h"
 #include "NGS/ngl/vertex/trait.h"
 
 NGS_BEGIN

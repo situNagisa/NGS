@@ -28,7 +28,7 @@ NGS_END
 NGL_OBJ_BEGIN
 
 class NGS_API  VertexArrayBase : public Object {
-	NGS_menvironment(VertexArrayBase);
+	NGS_MPL_ENVIRON(VertexArrayBase);
 public:
 	using element_type = byte;
 	using tag_attrib = tag::Attrib<byte>;

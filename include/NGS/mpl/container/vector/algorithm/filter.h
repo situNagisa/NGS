@@ -6,12 +6,12 @@
 
 NGS_MPL_BEGIN
 
-NGS_mfunction(filter, class _Rng, template<class...>class _Predicate, class = std::make_index_sequence<_Rng::size>);
+NGS_MPL_FUNCTION(filter, class _Rng, template<class...>class _Predicate, class = std::make_index_sequence<_Rng::size>);
 
 template<CVector _Rng, template<class...>class _Predicate>
 using filter_t = typename filter<_Rng, _Predicate>::result_type;
 
-NGS_mfunction(_vector_filter_2, CVector _Rng, template<class...>class _Predicate, size_t... _Index){
+NGS_MPL_FUNCTION(_vector_filter_2, CVector _Rng, template<class...>class _Predicate, size_t... _Index){
 public:
 	constexpr static std::array<bool,_Rng::size> _result = { _Predicate<_Rng,ccpt::uint_<_Index>>::result_type::value... };
 	constexpr static size_t _satisfy_count = (_result[_Index] + ...);
@@ -32,7 +32,7 @@ public:
 		return replace_template_parameters_t<_Rng,typename _Rng::template at_c<_satisfy[_I]>...>();
 		}(std::make_index_sequence<_satisfy_count>()));
 };
-NGS_mfunction(_vector_filter_1, CVector _Rng, template<class...>class _Predicate, size_t... _Index){
+NGS_MPL_FUNCTION(_vector_filter_1, CVector _Rng, template<class...>class _Predicate, size_t... _Index){
 	template<class _Sequence, class _I>
 	struct predicate_type {
 		using result_type = typename _Predicate<typename _Sequence::template at<_I>>::result_type;
@@ -40,8 +40,8 @@ NGS_mfunction(_vector_filter_1, CVector _Rng, template<class...>class _Predicate
 	using result_type = typename _vector_filter_2<_Rng, predicate_type,_Index...>::result_type;
 };
 
-NGS_mfunction(filter, CVector _Rng, template<class...>class _Predicate, size_t... _Index) < _Rng, _Predicate, std::index_sequence<_Index...> > {
-	NGS_mcst_t result_type = typename std::conditional_t<
+NGS_MPL_FUNCTION(filter, CVector _Rng, template<class...>class _Predicate, size_t... _Index) < _Rng, _Predicate, std::index_sequence<_Index...> > {
+	NGS_MPL_TYPE result_type = typename std::conditional_t<
 		ccpt::FunctorParameterTest<_Predicate, void, void>,
 		_vector_filter_2<_Rng, _Predicate, _Index...>,
 		_vector_filter_1<_Rng, _Predicate, _Index...>>::result_type;

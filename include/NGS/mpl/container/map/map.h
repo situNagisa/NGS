@@ -7,8 +7,8 @@
 
 NGS_MPL_BEGIN
 
-NGS_mfunction(map, template<class...>class _Equal = equal, CKeyValuePair... _KVPair) : public set<_Equal, _KVPair...>{
-	NGS_menvironment(map);
+NGS_MPL_FUNCTION(map, template<class...>class _Equal = equal, CKeyValuePair... _KVPair) : public set<_Equal, _KVPair...>{
+	NGS_MPL_ENVIRON(map);
 public:
 	template<class _With>
 	struct high_order_predicate {
@@ -36,9 +36,9 @@ public:
 	}
 public:
 	template<class _Key>
-	NGS_mcst_t index_of = decltype(_GET_INDEX_OF_KEY<_Key>());
+	NGS_MPL_TYPE index_of = decltype(_GET_INDEX_OF_KEY<_Key>());
 	template<class _Key>
-	NGS_mcst_t value_type = decltype(_GET_VALUE_TYPE<index_of<_Key>>());
+	NGS_MPL_TYPE value_type = decltype(_GET_VALUE_TYPE<index_of<_Key>>());
 };
 
 template<CKeyValuePair... _KVPair>

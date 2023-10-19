@@ -1,5 +1,5 @@
 ﻿#pragma once
 
 #include "NGS/basic/basic.h"
-#include "NGS/concepts/concepts.h"
-#include "NGS/mpl/mpl.h"
+#include "NGS/ccpt/ccpt.h"
+#include "NGS/mpl/utils.h"

@@ -8,7 +8,7 @@ NGL_OBJ_BEGIN
 
 
 class NGS_API  Object : public State {
-	NGS_menvironment(Object);
+	NGS_MPL_ENVIRON(Object);
 public:
 	using State::State;
 	Object(Object&&) = default;

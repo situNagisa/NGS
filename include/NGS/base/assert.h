@@ -11,15 +11,15 @@ inline bool Assert(
 	bool b,
 	nchar_ptr_cst assert_text,
 	nstring_view text = "logic error",
-	const ngs::source_location& location = ngs::source_location::current()
+	const source_location& location = source_location::current()
 )
 {
 	if (b)return false;
 	auto [call, return_type, function_id, params] = ParseIdFactor::ParseFunction(location.function_name());
 
-	ngs::Debugger::Print(
-		ngs::TextColor::red,
-		ngs::format(
+	Debugger::Print(
+		TextColor::red,
+		format(
 			""
 			"\n========================="
 			"\nERROR:: %s"
@@ -41,7 +41,7 @@ inline bool Assert(
 			location.line(),
 			location.column()
 		),
-		ngs::TextColor::reset
+		TextColor::reset
 	);
 	return true;
 }
@@ -66,15 +66,19 @@ _NGS_ASSERT_FAIL								\
 
 #else
 
-#define NGS_ASSERT(boolean,...)					\
-if(_NGS Assert(boolean, #boolean,  __VA_ARGS__))\
-_NGS_ASSERT_FAIL								\
+#define NGS_ASSERT(boolean,...)								\
+do {														\
+	if constexpr (!std::is_constant_evaluated()) {			\
+		if (_NGS Assert(boolean, #boolean, __VA_ARGS__))	\
+			_NGS_ASSERT_FAIL;								\
+	}														\
+}while(false)												\
 //
 
 #endif
 
 #else
 
-#define NGS_ASSERT(...) 
+#define NGS_ASSERT(...) (void)
 
 #endif // _DEBUG

@@ -12,10 +12,10 @@ template<ccpt::UInt _Dimension,CScalarExpression _ElementType,size_t... _Index>
 struct DiagonalMatrix<_Dimension,_ElementType,std::index_sequence<_Index...>> : MatrixContainer<DiagonalMatrix<_Dimension, _ElementType>,
 	_Dimension, _Dimension,
 	_ElementType, tag::row> {
-	NGS_menvironment(DiagonalMatrix);
+	NGS_MPL_ENVIRON(DiagonalMatrix);
 public:
-	NGS_minherit_t(expression_type, base_type);
-	NGS_minherit_t(element_type, base_type);
+	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
+	NGS_MPL_INHERIT_TYPE(element_type, base_type);
 	constexpr static size_t dimension = _Dimension::value;
 
 	using base_type::base_type;

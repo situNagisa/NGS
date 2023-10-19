@@ -13,7 +13,7 @@ NGS_MLA_BEGIN
 
 template<CVectorExpression _Vector, CMatrixLayout _Homo = tag::row>
 struct NGS_API MatrixScale : MatrixExpression<MatrixScale<_Vector,_Homo>> {
-	NGS_menvironment(MatrixScale);
+	NGS_MPL_ENVIRON(MatrixScale);
 private:
 	using vector_closure_type = typename vector_traits<_Vector>::closure_type;
 public:

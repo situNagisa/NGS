@@ -7,3 +7,4 @@
 #include "./basic/inversion_number.h"
 #include "./basic/expression.h"
 #include "./basic/power.h"
+#include "./basic/sqrt.h"

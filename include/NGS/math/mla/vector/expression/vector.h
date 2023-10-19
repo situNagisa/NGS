@@ -16,12 +16,12 @@ class NGS_API  Vector;
 
 template<size_t _Dimension, class  _ElementType, size_t... _Index>
 class NGS_API  Vector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<Vector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
-	NGS_menvironment(Vector);
+	NGS_MPL_ENVIRON(Vector);
 public:
-	NGS_minherit_t(element_type, base_type);
-	NGS_minherit_t(expression_type, base_type);
+	NGS_MPL_INHERIT_TYPE(element_type, base_type);
+	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
 
-	NGS_minherit(dimension, base_type);
+	NGS_MPL_INHERIT_VALUE(dimension, base_type);
 
 	constexpr Vector() = default;
 	template<CVectorExpression _Expression>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NGS/basic/defined.h"
+#include "./defined.h"
 
 NGS_BEGIN
 

@@ -9,7 +9,7 @@ NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression, CVectorUnaryFunctor<_Expression> _Functor>
 class NGS_API  VectorUnary : public VectorExpression<VectorUnary<_Expression, _Functor>> {
-	NGS_menvironment(VectorUnary);
+	NGS_MPL_ENVIRON(VectorUnary);
 public:
 	using expression_type = typename base_type::expression_type;
 private:

@@ -4,8 +4,8 @@
 
 NGS_MPL_BEGIN
 
-NGS_mfunction(at, CVector _Sequence, ccpt::UInt _Index) {
-	NGS_mcst_t result_type = typename _Sequence::template at<_Index>;
+NGS_MPL_FUNCTION(at, CVector _Sequence, ccpt::UInt _Index) {
+	NGS_MPL_TYPE result_type = typename _Sequence::template at<_Index>;
 };
 
 template<CVector _Sequence, size_t _Index>

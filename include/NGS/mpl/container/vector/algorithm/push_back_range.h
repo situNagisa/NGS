@@ -4,10 +4,10 @@
 
 NGS_MPL_BEGIN
 
-NGS_mfunction(push_back_range, CVector _Sequence, CVector _NewSequence);
+NGS_MPL_FUNCTION(push_back_range, CVector _Sequence, CVector _NewSequence);
 
-NGS_mfunction(push_back_range, template<class...>class _Sequence, class... _Element, template<class...>class _NewSequence, class... _NewElements) < _Sequence<_Element...>, _NewSequence<_NewElements...> > {
-	NGS_mcst_t result_type = _Sequence<_Element..., _NewElements...>;
+NGS_MPL_FUNCTION(push_back_range, template<class...>class _Sequence, class... _Element, template<class...>class _NewSequence, class... _NewElements) < _Sequence<_Element...>, _NewSequence<_NewElements...> > {
+	NGS_MPL_TYPE result_type = _Sequence<_Element..., _NewElements...>;
 };
 
 template<CVector _Sequence, CVector _NewSequence>

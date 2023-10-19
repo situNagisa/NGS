@@ -2,9 +2,9 @@
 
 #include "NGS/ngl/defined.h"
 #include "NGS/ngl/base/buffer.h"
-#include "NGS/ngl/vertex/vertex_format.h"
 #include "NGS/ngl/error.h"
 #include "NGS/ngl/base/opengl.h"
+#include "./fusion.h"
 
 NGL_BEGIN
 
@@ -15,8 +15,8 @@ private:
 	using base_type = BufferObject;
 public:
 	
-	VertexBuffer(void_ptr data, size_t count, Usage usage, const Buffer& format);
-	VertexBuffer(size_t count, Usage usage, const Buffer& format);
+	VertexBuffer(void_ptr data, size_t count, Usage usage, const fusion::buffer_dynamic_data& format);
+	VertexBuffer(size_t count, Usage usage, const fusion::buffer_dynamic_data& format);
 	VertexBuffer(VertexBuffer&& other) noexcept
 		: base_type(std::move(other))
 		  , format(other.format)
@@ -34,20 +34,20 @@ public:
 	byte_ptr GetData() { return _data; }
 	byte_ptr_cst GetData()const { return _data; }
 
-	const Buffer format;
+	const fusion::buffer_dynamic_data format;
 };
 
 NGS_END
 NGL_FAC_BEGIN
 
-template<CBuffer _Buffer>
+template<fusion::CBuffer _Buffer>
 buffers::VertexBuffer make_vertex_buffer(void_ptr data, size_t count, Usage usage) {
-	return { data, count, usage, make_buffer<_Buffer>() };
+	return { data, count, usage, fusion::make_buffer<_Buffer>() };
 }
 
-template<CBuffer _Buffer>
+template<fusion::CBuffer _Buffer>
 buffers::VertexBuffer make_vertex_buffer(size_t count, Usage usage) {
-	return { count, usage, make_buffer<_Buffer>() };
+	return { count, usage, fusion::make_buffer<_Buffer>() };
 }
 
 NGS_END

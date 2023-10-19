@@ -7,7 +7,7 @@
 //==========================================================================================================
 #pragma  once
 
-#include "NGS/basic/version.h"
+#include "./version.h"
 
 #include <type_traits>
 #include <typeinfo>

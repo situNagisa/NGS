@@ -47,7 +47,7 @@ struct NGS_API Array {
 };
 };
 namespace trait {
-NGS_mfunction(range, class  _Tag) { using type = typename _Tag::iterator_type*; };
+NGS_MPL_FUNCTION(range, class  _Tag) { using type = typename _Tag::iterator_type*; };
 template<class  _Tag>
 using range_t = typename range<_Tag>::type;
 };

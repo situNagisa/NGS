@@ -5,8 +5,8 @@
 #include "NGS/extend/extend.h"
 #include "NGS/math/math.h"
 #include "NGS/ngl/opengl.h"
+#include "NGS/mpl/structure.h"
 
-#include <boost/static_string.hpp>
 
 #define NGL_BEGIN NGS_BEGIN namespace ngl{
 #define NGL_END } NGS_END

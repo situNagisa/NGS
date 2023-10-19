@@ -6,11 +6,11 @@ NGL_BEGIN
 
 NGL_BUF_BEGIN
 
-NGS_HPP_INLINE VertexBuffer::VertexBuffer(void_ptr data, size_t count, Usage usage, const Buffer& format)
+NGS_HPP_INLINE VertexBuffer::VertexBuffer(void_ptr data, size_t count, Usage usage, const fusion::buffer_dynamic_data& format)
 	: base_type(BufferTarget::array, data, count* format.size, usage)
 	, format(format)
 {}
-NGS_HPP_INLINE VertexBuffer::VertexBuffer(size_t count, Usage usage, const Buffer& format)
+NGS_HPP_INLINE VertexBuffer::VertexBuffer(size_t count, Usage usage, const fusion::buffer_dynamic_data& format)
 	: base_type(BufferTarget::array, count* format.size, usage)
 	, format(format)
 {}

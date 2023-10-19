@@ -7,7 +7,7 @@ NGS_MLA_BEGIN
 
 template<CScalarExpression _ElementType, _ElementType... _Element>
 struct NGS_API StaticVector : VectorExpression<StaticVector<_ElementType, _Element...>> {
-	NGS_menvironment(StaticVector);
+	NGS_MPL_ENVIRON(StaticVector);
 public:
 	using element_type = _ElementType;
 

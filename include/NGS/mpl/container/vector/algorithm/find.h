@@ -5,7 +5,7 @@
 
 NGS_MPL_BEGIN
 
-NGS_mfunction(_vector_find_if_2, CVector _Rng, template<class...>class _Predicate){
+NGS_MPL_FUNCTION(_vector_find_if_2, CVector _Rng, template<class...>class _Predicate){
 private:
 	template<size_t... _Index>
 	consteval static int _GET_IS_SATISFY(std::index_sequence<_Index...>) {
@@ -19,7 +19,7 @@ private:
 public:
 	using result_type = ccpt::int_<_GET_IS_SATISFY(std::make_index_sequence<_Rng::size>())>;
 };
-NGS_mfunction(_vector_find_if_1, CVector _Rng, template<class...>class _Predicate){
+NGS_MPL_FUNCTION(_vector_find_if_1, CVector _Rng, template<class...>class _Predicate){
 private:
 	template<class _R, class _I>
 	struct predicate_type {
@@ -29,7 +29,7 @@ public:
 	using result_type = typename _vector_find_if_2<_Rng, predicate_type>::result_type;
 };
 
-NGS_mfunction(find_if, CVector _Rng, template<class...>class _Predicate) < _Rng, _Predicate > {
+NGS_MPL_FUNCTION(find_if, CVector _Rng, template<class...>class _Predicate) < _Rng, _Predicate > {
 	using result_type = typename std::conditional_t<
 		ccpt::FunctorParameterTest<_Predicate, void, void>,
 		_vector_find_if_2<_Rng, _Predicate>,

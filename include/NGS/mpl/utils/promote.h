@@ -4,7 +4,7 @@
 
 NGS_MPL_BEGIN
 
-NGS_mfunction(promote, class _Left,class _Right, class... _Types) {
+NGS_MPL_FUNCTION(promote, class _Left,class _Right, class... _Types) {
 private:
 	static constexpr auto _get_result_type() {
 		if constexpr (sizeof...(_Types)) {
@@ -15,7 +15,7 @@ private:
 		}
 	}
 public:
-	NGS_mcst_t result_type = decltype(_get_result_type());
+	NGS_MPL_TYPE result_type = decltype(_get_result_type());
 };
 
 template<class _Left, class _Right,class... _Types>

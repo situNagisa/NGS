@@ -76,7 +76,7 @@ struct NGS_API MatrixContainer<
 	std::index_sequence<_RowIndex...>,
 	std::index_sequence<_ColIndex...>>
 	: MatrixExpression<_Derived>{
-	NGS_menvironment(MatrixContainer);
+	NGS_MPL_ENVIRON(MatrixContainer);
 public:
 
 	using element_type = _ElementType;
@@ -172,7 +172,7 @@ protected:
 	struct NGS_API _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, element_type> {
 	private:
 		using _base_type = ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, element_type>;
-		NGS_minherit_t(_element_type, _base_type);
+		NGS_MPL_INHERIT_TYPE(_element_type, _base_type);
 	public:
 		using _base_type::_base_type;
 		_element_type operator*()const { return (*_base_type::_expr)()(_base_type::_n); }

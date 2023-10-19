@@ -15,7 +15,7 @@ NGS_END
 NGL_TARGET_BEGIN
 
 class NGS_API Renderbuffer final : public Target<Renderbuffer, objects::Renderbuffer> {
-	NGS_menvironment(Renderbuffer);
+	NGS_MPL_ENVIRON(Renderbuffer);
 private:
 	friend base_type;
 	static void _Select(state_type* state);
@@ -28,7 +28,7 @@ NGS_GL_GET_TARGET_FUNCTION(targets::Renderbuffer, objects::Renderbuffer, renderb
 NGL_OBJ_BEGIN
 
 class NGS_API Renderbuffer final : public Object {
-	NGS_menvironment(Renderbuffer);
+	NGS_MPL_ENVIRON(Renderbuffer);
 public:
 	Renderbuffer(size_t width, size_t height, RenderbufferImageFormat format)
 		: _format(format)

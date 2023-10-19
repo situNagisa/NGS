@@ -10,7 +10,7 @@ NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expressioin>
 struct NGS_API MatrixRowVector : VectorExpression<MatrixRowVector<_Expressioin>> {
-	NGS_menvironment(MatrixRowVector);
+	NGS_MPL_ENVIRON(MatrixRowVector);
 public:
 	using element_type = typename matrix_traits<_Expressioin>::element_type;
 	constexpr static size_t dimension = matrix_traits<_Expressioin>::col_count;
@@ -31,7 +31,7 @@ private:
 
 template<CMatrixExpression _Expressioin>
 struct NGS_API MatrixColVector : VectorExpression<MatrixColVector<_Expressioin>> {
-	NGS_menvironment(MatrixColVector);
+	NGS_MPL_ENVIRON(MatrixColVector);
 public:
 	using element_type = typename matrix_traits<_Expressioin>::element_type;
 	constexpr static size_t dimension = matrix_traits<_Expressioin>::row_count;
@@ -51,7 +51,7 @@ private:
 
 template<ccpt::CRPT<(bool)CMatrixExpression<>> _Expression>
 struct NGS_API MatrixExpression : Expression<_Expression> {
-	NGS_menvironment(MatrixExpression);
+	NGS_MPL_ENVIRON(MatrixExpression);
 public:
 	using type_category = tag::matrix;
 	constexpr static size_t row_count = 0;
@@ -76,7 +76,7 @@ protected:
 		using _base_type = ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type>;
 		using _self_type = _iterator<_Constant>;
 
-		NGS_minherit_t(_reference, _base_type);
+		NGS_MPL_INHERIT_TYPE(_reference, _base_type);
 	public:
 		using _base_type::_base_type;
 
@@ -111,9 +111,9 @@ protected:
 		using _base_type = ngs::mla::random_access_iterator<_element_iterator<_Constant, _IteratorType>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type>;
 		using _self_type = _element_iterator<_Constant, _IteratorType>;
 
-		NGS_minherit_t(_reference, _base_type);
-		NGS_minherit_t(_expression_ptr, _base_type);
-		NGS_minherit_t(_difference_type, _base_type);
+		NGS_MPL_INHERIT_TYPE(_reference, _base_type);
+		NGS_MPL_INHERIT_TYPE(_expression_ptr, _base_type);
+		NGS_MPL_INHERIT_TYPE(_difference_type, _base_type);
 	public:
 		constexpr static _iterator_type iterator_type = _IteratorType;
 
@@ -154,8 +154,8 @@ protected:
 		>;
 		using _self_type = _iterator_iterator<_Constant, _Reverse, _IteratorType>;
 
-		NGS_minherit_t(_element_type, _base_type);
-		NGS_minherit_t(_expression_type, _base_type);
+		NGS_MPL_INHERIT_TYPE(_element_type, _base_type);
+		NGS_MPL_INHERIT_TYPE(_expression_type, _base_type);
 	public:
 		constexpr static _iterator_type iterator_type = _IteratorType;
 		constexpr static bool is_reverse = _Reverse;

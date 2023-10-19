@@ -6,7 +6,7 @@
 NGL_BEGIN
 
 class NGS_API  DefaultIndicesCtrl : public IIndicesCtrl {
-	NGS_menvironment(DefaultIndicesCtrl);
+	NGS_MPL_ENVIRON(DefaultIndicesCtrl);
 public:
 	DefaultIndicesCtrl(size_t vertex_count, Usage usage)
 		: _indices(vertex_count, usage)

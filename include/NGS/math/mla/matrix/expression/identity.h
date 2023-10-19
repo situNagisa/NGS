@@ -6,11 +6,11 @@ NGS_MLA_BEGIN
 
 template<ccpt::UInt _Dim, class  _ElementType>
 struct NGS_API IdentityMatrix : SquareMatrix<IdentityMatrix<_Dim, _ElementType>, _Dim> {
-	NGS_menvironment(IdentityMatrix);
+	NGS_MPL_ENVIRON(IdentityMatrix);
 public:
 	using element_type = _ElementType;
-	NGS_minherit(row_count, base_type);
-	NGS_minherit(col_count, base_type);
+	NGS_MPL_INHERIT_VALUE(row_count, base_type);
+	NGS_MPL_INHERIT_VALUE(col_count, base_type);
 
 	using base_type::operator();
 	constexpr element_type operator()(size_t row_index, size_t col_index) const {

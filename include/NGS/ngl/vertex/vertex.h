@@ -2,6 +2,7 @@
 
 #include "NGS/ngl/vertex/vertex_buffer.h"
 #include "NGS/ngl/base/opengl.h"
+#include "./fusion.h"
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
@@ -69,7 +70,7 @@ public:
 private:
 	struct NGS_API _AttribFormat {
 		byte_ptr data;
-		const Attrib* format;
+		const fusion::attrib_dynamic_data* format;
 		const buffer_type* buffer;
 	};
 
@@ -89,7 +90,7 @@ private:
 
 NGS_END
 NGL_FAC_BEGIN
-template<CBuffer... _Buffers>
+template<fusion::CBuffer... _Buffers>
 buffers::Vertex make_vertex(size_t count, Usage usage) {
 	buffers::Vertex v{
 		std::array<buffers::VertexBuffer*, sizeof...(_Buffers)>{

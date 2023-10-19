@@ -6,7 +6,7 @@
 
 NGS_MPL_BEGIN
 
-NGS_mfunction(is_same_with_any_of, CVector _Rng, class _With,template<class,class>class _Functor = identically_equal) {
+NGS_MPL_FUNCTION(is_same_with_any_of, CVector _Rng, class _With,template<class,class>class _Functor = identically_equal) {
 	template<class _T>
 	struct predicate_type {
 		using result_type = typename _Functor<_T, _With>::result_type;

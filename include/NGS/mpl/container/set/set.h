@@ -18,23 +18,23 @@ concept CSet = requires(_Associative sequence, const _Associative sequence_cst) 
 	typename _Associative::template insert<void>;
 };
 
-NGS_mfunction(set, template<class...>class _Equal = equal, class... _Element);
+NGS_MPL_FUNCTION(set, template<class...>class _Equal = equal, class... _Element);
 
-NGS_mfunction(set, template<class, class>class _Equal, class... _Element) < _Equal, _Element... > {
+NGS_MPL_FUNCTION(set, template<class, class>class _Equal, class... _Element) < _Equal, _Element... > {
 public:
 	using self_type = set;
 
 	using container = unique_t<vector<_Element...>,_Equal>;
 public:
-	template<class _Left, class _Right> NGS_mcst_t equal_functor = _Equal<_Left,_Right>;
-	template<class _Left, class _Right> NGS_mcst_t equal_functor_t = typename _Equal<_Left, _Right>::result_type;
-	template<class _Left, class _Right> NGS_mcst bool equal_functor_v = equal_functor_t<_Left, _Right>::value;
+	template<class _Left, class _Right> NGS_MPL_TYPE equal_functor = _Equal<_Left,_Right>;
+	template<class _Left, class _Right> NGS_MPL_TYPE equal_functor_t = typename _Equal<_Left, _Right>::result_type;
+	template<class _Left, class _Right> NGS_MPL_VALUE bool equal_functor_v = equal_functor_t<_Left, _Right>::value;
 
-	NGS_mcst size_t size = container::size;
+	NGS_MPL_VALUE size_t size = container::size;
 
 	template<class _Type> constexpr static bool contain = is_same_with_any_of<container, _Type,equal_functor>::result_type::value;
 
-	template<class _NewElement> NGS_mcst_t insert = std::conditional_t<
+	template<class _NewElement> NGS_MPL_TYPE insert = std::conditional_t<
 		contain<_NewElement>, 
 		self_type, 
 		set<equal_functor, _Element..., _NewElement>

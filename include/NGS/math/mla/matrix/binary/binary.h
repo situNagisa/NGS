@@ -11,7 +11,7 @@ template<
 	CMatrixBinaryFunctor<_Expression1, _Expression2> _Functor,
 	ccpt::UInt _Row, ccpt::UInt _Col
 >class  MatrixBinary : public MatrixExpression<MatrixBinary<_Expression1, _Expression2, _Functor, _Row, _Col>> {
-	NGS_menvironment(MatrixBinary);
+	NGS_MPL_ENVIRON(MatrixBinary);
 public:
 	using expression_type = typename base_type::expression_type;
 private:

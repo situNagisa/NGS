@@ -26,7 +26,7 @@ protected:
 
 template<class  _Derived, class  _State>
 class NGS_API Target : public TargetBase<_State> {
-	NGS_menvironment(Target);
+	NGS_MPL_ENVIRON(Target);
 public:
 	using base = self_type;
 	using state_type = _State;

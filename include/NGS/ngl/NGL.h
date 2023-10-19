@@ -19,7 +19,6 @@
 #include "NGS/ngl/vertex/vertex.h"
 #include "NGS/ngl/vertex/indices.h"
 #include "NGS/ngl/vertex/concepts.h"
-#include "NGS/ngl/vertex/vertex_format.h"
 #include "NGS/ngl/vertex/array/base.h"
 #include "NGS/ngl/vertex/array/array.h"
 #include "NGS/ngl/vertex/array/indices.h"
@@ -29,7 +28,8 @@
 //shader
 #include "NGS/ngl/shader/source.h"
 #include "NGS/ngl/shader/shader.h"
-#include "NGS/ngl/shader/shader_uniform.h"
+//#include "NGS/ngl/shader/shader_uniform.h"
+#include "NGS/ngl/shader/uniform.h"
 
 //texture
 #include "NGS/ngl/texture/texture.h"

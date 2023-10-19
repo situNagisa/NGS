@@ -267,9 +267,6 @@
     <ClInclude Include="ngl\vertex\vertex_buffer.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ngl\vertex\vertex_format.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ngl\error.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -492,31 +489,31 @@
     <ClInclude Include="math\mla\scalar\traits.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\defined.h">
+    <ClInclude Include="ccpt\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\fundamental\constant.h">
+    <ClInclude Include="ccpt\fundamental\constant.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\fundamental\int.h">
+    <ClInclude Include="ccpt\fundamental\int.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\fundamental.h">
+    <ClInclude Include="ccpt\fundamental.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\fundamental\uint.h">
+    <ClInclude Include="ccpt\fundamental\uint.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\fundamental\floating.h">
+    <ClInclude Include="ccpt\fundamental\floating.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\any.h">
+    <ClInclude Include="ccpt\any.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\derived.h">
+    <ClInclude Include="ccpt\derived.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\concepts.h">
+    <ClInclude Include="ccpt\ccpt.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\mla\scalar\unary\negate.h">
@@ -750,7 +747,7 @@
     <ClInclude Include="math\basic.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\verify.h">
+    <ClInclude Include="ccpt\verify.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\basic\factorial.h">
@@ -768,7 +765,7 @@
     <ClInclude Include="math\basic\inversion_number.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\fundamental\fundamental.h">
+    <ClInclude Include="ccpt\fundamental\fundamental.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\mla.h">
@@ -1032,7 +1029,7 @@
     <ClInclude Include="mpl\container\vector\algorithm\push_back.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\functor.h">
+    <ClInclude Include="ccpt\functor.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="mpl\container\vector\algorithm\push_front.h">
@@ -1068,9 +1065,6 @@
     <ClInclude Include="mpl\meta_struct\meta_struct\meta_struct.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="mpl\meta_struct.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="mpl\meta_struct\spread.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -1089,19 +1083,16 @@
     <ClInclude Include="mpl\utils\template.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\predicate.h">
+    <ClInclude Include="ccpt\predicate.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="mpl\utils\is_same_with_any_of.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\fundamental\bool.h">
+    <ClInclude Include="ccpt\fundamental\bool.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="mpl\utils\precision.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="extend\static_string.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="extend\iterator_interface.h">
@@ -1323,7 +1314,7 @@
     <ClInclude Include="math\mla\vector\binary\operator\is_vertical.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="concepts\none.h">
+    <ClInclude Include="ccpt\none.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="transform\3d\projection\perspective.h">
@@ -1437,19 +1428,19 @@
     <ClInclude Include="transform\coordinate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\defined.h">
+    <ClInclude Include="mpl\structure\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\meta_struct.h">
+    <ClInclude Include="mpl\structure\structure.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\variable\variable.h">
+    <ClInclude Include="mpl\structure\type\variable\variable.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\structure.h">
+    <ClInclude Include="mpl\structure\type\structure.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type.h">
+    <ClInclude Include="mpl\structure\type.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="basic\type_name.h">
@@ -1473,16 +1464,16 @@
     <ClInclude Include="layout\size\size_of.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="basic\precessor\type_defined.h">
+    <ClInclude Include="basic\preprocessor\type_defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="basic\precessor.h">
+    <ClInclude Include="basic\preprocessor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="basic\precessor\debug_if.h">
+    <ClInclude Include="basic\preprocessor\debug_if.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="basic\precessor\type_value_convert.h">
+    <ClInclude Include="basic\preprocessor\type_value_convert.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="layout\align\constant.h">
@@ -1503,46 +1494,247 @@
     <ClInclude Include="layout\align\align_as.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\variable.h">
+    <ClInclude Include="mpl\structure\type\variable.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\variable\dynamic_data.h">
+    <ClInclude Include="mpl\structure\type\variable\dynamic_data.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\variable\traits.h">
+    <ClInclude Include="mpl\structure\type\variable\traits.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\structure\describe\describe.h">
+    <ClInclude Include="mpl\structure\type\structure\describe\describe.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\structure\flatten.h">
+    <ClInclude Include="mpl\structure\type\structure\flatten.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\basic\power.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\variable\concept.h">
+    <ClInclude Include="mpl\structure\type\variable\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\structure\storage\storage.h">
+    <ClInclude Include="mpl\structure\type\structure\storage\storage.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\structure\storage\concept.h">
+    <ClInclude Include="mpl\structure\type\structure\storage\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\structure\describe.h">
+    <ClInclude Include="mpl\structure\type\structure\describe.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\structure\storage.h">
+    <ClInclude Include="mpl\structure\type\structure\storage.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\structure\structure.h">
+    <ClInclude Include="mpl\structure\type\structure\structure.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\structure\concept.h">
+    <ClInclude Include="mpl\structure\type\structure\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="meta_struct\type\structure\wrapper.h">
+    <ClInclude Include="mpl\structure\type\structure\wrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\basic\sqrt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\structure.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\counter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\counter\counter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\counter\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\counter\core.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="yap\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="yap\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="yap\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="yap\yap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static_string\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static_string\static_string.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static_string\core.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\structure\type\structure\name\name_struct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\fusion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\algorithm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\algorithm\cat.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\structure\type\structure\name\pair.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\container\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\container\map.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\container\map\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\container\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\container\vector\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\container\pair\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\fusion\container\pair.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\mpl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\mpl\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\mpl\pair.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\mpl\pair\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\mpl\mpl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\structure\type\structure\describe\make.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\shader\uniform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\structure\type\structure\name.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\structure\type\structure\name\variable_at_key.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\structure\type\structure\name\make.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\structure\type\structure\name\index_of_key.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\attrib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\attrib\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\buffer\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\buffer\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\attrib\dynamic_data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\buffer\dynamic_data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\attrib\attrib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\attrib\make.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ngl\vertex\fusion\buffer\make.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\stl_interfaces.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\iterator\contiguous.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\iterator\contiguous\trivial.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\iterator\contiguous\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\iterator\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\iterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\range\contiguous.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\range\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\range\input.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\range\output.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\preprocessor\const_member_function.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\iterator\random_access\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\iterator\random_access.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1565,6 +1757,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
-    <None Include="meta_struct\type\structure\describe\concept.h" />
+    <None Include="mpl\structure\type\structure\describe\concept.h" />
   </ItemGroup>
 </Project>

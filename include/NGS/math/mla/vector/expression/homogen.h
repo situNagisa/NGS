@@ -10,12 +10,12 @@ class NGS_API  HomogenousVector;
 
 template<size_t _Dimension, class  _ElementType, size_t... _Index>
 class NGS_API  HomogenousVector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<HomogenousVector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
-	NGS_menvironment(HomogenousVector);
+	NGS_MPL_ENVIRON(HomogenousVector);
 public:
-	NGS_minherit_t(element_type, base_type);
-	NGS_minherit_t(expression_type, base_type);
+	NGS_MPL_INHERIT_TYPE(element_type, base_type);
+	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
 
-	NGS_minherit(dimension, base_type);
+	NGS_MPL_INHERIT_VALUE(dimension, base_type);
 
 	constexpr HomogenousVector() = default;
 	template<CVectorExpression _Expression>

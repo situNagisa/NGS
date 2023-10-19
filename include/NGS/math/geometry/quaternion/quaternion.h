@@ -14,10 +14,10 @@ NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CQuaternion,is_quaternion,
 
 template<class  _ElementType>
 struct NGS_API Quaternion : mla::VectorContainer<Quaternion<_ElementType>, ccpt::uint_<4>, _ElementType> {
-	NGS_menvironment(Quaternion);
+	NGS_MPL_ENVIRON(Quaternion);
 public:
-	NGS_minherit_t(element_type, base_type);
-	NGS_minherit_t(expression_type, base_type);
+	NGS_MPL_INHERIT_TYPE(element_type, base_type);
+	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
 
 	using vector_type = Point3<element_type>;
 

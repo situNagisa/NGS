@@ -7,7 +7,7 @@ NGL_OBJ_BEGIN
 
 template<CUniformTuple... _Tuples>
 class NGS_API ShaderUniform : public Shader {
-	NGS_menvironment(ShaderUniform);
+	NGS_MPL_ENVIRON(ShaderUniform);
 public:
 	using uniforms_type = uniforms_<_Tuples...>;
 public:

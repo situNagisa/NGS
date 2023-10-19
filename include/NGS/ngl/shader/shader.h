@@ -4,7 +4,7 @@
 #include "NGS/ngl/base/target.h"
 #include "NGS/ngl/shader/source.h"
 #include "NGS/ngl/base/opengl.h"
-#include "NGS/ngl/shader/glsl/uniform.h"
+#include "NGS/ngl/shader/glsl/uniform/location.h"
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
@@ -21,7 +21,7 @@ NGS_END
 NGL_OBJ_BEGIN
 
 class NGS_API Shader : public State {
-	NGS_menvironment(Shader);
+	NGS_MPL_ENVIRON(Shader);
 public:
 	Shader(Shader&&) = default;
 	Shader() { NGL_CHECK(_context = glCreateProgram()); }

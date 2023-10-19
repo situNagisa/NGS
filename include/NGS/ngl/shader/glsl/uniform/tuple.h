@@ -5,13 +5,13 @@
 #include "NGS/ngl/shader/glsl/uniform/functor.h"
 
 NGL_BEGIN
-
+/*
 template<class _Tuple>
 concept CUniformTuple = mpl::CMetaVariable<_Tuple> && requires() {
 	{ _Tuple::name };
 };
 
-NGS_mfunction(uniform_tuple, static_string _Name, class _Type, size_t _Count = 1) {
+NGS_MPL_FUNCTION(uniform_tuple, static_strings::static_string _Name, class _Type, size_t _Count = 1) {
 	static_assert(mla::CStandardMatrix<_Type> || mla::CStandardVector<_Type> || mla::CScalarExpression<_Type>, "the type must be a scalar, vector or matrix");
 
 	using element_type = _Type;
@@ -23,8 +23,8 @@ NGS_mfunction(uniform_tuple, static_string _Name, class _Type, size_t _Count = 1
 	constexpr static size_t size = element_count * element_size;
 };
 
-template<static_string _Name, class _Type, size_t _Count = 1>
+template<static_strings::static_string _Name, class _Type, size_t _Count = 1>
 using uniform_ = uniform_tuple<_Name, _Type, _Count>;
-
+*/
 
 NGL_END

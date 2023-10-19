@@ -28,15 +28,15 @@ struct NGS_API HomogeneousMatrix<
 	_Dimension, _ElementType, _Layout>,
 	std::integral_constant<size_t, _Dimension>, std::integral_constant<size_t, _Dimension>,
 	_ElementType, _Layout> {
-	NGS_menvironment(HomogeneousMatrix);
+	NGS_MPL_ENVIRON(HomogeneousMatrix);
 public:
-	NGS_minherit_t(expression_type, base_type);
-	NGS_minherit_t(element_type, base_type);
-	NGS_minherit_t(layout_category, base_type);
+	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
+	NGS_MPL_INHERIT_TYPE(element_type, base_type);
+	NGS_MPL_INHERIT_TYPE(layout_category, base_type);
 
-	NGS_minherit(row_count, base_type);
-	NGS_minherit(col_count, base_type);
-	NGS_minherit(element_count, base_type);
+	NGS_MPL_INHERIT_VALUE(row_count, base_type);
+	NGS_MPL_INHERIT_VALUE(col_count, base_type);
+	NGS_MPL_INHERIT_VALUE(element_count, base_type);
 
 	constexpr static size_t dimension = _Dimension;
 

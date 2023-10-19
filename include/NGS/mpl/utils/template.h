@@ -11,16 +11,16 @@ NGS_MPL_BEGIN
  *
  * @return `template`，模板的参数个数，模板替换，模板变换替换，模板应用，模板变换应用
 */
-NGS_mfunction(template_trait, class);
-NGS_mfunction(template_trait, template<class ...>class  _Template, class  ..._Args) < _Template<_Args...> > {
-	NGS_mcst_t template_type = _Template<_Args...>;
-	NGS_mcst size_t parameters_count = sizeof... (_Args);
+NGS_MPL_FUNCTION(template_trait, class);
+NGS_MPL_FUNCTION(template_trait, template<class ...>class  _Template, class  ..._Args) < _Template<_Args...> > {
+	NGS_MPL_TYPE template_type = _Template<_Args...>;
+	NGS_MPL_VALUE size_t parameters_count = sizeof... (_Args);
 
 	template<typename..._NewArgs>
-	NGS_mcst_t replace_parameters = _Template<_NewArgs...>;
+	NGS_MPL_TYPE replace_parameters = _Template<_NewArgs...>;
 
 	template<template<class ...>class  _NewTemplate>
-	NGS_mcst_t replace_template = _NewTemplate<_Args...>;
+	NGS_MPL_TYPE replace_template = _NewTemplate<_Args...>;
 };
 
 template<class  _Template, class ... _Args>
@@ -37,8 +37,8 @@ constexpr bool is_same_template_v<_Template<_Args1...>, _Template<_Args2...>> = 
 template<class _Left, class _Right>
 concept CSameTemplate = is_same_template_v<_Left, _Right>;
 
-NGS_mfunction(is_template, class, template<class ...>class) : std::false_type{};
-NGS_mfunction(is_template, template<class ...>class  _Template, class ... _Args) < _Template<_Args...>, _Template > : std::true_type{};
+NGS_MPL_FUNCTION(is_template, class, template<class ...>class) : std::false_type{};
+NGS_MPL_FUNCTION(is_template, template<class ...>class  _Template, class ... _Args) < _Template<_Args...>, _Template > : std::true_type{};
 
 template<class  T, template<class ...>class  _Template>
 constexpr bool is_template_v = is_template<T, _Template>::value;

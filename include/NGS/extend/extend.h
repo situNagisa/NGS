@@ -28,12 +28,9 @@
 #include "NGS/extend/command_queue.h"
 #include "NGS/extend/factory.h"
 #include "NGS/extend/user_data.h"
-#include "NGS/extend/static_string.h"
 
 #include "NGS/extend/console.h"
 
-#include "NGS/extend/meta_variable_wrapper.h"
-#include "NGS/extend/memory_reinterpreter.h"
 
 #ifdef NGS_USE_HPP
 #include "NGS/extend/extend.hpp"

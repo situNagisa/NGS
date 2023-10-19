@@ -15,7 +15,7 @@ NGS_END
 NGL_TARGET_BEGIN
 
 class NGS_API Framebuffer final : public Target<Framebuffer, objects::FramebufferBase> {
-	NGS_menvironment(Framebuffer);
+	NGS_MPL_ENVIRON(Framebuffer);
 private:
 	friend base_type;
 	static void _Select(state_type* state);
@@ -28,7 +28,7 @@ NGS_END
 NGL_OBJ_BEGIN
 
 class NGS_API FramebufferBase : public Object {
-	NGS_menvironment(FramebufferBase);
+	NGS_MPL_ENVIRON(FramebufferBase);
 public:
 	static self_type& DEFAULT() {
 		static FramebufferBase default_framebuffer;
@@ -84,7 +84,7 @@ private:
 
 template<FramebufferTarget _Target>
 struct Framebuffer : public FramebufferBase {
-	NGS_menvironment(Framebuffer);
+	NGS_MPL_ENVIRON(Framebuffer);
 public:
 	Framebuffer() : base_type(_Target) {}
 	Framebuffer(self_type&& other) = default;

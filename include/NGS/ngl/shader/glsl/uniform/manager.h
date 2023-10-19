@@ -4,13 +4,13 @@
 #include "NGS/ngl/shader/glsl/uniform/tuple.h"
 
 NGL_BEGIN
-
-NGS_mfunction(uniform_manager, mpl::CVector _Tuples, class = std::make_index_sequence<_Tuples::size>);
-NGS_mfunction(uniform_manager, CUniformTuple... _Tuples, size_t... _Index) < mpl::vector<_Tuples...>, std::index_sequence<_Index...> > {
+/*
+NGS_MPL_FUNCTION(uniform_manager, mpl::CVector _Tuples, class = std::make_index_sequence<_Tuples::size>);
+NGS_MPL_FUNCTION(uniform_manager, CUniformTuple... _Tuples, size_t... _Index) < mpl::vector<_Tuples...>, std::index_sequence<_Index...> > {
 public:
 	using self_type = uniform_manager;
 
-	template<static_string _Id>
+	template<static_strings::static_string _Id>
 	using key_type = ccpt::constant<std::remove_cvref_t<decltype(_Id)>, _Id>;
 
 	using struct_type = mpl::struct_<mpl::var_<typename _Tuples::element_type, _Tuples::element_count>...>;
@@ -24,21 +24,21 @@ public:
 		delete[] _memory.Get(0);
 	}
 
-	template<static_string _Id>
+	template<static_strings::static_string _Id>
 	constexpr auto Get() {
 		using value_type = typename container::template value_type<key_type<_Id>>;
 		using index_type = typename value_type::first_type;
 
 		return _memory.template Get<index_type::value>();
 	}
-	template<static_string _Id>
+	template<static_strings::static_string _Id>
 	constexpr auto Get() const {
 		using value_type = typename container::template value_type<key_type<_Id>>;
 		using index_type = typename value_type::first_type;
 
 		return _memory.template Get<index_type::value>();
 	}
-	template<static_string _Id>
+	template<static_strings::static_string _Id>
 	constexpr auto GetPointer() {
 		using value_type = typename container::template value_type<key_type<_Id>>;
 		using index_type = typename value_type::first_type;
@@ -73,5 +73,6 @@ private:
 
 template<CUniformTuple... _Tuples>
 using uniforms_ = uniform_manager<mpl::vector<_Tuples...>>;
+*/
 
 NGL_END

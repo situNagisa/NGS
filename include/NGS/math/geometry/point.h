@@ -7,10 +7,10 @@ NGS_MATH_BEGIN
 
 template<class  _ElementType>
 struct NGS_API Point2 : mla::VectorContainer<Point2<_ElementType>, std::integral_constant<size_t, 2>, _ElementType> {
-	NGS_menvironment(Point2);
+	NGS_MPL_ENVIRON(Point2);
 public:
-	NGS_minherit_t(element_type, base_type);
-	NGS_minherit_t(expression_type, base_type);
+	NGS_MPL_INHERIT_TYPE(element_type, base_type);
+	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
 
 	using base_type::base_type;
 	constexpr Point2(element_type x, element_type y)
@@ -91,10 +91,10 @@ using Point2s = Point2<size_t>;
 
 template<class  _ElementType>
 struct NGS_API Point3 : mla::VectorContainer<Point3<_ElementType>, std::integral_constant<size_t, 3>, _ElementType> {
-	NGS_menvironment(Point3);
+	NGS_MPL_ENVIRON(Point3);
 public:
-	NGS_minherit_t(element_type, base_type);
-	NGS_minherit_t(expression_type, base_type);
+	NGS_MPL_INHERIT_TYPE(element_type, base_type);
+	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
 
 	using base_type::base_type;
 	constexpr Point3(element_type x, element_type y, element_type z)
