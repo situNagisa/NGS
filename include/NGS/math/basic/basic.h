@@ -1,8 +1,9 @@
 ﻿#pragma once
 
-#include "NGS/math/defined.h"
-
-NGS_MATH_BEGIN
-
-
-NGS_MATH_END
+#include "./factorial.h"
+#include "./permutate.h"
+#include "./combine.h"
+#include "./inversion_number.h"
+#include "./expression.h"
+#include "./power.h"
+#include "./sqrt.h"

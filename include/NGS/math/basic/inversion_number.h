@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "NGS/math/defined.h"
+#include "./defined.h"
 
-NGS_MATH_BEGIN
+NGS_MATH_BASIC_BEGIN
 
 constexpr auto inversion_number(const std::ranges::forward_range auto& sequence) {
 	size_t result = 0;
@@ -17,4 +17,4 @@ constexpr auto inversion_number(const std::convertible_to<size_t> auto&... seque
 	return inversion_number(std::array<size_t, sizeof...(sequence)>(sequence...));
 }
 
-NGS_MATH_END
+NGS_MATH_BASIC_END

@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "NGS/math/defined.h"
+#include "./defined.h"
 
-NGS_MATH_BEGIN
+NGS_MATH_BASIC_BEGIN
 
 constexpr auto factorial(size_t n) {
 	size_t result = 1;
@@ -12,4 +12,4 @@ constexpr auto factorial(size_t n) {
 	return result;
 }
 
-NGS_MATH_END
+NGS_MATH_BASIC_END

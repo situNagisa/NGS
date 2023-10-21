@@ -2,8 +2,9 @@
 
 #include "NGS/basic/basic.h"
 #include "NGS/ccpt/ccpt.h"
-#include "NGS/mpl/mpl.h"
+#include "NGS/mpl/utils.h"
 #include "NGS/math/defined.h"
+#include "NGS/boost/fusion.h"
 
 #define NGS_SPACE_BEGIN NGS_MATH_BEGIN namespace space {
 #define NGS_SPACE_END } NGS_MATH_END

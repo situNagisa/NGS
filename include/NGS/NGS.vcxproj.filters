@@ -1737,6 +1737,267 @@
     <ClInclude Include="boost\stl_interfaces\iterator\random_access.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="math\scalar\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\expression\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\expression\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\basic\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\expression\tag.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\container\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\impl\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\container\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\impl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\container\tag.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\container\assign.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\impl\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\config\immediate_evaluation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\config\explicit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="yap\evaluate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\expression\evaluate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\cpt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\expression\value.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\expression\value_type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\operate\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\operate\immediate\code_gen_begin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\operate\immediate\code_gen_end.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\operate\immediate\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\operate\immediate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\operate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\preprocessor\forward.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\operate\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\operate\operators.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\modifier\reference.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\modifier\const.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\modifier\volatile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\modifier\cv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\modifier\cv_ref.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\modifier.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\type_trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\precision.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\is_same_object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\concepts\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\concepts\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\scalar\concepts\operators.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\operators.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\config\immediate_evaluation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\expression\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\object\is.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\object\same_as.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\expression\access.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\expression\value_type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\expression\dimension.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\container\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\container\assign.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\expression\concept\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\expression\concept\dimension.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\container\copy.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\container\concept\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\container\concept\size.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\expression\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="yap\closure_type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\container\closure_type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\expression\closure_type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\original.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\is_same_original.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\original.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\original\same_as.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\container\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\standard.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\standard\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\index_type_identiry.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\preprocessor\clear_buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\io.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\range.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">

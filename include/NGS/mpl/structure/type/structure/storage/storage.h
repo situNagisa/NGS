@@ -105,8 +105,8 @@ public:
 
 	constexpr auto begin() { return io_iterator_type{ this,0 }; }
 	constexpr auto begin()const { return in_iterator_type{ this,0 }; }
-	constexpr auto end() { return io_iterator_type{ this, describe_type::size }; }
-	constexpr auto end()const { return in_iterator_type{ this, describe_type::size }; }
+	constexpr auto end() { return io_iterator_type{ this, describe_type::variable_count }; }
+	constexpr auto end()const { return in_iterator_type{ this, describe_type::variable_count }; }
 
 	constexpr auto rbegin() { return reverse_io_iterator_type{ end() }; }
 	constexpr auto rbegin()const { return reverse_in_iterator_type{ end() }; }

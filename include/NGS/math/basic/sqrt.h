@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../defined.h"
+#include "./defined.h"
 
-NGS_MATH_BEGIN
+NGS_MATH_BASIC_BEGIN
 
 template<std::floating_point _Type>
 constexpr _Type sqrt(_Type x) noexcept {
@@ -22,4 +22,4 @@ constexpr _Type sqrt(_Type x) noexcept {
 	}
 }
 
-NGS_MATH_END
+NGS_MATH_BASIC_END

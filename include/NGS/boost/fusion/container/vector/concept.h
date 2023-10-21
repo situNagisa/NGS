@@ -5,6 +5,6 @@
 NGS_BOOST_FUSION_BEGIN
 
 template<class _Type, class _ObjectType = std::remove_reference_t<_Type>>
-concept CVector = true;
+concept CVector = CContainer<_ObjectType>;
 
 NGS_BOOST_FUSION_END

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../defined.h"
+#include "./defined.h"
 
-NGS_MATH_BEGIN
+NGS_MATH_BASIC_BEGIN
 
 constexpr double power(double base, int x)
 {
@@ -25,4 +25,4 @@ constexpr double power(double base, int x)
     }
 }
 
-NGS_MATH_END
+NGS_MATH_BASIC_END

@@ -9,10 +9,15 @@ NGS_SPACE_CARTESIAN_3D_BEGIN
 
 template<CCartesian _Left, CCartesian _Right>
 constexpr bool chirality_is_same_as = requires{
-	requires _Left::axes_type::size == _Right::axes_type::size;
-	requires _Left::axes_type::size == 3;
-	requires (_Left::axes_type::template at_c<0>::sign* _Left::axes_type::template at_c<1>::sign* _Left::axes_type::template at_c<2>::sign) ==
-(_Right::axes_type::template at_c<0>::sign * _Right::axes_type::template at_c<1>::sign * _Right::axes_type::template at_c<2>::sign);
+	requires boost::fusion::result_of::size<typename _Left::axes_type>::value == boost::fusion::result_of::size<typename _Right::axes_type>::value;
+	requires boost::fusion::result_of::size<typename _Left::axes_type>::value == 3;
+	requires
+	( boost::fusion::result_of::value_at_c<typename _Left::axes_type, 0>::type::sign
+	* boost::fusion::result_of::value_at_c<typename _Left::axes_type, 1>::type::sign
+	* boost::fusion::result_of::value_at_c<typename _Left::axes_type, 2>::type::sign) ==
+	( boost::fusion::result_of::value_at_c<typename _Left::axes_type, 0>::type::sign
+	* boost::fusion::result_of::value_at_c<typename _Left::axes_type, 1>::type::sign
+	* boost::fusion::result_of::value_at_c<typename _Left::axes_type, 2>::type::sign);
 };
 
 template<CCartesian _Coordinate>

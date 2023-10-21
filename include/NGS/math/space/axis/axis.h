@@ -4,7 +4,7 @@
 
 NGS_SPACE_BEGIN
 
-template<int _Sign, size_t _Dimension>
+template<size_t _Dimension, int _Sign = 1>
 struct axis {
 	static constexpr auto sign = _Sign;
 	static constexpr size_t dimension = _Dimension;

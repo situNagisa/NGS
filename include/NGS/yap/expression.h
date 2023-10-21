@@ -11,14 +11,16 @@ protected:
 public:
 	constexpr static size_t complexity = 0;
 	using expression_type = _Expression;
-	using type_category = void;
+	using expression_category = void;
 
 	constexpr expression() = default;
+	constexpr expression(const self_type&) = default;
 
 	const self_type& operator=(const self_type&) = delete;
 
-	constexpr expression_type& operator()() { return static_cast<expression_type&>(*this); }
-	constexpr const expression_type& operator()()const { return static_cast<const expression_type&>(*this); }
+protected:
+	constexpr expression_type& _derived() { return static_cast<expression_type&>(*this); }
+	constexpr const expression_type& _derived()const { return static_cast<const expression_type&>(*this); }
 };
 
 NGS_YAP_END

@@ -25,6 +25,7 @@
 #include <stack>
 #include <span>
 #include <tuple>
+#include <valarray>
 
 #include <functional>
 
@@ -55,6 +56,8 @@
 #include <regex>
 
 #include <mutex>
+
+#include <complex>
 
 
 #ifdef NGS_HAS_CPP_20
