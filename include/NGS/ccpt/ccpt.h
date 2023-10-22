@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "./any.h"
-#include "./none.h"
+#include "./base.h"
+#include "./bool.h"
 #include "./derived.h"
 #include "./fundamental.h"
 #include "./functor.h"

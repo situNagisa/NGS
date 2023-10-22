@@ -5,7 +5,7 @@
 NGS_MLA_BEGIN
 
 template<
-	ccpt::UInt _Dimension,
+	ccpt::uint _Dimension,
 	class  _ElementType,
 	CMatrixTriangularTag _Category = tag::upper,
 	CMatrixLayout _Layout = tag::row,
@@ -13,7 +13,7 @@ template<
 	struct NGS_API TriangularMatrix;
 
 template<
-	ccpt::UInt _Dimension,
+	ccpt::uint _Dimension,
 	class  _ElementType,
 	CMatrixTriangularTag _Category,
 	CMatrixLayout _Layout,

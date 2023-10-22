@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "./fundamental/constant.h"
-#include "./fundamental/int.h"
+#include "./fundamental/constant_.h"
+#include "./fundamental/integral.h"
 #include "./fundamental/uint.h"
 #include "./fundamental/floating.h"
-#include "./fundamental/bool.h"
+#include "./fundamental/boolean.h"

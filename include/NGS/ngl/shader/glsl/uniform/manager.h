@@ -11,7 +11,7 @@ public:
 	using self_type = uniform_manager;
 
 	template<static_strings::static_string _Id>
-	using key_type = ccpt::constant<std::remove_cvref_t<decltype(_Id)>, _Id>;
+	using key_type = ccpt::constant_<std::remove_cvref_t<decltype(_Id)>, _Id>;
 
 	using struct_type = mpl::struct_<mpl::var_<typename _Tuples::element_type, _Tuples::element_count>...>;
 	using memory_reinterpreter_type = MemoryReinterpreter<struct_type>;

@@ -32,10 +32,10 @@ NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CVectorContainerSize, is_vector_containe
 	requires sizeof(_Type) == sizeof(typename _Type::element_type) * _Type::dimension;
 });
 
-template<ccpt::CRPT<(bool)CVectorContainer<>> _Derived, ccpt::UInt _Dim, class  _ElementType, class = std::make_index_sequence<_Dim::value>>
+template<ccpt::CRPT<(bool)CVectorContainer<>> _Derived, ccpt::uint _Dim, class  _ElementType, class = std::make_index_sequence<_Dim::value>>
 class NGS_API  VectorContainer;
 
-template<ccpt::CRPT<(bool)CVectorContainer<>> _Derived, ccpt::UInt _Dim, class  _ElementType, size_t... _Index>
+template<ccpt::CRPT<(bool)CVectorContainer<>> _Derived, ccpt::uint _Dim, class  _ElementType, size_t... _Index>
 class NGS_API  VectorContainer<
 	_Derived,
 	_Dim,

@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include "./any.h"
-
 NGS_CCPT_BEGIN
 
 /**

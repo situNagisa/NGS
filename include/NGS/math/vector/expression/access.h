@@ -3,7 +3,7 @@
 #include "../defined.h"
 
 NGS_MATH_VECTOR_BEGIN
-constexpr auto access(ccpt::None auto&&,size_t){}
+constexpr auto access(cpt::none auto&&,size_t){}
 NGS_MATH_VECTOR_END
 
 NGS_MATH_VECTOR_FUNCTOR_BEGIN

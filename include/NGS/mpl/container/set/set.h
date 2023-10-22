@@ -11,7 +11,7 @@ NGS_MPL_BEGIN
 
 template<class _Associative>
 concept CSet = requires(_Associative sequence, const _Associative sequence_cst) {
-	requires ccpt::Predicate<typename _Associative::template equal_functor<void, void>>;
+	requires ccpt::predicate<typename _Associative::template equal_functor<void, void>>;
 	
 	{ _Associative::size } -> std::convertible_to<size_t>;
 	{ _Associative::template contain<void> } -> std::convertible_to<bool>;
@@ -40,7 +40,7 @@ public:
 		set<equal_functor, _Element..., _NewElement>
 	>;
 
-	template<ccpt::UInt _Index> using element_at = typename container::template at<_Index>;
+	template<ccpt::uint _Index> using element_at = typename container::template at<_Index>;
 	template<size_t _Index> using element_at_c = element_at<ccpt::uint_<_Index>>;
 };
 template<class... _Elements>

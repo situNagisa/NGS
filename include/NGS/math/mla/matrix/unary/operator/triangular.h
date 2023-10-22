@@ -8,9 +8,9 @@ NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expression,
 	CMatrixTriangularTag _Category,
-	ccpt::UInt _OffsetRow = std::integral_constant<size_t, 0>,
-	ccpt::UInt _OffsetCol = std::integral_constant<size_t, 0>,
-	ccpt::UInt _Dimension = std::integral_constant<size_t, _Expression::row_count>
+	ccpt::uint _OffsetRow = std::integral_constant<size_t, 0>,
+	ccpt::uint _OffsetCol = std::integral_constant<size_t, 0>,
+	ccpt::uint _Dimension = std::integral_constant<size_t, _Expression::row_count>
 >requires requires() {
 	requires CMatrixSquare<_Expression>;
 	requires _OffsetRow::value + _Dimension::value <= _Expression::row_count;

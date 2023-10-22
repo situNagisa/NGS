@@ -4,7 +4,7 @@
 
 NGS_TYPE_TRAIT_BEGIN
 
-NGS_MPL_FUNCTION(index_type_identity, ccpt::UInt _Index, class _Type) {
+NGS_MPL_FUNCTION(index_type_identity, ccpt::uint _Index, class _Type) {
 	NGS_MPL_TYPE result_type = _Type;
 };
 

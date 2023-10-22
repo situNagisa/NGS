@@ -27,8 +27,13 @@ public:
 	constexpr vector() = default;
 
 	constexpr vector(const type_traits::index_type_identity_t<_Index, value_type>&... right)
-		: source({right...})
+		: source{right...}
 	{}
+	constexpr explicit(false) vector(auto&& v)
+		requires functor::copyable<expression_type, decltype(v)>
+	{
+		functor::copy(base_type::_derived(), NGS_PERFECT_FORWARD(v));
+	}
 
 	using base_type::operator=;
 
@@ -53,17 +58,21 @@ public:
 	{
 		((source[_Index] = right),...);
 	}
+	//copy
 	constexpr void assign(functor::accessible auto&& right)
 	{
 		((source[_Index] = static_cast<value_type>(functor::access(NGS_PERFECT_FORWARD(right), _Index))), ...);
 	}
 public:
-	std::valarray<value_type> source{};
+	value_type source[dimension]{};
 };
 
 vector()->vector<0, int>;
 
 template<class _First,std::convertible_to<_First>... _Rest>
 vector(_First,_Rest...) -> vector<sizeof...(_Rest) + 1, _First>;
+
+template<functor::expression _E>
+vector(_E) -> vector<functor::dimension<_E>,functor::vector_value_t<_E>>;
 
 NGS_MATH_VECTOR_END

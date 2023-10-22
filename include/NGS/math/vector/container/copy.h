@@ -65,8 +65,8 @@ inline constexpr struct copy_function_impl
 
 using detail::copy;
 
-template<class _From, class _To>
-concept copyable = requires(_To left, _From right)
+template<class _Left, class _Right>
+concept copyable = requires(_Left left, _Right right)
 {
 	{ detail::copy(NGS_PERFECT_FORWARD(left), NGS_PERFECT_FORWARD(right)) };
 };

@@ -24,7 +24,7 @@ public:
 		return ::ngs::declval<result_type>();
 	}
 
-	template<ccpt::Int _Index>
+	template<ccpt::integral _Index>
 	constexpr static auto _GET_VALUE_TYPE() {
 		if constexpr (_Index::value == -1) {
 			static_assert(_Index::value != -1, "The key is not found in the map.");

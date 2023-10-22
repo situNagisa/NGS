@@ -17,12 +17,12 @@ template<class... _T>
 concept none = false;
 
 template<class... _T>
-concept all = true;
-
-template<class _T>
-concept arithmetic = std::is_arithmetic_v<_T>;
+concept any = true;
 
 template<class _T>
 concept fundamental = std::is_fundamental_v<_T>;
+
+template<class _T>
+concept real_number = std::is_arithmetic_v<_T>;
 
 NGS_CPT_END

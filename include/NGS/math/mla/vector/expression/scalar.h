@@ -4,7 +4,7 @@
 
 NGS_MLA_BEGIN
 
-template<ccpt::UInt _Dim, class  _ElementType>
+template<ccpt::uint _Dim, class  _ElementType>
 class NGS_API  VectorScalarExpression : public VectorExpression<VectorScalarExpression<_Dim, _ElementType>> {
 	NGS_MPL_ENVIRON(VectorScalarExpression);
 public:

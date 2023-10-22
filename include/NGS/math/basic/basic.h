@@ -7,3 +7,7 @@
 #include "./expression.h"
 #include "./power.h"
 #include "./sqrt.h"
+#include "./fix.h"
+#include "./floor.h"
+#include "./modulus.h"
+#include "./remainder.h"

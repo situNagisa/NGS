@@ -9,7 +9,7 @@ NGS_MLA_BEGIN
 template<
 	CMatrixExpression _Expression1, CMatrixExpression _Expression2,
 	CMatrixBinaryFunctor<_Expression1, _Expression2> _Functor,
-	ccpt::UInt _Row, ccpt::UInt _Col
+	ccpt::uint _Row, ccpt::uint _Col
 >class  MatrixBinary : public MatrixExpression<MatrixBinary<_Expression1, _Expression2, _Functor, _Row, _Col>> {
 	NGS_MPL_ENVIRON(MatrixBinary);
 public:

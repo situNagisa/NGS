@@ -4,7 +4,7 @@
 
 NGS_MLA_BEGIN
 
-template<ccpt::UInt _Dim, class  _ElementType>
+template<ccpt::uint _Dim, class  _ElementType>
 struct NGS_API IdentityMatrix : SquareMatrix<IdentityMatrix<_Dim, _ElementType>, _Dim> {
 	NGS_MPL_ENVIRON(IdentityMatrix);
 public:

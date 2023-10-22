@@ -4,7 +4,7 @@
 
 NGS_MATH_BASIC_BEGIN
 
-template<std::floating_point _Type>
+template<cpt::real_number _Type>
 constexpr _Type sqrt(_Type x) noexcept {
 	if (std::is_constant_evaluated() && !(x < static_cast<_Type>(0.0))) {
 		if (x == static_cast<_Type>(0.0))
@@ -18,7 +18,7 @@ constexpr _Type sqrt(_Type x) noexcept {
 		return r;
 	}
 	else {
-		return std::sqrt(x);
+		return static_cast<_Type>(std::sqrt(x));
 	}
 }
 

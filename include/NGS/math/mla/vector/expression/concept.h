@@ -31,7 +31,7 @@ inline constexpr bool _is_vector_same_dimension = _Type1::dimension == _Type2::d
 template<class _Type1,class _Type2>
 concept CVectorSameDimension = _is_vector_same_dimension<std::remove_cvref_t<_Type1>, std::remove_cvref_t<_Type2>>;
 
-template<CVectorExpression _Vector,ccpt::UInt _Dimension>
+template<CVectorExpression _Vector,ccpt::uint _Dimension>
 inline constexpr bool _is_vector_dimension_equal = _Vector::dimension == _Dimension::value;
 
 template<class _Vector,size_t _Dimension>

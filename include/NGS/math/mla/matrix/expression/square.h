@@ -10,7 +10,7 @@ NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CMatrixSquare,is_square_matrix,
 	requires _Type::row_count == _Type::col_count;
 });
 
-template<ccpt::CRPT<(bool)CMatrixExpression<>> _Expression, ccpt::UInt _Dim>
+template<ccpt::CRPT<(bool)CMatrixExpression<>> _Expression, ccpt::uint _Dim>
 struct NGS_API SquareMatrix : MatrixExpression<_Expression> {
 	NGS_MPL_ENVIRON(SquareMatrix);
 public:

@@ -4,7 +4,7 @@
 
 NGS_MLA_BEGIN
 
-template<ccpt::UInt _Row, ccpt::UInt _Col, class  _ElementType>
+template<ccpt::uint _Row, ccpt::uint _Col, class  _ElementType>
 struct NGS_API ZeroMatrix : MatrixExpression<ZeroMatrix<_Row, _Col, _ElementType>> {
 	NGS_MPL_ENVIRON(ZeroMatrix);
 public:

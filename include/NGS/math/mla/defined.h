@@ -23,7 +23,7 @@ inline constexpr bool constant_id##_v = constant_id<_Type>::value				\
 //
 
 #define NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT(concept_id,constant_id,...)								\
-NGS_MLA_CONCEPT_WITH_DEFINE(concept_id,constant_id,std::remove_cvref_t,ngs::ccpt::Any,__VA_ARGS__)	\
+NGS_MLA_CONCEPT_WITH_DEFINE(concept_id,constant_id,std::remove_cvref_t,ngs::ccpt::any,__VA_ARGS__)	\
 //
 
 #define NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(concept_id,constant_id,ext,...)			\

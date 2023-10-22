@@ -19,7 +19,7 @@ protected:
 	using self_type = vector;
 public:
 	NGS_MPL_VALUE size_t size = std::tuple_size_v<base_type>;
-	template<ccpt::UInt _Index>
+	template<ccpt::uint _Index>
 	NGS_MPL_TYPE at = std::tuple_element_t<_Index::value, base_type>;
 	template<size_t _Index>
 	NGS_MPL_TYPE at_c = at<ccpt::uint_<_Index>>;

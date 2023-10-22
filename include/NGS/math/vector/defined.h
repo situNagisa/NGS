@@ -6,6 +6,8 @@
 #include "NGS/cpt/cpt.h"
 #include "NGS/math/space.h"
 #include "NGS/boost/stl_interfaces.h"
+#include "NGS/math/basic.h"
+#include "NGS/math/angle.h"
 
 #define NGS_MATH_VECTOR_BEGIN NGS_MATH_BEGIN namespace vectors{
 #define NGS_MATH_VECTOR_END } NGS_MATH_END

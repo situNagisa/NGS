@@ -14,9 +14,8 @@ constexpr std::string to_string_by_stream(_Type& value)
 	return s.str();
 }
 
-constexpr std::string to_string(char c) {
-	return std::string(1, c);
-}
+constexpr std::string to_string(char c) { return { 1,c }; }
+constexpr std::string to_string(bool c) { return c ? "true" : "false"; }
 
 template<class _Type>
 constexpr std::string to_string(_Type&& value)
@@ -35,7 +34,7 @@ constexpr std::string to_string(_Type&& value)
 		return std::to_string(value);
 	}
 	else {
-		static_assert(ccpt::None<_Type>, "to_string not implemented for this type");
+		static_assert(ccpt::none<_Type>, "to_string not implemented for this type");
 	}
 }
 

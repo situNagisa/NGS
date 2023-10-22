@@ -5,10 +5,10 @@
 
 NGS_MLA_BEGIN
 
-template<ccpt::UInt _Dimension, CScalarExpression _ElementType,class = std::make_index_sequence<_Dimension::value>>
+template<ccpt::uint _Dimension, CScalarExpression _ElementType,class = std::make_index_sequence<_Dimension::value>>
 struct DiagonalMatrix;
 
-template<ccpt::UInt _Dimension,CScalarExpression _ElementType,size_t... _Index>
+template<ccpt::uint _Dimension,CScalarExpression _ElementType,size_t... _Index>
 struct DiagonalMatrix<_Dimension,_ElementType,std::index_sequence<_Index...>> : MatrixContainer<DiagonalMatrix<_Dimension, _ElementType>,
 	_Dimension, _Dimension,
 	_ElementType, tag::row> {

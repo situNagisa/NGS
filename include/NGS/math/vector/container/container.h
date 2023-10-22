@@ -15,11 +15,11 @@ public:
 public:
 	using base_type::base_type;
 	constexpr vector_container() = default;
-	constexpr explicit(false) vector_container(auto&& vector)
-		requires functor::copyable<expression_type,decltype(vector)>
-	{
-		functor::copy(base_type::_derived(), NGS_PERFECT_FORWARD(vector));
-	}
+	//constexpr explicit(false) vector_container(auto&& vector)
+	//	requires functor::copyable<expression_type,decltype(vector)>
+	//{
+	//	functor::copy(base_type::_derived(), NGS_PERFECT_FORWARD(vector));
+	//}
 
 	constexpr auto&& operator=(auto&& vector)
 		requires functor::copyable<expression_type,decltype(vector)>

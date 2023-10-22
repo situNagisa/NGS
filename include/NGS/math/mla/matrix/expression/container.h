@@ -43,7 +43,7 @@ NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CMatrixContainerSize, is_matrix_containe
 
 template<
 	ccpt::CRPT<(bool)CMatrixContainer<>> _Derived,
-	ccpt::UInt _Row, ccpt::UInt _Col,
+	ccpt::uint _Row, ccpt::uint _Col,
 	class  _ElementType,
 	class  _Layout,
 	class = std::make_index_sequence<_Col::value* _Row::value>,
@@ -61,7 +61,7 @@ template<
  */
 template<
 	ccpt::CRPT<(bool)CMatrixContainer<>> _Derived,
-	ccpt::UInt _Row, ccpt::UInt _Col,
+	ccpt::uint _Row, ccpt::uint _Col,
 	class  _ElementType,
 	class  _Layout,
 	size_t... _Index,
