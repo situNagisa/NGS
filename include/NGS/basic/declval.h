@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "./defined.h"
 
@@ -10,15 +10,15 @@ NGS_BEGIN
 #endif
 
 /**
- * \brief Ò»°ãÇé¿öÏÂ£¬ÎÒÃÇ²»»áÊ¹ÓÃÕâ¸öº¯Êı£¬Õâ¸öº¯ÊıÊÇÓÃÀ´ÔÚ±àÒëÆÚ»ñÈ¡Ò»¸öÀàĞÍµÄÖµ¡£
+ * \brief ä¸€èˆ¬æƒ…å†µä¸‹ï¼Œæˆ‘ä»¬ä¸ä¼šä½¿ç”¨è¿™ä¸ªå‡½æ•°ï¼Œè¿™ä¸ªå‡½æ•°æ˜¯ç”¨æ¥åœ¨ç¼–è¯‘æœŸè·å–ä¸€ä¸ªç±»å‹çš„å€¼ã€‚
  *
- * \warning ´Ëº¯ÊıÓ¦Óë`decltype`¹Ø¼ü×Ö´îÅäÊ¹ÓÃ£¬¶ø²»Ó¦¸Ãµ÷ÓÃËû£¬µ÷ÓÃ»áµ¼ÖÂÎ´¶¨ÒåĞĞÎª
+ * \warning æ­¤å‡½æ•°åº”ä¸`decltype`å…³é”®å­—æ­é…ä½¿ç”¨ï¼Œè€Œä¸åº”è¯¥è°ƒç”¨ä»–ï¼Œè°ƒç”¨ä¼šå¯¼è‡´æœªå®šä¹‰è¡Œä¸º
  *
- * \return Ò»¸öÀàĞÍµÄÖµ
+ * \return ä¸€ä¸ªç±»å‹çš„å€¼
 */
-template<class _Type>
-constexpr std::add_rvalue_reference_t<_Type> declval() {
-	_Type* ptr = nullptr;
+template<class _Type, class _Object = std::remove_reference_t<_Type>>
+constexpr std::add_rvalue_reference_t<_Object> declval() {
+	_Object* ptr = nullptr;
 	return std::move(*ptr);
 }
 

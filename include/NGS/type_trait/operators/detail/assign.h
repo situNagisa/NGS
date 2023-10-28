@@ -7,7 +7,7 @@ NGS_TYPE_TRAITS_OPERATORS_BEGIN
 //namespace assign{
 
 _GEN_OPERATOR_BINARY(is_,add		,_assignable,add_assign			, +=);
-_GEN_OPERATOR_BINARY(is_,substract	,_assignable,substract_assign	, -=);
+_GEN_OPERATOR_BINARY(is_,subtract	,_assignable,subtract_assign	, -=);
 _GEN_OPERATOR_BINARY(is_,multiply	,_assignable,multiply_assign	, *=);
 _GEN_OPERATOR_BINARY(is_,divie		,_assignable,divide_assign		, /=);
 _GEN_OPERATOR_BINARY(is_,and		,_assignable,and_assign			, &=);

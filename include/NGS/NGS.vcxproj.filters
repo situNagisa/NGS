@@ -1896,7 +1896,7 @@
     <ClInclude Include="math\vector\config\immediate_evaluation.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\expression\concept.h">
+    <ClInclude Include="math\vector\concept\expression\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="cpt\object.h">
@@ -1908,52 +1908,52 @@
     <ClInclude Include="cpt\object\same_as.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\expression\access.h">
+    <ClInclude Include="math\vector\concept\expression\access.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\expression\value_type.h">
+    <ClInclude Include="math\vector\concept\expression\value_type.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\expression\dimension.h">
+    <ClInclude Include="math\vector\concept\expression\dimension.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="cpt\base.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\container\concept.h">
+    <ClInclude Include="math\vector\concept\container\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\container\assign.h">
+    <ClInclude Include="math\vector\concept\container\functor\assign.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\expression\concept\expression.h">
+    <ClInclude Include="math\vector\concept\expression\concept\expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\expression\concept\dimension.h">
+    <ClInclude Include="math\vector\concept\expression\concept\dimension.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\container\copy.h">
+    <ClInclude Include="math\vector\concept\container\functor\copy.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\container\concept\expression.h">
+    <ClInclude Include="math\vector\concept\container\concept\expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\container\concept\size.h">
+    <ClInclude Include="math\vector\concept\container\concept\size.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\expression.h">
+    <ClInclude Include="math\vector\concept\expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\expression\expression.h">
+    <ClInclude Include="math\vector\concept\expression\expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="yap\closure_type.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\container\closure_type.h">
+    <ClInclude Include="math\vector\concept\container\trait\closure.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\expression\closure_type.h">
+    <ClInclude Include="math\vector\concept\expression\closure_type.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="type_trait\naked.h">
@@ -1968,16 +1968,16 @@
     <ClInclude Include="cpt\naked\same_as.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\container.h">
+    <ClInclude Include="math\vector\concept\container.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\container\container.h">
+    <ClInclude Include="math\vector\concept\container\container.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\standard.h">
+    <ClInclude Include="math\vector\implement\standard.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\standard\vector.h">
+    <ClInclude Include="math\vector\implement\standard\vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\vector.h">
@@ -1989,10 +1989,10 @@
     <ClInclude Include="basic\preprocessor\clear_buffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\io.h">
+    <ClInclude Include="math\vector\implement\io.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\range.h">
+    <ClInclude Include="math\vector\implement\range.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\angle\defined.h">
@@ -2016,22 +2016,22 @@
     <ClInclude Include="math\basic\remainder.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\norm.h">
+    <ClInclude Include="math\vector\implement\operators\norm.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\negate.h">
+    <ClInclude Include="math\vector\implement\operators\negate.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators.h">
+    <ClInclude Include="math\vector\implement\operators.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\normalize.h">
+    <ClInclude Include="math\vector\implement\operators\normalize.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\angle.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\principal_angle.h">
+    <ClInclude Include="math\vector\implement\operators\principal_angle.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="type_trait\operators.h">
@@ -2097,13 +2097,13 @@
     <ClInclude Include="cpt\operators\sign.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\arithmetic.h">
+    <ClInclude Include="math\vector\implement\operators\arithmetic.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\scalar_adapter.h">
+    <ClInclude Include="math\vector\implement\standard\scalar.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\binary.h">
+    <ClInclude Include="math\vector\implement\standard\binary.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="type_trait\na.h">
@@ -2115,19 +2115,226 @@
     <ClInclude Include="cpt\na.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\compare.h">
+    <ClInclude Include="math\vector\implement\operators\compare.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\product.h">
+    <ClInclude Include="math\vector\implement\operators\product.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="yap\complexity.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\included_angle.h">
+    <ClInclude Include="math\vector\implement\operators\included_angle.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\operators\is_collinear.h">
+    <ClInclude Include="math\vector\implement\operators\is_collinear.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\functor\access.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\trait\value.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\trait\closure.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\functor\order.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\concept\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\concept\order.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\container\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\container\functor\assign.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\container\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\container\trait\closure.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\container\trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\container\concept\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\container\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\standard.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\standard\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\standard\identity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\standard\trivial.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\standard\triangular.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\standard\layout.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\container\functor\copy.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\standard\zero.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\arithmetic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\standard\binary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\dimension.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\determinant.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\permutation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\elimination.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\inverse.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\transpose.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\negate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\compare.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\rank.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\concept\container\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\concept\container\trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\implement\range\iterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\implement\range\trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\implement\range\interface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\implement\range\wrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\preprocessor\to_string.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\preprocessor\warning.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept\expression\index.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\access.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\range\iterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\range\trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\range\interface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\range\wrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\preprocessor\type_of_expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\standard\diagonal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\preprocessor\concept_wrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\arithmetic\numeric.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\arithmetic\multiply.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\standard\quantity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\arithmetic\multiply\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\arithmetic\multiply\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement\operators\arithmetic\multiply\numeric.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\implement.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix\implement.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

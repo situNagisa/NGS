@@ -7,7 +7,7 @@ NGS_CPT_BEGIN
 //namespace assign{
 
 _GEN_OPERATOR_BINARY(add_assignable			, is_add_assignable);
-_GEN_OPERATOR_BINARY(substract_assignable	, is_substract_assignable);
+_GEN_OPERATOR_BINARY(subtract_assignable	, is_subtract_assignable);
 _GEN_OPERATOR_BINARY(multiply_assignable	, is_multiply_assignable);
 _GEN_OPERATOR_BINARY(divide_assignable		, is_divie_assignable);
 _GEN_OPERATOR_BINARY(and_assignable			, is_and_assignable);

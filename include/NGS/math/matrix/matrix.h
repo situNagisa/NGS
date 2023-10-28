@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "./concept.h"
 #include "./implement.h"
