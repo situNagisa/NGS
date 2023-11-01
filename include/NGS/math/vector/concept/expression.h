@@ -1,9 +1,7 @@
-#pragma once
+﻿#pragma once
 
-#include "./expression/dimension.h"
-#include "./expression/access.h"
 #include "./expression/concept.h"
-#include "./expression/value_type.h"
-#include "./expression/closure_type.h"
+#include "./expression/functor.h"
+#include "./expression/trait.h"
 
 #include "./expression/expression.h"

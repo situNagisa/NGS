@@ -1854,13 +1854,13 @@
     <ClInclude Include="cpt\object\same_as.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\concept\expression\access.h">
+    <ClInclude Include="math\vector\concept\expression\functor\access.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\concept\expression\value_type.h">
+    <ClInclude Include="math\vector\concept\expression\trait\value.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\concept\expression\dimension.h">
+    <ClInclude Include="math\vector\concept\expression\functor\dimension.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="cpt\base.h">
@@ -1899,7 +1899,7 @@
     <ClInclude Include="math\vector\concept\container\trait\closure.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="math\vector\concept\expression\closure_type.h">
+    <ClInclude Include="math\vector\concept\expression\trait\closure.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="type_trait\naked.h">
@@ -2488,6 +2488,99 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="color\colors\hsv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="byte\byte.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="byte\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="byte\no_endian.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="boost\stl_interfaces\iterator\random_access\trivial.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="preprocessor\utils\as_one_expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\concept\expression\functor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector\concept\expression\trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\linear_algebra.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\vector\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\vector\access.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\vector\assign.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\vector\dimension.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\scalar\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\matrix\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\concept\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\concept\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\concept\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\concept\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\concept\vector\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\concept\vector\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\concept\vector\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\vector\contain.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

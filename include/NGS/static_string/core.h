@@ -17,12 +17,12 @@ struct basic_static_string {
 	using value_type = _CharType;
 	using traits_type = _Traits;
 
-	constexpr static size_t size = _N;
+	constexpr static size_t char_size = _N;
 
-	using string_type = value_type[size];
+	using string_type = value_type[char_size];
 
 	consteval explicit(false) basic_static_string(const value_type(&str)[_N]) noexcept {
-		for (size_t i = 0; i < size; i++)
+		for (size_t i = 0; i < char_size; i++)
 		{
 			source[i] = str[i];
 		}
@@ -33,6 +33,8 @@ struct basic_static_string {
 	}
 	constexpr auto&& data() { return source; }
 	constexpr auto&& data()const { return source; }
+
+	constexpr size_t size()const { return char_size; }
 
 	string_type source{};
 };

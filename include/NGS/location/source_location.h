@@ -11,13 +11,13 @@ using source_location = std::source_location;
 NGS_MODULE_EXPORT struct source_location {
 	[[nodiscard]] static consteval source_location current(
 		const uint_least32_t line = __builtin_LINE(),
-#if NGS_COMPILER_IS_MSVC || NGS_COMPILER_IS_GCC || NGS_COMPILER_IS_CLANG
+#if defined(NGS_COMPILER_IS_MSVC) || defined(NGS_COMPILER_IS_GCC) || defined(NGS_COMPILER_IS_CLANG)
 		const uint_least32_t column = __builtin_COLUMN(),
 #else
 		const uint_least32_t column = 0,
 #endif
 		const char* const file = __builtin_FILE(),
-#if NGS_COMPILER_IS_CLANG || NGS_COMPILER_USE_EDG
+#if defined(NGS_COMPILER_IS_CLANG) || defined(NGS_COMPILER_USE_EDG)
 		const char* const function = __builtin_FUNCTION()
 #else 
 		const char* const function = __builtin_FUNCSIG()
@@ -54,5 +54,33 @@ private:
 };
 
 #endif
+
+struct source_location_info {
+	constexpr source_location_info() = default;
+	constexpr source_location_info(
+		const char* const file_name,
+		const char* const function_name,
+		const uint_least32_t line,
+		const uint_least32_t column
+	) noexcept :
+		file_name(file_name),
+		function_name(function_name),
+		line(line),
+		column(column)
+	{}
+	constexpr source_location_info(const source_location& location) noexcept :
+		source_location_info(
+			location.file_name(),
+			location.function_name(),
+			location.line(),
+			location.column()
+		)
+	{}
+
+	const char* file_name;
+	const char* function_name;
+	uint_least32_t line;
+	uint_least32_t column;
+};
 
 NGS_LOCATION_END

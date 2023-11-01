@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "./access.h"
+#include "../functor.h"
 
 NGS_MATH_VECTOR_FUNCTOR_BEGIN
 

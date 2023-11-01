@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 
-#include "../../defined.h"
+#include "../../../defined.h"
 
 NGS_MATH_VECTOR_FUNCTOR_BEGIN
 
@@ -13,7 +13,7 @@ template<class _Vector>
 	requires requires{ { type_traits::object_t<_Vector>::dimension } -> std::convertible_to<size_t>; }
 inline constexpr size_t dimension<_Vector> = type_traits::object_t<_Vector>::dimension;
 
-template<class _T,class _O = type_traits::object_t<_T>>
+template<class _T, class _O = type_traits::object_t<_T>>
 concept valid_dimension = dimension<_O> != invalid_dimension;
 
 NGS_MATH_VECTOR_FUNCTOR_END

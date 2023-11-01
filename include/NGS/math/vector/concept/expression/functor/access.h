@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "../../defined.h"
+#include "../../../defined.h"
 
 NGS_MATH_VECTOR_BEGIN
 //constexpr auto access(cpt::none auto&&,size_t){}

@@ -13,28 +13,57 @@ NGS_BIT_BEGIN
 template<size_t _BitCount>
 struct bit_wrapper;
 
-
+/**
+ * \brief 位集，保证存储大小为储存_BitCount位所需的最小字节数
+ * \tparam _BitCount 位数
+ */
 template<size_t _BitCount> requires (_BitCount <= as_bit<uint64>())
 class NGS_DLL_API bit_set {
 protected:
 	using self_type = bit_set;
 public:
+	/** \brief 位数 */
 	static constexpr uint64 bit_count = _BitCount;
+	/** \brief 字节数 */
 	static constexpr uint64 byte_count = as_byte(bit_count);
+	/** \brief 字节类型 */
 	using byte_type = byte_<byte_count>;
+	/** \brief 位包装器 */
 	using wrapper_type = bit_wrapper<bit_count>;
+	/** \brief 位掩码 */
 	static constexpr byte_type mask = static_cast<byte_type>(bits::mask(bit_count));
 
 public:
 	constexpr          bit_set() = default;
 	explicit constexpr bit_set(byte_type data) : _data(data) {}
 
+	/** \brief 获取位值 */
 	constexpr auto value()const { return _data & mask; }
+	/**
+	 * \brief 设置位值
+	 * \param data
+	 */
 	constexpr void set(byte_type data) { _data = data; }
+	/**
+	 * \brief 设置位值
+	 * \param index 位域
+	 * \param boolean false 为 0, true 为 1
+	 */
 	constexpr void set(size_t index, bool boolean) { _data = static_cast<byte_type>(bits::set(_data, scope(index), boolean)); }
+	/**
+	 * \brief 测试位值
+	 * \param index 位域
+	 * \return false 为 0, true 为 1
+	 */
 	constexpr auto test(size_t index)const { return bits::get(_data, scope(index)); }
+	/** \brief 重置为 0 */
 	constexpr void reset() { _data = 0; }
+	/**
+	 * \brief 取反位值
+	 * \param index 位域
+	 */
 	constexpr void flip(size_t index) { set(index, !test(index)); }
+	/** \brief 取反所有位值 */
 	constexpr void flip() { _data = ~_data; }
 
 	explicit constexpr operator byte_type()const { return value(); }
@@ -58,20 +87,32 @@ public:
 	constexpr self_type operator<<(size_t off) { return { _data << off }; }
 	constexpr self_type operator>>(size_t off) { return { _data >> off }; }
 
+	/** \brief 是否全为 1 */
 	constexpr bool all()const { return !(~_data & mask); }
+	/** \brief 是否不全为 0 */
 	constexpr bool any()const { return _data & mask; }
+	/** \brief 是否全为 0 */
 	constexpr bool none()const { return !any(); }
 
+	/** \brief 1 的个数 */
 	constexpr size_t count()const { return std::popcount(value()); }
 
+	/** \brief 是否只有一个 1 (是否为 2 的幂) */
 	constexpr bool is_single_bit()const { return std::has_single_bit(value()); }
+	/** \brief 不小于 x 的最小的二的整数次幂。 */
 	constexpr byte_type ceil()const { return std::bit_ceil(value()); }
+	/** \brief 不大于 x 的最大的二的整数次幂。 */
 	constexpr byte_type floor()const { return std::bit_floor(value()); }
+	/** \brief 若 x 非零，则计算存储值 x 所需的位数，即 1 + floor(log2(x)) 。若 x 为零，则返回零。 */
 	constexpr size_t width()const { return std::bit_width(value()); }
 
+	/** \brief 从右往左数第一个 1 的位置 */
 	constexpr size_t leading_zero()const { return std::countl_zero(value()) - (as_bit(byte_count) - bit_count); }
+	/** \brief 从右往左数第一个 0 的位置 */
 	constexpr size_t leading_one()const { return std::countl_one(value()); }
+	/** \brief 从左往右数第一个 0 的位置 */
 	constexpr size_t trailing_zero()const { return std::countr_zero(_data); }
+	/** \brief 从左往右数第一个 1 的位置 */
 	constexpr size_t trailing_one()const { return std::countr_one(_data); }
 
 private:

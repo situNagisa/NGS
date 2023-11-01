@@ -4,14 +4,14 @@
 
 NGS_ASSERT_BEGIN
 
-inline bool assert_(
+inline bool dynamic_assert(
 	bool condition,
 	std::string_view expression,
 	std::string_view message = "",
 	const locations::source_location& location = locations::source_location::current()
 )
 {
-	if (!condition)
+	if (condition)
 	{
 		return false;
 	}
@@ -39,6 +39,29 @@ inline bool assert_(
 	return true;
 }
 
+template<bool _Condition, static_strings::static_string _Message = "", locations::source_location_info _Location = locations::source_location::current()>
+constexpr bool static_assert_()
+{
+	return _Condition;
+}
+
+constexpr bool assert_(
+	bool condition,
+	std::string_view expression,
+	std::string_view message = "",
+	const locations::source_location& location = locations::source_location::current()
+)
+{
+	if (std::is_constant_evaluated())
+	{
+		return condition;
+	}
+	else
+	{
+		return dynamic_assert(condition, expression, message, location);
+	}
+}
+
 NGS_ASSERT_END
 
 #if NGS_COMPILER_IS_MSVC && NGS_BUILD_TYPE_IS_DEBUG
@@ -53,32 +76,42 @@ NGS_ASSERT_END
 
 #if NGS_BUILD_TYPE_IS_DEBUG
 
-#	if NGS_CPP_STANDARD_HAS_20
-#		define NGS_ASSERT(condition,...)								\
-do																		\
-{																		\
-	if constexpr (!std::is_constant_evaluated()){						\
-		if (NGS_ asserts::assert_((condition),#condition,__VA_ARGS__))	\
-		{																\
-			NGS_ASSERT_FAIL;											\
-		}																\
-	}																	\
-}while(false)															\
+#define NGS_ASSERT(condition,...)									\
+do																	\
+{																	\
+	if (NGS_ asserts::dynamic_assert((condition),#condition,__VA_ARGS__))\
+	{																\
+		NGS_ASSERT_FAIL;											\
+	}																\
+}while(false)														\
 //
-#	else
-#		define NGS_ASSERT(condition,...)								\
-do																		\
-{																		\
-	if (NGS_ asserts::assert_((condition),#condition,__VA_ARGS__))		\
-	{																	\
-		NGS_ASSERT_FAIL;												\
-	}																	\
-}while(false)															\
+
+#	if NGS_CPP_STANDARD_HAS_20
+#define NGS_ASSERT_IF_CONSTEVAL(condition,...)									\
+do																				\
+{																				\
+	if(std::is_constant_evaluated())											\
+	{																			\
+																				\
+	}																			\
+	else																		\
+	{																			\
+		if (NGS_ asserts::dynamic_assert((condition), #condition, __VA_ARGS__))	\
+		{																		\
+			NGS_ASSERT_FAIL;													\
+		}																		\
+	}																			\
+} while (false)																	\
 //
 #	endif
 
 #else
 #	define NGS_ASSERT(condition,...) ((void)0)
+
+#	if NGS_CPP_STANDARD_HAS_20
+#		define NGS_ASSERT_IF_CONSTEVAL(condition,...) ((void)0)
+#	endif
+
 #endif
 
 

@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 
-#include "../dimension.h"
+#include "../functor.h"
 #include "./expression.h"
 
 NGS_MATH_VECTOR_FUNCTOR_BEGIN

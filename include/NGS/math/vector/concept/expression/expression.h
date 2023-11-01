@@ -1,9 +1,8 @@
-#pragma once
+﻿#pragma once
 
 #include "./concept.h"
-#include "./access.h"
-#include "./dimension.h"
-#include "./value_type.h"
+#include "./functor.h"
+#include "./trait.h"
 
 NGS_MATH_VECTOR_BEGIN
 

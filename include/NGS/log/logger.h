@@ -7,7 +7,7 @@
 NGS_LOG_BEGIN
 
 template<class _Type>
-concept is_control_char = requires(_Type target) { _control_char(target); };
+concept is_control_char = cpt::is_any_of<type_traits::naked_t<_Type>, consoles::text_color, log_level>;
 
 struct NGS_DLL_API logger
 {

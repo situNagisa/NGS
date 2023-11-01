@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 
-#include "./concept.h"
+#include "../concept.h"
 
 NGS_MATH_VECTOR_FUNCTOR_BEGIN
 
