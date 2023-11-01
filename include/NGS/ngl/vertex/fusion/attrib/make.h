@@ -5,7 +5,7 @@
 
 NGS_NGL_FUSION_BEGIN
 
-template<CFundamental _ElementType>
+template<cpt::fundamental _ElementType>
 constexpr auto make_attrib(size_t element_count, size_t offset = 0, bool normalize = false) {
 	using element_type = _ElementType;
 
@@ -20,7 +20,7 @@ constexpr auto make_attrib(size_t element_count, size_t offset = 0, bool normali
 	return data;
 }
 
-template<CFundamental _ElementType, size_t _Count>
+template<cpt::fundamental _ElementType, size_t _Count>
 constexpr auto make_attrib() {
 	return make_attrib<_ElementType>(_Count);
 }

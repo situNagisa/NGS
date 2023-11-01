@@ -22,7 +22,7 @@ concept CVectorUnaryFunctor = CVectorExpression<_Expression> &&
 template<CVectorExpression _Expression, CScalarUnaryFunctor _Functor>
 	requires requires(_Expression e) {
 		{ _Functor::apply(e()(0)) } -> std::convertible_to<typename _Expression::element_type>;
-}struct NGS_API VectorUnaryScalarFunctor {
+}struct NGS_DLL_API VectorUnaryScalarFunctor {
 private:
 	using expression_type = _Expression;
 	using functor_type = _Functor;

@@ -24,7 +24,7 @@ concept CMatrixUnaryFunctor = CMatrixExpression<_Expression> && requires(_Expres
 template<CMatrixExpression _Expression, CScalarUnaryFunctor _Functor>
 	requires requires(typename _Expression::element_type element) {
 		{ _Functor::apply(element) } -> std::convertible_to<typename _Expression::element_type>;
-}struct NGS_API MatrixUnaryScalarFunctor {
+}struct NGS_DLL_API MatrixUnaryScalarFunctor {
 private:
 	using expression_type = _Expression;
 	using functor_type = _Functor;

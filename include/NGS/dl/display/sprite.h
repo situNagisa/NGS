@@ -4,7 +4,7 @@
 
 NGS_DL_BEGIN
 
-class NGS_API Sprite : public DisplayObjectContainer {
+class NGS_DLL_API Sprite : public DisplayObjectContainer {
 public:
 	using base_type = DisplayObjectContainer;
 

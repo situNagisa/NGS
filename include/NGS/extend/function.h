@@ -4,7 +4,7 @@
 
 NGS_BEGIN
 
-template< CFunction Fn>
+template< cpt::function Fn>
 bool operator==(const std::function<Fn>& a, const std::function<Fn>& b) {
 	return *(a.template target<Fn>()) == *(b.template target<Fn>());
 }

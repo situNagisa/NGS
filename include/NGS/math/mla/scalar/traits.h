@@ -5,7 +5,7 @@
 NGS_MLA_BEGIN
 
 template<class  T>
-struct NGS_API scalar_traits : type_traits<T> {
+struct NGS_DLL_API scalar_traits : type_traits<T> {
 private:
 	using base_type = typename scalar_traits::self_type;
 public:
@@ -15,7 +15,7 @@ public:
 };
 
 template<>
-struct NGS_API scalar_traits<float> : type_traits<float> {
+struct NGS_DLL_API scalar_traits<float> : type_traits<float> {
 private:
 	using base_type = typename scalar_traits::self_type;
 public:
@@ -25,7 +25,7 @@ public:
 };
 
 template<>
-struct NGS_API scalar_traits<double> : type_traits<double> {
+struct NGS_DLL_API scalar_traits<double> : type_traits<double> {
 private:
 	using base_type = typename scalar_traits::self_type;
 public:

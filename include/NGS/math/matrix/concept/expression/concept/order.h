@@ -6,7 +6,7 @@
 NGS_MATH_MATRIX_FUNCTOR_BEGIN
 
 template<class _Left, class _Right>
-bool same_type =
+concept same_type =
 expression<_Left> && expression<_Right> &&
 functor::valid_row_column<_Left> && functor::valid_row_column<_Right> &&
 functor::rows<_Left> == functor::rows<_Right> &&

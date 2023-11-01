@@ -4,7 +4,7 @@
 #include "NGS/base/format.h"
 NGS_BEGIN
 
-#if NGS_COMPILER == NGS_GCC && defined(NGS_GCC_USE_ABI)
+#if NGS_COMPILER == NGS_COMPILER_GCC && defined(NGS_GCC_USE_ABI)
 #include <cxxabi.h> 
 #define NGS_GET_TYPE_NAME(type)		\
 ([]()->std::string					\
@@ -24,18 +24,18 @@ NGS_BEGIN
 #endif
 
 template<class  T>
-struct NGS_API _Check {
+struct NGS_DLL_API _Check {
 	static std::string name() { return NGS_GET_TYPE_NAME(T); }
 };
 
 //template<class  T>
-//struct NGS_API _Check<const T> : _Check<T> {
+//struct NGS_DLL_API _Check<const T> : _Check<T> {
 //	static std::string name() { return "const " + _Check<T>::name(); }
 //};
 
 
 template<class  T>
-class NGS_API  TypeInfo {
+class NGS_DLL_API  TypeInfo {
 public:
 	TypeInfo() = default;
 
@@ -47,7 +47,7 @@ inline std::string check_type(void) {
 	return NGS_GET_TYPE_NAME(T);
 }
 
-struct NGS_API ParseIdFactor {
+struct NGS_DLL_API ParseIdFactor {
 	static std::string bracket(const std::string& str) {
 		return std::string(R"(()") + str + R"())";
 	}

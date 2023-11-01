@@ -26,12 +26,12 @@ struct value_wrapper
 	constexpr decltype(auto) operator=(auto&& value)
 		requires functor::assignable<decltype(value), range_type>
 	{
-		return functor::assign(*_expression, _index, NGS_PERFECT_FORWARD(value));
+		return functor::assign(*_expression, _index, NGS_PP_PERFECT_FORWARD(value));
 	}
 	constexpr decltype(auto) operator=(auto&& value)const
 		requires functor::assignable<decltype(value), range_type>
 	{
-		return functor::assign(*_expression, _index, NGS_PERFECT_FORWARD(value));
+		return functor::assign(*_expression, _index, NGS_PP_PERFECT_FORWARD(value));
 	}
 
 	constexpr operator decltype(auto) () noexcept{ return get(); }

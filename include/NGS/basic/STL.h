@@ -7,8 +7,7 @@
 //==========================================================================================================
 #pragma  once
 
-#include "./version.h"
-
+#include <version>
 #include <type_traits>
 #include <typeinfo>
 
@@ -59,37 +58,14 @@
 
 #include <complex>
 
-
-#ifdef NGS_HAS_CPP_20
-#include <source_location>
+#ifdef __cpp_lib_source_location
+#	include <source_location>
+#elif __has_include(<experimental/source_location>)
+#	include <experimental / source_location>
 #else
-#include <experimental/source_location>
-#endif // NGS_CPP_20
 
-//#include <format>
+#endif
 
-#include "NGS/basic/config.h"
-
-namespace std {
-
-template<typename T>
-struct NGS_API hash<unordered_set<T>> {
-	size_t operator()(const unordered_set<T>& s) const {
-		size_t seed = s.size();
-		for (const auto& i : s)
-			seed ^= hash<T>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-		return seed;
-	}
-};
-
-/*template<class  _Element, ranges::range _Rng>
-	requires requires(basic_ostream<_Element> os, ranges::range_value_t<_Rng> v) { os << v; }
-inline basic_ostream<_Element>& operator<<(basic_ostream<_Element>& os, _Rng&& container) {
-	os << "{";
-	for (auto&& i : container)
-		os << i << ",";
-	os << "}";
-	return os;
-}*/
-
-}
+#ifdef __cpp_lib_format
+#include <format>
+#endif

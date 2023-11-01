@@ -5,7 +5,7 @@
 
 NGS_DL_BEGIN
 
-struct NGS_API GraphicPath : public IGraphic {
+struct NGS_DLL_API GraphicPath : public IGraphic {
 private:
 	using base_type = IGraphic;
 public:

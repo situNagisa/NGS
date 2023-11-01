@@ -6,7 +6,7 @@
 
 NGS_DL_BEGIN
 
-class NGS_API  BitmapDataView final: public IBitmapData {
+class NGS_DLL_API  BitmapDataView final: public IBitmapData {
 public:
 	explicit(false) BitmapDataView(const BitmapData& other)
 		: _data(other.GetData())

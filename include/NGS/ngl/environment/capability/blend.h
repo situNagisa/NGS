@@ -6,7 +6,7 @@
 
 NGL_ENV_BEGIN
 
-class NGS_API Blend final : public ICapability {
+class NGS_DLL_API Blend final : public ICapability {
 public:
 	void SetBlendMode(const BlendMode& blend) { _blend_mode = blend; }
 	auto& GetBlendMode() { return _blend_mode; }

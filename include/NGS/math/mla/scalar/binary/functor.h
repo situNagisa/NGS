@@ -23,7 +23,7 @@ concept CScalarBinaryFunctor = requires(typename _Type::argument_type1 argument1
 };
 
 template<class  _ElementType1, class  _ElementType2>
-struct NGS_API ScalarBinaryFunctor {
+struct NGS_DLL_API ScalarBinaryFunctor {
 protected:
 	using self_type = ScalarBinaryFunctor;
 public:
@@ -38,7 +38,7 @@ public:
 };
 
 template<class  _ElementType1, class  _ElementType2>
-struct NGS_API ScalarBinaryAssignFunctor {
+struct NGS_DLL_API ScalarBinaryAssignFunctor {
 protected:
 	using self_type = ScalarBinaryAssignFunctor<_ElementType1, _ElementType2>;
 public:

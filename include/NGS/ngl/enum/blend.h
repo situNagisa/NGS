@@ -29,7 +29,7 @@ enum class  BlendEquations : GLenum {
 	max = GL_MAX,
 };
 
-struct NGS_API BlendMode {
+struct NGS_DLL_API BlendMode {
 	BlendFactors src_factor;
 	BlendFactors dst_factor;
 	BlendEquations equation;

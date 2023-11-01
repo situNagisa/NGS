@@ -9,7 +9,7 @@ NGS_MLA_BEGIN
 
 
 template<CMatrixExpression _Expressioin>
-struct NGS_API MatrixRowVector : VectorExpression<MatrixRowVector<_Expressioin>> {
+struct NGS_DLL_API MatrixRowVector : VectorExpression<MatrixRowVector<_Expressioin>> {
 	NGS_MPL_ENVIRON(MatrixRowVector);
 public:
 	using element_type = typename matrix_traits<_Expressioin>::element_type;
@@ -30,7 +30,7 @@ private:
 //verify
 
 template<CMatrixExpression _Expressioin>
-struct NGS_API MatrixColVector : VectorExpression<MatrixColVector<_Expressioin>> {
+struct NGS_DLL_API MatrixColVector : VectorExpression<MatrixColVector<_Expressioin>> {
 	NGS_MPL_ENVIRON(MatrixColVector);
 public:
 	using element_type = typename matrix_traits<_Expressioin>::element_type;
@@ -50,7 +50,7 @@ private:
 //verify
 
 template<ccpt::CRPT<(bool)CMatrixExpression<>> _Expression>
-struct NGS_API MatrixExpression : Expression<_Expression> {
+struct NGS_DLL_API MatrixExpression : Expression<_Expression> {
 	NGS_MPL_ENVIRON(MatrixExpression);
 public:
 	using type_category = tag::matrix;
@@ -71,7 +71,7 @@ public:
 	/*
 protected:
 	template<bool _Constant>
-	struct NGS_API _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
+	struct NGS_DLL_API _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
 	private:
 		using _base_type = ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type>;
 		using _self_type = _iterator<_Constant>;
@@ -106,7 +106,7 @@ protected:
 		column,
 	};
 	template<bool _Constant, _iterator_type _IteratorType>
-	struct NGS_API _element_iterator : random_access_iterator<_element_iterator<_Constant, _IteratorType>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
+	struct NGS_DLL_API _element_iterator : random_access_iterator<_element_iterator<_Constant, _IteratorType>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type> {
 	private:
 		using _base_type = ngs::mla::random_access_iterator<_element_iterator<_Constant, _IteratorType>, _Constant, typename base_type::expression_type, typename base_type::expression_type::element_type>;
 		using _self_type = _element_iterator<_Constant, _IteratorType>;
@@ -138,7 +138,7 @@ protected:
 		_difference_type _index{};
 	};
 	template<bool _Constant, bool _Reverse, _iterator_type _IteratorType>
-	struct NGS_API _iterator_iterator :
+	struct NGS_DLL_API _iterator_iterator :
 		random_access_iterator<
 		_iterator_iterator<_Constant, _Reverse, _IteratorType>,
 		_Constant,

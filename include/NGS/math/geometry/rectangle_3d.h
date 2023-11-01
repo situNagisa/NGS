@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/math/defined.h"
 #include "NGS/math/util.h"
@@ -6,14 +6,14 @@
 
 NGS_MATH_BEGIN
 
-template<CArithmetic _ElementType>
-struct NGS_API Rectangle3D {
+template<cpt::real_number _ElementType>
+struct NGS_DLL_API Rectangle3D {
 protected:
 	using self_type = Rectangle3D;
 public:
 	using element_type = _ElementType;
 	using point_type = Point3<element_type>;
-	
+
 
 public:
 	constexpr element_type Area()const;

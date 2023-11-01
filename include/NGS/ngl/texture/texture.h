@@ -11,12 +11,12 @@
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
-class NGS_API  _Texture;
+class NGS_DLL_API  _Texture;
 NGS_END
 
 NGL_TARGET_BEGIN
 
-class NGS_API  Texture : public Target<Texture, objects::_Texture> {
+class NGS_DLL_API  Texture : public Target<Texture, objects::_Texture> {
 	friend class  Target<Texture, objects::_Texture>;
 	static void _Select(state_type* state);
 public:
@@ -32,7 +32,7 @@ NGL_OBJ_BEGIN
 
 #undef min
 
-class NGS_API  _Texture : public State {
+class NGS_DLL_API  _Texture : public State {
 public:
 	_Texture(TextureTarget target, const ImageView& image, size_t mipmap_level)
 		: target(target)
@@ -40,7 +40,7 @@ public:
 	{
 		NGL_CHECK(glGenTextures(1, &_context));
 
-		if(_image.IsEmpty())return;
+		if (_image.IsEmpty())return;
 		_UpdateImage(mipmap_level);
 	}
 	_Texture(
@@ -53,13 +53,13 @@ public:
 	{}
 
 	_Texture(
-		TextureTarget target, 
-		void_ptr_cst data, 
-		size_t width, size_t height, 
+		TextureTarget target,
+		void_ptr_cst data,
+		size_t width, size_t height,
 		format_t format, internal_format_t internal_format,
 		type_t type,
 		size_t mipmap_level)
-		: _Texture(target,{data,width,height,format,internal_format ,type},mipmap_level)
+		: _Texture(target, { data,width,height,format,internal_format ,type }, mipmap_level)
 	{}
 
 	_Texture(TextureTarget target)
@@ -68,14 +68,14 @@ public:
 
 	_Texture(_Texture&& other) noexcept
 		: State(std::move(other))
-		  , target(other.target)
-		  , min(other.min)
-		  , mag(other.mag)
-		  , s(other.s)
-		  , t(other.t)
-		  , r(other.r)
-		  , slot(other.slot)
-		  , _image(std::move(other._image))
+		, target(other.target)
+		, min(other.min)
+		, mag(other.mag)
+		, s(other.s)
+		, t(other.t)
+		, r(other.r)
+		, slot(other.slot)
+		, _image(std::move(other._image))
 	{}
 
 	virtual ~_Texture() override
@@ -111,15 +111,15 @@ protected:
 
 	}
 	void _UpdateImage(size_t mipmap_level) {
-		if(!is_bind(this))bind(this);
+		if (!is_bind(this))bind(this);
 		NGL_CHECK(glTexImage2D(
-			static_cast<GLenum>(target), 
-			static_cast<GLint>(mipmap_level), 
+			static_cast<GLenum>(target),
+			static_cast<GLint>(mipmap_level),
 			_image.GetInternalFormat(),
-			static_cast<GLsizei>(_image.GetSize().x), 
-			static_cast<GLsizei>(_image.GetSize().y), 
-			0, 
-			_image.GetFormat(), 
+			static_cast<GLsizei>(_image.GetSize().x),
+			static_cast<GLsizei>(_image.GetSize().y),
+			0,
+			_image.GetFormat(),
 			_image.GetType(),
 			_image.GetData()
 		));
@@ -140,12 +140,12 @@ private:
 };
 
 template<TextureTarget _Target>
-class NGS_API  Texture : public _Texture {
+class NGS_DLL_API  Texture : public _Texture {
 public:
 	Texture(Texture&&) = default;
 
-	Texture(void_ptr_cst data, size_t width, size_t height, type_t format, size_t mipmap_level = 0) 
-		: _Texture(_Target, data, width, height, format, mipmap_level) 
+	Texture(void_ptr_cst data, size_t width, size_t height, type_t format, size_t mipmap_level = 0)
+		: _Texture(_Target, data, width, height, format, mipmap_level)
 	{}
 	Texture(
 		void_ptr_cst data,
@@ -153,18 +153,18 @@ public:
 		format_t format, internal_format_t internal_format,
 		type_t type,
 		size_t mipmap_level = 0)
-		: _Texture(_Target, data,width,height,format,internal_format ,type, mipmap_level)
+		: _Texture(_Target, data, width, height, format, internal_format, type, mipmap_level)
 	{}
 
-	template<CSameAsAny<RGBA24, RGBA32> _RGBA>
-	Texture(const _RGBA* data, size_t width, size_t height, size_t mipmap_level = 0) 
-		: Texture(data, width, height, gl_convert<_RGBA>, mipmap_level) 
+	template<cpt::is_any_of<RGBA24, RGBA32> _RGBA>
+	Texture(const _RGBA* data, size_t width, size_t height, size_t mipmap_level = 0)
+		: Texture(data, width, height, gl_convert<_RGBA>, mipmap_level)
 	{}
 
-	Texture(const ImageView& image, size_t mipmap_level = 0) 
-		: _Texture(_Target, image, mipmap_level) 
+	Texture(const ImageView& image, size_t mipmap_level = 0)
+		: _Texture(_Target, image, mipmap_level)
 	{}
-	
+
 	Texture() : _Texture(_Target) {}
 };
 

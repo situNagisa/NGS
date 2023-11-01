@@ -6,7 +6,7 @@
 
 NDA_BEGIN
 
-class NGS_API  Stage : public Sprite, public DeleteCopy {
+class NGS_DLL_API  Stage : public Sprite, public DeleteCopy {
 public:
 	using Sprite::Sprite;
 

@@ -5,7 +5,7 @@
 
 NDA_BEGIN
 
-class NGS_API  IDrawer {
+class NGS_DLL_API  IDrawer {
 public:
 	virtual void Draw(const Stage* stage) = 0;
 };

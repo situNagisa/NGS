@@ -7,7 +7,7 @@
 
 NGL_ENV_BEGIN
 
-class NGS_API  IEnvironment {
+class NGS_DLL_API  IEnvironment {
 public:
 	virtual ~IEnvironment() = default;
 

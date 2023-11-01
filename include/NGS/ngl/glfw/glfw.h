@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/ngl/glfw/defined.h"
 #include "NGS/ngl/config.h"
@@ -7,7 +7,7 @@
 
 NGL_BEGIN
 NGL_TARGET_BEGIN
-class NGS_API  GLFW : public Target<GLFW, fw::Window>, public Singleton<GLFW> {
+class NGS_DLL_API  GLFW : public Target<GLFW, fw::Window>, public Singleton<GLFW> {
 public:
 	NGS_TYPE_DEFINE(fw::Window, window);
 
@@ -21,7 +21,7 @@ private:
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#if NGS_PLATFORM == NGS_MAC
+#if NGS_SYSTEM == NGS_SYSTEM_MAC
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 	}

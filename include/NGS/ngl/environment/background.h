@@ -6,7 +6,7 @@
 
 NGL_ENV_BEGIN
 
-class NGS_API  BackgroundColor final : public IEnvironment {
+class NGS_DLL_API  BackgroundColor final : public IEnvironment {
 public:
 	void SetBackgroundColor(ARGB32 argb) { _background_color = argb; }
 	auto GetBackgroundColor()const { return _background_color; }

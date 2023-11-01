@@ -5,7 +5,7 @@
 
 NGL_BEGIN
 
-class NGS_API  ImageView {
+class NGS_DLL_API  ImageView {
 private:
 
 public:

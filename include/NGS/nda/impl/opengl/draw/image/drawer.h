@@ -5,7 +5,7 @@
 
 NDA_IMPL_OPENGL_BEGIN
 
-struct NGS_API TextureDrawer {
+struct NGS_DLL_API TextureDrawer {
 	using buffer_pos = ngl::buffer_c<ngs::float32, 2>;
 	using buffer_size = ngl::buffer_c<ngs::float32, 2>;
 	using buffer_texture_slot = ngl::buffer_c<ngs::float32, 1>;

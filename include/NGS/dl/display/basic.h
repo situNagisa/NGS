@@ -5,7 +5,7 @@
 NGS_DL_BEGIN
 
 template<class _Parent,class _FriendParent>
-class NGS_API IChild {
+class NGS_DLL_API IChild {
 	using parent_type = _Parent;
 	friend _FriendParent;
 public:
@@ -20,7 +20,7 @@ protected:
 };
 
 template<class _DerivedType,class _Child>
-class NGS_API IParent {
+class NGS_DLL_API IParent {
 private:
 	using _derived_type = _DerivedType;
 public:

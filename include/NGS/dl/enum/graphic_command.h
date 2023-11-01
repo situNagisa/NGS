@@ -4,7 +4,7 @@
 
 NGS_DL_BEGIN
 
-enum class NGS_API GraphicPathCommand {
+enum class NGS_DLL_API GraphicPathCommand {
 	point,
 	circle,
 	ellipse,

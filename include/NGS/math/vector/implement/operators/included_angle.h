@@ -57,7 +57,7 @@ concept included_angleable = []
 constexpr auto included_angle(functor::expression auto&& left, functor::expression auto&& right)
 	requires detail::included_angleable<decltype(left), decltype(right)>
 {
-	return std::acos(product_inner(NGS_PERFECT_FORWARD(left), NGS_PERFECT_FORWARD(right)) / (norm(NGS_PERFECT_FORWARD(left)) * norm(NGS_PERFECT_FORWARD(right))));
+	return std::acos(product_inner(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)) / (norm(NGS_PP_PERFECT_FORWARD(left)) * norm(NGS_PP_PERFECT_FORWARD(right))));
 }
 
 NGS_MATH_VECTOR_END

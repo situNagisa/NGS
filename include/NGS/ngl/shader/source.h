@@ -8,7 +8,7 @@
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
-class NGS_API  _ShaderSource : public State {
+class NGS_DLL_API  _ShaderSource : public State {
 public:
 	_ShaderSource(ShaderType type, const GLchar* const* sources, size_t count)
 		: type(type)
@@ -31,7 +31,7 @@ public:
 
 	void Compile()const {
 		NGL_CHECK(glCompileShader(_context));
-#if NGS_BUILD_TYPE == NGS_DEBUG
+#if NGS_BUILD_TYPE_IS_DEBUG
 		GLint compile_ok = GL_FALSE;
 		NGL_CHECK(glGetShaderiv(_context, GL_COMPILE_STATUS, &compile_ok));
 		if (compile_ok == GL_FALSE) {
@@ -49,7 +49,7 @@ public:
 };
 
 template<ShaderType _Type>
-class NGS_API  ShaderSource : public _ShaderSource {
+class NGS_DLL_API  ShaderSource : public _ShaderSource {
 public:
 	ShaderSource(ShaderSource&&) = default;
 	ShaderSource(const nchar_ptr_cst* sources, size_t count)

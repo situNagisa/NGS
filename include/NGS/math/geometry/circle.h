@@ -6,7 +6,7 @@
 NGS_MATH_BEGIN
 
 template<class _ElementType>
-struct NGS_API Circle {
+struct NGS_DLL_API Circle {
 private:
 	using self_type = Circle;
 public:

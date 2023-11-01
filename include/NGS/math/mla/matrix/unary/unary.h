@@ -8,7 +8,7 @@
 NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expression, CMatrixUnaryFunctor<_Expression> _Functor, ccpt::uint _Row, ccpt::uint _Col>
-class NGS_API  MatrixUnary : public MatrixExpression<MatrixUnary<_Expression, _Functor, _Row, _Col>> {
+class NGS_DLL_API  MatrixUnary : public MatrixExpression<MatrixUnary<_Expression, _Functor, _Row, _Col>> {
 	NGS_MPL_ENVIRON(MatrixUnary);
 public:
 	using expression_type = typename base_type::expression_type;

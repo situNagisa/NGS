@@ -7,7 +7,7 @@ NGL_BEGIN
 NGL_OBJ_BEGIN
 
 template<mpl::mstruct::CPair... _Pairs>
-class NGS_API ShaderUniform : public Shader {
+class NGS_DLL_API ShaderUniform : public Shader {
 	NGS_MPL_ENVIRON(ShaderUniform);
 public:
 	using uniforms_type = mpl::mstruct::name_struct<layout::no_align_t, _Pairs...>;

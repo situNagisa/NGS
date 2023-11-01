@@ -5,7 +5,7 @@
 
 NGS_BEGIN
 
-class NGS_API  IO : public EmbeddedObject {
+class NGS_DLL_API  IO : public EmbeddedObject {
 public:
 
 public:

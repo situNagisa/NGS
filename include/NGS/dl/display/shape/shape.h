@@ -5,7 +5,7 @@
 
 NGS_DL_BEGIN
 
-class NGS_API Shape : public DisplayObject {
+class NGS_DLL_API Shape : public DisplayObject {
 public:
 	Shape();
 

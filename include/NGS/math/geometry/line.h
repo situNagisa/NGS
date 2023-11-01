@@ -5,8 +5,8 @@
 
 NGS_MATH_BEGIN
 
-template<CArithmetic _ElementType>
-class NGS_API  Line2 {
+template<cpt::real_number _ElementType>
+class NGS_DLL_API  Line2 {
 public:
 	using element_type = _ElementType;
 	using point_type = Point2<element_type>;

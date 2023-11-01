@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define NGS_TYPE_DEFINE(type,id)        \
 using __##id    = type;                 \
@@ -9,18 +9,6 @@ using __##id##_right = type&&;			\
 using __##id##_right_cst = const type&&;\
 using __##id##_ptr = type*;             \
 using __##id##_ptr_cst = const type*;	\
-//
-
-
-#define _NGS_TYPE_DEFINE(type,id)   	\
-using id    = type;                 	\
-using id##_cst = const type;        	\
-using id##_ref = type&;             	\
-using id##_ref_cst = const type&;   	\
-using id##_right = type&&;				\
-using id##_right_cst = const type&&;	\
-using id##_ptr = type*;             	\
-using id##_ptr_cst = const type*;		\
 //
 
 #define NGS_DEFINE_TYPE(id,...)			\

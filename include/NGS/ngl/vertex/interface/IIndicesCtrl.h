@@ -8,7 +8,7 @@
 
 NGL_BEGIN
 
-class NGS_API  IIndicesCtrl {
+class NGS_DLL_API  IIndicesCtrl {
 protected:
 	using self_type = IIndicesCtrl;
 public:

@@ -6,7 +6,7 @@
 NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expression>
-struct NGS_API MatrixUnaryTransposeFunctor {
+struct NGS_DLL_API MatrixUnaryTransposeFunctor {
 private:
 	using expression_type = _Expression;
 	using result_type = typename matrix_traits<expression_type>::element_type;
@@ -17,7 +17,7 @@ public:
 	}
 };
 
-struct NGS_API _Transpose {
+struct NGS_DLL_API _Transpose {
 	constexpr _Transpose() = default;
 
 	template<CMatrixExpression _Expression>

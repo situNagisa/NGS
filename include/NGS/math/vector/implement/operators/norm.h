@@ -21,12 +21,12 @@ constexpr auto norm_squared(_Vector&& expr) {
 	value_type result{};
 	for (size_t i = 0; i < functor::dimension<_Vector>; i++)
 	{
-		result += functor::access(NGS_PERFECT_FORWARD(expr), i) * functor::access(NGS_PERFECT_FORWARD(expr), i);
+		result += functor::access(NGS_PP_PERFECT_FORWARD(expr), i) * functor::access(NGS_PP_PERFECT_FORWARD(expr), i);
 	}
 	return result;
 }
 template<functor::expression _Vector>
-constexpr auto norm(_Vector&& expr) { return sqrt(norm_squared(NGS_PERFECT_FORWARD(expr))); }
+constexpr auto norm(_Vector&& expr) { return sqrt(norm_squared(NGS_PP_PERFECT_FORWARD(expr))); }
 
 
 NGS_MATH_VECTOR_END

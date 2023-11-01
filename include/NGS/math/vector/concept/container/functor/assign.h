@@ -18,16 +18,16 @@ inline constexpr struct
 		assign,
 		member,
 	};
-	template<class _Left, class _Right, NGS_CONSTEXPR_CLEAR_BUFFER>
+	template<class _Left, class _Right, NGS_PP_CONSTEXPR_CLEAR_BUFFER>
 	constexpr static auto CHOICE()
 	{
 		if constexpr (
-			requires(_Left left, size_t index, _Right right) { { assign(NGS_PERFECT_FORWARD(left), index, NGS_PERFECT_FORWARD(right)) }; }
+			requires(_Left left, size_t index, _Right right) { { assign(NGS_PP_PERFECT_FORWARD(left), index, NGS_PP_PERFECT_FORWARD(right)) }; }
 		) {
 			return assign_type::assign;
 		}
 		else if constexpr (
-			requires(_Left left, size_t index, _Right right) { { left.assign(index, NGS_PERFECT_FORWARD(right)) }; }
+			requires(_Left left, size_t index, _Right right) { { left.assign(index, NGS_PP_PERFECT_FORWARD(right)) }; }
 		) {
 			return assign_type::member;
 		}
@@ -40,12 +40,12 @@ inline constexpr struct
 	constexpr decltype(auto) operator()(auto&& to, size_t index, auto&& from) const
 		requires (CHOICE<decltype(to), decltype(from)>() == assign_type::assign)
 	{
-		return assign(NGS_PERFECT_FORWARD(to), index, NGS_PERFECT_FORWARD(from));
+		return assign(NGS_PP_PERFECT_FORWARD(to), index, NGS_PP_PERFECT_FORWARD(from));
 	}
 	constexpr decltype(auto) operator()(auto&& to, size_t index, auto&& from) const
 		requires (CHOICE<decltype(to), decltype(from)>() == assign_type::member)
 	{
-		return to.assign(index, NGS_PERFECT_FORWARD(from));
+		return to.assign(index, NGS_PP_PERFECT_FORWARD(from));
 	}
 } assign{};
 
@@ -56,7 +56,7 @@ using detail::assign;
 template<class _From, class _To, class _L = type_traits::object_t<_To>, class _R = type_traits::object_t<_From>>
 concept assignable = requires(_L left, size_t index, _R right)
 {
-	{ detail::assign(NGS_PERFECT_FORWARD(left), index, NGS_PERFECT_FORWARD(right)) };
+	{ detail::assign(NGS_PP_PERFECT_FORWARD(left), index, NGS_PP_PERFECT_FORWARD(right)) };
 };
 
 NGS_MATH_VECTOR_FUNCTOR_END

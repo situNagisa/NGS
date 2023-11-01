@@ -32,7 +32,7 @@ public:
 	constexpr explicit(false) vector(auto&& v)
 		requires functor::copyable<expression_type, decltype(v)>
 	{
-		functor::copy(base_type::_derived(), NGS_PERFECT_FORWARD(v));
+		functor::copy(base_type::_derived(), NGS_PP_PERFECT_FORWARD(v));
 	}
 
 	using base_type::operator=;
@@ -48,16 +48,16 @@ public:
 
 	constexpr void assign(size_t index, functor::accessible auto&& right)
 	{
-		source[index] = static_cast<value_type>(functor::access(NGS_PERFECT_FORWARD(right), index));
+		source[index] = static_cast<value_type>(functor::access(NGS_PP_PERFECT_FORWARD(right), index));
 	}
 
 	/**
-	 * \brief 
-	 * \param index 
+	 * \brief
+	 * \param index
 	 * \param right
 	 * \note 声明此函数是为了减缓智能提示压力
 	 */
-	constexpr void assign(size_t index, const value_type& right){ source[index] = right; }
+	constexpr void assign(size_t index, const value_type& right) { source[index] = right; }
 	//constexpr void assign(size_t index, std::convertible_to<value_type> auto&& right)
 	//{
 	//	source[index] = static_cast<value_type>(right);
@@ -69,7 +69,7 @@ public:
 	//copy
 	constexpr void assign(functor::accessible auto&& right)
 	{
-		((source[_Index] = static_cast<value_type>(functor::access(NGS_PERFECT_FORWARD(right), _Index))), ...);
+		((source[_Index] = static_cast<value_type>(functor::access(NGS_PP_PERFECT_FORWARD(right), _Index))), ...);
 	}
 public:
 	value_type source[dimension]{};

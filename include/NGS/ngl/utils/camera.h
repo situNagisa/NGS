@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-class NGS_API  Camera2D {
+class NGS_DLL_API  Camera2D {
 public:
 	Camera2D(float32 width, float32 height) : size(width, height) {}
 

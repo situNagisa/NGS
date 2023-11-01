@@ -25,7 +25,7 @@ concept CMatrixBinaryFunctor = CMatrixExpression<_Expression1> && CMatrixExpress
 template<CMatrixExpression _Expression1, CMatrixExpression _Expression2, CScalarBinaryFunctor _Functor>
 	requires requires(typename matrix_traits<_Expression1>::element_type e1, typename matrix_traits<_Expression2>::element_type e2) {
 		{ _Functor::apply(e1, e2) } -> std::convertible_to< mpl::promote_t<typename _Expression1::element_type, typename _Expression2::element_type>>;
-}struct NGS_API MatrixBinaryScalarFunctor {
+}struct NGS_DLL_API MatrixBinaryScalarFunctor {
 private:
 	using expression_type1 = _Expression1;
 	using expression_type2 = _Expression2;

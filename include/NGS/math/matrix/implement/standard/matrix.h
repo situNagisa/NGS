@@ -52,7 +52,7 @@ public:
 	constexpr explicit(false) matrix(auto&& v)
 		requires functor::copyable<expression_type, decltype(v)>
 	{
-		functor::copy(base_type::_derived(), NGS_PERFECT_FORWARD(v));
+		functor::copy(base_type::_derived(), NGS_PP_PERFECT_FORWARD(v));
 	}
 
 	using base_type::operator=;
@@ -68,7 +68,7 @@ public:
 
 	constexpr void assign(size_t row, size_t column, functor::accessible auto&& right)
 	{
-		source[layout_type::transform(row, column)] = static_cast<value_type>(functor::access(NGS_PERFECT_FORWARD(right), row, column));
+		source[layout_type::transform(row, column)] = static_cast<value_type>(functor::access(NGS_PP_PERFECT_FORWARD(right), row, column));
 	}
 
 	/**
@@ -93,7 +93,7 @@ public:
 		for (size_t i = 0; i < rows * columns; i++)
 		{
 			auto&& [row, column] = layout_type::transform(i);
-			source[layout_type::standard_sequence(i)] = static_cast<value_type>(functor::access(NGS_PERFECT_FORWARD(right), row, column));
+			source[layout_type::standard_sequence(i)] = static_cast<value_type>(functor::access(NGS_PP_PERFECT_FORWARD(right), row, column));
 		}
 	}
 public:

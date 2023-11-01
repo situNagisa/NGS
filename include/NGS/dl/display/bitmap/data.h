@@ -5,7 +5,7 @@
 
 NGS_DL_BEGIN
 
-class NGS_API  BitmapData final : public IBitmapData {
+class NGS_DLL_API  BitmapData final : public IBitmapData {
 public:
 	BitmapData(const void_ptr data, const color_space::PixelFormat format, const size_t width, const size_t height);
 	//copy

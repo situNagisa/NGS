@@ -96,11 +96,11 @@ constexpr ARGB24 Convert <HSV, ARGB24>(const HSV& hsv) {
 
 NGS_END
 
-class NGS_API  Color {
+class NGS_DLL_API  Color {
 public:
 	NGS_TYPE_DEFINE(uint8, channel);
 
-	struct NGS_API Blend {
+	struct NGS_DLL_API Blend {
 	public:
 		template<_NGS_CPT CARGB rgb = _NGS_TYP StdARGB>
 		constexpr static typename rgb::A::type RGB_AlphaBlend(rgb::A::type alphaA, rgb::A::type alphaB) {

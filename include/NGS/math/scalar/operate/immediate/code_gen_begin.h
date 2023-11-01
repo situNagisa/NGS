@@ -24,9 +24,9 @@ using operate_detail::id												\
 //
 
 #define NGS_MATH_SCALAR_GEN_UNARY(id,op)																		\
-NGS_MATH_SCALAR_GEN_FUNCTION(id,op value(NGS_PERFECT_FORWARD(expression)), CScalarExpression auto&& expression)	\
+NGS_MATH_SCALAR_GEN_FUNCTION(id,op value(NGS_PP_PERFECT_FORWARD(expression)), CScalarExpression auto&& expression)	\
 //
 
 #define NGS_MATH_SCALAR_GEN_BINARY(id,op)																															\
-NGS_MATH_SCALAR_GEN_FUNCTION(id,value(NGS_PERFECT_FORWARD(left)) op value(NGS_PERFECT_FORWARD(right)),CScalarExpression auto&& left,CScalarExpression auto&& right)	\
+NGS_MATH_SCALAR_GEN_FUNCTION(id,value(NGS_PP_PERFECT_FORWARD(left)) op value(NGS_PP_PERFECT_FORWARD(right)),CScalarExpression auto&& left,CScalarExpression auto&& right)	\
 //

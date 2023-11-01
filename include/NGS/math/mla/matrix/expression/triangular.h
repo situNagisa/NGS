@@ -10,7 +10,7 @@ template<
 	CMatrixTriangularTag _Category = tag::upper,
 	CMatrixLayout _Layout = tag::row,
 	class = std::make_index_sequence<_Dimension::value* (_Dimension::value + 1) / 2>>
-	struct NGS_API TriangularMatrix;
+	struct NGS_DLL_API TriangularMatrix;
 
 template<
 	ccpt::uint _Dimension,
@@ -18,7 +18,7 @@ template<
 	CMatrixTriangularTag _Category,
 	CMatrixLayout _Layout,
 	size_t... _Index
->struct NGS_API TriangularMatrix<
+>struct NGS_DLL_API TriangularMatrix<
 	_Dimension,
 	_ElementType,
 	_Category,

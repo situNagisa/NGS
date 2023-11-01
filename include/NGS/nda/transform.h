@@ -4,7 +4,7 @@
 
 NDA_BEGIN
 
-struct NGS_API Transform {
+struct NGS_DLL_API Transform {
 public:
 	matrix_t GetMatrix()const {
 		matrix_t matrix = identity_matrix;

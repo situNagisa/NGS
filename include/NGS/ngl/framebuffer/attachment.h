@@ -7,7 +7,7 @@
 
 NGL_BEGIN
 
-class NGS_API Attachment {
+class NGS_DLL_API Attachment {
 protected:
 	using self_type = Attachment;
 public:

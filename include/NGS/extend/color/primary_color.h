@@ -39,7 +39,7 @@ NGS_COLOR_SPACE_BEGIN
 #undef _G
 #undef _B
 
-#if NGS_PLATFORM == NGS_MSVC
+#if NGS_COMPILER == NGS_COMPILER_MSVC
 #pragma warning(push)
 #pragma warning(disable:4309)
 #pragma warning(push)
@@ -47,7 +47,7 @@ NGS_COLOR_SPACE_BEGIN
 #endif
 
 template<CChannel _A, CChannel _R, CChannel _G, CChannel _B>
-struct NGS_API PrimaryColor {
+struct NGS_DLL_API PrimaryColor {
 protected:
 	using self_type = PrimaryColor;
 public:
@@ -142,7 +142,7 @@ private:
 
 #define NGS_DEFINE_ARGB(c1,c2,c3,c4)		\
 template<size_t _##c1, size_t _##c2, size_t _##c3, size_t _##c4> \
-struct NGS_API c1##c2##c3##c4 : public PrimaryColor<Channel<_##c1, _##c2 + _##c3 + _##c4>, Channel<_##c2, _##c3 + _##c4>, Channel<_##c3, _##c4>, Channel<_##c4, 0>> { \
+struct NGS_DLL_API c1##c2##c3##c4 : public PrimaryColor<Channel<_##c1, _##c2 + _##c3 + _##c4>, Channel<_##c2, _##c3 + _##c4>, Channel<_##c3, _##c4>, Channel<_##c4, 0>> { \
 	NGS_MPL_ENVIRON(c1##c2##c3##c4);		\
 public:										\
 	using A = typename base_type::A;		\
@@ -203,7 +203,7 @@ NGS_DEFINE_ARGB(B, G, R, A);
 
 #undef NGS_DEFINE_ARGB
 
-#if NGS_PLATFORM == NGS_MSVC
+#if NGS_COMPILER == NGS_COMPILER_MSVC
 #pragma warning(pop)
 #pragma warning(pop)
 #endif

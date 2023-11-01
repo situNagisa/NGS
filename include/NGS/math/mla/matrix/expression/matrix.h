@@ -19,7 +19,7 @@ template<
 	class = std::make_index_sequence<_Col* _Row>,
 	class = std::make_index_sequence<_Row>,
 	class = std::make_index_sequence<_Col>>
-	struct NGS_API Matrix;
+	struct NGS_DLL_API Matrix;
 
 template<
 	size_t _Row, size_t _Col,
@@ -28,7 +28,7 @@ template<
 	size_t... _Index,
 	size_t... _RowIndex,
 	size_t... _ColIndex>
-struct NGS_API Matrix<
+struct NGS_DLL_API Matrix<
 	_Row, _Col,
 	_ElementType,
 	_Layout,

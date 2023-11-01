@@ -8,7 +8,7 @@
 
 NGS_MLA_BEGIN
 
-struct NGS_API _Determinant {
+struct NGS_DLL_API _Determinant {
 	constexpr _Determinant() = default;
 
 	template<CMatrixSquare _Expression>

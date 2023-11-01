@@ -1,10 +1,11 @@
 ﻿#pragma once
 
 #include "NGS/base/base.h"
+#include "NGS/cpt/cpt.h"
 
 NGS_BEGIN
 
-class NGS_API  Constructor {
+class NGS_DLL_API  Constructor {
 public:
 	template<class  T, class ... Args>
 	static void CONSTRUCT_PLACE(T* block, Args&&... args) { new(block)T(std::forward<Args>(args)...); }
@@ -18,7 +19,7 @@ public:
 
 };
 
-class NGS_API  Destructor {
+class NGS_DLL_API  Destructor {
 public:
 	template<class  T>
 	static void DESTRUCT(T* block) { delete block; }
@@ -32,9 +33,9 @@ public:
 	}
 };
 
-class NGS_API  SegmentManager {
+class NGS_DLL_API  SegmentManager {
 
-	struct NGS_API ConstructorProxy {
+	struct NGS_DLL_API ConstructorProxy {
 		NGS_TYPE_DEFINE(ConstructorProxy, proxy);
 
 		__proxy operator[](size_t n)const { return { size,id }; }
@@ -44,9 +45,9 @@ class NGS_API  SegmentManager {
 	};
 };
 
-class NGS_API  Allocator : public Singleton<Allocator> {
+class NGS_DLL_API  Allocator : public Singleton<Allocator> {
 public:
-	struct NGS_API AllocatedInfo {
+	struct NGS_DLL_API AllocatedInfo {
 		size_t count = 0;
 		size_t size = 0;
 		std::string id{};
@@ -160,7 +161,7 @@ constexpr void MemorySet(UINT* dst, UINT value, size_t size) {
 //inline void MemoryMove(void* dst, void_ptr_cst src, size_t size) { memmove(dst, src, size); }
 
 //实现基础逻辑，交换整形数据（最大可达八字节，即unsigned long long)
-template< CUnsignedIntegral UINT>
+template< std::unsigned_integral UINT>
 void memory_swap(UINT& a, UINT& b) {
 	a ^= b;
 	b ^= a;
@@ -168,7 +169,7 @@ void memory_swap(UINT& a, UINT& b) {
 }
 
 //实现n个整数类型的数据交换
-template<size_t N, CUnsignedIntegral UINT>
+template<size_t N, std::unsigned_integral UINT>
 void memory_swap(UINT* a, UINT* b) {
 	//可用OpenMP或模板For优化这个for循环
 	for (size_t i = 0; i < N; i++) {
@@ -176,7 +177,7 @@ void memory_swap(UINT* a, UINT* b) {
 	}
 }
 //同上，支持动态填写size参数，缺点是不能用For模板进行优化循环
-template< CUnsignedIntegral UINT>
+template< std::unsigned_integral UINT>
 void memory_swap(UINT* a, UINT* b, size_t size) {
 	for (size_t i = 0; i < size; i++) {
 		memory_swap(a[i], b[i]);
@@ -185,7 +186,7 @@ void memory_swap(UINT* a, UINT* b, size_t size) {
 
 //Different 不同类型约束，此次确保T不为void
 //接口
-template<CDifferentFrom<void> T>
+template<cpt::different_from<void> T>
 void memory_swap(T* a, T* b) {
 	constexpr auto rate = sizeof(T) / (sizeof(uint64));
 	constexpr auto modulo = sizeof(T) % (sizeof(uint64));
@@ -206,14 +207,14 @@ void memory_swap(T* a, T* b) {
 /*template< CIntegral T>
 inline void ByteInverse(T& p) { ByteInverse(byte_ptr(&p), sizeof(T)); }*/
 
-#if NGS_COMPILER == NGS_MSVC && NGS_PLATFORM == NGS_WINDOWS
+#if NGS_COMPILER == NGS_COMPILER_MSVC && NGS_SYSTEM == NGS_SYSTEM_WINDOWS
 //inline size_t SizeOf(void* block) { return _msize(block); }
 #else
 //inline size_t SizeOf(void* block) { return 0; }
 #endif
 
 template<size_t _Count>
-class NGS_API  NumberAllocator {
+class NGS_DLL_API  NumberAllocator {
 public:
 	NGS_TYPE_DEFINE(BitSet<_Count>, bits);
 public:

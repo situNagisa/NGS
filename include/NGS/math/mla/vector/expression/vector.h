@@ -12,10 +12,10 @@ NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CStandardVector, is_standard_vector,
 });
 
 template<size_t _Dimension, class  _ElementType, class  = std::make_index_sequence<_Dimension>>
-class NGS_API  Vector;
+class NGS_DLL_API  Vector;
 
 template<size_t _Dimension, class  _ElementType, size_t... _Index>
-class NGS_API  Vector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<Vector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
+class NGS_DLL_API  Vector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<Vector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
 	NGS_MPL_ENVIRON(Vector);
 public:
 	NGS_MPL_INHERIT_TYPE(element_type, base_type);

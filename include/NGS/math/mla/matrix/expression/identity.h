@@ -5,7 +5,7 @@
 NGS_MLA_BEGIN
 
 template<ccpt::uint _Dim, class  _ElementType>
-struct NGS_API IdentityMatrix : SquareMatrix<IdentityMatrix<_Dim, _ElementType>, _Dim> {
+struct NGS_DLL_API IdentityMatrix : SquareMatrix<IdentityMatrix<_Dim, _ElementType>, _Dim> {
 	NGS_MPL_ENVIRON(IdentityMatrix);
 public:
 	using element_type = _ElementType;

@@ -6,7 +6,7 @@
 
 NGS_DL_BEGIN
 
-class NGS_API Bitmap : public DisplayObject {
+class NGS_DLL_API Bitmap : public DisplayObject {
 public:
 	using base_type = DisplayObject;
 

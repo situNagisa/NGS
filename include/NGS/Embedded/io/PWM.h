@@ -4,7 +4,7 @@
 
 NGS_BEGIN
 
-class NGS_API  PWM : public IO{
+class NGS_DLL_API  PWM : public IO{
 public:
 
 public:

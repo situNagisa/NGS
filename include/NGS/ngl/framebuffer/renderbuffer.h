@@ -9,12 +9,12 @@
 NGL_BEGIN
 NGL_OBJ_BEGIN
 
-class NGS_API Renderbuffer;
+class NGS_DLL_API Renderbuffer;
 
 NGS_END
 NGL_TARGET_BEGIN
 
-class NGS_API Renderbuffer final : public Target<Renderbuffer, objects::Renderbuffer> {
+class NGS_DLL_API Renderbuffer final : public Target<Renderbuffer, objects::Renderbuffer> {
 	NGS_MPL_ENVIRON(Renderbuffer);
 private:
 	friend base_type;
@@ -27,7 +27,7 @@ NGS_GL_GET_TARGET_FUNCTION(targets::Renderbuffer, objects::Renderbuffer, renderb
 
 NGL_OBJ_BEGIN
 
-class NGS_API Renderbuffer final : public Object {
+class NGS_DLL_API Renderbuffer final : public Object {
 	NGS_MPL_ENVIRON(Renderbuffer);
 public:
 	Renderbuffer(size_t width, size_t height, RenderbufferImageFormat format)

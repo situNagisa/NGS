@@ -7,7 +7,7 @@
 
 NGL_FW_BEGIN
 
-class NGS_API  Window : public DeleteCopy {
+class NGS_DLL_API  Window : public DeleteCopy {
 public:
 	using context_t = GLFWwindow*;
 public:

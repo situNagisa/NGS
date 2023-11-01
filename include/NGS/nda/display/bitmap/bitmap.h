@@ -8,7 +8,7 @@
 
 NDA_BEGIN
 
-class NGS_API  Bitmap : public DisplayObject {
+class NGS_DLL_API  Bitmap : public DisplayObject {
 public:
 	using DisplayObject::DisplayObject;
 	Bitmap(IBitmapData* bitmap_data)

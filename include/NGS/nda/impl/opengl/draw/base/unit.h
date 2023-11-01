@@ -4,7 +4,7 @@
 
 NDA_IMPL_OPENGL_BEGIN
 
-struct NGS_API IDrawUnit {
+struct NGS_DLL_API IDrawUnit {
 	IDrawUnit(DisplayObject* display)
 		: display(display)
 	{}

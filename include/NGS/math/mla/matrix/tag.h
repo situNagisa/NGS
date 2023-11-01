@@ -5,8 +5,8 @@
 NGS_MLA_BEGIN
 
 namespace tag {
-struct NGS_API matrix : unknown {};
-struct NGS_API matrix_container : matrix {};
+struct NGS_DLL_API matrix : unknown {};
+struct NGS_DLL_API matrix_container : matrix {};
 static_assert(std::derived_from<matrix_container, matrix>);
 }
 
@@ -20,7 +20,7 @@ NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT(CMatrixLayout,is_matrix_layout,
 namespace tag {
 
 
-struct NGS_API row : unknown {
+struct NGS_DLL_API row : unknown {
 	constexpr static size_t transform(size_t row_index, size_t col_index, size_t /*row_count*/, size_t col_count) {
 		return row_index * col_count + col_index;
 	}
@@ -29,7 +29,7 @@ struct NGS_API row : unknown {
 	}
 };
 NGS_CCPT_VERIFY(CMatrixLayout, row);
-struct NGS_API column : unknown {
+struct NGS_DLL_API column : unknown {
 	constexpr static size_t transform(size_t row_index, size_t col_index, size_t row_count, size_t /*col_count*/) {
 		return col_index * row_count + row_index;
 	}
@@ -51,7 +51,7 @@ NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT(CMatrixTriangularTag,is_matrix_triangular_ta
 
 namespace tag {
 
-struct NGS_API lower : unknown {
+struct NGS_DLL_API lower : unknown {
 	constexpr static bool has_element(size_t row_index, size_t col_index, size_t row_count, size_t col_count) {
 		return row_index >= col_index;
 	}
@@ -85,7 +85,7 @@ struct NGS_API lower : unknown {
 };
 NGS_CCPT_VERIFY(CMatrixTriangularTag, lower);
 
-struct NGS_API upper : unknown {
+struct NGS_DLL_API upper : unknown {
 	constexpr static bool has_element(size_t row_index, size_t col_index, size_t row_count, size_t col_count) {
 		return row_index <= col_index;
 	}

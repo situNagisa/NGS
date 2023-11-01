@@ -6,10 +6,10 @@ NGS_MLA_BEGIN
 
 template<size_t _Dimension, class  _ElementType, class  = std::make_index_sequence<_Dimension - 1>>
 	requires (_Dimension > 1)
-class NGS_API  HomogenousVector;
+class NGS_DLL_API  HomogenousVector;
 
 template<size_t _Dimension, class  _ElementType, size_t... _Index>
-class NGS_API  HomogenousVector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<HomogenousVector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
+class NGS_DLL_API  HomogenousVector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<HomogenousVector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
 	NGS_MPL_ENVIRON(HomogenousVector);
 public:
 	NGS_MPL_INHERIT_TYPE(element_type, base_type);

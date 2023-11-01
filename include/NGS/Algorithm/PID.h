@@ -5,7 +5,7 @@
 
 NGS_BEGIN
 
-class NGS_API  PID {
+class NGS_DLL_API  PID {
 public:
 	PID() {
 		_Initialize();

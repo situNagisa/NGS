@@ -9,7 +9,7 @@ template<CVectorExpression _Expression1, CVectorExpression _Expression2, templat
 using vector_binary_functor_trait_t = VectorBinary<_Expression1, _Expression2, _Functor<_Expression1, _Expression2>>;
 
 template<CVectorExpression _Expression1, CVectorExpression _Expression2, CScalarBinaryFunctor _Functor>
-struct NGS_API vector_binary_scalar_traits {
+struct NGS_DLL_API vector_binary_scalar_traits {
 	using original_expression_type1 = _Expression1;
 	using original_expression_type2 = _Expression2;
 	using functor_type = _Functor;

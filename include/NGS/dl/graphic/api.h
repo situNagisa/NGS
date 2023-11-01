@@ -4,7 +4,7 @@
 
 NGS_DL_BEGIN
 
-class NGS_API GraphicAPI : public Singleton<GraphicAPI> {
+class NGS_DLL_API GraphicAPI : public Singleton<GraphicAPI> {
 private:
 	using base_type = GraphicAPI::self_type;
 	friend base_type;

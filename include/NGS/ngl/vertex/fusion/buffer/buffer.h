@@ -5,7 +5,7 @@
 
 NGS_NGL_FUSION_BEGIN
 
-template<CFundamental _Type, size_t... _Counts>
+template<cpt::fundamental _Type, size_t... _Counts>
 struct buffer : mpl::mstruct::structure<layout::no_align_t, _Type[_Counts]...> {
 	NGS_MPL_ENVIRON(buffer);
 public:

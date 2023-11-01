@@ -24,7 +24,7 @@ concept CVectorBinaryFunctor = CVectorExpression<_Expression1> && CVectorExpress
 template<CVectorExpression _Expression1, CVectorExpression _Expression2, CScalarBinaryFunctor _Functor>
 	requires requires(_Expression1 e1, _Expression2 e2) {
 		{ _Functor::apply(e1()(0), e2()(0)) } -> std::convertible_to< mpl::promote_t<typename _Expression1::element_type, typename _Expression2::element_type>>;
-}struct NGS_API VectorBinaryScalarFunctor {
+}struct NGS_DLL_API VectorBinaryScalarFunctor {
 private:
 	using expression_type1 = _Expression1;
 	using expression_type2 = _Expression2;
@@ -37,7 +37,7 @@ public:
 };
 
 template<CVectorExpression _Expression1, CVectorExpression _Expression2>
-struct NGS_API VectorBinaryProductOuterFunctor {
+struct NGS_DLL_API VectorBinaryProductOuterFunctor {
 private:
 	using expression_closure_type1 = typename vector_traits<_Expression1>::closure_type;
 	using expression_closure_type2 = typename vector_traits<_Expression2>::closure_type;

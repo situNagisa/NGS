@@ -49,36 +49,36 @@ inline bool Assert(
 NGS_END
 
 
-#if NGS_BUILD_TYPE == NGS_DEBUG
+#if NGS_BUILD_TYPE_IS_DEBUG
 
-#if NGS_COMPILER == NGS_MSVC
-#define _NGS_ASSERT_FAIL __debugbreak()
-#else
-#define _NGS_ASSERT_FAIL exit(1)
-#endif
+#	if NGS_COMPILER_IS_MSVC
+#		define _NGS_ASSERT_FAIL __debugbreak()
+#	else
+#		define _NGS_ASSERT_FAIL exit(1)
+#	endif
 
-#if NGS_COMPILER == NGS_GCC
+#	if NGS_COMPILER_IS_GCC
 
-#define NGS_ASSERT(boolean,...)					\
-if(_NGS Assert(boolean, #boolean,##__VA_ARGS__))\
+#		define NGS_ASSERT(boolean,...)			\
+if(NGS_ Assert(boolean, #boolean,##__VA_ARGS__))\
 _NGS_ASSERT_FAIL								\
 //
 
-#else
+#	else
 
-#define NGS_ASSERT(boolean,...)								\
+#		define NGS_ASSERT(boolean,...)						\
 do {														\
 	if constexpr (!std::is_constant_evaluated()) {			\
-		if (_NGS Assert(boolean, #boolean, __VA_ARGS__))	\
+		if (NGS_ Assert(boolean, #boolean, __VA_ARGS__))	\
 			_NGS_ASSERT_FAIL;								\
 	}														\
 }while(false)												\
 //
 
-#endif
+#	endif
 
 #else
 
-#define NGS_ASSERT(...) (void)
+#	define NGS_ASSERT(...) (void)
 
-#endif // _DEBUG
+#endif

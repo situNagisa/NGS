@@ -5,7 +5,7 @@
 
 NGL_ENV_BEGIN
 
-class NGS_API  Shader final : public IEnvironment {
+class NGS_DLL_API  Shader final : public IEnvironment {
 public:
 	Shader() = default;
 	Shader(const std::shared_ptr<objects::Shader>& shader) :_shader(shader) {}

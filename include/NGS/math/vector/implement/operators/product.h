@@ -31,7 +31,7 @@ constexpr decltype(auto) product_inner(_L&& left, _R&& right)
 	value_type result{};
 	for (size_t i = 0; i < functor::dimension<_L>; i++)
 	{
-		result += functor::access(NGS_PERFECT_FORWARD(left), i) * functor::access(NGS_PERFECT_FORWARD(right), i);
+		result += functor::access(NGS_PP_PERFECT_FORWARD(left), i) * functor::access(NGS_PP_PERFECT_FORWARD(right), i);
 	}
 	return result;
 }
@@ -47,29 +47,29 @@ constexpr decltype(auto) product_outer(_L&& left, _R&& right)
 	{
 		return result_type
 		(
-			functor::access(NGS_PERFECT_FORWARD(left), 1) * functor::access(NGS_PERFECT_FORWARD(right), 2) - functor::access(NGS_PERFECT_FORWARD(left), 2) * functor::access(NGS_PERFECT_FORWARD(right), 1),
-			functor::access(NGS_PERFECT_FORWARD(left), 2) * functor::access(NGS_PERFECT_FORWARD(right), 0) - functor::access(NGS_PERFECT_FORWARD(left), 0) * functor::access(NGS_PERFECT_FORWARD(right), 2),
-			functor::access(NGS_PERFECT_FORWARD(left), 0) * functor::access(NGS_PERFECT_FORWARD(right), 1) - functor::access(NGS_PERFECT_FORWARD(left), 1) * functor::access(NGS_PERFECT_FORWARD(right), 0)
+			functor::access(NGS_PP_PERFECT_FORWARD(left), 1) * functor::access(NGS_PP_PERFECT_FORWARD(right), 2) - functor::access(NGS_PP_PERFECT_FORWARD(left), 2) * functor::access(NGS_PP_PERFECT_FORWARD(right), 1),
+			functor::access(NGS_PP_PERFECT_FORWARD(left), 2) * functor::access(NGS_PP_PERFECT_FORWARD(right), 0) - functor::access(NGS_PP_PERFECT_FORWARD(left), 0) * functor::access(NGS_PP_PERFECT_FORWARD(right), 2),
+			functor::access(NGS_PP_PERFECT_FORWARD(left), 0) * functor::access(NGS_PP_PERFECT_FORWARD(right), 1) - functor::access(NGS_PP_PERFECT_FORWARD(left), 1) * functor::access(NGS_PP_PERFECT_FORWARD(right), 0)
 		);
 	}
 	else if constexpr (yap::complexity<_L>)
 	{
-		return product_outer(result_type(NGS_PERFECT_FORWARD(left)), NGS_PERFECT_FORWARD(right));
+		return product_outer(result_type(NGS_PP_PERFECT_FORWARD(left)), NGS_PP_PERFECT_FORWARD(right));
 	}
 	else if constexpr (yap::complexity<_R>)
 	{
-		return product_outer(NGS_PERFECT_FORWARD(left), result_type(NGS_PERFECT_FORWARD(left)));
+		return product_outer(NGS_PP_PERFECT_FORWARD(left), result_type(NGS_PP_PERFECT_FORWARD(left)));
 	}
 	else
 	{
-		return product_outer(result_type(NGS_PERFECT_FORWARD(left)), result_type(NGS_PERFECT_FORWARD(right)));
+		return product_outer(result_type(NGS_PP_PERFECT_FORWARD(left)), result_type(NGS_PP_PERFECT_FORWARD(right)));
 	}
 }
 
 constexpr decltype(auto) operator^(auto&& left, auto&& right)
-	requires requires{ product_outer(NGS_PERFECT_FORWARD(left), NGS_PERFECT_FORWARD(right)); }
+	requires requires{ product_outer(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)); }
 {
-	return product_outer(NGS_PERFECT_FORWARD(left), NGS_PERFECT_FORWARD(right));
+	return product_outer(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
 NGS_MATH_VECTOR_END

@@ -14,10 +14,10 @@ constexpr auto operator op(__VA_ARGS__)								\
 }																	\
 //
 #define NGS_MATH_SCALAR_GEN_UNARY(function, op)																			\
-NGS_MATH_SCALAR_GEN_OPERATOR(op,function,function(NGS_PERFECT_FORWARD(expression)),CScalarExpression auto&& expression)	\
+NGS_MATH_SCALAR_GEN_OPERATOR(op,function,function(NGS_PP_PERFECT_FORWARD(expression)),CScalarExpression auto&& expression)	\
 //
 #define NGS_MATH_SCALAR_GEN_BINARY(function,op)																															\
-NGS_MATH_SCALAR_GEN_OPERATOR(op,function,function(NGS_PERFECT_FORWARD(left),NGS_PERFECT_FORWARD(right)),CScalarExpression auto&& left,CScalarExpression auto&& right)	\
+NGS_MATH_SCALAR_GEN_OPERATOR(op,function,function(NGS_PP_PERFECT_FORWARD(left),NGS_PP_PERFECT_FORWARD(right)),CScalarExpression auto&& left,CScalarExpression auto&& right)	\
 //
 
 //assign

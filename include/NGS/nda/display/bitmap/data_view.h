@@ -6,7 +6,7 @@
 
 NDA_BEGIN
 
-class NGS_API  BitmapDataView : public IBitmapData {
+class NGS_DLL_API  BitmapDataView : public IBitmapData {
 public:
 	BitmapDataView(const BitmapData& other)
 		: _data(other.GetData())

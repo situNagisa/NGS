@@ -6,9 +6,9 @@ NGS_BEGIN
 
 namespace tree_struct {
 
-class NGS_API IParent;
+class NGS_DLL_API IParent;
 
-class NGS_API  IChild {
+class NGS_DLL_API  IChild {
 	friend IParent;
 public:
 	virtual ~IChild() = default;
@@ -21,7 +21,7 @@ protected:
 	IParent* _parent = nullptr;
 };
 
-class NGS_API  IParent {
+class NGS_DLL_API  IParent {
 private:
 	NGS_DEFINE_TYPE(__child, IChild);
 	NGS_DEFINE_TYPE(__container, IParent);
@@ -64,11 +64,11 @@ protected:
 	std::vector<IChild*> _children{};
 };
 
-class NGS_API  Leaf : virtual public IChild {
+class NGS_DLL_API  Leaf : virtual public IChild {
 
 };
 
-class NGS_API  Tree : virtual public IChild, virtual public IParent {
+class NGS_DLL_API  Tree : virtual public IChild, virtual public IParent {
 public:
 
 private:

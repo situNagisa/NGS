@@ -22,25 +22,25 @@ namespace tag {
 
 
 template<class  _ElementType>
-struct NGS_API Attrib {
+struct NGS_DLL_API Attrib {
 	using element_type = _ElementType;
 	using iterator_type = const element_type*;
 	using type = iterator_type;
 };
 template<class  _ElementType>
-struct NGS_API Buffer {
+struct NGS_DLL_API Buffer {
 	using element_type = _ElementType;
 	using iterator_type = const element_type*;
 	using type = iterator_type;
 };
 template<class  _ElementType>
-struct NGS_API Vertex {
+struct NGS_DLL_API Vertex {
 	using element_type = Buffer<_ElementType>::type;
 	using iterator_type = const element_type*;
 	using type = iterator_type;
 };
 template<class  _ElementType>
-struct NGS_API Array {
+struct NGS_DLL_API Array {
 	using element_type = Vertex<_ElementType>::type;
 	using iterator_type = const element_type*;
 	using type = iterator_type;

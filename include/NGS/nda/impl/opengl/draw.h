@@ -6,7 +6,7 @@
 
 NDA_IMPL_OPENGL_BEGIN
 
-class NGS_API  Drawer : public IDrawer {
+class NGS_DLL_API  Drawer : public IDrawer {
 public:
 	void Draw(const Stage* stage) override {
 		boost::object_pool<matrix_t> transform_pool{ stage->GetNumChildrenRecurse() };

@@ -1,12 +1,12 @@
-#pragma once
+﻿#pragma once
 
 #include "NGS/base/base.h"
 
 NGS_BEGIN
 
-class NGS_API  FilePath {
+class NGS_DLL_API  FilePath {
 public:
-#if NGS_PLATFORM == NGS_WINDOWS
+#if NGS_SYSTEM == NGS_SYSTEM_WINDOWS
 	static constexpr char SEPARATOR = '\\';
 #else
 	static constexpr char SEPARATOR = '/';
@@ -33,7 +33,7 @@ public:
 		using std::string_view_literals::operator""sv;
 		for (const auto& v : (dir | std::views::split("\\"sv))) {
 			for (const auto& folder : v | std::views::split("/"sv)) {
-#if NGS_COMPILER == NGS_GCC
+#if NGS_COMPILER == NGS_COMPILER_GCC
 				std::string f;
 				for (const auto& c : folder) {
 					f += c;

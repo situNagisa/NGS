@@ -9,7 +9,7 @@ NGS_DL_BEGIN
 
 class DisplayObjectContainer;
 
-class NGS_API DisplayObject : virtual public IChild<DisplayObjectContainer, IParent<DisplayObjectContainer, DisplayObject>> {
+class NGS_DLL_API DisplayObject : virtual public IChild<DisplayObjectContainer, IParent<DisplayObjectContainer, DisplayObject>> {
 public:
 	friend class DisplayObjectContainer;
 	using container_type = DisplayObjectContainer;
@@ -28,7 +28,7 @@ public:
 	mutable UserData user_data{};
 };
 
-class NGS_API DisplayObjectContainer : public DisplayObject, virtual public IParent<DisplayObjectContainer, DisplayObject> {
+class NGS_DLL_API DisplayObjectContainer : public DisplayObject, virtual public IParent<DisplayObjectContainer, DisplayObject> {
 public:
 	using base_type = DisplayObject;
 	using parent_type = IParent<DisplayObjectContainer, DisplayObject>;

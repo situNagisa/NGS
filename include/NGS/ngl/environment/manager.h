@@ -4,7 +4,7 @@
 
 NGL_ENV_BEGIN
 
-class NGS_API  EnvironmentManager : public IEnvironment {
+class NGS_DLL_API  EnvironmentManager : public IEnvironment {
 public:
 	virtual void Build()override {
 		for (auto i = environments.cbegin(); i != environments.cend(); i++) {

@@ -25,7 +25,7 @@ template<class  _Type = void>
 concept CExpression = _is_expression<std::remove_cvref_t<_Type>>;
 
 template<ccpt::CRPT _Expression>
-struct NGS_API Expression {
+struct NGS_DLL_API Expression {
 protected:
 	using self_type = Expression;
 public:

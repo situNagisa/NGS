@@ -5,7 +5,7 @@
 
 NGL_BEGIN
 
-class NGS_API  VertexIndicesCtrl : public DefaultIndicesCtrl {
+class NGS_DLL_API  VertexIndicesCtrl : public DefaultIndicesCtrl {
 private:
 
 public:

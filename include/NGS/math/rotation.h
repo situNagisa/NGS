@@ -1,12 +1,11 @@
-#pragma once
+﻿#pragma once
 
-#include "NGS/base/base.h"
 #include "NGS/math/vector.h"
 #include "NGS/math/util.h"
 
 NGS_BEGIN
 
-struct NGS_API Rotation
+struct NGS_DLL_API Rotation
 {
 	Rotation() = default;
 	Rotation(float angle)

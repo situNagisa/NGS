@@ -10,7 +10,7 @@ NGL_BEGIN
 
 NGL_BUF_BEGIN
 
-class NGS_API  VertexBuffer : public BufferObject {
+class NGS_DLL_API  VertexBuffer : public BufferObject {
 private:
 	using base_type = BufferObject;
 public:

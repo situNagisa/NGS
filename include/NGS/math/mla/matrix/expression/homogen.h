@@ -15,11 +15,11 @@ NGS_MLA_CONCEPT_WITH_DEFINE_DEFAULT_EXT(CHomogeneousMatrix,is_homogeneous_matrix
 });
 
 template<size_t _Dimension, CScalarExpression _ElementType, CMatrixLayout _Layout = tag::row, class = std::make_index_sequence<_Dimension* (_Dimension - 1)>>
-struct NGS_API HomogeneousMatrix;
+struct NGS_DLL_API HomogeneousMatrix;
 
 template<size_t _Dimension, CScalarExpression _ElementType, CMatrixLayout _Layout,size_t... _Index>
 	requires (_Dimension > 1)
-struct NGS_API HomogeneousMatrix<
+struct NGS_DLL_API HomogeneousMatrix<
 	_Dimension,
 	_ElementType, _Layout,
 	std::index_sequence<_Index...>> :

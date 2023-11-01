@@ -5,7 +5,7 @@
 
 NGS_BEGIN
 
-class NGS_API  IRenderer {
+class NGS_DLL_API  IRenderer {
 public:
 
 public:

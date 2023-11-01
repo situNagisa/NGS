@@ -6,7 +6,7 @@
 
 NGL_ENV_BEGIN
 
-class NGS_API  Clear final : public IEnvironment {
+class NGS_DLL_API  Clear final : public IEnvironment {
 public:
 	void SetClearBitfield(GLbitfield bitfield) { _clear_bitfield = bitfield; }
 	auto GetClearBitfield()const { return _clear_bitfield; }

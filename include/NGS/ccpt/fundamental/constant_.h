@@ -11,7 +11,7 @@ concept constant = requires() {
 };
 
 template<class  _Type, _Type _Value>
-struct NGS_API constant_ {
+struct NGS_DLL_API constant_ {
 	using value_type = _Type;
 	static constexpr value_type value = _Value;
 };

@@ -31,7 +31,7 @@ protected:											\
 
 #define NGS_MPL_FUNCTION(meta_function,...)	\
 template<__VA_ARGS__>						\
-struct NGS_API meta_function				\
+struct NGS_DLL_API meta_function				\
 //
 
 #define NGS_MPL_INHERIT_TYPE(id,...) using id = typename __VA_ARGS__::id

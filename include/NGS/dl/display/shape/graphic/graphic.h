@@ -4,7 +4,7 @@
 
 NGS_DL_BEGIN
 
-class NGS_API IGraphic {
+class NGS_DLL_API IGraphic {
 public:
 	virtual ~IGraphic() = default;
 

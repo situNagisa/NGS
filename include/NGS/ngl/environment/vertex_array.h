@@ -7,7 +7,7 @@
 
 NGL_ENV_BEGIN
 
-class NGS_API  VertexArray final : public IEnvironment {
+class NGS_DLL_API  VertexArray final : public IEnvironment {
 public:
 	NGS_FLAG(flag_clear, 0);
 public:

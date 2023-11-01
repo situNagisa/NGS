@@ -19,10 +19,10 @@ inline constexpr struct
 		member,
 		round_bracket,
 	};
-	template<class _Type, NGS_CONSTEXPR_CLEAR_BUFFER>
+	template<class _Type, NGS_PP_CONSTEXPR_CLEAR_BUFFER>
 	constexpr static auto CHOICE()
 	{
-		if constexpr (requires(_Type expr, size_t row, size_t column) { { access(NGS_PERFECT_FORWARD(expr), row, column) }; })
+		if constexpr (requires(_Type expr, size_t row, size_t column) { { access(NGS_PP_PERFECT_FORWARD(expr), row, column) }; })
 		{
 			return choice_type::global;
 		}
@@ -43,7 +43,7 @@ inline constexpr struct
 	constexpr decltype(auto) operator()(auto&& expression, size_t row, size_t column) const
 		requires (CHOICE<decltype(expression)>() == choice_type::global)
 	{
-		return access(NGS_PERFECT_FORWARD(expression), row, column);
+		return access(NGS_PP_PERFECT_FORWARD(expression), row, column);
 	}
 	constexpr decltype(auto) operator()(auto&& expression, size_t row, size_t column) const
 		requires (CHOICE<decltype(expression)>() == choice_type::member)

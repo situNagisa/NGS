@@ -7,7 +7,7 @@ NGS_BEGIN
 
 using pin_t = ngs::uint32;
 
-class NGS_API  EmbeddedObject : public DeleteCopy {
+class NGS_DLL_API  EmbeddedObject : public DeleteCopy {
 public:
 	virtual ~EmbeddedObject(){}
 

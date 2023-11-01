@@ -18,15 +18,13 @@
 
 #include "NGS/base/defined.h"
 
-#include "NGS/base/type_info.h"
-#include "NGS/base/format.h"
-#include "NGS/base/base_class.h"
+ //#include "NGS/base/type_info.h"
+ //#include "NGS/base/base_class.h"
 
-#include "NGS/base/bit.h"
-#include "NGS/base/concepts.h"
+  //#include "NGS/base/bit.h"
+  //#include "NGS/base/concepts.h"
 
-#include "NGS/base/log.h"
-#include "NGS/base/assert.h"
+   //#include "NGS/base/log.h"
+  //#include "NGS/base/assert.h"
 
 #include "NGS/base/is_as.h"
-#include "NGS/base/to_string.h"

@@ -8,7 +8,7 @@
 NGL_BEGIN
 NGL_BUF_BEGIN
 
-class NGS_API  BufferObject : public State {
+class NGS_DLL_API  BufferObject : public State {
 public:
 	/**
 	 * @brief

@@ -7,7 +7,7 @@ NGL_BEGIN
 NGL_OBJ_BEGIN
 
 
-class NGS_API  Object : public State {
+class NGS_DLL_API  Object : public State {
 	NGS_MPL_ENVIRON(Object);
 public:
 	using State::State;

@@ -12,7 +12,7 @@
 NGS_MLA_BEGIN
 
 template<CVectorExpression _Vector, CMatrixLayout _Homo = tag::row>
-struct NGS_API MatrixTranslate : MatrixExpression<MatrixTranslate<_Vector>> {
+struct NGS_DLL_API MatrixTranslate : MatrixExpression<MatrixTranslate<_Vector>> {
 	NGS_MPL_ENVIRON(MatrixTranslate);
 private:
 	using vector_closure_type = typename vector_traits<_Vector>::closure_type;

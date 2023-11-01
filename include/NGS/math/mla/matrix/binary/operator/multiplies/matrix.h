@@ -13,7 +13,7 @@
 NGS_MLA_BEGIN
 
 template<CMatrixExpression _Left, CMatrixExpression _Right>
-struct NGS_API MatrixMultipliesFunctor {
+struct NGS_DLL_API MatrixMultipliesFunctor {
 private:
 	using left_t = typename matrix_traits<_Left>::original_type;
 	using right_t = typename matrix_traits<_Right>::original_type;

@@ -4,7 +4,7 @@
 
 NGS_DL_BEGIN
 
-enum class NGS_API BlendMode {
+enum class NGS_DLL_API BlendMode {
 	normal,
 	layer,
 	multiply,

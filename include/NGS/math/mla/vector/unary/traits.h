@@ -6,7 +6,7 @@
 NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression, CScalarUnaryFunctor _Functor>
-struct NGS_API vector_unary_scalar_traits {
+struct NGS_DLL_API vector_unary_scalar_traits {
 	using original_expression_type = _Expression;
 	using functor_type = _Functor;
 	using expression_type = VectorUnary<original_expression_type, VectorUnaryScalarFunctor<original_expression_type, functor_type>>;

@@ -25,8 +25,8 @@ struct negate_function_impl : yap::expression<negate_function_impl<_Vector>>
 }
 
 template<functor::expression _Expression>
-constexpr auto negate(_Expression&& expr) { return detail::negate_function_impl<_Expression>(NGS_PERFECT_FORWARD(expr)); }
+constexpr auto negate(_Expression&& expr) { return detail::negate_function_impl<_Expression>(NGS_PP_PERFECT_FORWARD(expr)); }
 template<functor::expression _Expression>
-constexpr auto operator-(_Expression&& expr) { return negate(NGS_PERFECT_FORWARD(expr)); }
+constexpr auto operator-(_Expression&& expr) { return negate(NGS_PP_PERFECT_FORWARD(expr)); }
 
 NGS_MATH_VECTOR_END

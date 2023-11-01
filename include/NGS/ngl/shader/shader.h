@@ -8,11 +8,11 @@
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
-class NGS_API  Shader;
+class NGS_DLL_API  Shader;
 NGS_END
 NGL_TARGET_BEGIN
 
-class NGS_API  ShaderProgram : public Target<ShaderProgram, objects::Shader> {
+class NGS_DLL_API  ShaderProgram : public Target<ShaderProgram, objects::Shader> {
 	friend class  Target<ShaderProgram, objects::Shader>;
 	static void _Select(state_type* state);
 };
@@ -20,7 +20,7 @@ class NGS_API  ShaderProgram : public Target<ShaderProgram, objects::Shader> {
 NGS_END
 NGL_OBJ_BEGIN
 
-class NGS_API Shader : public State {
+class NGS_DLL_API Shader : public State {
 	NGS_MPL_ENVIRON(Shader);
 public:
 	Shader(Shader&&) = default;
@@ -48,7 +48,7 @@ public:
 	void Attach(const _ShaderSource& code) { NGL_CHECK(glAttachShader(_context, code.GetContext())); }
 	void Link() {
 		NGL_CHECK(glLinkProgram(_context));
-#if NGS_BUILD_TYPE == NGS_DEBUG
+#if NGS_BUILD_TYPE_IS_DEBUG
 		//NGL_CHECK(glValidateProgram(_context));
 		GLint status = GL_FALSE;
 		glGetProgramiv(_context, GL_LINK_STATUS, &status);

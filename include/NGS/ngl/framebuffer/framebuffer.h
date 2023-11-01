@@ -9,12 +9,12 @@
 NGL_BEGIN
 NGL_OBJ_BEGIN
 
-class NGS_API FramebufferBase;
+class NGS_DLL_API FramebufferBase;
 
 NGS_END
 NGL_TARGET_BEGIN
 
-class NGS_API Framebuffer final : public Target<Framebuffer, objects::FramebufferBase> {
+class NGS_DLL_API Framebuffer final : public Target<Framebuffer, objects::FramebufferBase> {
 	NGS_MPL_ENVIRON(Framebuffer);
 private:
 	friend base_type;
@@ -27,7 +27,7 @@ public:
 NGS_END
 NGL_OBJ_BEGIN
 
-class NGS_API FramebufferBase : public Object {
+class NGS_DLL_API FramebufferBase : public Object {
 	NGS_MPL_ENVIRON(FramebufferBase);
 public:
 	static self_type& DEFAULT() {

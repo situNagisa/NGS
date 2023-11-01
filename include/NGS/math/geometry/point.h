@@ -6,7 +6,7 @@
 NGS_MATH_BEGIN
 
 template<class  _ElementType>
-struct NGS_API Point2 : mla::VectorContainer<Point2<_ElementType>, std::integral_constant<size_t, 2>, _ElementType> {
+struct NGS_DLL_API Point2 : mla::VectorContainer<Point2<_ElementType>, std::integral_constant<size_t, 2>, _ElementType> {
 	NGS_MPL_ENVIRON(Point2);
 public:
 	NGS_MPL_INHERIT_TYPE(element_type, base_type);
@@ -90,7 +90,7 @@ using Point2s = Point2<size_t>;
 
 
 template<class  _ElementType>
-struct NGS_API Point3 : mla::VectorContainer<Point3<_ElementType>, std::integral_constant<size_t, 3>, _ElementType> {
+struct NGS_DLL_API Point3 : mla::VectorContainer<Point3<_ElementType>, std::integral_constant<size_t, 3>, _ElementType> {
 	NGS_MPL_ENVIRON(Point3);
 public:
 	NGS_MPL_INHERIT_TYPE(element_type, base_type);

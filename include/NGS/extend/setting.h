@@ -28,29 +28,29 @@ void delete_array(T* block) {
 
 NGS_END
 
-#if NGS_BUILD_TYPE == NGS_DEBUG
+#if NGS_BUILD_TYPE_IS_DEBUG
 
 #define NGS_NEW(ptr,...)											\
 ptr = (__VA_ARGS__*)std::malloc(sizeof(__VA_ARGS__));				\
 NGS_ASSERT(ptr,"nagisa new fail!");									\
-_NGS Allocator::I().Record_Allocate((__VA_ARGS__*)ptr, 1, #ptr);	\
+NGS_ Allocator::I().Record_Allocate((__VA_ARGS__*)ptr, 1, #ptr);	\
 new(ptr)__VA_ARGS__													\
 //
 #define NGS_NEW_ARR(ptr,count,...)									\
 ptr = (__VA_ARGS__*)std::malloc(sizeof(__VA_ARGS__) * (count));		\
 NGS_ASSERT(ptr, "nagisa new array fail!");							\
-_NGS Allocator::I().Record_Allocate((__VA_ARGS__*)ptr, (count), #ptr); \
+NGS_ Allocator::I().Record_Allocate((__VA_ARGS__*)ptr, (count), #ptr); \
 new(ptr)__VA_ARGS__[(count)]										\
 //
 
-#define NGS_DELETE(block) _NGS delete_(block)
-#define NGS_DELETE_ARR(block) _NGS delete_array(block)
+#define NGS_DELETE(block) NGS_ delete_(block)
+#define NGS_DELETE_ARR(block) NGS_ delete_array(block)
 
 #else
 
 #define NGS_NEW(ptr,...) ptr = new __VA_ARGS__
 #define NGS_NEW_ARR(ptr,count,...) ptr = new __VA_ARGS__[count]
-#define NGS_DELETE(block) _NGS Destructor::DESTRUCT(block)
-#define NGS_DELETE_ARR(block) _NGS Destructor::DESTRUCT_ARRAY(block)
+#define NGS_DELETE(block) NGS_ Destructor::DESTRUCT(block)
+#define NGS_DELETE_ARR(block) NGS_ Destructor::DESTRUCT_ARRAY(block)
 
 #endif

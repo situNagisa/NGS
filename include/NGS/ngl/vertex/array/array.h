@@ -8,10 +8,10 @@ NGL_BEGIN
 NGL_OBJ_BEGIN
 
 template<class, class, fusion::CBuffer...>
-class NGS_API  _VertexArray;
+class NGS_DLL_API  _VertexArray;
 
 template<fusion::CBuffer... _Buffers, size_t... _BufferIndex, size_t... _AttribIndex>
-class NGS_API  _VertexArray<std::index_sequence<_BufferIndex...>, std::index_sequence<_AttribIndex...>, _Buffers...> : public VertexArrayBase {
+class NGS_DLL_API  _VertexArray<std::index_sequence<_BufferIndex...>, std::index_sequence<_AttribIndex...>, _Buffers...> : public VertexArrayBase {
 	NGS_MPL_ENVIRON(_VertexArray);
 private:
 	using _sequence = mpl::vector<_Buffers...>;
@@ -91,11 +91,11 @@ private:
 																																								
 #define _NGL_VAO_DERIVED_FROM(base_class,derived_class)																											\
 template<class , class , fusion::CBuffer...>																													\
-class NGS_API  _##derived_class;																																\
+class NGS_DLL_API  _##derived_class;																																\
 template<fusion::CBuffer... _Buffers>																															\
 using derived_class = _##derived_class<std::index_sequence_for<_Buffers...>, std::make_index_sequence<(_Buffers::variable_count + ...)>, _Buffers...>;			\
 template<fusion::CBuffer... _Buffers, size_t... _BufferIndex, size_t... _AttribIndex>																			\
-class NGS_API  _##derived_class<std::index_sequence<_BufferIndex...>, std::index_sequence<_AttribIndex...>, _Buffers...> : public base_class<_Buffers...>		\
+class NGS_DLL_API  _##derived_class<std::index_sequence<_BufferIndex...>, std::index_sequence<_AttribIndex...>, _Buffers...> : public base_class<_Buffers...>		\
 //
 
 template<fusion::CBuffer... _Buffers>

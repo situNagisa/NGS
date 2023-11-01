@@ -19,7 +19,7 @@ public:
 	constexpr auto&& operator=(auto&& matrix)
 		requires functor::copyable<expression_type, decltype(matrix)>
 	{
-		functor::copy(base_type::_derived(), NGS_PERFECT_FORWARD(matrix));
+		functor::copy(base_type::_derived(), NGS_PP_PERFECT_FORWARD(matrix));
 		return base_type::_derived();
 	}
 };

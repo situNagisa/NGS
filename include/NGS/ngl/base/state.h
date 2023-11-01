@@ -4,7 +4,7 @@
 
 NGL_BEGIN
 
-struct NGS_API State : DeleteCopy {
+struct NGS_DLL_API State : DeleteCopy {
 protected:
 	using self_type = State;
 public:

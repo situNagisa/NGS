@@ -6,7 +6,7 @@
 
 NGL_BEGIN
 
-class NGS_API  Renderer {
+class NGS_DLL_API  Renderer {
 public:
 
 public:

@@ -6,7 +6,7 @@ NGL_BEGIN
 NGL_TARGET_BEGIN
 
 template<class  _State>
-class NGS_API TargetBase {
+class NGS_DLL_API TargetBase {
 protected:
 	using self_type = TargetBase;
 public:
@@ -25,7 +25,7 @@ protected:
 };
 
 template<class  _Derived, class  _State>
-class NGS_API Target : public TargetBase<_State> {
+class NGS_DLL_API Target : public TargetBase<_State> {
 	NGS_MPL_ENVIRON(Target);
 public:
 	using base = self_type;

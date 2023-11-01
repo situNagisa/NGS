@@ -4,7 +4,7 @@
 
 NGS_BEGIN
 
-class NGS_API  Console {
+class NGS_DLL_API  Console {
 public:
 
 public:

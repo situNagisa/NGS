@@ -6,7 +6,7 @@
 
 #include "NGS/base/base.h"
 
-#if NGS_PLATFORM == NGS_MSVC
+#if NGS_COMPILER == NGS_COMPILER_MSVC
 #pragma warning(push)
 #pragma warning(disable: 4244)
 #pragma warning(push)
@@ -49,7 +49,7 @@
 #include "NGS/ngl/NGL.hpp"
 #endif
 
-#if NGS_PLATFORM == NGS_MSVC
+#if NGS_COMPILER == NGS_COMPILER_MSVC
 #pragma warning(pop)
 #pragma warning(pop)
 #endif

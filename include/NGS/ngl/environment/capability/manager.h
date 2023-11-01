@@ -6,7 +6,7 @@
 
 NGL_ENV_BEGIN
 
-class NGS_API  CapabilityManager : public IEnvironment{
+class NGS_DLL_API  CapabilityManager : public IEnvironment{
 public:
 	auto& GetServer() { return _server; }
 	const auto& GetServer()const { return _server; }

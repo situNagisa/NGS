@@ -4,7 +4,7 @@
 #include "NGS/extend/function.h"
 
 NGS_BEGIN
-class NGS_API  Event : public TypeDefined<Event> {
+class NGS_DLL_API  Event : public TypeDefined<Event> {
 public:
 	NGS_TYPE_DEFINE(nstring, string);
 	NGS_TYPE_DEFINE(nstring_view, view);
@@ -62,7 +62,7 @@ public:
 	void_ptr param = nullptr;
 };
 
-class NGS_API  EventQueue : public TypeDefined<EventQueue> {
+class NGS_DLL_API  EventQueue : public TypeDefined<EventQueue> {
 public:
 	friend class  EventDispatcher;
 
@@ -86,7 +86,7 @@ private:
 	__cache _queue;
 };
 
-struct NGS_API EventListener {
+struct NGS_DLL_API EventListener {
 	NGS_TYPE_DEFINE(EventListener, this);
 	NGS_TYPE_DEFINE(void_ptr, target);
 	NGS_TYPE_DEFINE(Event, evt);
@@ -112,7 +112,7 @@ struct NGS_API EventListener {
 	}
 };
 
-class NGS_API  EventDispatcher : public TypeDefined<EventDispatcher> {
+class NGS_DLL_API  EventDispatcher : public TypeDefined<EventDispatcher> {
 public:
 	NGS_TYPE_DEFINE(nstring, string);
 	NGS_TYPE_DEFINE(nstring_view, string_v);

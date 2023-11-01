@@ -9,8 +9,8 @@ concept left_multipliable_with_vector = requires(_M matrix, _V vector, size_t ro
 {
 	requires expression<_M>;
 	requires vectors::functor::expression<_V>;
-	{ row(NGS_PERFECT_FORWARD(matrix), row_index) } -> vectors::functor::expression;
-	requires vectors::functor::inner_productable<decltype(row(NGS_PERFECT_FORWARD(matrix), row_index)), _V>;
+	{ row(NGS_PP_PERFECT_FORWARD(matrix), row_index) } -> vectors::functor::expression;
+	requires vectors::functor::inner_productable<decltype(row(NGS_PP_PERFECT_FORWARD(matrix), row_index)), _V>;
 };
 
 template<class _V, class _M>
@@ -18,8 +18,8 @@ concept right_multipliable_with_vector = requires(_M matrix, _V vector, size_t r
 {
 	requires expression<_M>;
 	requires vectors::functor::expression<_V>;
-	{ column(NGS_PERFECT_FORWARD(matrix), col_index) } -> vectors::functor::expression;
-	requires vectors::functor::inner_productable<_V,decltype(column(NGS_PERFECT_FORWARD(matrix), col_index))>;
+	{ column(NGS_PP_PERFECT_FORWARD(matrix), col_index) } -> vectors::functor::expression;
+	requires vectors::functor::inner_productable<_V,decltype(column(NGS_PP_PERFECT_FORWARD(matrix), col_index))>;
 };
 
 template<class _L, class _R>
@@ -76,12 +76,12 @@ inline constexpr struct
 	constexpr decltype(auto) operator()(auto&& left, auto&& right) const
 		requires functor::left_multipliable_with_vector<decltype(left), decltype(right)>
 	{
-		return left_multiply_with_vector_function_impl<decltype(left),decltype(right)>(NGS_PERFECT_FORWARD(left), NGS_PERFECT_FORWARD(right));
+		return left_multiply_with_vector_function_impl<decltype(left),decltype(right)>(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 	}
 	constexpr decltype(auto) operator()(auto&& left, auto&& right) const
 		requires functor::right_multipliable_with_vector<decltype(left), decltype(right)>
 	{
-		return right_multiply_with_vector_function_impl<decltype(left),decltype(right)>(NGS_PERFECT_FORWARD(left), NGS_PERFECT_FORWARD(right));
+		return right_multiply_with_vector_function_impl<decltype(left),decltype(right)>(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 	}
 }multiply_vector;
 

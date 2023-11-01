@@ -6,7 +6,7 @@
 NGL_BEGIN
 
 template<std::derived_from<objects::_Texture> _TextureType>
-class NGS_API  TexturePool : DeleteCopy {
+class NGS_DLL_API  TexturePool : DeleteCopy {
 public:
 	using texture_type = _TextureType;
 public:

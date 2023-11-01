@@ -6,7 +6,7 @@
 NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expression, CMatrixLayout _Layout = tag::row>
-class NGS_API  AsVectorUnary : public VectorExpression<AsVectorUnary<_Expression, _Layout>> {
+class NGS_DLL_API  AsVectorUnary : public VectorExpression<AsVectorUnary<_Expression, _Layout>> {
 	NGS_MPL_ENVIRON(AsVectorUnary);
 public:
 	NGS_MPL_INHERIT_TYPE(expression_type, base_type);

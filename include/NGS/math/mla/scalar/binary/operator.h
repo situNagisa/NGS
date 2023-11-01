@@ -3,7 +3,7 @@
 #include "NGS/math/mla/scalar/binary/functor.h"
 #include "NGS/math/mla/scalar/binary/macro_begin.h"
 
-#if NGS_COMPILER == NGS_MSVC
+#if NGS_COMPILER == NGS_COMPILER_MSVC
 #pragma warning(push)
 #pragma warning(disable: 4244)
 #endif
@@ -24,7 +24,7 @@ NGS_MLA_SCALAR_BINARY_FUNCTOR((x /= y), ScalarDividesAssignFunctor, ScalarBinary
 
 NGS_MLA_END
 
-#if NGS_COMPILER == NGS_MSVC
+#if NGS_COMPILER == NGS_COMPILER_MSVC
 #pragma warning(pop)
 #endif
 

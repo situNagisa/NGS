@@ -5,7 +5,7 @@
 
 NGS_BEGIN
 
-class NGS_API  SPI : public BusSync<BusBase::Type::full_duplex> {
+class NGS_DLL_API  SPI : public BusSync<BusBase::Type::full_duplex> {
 public:
 	NGS_TYPE_DEFINE(BusSync<BusBase::Type::full_duplex>, base);
 public:

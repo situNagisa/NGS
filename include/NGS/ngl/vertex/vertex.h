@@ -6,11 +6,11 @@
 
 NGL_BEGIN
 NGL_OBJ_BEGIN
-class NGS_API  VertexArrayBase;
+class NGS_DLL_API  VertexArrayBase;
 NGS_END
 NGL_BUF_BEGIN
 
-class NGS_API  Vertex : public DeleteCopy {
+class NGS_DLL_API  Vertex : public DeleteCopy {
 public:
 	using buffer_type = VertexBuffer;
 
@@ -68,7 +68,7 @@ public:
 		}
 	}
 private:
-	struct NGS_API _AttribFormat {
+	struct NGS_DLL_API _AttribFormat {
 		byte_ptr data;
 		const fusion::attrib_dynamic_data* format;
 		const buffer_type* buffer;

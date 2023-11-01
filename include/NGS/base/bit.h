@@ -10,7 +10,7 @@
 #include "NGS/base/defined.h"
 #include "NGS/base/concepts.h"
 
-#if NGS_PLATFORM == NGS_MSVC
+#if NGS_COMPILER == NGS_COMPILER_MSVC
 #pragma warning(push)
 #pragma warning(disable: 4293)
 #endif
@@ -21,15 +21,15 @@ namespace bit {
 
 constexpr size_t bit_per_byte = 8;
 
-template<CUnsignedIntegral _Int> constexpr _Int scope(size_t index) { return (_Int)1 << index; }
-constexpr uint64 scope(size_t index) { return scope<uint64>(index); }
+template<CUnsignedIntegral _Int> constexpr _Int scope(size_t index) { return static_cast<_Int>(1) << index; }
+constexpr uint64                                scope(size_t index) { return scope<uint64>(index); }
 
 constexpr size_t as_byte(size_t bit_count) { return (((bit_count) / bit_per_byte) + (((bit_count) % bit_per_byte) > 0)); }
 constexpr size_t as_bit(size_t byte_count) { return byte_count * bit_per_byte; }
 template<class  T> consteval size_t as_bit() { return as_bit(sizeof(T)); }
 
 //template<CUnsignedIntegral _Int> constexpr _Int mask(CUnsignedIntegral auto bit_count) { return (bit_count >= as_bit<_Int>()) ? (_Int)(-1) : (scope<_Int>(bit_count) - 1); }
-constexpr uint64 mask(CIntegral auto bit_count) { return (bit_count >= as_bit<uint64>()) ? (uint64)(-1) : (scope<uint64>(bit_count) - 1); }
+constexpr uint64 mask(CIntegral auto bit_count) { return (bit_count >= as_bit<uint64>()) ? static_cast<uint64>(-1) : (scope<uint64>(bit_count) - 1); }
 
 constexpr auto set(auto bit_set, auto bit_scope, bool state) { return state ? bit_set | bit_scope : bit_set & ~bit_scope; }
 constexpr auto get(auto bit_set, auto bit_scope) { return bit_set & bit_scope; }
@@ -41,7 +41,7 @@ constexpr auto get(auto bit_set, auto bit_scope) { return bit_set & bit_scope; }
 #undef _N
 template<uint64 _N>
 	requires (_N <= bit::as_bit<uint64>())
-class NGS_API  BitSet {
+class NGS_DLL_API  BitSet {
 public:
 	static constexpr uint64 BitCount = _N;
 	static constexpr uint64 ByteCount = bit::as_byte(BitCount);
@@ -156,7 +156,7 @@ private:
 	type _data;
 };
 
-class NGS_API  Flag : public BitSet<bit::as_bit<uint64>()> {
+class NGS_DLL_API  Flag : public BitSet<bit::as_bit<uint64>()> {
 public:
 	constexpr Flag()
 		: BitSet<bit::as_bit<uint64>()>()
@@ -177,11 +177,11 @@ public:
 
 constexpr Flag FLAG_ANY = {};
 
-#define NGS_FLAG(id,value) static constexpr _NGS Flag id{value}
+#define NGS_FLAG(id,value) static constexpr NGS_ Flag id{value}
 
 NGS_END
 
 
-#if NGS_PLATFORM == NGS_MSVC
+#if NGS_COMPILER == NGS_COMPILER_MSVC
 #pragma warning(pop)
 #endif

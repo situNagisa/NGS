@@ -12,7 +12,7 @@ template<
 	class _Pointer = _ElementType*,
 	class _DifferenceType = std::ptrdiff_t
 >
-struct NGS_API base_iterator : boost::stl_interfaces::iterator_interface <
+struct NGS_DLL_API base_iterator : boost::stl_interfaces::iterator_interface <
 	_Derived,_Tag,_ElementType,_Reference,_Pointer,_DifferenceType> 
 {
 protected:

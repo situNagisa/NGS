@@ -6,8 +6,8 @@
 
 NGS_MATH_BEGIN
 
-template<CArithmetic _ElementType>
-struct NGS_API Rectangle {
+template<cpt::real_number _ElementType>
+struct NGS_DLL_API Rectangle {
 private:
 	using self_type = Rectangle;
 	using point_type = Point2<_ElementType>;

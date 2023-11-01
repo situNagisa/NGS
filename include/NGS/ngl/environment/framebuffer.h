@@ -5,7 +5,7 @@
 
 NGL_ENV_BEGIN
 
-class NGS_API Framebuffer final : public IEnvironment {
+class NGS_DLL_API Framebuffer final : public IEnvironment {
 public:
 	Framebuffer() = default;
 	Framebuffer(const std::shared_ptr<objects::FramebufferBase>& framebuffer) : _framebuffer(framebuffer) {}

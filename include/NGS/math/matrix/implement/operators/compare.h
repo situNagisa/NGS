@@ -12,7 +12,7 @@ constexpr bool equality(_L&& left, _R&& right)
 	{
 		for (size_t c = 0; c < functor::columns<_L>; c++)
 		{
-			if (functor::access(NGS_PERFECT_FORWARD(left), r, c) != functor::access(NGS_PERFECT_FORWARD(right), r, c))
+			if (functor::access(NGS_PP_PERFECT_FORWARD(left), r, c) != functor::access(NGS_PP_PERFECT_FORWARD(right), r, c))
 				return false;
 		}
 	}
@@ -20,9 +20,9 @@ constexpr bool equality(_L&& left, _R&& right)
 }
 
 constexpr decltype(auto) operator==(auto&& left, auto&& right)
-	requires requires{ vectors::equality(NGS_PERFECT_FORWARD(left), NGS_PERFECT_FORWARD(right)); }
+	requires requires{ vectors::equality(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)); }
 {
-	return vectors::equality(NGS_PERFECT_FORWARD(left), NGS_PERFECT_FORWARD(right));
+	return vectors::equality(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
 NGS_MATH_MATRIX_END

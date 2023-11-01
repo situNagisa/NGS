@@ -5,7 +5,7 @@
 NGS_BEGIN
 
 template<class  _Target>
-class NGS_API  Factory {
+class NGS_DLL_API  Factory {
 
 public:
 

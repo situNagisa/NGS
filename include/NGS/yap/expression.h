@@ -5,7 +5,7 @@
 NGS_YAP_BEGIN
 
 template<ccpt::CRPT _Expression>
-struct NGS_API expression {
+struct NGS_DLL_API expression {
 protected:
 	using self_type = expression;
 public:

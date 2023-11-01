@@ -3,8 +3,7 @@
 #include "NGS/ngl/defined.h"
 #include "NGS/ngl/vertex/trait.h"
 
-NGS_BEGIN
-NGS_CONCEPT
+NGL_BEGIN
 
 template<class  T, class  _ElementType = void>
 concept CAttrib = std::convertible_to<T, typename ngl::tag::Attrib<_ElementType>::type>;
@@ -67,5 +66,4 @@ concept CVertexRange =
 (std::is_pointer_v<T> && CBufferRange<std::remove_pointer_t<T>, _ElementType>) ||
 (std::ranges::forward_range<T> && CBufferRange<std::ranges::range_value_t<T>, _ElementType>);
 
-NGS_END
-NGS_END
+NGL_END

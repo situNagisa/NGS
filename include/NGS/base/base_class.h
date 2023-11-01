@@ -12,13 +12,13 @@
 NGS_BEGIN
 
 template<class  This>
-class NGS_API  TypeDefined {
+class NGS_DLL_API  TypeDefined {
 public:
 	NGS_TYPE_DEFINE(This, this);
 };
 
 template<class  Derived>
-class NGS_API  Singleton {
+class NGS_DLL_API  Singleton {
 protected:
 	using self_type = Singleton;
 public:
@@ -31,7 +31,7 @@ public:
 	static Derived* INSTANCE() { return &I(); }
 };
 
-class NGS_API  DeleteCopy {
+class NGS_DLL_API  DeleteCopy {
 public:
 	DeleteCopy() = default;
 	DeleteCopy(const DeleteCopy&) = delete;

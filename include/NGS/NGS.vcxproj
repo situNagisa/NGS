@@ -24,17 +24,85 @@
     <ClInclude Include="algorithm\dynamic_program.h" />
     <ClInclude Include="algorithm\PID.h" />
     <ClInclude Include="algorithm\PID.hpp" />
+    <ClInclude Include="assert\assert.h" />
+    <ClInclude Include="assert\defined.h" />
+    <ClInclude Include="assert\normal.h" />
+    <ClInclude Include="bases\bases.h" />
+    <ClInclude Include="bases\defined.h" />
+    <ClInclude Include="bases\delete_copy.h" />
+    <ClInclude Include="bases\singleton.h" />
     <ClInclude Include="basic\preprocessor.h" />
-    <ClInclude Include="basic\preprocessor\clear_buffer.h" />
+    <ClInclude Include="bit\bit.h" />
+    <ClInclude Include="bit\defined.h" />
+    <ClInclude Include="bit\operation.h" />
+    <ClInclude Include="bit\set.h" />
+    <ClInclude Include="color\channel.h" />
+    <ClInclude Include="color\color.h" />
+    <ClInclude Include="color\concept.h" />
+    <ClInclude Include="color\defined.h" />
+    <ClInclude Include="color\colors\hsv.h" />
+    <ClInclude Include="color\colors\primary.h" />
+    <ClInclude Include="config\feature\constexpr.h" />
+    <ClInclude Include="console\base.h" />
+    <ClInclude Include="console\console.h" />
+    <ClInclude Include="console\impl\linux.hpp" />
+    <ClInclude Include="console\impl\mac.hpp" />
+    <ClInclude Include="console\impl\none.hpp" />
+    <ClInclude Include="console\impl\windows.hpp" />
+    <ClInclude Include="console\default.h" />
+    <ClInclude Include="console\defined.h" />
+    <ClInclude Include="location\defined.h" />
+    <ClInclude Include="location\location.h" />
+    <ClInclude Include="location\source_location.h" />
+    <ClInclude Include="log\config.h" />
+    <ClInclude Include="log\logger.h" />
+    <ClInclude Include="log\defined.h" />
+    <ClInclude Include="log\level.h" />
+    <ClInclude Include="log\log.h" />
+    <ClInclude Include="log\scope.h" />
+    <ClInclude Include="log\winapi.h" />
+    <ClInclude Include="preprocessor\utils.h" />
+    <ClInclude Include="preprocessor\utils\args_package.h" />
+    <ClInclude Include="preprocessor\utils\cat.h" />
+    <ClInclude Include="preprocessor\utils\clear_buffer.h" />
     <ClInclude Include="basic\preprocessor\concept_wrapper.h" />
-    <ClInclude Include="basic\preprocessor\const_member_function.h" />
-    <ClInclude Include="basic\preprocessor\debug_if.h" />
-    <ClInclude Include="basic\preprocessor\forward.h" />
-    <ClInclude Include="basic\preprocessor\to_string.h" />
+    <ClInclude Include="preprocessor\utils\debug_if.h" />
+    <ClInclude Include="preprocessor\utils\forward.h" />
+    <ClInclude Include="preprocessor\utils\function_name.h" />
+    <ClInclude Include="preprocessor\utils\to_string.h" />
     <ClInclude Include="basic\preprocessor\type_defined.h" />
-    <ClInclude Include="basic\preprocessor\type_of_expression.h" />
+    <ClInclude Include="preprocessor\utils\type_of_expression.h" />
     <ClInclude Include="basic\preprocessor\type_value_convert.h" />
-    <ClInclude Include="basic\preprocessor\warning.h" />
+    <ClInclude Include="preprocessor\utils\warning.h" />
+    <ClInclude Include="basic\type.h" />
+    <ClInclude Include="basic\type\byte.h" />
+    <ClInclude Include="basic\type\core.h" />
+    <ClInclude Include="basic\type\defined.h" />
+    <ClInclude Include="config\build.h" />
+    <ClInclude Include="config\config.h" />
+    <ClInclude Include="config\defined.h" />
+    <ClInclude Include="config\feature.h" />
+    <ClInclude Include="config\extern_c.h" />
+    <ClInclude Include="config\feature\dll.h" />
+    <ClInclude Include="config\feature\hpp.h" />
+    <ClInclude Include="config\feature\inline.h" />
+    <ClInclude Include="config\feature\module.h" />
+    <ClInclude Include="numbers\defined.h" />
+    <ClInclude Include="numbers\normal.h" />
+    <ClInclude Include="numbers\numbers.h" />
+    <ClInclude Include="preprocessor\defined.h" />
+    <ClInclude Include="preprocessor\preprocessor.h" />
+    <ClInclude Include="symbol\defined.h" />
+    <ClInclude Include="symbol\enum.h" />
+    <ClInclude Include="symbol\symbol.h" />
+    <ClInclude Include="symbol\type.h" />
+    <ClInclude Include="symbol\value.h" />
+    <ClInclude Include="to_string\defined.h" />
+    <ClInclude Include="to_string\core.h" />
+    <ClInclude Include="to_string\to_string.h" />
+    <ClInclude Include="version\compiler.h" />
+    <ClInclude Include="version\cpp_standard.h" />
+    <ClInclude Include="version\system.h" />
     <ClInclude Include="boost\defined.h" />
     <ClInclude Include="boost\fusion.h" />
     <ClInclude Include="boost\fusion\algorithm.h" />
@@ -144,7 +212,7 @@
     <ClInclude Include="math\matrix\implement\operators\inverse.h" />
     <ClInclude Include="math\matrix\implement\operators\negate.h" />
     <ClInclude Include="math\matrix\implement\operators\rank.h" />
-    <ClInclude Include="math\matrix\implement\operators\permutation.h" />
+    <ClInclude Include="math\matrix\implement\operators\swap.h" />
     <ClInclude Include="math\matrix\implement\operators\transpose.h" />
     <ClInclude Include="math\matrix\implement\standard.h" />
     <ClInclude Include="math\matrix\implement\standard\binary.h" />
@@ -297,16 +365,10 @@
     <ClInclude Include="layout\align\is_align.h" />
     <ClInclude Include="layout\layout.h" />
     <ClInclude Include="layout\defined.h" />
-    <ClInclude Include="base\assert.h" />
     <ClInclude Include="base\base.h" />
     <ClInclude Include="base\base.hpp" />
-    <ClInclude Include="base\base_class.h" />
-    <ClInclude Include="base\to_string.h" />
     <ClInclude Include="basic\declval.h" />
-    <ClInclude Include="base\format.h" />
-    <ClInclude Include="basic\enum_name.h" />
-    <ClInclude Include="basic\numbers.h" />
-    <ClInclude Include="basic\type_name.h" />
+    <ClInclude Include="to_string\format.h" />
     <ClInclude Include="ccpt\base.h" />
     <ClInclude Include="extend\meta_variable_wrapper.h" />
     <ClInclude Include="layout\offset.h" />
@@ -344,13 +406,9 @@
     <ClInclude Include="extend\color\color.h" />
     <ClInclude Include="extend\iterator_interface.h" />
     <ClInclude Include="basic\basic.h" />
-    <ClInclude Include="base\bit.h" />
-    <ClInclude Include="base\concepts.h" />
-    <ClInclude Include="basic\config.h" />
     <ClInclude Include="base\defined.h" />
     <ClInclude Include="base\is_as.h" />
     <ClInclude Include="extend\memory_reinterpreter.h" />
-    <ClInclude Include="base\type_info.h" />
     <ClInclude Include="ccpt\ccpt.h" />
     <ClInclude Include="ccpt\fundamental\boolean.h" />
     <ClInclude Include="ccpt\fundamental\constant_.h" />
@@ -406,9 +464,8 @@
     <ClInclude Include="extend\console.h" />
     <ClInclude Include="extend\console.hpp" />
     <ClInclude Include="basic\defined.h" />
-    <ClInclude Include="base\log.h" />
     <ClInclude Include="basic\STL.h" />
-    <ClInclude Include="basic\version.h" />
+    <ClInclude Include="version\version.h" />
     <ClInclude Include="embedded\bus\bus_base.h" />
     <ClInclude Include="embedded\bus\i2c\I2C.h" />
     <ClInclude Include="embedded\bus\serial_port\serial_port.h" />
@@ -426,8 +483,6 @@
     <ClInclude Include="extend\event.h" />
     <ClInclude Include="extend\extend.h" />
     <ClInclude Include="extend\extend.hpp" />
-    <ClInclude Include="extend\file.h" />
-    <ClInclude Include="extend\function.h" />
     <ClInclude Include="extend\memory.h" />
     <ClInclude Include="extend\movie.h" />
     <ClInclude Include="extend\parser.h" />
@@ -458,7 +513,6 @@
     <ClInclude Include="math\geometry\quaternion\multiply.h" />
     <ClInclude Include="math\geometry\quaternion\quaternion.h" />
     <ClInclude Include="math\geometry\rectangle_3d.h" />
-    <ClInclude Include="math\geometry\rectangle_old.h" />
     <ClInclude Include="math\geometry\transform.h" />
     <ClInclude Include="math\mla.h" />
     <ClInclude Include="math\geometry\point.h" />
@@ -573,7 +627,6 @@
     <ClInclude Include="math\mla\vector\expression\vector.h" />
     <ClInclude Include="math\math.h" />
     <ClInclude Include="math\math.hpp" />
-    <ClInclude Include="math\geometry\matrix_old.h" />
     <ClInclude Include="math\geometry\rectangle.h" />
     <ClInclude Include="math\mst\defined.h" />
     <ClInclude Include="math\mst\set\expression.h" />
@@ -586,8 +639,6 @@
     <ClInclude Include="math\utils\axis.h" />
     <ClInclude Include="math\utils\base_vector.h" />
     <ClInclude Include="math\utils\util.h" />
-    <ClInclude Include="math\geometry\vector.h" />
-    <ClInclude Include="math\geometry\vector_old.h" />
     <ClInclude Include="mpl\counter.h" />
     <ClInclude Include="mpl\counter\core.h" />
     <ClInclude Include="mpl\counter\counter.h" />
@@ -890,6 +941,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -907,6 +959,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -924,6 +977,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -941,6 +995,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>

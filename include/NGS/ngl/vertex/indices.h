@@ -11,7 +11,7 @@ using indices_t = uint32;
 
 NGL_BUF_BEGIN
 
-class NGS_API  Indices : public BufferObject {
+class NGS_DLL_API  Indices : public BufferObject {
 public:
 	Indices(void_ptr data, size_t count, Usage usage);
 	Indices(size_t count, Usage usage);

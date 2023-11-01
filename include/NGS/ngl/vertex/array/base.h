@@ -13,12 +13,12 @@
 NGL_BEGIN
 
 NGL_OBJ_BEGIN
-class NGS_API  VertexArrayBase;
+class NGS_DLL_API  VertexArrayBase;
 NGS_END
 
 NGL_TARGET_BEGIN
 
-class NGS_API  VertexArray : public Target < VertexArray, objects::VertexArrayBase > {
+class NGS_DLL_API  VertexArray : public Target < VertexArray, objects::VertexArrayBase > {
 	friend class  Target < VertexArray, objects::VertexArrayBase >;
 	static void _Select(state_type* state);
 };
@@ -27,7 +27,7 @@ NGS_END
 
 NGL_OBJ_BEGIN
 
-class NGS_API  VertexArrayBase : public Object {
+class NGS_DLL_API  VertexArrayBase : public Object {
 	NGS_MPL_ENVIRON(VertexArrayBase);
 public:
 	using element_type = byte;
@@ -72,7 +72,7 @@ protected:
 	static auto _GET_BEGIN(T && range, size_t constrain_size = 0) {
 		if constexpr (std::ranges::forward_range<decltype(range)>) {
 			if constexpr (std::ranges::sized_range<decltype(range)>) {
-				NGS_DEBUG_EXPR(if (constrain_size) { NGS_ASSERT(std::ranges::size(range) >= constrain_size); });
+				NGS_PP_DEBUG_EXPR(if (constrain_size) { NGS_ASSERT(std::ranges::size(range) >= constrain_size); });
 			}
 			return std::ranges::cbegin(range);
 		}

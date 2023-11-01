@@ -5,7 +5,7 @@
 NGS_BEGIN
 
 template<typename _Duration, typename _Clock>
-class NGS_API  Timer {
+class NGS_DLL_API  Timer {
 public:
 	using clock = _Clock;
 	using time_point = typename clock::time_point;
@@ -32,7 +32,7 @@ private:
 
 using StdTimer = Timer< std::chrono::nanoseconds, std::chrono::high_resolution_clock>;
 
-class NGS_API  DelayCall : public Singleton<DelayCall> {
+class NGS_DLL_API  DelayCall : public Singleton<DelayCall> {
 public:
 	NGS_TYPE_DEFINE(std::function<void()>, timer);
 

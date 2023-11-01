@@ -9,23 +9,23 @@ NGL_BEGIN
 NGL_TARGET_BEGIN
 
 //vertex
-class NGS_API VertexArray;
+class NGS_DLL_API VertexArray;
 
 //texture
-class NGS_API Texture;
+class NGS_DLL_API Texture;
 
 //shader
-class NGS_API ShaderProgram;
+class NGS_DLL_API ShaderProgram;
 
 //framebuffer
-class NGS_API Framebuffer;
+class NGS_DLL_API Framebuffer;
 
 //renderbuffer
-class NGS_API Renderbuffer;
+class NGS_DLL_API Renderbuffer;
 
 NGS_END
 
-class NGS_API  OpenGL : public Singleton<OpenGL> {
+class NGS_DLL_API  OpenGL : public Singleton<OpenGL> {
 private:
 	friend class  Singleton;
 	OpenGL();
@@ -50,7 +50,7 @@ public:
 };
 
 template<class>
-struct NGS_API _get_target_function;
+struct NGS_DLL_API _get_target_function;
 
 template<class _Object>
 inline constexpr _get_target_function<_Object> get_target{};
@@ -69,7 +69,7 @@ bool is_bind(_Object& object) {return is_bind(&object);}
 
 #define NGS_GL_GET_TARGET_FUNCTION(_target,_object,id)	\
 template<std::derived_from<_object> _Object>			\
-struct NGS_API _get_target_function<_Object> {			\
+struct NGS_DLL_API _get_target_function<_Object> {			\
 	_target* operator()()const noexcept {				\
 		return OpenGL::I(). id;							\
 	}													\

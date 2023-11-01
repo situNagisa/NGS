@@ -6,7 +6,7 @@
 NGS_BEGIN
 
 
-class NGS_API  SerialPort : public BusAsync<BusBase::Type::full_duplex> {
+class NGS_DLL_API  SerialPort : public BusAsync<BusBase::Type::full_duplex> {
 public:
 	NGS_TYPE_DEFINE(BusAsync<BusBase::Type::full_duplex>, base);
 public:

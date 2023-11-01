@@ -5,7 +5,7 @@
 
 NGS_BEGIN
 
-class NGS_API  BusBase : public EmbeddedObject {
+class NGS_DLL_API  BusBase : public EmbeddedObject {
 public:
 	enum class  Type {
 		simplex,
@@ -36,13 +36,13 @@ private:
 };
 
 template<BusBase::Type _Type>
-class NGS_API  BusSync : public BusBase {
+class NGS_DLL_API  BusSync : public BusBase {
 public:
 	static constexpr typename BusBase::Type type = _Type;
 };
 
 template<BusBase::Type _Type>
-class NGS_API  BusAsync : public BusBase {
+class NGS_DLL_API  BusAsync : public BusBase {
 	static constexpr typename BusBase::Type type = _Type;
 };
 

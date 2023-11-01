@@ -49,7 +49,7 @@ template<
 	class = std::make_index_sequence<_Col::value* _Row::value>,
 	class = std::make_index_sequence<_Row::value>,
 	class = std::make_index_sequence<_Col::value>>
-	struct NGS_API MatrixContainer;
+	struct NGS_DLL_API MatrixContainer;
 
 /**
  * @brief
@@ -67,7 +67,7 @@ template<
 	size_t... _Index,
 	size_t... _RowIndex,
 	size_t... _ColIndex>
-struct NGS_API MatrixContainer<
+struct NGS_DLL_API MatrixContainer<
 	_Derived,
 	_Row,_Col,
 	_ElementType,
@@ -169,7 +169,7 @@ public:
 	//=================
 protected:
 	template<bool _Constant>
-	struct NGS_API _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, element_type> {
+	struct NGS_DLL_API _iterator : ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, element_type> {
 	private:
 		using _base_type = ngs::mla::random_access_iterator<_iterator<_Constant>, _Constant, typename base_type::expression_type, element_type>;
 		NGS_MPL_INHERIT_TYPE(_element_type, _base_type);

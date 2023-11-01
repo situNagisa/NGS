@@ -9,7 +9,7 @@ NGS_BEGIN
 namespace iterator_interface {
 
 template<class  _Derived, bool _Constant, class  _Rng, class  _ElementType>
-struct NGS_API random_access_iterator : boost::stl_interfaces::iterator_interface <
+struct NGS_DLL_API random_access_iterator : boost::stl_interfaces::iterator_interface <
 	_Derived,
 	std::random_access_iterator_tag,
 	_ElementType

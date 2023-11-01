@@ -33,20 +33,20 @@ constexpr auto min(auto a, auto b) { return a > b ? b : a; }
 
 
 /* 判断点是否在区间内 */
-template< CArithmetic T>
+template<cpt::real_number T>
 bool In(T val, T low, T high) { return val >= low && val <= high; }
 
 /* 判断点是否在区间内 */
-template< CArithmetic T>
+template< cpt::real_number T>
 bool Between(T val, T low, T high) { return val > low && val < high; }
 
 /* 点与区间的距离，若在区间内则为0 */
-template< CArithmetic T> T Distance(T val, T min, T max) { return max(0, max(min - val, val - max)); }
+template< cpt::real_number T> T Distance(T val, T min, T max) { return max(0, max(min - val, val - max)); }
 /* 判断两区间是否相交 */
-template< CArithmetic T> bool IsCross(T min0, T max0, T min1, T max1) { return min1 <= max0 && min0 <= max1; }
+template< cpt::real_number T> bool IsCross(T min0, T max0, T min1, T max1) { return min1 <= max0 && min0 <= max1; }
 
-template< CArithmetic T> T Clamp(T value, T low, T high) { return max(low, min(value, high)); }
-template< CArithmetic T> constexpr T NearTo(T value, T aim, T speed) {
+template< cpt::real_number T> T Clamp(T value, T low, T high) { return max(low, min(value, high)); }
+template< cpt::real_number T> constexpr T NearTo(T value, T aim, T speed) {
 	if (value < aim)
 		return (value + speed > aim) ? aim : value + speed;
 	if (value > aim)
@@ -89,22 +89,6 @@ inline double angle_difference(double angle1, double angle2) {
 }
 
 
-constexpr auto average(CIntegral auto a, CIntegral auto b) { return (a & b) + ((a ^ b) >> 1); }
-
-template <typename T>
-constexpr T Sqrt(T x) {
-	return std::sqrt(x);
-	// if constexpr (std::is_constant_evaluated()) {
-	// 	/*static_assert(x >= 0, "Sqrt argument must be non-negative");
-	// 	auto SqrtHelper = [&](T curr, T prev) constexpr {
-	// 		return curr == prev ? curr : SqrtHelper(0.5 * (curr + x / curr), curr);
-	// 	};
-	// 	return SqrtHelper(x, 0);*/
-	// 	return std::sqrt(x);
-	// }
-	// else {
-	// 	return std::sqrt(x);
-	// }
-}
+constexpr auto average(std::integral auto a, std::integral auto b) { return (a & b) + ((a ^ b) >> 1); }
 
 NGS_END

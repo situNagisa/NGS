@@ -9,11 +9,11 @@ NGS_BEGIN
 
 template<
 	size_t _N,
-	CArithmetic _ElementType,
+	cpt::real_number _ElementType,
 	class  _Derived,
-	class  = std::make_index_sequence<_N>
+	class = std::make_index_sequence<_N>
 >
-class NGS_API  _Vector;
+class NGS_DLL_API  _Vector;
 
 template<
 	size_t _N,
@@ -21,7 +21,7 @@ template<
 	class  _Derived,
 	size_t... _Index
 >
-class NGS_API  _Vector<_N, _ElementType, _Derived, std::index_sequence<_Index...>> {
+class NGS_DLL_API  _Vector<_N, _ElementType, _Derived, std::index_sequence<_Index...>> {
 
 #define _VECTOR_COMMA +
 #define _VECTOR_NOTHING 
@@ -154,7 +154,7 @@ public:
 };
 
 template<CArithmetic _ElementType>
-class NGS_API  Vector2D : public _Vector<2, _ElementType, Vector2D<_ElementType>> {
+class NGS_DLL_API  Vector2D : public _Vector<2, _ElementType, Vector2D<_ElementType>> {
 private:
 	using __base = _Vector<2, _ElementType, Vector2D<_ElementType>>;
 	NGS_TYPE_DEFINE(_ElementType, ele);
@@ -225,7 +225,7 @@ using Point2lf = Point2_<double>;
 using Point2s = Point2_<size_t>;
 
 template<CArithmetic _ElementType>
-class NGS_API  Vector3D : public _Vector<3, _ElementType, Vector3D<_ElementType>> {
+class NGS_DLL_API  Vector3D : public _Vector<3, _ElementType, Vector3D<_ElementType>> {
 private:
 	using __base = _Vector<3, _ElementType, Vector3D<_ElementType>>;
 	NGS_TYPE_DEFINE(_ElementType, ele);
@@ -285,7 +285,7 @@ using Point3s = Point3_<size_t>;
 
 
 template< CArithmetic _ElementType>
-class NGS_API  Vector4D : public _Vector<4, _ElementType, Vector4D<_ElementType>> {
+class NGS_DLL_API  Vector4D : public _Vector<4, _ElementType, Vector4D<_ElementType>> {
 private:
 	using __base = _Vector<4, _ElementType, Vector4D<_ElementType>>;
 	NGS_TYPE_DEFINE(_ElementType, ele);
@@ -339,7 +339,7 @@ using Point4s = Point4_<size_t>;
 
 
 template<size_t _N, CArithmetic _ElementType>
-class NGS_API  VectorND : public _Vector<_N, _ElementType, VectorND<_N, _ElementType>> {
+class NGS_DLL_API  VectorND : public _Vector<_N, _ElementType, VectorND<_N, _ElementType>> {
 private:
 	using __base = _Vector<_N, _ElementType, Vector3D<_ElementType>>;
 	NGS_TYPE_DEFINE(_ElementType, ele);

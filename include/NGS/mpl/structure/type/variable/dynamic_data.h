@@ -4,7 +4,7 @@
 
 NGS_STRUCTURE_TYPE_BEGIN
 
-struct NGS_API variable_dynamic_data {
+struct NGS_DLL_API variable_dynamic_data {
 	size_t count;
 	size_t size;
 	size_t offset;

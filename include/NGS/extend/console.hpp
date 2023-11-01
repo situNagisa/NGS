@@ -2,7 +2,7 @@
 
 #include "NGS/extend/console.h"
 
-#if NGS_PLATFORM == NGS_WINDOWS
+#if NGS_SYSTEM == NGS_SYSTEM_WINDOWS
 
 #include <windows.h>
 
@@ -11,13 +11,13 @@
 NGS_BEGIN
 
 namespace {
-	inline bool _s_set_text_color = [] {
-		Debugger::set_text_color = Console::SetTextColor;
-		return true;
+inline bool _s_set_text_color = [] {
+	Debugger::set_text_color = Console::SetTextColor;
+	return true;
 	}();
 }
 
-#if NGS_PLATFORM == NGS_WINDOWS
+#if NGS_SYSTEM == NGS_SYSTEM_WINDOWS
 
 #if true
 

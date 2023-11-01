@@ -4,7 +4,7 @@
 
 NGS_DL_BEGIN
 
-class NGS_API IBitmapData{
+class NGS_DLL_API IBitmapData{
 public:
 	virtual ~IBitmapData() = default;
 

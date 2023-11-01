@@ -86,14 +86,14 @@ public:
 	constexpr decltype(auto) assign(size_t index, vectors::functor::accessible auto&& vector)
 	{
 		auto&& [row, column] = tag_type::access(_rc_index, index);
-		return functor::assign(*_matrix, row, column, vectors::functor::access(NGS_PERFECT_FORWARD(vector), index));
+		return functor::assign(*_matrix, row, column, vectors::functor::access(NGS_PP_PERFECT_FORWARD(vector), index));
 	}
 	constexpr decltype(auto) assign(vectors::functor::accessible auto&& vector)
 	{
 		for (size_t i = 0; i < dimension; i++)
 		{
 			auto&& [row, column] = tag_type::access(_rc_index, i);
-			functor::assign(*_matrix, row, column, vectors::functor::access(NGS_PERFECT_FORWARD(vector), i));
+			functor::assign(*_matrix, row, column, vectors::functor::access(NGS_PP_PERFECT_FORWARD(vector), i));
 		}
 	}
 private:
@@ -111,12 +111,12 @@ using column_vector = base_rc_vector<_Matrix, column_vector_tag>;
 
 constexpr decltype(auto) row(functor::expression auto&& matrix, size_t index)
 {
-	return detail::row_vector<NGS_EXPRESSION_TYPE(matrix)>(NGS_PERFECT_FORWARD(matrix), index);
+	return detail::row_vector<NGS_PP_EXPRESSION_TYPE(matrix)>(NGS_PP_PERFECT_FORWARD(matrix), index);
 }
 
 constexpr decltype(auto) column(functor::expression auto&& matrix, size_t index)
 {
-	return detail::column_vector<NGS_EXPRESSION_TYPE(matrix)>(NGS_PERFECT_FORWARD(matrix), index);
+	return detail::column_vector<NGS_PP_EXPRESSION_TYPE(matrix)>(NGS_PP_PERFECT_FORWARD(matrix), index);
 }
 
 NGS_MATH_MATRIX_END

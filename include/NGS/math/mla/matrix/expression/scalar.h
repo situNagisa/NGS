@@ -5,7 +5,7 @@
 NGS_MLA_BEGIN
 
 template<ccpt::uint _Row, ccpt::uint _Col, class  _ElementType>
-class NGS_API  MatrixScalarExpression : public MatrixExpression<MatrixScalarExpression<_Row, _Col, _ElementType>> {
+class NGS_DLL_API  MatrixScalarExpression : public MatrixExpression<MatrixScalarExpression<_Row, _Col, _ElementType>> {
 	NGS_MPL_ENVIRON(MatrixScalarExpression);
 public:
 	using element_type = _ElementType;

@@ -5,7 +5,7 @@
 
 NGS_DL_BEGIN
 
-class NGS_API Listen {
+class NGS_DLL_API Listen {
 public:
 	using display_object_constructor = void(*)(DisplayObject*);
 	using display_object_destructor = void(*)(DisplayObject*);

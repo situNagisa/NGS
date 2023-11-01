@@ -29,7 +29,7 @@ enum class  TextColor {
 	white,
 };
 
-class NGS_API  Debugger {
+class NGS_DLL_API  Debugger {
 public:
 	class  ScopeHolder : DeleteCopy {
 	public:
@@ -147,7 +147,7 @@ public:
 		else {
 			std::cout << std::forward<T>(obj);
 		}
-		
+
 
 		if constexpr (sizeof...(Args))_Print(std::forward<Args>(args)...);
 	}
@@ -161,27 +161,27 @@ private:
 	inline static std::mutex _mutex{};
 };
 
-#if NGS_BUILD_TYPE == NGS_DEBUG
+#if NGS_BUILD_TYPE_IS_DEBUG
 
-#define NGS_LOG_SCOPE_CREATE auto _ngs_scope_holder = _NGS Debugger::Push()
+#define NGS_LOG_SCOPE_CREATE auto _ngs_scope_holder = NGS_ Debugger::Push()
 #define NGS_LOG_SCOPE_DISABLE NGS_LOG_SCOPE_CREATE;_ngs_scope_holder.Disable()
 #define NGS_LOG_SCOPE_ENABLE _ngs_scope_holder.Enable()
 
 #define _NGS_DEBUG_CALL(function, ...)			\
 do {											\
 	NGS_LOG_SCOPE_CREATE;						\
-	_NGS Debugger::function(__VA_ARGS__);		\
+	NGS_ Debugger::function(__VA_ARGS__);		\
 } while (false)									\
 //
 
 #define NGS_LOG(level, ...)						\
-_NGS_DEBUG_CALL(Log, _NGS level, ##__VA_ARGS__)	
+_NGS_DEBUG_CALL(Log, NGS_ level, ##__VA_ARGS__)	
 #define NGS_LOGL(level, ...)					\
-_NGS_DEBUG_CALL(LogLine, _NGS level, ##__VA_ARGS__)	
+_NGS_DEBUG_CALL(LogLine, NGS_ level, ##__VA_ARGS__)	
 #define NGS_LOGF(level, format, ...) 			\
-_NGS_DEBUG_CALL(LogFormat, _NGS level, format, ##__VA_ARGS__)	
+_NGS_DEBUG_CALL(LogFormat, NGS_ level, format, ##__VA_ARGS__)	
 #define NGS_LOGFL(level, format, ...)					\
-_NGS_DEBUG_CALL(LogFormatLine, _NGS level, format, ##__VA_ARGS__)	\
+_NGS_DEBUG_CALL(LogFormatLine, NGS_ level, format, ##__VA_ARGS__)	\
 //
 
 #define NGS_PRINT(...)							\

@@ -5,7 +5,7 @@
 
 NGS_BEGIN
 
-class NGS_API  GPIO : public IO {
+class NGS_DLL_API  GPIO : public IO {
 public:
 	enum class  Mode {
 		disable,
