@@ -3,7 +3,6 @@
 #include "./defined.h"
 
 NGS_ASSERT_BEGIN
-
 inline bool dynamic_assert(
 	bool condition,
 	std::string_view expression,
@@ -39,7 +38,7 @@ inline bool dynamic_assert(
 	return true;
 }
 
-template<bool _Condition, static_strings::static_string _Message = "", locations::source_location_info _Location = locations::source_location::current()>
+template<bool _Condition, statics::strings::string _Message = "", locations::source_location_info _Location = locations::source_location::current()>
 constexpr bool static_assert_()
 {
 	return _Condition;

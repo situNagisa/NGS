@@ -50,9 +50,14 @@ constexpr functor_choice dimension_choice()
 
 template<class _T> concept valid_dimension = detail::dimension_choice<_T>() != functor_choice::none;
 template<class _T> concept invalid_dimension = !valid_dimension<_T>;
-template<class _T> dimension_t static_dimension = dimension_invalid;
-template<valid_dimension _T> dimension_t static_dimension<_T> = type_traits::object_t<_T>::dimension;
+template<class> constexpr dimension_t static_dimension = dimension_invalid;
+template<valid_dimension _T>
+constexpr dimension_t static_dimension<_T> = type_traits::object_t<_T>::dimension;
+
 template<class _T> concept dynamic_dimension = static_dimension<_T> == dimension_dynamic;
+template<class _T, size_t _Dimension> concept dimension_equality = static_dimension<_T> == _Dimension;
+template<class _L, class _R>
+concept same_type = dynamic_dimension<_L> || dynamic_dimension<_R> || (static_dimension<_L> == static_dimension<_R>);
 
 inline constexpr struct
 {
@@ -69,7 +74,7 @@ inline constexpr struct
 		}
 		else if constexpr (choice == functor_choice::other)
 		{
-			return decltype(target)::dimension;
+			return type_traits::object_t<decltype(target)>::dimension;
 		}
 	}
 } dimension;

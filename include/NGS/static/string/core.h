@@ -5,7 +5,7 @@
 NGS_STATIC_STRING_BEGIN
 
 template<class _Type, class _ObjectType = std::remove_reference_t<_Type>>
-concept CStaticString = requires(_ObjectType obj, const _ObjectType obj_cst) {
+concept CString = requires(_ObjectType obj, const _ObjectType obj_cst) {
 	typename _ObjectType::value_type;
 	typename _ObjectType::traits_type;
 	{ _ObjectType::size }->std::convertible_to<std::size_t>;
@@ -13,7 +13,7 @@ concept CStaticString = requires(_ObjectType obj, const _ObjectType obj_cst) {
 };
 
 template<std::size_t _N, class _CharType, class _Traits = std::char_traits<_CharType>>
-struct basic_static_string {
+struct basic_string {
 	using value_type = _CharType;
 	using traits_type = _Traits;
 
@@ -21,7 +21,7 @@ struct basic_static_string {
 
 	using string_type = value_type[char_size];
 
-	consteval explicit(false) basic_static_string(const value_type(&str)[_N]) noexcept {
+	consteval explicit(false) basic_string(const value_type(&str)[_N]) noexcept {
 		for (size_t i = 0; i < char_size; i++)
 		{
 			source[i] = str[i];
@@ -40,14 +40,14 @@ struct basic_static_string {
 };
 
 template<std::size_t _N>
-using static_string = basic_static_string<_N, char>;
+using string = basic_string<_N, char>;
 template<std::size_t _N>
-using static_wstring = basic_static_string<_N, wchar_t>;
+using wstring = basic_string<_N, wchar_t>;
 template<std::size_t _N>
-using static_u16string = basic_static_string<_N, char16_t>;
+using u16string = basic_string<_N, char16_t>;
 template<std::size_t _N>
-using static_u32string = basic_static_string<_N, char32_t>;
+using u32string = basic_string<_N, char32_t>;
 template<std::size_t _N>
-using static_u8string = basic_static_string<_N, char8_t>;
+using u8string = basic_string<_N, char8_t>;
 
 NGS_STATIC_STRING_END

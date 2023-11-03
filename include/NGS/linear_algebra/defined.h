@@ -3,6 +3,9 @@
 #include "NGS/math/defined.h"
 #include "NGS/type_trait/type_trait.h"
 #include "NGS/yap/yap.h"
+#include "NGS/assert/assert.h"
+#include "NGS/boost/stl_interfaces.h"
+#include "NGS/wrapper/wrapper.h"
 
 #define NGS_MATH_LA_BEGIN NGS_MATH_BEGIN namespace linear_algebra {
 #define NGS_MATH_LA_END } NGS_MATH_END

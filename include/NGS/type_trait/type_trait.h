@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "./modifier.h"
 #include "./object.h"
@@ -9,3 +9,5 @@
 #include "./index_type_identiry.h"
 #include "./operators.h"
 #include "./na.h"
+#include "./function.h"
+#include "./is_specialization.h"

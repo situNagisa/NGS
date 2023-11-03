@@ -70,7 +70,7 @@ NGS_HPP_INLINE console::console(int count, ...)
 #	pragma warning(push)
 #	pragma warning(disable: 26451)
 #endif
-			va_arg(stream, DWORD);
+			va_arg(args, DWORD);
 #if NGS_COMPILER_IS_MSVC
 #	pragma warning(pop)
 #	pragma warning(pop)

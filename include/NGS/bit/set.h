@@ -11,13 +11,16 @@
 NGS_BIT_BEGIN
 
 template<size_t _BitCount>
+concept _valid_bit_count = (_BitCount <= as_bit<uint64>());
+
+template<size_t _BitCount>
 struct bit_wrapper;
 
 /**
  * \brief 位集，保证存储大小为储存_BitCount位所需的最小字节数
  * \tparam _BitCount 位数
  */
-template<size_t _BitCount> requires (_BitCount <= as_bit<uint64>())
+template<size_t _BitCount> requires _valid_bit_count<_BitCount>
 class NGS_DLL_API bit_set {
 protected:
 	using self_type = bit_set;
@@ -152,15 +155,13 @@ public:
 	size_t _index;
 };
 
-template <size_t _BitCount> requires (_BitCount <= as_bit<unsigned long long>())
+template <size_t _BitCount> requires _valid_bit_count<_BitCount>
 constexpr typename bit_set<_BitCount>::wrapper_type bit_set<_BitCount>::operator[](size_t index)
 {
-	return { *this, index };
+	return { *this,index };
 }
 
 NGS_BIT_END
-
-
 
 #if NGS_COMPILER_IS_MSVC
 #pragma warning(pop)

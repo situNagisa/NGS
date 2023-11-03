@@ -4,3 +4,4 @@
 #include "./vector/assign.h"
 #include "./vector/dimension.h"
 #include "./vector/contain.h"
+#include "./vector/copy.h"

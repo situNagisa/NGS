@@ -4,15 +4,10 @@
 
 NGS_BOOST_STL_INTERFACES_BEGIN
 
-inline constexpr auto random_access_range_square_bracket_access = [](std::ranges::random_access_range auto&& range, auto&& index) { return range[index]; };
-
-template<class _Derived, class _Range, auto _Access>
-struct base_trivial_random_access_iterator;
-
-template<class _Derived, std::ranges::random_access_range _Range, auto _Access = random_access_range_square_bracket_access>
-	requires requires(_Range range, int index) { {_Access(range, index)} -> std::convertible_to<std::ranges::range_value_t<_Range>>; }
-struct base_trivial_random_access_iterator : base_random_access_iterator<_Derived, std::ranges::range_value_t<_Range>> {
-	NGS_MPL_ENVIRON2(base_trivial_random_access_iterator, base_random_access_iterator<_Derived, std::ranges::range_value_t<_Range>>);
+template<class _Derived, class _Range, class _ElementType, auto _Access>
+	requires requires(_Range range, int index) { {_Access(range, index)} -> std::convertible_to<_ElementType>; }
+struct base_trivial_random_access_iterator : base_random_access_iterator<_Derived, _ElementType> {
+	NGS_MPL_ENVIRON2(base_trivial_random_access_iterator, base_random_access_iterator<_Derived, _ElementType>);
 public:
 	NGS_MPL_INHERIT_TYPE(iterator_type, base_type);
 	NGS_MPL_INHERIT_TYPE(value_type, base_type);
@@ -25,6 +20,7 @@ public:
 public:
 	using base_type::base_type;
 	constexpr base_trivial_random_access_iterator(range_type* pointer, difference_type index) : _pointer(pointer), _index(index) {}
+	constexpr base_trivial_random_access_iterator(const self_type&) = default;
 
 	constexpr iterator_type& operator+=(difference_type n) {
 		_index += n;
@@ -39,10 +35,10 @@ protected:
 	difference_type _index = 0;
 };
 
-template<std::ranges::random_access_range _Range, auto _Access = random_access_range_square_bracket_access>
-	requires requires(_Range range, int index) { {_Access(range, index)} -> std::convertible_to<std::ranges::range_value_t<_Range>>; }
-struct trivial_random_access_iterator : base_random_access_iterator<trivial_random_access_iterator<_Range, _Access>, std::ranges::range_value_t<_Range>> {
-	NGS_MPL_ENVIRON2(trivial_random_access_iterator, base_random_access_iterator<trivial_random_access_iterator<_Range, _Access>, std::ranges::range_value_t<_Range>>);
+template<class _Range, class _ElementType, auto _Access>
+	requires requires(_Range range, int index) { {_Access(range, index)} -> std::convertible_to<_ElementType>; }
+struct trivial_random_access_iterator : base_random_access_iterator<trivial_random_access_iterator<_Range, _ElementType, _Access>, _ElementType> {
+	NGS_MPL_ENVIRON2(trivial_random_access_iterator, base_random_access_iterator<trivial_random_access_iterator<_Range, _ElementType, _Access>, _ElementType>);
 public:
 	NGS_MPL_INHERIT_TYPE(iterator_type, base_type);
 	NGS_MPL_INHERIT_TYPE(value_type, base_type);
@@ -55,6 +51,7 @@ public:
 public:
 	using base_type::base_type;
 	constexpr trivial_random_access_iterator(range_type* pointer, difference_type index) : _pointer(pointer), _index(index) {}
+	constexpr trivial_random_access_iterator(const self_type&) = default;
 
 	constexpr iterator_type& operator+=(difference_type n) {
 		_index += n;

@@ -2,6 +2,12 @@
 
 #include "../defined.h"
 
+#ifdef NGS_CPP_STANDARD_HAS_26
+#	define NGS_CONSTEXPR26 constexpr
+#else
+#	define NGS_CONSTEXPR26
+#endif
+
 #ifdef NGS_CPP_STANDARD_HAS_23
 #	define NGS_CONSTEXPR23 constexpr
 #else

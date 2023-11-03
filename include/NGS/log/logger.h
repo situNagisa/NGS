@@ -73,7 +73,8 @@ struct NGS_DLL_API logger
 	}
 	void log_format(log_level level, std::string_view f, auto&&... args)
 	{
-		log(level, format(f, NGS_PP_PERFECT_FORWARD(args)...));
+		///\code NGS_ format\endcode remove ADL
+		log(level, NGS_ format(f, NGS_PP_PERFECT_FORWARD(args)...));
 	}
 	void log_format_line(log_level level, std::string_view f, auto&&... args)
 	{
@@ -81,7 +82,7 @@ struct NGS_DLL_API logger
 		end_line();
 	}
 	//=============
-	NGS_CONSTEXPR23 consoles::text_color level_color(log_level level) const { return _config.level_colors.at(level); }
+	NGS_CONSTEXPR26 consoles::text_color level_color(log_level level) const { return _config.level_colors.at(level); }
 	constexpr auto&& get_config()const { return _config; }
 	constexpr auto&& get_config() { return _config; }
 

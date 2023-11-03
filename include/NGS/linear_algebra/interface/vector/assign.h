@@ -33,15 +33,45 @@ constexpr functor_choice assign_choice()
 
 }
 
+/**
+ * \brief 可赋值
+ *
+ * \tparam _L 左边
+ * \tparam _R 右边
+ *
+ * \note 当用户重载了\code interfaces::vectors::assign \endcode 函数时
+ * \note 当\code _L::assign \endcode 函数存在时,且能接受类型为\code index_t \endcode 和\code _R\endcode 的参数时
+ * \note 当满足\code std::assignable_from<decltype(access(_L,index_t)),_R \endcode
+ *
+ * \return 当满足`note`所述条件时,返回`true`,否则返回`false`
+*/
 template<class _L, class _R = _L>
 concept assignable = detail::assign_choice<_L, _R>() != functor_choice::none;
 
+/**
+ * \brief 赋值
+ *
+ * \concept assignable
+ *
+ * \param target 被赋值的目标，须满足概念\code assignable \endcode
+ * \param index  被赋值的下标
+ * \param value  赋值的值
+ *
+ * \return 取决于所依赖的函数
+ *
+ * \code
+ * vector3i v{1,2,3};
+ * assign(v,0,2);
+ * \endcode
+ *
+ */
 inline constexpr struct
 {
 
-	constexpr decltype(auto) operator()(assignable auto&& target, index_t index, auto&& value) const
+	constexpr decltype(auto) operator()(auto&& target, index_t index, auto&& value) const
+		requires assignable<decltype(target), decltype(value)>
 	{
-		constexpr auto choice = detail::access_choice<decltype(target), decltype(value)>();
+		constexpr auto choice = detail::assign_choice<decltype(target), decltype(value)>();
 		if constexpr (choice == functor_choice::interface)
 		{
 			return interfaces::vectors::assign(NGS_PP_PERFECT_FORWARD(target), index, NGS_PP_PERFECT_FORWARD(value));

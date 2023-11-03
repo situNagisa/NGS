@@ -22,7 +22,7 @@ constexpr functor_choice access_choice()
 	{
 		return functor_choice::member;
 	}
-	else if constexpr (requires(_T target, index_t index) { target(index); })
+	else if constexpr (requires(_T target, index_t index) { target[index]; })
 	{
 		return functor_choice::operators;
 	}
@@ -52,7 +52,7 @@ inline constexpr struct
 		}
 		else if constexpr (choice == functor_choice::operators)
 		{
-			return target(index);
+			return target[index];
 		}
 		else
 		{

@@ -6,9 +6,10 @@ NGS_MATH_LA_VECTOR_CONCEPT_BEGIN
 
 using adapters::vectors::assignable;
 using adapters::vectors::callable_contain;
+using adapters::vectors::copyable;
 
-template<class _T, class _O = type_traits::object_t<_T>>
-concept container = expression<_T> && assignable<_O, traits::vectors::value_t<_O>>;
+template<class _T, class _N = type_traits::naked_t<_T>>
+concept container = expression<_T> && assignable<_N, traits::vectors::value_t<_N>>;
 
 template <class _T>
 concept output_wrapper = container<_T> && assignable<_T, traits::vectors::value_t<_T>>;

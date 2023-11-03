@@ -1512,13 +1512,13 @@
     <ClInclude Include="yap\yap.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="static_string\defined.h">
+    <ClInclude Include="static\string\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="static_string\static_string.h">
+    <ClInclude Include="static\string\string.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="static_string\core.h">
+    <ClInclude Include="static\string\core.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="mpl\structure\type\structure\name\name_struct.h">
@@ -2581,6 +2581,168 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="linear_algebra\interface\vector\contain.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\container\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\container\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\container\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\container\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\container\vector\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\container\vector\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\container\vector\base\expression.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\container\vector\base\container.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\container\vector\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\vector\copy.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\range.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrapper\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrapper\wrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrapper\input.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrapper\output.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\function.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrapper\input_or_output.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\range.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\iterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\stl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\output.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\input.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\input_or_output.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\forward.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\bidirectional.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\random_access.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\contiguous.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\string.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="bases\empty.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\is_specialization.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\specialiaze_form.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\bind.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\placeholder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\bind\trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\placeholder\trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\placeholder\arg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\bind\parameter_pack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\placeholder\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\placeholder\placeholders.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\bind\binder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\tuple.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\tuple\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\tuple\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

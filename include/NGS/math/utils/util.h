@@ -1,6 +1,7 @@
 ﻿#pragma  once
 
 #include "NGS/base/base.h"
+#include "NGS/bit/bit.h"
 
 NGS_BEGIN
 
@@ -53,18 +54,18 @@ template< cpt::real_number T> constexpr T NearTo(T value, T aim, T speed) {
 		return (value - speed < aim) ? aim : value - speed;
 }
 
-constexpr int8 sign(int64 number) { return -static_cast<int64>((static_cast<byte_<sizeof(int64)>>(number) >> (bit::as_bit<int64>() - 1)) << 1) + 1; }
+constexpr int8 sign(int64 number) { return -static_cast<int64>((static_cast<byte_<sizeof(int64)>>(number) >> (bits::as_bit<int64>() - 1)) << 1) + 1; }
 constexpr int8 sign(float64 floating) { return floating >= 0 ? 1 : -1; }
 constexpr int8 sign(bool b) { return (b << 1) - 1; }
 
 inline constexpr auto _degrees_to_radian = std::numbers::pi / 180;
 inline constexpr auto _radian_to_degrees = 180 / std::numbers::pi;
 
-constexpr auto decimals(CArithmetic auto floating) {
+constexpr auto decimals(cpt::real_number auto floating) {
 	return floating - static_cast<int64>(floating);
 }
 
-consteval auto round(CArithmetic auto floating) {
+consteval auto round(cpt::real_number auto floating) {
 	constexpr auto d = decimals(floating);
 	if constexpr (d > 0.4) {
 		return static_cast<int64>(floating) + 1;

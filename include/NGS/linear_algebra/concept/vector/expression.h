@@ -6,6 +6,9 @@ NGS_MATH_LA_VECTOR_CONCEPT_BEGIN
 
 using adapters::vectors::valid_dimension;
 using adapters::vectors::invalid_dimension;
+using adapters::vectors::dynamic_dimension;
+using adapters::vectors::dimension_equality;
+using adapters::vectors::same_type;
 using adapters::vectors::accessible;
 
 template<class _T>

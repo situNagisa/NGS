@@ -1,0 +1,6 @@
+﻿#pragma once
+
+#include "../defined.h"
+
+#define NGS_MATH_LA_VECTOR_CONTAINER_BEGIN NGS_MATH_LA_CONTAINER_BEGIN namespace vectors {
+#define NGS_MATH_LA_VECTOR_CONTAINER_END } NGS_MATH_LA_CONTAINER_END

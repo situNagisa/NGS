@@ -4,7 +4,7 @@
 
 NGS_LOCATION_BEGIN
 
-#if !__cpp_lib_source_location
+#if defined(__cpp_lib_source_location)
 using source_location = std::source_location;
 #else
 
@@ -77,10 +77,10 @@ struct source_location_info {
 		)
 	{}
 
-	const char* file_name;
-	const char* function_name;
-	uint_least32_t line;
-	uint_least32_t column;
+	const char* file_name{};
+	const char* function_name{};
+	uint_least32_t line{};
+	uint_least32_t column{};
 };
 
 NGS_LOCATION_END
