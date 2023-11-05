@@ -11,3 +11,4 @@
 #include "./na.h"
 #include "./function.h"
 #include "./is_specialization.h"
+#include "./is_template.h"

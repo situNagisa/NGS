@@ -2697,40 +2697,28 @@
     <ClInclude Include="bases\empty.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="static\functional\defined.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="type_trait\is_specialization.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="cpt\specialiaze_form.h">
+    <ClInclude Include="cpt\is_specialization_of.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="static\functional\bind.h">
+    <ClInclude Include="static\functional\binder\trait.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="static\functional\placeholder.h">
+    <ClInclude Include="static\functional\param\placeholder\trait.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="static\functional\bind\trait.h">
+    <ClInclude Include="static\functional\param\placeholder\placeholder.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="static\functional\placeholder\trait.h">
+    <ClInclude Include="static\functional\param\placeholder\concept.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="static\functional\placeholder\arg.h">
+    <ClInclude Include="static\functional\param\placeholder\placeholders.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="static\functional\bind\parameter_pack.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="static\functional\placeholder\concept.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="static\functional\placeholder\placeholders.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="static\functional\bind\binder.h">
+    <ClInclude Include="static\functional\binder\binder.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="stl\tuple.h">
@@ -2743,6 +2731,126 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="static\functional.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_trait\is_template.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cpt\is_template.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\optional\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\optional\optional.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\optional\process\has_value.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\optional\process\value.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\optional\process\value_or.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\optional\process.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\optional\object\optional.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\optional\object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\optional.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\param.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\packer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\param\placeholder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\param\param.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\param\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\packer\packer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\packer\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\packer\size.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\packer\param_at.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\packer\unpack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\functional.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\params.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="config\lib\boost.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="config\lib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\param\placeholder\forward_replace.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\param\forward_replace.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\packer\replace.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\packer\forward_as_packer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\packer\apply.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\binder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\function.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\reference.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\binder\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\reference\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="static\functional\binder\forward_replace.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\interface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stl\iterator\interface\interface.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

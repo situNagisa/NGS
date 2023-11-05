@@ -4,6 +4,16 @@
 
 NGS_STL_ITERATOR_BEGIN
 /**
+ * \code
+ * std::forward_iterator :
+ *	std::sentinel_for
+ *		std::semiregular
+ *		weakly comparable
+ *	std::incrementable
+ *
+ * \endcode
+*/
+/**
  * \brief
  * \tparam _Derived
  * \tparam _ValueType
@@ -12,18 +22,22 @@ NGS_STL_ITERATOR_BEGIN
 template<
 	class _Derived,
 	class _ValueType,
+	class _Reference = _ValueType&,
 	class _Difference = std::ptrdiff_t
 >
-struct forward : input<_Derived, _ValueType, _Difference>
+struct forward : input<_Derived, _ValueType, _Reference, _Difference>
 {
 	NGS_MPL_ENVIRON(forward);
 public:
 	NGS_MPL_INHERIT_TYPE(iterator_type, base_type);
+	using iterator_category = std::forward_iterator_tag;
 
 	using base_type::base_type;
 
-	///\code std::input_iterator \endcode
-
+	//constexpr iterator_type operator++(int);
+	constexpr bool operator==(const forward&) const = default;
+	constexpr bool operator!=(const forward&) const = default;
+	constexpr auto operator<=>(const forward&) const = default;
 };
 
 NGS_STL_ITERATOR_END

@@ -113,4 +113,6 @@ do																				\
 
 #endif
 
+#define NGS_ASSERT_IF_CONSTEXPR(condition,...) static_assert(condition,__VA_ARGS__); if constexpr(condition)
+
 

@@ -150,7 +150,7 @@ private:
 	consoles::default_console _console{};
 	std::function<void(std::string_view)> _print_callback = [](std::string_view info)
 		{
-			std::cout << info.data();
+			std::cout << info;
 		};
 	std::string _current_scope_name{};
 };

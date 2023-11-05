@@ -1,4 +1,3 @@
 ﻿#pragma once
 
-#include "./functional/bind.h"
-#include "./functional/placeholder.h"
+#include "./functional/functional.h"

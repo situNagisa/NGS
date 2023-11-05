@@ -7,3 +7,4 @@
 #include "./build.h"
 #include "./feature.h"
 #include "./extern_c.h"
+#include "./lib.h"

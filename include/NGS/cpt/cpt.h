@@ -5,4 +5,5 @@
 #include "./object.h"
 #include "./naked.h"
 #include "./na.h"
-#include "./specialiaze_form.h"
+#include "./is_specialization_of.h"
+#include "./is_template.h"

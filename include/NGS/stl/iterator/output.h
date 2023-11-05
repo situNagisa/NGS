@@ -4,16 +4,18 @@
 
 NGS_STL_ITERATOR_BEGIN
 /**
+ * \code
+ * std::output_iterator :
+ * std::indirectly_writable;
+ * requires :
+ * *i++ = t;
+ * \endcode
+*/
+/**
  * \brief
  *
  * \tparam _Derived
  * \tparam _Difference
- * \note 要求`_Derived`具有以下成员函数
- * \code
- * iterator_type& _increment()
- * reference auto _dereference()const
- * auto _assign(any auto&& value)
- * \endcode
  *
 */
 template<
@@ -28,9 +30,7 @@ public:
 
 	using base_type::base_type;
 
-	///\code std::output_iterator\endcode
-	using base_type::operator=;
-	constexpr decltype(auto) operator=(auto&& value)const { base_type::_derived()._assign(NGS_PP_PERFECT_FORWARD(value)); }
+	//constexpr auto& operator*();
 };
 
 NGS_STL_ITERATOR_END
