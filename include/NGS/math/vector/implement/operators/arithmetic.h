@@ -8,90 +8,90 @@ NGS_MATH_VECTOR_BEGIN
 
 namespace detail_arithmetic {
 
-enum class choice_type
-{
-	none,
-	expression,
-	value_expr,
-	expr_value,
-};
-template<class _Left, class _Right, template<class, class>class _Concept>
-constexpr auto choice()
-{
-	if constexpr (requires
+	enum class choice_type
 	{
-		requires functor::expression<_Left>;
-		requires functor::expression<_Right>;
-		requires functor::dimension_equality<_Left, _Right>;
-		requires _Concept<functor::value_t<_Left>, functor::value_t<_Right>>::value;
-	})
+		none,
+		expression,
+		value_expr,
+		expr_value,
+	};
+	template<class _Left, class _Right, template<class, class>class _Concept>
+	constexpr auto choice()
 	{
-		return choice_type::expression;
-	}
-	else if constexpr (requires
-	{
-		requires functor::expression<_Left>;
-		requires !matrixes::functor::expression<_Right>;
-		requires _Concept<functor::value_t<_Left>, _Right>::value;
-	})
-	{
-		return choice_type::expr_value;
-	}
-	else if constexpr (requires
-	{
-		requires !matrixes::functor::expression<_Left>;
-		requires functor::expression<_Right>;
-		requires _Concept<_Left, functor::value_t<_Right>>::value;
-	})
-	{
-		return choice_type::value_expr;
-	}
-	else
-	{
-		return choice_type::none;
-	}
-}
-
-template<template<class, class>class _Concept, auto _Access>
-struct arithmetic_functor
-{
-	constexpr decltype(auto) operator()(auto&& left, auto&& right) const
-		requires (choice<decltype(left), decltype(right), _Concept>() == choice_type::expression)
-	{
-		return functor::binary_functor<decltype((left)), decltype((right)), _Access>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
-	}
-	constexpr decltype(auto) operator()(auto&& left, auto&& right) const
-		requires (choice<decltype(left), decltype(right), _Concept>() == choice_type::value_expr)
-	{
-		using adapter_type = scalar_adapter<functor::dimension<decltype(right)>, type_traits::object_t<decltype(left)>>;
-
-		return (*this)(adapter_type(NGS_PP_PERFECT_FORWARD(left)), NGS_PP_PERFECT_FORWARD(right));
-	}
-	constexpr decltype(auto) operator()(auto&& left, auto&& right) const
-		requires (choice<decltype(left), decltype(right), _Concept>() == choice_type::expr_value)
-	{
-		using adapter_type = scalar_adapter<functor::dimension<decltype(left)>, type_traits::object_t<decltype(right)>>;
-
-		return (*this)(NGS_PP_PERFECT_FORWARD(left), adapter_type(NGS_PP_PERFECT_FORWARD(right)));
-	}
-};
-
-inline constexpr auto add = arithmetic_functor < type_traits::is_addable, [](auto&& left, auto&& right, size_t index)
-	{
-		return functor::access(NGS_PP_PERFECT_FORWARD(left), index) + functor::access(NGS_PP_PERFECT_FORWARD(right), index);
-	} > {};
-	inline constexpr auto subtract = arithmetic_functor < type_traits::is_subtractable, [](auto&& left, auto&& right, size_t index)
+		if constexpr (requires
 		{
-			return functor::access(NGS_PP_PERFECT_FORWARD(left), index) - functor::access(NGS_PP_PERFECT_FORWARD(right), index);
+			requires functor::expression<_Left>;
+			requires functor::expression<_Right>;
+			requires functor::dimension_equality<_Left, _Right>;
+			requires _Concept<functor::value_t<_Left>, functor::value_t<_Right>>::value;
+		})
+		{
+			return choice_type::expression;
+		}
+		else if constexpr (requires
+		{
+			requires functor::expression<_Left>;
+			requires !matrixes::functor::expression<_Right>;
+			requires _Concept<functor::value_t<_Left>, _Right>::value;
+		})
+		{
+			return choice_type::expr_value;
+		}
+		else if constexpr (requires
+		{
+			requires !matrixes::functor::expression<_Left>;
+			requires functor::expression<_Right>;
+			requires _Concept<_Left, functor::value_t<_Right>>::value;
+		})
+		{
+			return choice_type::value_expr;
+		}
+		else
+		{
+			return choice_type::none;
+		}
+	}
+
+	template<template<class, class>class _Concept, auto _Access>
+	struct arithmetic_functor
+	{
+		constexpr decltype(auto) operator()(auto&& left, auto&& right) const
+			requires (choice<decltype(left), decltype(right), _Concept>() == choice_type::expression)
+		{
+			return functor::binary_functor<decltype((left)), decltype((right)), _Access>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
+		}
+		constexpr decltype(auto) operator()(auto&& left, auto&& right) const
+			requires (choice<decltype(left), decltype(right), _Concept>() == choice_type::value_expr)
+		{
+			using adapter_type = scalar_adapter<functor::dimension<decltype(right)>, type_traits::object_t<decltype(left)>>;
+
+			return (*this)(adapter_type(NGS_PP_PERFECT_FORWARD(left)), NGS_PP_PERFECT_FORWARD(right));
+		}
+		constexpr decltype(auto) operator()(auto&& left, auto&& right) const
+			requires (choice<decltype(left), decltype(right), _Concept>() == choice_type::expr_value)
+		{
+			using adapter_type = scalar_adapter<functor::dimension<decltype(left)>, type_traits::object_t<decltype(right)>>;
+
+			return (*this)(NGS_PP_PERFECT_FORWARD(left), adapter_type(NGS_PP_PERFECT_FORWARD(right)));
+		}
+	};
+
+	inline constexpr auto add = arithmetic_functor < type_traits::is_addable, [](auto&& left, auto&& right, size_t index)
+		{
+			return functor::access(NGS_PP_PERFECT_FORWARD(left), index) + functor::access(NGS_PP_PERFECT_FORWARD(right), index);
 		} > {};
-		inline constexpr auto multiply = arithmetic_functor < type_traits::is_multipliable, [](auto&& left, auto&& right, size_t index)
+		inline constexpr auto subtract = arithmetic_functor < type_traits::is_subtractable, [](auto&& left, auto&& right, size_t index)
 			{
-				return functor::access(NGS_PP_PERFECT_FORWARD(left), index) * functor::access(NGS_PP_PERFECT_FORWARD(right), index);
+				return functor::access(NGS_PP_PERFECT_FORWARD(left), index) - functor::access(NGS_PP_PERFECT_FORWARD(right), index);
 			} > {};
-			inline constexpr auto divide = arithmetic_functor < type_traits::is_divisible, [](auto&& left, auto&& right, size_t index)
+			inline constexpr auto multiply = arithmetic_functor < type_traits::is_multipliable, [](auto&& left, auto&& right, size_t index)
 				{
-					return functor::access(NGS_PP_PERFECT_FORWARD(left), index) / functor::access(NGS_PP_PERFECT_FORWARD(right), index);
+					return functor::access(NGS_PP_PERFECT_FORWARD(left), index) * functor::access(NGS_PP_PERFECT_FORWARD(right), index);
 				} > {};
+				inline constexpr auto divide = arithmetic_functor < type_traits::is_divisible, [](auto&& left, auto&& right, size_t index)
+					{
+						return functor::access(NGS_PP_PERFECT_FORWARD(left), index) / functor::access(NGS_PP_PERFECT_FORWARD(right), index);
+					} > {};
 
 }
 

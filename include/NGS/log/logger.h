@@ -99,13 +99,10 @@ private:
 	{
 		if (_config.enable_print.time)
 		{
-			//_print('[');
-			//_control_char(level_color(level));
 			const auto now = std::chrono::system_clock::now();
 			std::time_t now_c = std::chrono::system_clock::to_time_t(now);
 			_print(std::put_time(std::localtime(&now_c), "%F %T "));
-			//_control_char(consoles::text_color::reset);
-			//_print("] ");
+
 		}
 
 		_print('[');

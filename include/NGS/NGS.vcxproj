@@ -24,6 +24,9 @@
     <ClInclude Include="algorithm\dynamic_program.h" />
     <ClInclude Include="algorithm\PID.h" />
     <ClInclude Include="algorithm\PID.hpp" />
+    <ClInclude Include="allocator\allocator.h" />
+    <ClInclude Include="allocator\defined.h" />
+    <ClInclude Include="allocator\id.h" />
     <ClInclude Include="assert\assert.h" />
     <ClInclude Include="assert\defined.h" />
     <ClInclude Include="assert\normal.h" />
@@ -60,6 +63,39 @@
     <ClInclude Include="console\defined.h" />
     <ClInclude Include="cpt\is_specialization_of.h" />
     <ClInclude Include="cpt\is_template.h" />
+    <ClInclude Include="embedded\io\base.h" />
+    <ClInclude Include="embedded\io\bus.h" />
+    <ClInclude Include="embedded\io\bus\base.h" />
+    <ClInclude Include="embedded\io\bus\defined.h" />
+    <ClInclude Include="embedded\io\bus\i2c.h" />
+    <ClInclude Include="embedded\io\bus\i2c\address.h" />
+    <ClInclude Include="embedded\io\bus\i2c\base.h" />
+    <ClInclude Include="embedded\io\bus\i2c\defined.h" />
+    <ClInclude Include="embedded\io\bus\i2c\master.h" />
+    <ClInclude Include="embedded\io\bus\i2c\message.h" />
+    <ClInclude Include="embedded\io\bus\i2c\mode.h" />
+    <ClInclude Include="embedded\io\bus\i2c\mode\ack.h" />
+    <ClInclude Include="embedded\io\bus\i2c\mode\address.h" />
+    <ClInclude Include="embedded\io\bus\i2c\mode\io.h" />
+    <ClInclude Include="embedded\io\bus\i2c\mode\defined.h" />
+    <ClInclude Include="embedded\io\bus\i2c\slave.h" />
+    <ClInclude Include="embedded\io\gpio\defined.h" />
+    <ClInclude Include="embedded\io\gpio\gpio.h" />
+    <ClInclude Include="embedded\io\gpio\mode.h" />
+    <ClInclude Include="embedded\io\gpio\mode\interrupt.h" />
+    <ClInclude Include="embedded\io\gpio\mode\io.h" />
+    <ClInclude Include="embedded\io\gpio\mode\defined.h" />
+    <ClInclude Include="embedded\io\pin.h" />
+    <ClInclude Include="embedded\io\gpio\mode\pull.h" />
+    <ClInclude Include="embedded\io\pwm.h" />
+    <ClInclude Include="embedded\defined.h" />
+    <ClInclude Include="embedded\embedded.h" />
+    <ClInclude Include="embedded\io\defined.h" />
+    <ClInclude Include="embedded\io\gpio.h" />
+    <ClInclude Include="embedded\io\io.h" />
+    <ClInclude Include="linear_algebra\api\matrix.h" />
+    <ClInclude Include="linear_algebra\api\scalar.h" />
+    <ClInclude Include="linear_algebra\api\vector.h" />
     <ClInclude Include="linear_algebra\concept.h" />
     <ClInclude Include="linear_algebra\concept\defined.h" />
     <ClInclude Include="linear_algebra\concept\matrix.h" />
@@ -82,7 +118,9 @@
     <ClInclude Include="linear_algebra\interface.h" />
     <ClInclude Include="linear_algebra\interface\defined.h" />
     <ClInclude Include="linear_algebra\interface\matrix.h" />
+    <ClInclude Include="linear_algebra\interface\matrix\access.h" />
     <ClInclude Include="linear_algebra\interface\matrix\defined.h" />
+    <ClInclude Include="linear_algebra\interface\matrix\order.h" />
     <ClInclude Include="linear_algebra\interface\scalar.h" />
     <ClInclude Include="linear_algebra\interface\scalar\defined.h" />
     <ClInclude Include="linear_algebra\interface\vector.h" />
@@ -94,12 +132,33 @@
     <ClInclude Include="linear_algebra\interface\vector\dimension.h" />
     <ClInclude Include="linear_algebra\linear_algebra.h" />
     <ClInclude Include="linear_algebra\matrix.h" />
+    <ClInclude Include="linear_algebra\operators\defined.h" />
+    <ClInclude Include="linear_algebra\operators\vector.h" />
+    <ClInclude Include="linear_algebra\operators\vector\defined.h" />
     <ClInclude Include="linear_algebra\range.h" />
     <ClInclude Include="linear_algebra\ranges\defined.h" />
     <ClInclude Include="linear_algebra\ranges\vector.h" />
     <ClInclude Include="linear_algebra\ranges\vector\defined.h" />
     <ClInclude Include="linear_algebra\ranges\vector\iterator.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\iterator\grace.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\iterator\defined.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\iterator\noraml.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\norm.h" />
     <ClInclude Include="linear_algebra\ranges\vector\range.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\arithmetic.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\arithmetic\arithmetic.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\arithmetic\defined.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\arithmetic\gen.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\arithmetic\grace.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\binary.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\defined.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\negate.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\normalize.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\posit.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\product.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\view\unary.h" />
+    <ClInclude Include="linear_algebra\ranges\vector\wrapper.h" />
     <ClInclude Include="linear_algebra\scalar.h" />
     <ClInclude Include="linear_algebra\vector.h" />
     <ClInclude Include="location\defined.h" />
@@ -123,6 +182,36 @@
     <ClInclude Include="mpl\optional\optional.h" />
     <ClInclude Include="mpl\optional\process\value.h" />
     <ClInclude Include="mpl\optional\process\value_or.h" />
+    <ClInclude Include="osapi\defined.h" />
+    <ClInclude Include="osapi\esp.h" />
+    <ClInclude Include="osapi\esp.hpp" />
+    <ClInclude Include="osapi\esp\io.h" />
+    <ClInclude Include="osapi\esp\io.hpp" />
+    <ClInclude Include="osapi\esp\io\bus.h" />
+    <ClInclude Include="osapi\esp\io\bus.hpp" />
+    <ClInclude Include="osapi\esp\io\bus\defined.h" />
+    <ClInclude Include="osapi\esp\io\bus\i2c.h" />
+    <ClInclude Include="osapi\esp\io\bus\i2c.hpp" />
+    <ClInclude Include="osapi\esp\io\bus\i2c\master.h" />
+    <ClInclude Include="osapi\esp\io\bus\i2c\I2C.hpp" />
+    <ClInclude Include="osapi\esp\defined.h" />
+    <ClInclude Include="osapi\esp\esp.h" />
+    <ClInclude Include="osapi\esp\esp.hpp" />
+    <ClInclude Include="osapi\esp\esp_idf.h" />
+    <ClInclude Include="osapi\esp\io\bus\i2c\master.hpp" />
+    <ClInclude Include="osapi\esp\io\bus\i2c\slave.h" />
+    <ClInclude Include="osapi\esp\io\bus\i2c\slave.hpp" />
+    <ClInclude Include="osapi\esp\io\bus\i2c\tick_type.h" />
+    <ClInclude Include="osapi\esp\io\bus\i2c\util.hpp" />
+    <ClInclude Include="osapi\esp\io\defined.h" />
+    <ClInclude Include="osapi\esp\io\gpio.h" />
+    <ClInclude Include="osapi\esp\io\gpio.hpp" />
+    <ClInclude Include="osapi\esp\io\gpio\gpio.hpp" />
+    <ClInclude Include="osapi\esp\io\gpio\data.h" />
+    <ClInclude Include="osapi\esp\io\gpio\gpio.h" />
+    <ClInclude Include="osapi\esp\io\PCNT.h" />
+    <ClInclude Include="osapi\esp\io\PCNT.hpp" />
+    <ClInclude Include="osapi\esp\io\PWM.hpp" />
     <ClInclude Include="preprocessor\utils.h" />
     <ClInclude Include="preprocessor\utils\args_package.h" />
     <ClInclude Include="preprocessor\utils\as_one_expression.h" />
@@ -574,8 +663,8 @@
     <ClInclude Include="dl\graphic\api.h" />
     <ClInclude Include="dl\graphic\listen.h" />
     <ClInclude Include="dl\transform.h" />
-    <ClInclude Include="embedded\bus\bus.h" />
-    <ClInclude Include="embedded\embedded.hpp" />
+    <ClInclude Include="embedded2\bus\bus.h" />
+    <ClInclude Include="embedded2\embedded.hpp" />
     <ClInclude Include="extend\color\channel.h" />
     <ClInclude Include="extend\color.h" />
     <ClInclude Include="extend\color\concept.h" />
@@ -587,17 +676,17 @@
     <ClInclude Include="basic\defined.h" />
     <ClInclude Include="basic\STL.h" />
     <ClInclude Include="version\version.h" />
-    <ClInclude Include="embedded\bus\bus_base.h" />
-    <ClInclude Include="embedded\bus\i2c\I2C.h" />
-    <ClInclude Include="embedded\bus\serial_port\serial_port.h" />
-    <ClInclude Include="embedded\bus\spi\SPI.h" />
-    <ClInclude Include="embedded\bus\uart\UART.h" />
-    <ClInclude Include="embedded\bus\usb\UVC.h" />
-    <ClInclude Include="embedded\embedded.h" />
-    <ClInclude Include="embedded\Interface.h" />
-    <ClInclude Include="embedded\io\GPIO.h" />
-    <ClInclude Include="embedded\io\IO.h" />
-    <ClInclude Include="embedded\io\PWM.h" />
+    <ClInclude Include="embedded2\bus\bus_base.h" />
+    <ClInclude Include="embedded2\bus\i2c\I2C.h" />
+    <ClInclude Include="embedded2\bus\serial_port\serial_port.h" />
+    <ClInclude Include="embedded2\bus\spi\SPI.h" />
+    <ClInclude Include="embedded2\bus\uart\UART.h" />
+    <ClInclude Include="embedded2\bus\usb\UVC.h" />
+    <ClInclude Include="embedded2\embedded.h" />
+    <ClInclude Include="embedded2\Interface.h" />
+    <ClInclude Include="embedded2\io\GPIO.h" />
+    <ClInclude Include="embedded2\io\IO.h" />
+    <ClInclude Include="embedded2\io\PWM.h" />
     <ClInclude Include="extend\byte_array.h" />
     <ClInclude Include="extend\color\color_old.h" />
     <ClInclude Include="extend\debug.h" />
@@ -943,12 +1032,12 @@
     <ClInclude Include="ngl\vertex\array\polygon.h" />
     <ClInclude Include="NGS.h" />
     <ClInclude Include="NGS.hpp" />
-    <ClInclude Include="nsw\bus\serial_port.hpp" />
-    <ClInclude Include="nsw\bus\UART.hpp" />
-    <ClInclude Include="nsw\defined.h" />
-    <ClInclude Include="nsw\depend.h" />
-    <ClInclude Include="nsw\NSW.h" />
-    <ClInclude Include="nsw\NSW.hpp" />
+    <ClInclude Include="osapi\nsw\bus\serial_port.hpp" />
+    <ClInclude Include="osapi\nsw\bus\UART.hpp" />
+    <ClInclude Include="osapi\nsw\defined.h" />
+    <ClInclude Include="osapi\nsw\depend.h" />
+    <ClInclude Include="osapi\nsw\NSW.h" />
+    <ClInclude Include="osapi\nsw\NSW.hpp" />
     <ClInclude Include="mpl\structure\defined.h" />
     <ClInclude Include="mpl\structure\structure.h" />
     <ClInclude Include="mpl\structure\type\structure.h" />
@@ -1037,21 +1126,25 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="C:\configure\visual_studio\NagisaBase.props" />
     <Import Project="C:\configure\visual_studio\NagisaLib.props" />
+    <Import Project="C:\configure\visual_studio\ESPIDF.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="C:\configure\visual_studio\NagisaBase.props" />
     <Import Project="C:\configure\visual_studio\NagisaLib.props" />
+    <Import Project="C:\configure\visual_studio\ESPIDF.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="C:\configure\visual_studio\NagisaBase.props" />
     <Import Project="C:\configure\visual_studio\NagisaLib.props" />
+    <Import Project="C:\configure\visual_studio\ESPIDF.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="C:\configure\visual_studio\NagisaBase.props" />
     <Import Project="C:\configure\visual_studio\NagisaLib.props" />
+    <Import Project="C:\configure\visual_studio\ESPIDF.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

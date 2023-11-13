@@ -9,27 +9,27 @@ NGS_MATH_LA_VECTOR_INTERFACE_END
 NGS_MATH_LA_VECTOR_ADAPTER_BEGIN
 namespace detail
 {
-template<class _L, class _R>
-constexpr functor_choice assign_choice()
-{
-	using value_type = _R;
-	if constexpr (requires(_L target, index_t index, value_type value) { interfaces::vectors::assign(NGS_PP_PERFECT_FORWARD(target), index, NGS_PP_PERFECT_FORWARD(value)); })
+	template<class _L, class _R>
+	constexpr functor_choice assign_choice()
 	{
-		return functor_choice::interface;
+		using value_type = _R;
+		if constexpr (requires(_L target, traits::vectors::index_t index, value_type value) { interfaces::vectors::assign(NGS_PP_PERFECT_FORWARD(target), index, NGS_PP_PERFECT_FORWARD(value)); })
+		{
+			return functor_choice::interface;
+		}
+		else if constexpr (requires(_L target, traits::vectors::index_t index, value_type value) { target.assign(index, NGS_PP_PERFECT_FORWARD(value)); })
+		{
+			return functor_choice::member;
+		}
+		else if constexpr (requires(_L target, traits::vectors::index_t index, value_type value) { requires std::assignable_from<decltype(access(NGS_PP_PERFECT_FORWARD(target), index)), value_type>; })
+		{
+			return functor_choice::other;
+		}
+		else
+		{
+			return functor_choice::none;
+		}
 	}
-	else if constexpr (requires(_L target, index_t index, value_type value) { target.assign(index, NGS_PP_PERFECT_FORWARD(value)); })
-	{
-		return functor_choice::member;
-	}
-	else if constexpr (requires(_L target, index_t index, value_type value) { requires std::assignable_from<decltype(access(NGS_PP_PERFECT_FORWARD(target), index)), value_type>; })
-	{
-		return functor_choice::other;
-	}
-	else
-	{
-		return functor_choice::none;
-	}
-}
 
 }
 
@@ -68,7 +68,7 @@ concept assignable = detail::assign_choice<_L, _R>() != functor_choice::none;
 inline constexpr struct
 {
 
-	constexpr decltype(auto) operator()(auto&& target, index_t index, auto&& value) const
+	constexpr decltype(auto) operator()(auto&& target, traits::vectors::index_t index, auto&& value) const
 		requires assignable<decltype(target), decltype(value)>
 	{
 		constexpr auto choice = detail::assign_choice<decltype(target), decltype(value)>();

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "../defined.h"
 #include "NGS/yap/yap.h"

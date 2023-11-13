@@ -18,3 +18,36 @@ template<class _T>
 concept sparse = container<_T> && callable_contain<_T>;
 
 NGS_MATH_LA_VECTOR_CONCEPT_END
+NGS_MATH_LA_VECTOR_TRAIT_BEGIN
+
+template<class _T>
+struct closure
+{
+	//copy
+	using type = type_traits::object_t<_T>;
+	using param_type = type_traits::add_cvref_like_t<const int&, _T>;
+};
+
+template<concepts::vectors::container _T>
+struct closure<_T>
+{
+	using cvref_type = _T;
+	using naked_type = type_traits::naked_t<_T>;
+	using object_type = type_traits::object_t<_T>;
+	//if _T is xvalue or prvalue, use copy, otherwise use reference
+	using type = std::conditional_t<
+		std::is_rvalue_reference_v<cvref_type>,
+		naked_type,
+		std::add_lvalue_reference_t<object_type>
+	>;
+	using param_type = std::conditional_t<
+		std::is_rvalue_reference_v<cvref_type>,
+		std::add_lvalue_reference_t<std::add_const_t<naked_type>>,
+		std::add_lvalue_reference_t<object_type>
+	>;
+};
+
+template<class _T> using closure_t = typename closure<_T>::type;
+template<class _T> using closure_param_t = typename closure<_T>::param_type;
+
+NGS_MATH_LA_VECTOR_TRAIT_END

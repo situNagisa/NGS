@@ -42,37 +42,37 @@
     <ClInclude Include="version\version.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\bus_base.h">
+    <ClInclude Include="embedded2\bus\bus_base.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\i2c\I2C.h">
+    <ClInclude Include="embedded2\bus\i2c\I2C.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\serial_port\serial_port.h">
+    <ClInclude Include="embedded2\bus\serial_port\serial_port.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\spi\SPI.h">
+    <ClInclude Include="embedded2\bus\spi\SPI.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\uart\UART.h">
+    <ClInclude Include="embedded2\bus\uart\UART.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\usb\UVC.h">
+    <ClInclude Include="embedded2\bus\usb\UVC.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\embedded.h">
+    <ClInclude Include="embedded2\embedded.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\Interface.h">
+    <ClInclude Include="embedded2\Interface.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\io\GPIO.h">
+    <ClInclude Include="embedded2\io\GPIO.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\io\IO.h">
+    <ClInclude Include="embedded2\io\IO.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\io\PWM.h">
+    <ClInclude Include="embedded2\io\PWM.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="extend\byte_array.h">
@@ -120,19 +120,19 @@
     <ClInclude Include="math\utils\util.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\bus\serial_port.hpp">
+    <ClInclude Include="osapi\nsw\bus\serial_port.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\bus\UART.hpp">
+    <ClInclude Include="osapi\nsw\bus\UART.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\defined.h">
+    <ClInclude Include="osapi\nsw\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\depend.h">
+    <ClInclude Include="osapi\nsw\depend.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\NSW.h">
+    <ClInclude Include="osapi\nsw\NSW.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="NGS.h">
@@ -159,7 +159,7 @@
     <ClInclude Include="algorithm\dynamic_program.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\bus\bus.h">
+    <ClInclude Include="embedded2\bus\bus.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="algorithm\algorithm.hpp">
@@ -171,7 +171,7 @@
     <ClInclude Include="NGS.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="nsw\NSW.hpp">
+    <ClInclude Include="osapi\nsw\NSW.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui.h">
@@ -291,7 +291,7 @@
     <ClInclude Include="base\base.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\embedded.hpp">
+    <ClInclude Include="embedded2\embedded.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\math.hpp">
@@ -2851,6 +2851,273 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="stl\iterator\interface\interface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\arithmetic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\binary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\unary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\negate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\arithmetic\gen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\arithmetic\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\arithmetic\arithmetic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\arithmetic\grace.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\iterator\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\iterator\noraml.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\iterator\grace.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\wrapper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\posit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\product.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\norm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\ranges\vector\view\normalize.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\operators\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\operators\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\operators\vector\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\api\vector.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\api\scalar.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\api\matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\matrix\access.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_algebra\interface\matrix\order.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\embedded.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\gpio.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\io.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\pwm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\pin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\gpio\mode\io.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\gpio\gpio.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\gpio\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\gpio\mode\pull.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\gpio\mode\interrupt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\gpio\mode\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\gpio\mode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\mode\io.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\mode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\address.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\mode\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\mode\address.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\base.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\master.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\mode\ack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\message.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\i2c\slave.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\i2c\I2C.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\gpio.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\PCNT.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\PCNT.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\PWM.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\esp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\esp.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\esp_idf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\gpio\data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\gpio\gpio.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\gpio\gpio.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\gpio.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\i2c.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\i2c\master.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\i2c\slave.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\i2c\master.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\i2c\util.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="allocator\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="allocator\allocator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="allocator\id.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\i2c\tick_type.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\i2c\slave.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\i2c.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

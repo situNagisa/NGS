@@ -6,6 +6,8 @@
 #include "NGS/assert/assert.h"
 #include "NGS/boost/stl_interfaces.h"
 #include "NGS/wrapper/wrapper.h"
+#include "NGS/static/functional.h"
+#include "NGS/math/basic.h"
 
 #define NGS_MATH_LA_BEGIN NGS_MATH_BEGIN namespace linear_algebra {
 #define NGS_MATH_LA_END } NGS_MATH_END

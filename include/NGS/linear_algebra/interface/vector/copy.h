@@ -11,30 +11,30 @@ NGS_MATH_LA_VECTOR_ADAPTER_BEGIN
 
 namespace detail
 {
-template<class _L, class _R>
-constexpr functor_choice copy_choice()
-{
-	if constexpr (requires(_L left, _R right) { interfaces::vectors::copy(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)); })
+	template<class _L, class _R>
+	constexpr functor_choice copy_choice()
 	{
-		return functor_choice::interface;
+		if constexpr (requires(_L left, _R right) { interfaces::vectors::copy(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)); })
+		{
+			return functor_choice::interface;
+		}
+		else if constexpr (requires(_L left, _R right) { left.copy(NGS_PP_PERFECT_FORWARD(right)); })
+		{
+			return functor_choice::member;
+		}
+		else if constexpr (same_type<_L, _R> && requires
+		{
+			requires accessible<_R>;
+			requires assignable<_L, traits::vectors::value_t<_R>>;
+		})
+		{
+			return functor_choice::other;
+		}
+		else
+		{
+			return functor_choice::none;
+		}
 	}
-	else if constexpr (requires(_L left, _R right) { left.copy(NGS_PP_PERFECT_FORWARD(right)); })
-	{
-		return functor_choice::member;
-	}
-	else if constexpr (same_type<_L, _R> && requires
-	{
-		requires accessible<_R>;
-		requires assignable<_L, traits::vectors::value_t<_R>>;
-	})
-	{
-		return functor_choice::other;
-	}
-	else
-	{
-		return functor_choice::none;
-	}
-}
 
 }
 
@@ -57,12 +57,9 @@ inline constexpr struct
 		}
 		else if constexpr (choice == functor_choice::other)
 		{
-			if constexpr (dynamic_dimension<decltype(left)> || dynamic_dimension<decltype(right)>)
-			{
-				NGS_ASSERT_IF_CONSTEVAL(dimension(left) == dimension(right), "dimension mismatch");
-			}
+			vectors::assert_same_type(left, right);
 
-			for (index_t i = 0; i < dimension(left); i++)
+			for (traits::vectors::index_t i = 0; i < dimension(left); i++)
 			{
 				if constexpr (callable_contain<decltype(left)>)
 				{

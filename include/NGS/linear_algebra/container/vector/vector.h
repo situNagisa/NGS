@@ -5,17 +5,17 @@
 
 NGS_MATH_LA_VECTOR_CONTAINER_BEGIN
 
-template<dimension_t _Dimension, class _ValueType, class = std::make_index_sequence<_Dimension>>
+template<traits::vectors::dimension_t _Dimension, class _ValueType, class = std::make_index_sequence<_Dimension>>
 struct vector;
 
-template<dimension_t _Dimension, class _ValueType, size_t... _Index>
+template<traits::vectors::dimension_t _Dimension, class _ValueType, size_t... _Index>
 struct vector<_Dimension, _ValueType, std::index_sequence<_Index...>> : vector_container<vector<_Dimension, _ValueType>>
 {
 	NGS_MPL_ENVIRON(vector);
 public:
 	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
 public:
-	constexpr static dimension_t dimension = _Dimension;
+	constexpr static traits::vectors::dimension_t dimension = _Dimension;
 	using value_type = _ValueType;
 
 public:
@@ -37,12 +37,26 @@ public:
 
 	using base_type::operator=;
 
-	constexpr auto&& access(index_t index) { return source[index]; }
-	constexpr auto&& access(index_t index)const { return source[index]; }
+	constexpr auto&& access(traits::vectors::index_t index) { return source[index]; }
+	constexpr auto&& access(traits::vectors::index_t index)const { return source[index]; }
 
 	constexpr void assign(const type_traits::index_type_identity_t<_Index, value_type>&... right)
 	{
 		((source[_Index] = right), ...);
+	}
+
+	/**
+	 * \brief 给容器第i个元素赋值
+	 * \param index
+	 * \param value
+	 * \note
+	 *	若按照提供的概念，只需access返回的是个左值即可达到此函数的效果
+	 *	但若是在常量求值语境中，上面这种方法会导致编译器调用旧的堆栈（根据编译错误信息得知，具体细节未知）
+	 *	从而编译失败，故写此函数（若后续有更好的解决方案，可考虑删除此函数）
+	 */
+	constexpr void assign(traits::vectors::index_t index, const value_type& value)
+	{
+		source[index] = value;
 	}
 public:
 	value_type source[dimension]{};

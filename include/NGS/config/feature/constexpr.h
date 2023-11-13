@@ -37,3 +37,9 @@
 #else
 #	define NGS_CONSTEXPR11 
 #endif
+
+#if defined(NGS_CPP_STANDARD_HAS_20) && defined(NGS_USE_HPP)
+#	define NGS_CONSTEXPR_VIRTUAL constexpr
+#else
+#	define NGS_CONSTEXPR_VIRTUAL 
+#endif
