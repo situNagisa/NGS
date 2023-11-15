@@ -38,7 +38,7 @@ NGS_HPP_INLINE bool slave::open(
 NGS_HPP_INLINE size_t slave::read(void_ptr buffer, size_t size)
 {
 #if defined(NGS_BUILD_TYPE_IS_DEBUG)
-	auto ret = i2c_slave_read_buffer(_port, buffer, size, _wait);
+	auto ret = i2c_slave_read_buffer(_port, static_cast<uint8_t*>(buffer), size, _wait);
 	if (ret == -1)
 	{
 		NGS_LOGL(warn, "i2c_slave_read_buffer failed");
@@ -46,14 +46,14 @@ NGS_HPP_INLINE size_t slave::read(void_ptr buffer, size_t size)
 	}
 	return ret;
 #else
-	return i2c_slave_read_buffer(_port, buffer, size, _wait);
+	return i2c_slave_read_buffer(_port, static_cast<uint8_t*>(buffer), size, _wait);
 #endif
 }
 
 NGS_HPP_INLINE size_t slave::write(void_ptr_cst buffer, size_t size)
 {
 #if defined(NGS_BUILD_TYPE_IS_DEBUG)
-	auto ret = i2c_slave_write_buffer(_port, buffer, size, _wait);
+	auto ret = i2c_slave_write_buffer(_port, static_cast<const uint8_t*>(buffer), size, _wait);
 	if (ret == -1)
 	{
 		NGS_LOGL(warn, "i2c_slave_write_buffer failed");
@@ -61,7 +61,7 @@ NGS_HPP_INLINE size_t slave::write(void_ptr_cst buffer, size_t size)
 	}
 	return ret;
 #else
-	return i2c_slave_write_buffer(_port, buffer, size, _wait);
+	return i2c_slave_write_buffer(_port, static_cast<const uint8_t*>(buffer), size, _wait);
 #endif
 }
 

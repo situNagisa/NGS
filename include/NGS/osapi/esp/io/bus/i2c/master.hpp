@@ -101,9 +101,9 @@ NGS_HPP_INLINE size_t master::transfer(const embedded::io::bus::i2c::message* me
 		if (ret == ESP_ERR_TIMEOUT)
 			NGS_LOGL(warn, "iic master write data time out");
 		else
-			NGS_LOGL(error, "iic master write port:%d address %d ret=%003x", _port, _address, ret);
+			NGS_LOGL(error, "iic master write port:%d address %d ret=%003x", _port, _address.value, ret);
 	}
-	return ret == ESP_OK;
+	return ret;
 }
 
 NGS_OS_ESP_IO_BUS_END

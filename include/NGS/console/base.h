@@ -33,12 +33,6 @@ private:
 
 NGS_CONSOLE_END
 
-#if NGS_SYSTEM_IS_WINDOWS
-#	include "./impl/windows.hpp"
-#elif NGS_SYSTEM_IS_LINUX
-#	include "./impl/linux.hpp"
-#elif NGS_SYSTEM_IS_MAC
-#	include "./impl/mac.hpp"
-#else
-#	include "./impl/none.hpp"
+#if defined(NGS_USE_HPP)
+#	include "./impl.h"
 #endif

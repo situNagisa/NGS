@@ -42,39 +42,6 @@
     <ClInclude Include="version\version.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded2\bus\bus_base.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\bus\i2c\I2C.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\bus\serial_port\serial_port.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\bus\spi\SPI.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\bus\uart\UART.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\bus\usb\UVC.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\embedded.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\Interface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\io\GPIO.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\io\IO.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\io\PWM.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="extend\byte_array.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -157,9 +124,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="algorithm\dynamic_program.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\bus\bus.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="algorithm\algorithm.hpp">
@@ -289,9 +253,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base\base.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="embedded2\embedded.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\math.hpp">
@@ -3021,9 +2982,6 @@
     <ClInclude Include="embedded\io\bus.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="osapi\esp\io\bus\i2c\I2C.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="osapi\esp\io\gpio.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -3120,6 +3078,21 @@
     <ClInclude Include="osapi\esp.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="console\impl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="console\console.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ia\build\config\sdkconfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\temp_config\sdkconfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="preprocessor\utils\variable_args.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nda\core\display_object.cpp">
@@ -3134,9 +3107,6 @@
     <ClCompile Include="dl\transform.hpp">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

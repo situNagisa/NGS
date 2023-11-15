@@ -1,5 +1,0 @@
-if(NGS_BUILD_HPP)
-	file(GLOB_RECURSE NGS_EMBEDDED_SRC *.hpp *.cpp)
-	#target_sources(NGS PRIVATE ${NGS_EMBEDDED_SRC})
-	set(NGS_SRC ${NGS_SRC} ${NGS_EMBEDDED_SRC} PARENT_SCOPE)
-endif()

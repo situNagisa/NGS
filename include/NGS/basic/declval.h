@@ -27,3 +27,5 @@ constexpr std::add_rvalue_reference_t<_Object> declval() {
 #endif
 
 NGS_END
+
+#define NGS_DECLVAL(type) NGS_ declval<type>()

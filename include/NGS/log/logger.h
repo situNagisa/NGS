@@ -11,6 +11,9 @@ concept is_control_char = cpt::is_any_of<type_traits::naked_t<_Type>, consoles::
 
 struct NGS_DLL_API logger
 {
+protected:
+	using self_type = logger;
+public:
 	constexpr logger() = default;
 	logger(const logger_config& config) : _config(config) {}
 
@@ -31,30 +34,30 @@ struct NGS_DLL_API logger
 	{
 		if constexpr (is_control_char<decltype(first)>)
 		{
-			_control_char(first);
+			self_type::_control_char(first);
 		}
 		else
 		{
-			_print(NGS_PP_PERFECT_FORWARD(first));
+			self_type::_print(NGS_PP_PERFECT_FORWARD(first));
 		}
 
 		if constexpr (sizeof...(rest))
 		{
-			print(NGS_PP_PERFECT_FORWARD(rest)...);
+			self_type::print(NGS_PP_PERFECT_FORWARD(rest)...);
 		}
 	}
 	void print_line(auto&&... args)
 	{
-		print(NGS_PP_PERFECT_FORWARD(args)...);
+		self_type::print(NGS_PP_PERFECT_FORWARD(args)...);
 		end_line();
 	}
 	void print_format(std::string_view f, auto&&... args)
 	{
-		print(format(f, NGS_PP_PERFECT_FORWARD(args)...));
+		self_type::print(ngs::format(f, NGS_PP_PERFECT_FORWARD(args)...));
 	}
 	void print_format_line(std::string_view f, auto&&... args)
 	{
-		print_format(f, NGS_PP_PERFECT_FORWARD(args)...);
+		self_type::print_format(f, NGS_PP_PERFECT_FORWARD(args)...);
 		end_line();
 	}
 	//============
@@ -64,17 +67,17 @@ struct NGS_DLL_API logger
 	void log(log_level level, auto&&... args)
 	{
 		_control_char(level);
-		print(NGS_PP_PERFECT_FORWARD(args)...);
+		self_type::print(NGS_PP_PERFECT_FORWARD(args)...);
 	}
 	void log_line(log_level level, auto&&... args)
 	{
-		log(level, NGS_PP_PERFECT_FORWARD(args)...);
+		self_type::log(level, NGS_PP_PERFECT_FORWARD(args)...);
 		end_line();
 	}
 	void log_format(log_level level, std::string_view f, auto&&... args)
 	{
 		///\code NGS_ format\endcode remove ADL
-		log(level, NGS_ format(f, NGS_PP_PERFECT_FORWARD(args)...));
+		self_type::log(level, NGS_ format(f, NGS_PP_PERFECT_FORWARD(args)...));
 	}
 	void log_format_line(log_level level, std::string_view f, auto&&... args)
 	{
@@ -86,7 +89,10 @@ struct NGS_DLL_API logger
 	constexpr auto&& get_config()const { return _config; }
 	constexpr auto&& get_config() { return _config; }
 
-	constexpr void set_scope_name(std::string_view name)
+#if (defined(NGS_COMPILER_IS_GCC) and NGS_COMPILER_VERSION_IS_AT_LEAST(12, 0)) or !defined(NGS_COMPILER_IS_GCC)
+	constexpr
+#endif
+		void set_scope_name(std::string_view name)
 	{
 		_current_scope_name = name;
 	}

@@ -23,6 +23,7 @@
 
 #elif defined(ESP_PLATFORM)
 
+#	define NGS_SYSTEM_IS_ESP true
 #	define NGS_SYSTEM_IS_RTOS true
 #	define NGS_SYSTEM NGS_SYSTEM_RTOS
 

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\ia\build\config\sdkconfig.h" />
     <ClInclude Include="algorithm\algorithm.h" />
     <ClInclude Include="algorithm\algorithm.hpp" />
     <ClInclude Include="algorithm\dynamic_program.h" />
@@ -55,6 +56,8 @@
     <ClInclude Include="config\lib\boost.h" />
     <ClInclude Include="console\base.h" />
     <ClInclude Include="console\console.h" />
+    <ClInclude Include="console\console.hpp" />
+    <ClInclude Include="console\impl.h" />
     <ClInclude Include="console\impl\linux.hpp" />
     <ClInclude Include="console\impl\mac.hpp" />
     <ClInclude Include="console\impl\none.hpp" />
@@ -193,7 +196,6 @@
     <ClInclude Include="osapi\esp\io\bus\i2c.h" />
     <ClInclude Include="osapi\esp\io\bus\i2c.hpp" />
     <ClInclude Include="osapi\esp\io\bus\i2c\master.h" />
-    <ClInclude Include="osapi\esp\io\bus\i2c\I2C.hpp" />
     <ClInclude Include="osapi\esp\defined.h" />
     <ClInclude Include="osapi\esp\esp.h" />
     <ClInclude Include="osapi\esp\esp.hpp" />
@@ -212,6 +214,7 @@
     <ClInclude Include="osapi\esp\io\PCNT.h" />
     <ClInclude Include="osapi\esp\io\PCNT.hpp" />
     <ClInclude Include="osapi\esp\io\PWM.hpp" />
+    <ClInclude Include="osapi\esp\temp_config\sdkconfig.h" />
     <ClInclude Include="preprocessor\utils.h" />
     <ClInclude Include="preprocessor\utils\args_package.h" />
     <ClInclude Include="preprocessor\utils\as_one_expression.h" />
@@ -225,6 +228,7 @@
     <ClInclude Include="basic\preprocessor\type_defined.h" />
     <ClInclude Include="preprocessor\utils\type_of_expression.h" />
     <ClInclude Include="basic\preprocessor\type_value_convert.h" />
+    <ClInclude Include="preprocessor\utils\variable_args.h" />
     <ClInclude Include="preprocessor\utils\warning.h" />
     <ClInclude Include="basic\type.h" />
     <ClInclude Include="basic\type\byte.h" />
@@ -663,8 +667,6 @@
     <ClInclude Include="dl\graphic\api.h" />
     <ClInclude Include="dl\graphic\listen.h" />
     <ClInclude Include="dl\transform.h" />
-    <ClInclude Include="embedded2\bus\bus.h" />
-    <ClInclude Include="embedded2\embedded.hpp" />
     <ClInclude Include="extend\color\channel.h" />
     <ClInclude Include="extend\color.h" />
     <ClInclude Include="extend\color\concept.h" />
@@ -676,17 +678,6 @@
     <ClInclude Include="basic\defined.h" />
     <ClInclude Include="basic\STL.h" />
     <ClInclude Include="version\version.h" />
-    <ClInclude Include="embedded2\bus\bus_base.h" />
-    <ClInclude Include="embedded2\bus\i2c\I2C.h" />
-    <ClInclude Include="embedded2\bus\serial_port\serial_port.h" />
-    <ClInclude Include="embedded2\bus\spi\SPI.h" />
-    <ClInclude Include="embedded2\bus\uart\UART.h" />
-    <ClInclude Include="embedded2\bus\usb\UVC.h" />
-    <ClInclude Include="embedded2\embedded.h" />
-    <ClInclude Include="embedded2\Interface.h" />
-    <ClInclude Include="embedded2\io\GPIO.h" />
-    <ClInclude Include="embedded2\io\IO.h" />
-    <ClInclude Include="embedded2\io\PWM.h" />
     <ClInclude Include="extend\byte_array.h" />
     <ClInclude Include="extend\color\color_old.h" />
     <ClInclude Include="extend\debug.h" />
@@ -1075,9 +1066,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="nda\core\display_object.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

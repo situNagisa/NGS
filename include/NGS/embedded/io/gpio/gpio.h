@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "./pin.h"
 #include "./mode.h"
 
 NGS_EMBEDDED_IO_GPIO_BEGIN

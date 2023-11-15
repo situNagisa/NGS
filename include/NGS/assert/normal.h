@@ -78,7 +78,7 @@ NGS_ASSERT_END
 #define NGS_ASSERT(condition,...)									\
 do																	\
 {																	\
-	if (NGS_ asserts::dynamic_assert((condition),#condition,__VA_ARGS__))\
+	if (NGS_ asserts::dynamic_assert((condition),#condition NGS_PP_VA_ARGS_OPT_COMMA(__VA_ARGS__)))\
 	{																\
 		NGS_ASSERT_FAIL;											\
 	}																\
@@ -95,7 +95,7 @@ do																				\
 	}																			\
 	else																		\
 	{																			\
-		if (NGS_ asserts::dynamic_assert((condition), #condition, __VA_ARGS__))	\
+		if (NGS_ asserts::dynamic_assert((condition), #condition NGS_PP_VA_ARGS_OPT_COMMA(__VA_ARGS__)))\
 		{																		\
 			NGS_ASSERT_FAIL;													\
 		}																		\
@@ -113,6 +113,6 @@ do																				\
 
 #endif
 
-#define NGS_ASSERT_IF_CONSTEXPR(condition,...) static_assert(condition,__VA_ARGS__); if constexpr(condition)
+#define NGS_ASSERT_IF_CONSTEXPR(condition,...) static_assert(condition NGS_PP_VA_ARGS_OPT_COMMA(__VA_ARGS__)); if constexpr(condition)
 
 
