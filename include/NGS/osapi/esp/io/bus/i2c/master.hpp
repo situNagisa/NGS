@@ -5,50 +5,50 @@
 
 NGS_OS_ESP_IO_BUS_BEGIN
 
-NGS_HPP_INLINE master::master() = default;
-NGS_HPP_INLINE master::~master()
+NGS_HPP_INLINE i2c_master::i2c_master() = default;
+NGS_HPP_INLINE i2c_master::~i2c_master()
 {
-	NGS_ASSERT(!is_open());
+	NGS_ASSERT(!is_opened());
 }
 
-NGS_HPP_INLINE bool master::is_open() const
+NGS_HPP_INLINE bool i2c_master::is_opened() const
 {
 	return _port != allocators::invalid_id;
 }
 
-NGS_HPP_INLINE void master::close()
+NGS_HPP_INLINE void i2c_master::close()
 {
-	NGS_ASSERT(is_open());
-	detail::close_impl(_port);
+	NGS_ASSERT(is_opened());
+	detail::i2c_close_impl(_port);
 	i2c_cmd_link_delete(_cmd);
 }
 
-NGS_HPP_INLINE bool master::open(
+NGS_HPP_INLINE bool i2c_master::open(
 	embedded::io::pin_t sda, embedded::io::pin_t scl,
 	embedded::io::bus::i2c::modes::address_t address)
 {
 	_config.mode = I2C_MODE_MASTER;
 	_config.master.clk_speed = 400'000;
 
-	return detail::open_impl(sda, scl, _port, _config);
+	return detail::i2c_open_impl(sda, scl, _port, _config);
 }
 
-NGS_HPP_INLINE void master::set_ack(embedded::io::bus::i2c::modes::ack ack)
+NGS_HPP_INLINE void i2c_master::set_ack(embedded::io::bus::i2c::modes::ack ack)
 {
 	_ack = ack;
 }
 
-NGS_HPP_INLINE void master::set_address(embedded::io::bus::i2c::modes::address mode)
+NGS_HPP_INLINE void i2c_master::set_address(embedded::io::bus::i2c::modes::address mode)
 {
 	_address.mode = mode;
 }
 
-NGS_HPP_INLINE void master::set_address(embedded::io::bus::i2c::modes::address_t address)
+NGS_HPP_INLINE void i2c_master::set_address(embedded::io::bus::i2c::modes::address_t address)
 {
 	_address.value = address;
 }
 
-NGS_HPP_INLINE size_t master::transfer(const embedded::io::bus::i2c::message* messages, size_t count)
+NGS_HPP_INLINE size_t i2c_master::transfer(const embedded::io::bus::i2c::message* messages, size_t count)
 {
 	esp_err_t ret = ESP_OK;
 
@@ -99,9 +99,9 @@ NGS_HPP_INLINE size_t master::transfer(const embedded::io::bus::i2c::message* me
 
 	if (ret != ESP_OK) {
 		if (ret == ESP_ERR_TIMEOUT)
-			NGS_LOGL(warn, "iic master write data time out");
+			NGS_LOGL(warn, "iic i2c_master write data time out");
 		else
-			NGS_LOGL(error, "iic master write port:%d address %d ret=%003x", _port, _address.value, ret);
+			NGS_LOGL(error, "iic i2c_master write port:%d address %d ret=%003x", _port, _address.value, ret);
 	}
 	return ret;
 }

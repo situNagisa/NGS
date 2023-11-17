@@ -16,7 +16,8 @@ public:
 	virtual void set_interrupt(bool enable) = 0;
 	virtual void set_interrupt(modes::interrupt type) = 0;
 
-	virtual void set_mode(modes::io mode) = 0;
+	virtual void set_io(modes::io mode) = 0;
+	virtual void set_pull(modes::pull mode) = 0;
 
 	virtual bool get() const = 0;
 	virtual void set(bool value) = 0;
@@ -33,7 +34,7 @@ public:
 
 	virtual size_t write(void_ptr_cst buffer, size_t size) override
 	{
-		set(*static_cast<const bool*>(buffer + size - 1));
+		set(static_cast<const bool*>(buffer)[size - 1]);
 		return size;
 	}
 };

@@ -16,9 +16,9 @@ enum class log_level
 
 NGS_LOG_END
 
-NGS_BEGIN
+NGS_TOSTRING_BEGIN
 
-constexpr std::string_view to_string(logs::log_level level)
+NGS_CONSTEXPR17 std::string_view to_string(logs::log_level level)
 {
 	switch (level)
 	{
@@ -32,4 +32,4 @@ constexpr std::string_view to_string(logs::log_level level)
 	}
 }
 
-NGS_END
+NGS_TOSTRING_END

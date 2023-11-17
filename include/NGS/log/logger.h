@@ -172,7 +172,7 @@ do												\
 
 #else
 
-#define NGS_LOG_CALL(function,...)
+#define NGS_LOG_CALL(function,...) (static_cast<void*>(nullptr))
 
 #endif
 
@@ -189,10 +189,10 @@ NGS_LOG_CALL(log,NGS_ logs::log_level::level, __VA_ARGS__)	\
 NGS_LOG_CALL(log_line,NGS_ logs::log_level::level, __VA_ARGS__)\
 //
 #define NGS_LOGF(level,format,...)							\
-NGS_LOG_CALL(log_format,NGS_ logs::log_level::level, format, __VA_ARGS__)\
+NGS_LOG_CALL(log_format,NGS_ logs::log_level::level, format NGS_PP_VA_ARGS_OPT_COMMA(__VA_ARGS__))\
 //
 #define NGS_LOGFL(level,format,...)							\
-NGS_LOG_CALL(log_format_line,NGS_ logs::log_level::level, format, __VA_ARGS__)\
+NGS_LOG_CALL(log_format_line,NGS_ logs::log_level::level, format NGS_PP_VA_ARGS_OPT_COMMA(__VA_ARGS__))\
 //
 
 

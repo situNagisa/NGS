@@ -5,25 +5,25 @@
 
 NGS_OS_ESP_IO_BUS_BEGIN
 
-NGS_HPP_INLINE slave::slave() = default;
+NGS_HPP_INLINE i2c_slave::i2c_slave() = default;
 
-NGS_HPP_INLINE slave::~slave()
+NGS_HPP_INLINE i2c_slave::~i2c_slave()
 {
-	NGS_ASSERT(!is_open());
+	NGS_ASSERT(!is_opened());
 }
 
-NGS_HPP_INLINE bool slave::is_open() const
+NGS_HPP_INLINE bool i2c_slave::is_opened() const
 {
 	return _port != allocators::invalid_id;
 }
 
-NGS_HPP_INLINE void slave::close()
+NGS_HPP_INLINE void i2c_slave::close()
 {
-	NGS_ASSERT(is_open());
-	detail::close_impl(_port);
+	NGS_ASSERT(is_opened());
+	detail::i2c_close_impl(_port);
 }
 
-NGS_HPP_INLINE bool slave::open(
+NGS_HPP_INLINE bool i2c_slave::open(
 	embedded::io::pin_t sda, embedded::io::pin_t scl,
 	embedded::io::bus::i2c::modes::address_t address)
 {
@@ -32,10 +32,10 @@ NGS_HPP_INLINE bool slave::open(
 	_config.slave.slave_addr = _address.value;
 	_config.slave.maximum_speed = 1'000'000;
 
-	return detail::open_impl(sda, scl, _port, _config);
+	return detail::i2c_open_impl(sda, scl, _port, _config);
 }
 
-NGS_HPP_INLINE size_t slave::read(void_ptr buffer, size_t size)
+NGS_HPP_INLINE size_t i2c_slave::read(void_ptr buffer, size_t size)
 {
 #if defined(NGS_BUILD_TYPE_IS_DEBUG)
 	auto ret = i2c_slave_read_buffer(_port, static_cast<uint8_t*>(buffer), size, _wait);
@@ -50,7 +50,7 @@ NGS_HPP_INLINE size_t slave::read(void_ptr buffer, size_t size)
 #endif
 }
 
-NGS_HPP_INLINE size_t slave::write(void_ptr_cst buffer, size_t size)
+NGS_HPP_INLINE size_t i2c_slave::write(void_ptr_cst buffer, size_t size)
 {
 #if defined(NGS_BUILD_TYPE_IS_DEBUG)
 	auto ret = i2c_slave_write_buffer(_port, static_cast<const uint8_t*>(buffer), size, _wait);
@@ -65,12 +65,12 @@ NGS_HPP_INLINE size_t slave::write(void_ptr_cst buffer, size_t size)
 #endif
 }
 
-NGS_HPP_INLINE void slave::set_address(embedded::io::bus::i2c::modes::address mode)
+NGS_HPP_INLINE void i2c_slave::set_address(embedded::io::bus::i2c::modes::address mode)
 {
 	_address.mode = mode;
 }
 
-NGS_HPP_INLINE void slave::set_address(embedded::io::bus::i2c::modes::address_t address)
+NGS_HPP_INLINE void i2c_slave::set_address(embedded::io::bus::i2c::modes::address_t address)
 {
 	_address.value = address;
 }

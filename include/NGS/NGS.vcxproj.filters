@@ -2895,7 +2895,7 @@
     <ClInclude Include="embedded\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="embedded\embedded.h">
+    <ClInclude Include="embedded\io.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="embedded\io\defined.h">
@@ -3012,7 +3012,7 @@
     <ClInclude Include="osapi\esp\io\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="osapi\esp\io\gpio\data.h">
+    <ClInclude Include="osapi\esp\io\gpio\config.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="osapi\esp\io\gpio\gpio.h">
@@ -3051,7 +3051,7 @@
     <ClInclude Include="allocator\id.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="osapi\esp\io\bus\i2c\tick_type.h">
+    <ClInclude Include="osapi\esp\tick_type.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="osapi\esp\io\bus\i2c\slave.hpp">
@@ -3091,6 +3091,75 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="preprocessor\utils\variable_args.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\spi\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\spi\spi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\spi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\spi\master.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\spi\master.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\spi.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\spi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\spi\master.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\spi\slave.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\spi\mode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\spi\mode\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\spi\mode\polarity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\spi\mode\phase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\spi\slave.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\spi\slave.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\io\bus\spi\device.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\bus\spi\device.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\io\frequency.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded\embedded.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\assert\assert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\assert\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\assert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="assert\format.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

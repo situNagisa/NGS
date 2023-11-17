@@ -13,10 +13,9 @@ constexpr size_t as_byte(size_t bit_count) { return (((bit_count) / bit_per_byte
 constexpr size_t as_bit(size_t byte_count) { return byte_count * bit_per_byte; }
 template<class _T> consteval size_t as_bit() { return as_bit(sizeof(_T)); }
 
-constexpr uint64 mask(std::integral auto bit_count) { return (bit_count >= as_bit<uint64>()) ? static_cast<uint64>(-1) : (scope<uint64>(bit_count) - 1); }
+constexpr uint64 mask(std::integral auto bit_count) { return (bit_count >= as_bit<uint64>()) ? static_cast<uint64>(-1) : (bits::scope<uint64>(bit_count) - 1); }
 
 constexpr auto set(auto bit_set, auto bit_scope, bool state) { return state ? bit_set | bit_scope : bit_set & ~bit_scope; }
-constexpr auto get(auto bit_set, auto bit_scope) { return bit_set & bit_scope; }
-
+constexpr bool get(auto bit_set, auto bit_scope) { return bit_set & bit_scope; }
 
 NGS_BIT_END

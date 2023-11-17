@@ -1,4 +1,4 @@
 ﻿#pragma once
 
-#include "./to_string.h"
+#include "./core.h"
 #include "./format.h"

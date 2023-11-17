@@ -1,4 +1,4 @@
 ﻿#pragma once
 
-#include "./gpio/data.h"
+#include "./gpio/config.h"
 #include "./gpio/gpio.h"

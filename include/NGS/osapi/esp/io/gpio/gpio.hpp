@@ -12,38 +12,13 @@ NGS_HPP_INLINE bool gpio::open(embedded::io::pin_t gpio_num, embedded::io::gpio:
 {
 	using namespace embedded::io::gpio;
 
-	_data.pin = gpio_num;
-	gpio_config_t& config = _data.config;
-
-	config.pin_bit_mask = bits::scope(_data.pin);
-	switch (io_mode)
-	{
-	case modes::io::input:
-		config.mode = GPIO_MODE_INPUT;
-		break;
-	case modes::io::output:
-		config.mode = GPIO_MODE_OUTPUT;
-		break;
-	default:
-		break;
-	}
-	config.pull_up_en = GPIO_PULLUP_DISABLE;
-	config.pull_down_en = GPIO_PULLDOWN_ENABLE;
-	config.intr_type = GPIO_INTR_DISABLE;
-
-	esp_err_t ret = gpio_config(&config);
-	ESP_ERROR_CHECK_WITHOUT_ABORT(ret);
-	if (ret != ESP_OK) {
-		_data.pin = embedded::io::invalid_pin;
-		return false;
-	}
-	NGS_LOGFL(debug, "%d success!", _data.pin);
-	return true;
+	_config.set_io(io_mode);
+	return open(gpio_num, _config);
 }
 
-NGS_HPP_INLINE bool gpio::is_open() const
+NGS_HPP_INLINE bool gpio::is_opened() const
 {
-	return _data.pin != embedded::io::invalid_pin;
+	return _pin != embedded::io::invalid_pin;
 }
 
 NGS_HPP_INLINE void gpio::close()
@@ -66,33 +41,39 @@ NGS_HPP_INLINE void gpio::set_interrupt(embedded::io::gpio::modes::interrupt typ
 
 }
 
-NGS_HPP_INLINE void gpio::set_mode(embedded::io::gpio::modes::io mode)
+NGS_HPP_INLINE void gpio::set_io(embedded::io::gpio::modes::io mode)
 {
-	using namespace embedded::io::gpio;
-	gpio_config_t& config = _data.config;
+	_config.set_io(mode);
+	NGS_OS_ESP_ASSERT_ERROR(::gpio_config(&_config), format("io num = %d, io mode = 0x%02x", _pin, mode));
+}
 
-	switch (mode)
-	{
-	case modes::io::input:
-		config.mode = GPIO_MODE_INPUT;
-		break;
-	case modes::io::output:
-		config.mode = GPIO_MODE_OUTPUT;
-		break;
-	default:
-		break;
-	}
-	ESP_ERROR_CHECK(gpio_config(&config));
+NGS_HPP_INLINE void gpio::set_pull(embedded::io::gpio::modes::pull mode)
+{
+	_config.set_pull(mode);
+	NGS_OS_ESP_ASSERT_ERROR(::gpio_config(&_config), format("io num = %d, pull mode = %d", _pin, mode));
 }
 
 NGS_HPP_INLINE void gpio::set(bool value)
 {
-	ESP_ERROR_CHECK(gpio_set_level(static_cast<gpio_num_t>(_data.pin), static_cast<uint32>(value)));
+	NGS_OS_ESP_ASSERT_ERROR(::gpio_set_level(static_cast<gpio_num_t>(_pin), static_cast<uint32>(value)), format("io num = %d, level = %s", _pin, to_string(value).data()));
 }
 
 NGS_HPP_INLINE bool gpio::get() const
 {
-	return gpio_get_level(static_cast<gpio_num_t>(_data.pin));
+	return ::gpio_get_level(static_cast<gpio_num_t>(_pin));
+}
+
+NGS_HPP_INLINE bool gpio::open(embedded::io::pin_t gpio_num, const gpio_config& config)
+{
+	_pin = gpio_num;
+	_config = config;
+	_config.pin_bit_mask = bits::scope(gpio_num);
+
+	if (!NGS_OS_ESP_EXPECT_ERROR(::gpio_config(&_config), format("io num = %d", _pin))) {
+		_pin = embedded::io::invalid_pin;
+		return false;
+	}
+	return true;
 }
 
 NGS_OS_ESP_IO_END

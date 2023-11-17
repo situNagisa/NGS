@@ -18,7 +18,7 @@ public:
 	 * \brief io流是否打开
 	 * \return true 打开，false 关闭
 	 */
-	virtual bool   is_open() const = 0;
+	virtual bool   is_opened() const = 0;
 
 	/**
 	 * \brief 关闭io流

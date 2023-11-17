@@ -1,17 +1,17 @@
 ﻿#pragma once
 
-#include "./tick_type.h"
+#include "../../../tick_type.h"
 
 NGS_OS_ESP_IO_BUS_BEGIN
 
-struct NGS_DLL_API slave : embedded::io::bus::i2c::slave
+struct NGS_DLL_API i2c_slave : embedded::io::bus::i2c::slave
 {
-	NGS_MPL_ENVIRON(slave);
+	NGS_MPL_ENVIRON(i2c_slave);
 public:
-	slave();
-	virtual ~slave() override;
+	i2c_slave();
+	virtual ~i2c_slave() override;
 
-	virtual bool is_open() const override;
+	virtual bool is_opened() const override;
 	virtual void close() override;
 	virtual bool open(embedded::io::pin_t sda, embedded::io::pin_t scl, embedded::io::bus::i2c::modes::address_t address) override;
 	virtual size_t read(void_ptr buffer, size_t size) override;

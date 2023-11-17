@@ -1,17 +1,18 @@
 ﻿#pragma once
 
-#include "./tick_type.h"
+#include "../../../tick_type.h"
+#include "../defined.h"
 
 NGS_OS_ESP_IO_BUS_BEGIN
 
-struct NGS_DLL_API master : embedded::io::bus::i2c::master
+struct NGS_DLL_API i2c_master : embedded::io::bus::i2c::master
 {
-	NGS_MPL_ENVIRON(master);
+	NGS_MPL_ENVIRON(i2c_master);
 public:
-	master();
-	virtual ~master() override;
+	i2c_master();
+	virtual ~i2c_master() override;
 
-	virtual bool is_open() const override;
+	virtual bool is_opened() const override;
 	virtual void close() override;
 
 	virtual bool open(embedded::io::pin_t sda, embedded::io::pin_t scl, embedded::io::bus::i2c::modes::address_t address) override;

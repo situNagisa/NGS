@@ -4,10 +4,10 @@
 
 NGS_OS_ESP_IO_BUS_BEGIN
 namespace detail {
-	inline constexpr size_t default_buffer_size = 512;
+	inline constexpr size_t i2c_default_buffer_size = 512;
 	inline allocators::id<I2C_NUM_MAX> i2c_ports;
 
-	NGS_HPP_INLINE bool open_impl(
+	NGS_HPP_INLINE bool i2c_open_impl(
 		embedded::io::pin_t sda, embedded::io::pin_t scl,
 		i2c_port_t& port,
 		i2c_config_t& config
@@ -29,7 +29,7 @@ namespace detail {
 		}
 
 		esp_err_t ret = i2c_param_config(port, &config);
-		ESP_ERROR_CHECK_WITHOUT_ABORT(ret);
+		NGS_OS_ESP_EXPECT_ERROR(ret);
 		if (ret != ESP_OK) {
 			i2c_ports.free(port);
 			port = allocators::invalid_id;
@@ -39,7 +39,7 @@ namespace detail {
 		switch (config.mode)
 		{
 		case I2C_MODE_MASTER:
-			ESP_ERROR_CHECK_WITHOUT_ABORT(ret = i2c_driver_install(port, config.mode, 0, 0, 0));
+			NGS_OS_ESP_EXPECT_ERROR(ret = i2c_driver_install(port, config.mode, 0, 0, 0));
 			if (ret != ESP_OK) {
 				i2c_ports.free(port);
 				port = allocators::invalid_id;
@@ -48,7 +48,7 @@ namespace detail {
 			}
 			break;
 		case I2C_MODE_SLAVE:
-			ESP_ERROR_CHECK_WITHOUT_ABORT(ret = i2c_driver_install(port, config.mode, default_buffer_size, default_buffer_size, 0));
+			NGS_OS_ESP_EXPECT_ERROR(ret = i2c_driver_install(port, config.mode, i2c_default_buffer_size, i2c_default_buffer_size, 0));
 			if (ret != ESP_OK) {
 				i2c_ports.free(port);
 				port = allocators::invalid_id;
@@ -63,7 +63,7 @@ namespace detail {
 		return true;
 	}
 
-	NGS_HPP_INLINE void close_impl(i2c_port_t& port)
+	NGS_HPP_INLINE void i2c_close_impl(i2c_port_t& port)
 	{
 		i2c_driver_delete(port);
 

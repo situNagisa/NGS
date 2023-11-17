@@ -1,8 +1,9 @@
 ﻿#pragma once
 
-#include "./defined.h"
+#include "./format.h"
 
 NGS_ASSERT_BEGIN
+
 inline bool dynamic_assert(
 	bool condition,
 	std::string_view expression,
@@ -11,31 +12,10 @@ inline bool dynamic_assert(
 )
 {
 	if (condition)
-	{
-		return false;
-	}
+		return true;
 
-	logs::std_logger.print_line(
-		consoles::text_color::red,
-		format(
-			""
-			"\n========================="
-			"\nERROR:: %s"
-			"\nfile    : %s"
-			"\nassert  : %s"
-			"\nfunction: %s"
-			"\nline %d,column %d"
-			"\n=========================",
-			message.data(),
-			location.file_name(),
-			expression.data(),
-			location.function_name(),
-			location.line(),
-			location.column()
-		),
-		consoles::text_color::reset
-	);
-	return true;
+	print_assert(assert_format(expression, message, location));
+	return false;
 }
 
 template<bool _Condition, statics::strings::string _Message = "", locations::source_location_info _Location = locations::source_location::current()>
@@ -63,22 +43,22 @@ constexpr bool assert_(
 
 NGS_ASSERT_END
 
-#if NGS_COMPILER_IS_MSVC && NGS_BUILD_TYPE_IS_DEBUG
-
-#	define NGS_ASSERT_FAIL __debugbreak()
-
-#else
-
-#	define NGS_ASSERT_FAIL std::abort()
-
+#if not defined(NGS_ASSERT_FAIL)
+#	if NGS_COMPILER_IS_MSVC && NGS_BUILD_TYPE_IS_DEBUG
+#		define NGS_ASSERT_FAIL __debugbreak()
+#	else
+#		define NGS_ASSERT_FAIL std::abort()
+#	endif
 #endif
 
 #if NGS_BUILD_TYPE_IS_DEBUG
 
+#define NGS_EXPECT(condition,...)	NGS_ asserts::dynamic_assert((condition),#condition NGS_PP_VA_ARGS_OPT_COMMA(__VA_ARGS__))
+
 #define NGS_ASSERT(condition,...)									\
 do																	\
 {																	\
-	if (NGS_ asserts::dynamic_assert((condition),#condition NGS_PP_VA_ARGS_OPT_COMMA(__VA_ARGS__)))\
+	if (!NGS_EXPECT(condition ,__VA_ARGS__))						\
 	{																\
 		NGS_ASSERT_FAIL;											\
 	}																\
@@ -95,7 +75,7 @@ do																				\
 	}																			\
 	else																		\
 	{																			\
-		if (NGS_ asserts::dynamic_assert((condition), #condition NGS_PP_VA_ARGS_OPT_COMMA(__VA_ARGS__)))\
+		if (!NGS_EXPECT(condition ,__VA_ARGS__))								\
 		{																		\
 			NGS_ASSERT_FAIL;													\
 		}																		\
@@ -105,6 +85,8 @@ do																				\
 #	endif
 
 #else
+
+#	define NGS_EXPECT(condition,...) false
 #	define NGS_ASSERT(condition,...) ((void)0)
 
 #	if NGS_CPP_STANDARD_HAS_20
