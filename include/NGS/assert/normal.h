@@ -43,12 +43,10 @@ constexpr bool assert_(
 
 NGS_ASSERT_END
 
-#if not defined(NGS_ASSERT_FAIL)
-#	if NGS_COMPILER_IS_MSVC && NGS_BUILD_TYPE_IS_DEBUG
-#		define NGS_ASSERT_FAIL __debugbreak()
-#	else
-#		define NGS_ASSERT_FAIL std::abort()
-#	endif
+#if NGS_COMPILER_IS_MSVC && NGS_BUILD_TYPE_IS_DEBUG
+#	define NGS_ASSERT_FAIL __debugbreak()
+#else
+#	define NGS_ASSERT_FAIL std::abort()
 #endif
 
 #if NGS_BUILD_TYPE_IS_DEBUG

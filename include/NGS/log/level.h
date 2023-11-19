@@ -12,6 +12,7 @@ enum class log_level
 	warn,
 	error,
 	fatal,
+	max,
 };
 
 NGS_LOG_END

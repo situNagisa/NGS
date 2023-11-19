@@ -32,8 +32,9 @@ public:
 
 	bool open(const spi_bus_config_t& config);
 
-	void lock() const;
-	void unlock() const;
+	void lock();
+	void unlock();
+	bool is_locking() const { return _is_locking; }
 
 	void select(const spi_device& device);
 	void add_device(const spi_device& device);
@@ -114,6 +115,7 @@ private:
 	std::unordered_map<embedded::io::pin_t, spi_device_handle_t> _device_mapper{};
 	std::optional<spi_device> _current_device{};
 	spi_device_handle_t _current_handle = nullptr;
+	bool _is_locking = false;
 };
 
 NGS_OS_ESP_IO_BUS_END

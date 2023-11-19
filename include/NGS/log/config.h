@@ -7,14 +7,27 @@ NGS_LOG_BEGIN
 
 struct NGS_DLL_API logger_config
 {
-	std::unordered_map<log_level, consoles::text_color> level_colors = {
-		{log_level::trace,consoles::text_color::white},
-		{log_level::debug,consoles::text_color::green},
-		{log_level::info,consoles::text_color::cyan},
-		{log_level::warn,consoles::text_color::yellow},
-		{log_level::error,consoles::text_color::red},
-		{log_level::fatal,consoles::text_color::red},
-	};
+	struct
+	{
+		std::array<consoles::text_color, static_cast<size_t>(log_level::max)> data = {
+			consoles::text_color::white,
+			consoles::text_color::green,
+			consoles::text_color::cyan,
+			consoles::text_color::yellow,
+			consoles::text_color::red,
+			consoles::text_color::red,
+		};
+
+		constexpr consoles::text_color operator[](log_level l) const
+		{
+			return data[static_cast<int>(l)];
+		}
+		constexpr consoles::text_color at(log_level l) const
+		{
+			return data.at(static_cast<int>(l));
+		}
+
+	} level_colors{};
 	struct
 	{
 		bool scope_name : 1 = true;

@@ -23,12 +23,15 @@ NGS_HPP_INLINE bool gpio::is_opened() const
 
 NGS_HPP_INLINE void gpio::close()
 {
-
+	reset();
+	_pin = embedded::io::invalid_pin;
 }
 
 NGS_HPP_INLINE void gpio::reset()
 {
-	low();
+	gpio_config config{};
+	config.pin_bit_mask = _config.pin_bit_mask;
+	NGS_OS_ESP_ASSERT_ERROR(::gpio_config(&config), format("io num = %d", _pin));
 }
 
 NGS_HPP_INLINE void gpio::set_interrupt(bool enable)
@@ -55,7 +58,8 @@ NGS_HPP_INLINE void gpio::set_pull(embedded::io::gpio::modes::pull mode)
 
 NGS_HPP_INLINE void gpio::set(bool value)
 {
-	NGS_OS_ESP_ASSERT_ERROR(::gpio_set_level(static_cast<gpio_num_t>(_pin), static_cast<uint32>(value)), format("io num = %d, level = %s", _pin, to_string(value).data()));
+	//NGS_LOGFL(debug, "io num = %d, level = %s", _pin, ngs::to_string(value).data());
+	NGS_OS_ESP_ASSERT_ERROR(::gpio_set_level(static_cast<gpio_num_t>(_pin), static_cast<uint32>(value)), format("io num = %d, level = %s", _pin, ngs::to_string(value).data()));
 }
 
 NGS_HPP_INLINE bool gpio::get() const

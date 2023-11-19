@@ -133,9 +133,9 @@ private:
 		{
 			_print_callback(NGS_PP_PERFECT_FORWARD(first));
 		}
-		else if constexpr (requires{ to_string(NGS_PP_PERFECT_FORWARD(first)); })
+		else if constexpr (requires{ ngs::to_string(NGS_PP_PERFECT_FORWARD(first)); })
 		{
-			_print_callback(to_string(NGS_PP_PERFECT_FORWARD(first)));
+			_print_callback(ngs::to_string(NGS_PP_PERFECT_FORWARD(first)));
 		}
 		else if constexpr (requires(std::stringstream o) { o << NGS_PP_PERFECT_FORWARD(first); })
 		{
@@ -153,7 +153,7 @@ private:
 	consoles::default_console _console{};
 	std::function<void(std::string_view)> _print_callback = [](std::string_view info)
 		{
-			std::cout << info;
+			std::cout << info << std::flush;
 		};
 	std::string _current_scope_name{};
 };

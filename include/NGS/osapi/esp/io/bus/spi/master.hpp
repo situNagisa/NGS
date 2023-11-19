@@ -72,9 +72,9 @@ NGS_HPP_INLINE bool spi_master::open(const spi_bus_config_t& config)
 		_host = allocate_host();
 		if (_host == spi_invalid_host)
 			return false;
-		if (NGS_OS_ESP_EXPECT_ERROR(::spi_bus_initialize(_host, &_config, SPI_DMA_CH_AUTO), "bus already initialized!"))
+		if (NGS_OS_ESP_EXPECT_ERROR(::spi_bus_initialize(_host, &_config, SPI_DMA_CH_AUTO), format("bus host[%d] already initialized!", _host)))
 		{
-			NGS_LOGL(info, "allocate spi host successfully!");
+			NGS_LOGFL(info, "allocate spi host[%d] successfully!", _host);
 			break;
 		}
 	}
@@ -82,14 +82,16 @@ NGS_HPP_INLINE bool spi_master::open(const spi_bus_config_t& config)
 	return true;
 }
 
-NGS_HPP_INLINE void spi_master::lock() const
+NGS_HPP_INLINE void spi_master::lock()
 {
 	NGS_OS_ESP_ASSERT_ERROR(::spi_device_acquire_bus(_current_handle, portMAX_DELAY), format("handle = %p", _current_handle));
+	_is_locking = true;
 }
 
-NGS_HPP_INLINE void spi_master::unlock() const
+NGS_HPP_INLINE void spi_master::unlock()
 {
 	::spi_device_release_bus(_current_handle);
+	_is_locking = false;
 }
 
 NGS_HPP_INLINE void spi_master::select(const spi_device& device)
@@ -113,8 +115,7 @@ NGS_HPP_INLINE void spi_master::remove_device(const spi_device& device)
 
 NGS_HPP_INLINE void spi_master::polling(spi_transaction_t& transaction) const
 {
-	NGS_LOGFL(debug, "tx { %p,%s,%d }", transaction.tx_buffer, ngs::to_string(static_cast<bool>(transaction.flags & SPI_TRANS_USE_TXDATA)).data(), transaction.length);
-	NGS_LOGFL(debug, "rx { %p,%s,%d }", transaction.rx_buffer, ngs::to_string(static_cast<bool>(transaction.flags & SPI_TRANS_USE_RXDATA)).data(), transaction.length);
+	//NGS_LOGFL(debug, "tx = %p,rx = %p,flag = 0x%08x,size = %d", transaction.tx_buffer, transaction.rx_buffer, transaction.flags, transaction.length);
 
 	NGS_OS_ESP_ASSERT_ERROR(::spi_device_polling_transmit(_current_handle, &transaction), format(
 		"handle = %p",
