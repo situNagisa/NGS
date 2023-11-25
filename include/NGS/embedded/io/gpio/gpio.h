@@ -8,9 +8,13 @@ struct NGS_DLL_API gpio : basic_io
 {
 	NGS_MPL_ENVIRON(gpio);
 public:
-	bool open(pin_t gpio_num) { return open(gpio_num, modes::io::output); }
 
-	virtual bool open(pin_t gpio_num, modes::io io_mode) = 0;
+	bool open(pin_t gpio_num)
+	{
+		return open(gpio_num, modes::io::disable, modes::pull::floating);
+	}
+
+	virtual bool open(pin_t gpio_num, modes::io io_mode, modes::pull pull_mode) = 0;
 	virtual void reset() = 0;
 
 	virtual void set_interrupt(bool enable) = 0;
@@ -22,6 +26,7 @@ public:
 	virtual bool get() const = 0;
 	virtual void set(bool value) = 0;
 
+	virtual pin_t get_pin() const = 0;
 
 	void high() { set(true); }
 	void low() { set(false); }

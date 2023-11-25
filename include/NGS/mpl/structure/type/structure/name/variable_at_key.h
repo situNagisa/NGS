@@ -10,7 +10,7 @@ struct variable_at_key {
 	using type = typename _Struct::template variable_at<index_of_key<_Struct, _Id>::type::value>;
 };
 
-template<CNamedStruct _Struct, static_strings::static_string _Id>
+template<CNamedStruct _Struct, statics::strings::string _Id>
 struct variable_at_key_c {
 	using type = typename variable_at_key<_Struct, variable_id<_Id>>::type;
 };

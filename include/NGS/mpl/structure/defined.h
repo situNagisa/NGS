@@ -7,7 +7,7 @@
 #include "NGS/ccpt/ccpt.h"
 #include "NGS/layout/layout.h"
 #include "NGS/mpl/defined.h"
-#include "NGS/static_string/static_string.h"
+#include "NGS/static/string.h"
 
 
 #define NGS_STRUCTURE_BEGIN NGS_MPL_BEGIN namespace mstruct{

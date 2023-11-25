@@ -1,14 +1,13 @@
 ﻿#pragma once
 
-#include "NGS/extend/color/defined.h"
+#include "./defined.h"
 
-NGS_BEGIN
-NGS_CONCEPT
+NGS_COLOR_BEGIN
 
-template <typename T>
+template <class _T, class _O = type_traits::object_t<_T>>
 concept CColor = requires() {
-	{T::Format} -> std::convertible_to<PixelFormat>;
+	true;
+	//{ _O::format() } -> std::convertible_to<color_format>;
 };
 
-NGS_END
-NGS_END
+NGS_COLOR_END

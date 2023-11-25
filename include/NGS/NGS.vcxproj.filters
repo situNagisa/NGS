@@ -2433,7 +2433,7 @@
     <ClInclude Include="bit\set.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="color\colors\primary.h">
+    <ClInclude Include="color\colors\primary_old.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="color\channel.h">
@@ -3084,9 +3084,6 @@
     <ClInclude Include="console\console.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\ia\build\config\sdkconfig.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="osapi\esp\temp_config\sdkconfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -3160,6 +3157,99 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="assert\format.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\embed\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\embed\embed.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="osapi\esp\embed.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="color\colors\primary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="color\colors\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="color\primary\concept.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="color\primary\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="color\primary\trait.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="color\primary\primary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="color\primary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="color\primary\constant.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="color\constant.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\opengl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\error.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\blend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\capabilities.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\cursor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\draw.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\error_code.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\filters.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\framebuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\image_format.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\usage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\wraps.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\enum\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

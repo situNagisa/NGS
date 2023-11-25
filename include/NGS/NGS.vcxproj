@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\ia\build\config\sdkconfig.h" />
     <ClInclude Include="algorithm\algorithm.h" />
     <ClInclude Include="algorithm\algorithm.hpp" />
     <ClInclude Include="algorithm\dynamic_program.h" />
@@ -48,10 +47,19 @@
     <ClInclude Include="byte\no_endian.h" />
     <ClInclude Include="color\channel.h" />
     <ClInclude Include="color\color.h" />
+    <ClInclude Include="color\colors\defined.h" />
+    <ClInclude Include="color\colors\primary.h" />
     <ClInclude Include="color\concept.h" />
+    <ClInclude Include="color\constant.h" />
     <ClInclude Include="color\defined.h" />
     <ClInclude Include="color\colors\hsv.h" />
-    <ClInclude Include="color\colors\primary.h" />
+    <ClInclude Include="color\colors\primary_old.h" />
+    <ClInclude Include="color\primary.h" />
+    <ClInclude Include="color\primary\concept.h" />
+    <ClInclude Include="color\primary\constant.h" />
+    <ClInclude Include="color\primary\defined.h" />
+    <ClInclude Include="color\primary\primary.h" />
+    <ClInclude Include="color\primary\trait.h" />
     <ClInclude Include="config\feature\constexpr.h" />
     <ClInclude Include="config\lib.h" />
     <ClInclude Include="config\lib\boost.h" />
@@ -198,12 +206,34 @@
     <ClInclude Include="mpl\optional\optional.h" />
     <ClInclude Include="mpl\optional\process\value.h" />
     <ClInclude Include="mpl\optional\process\value_or.h" />
+    <ClInclude Include="opengl\config.h" />
+    <ClInclude Include="opengl\defined.h" />
+    <ClInclude Include="opengl\enum\blend.h" />
+    <ClInclude Include="opengl\enum\buffer.h" />
+    <ClInclude Include="opengl\enum\capabilities.h" />
+    <ClInclude Include="opengl\enum\cursor.h" />
+    <ClInclude Include="opengl\enum\defined.h" />
+    <ClInclude Include="opengl\enum\draw.h" />
+    <ClInclude Include="opengl\enum\error_code.h" />
+    <ClInclude Include="opengl\enum\filters.h" />
+    <ClInclude Include="opengl\enum\framebuffer.h" />
+    <ClInclude Include="opengl\enum\image_format.h" />
+    <ClInclude Include="opengl\enum\shader.h" />
+    <ClInclude Include="opengl\enum\texture.h" />
+    <ClInclude Include="opengl\enum\usage.h" />
+    <ClInclude Include="opengl\enum\wraps.h" />
+    <ClInclude Include="opengl\error.h" />
+    <ClInclude Include="opengl\enum.h" />
+    <ClInclude Include="opengl\opengl.h" />
     <ClInclude Include="osapi\defined.h" />
     <ClInclude Include="osapi\esp.h" />
     <ClInclude Include="osapi\esp.hpp" />
     <ClInclude Include="osapi\esp\assert.h" />
     <ClInclude Include="osapi\esp\assert\assert.h" />
     <ClInclude Include="osapi\esp\assert\defined.h" />
+    <ClInclude Include="osapi\esp\embed.h" />
+    <ClInclude Include="osapi\esp\embed\defined.h" />
+    <ClInclude Include="osapi\esp\embed\embed.h" />
     <ClInclude Include="osapi\esp\io.h" />
     <ClInclude Include="osapi\esp\io.hpp" />
     <ClInclude Include="osapi\esp\io\bus.h" />

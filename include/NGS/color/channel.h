@@ -20,7 +20,7 @@ struct NGS_DLL_API channel {
 
 	using type = byte_<bits::as_byte(count)>;
 
-	static constexpr type filter = bits::mask(count);
+	static constexpr type filter = static_cast<type>(bits::mask(count));
 	static constexpr  size_t filter_with_offset = filter << offset;
 
 	static constexpr float64 percent(type value) { return static_cast<float64>(value) / filter; }

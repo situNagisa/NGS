@@ -81,7 +81,7 @@ public:
 	}
 	void log_format_line(log_level level, std::string_view f, auto&&... args)
 	{
-		log_format(level, f, NGS_PP_PERFECT_FORWARD(args)...);
+		self_type::log_format(level, f, NGS_PP_PERFECT_FORWARD(args)...);
 		end_line();
 	}
 	//=============

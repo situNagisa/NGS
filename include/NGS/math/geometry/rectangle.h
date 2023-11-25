@@ -23,7 +23,7 @@ public:
 	constexpr Rectangle(const point_type& position, const point_type& size) : x(position.x), y(position.y), width(size.x), height(size.y) {}
 	constexpr Rectangle(element_type x, element_type y, const point_type& size) : x(x), y(y), width(size.x), height(size.y) {}
 	constexpr Rectangle(const point_type& position, element_type width, element_type height) : x(position.x), y(position.y), width(width), height(height) {}
-	template<CTemplateFrom<Rectangle> _Rectangle>
+	template<cpt::is_specialization_of<Rectangle> _Rectangle>
 	constexpr Rectangle(const _Rectangle& other) : x(other.x), y(other.y), width(other.width), height(other.height) {}
 
 	//=============

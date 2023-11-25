@@ -32,11 +32,11 @@ public:
 	constexpr auto&& get()const {
 		return base_type::template get<__Index>();
 	}
-	template<static_strings::static_string _Id>
+	template<statics::strings::string _Id>
 	constexpr auto&& get() {
 		return self_type::template get<boost::fusion::result_of::value_at_key<map_type, variable_id<_Id>>::type::value>();
 	}
-	template<static_strings::static_string _Id>
+	template<statics::strings::string _Id>
 	constexpr auto&& get()const {
 		return self_type::template get<boost::fusion::result_of::value_at_key<map_type, variable_id<_Id>>::type::value>();
 	}

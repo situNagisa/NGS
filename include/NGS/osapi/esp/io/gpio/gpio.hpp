@@ -8,11 +8,12 @@ NGS_HPP_INLINE gpio::gpio() = default;
 
 NGS_HPP_INLINE gpio::~gpio() = default;
 
-NGS_HPP_INLINE bool gpio::open(embedded::io::pin_t gpio_num, embedded::io::gpio::modes::io io_mode)
+NGS_HPP_INLINE bool gpio::open(embedded::io::pin_t gpio_num, embedded::io::gpio::modes::io io_mode, embedded::io::gpio::modes::pull pull_mode)
 {
 	using namespace embedded::io::gpio;
 
 	_config.set_io(io_mode);
+	_config.set_pull(pull_mode);
 	return open(gpio_num, _config);
 }
 
