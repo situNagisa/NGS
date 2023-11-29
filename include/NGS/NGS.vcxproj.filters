@@ -3195,61 +3195,106 @@
     <ClInclude Include="color\constant.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\opengl.h">
+    <ClInclude Include="external\opengl\opengl.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\defined.h">
+    <ClInclude Include="external\opengl\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\config.h">
+    <ClInclude Include="external\opengl\config.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\error.h">
+    <ClInclude Include="external\opengl\error.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum.h">
+    <ClInclude Include="external\opengl\enum.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\blend.h">
+    <ClInclude Include="external\opengl\enum\blend.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\buffer.h">
+    <ClInclude Include="external\opengl\enum\buffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\capabilities.h">
+    <ClInclude Include="external\opengl\enum\capabilities.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\cursor.h">
+    <ClInclude Include="external\opengl\enum\cursor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\draw.h">
+    <ClInclude Include="external\opengl\enum\draw.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\error_code.h">
+    <ClInclude Include="external\opengl\enum\error_code.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\filters.h">
+    <ClInclude Include="external\opengl\enum\filters.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\framebuffer.h">
+    <ClInclude Include="external\opengl\enum\framebuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\image_format.h">
+    <ClInclude Include="external\opengl\enum\image_format.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\shader.h">
+    <ClInclude Include="external\opengl\enum\shader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\texture.h">
+    <ClInclude Include="external\opengl\enum\texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\usage.h">
+    <ClInclude Include="external\opengl\enum\usage.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\wraps.h">
+    <ClInclude Include="external\opengl\enum\wraps.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opengl\enum\defined.h">
+    <ClInclude Include="external\opengl\enum\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="bit\index.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="bit\state.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\external.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\state_machine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\window.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\state_machine.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\glfw.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\glfw_with_depend.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw\glfw.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw_with_depend.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\glfw.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

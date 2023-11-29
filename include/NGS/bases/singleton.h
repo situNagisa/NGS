@@ -11,7 +11,7 @@ protected:
 public:
 	using singleton_type = _Derived;
 
-	static singleton_type& I() {
+	static singleton_type& instance() {
 		static singleton_type instance;
 		return instance;
 	}

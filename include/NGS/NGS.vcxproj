@@ -39,8 +39,10 @@
     <ClInclude Include="basic\preprocessor.h" />
     <ClInclude Include="bit\bit.h" />
     <ClInclude Include="bit\defined.h" />
+    <ClInclude Include="bit\index.h" />
     <ClInclude Include="bit\operation.h" />
     <ClInclude Include="bit\set.h" />
+    <ClInclude Include="bit\state.h" />
     <ClInclude Include="boost\stl_interfaces\iterator\random_access\trivial.h" />
     <ClInclude Include="byte\byte.h" />
     <ClInclude Include="byte\defined.h" />
@@ -117,6 +119,19 @@
     <ClInclude Include="embedded\io\defined.h" />
     <ClInclude Include="embedded\io\gpio.h" />
     <ClInclude Include="embedded\io\io.h" />
+    <ClInclude Include="external\defined.h" />
+    <ClInclude Include="external\external.h" />
+    <ClInclude Include="external\glfw.h" />
+    <ClInclude Include="external\glfw_with_depend.hpp" />
+    <ClInclude Include="external\glfw\defined.h" />
+    <ClInclude Include="external\glfw\glfw.h" />
+    <ClInclude Include="external\glfw\glfw_with_depend.hpp" />
+    <ClInclude Include="external\glfw\state_machine.h" />
+    <ClInclude Include="external\glfw\state_machine.hpp" />
+    <ClInclude Include="external\glfw\window.h" />
+    <ClInclude Include="external\glfw\window.hpp" />
+    <ClInclude Include="external\glfw\glfw.hpp" />
+    <ClInclude Include="external\glfw.hpp" />
     <ClInclude Include="linear_algebra\api\matrix.h" />
     <ClInclude Include="linear_algebra\api\scalar.h" />
     <ClInclude Include="linear_algebra\api\vector.h" />
@@ -206,25 +221,25 @@
     <ClInclude Include="mpl\optional\optional.h" />
     <ClInclude Include="mpl\optional\process\value.h" />
     <ClInclude Include="mpl\optional\process\value_or.h" />
-    <ClInclude Include="opengl\config.h" />
-    <ClInclude Include="opengl\defined.h" />
-    <ClInclude Include="opengl\enum\blend.h" />
-    <ClInclude Include="opengl\enum\buffer.h" />
-    <ClInclude Include="opengl\enum\capabilities.h" />
-    <ClInclude Include="opengl\enum\cursor.h" />
-    <ClInclude Include="opengl\enum\defined.h" />
-    <ClInclude Include="opengl\enum\draw.h" />
-    <ClInclude Include="opengl\enum\error_code.h" />
-    <ClInclude Include="opengl\enum\filters.h" />
-    <ClInclude Include="opengl\enum\framebuffer.h" />
-    <ClInclude Include="opengl\enum\image_format.h" />
-    <ClInclude Include="opengl\enum\shader.h" />
-    <ClInclude Include="opengl\enum\texture.h" />
-    <ClInclude Include="opengl\enum\usage.h" />
-    <ClInclude Include="opengl\enum\wraps.h" />
-    <ClInclude Include="opengl\error.h" />
-    <ClInclude Include="opengl\enum.h" />
-    <ClInclude Include="opengl\opengl.h" />
+    <ClInclude Include="external\opengl\config.h" />
+    <ClInclude Include="external\opengl\defined.h" />
+    <ClInclude Include="external\opengl\enum\blend.h" />
+    <ClInclude Include="external\opengl\enum\buffer.h" />
+    <ClInclude Include="external\opengl\enum\capabilities.h" />
+    <ClInclude Include="external\opengl\enum\cursor.h" />
+    <ClInclude Include="external\opengl\enum\defined.h" />
+    <ClInclude Include="external\opengl\enum\draw.h" />
+    <ClInclude Include="external\opengl\enum\error_code.h" />
+    <ClInclude Include="external\opengl\enum\filters.h" />
+    <ClInclude Include="external\opengl\enum\framebuffer.h" />
+    <ClInclude Include="external\opengl\enum\image_format.h" />
+    <ClInclude Include="external\opengl\enum\shader.h" />
+    <ClInclude Include="external\opengl\enum\texture.h" />
+    <ClInclude Include="external\opengl\enum\usage.h" />
+    <ClInclude Include="external\opengl\enum\wraps.h" />
+    <ClInclude Include="external\opengl\error.h" />
+    <ClInclude Include="external\opengl\enum.h" />
+    <ClInclude Include="external\opengl\opengl.h" />
     <ClInclude Include="osapi\defined.h" />
     <ClInclude Include="osapi\esp.h" />
     <ClInclude Include="osapi\esp.hpp" />
@@ -1168,24 +1183,28 @@
     <Import Project="C:\configure\visual_studio\NagisaBase.props" />
     <Import Project="C:\configure\visual_studio\NagisaLib.props" />
     <Import Project="C:\configure\visual_studio\ESPIDF.props" />
+    <Import Project="C:\configure\visual_studio\vulkan.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="C:\configure\visual_studio\NagisaBase.props" />
     <Import Project="C:\configure\visual_studio\NagisaLib.props" />
     <Import Project="C:\configure\visual_studio\ESPIDF.props" />
+    <Import Project="C:\configure\visual_studio\vulkan.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="C:\configure\visual_studio\NagisaBase.props" />
     <Import Project="C:\configure\visual_studio\NagisaLib.props" />
     <Import Project="C:\configure\visual_studio\ESPIDF.props" />
+    <Import Project="C:\configure\visual_studio\vulkan.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="C:\configure\visual_studio\NagisaBase.props" />
     <Import Project="C:\configure\visual_studio\NagisaLib.props" />
     <Import Project="C:\configure\visual_studio\ESPIDF.props" />
+    <Import Project="C:\configure\visual_studio\vulkan.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

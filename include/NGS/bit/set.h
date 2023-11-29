@@ -3,7 +3,7 @@
 #include "./defined.h"
 #include "./operation.h"
 
-#if NGS_COMPILER_IS_MSVC
+#if defined(NGS_COMPILER_IS_MSVC)
 #pragma warning(push)
 #pragma warning(disable: 4293)
 #endif
@@ -163,6 +163,6 @@ constexpr typename bit_set<_BitCount>::wrapper_type bit_set<_BitCount>::operator
 
 NGS_BIT_END
 
-#if NGS_COMPILER_IS_MSVC
+#if defined(NGS_COMPILER_IS_MSVC)
 #pragma warning(pop)
 #endif
