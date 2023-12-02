@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./defined.h"
+#include "../defined.h"
 
 #define NGS_TVM_TV_REGISTER(mapper,value_type_)								\
 namespace mapper{															\

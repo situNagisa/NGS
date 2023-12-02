@@ -1,7 +1,7 @@
 #pragma once
 
-#include "./tv.h"
-#include "./vt.h"
+#include "../injective/tv.h"
+#include "../injective/vt.h"
 
 #define NGS_TVM_REGISTER(mapper,value_type_)	\
 NGS_TVM_TV_REGISTER(mapper,value_type_);		\

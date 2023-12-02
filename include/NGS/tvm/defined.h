@@ -8,7 +8,7 @@
 //tvm - type-value map
 
 #define NGS_LIB_VERSION_MAJOR 0
-#define NGS_LIB_VERSION_MINOR 2
+#define NGS_LIB_VERSION_MINOR 3
 #define NGS_LIB_VERSION_PATCH 0
 #define NGS_LIB_NAME tvm
 #include "NGS/lib/lib.h"

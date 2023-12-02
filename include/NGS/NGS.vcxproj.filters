@@ -3348,16 +3348,25 @@
     <ClInclude Include="tvm\tvm.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="tvm\tv.h">
+    <ClInclude Include="tvm\injective\tv.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="tvm\sequence.h">
+    <ClInclude Include="tvm\bijective\sequence.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="tvm\vt.h">
+    <ClInclude Include="tvm\injective\vt.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="tvm\tv_bitmap.h">
+    <ClInclude Include="tvm\bijective\tv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tvm\injective\vv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tvm\injective.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tvm\bijective.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
