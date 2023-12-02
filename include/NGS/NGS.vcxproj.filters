@@ -3365,6 +3365,16 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="external\vulkan\type_map\type_type.h">
+    <ClInclude Include="tvm\tv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tvm\sequence.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tvm\vt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tvm\tv_bitmap.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

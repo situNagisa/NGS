@@ -1,6 +1,8 @@
 #pragma once
 
-
-#include "./type_value.h"
+#include "./tv.h"
+#include "./vt.h"
+#include "./tv_bitmap.h"
+#include "./sequence.h"
 
 #include "NGS/lib/lib_end.h"
