@@ -10,6 +10,8 @@ template<key_type> constexpr value_type value = {};			\
 }															\
 //
 
-#define NGS_TVM_VV_INSERT(mapper,key_,value_)															\
-template<> constexpr mapper::value_type mapper::value<key_> = static_cast<mapper::value_type>(value_);	\
+#define NGS_TVM_VV_INSERT(mapper,key_,value_)									\
+namespace mapper{																\
+template<> constexpr value_type value<key_> = static_cast<value_type>(value_);	\
+}																				\
 //
