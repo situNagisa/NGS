@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./defined.h"
+#include "../defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
@@ -12,23 +12,12 @@ struct buffer_binder
 	constexpr static size_t attribute_count = sizeof...(_ActiveIndices);
 	constexpr static std::array<size_t, attribute_count> active_indices = { _ActiveIndices... };
 
+	constexpr static auto get_description()
+	{
+		vk::VertexInputBindingDescription description{};
 
+		return description;
+	}
 };
-
-template<class>
-struct ohh {};
-
-template<template<class...>class _T, mpl::mstruct::CVariable... _Args>
-struct ohh<_T<_Args...>> : std::true_type {};
-
-void aaa()
-{
-	using mpl::mstruct::variable;
-	using m = mpl::mstruct::structure<int, float, float>;
-	static_assert(mpl::mstruct::CFlattenedStructure<m>);
-
-	using b = buffer_binder<m, 0, 2>;
-
-}
 
 NGS_LIB_MODULE_END

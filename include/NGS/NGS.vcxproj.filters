@@ -3315,7 +3315,7 @@
     <ClInclude Include="external\vulkan\descriptor\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="external\vulkan\descriptor\buffer.h">
+    <ClInclude Include="external\vulkan\shader\buffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="lib\defined.h">
@@ -3349,6 +3349,22 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="tvm\type_value.h">
+    <ClInclude Include="external\vulkan\shader\buffer\binder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\shader\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\shader\buffer\attribute.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\shader\buffer\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\type_map\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\type_map\type_type.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
