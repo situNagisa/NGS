@@ -389,6 +389,9 @@
     <ClInclude Include="to_string\defined.h" />
     <ClInclude Include="to_string\core.h" />
     <ClInclude Include="to_string\to_string.h" />
+    <ClInclude Include="tvm\defined.h" />
+    <ClInclude Include="tvm\tvm.h" />
+    <ClInclude Include="tvm\type_value.h" />
     <ClInclude Include="type_trait\function.h" />
     <ClInclude Include="type_trait\is_specialization.h" />
     <ClInclude Include="type_trait\is_template.h" />
