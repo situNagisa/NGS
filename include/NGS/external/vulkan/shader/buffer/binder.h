@@ -1,23 +1,24 @@
 #pragma once
 
-#include "../defined.h"
+#include "./defined.h"
+#include "./attribute.h"
 
 NGS_LIB_MODULE_BEGIN
 
-template<mpl::mstruct::CFlattenedStructure _LocationStruct, size_t... _ActiveIndices>
-	requires ((_ActiveIndices < _LocationStruct::variable_count) && ...)
-struct buffer_binder
+template<CAttribute... _Attributes>
+struct binder
 {
-	using location_struct = _LocationStruct;
-	constexpr static size_t attribute_count = sizeof...(_ActiveIndices);
-	constexpr static std::array<size_t, attribute_count> active_indices = { _ActiveIndices... };
+	using structure_type = mpl::mstruct::structure<typename _Attributes::variable_type...>;
+	constexpr static size_t attribute_count = sizeof...(_Attributes);
+	constexpr static ::std::array<vk::Format, attribute_count> formats = { _Attributes::format... };
+};
 
-	constexpr static auto get_description()
-	{
-		vk::VertexInputBindingDescription description{};
-
-		return description;
-	}
+template<class _T, class _O = type_traits::object_t<_T>>
+concept CBinder = requires
+{
+	{ _O::attribute_count } -> ::std::convertible_to<size_t>;
+	{ _O::formats } -> ::std::convertible_to<::std::array<vk::Format, _O::attribute_count>>;
+		requires mpl::mstruct::CStructure<typename _O::structure_type>;
 };
 
 NGS_LIB_MODULE_END

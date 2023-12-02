@@ -28,27 +28,27 @@ public:
 
 	template<size_t _Index>
 	constexpr auto&& get() {
-		constexpr auto variables = describe_type::GET_VARIABLES();
+		constexpr auto variables = describe_type::get_variables();
 		using variable_type = typename describe_type::template variable_at<_Index>;
 		return *(reinterpret_cast<typename variable_type::storage_type*>(data + variables[_Index].offset));
 	}
 	template<size_t _Index>
 	constexpr auto&& get()const {
-		constexpr auto variables = describe_type::GET_VARIABLES();
+		constexpr auto variables = describe_type::get_variables();
 		using variable_type = typename describe_type::template variable_at<_Index>;
 		return *(reinterpret_cast<const typename variable_type::storage_type*>(data + variables[_Index].offset));
 	}
 
 	constexpr auto get(size_t index) {
-		constexpr auto variables = describe_type::GET_VARIABLES();
+		constexpr auto variables = describe_type::get_variables();
 		return data + variables[index].offset;
 	}
 	constexpr auto get(size_t index) const {
-		constexpr auto variables = describe_type::GET_VARIABLES();
+		constexpr auto variables = describe_type::get_variables();
 		return data + variables[index].offset;
 	}
 	constexpr auto get_size(size_t index) const {
-		constexpr auto variables = describe_type::GET_VARIABLES();
+		constexpr auto variables = describe_type::get_variables();
 		return variables[index].size;
 	}
 	constexpr auto get_span(size_t index) {

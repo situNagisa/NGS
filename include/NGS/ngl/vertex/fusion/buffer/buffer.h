@@ -17,7 +17,7 @@ public:
 		std::array<attrib_dynamic_data, attrib_count> attribs{
 			make_attrib<element_type,_Counts>()...
 		};
-		constexpr auto variables = base_type::GET_VARIABLES();
+		constexpr auto variables = base_type::get_variables();
 		for (size_t i = 0; i < attrib_count; i++)
 		{
 			attribs[i].offset = variables[i].offset;

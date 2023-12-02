@@ -4,12 +4,14 @@
 
 NGS_LIB_MODULE_BEGIN
 
+using structure_default_align_t = layout::no_align_t;
+
 template<class...>
 struct make_describe;
 
 template<>
 struct make_describe<> {
-	using result_type = struct_describe<layout::default_align_t>;
+	using result_type = struct_describe<structure_default_align_t>;
 };
 
 template<class _First, class... _Rest>
@@ -24,10 +26,10 @@ private:
 				return declval<arg_type>();
 			}
 			else if constexpr (CVariable<arg_type>) {
-				return declval<struct_describe<layout::default_align_t, arg_type>>();
+				return declval<struct_describe<structure_default_align_t, arg_type>>();
 			}
 			else {
-				return declval<struct_describe<layout::default_align_t, variable<arg_type>>>();
+				return declval<struct_describe<structure_default_align_t, variable<arg_type>>>();
 			}
 		}
 		else {
@@ -43,7 +45,7 @@ private:
 				}
 			}
 			else {
-				return declval < struct_describe < layout::default_align_t,
+				return declval < struct_describe < structure_default_align_t,
 					std::conditional_t<CVariable<arg_type>, arg_type, variable<arg_type>>,
 					std::conditional_t<CVariable<arg_type>, _Rest, variable<_Rest>>...
 					>>();

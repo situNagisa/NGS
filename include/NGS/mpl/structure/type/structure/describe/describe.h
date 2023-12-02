@@ -24,7 +24,7 @@ struct struct_describe<_Align, _Variable...> {
 	constexpr static size_t size = layout::size_of<align>(_Variable::size...);
 
 	// 元变量对应的动态结构体数组（可动态访问
-	NGS_MPL_VALUE auto GET_VARIABLES() {
+	NGS_MPL_VALUE auto get_variables() {
 		constexpr std::array<size_t, variable_count> _counts = { variable_traits<_Variable>::element_count... };
 		constexpr std::array<size_t, variable_count> _sizes = { _Variable::size... };
 		constexpr std::array<size_t, variable_count> _offsets = layout::offset<align>(_Variable::size...);
