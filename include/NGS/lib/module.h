@@ -1,0 +1,17 @@
+//#pragma once
+
+
+#if !defined(NGS_LIB_BEGIN) || !defined(NGS_LIB_END)
+#	error "NGS_LIB_BEGIN or NGS_LIB_END is not defined."
+#else
+#	if defined(NGS_LIB_MODULE_NAME)
+#		define NGS_LIB_MODULE_BEGIN NGS_LIB_BEGIN namespace NGS_LIB_MODULE_NAME {
+#		define NGS_LIB_MODULE_END } NGS_LIB_END
+#	elif defined(NGS_LIB_MODULE_INLINE_NAME)
+#		define NGS_LIB_MODULE_NAME NGS_LIB_MODULE_INLINE_NAME
+#		define NGS_LIB_MODULE_BEGIN NGS_LIB_BEGIN inline namespace NGS_LIB_MODULE_NAME {
+#		define NGS_LIB_MODULE_END } NGS_LIB_END
+#	else
+#		error "NGS_LIB_MODULE_NAME or NGS_LIB_MODULE_INLINE_NAME is not defined."
+#	endif
+#endif

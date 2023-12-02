@@ -1,8 +1,8 @@
 #pragma once
 
-#include "NGS/mpl/structure/defined.h"
+#include "../defined.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 template<class _Type = void, class _ObjectType = std::remove_reference_t<_Type>>
 concept CVariable = requires() {
@@ -12,4 +12,4 @@ concept CVariable = requires() {
 	{ _ObjectType::align } -> std::convertible_to<size_t>;
 };
 
-NGS_STRUCTURE_TYPE_END
+NGS_LIB_MODULE_END

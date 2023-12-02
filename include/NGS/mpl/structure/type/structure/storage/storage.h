@@ -2,7 +2,7 @@
 
 #include "./concept.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 template<CStructureDescribe _Describe>
 struct alignas(_Describe::align) struct_storage : _Describe {
@@ -47,7 +47,7 @@ public:
 		constexpr auto variables = describe_type::GET_VARIABLES();
 		return data + variables[index].offset;
 	}
-	constexpr auto get_size(size_t index) const{
+	constexpr auto get_size(size_t index) const {
 		constexpr auto variables = describe_type::GET_VARIABLES();
 		return variables[index].size;
 	}
@@ -62,10 +62,10 @@ public:
 	//====================
 	template<bool _Constant>
 	struct _storage_iterator :
-	nboost::stl_interfaces::base_random_access_iterator<
+		nboost::stl_interfaces::base_random_access_iterator<
 		_storage_iterator<_Constant>,
-		std::span<std::conditional_t<_Constant,const byte,byte>>
-	>
+		std::span<std::conditional_t<_Constant, const byte, byte>>
+		>
 	{
 		NGS_MPL_ENVIRON2(_storage_iterator, nboost::stl_interfaces::base_random_access_iterator<_storage_iterator<_Constant>, std::span<std::conditional_t<_Constant, const byte, byte>>>);
 	public:
@@ -78,7 +78,7 @@ public:
 		using range_type = std::conditional_t<_Constant, const struct_storage, struct_storage>;
 	public:
 		using base_type::base_type;
-		constexpr _storage_iterator(range_type* range,size_t size)
+		constexpr _storage_iterator(range_type* range, size_t size)
 			: _range(range)
 			, _index(size)
 		{}
@@ -121,7 +121,7 @@ public:
 	byte data[describe_type::size]{};
 };
 
-NGS_STRUCTURE_TYPE_END
+NGS_LIB_MODULE_END
 
 NGS_BEGIN
 

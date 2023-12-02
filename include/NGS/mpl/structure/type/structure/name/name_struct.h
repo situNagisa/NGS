@@ -3,7 +3,7 @@
 #include "../structure.h"
 #include "./pair.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 template<class _Type, class _ObjectType = std::remove_reference_t<_Type>>
 concept CNamedStruct = CStructure<_ObjectType> && requires(_ObjectType obj, const _ObjectType obj_cst) {
@@ -45,4 +45,4 @@ public:
 template<layout::CAlign _Align, CPair... _Pairs>
 using name_struct = _name_struct<_Align, std::make_index_sequence<sizeof...(_Pairs)>, _Pairs...>;
 
-NGS_STRUCTURE_TYPE_END
+NGS_LIB_MODULE_END

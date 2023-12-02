@@ -2,7 +2,7 @@
 
 #include "./concept.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 NGS_MPL_FUNCTION(variable, class _Type) {
 	NGS_MPL_TYPE original_type = _Type;
@@ -15,4 +15,4 @@ NGS_MPL_FUNCTION(variable, CVariable _Variable) < _Variable > : _Variable{};
 
 NGS_CCPT_VERIFY(CVariable, variable<int>);
 
-NGS_STRUCTURE_TYPE_END
+NGS_LIB_MODULE_END

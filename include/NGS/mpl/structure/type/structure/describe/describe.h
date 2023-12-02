@@ -1,10 +1,10 @@
 ﻿#pragma once
 
 #include "./concept.h"
-#include "NGS/mpl/structure/type/variable/traits.h"
-#include "NGS/mpl/structure/type/variable/dynamic_data.h"
+#include "../../variable/traits.h"
+#include "../../variable/dynamic_data.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 NGS_MPL_FUNCTION(struct_describe, class ...);
 
@@ -40,4 +40,4 @@ struct struct_describe<_Align, _Variable...> {
 	}
 };
 
-NGS_STRUCTURE_TYPE_END
+NGS_LIB_MODULE_END

@@ -1,0 +1,6 @@
+//#pragma once
+
+#undef NGS_LIB_MODULE_NAME
+#undef NGS_LIB_MODULE_INLINE_NAME
+#undef NGS_LIB_MODULE_BEGIN
+#undef NGS_LIB_MODULE_END

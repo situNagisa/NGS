@@ -132,6 +132,18 @@
     <ClInclude Include="external\glfw\window.hpp" />
     <ClInclude Include="external\glfw\glfw.hpp" />
     <ClInclude Include="external\glfw.hpp" />
+    <ClInclude Include="external\vulkan\defined.h" />
+    <ClInclude Include="external\vulkan\descriptor\buffer.h" />
+    <ClInclude Include="external\vulkan\descriptor\defined.h" />
+    <ClInclude Include="external\vulkan\vulkan.h" />
+    <ClInclude Include="external\vulkan\vulkan.hpp" />
+    <ClInclude Include="external\vulkan\vulkan_with_depend.hpp" />
+    <ClInclude Include="gsml\defined.h" />
+    <ClInclude Include="lib\defined.h" />
+    <ClInclude Include="lib\lib.h" />
+    <ClInclude Include="lib\lib_end.h" />
+    <ClInclude Include="lib\module.h" />
+    <ClInclude Include="lib\module_end.h" />
     <ClInclude Include="linear_algebra\api\matrix.h" />
     <ClInclude Include="linear_algebra\api\scalar.h" />
     <ClInclude Include="linear_algebra\api\vector.h" />
@@ -240,6 +252,8 @@
     <ClInclude Include="external\opengl\error.h" />
     <ClInclude Include="external\opengl\enum.h" />
     <ClInclude Include="external\opengl\opengl.h" />
+    <ClInclude Include="mpl\structure\type\defined.h" />
+    <ClInclude Include="mpl\structure\type\structure\defined.h" />
     <ClInclude Include="osapi\defined.h" />
     <ClInclude Include="osapi\esp.h" />
     <ClInclude Include="osapi\esp.hpp" />
@@ -297,6 +311,7 @@
     <ClInclude Include="preprocessor\utils\type_of_expression.h" />
     <ClInclude Include="basic\preprocessor\type_value_convert.h" />
     <ClInclude Include="preprocessor\utils\variable_args.h" />
+    <ClInclude Include="preprocessor\utils\version.h" />
     <ClInclude Include="preprocessor\utils\warning.h" />
     <ClInclude Include="basic\type.h" />
     <ClInclude Include="basic\type\byte.h" />
@@ -647,8 +662,8 @@
     <ClInclude Include="layout\align\is_align.h" />
     <ClInclude Include="layout\layout.h" />
     <ClInclude Include="layout\defined.h" />
-    <ClInclude Include="base\base.h" />
-    <ClInclude Include="base\base.hpp" />
+    <ClInclude Include="_discard\base\base.h" />
+    <ClInclude Include="_discard\base\base.hpp" />
     <ClInclude Include="basic\declval.h" />
     <ClInclude Include="to_string\format.h" />
     <ClInclude Include="ccpt\base.h" />
@@ -688,8 +703,8 @@
     <ClInclude Include="extend\color\color.h" />
     <ClInclude Include="extend\iterator_interface.h" />
     <ClInclude Include="basic\basic.h" />
-    <ClInclude Include="base\defined.h" />
-    <ClInclude Include="base\is_as.h" />
+    <ClInclude Include="_discard\base\defined.h" />
+    <ClInclude Include="_discard\base\is_as.h" />
     <ClInclude Include="extend\memory_reinterpreter.h" />
     <ClInclude Include="ccpt\ccpt.h" />
     <ClInclude Include="ccpt\fundamental\boolean.h" />

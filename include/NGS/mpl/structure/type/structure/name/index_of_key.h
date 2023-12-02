@@ -2,7 +2,7 @@
 
 #include "./name_struct.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 template<CNamedStruct _Struct, CVariableId _Id>
 struct index_of_key {
@@ -14,4 +14,4 @@ struct index_of_key_c {
 	using type = typename index_of_key<_Struct, variable_id<_Id>>::type;
 };
 
-NGS_STRUCTURE_TYPE_END
+NGS_LIB_MODULE_END

@@ -4,12 +4,12 @@
 
 NGS_LAYOUT_BEGIN
 
-template<size_t _Align,size_t _Count>
+template<size_t _Align, size_t _Count>
 	requires CAlign<ccpt::uint_<_Align>>
-constexpr auto offset(const std::array<size_t,_Count>& sizes){
+constexpr auto offset(const std::array<size_t, _Count>& sizes) {
 	using result_type = std::array<size_t, _Count>;
 	result_type offsets{};
-	if constexpr(_Align == no_align) {
+	if constexpr (_Align == no_align) {
 		for (size_t i = 1; i < offsets.size(); i++)
 		{
 			offsets[i] = offsets[i - 1] + sizes[i - 1];
@@ -38,7 +38,7 @@ constexpr auto offset(const std::array<size_t,_Count>& sizes){
 template<size_t _Align>
 	requires CAlign<ccpt::uint_<_Align>>
 constexpr auto offset(std::integral auto... sizes) {
-	return offset<_Align>(std::array{ static_cast<size_t>(sizes)... });
+	return layout::offset<_Align>(std::array{ static_cast<size_t>(sizes)... });
 }
 
 NGS_LAYOUT_END

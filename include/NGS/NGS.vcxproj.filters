@@ -24,7 +24,7 @@
     <ClInclude Include="algorithm\PID.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\base.h">
+    <ClInclude Include="_discard\base\base.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="extend\console.h">
@@ -252,7 +252,7 @@
     <ClInclude Include="ngl\vertex\vertex.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\base.hpp">
+    <ClInclude Include="_discard\base\base.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="math\math.hpp">
@@ -699,7 +699,7 @@
     <ClInclude Include="math\geometry\transform.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\defined.h">
+    <ClInclude Include="_discard\base\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="basic\basic.h">
@@ -828,7 +828,7 @@
     <ClInclude Include="ngl\glfw\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="base\is_as.h">
+    <ClInclude Include="_discard\base\is_as.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="dl\display\bitmap\bitmap.h">
@@ -3295,6 +3295,51 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="external\glfw.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\vulkan.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\vulkan_with_depend.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\vulkan.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gsml\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\descriptor\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="external\vulkan\descriptor\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\lib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\module.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\lib_end.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\module_end.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="preprocessor\utils\version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\structure\type\defined.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mpl\structure\type\structure\defined.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,7 +2,7 @@
 
 #include "./describe.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 template<class...>
 struct make_describe;
@@ -57,4 +57,4 @@ public:
 template<class... _Types>
 using make_describe_t = typename make_describe<_Types...>::result_type;
 
-NGS_STRUCTURE_TYPE_END
+NGS_LIB_MODULE_END

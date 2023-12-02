@@ -2,7 +2,7 @@
 
 #include "./structure.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 template<CStructure _Struct>
 constexpr auto&& wrapper(void_ptr address) {
@@ -14,4 +14,4 @@ constexpr auto&& wrapper(void_ptr_cst address) {
 	return *static_cast<const _Struct*>(address);
 }
 
-NGS_STRUCTURE_TYPE_END
+NGS_LIB_MODULE_END

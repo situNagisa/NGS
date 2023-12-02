@@ -9,12 +9,9 @@
 #include "NGS/mpl/defined.h"
 #include "NGS/static/string.h"
 
+#define NGS_LIB_VERSION_MAJOR 1
+#define NGS_LIB_VERSION_MINOR 1
+#define NGS_LIB_VERSION_PATCH 0
 
-#define NGS_STRUCTURE_BEGIN NGS_MPL_BEGIN namespace mstruct{
-#define NGS_STRUCTURE_END } NGS_MPL_END
-
-#define NGS_STRUCTURE_TYPE_BEGIN NGS_STRUCTURE_BEGIN inline namespace type{
-#define NGS_STRUCTURE_TYPE_END } NGS_STRUCTURE_END
-
-#define NGS_STRUCTURE_CONTAINER_BEGIN NGS_STRUCTURE_BEGIN namespace container{
-#define NGS_STRUCTURE_CONTAINER_END } NGS_STRUCTURE_END
+#define NGS_LIB_NAME mpl::mstruct
+#include "NGS/lib/lib.h"

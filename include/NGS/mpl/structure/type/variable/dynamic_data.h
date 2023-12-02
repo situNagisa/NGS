@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "NGS/mpl/structure/defined.h"
+#include "../defined.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API variable_dynamic_data {
 	size_t count;
@@ -10,4 +10,4 @@ struct NGS_DLL_API variable_dynamic_data {
 	size_t offset;
 };
 
-NGS_STRUCTURE_TYPE_END
+NGS_LIB_MODULE_END

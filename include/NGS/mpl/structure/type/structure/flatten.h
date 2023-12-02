@@ -2,7 +2,7 @@
 
 #include "./structure.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 NGS_MPL_FUNCTION(flatten, class...);
 template<class... _Types>
@@ -69,4 +69,22 @@ NGS_MPL_FUNCTION(flatten_as_struct, CStructure _Struct, template<class...>class 
 template<CStructure _Struct>
 using flatten_as_struct_t = typename flatten_as_struct<_Struct>::result_type;
 
-NGS_STRUCTURE_TYPE_END
+namespace detail
+{
+	template<class>
+	struct is_flattened_struct : std::false_type {};
+
+	template<template<class...>class _Template, CVariable... _Variables>
+	struct is_flattened_struct<_Template<_Variables...>> : std::bool_constant<!(CStructure<typename _Variables::original_type> || ...)> {};
+
+}
+
+/**
+ * @brief 判断结构体是否已经展开
+ *
+ * @tparam _Struct 待判断的结构体
+ */
+template<class _Struct>
+concept CFlattenedStructure = CStructure<_Struct> && detail::is_flattened_struct<typename _Struct::variable_types>::value;
+
+NGS_LIB_MODULE_END

@@ -2,7 +2,7 @@
 
 #include "./variable.h"
 
-NGS_STRUCTURE_TYPE_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 template<CVariable _Variable>
 struct variable_traits {
@@ -28,4 +28,4 @@ struct variable_traits {
 		}();
 };
 
-NGS_STRUCTURE_TYPE_END
+NGS_LIB_MODULE_END
