@@ -390,8 +390,11 @@
     <ClInclude Include="to_string\core.h" />
     <ClInclude Include="to_string\to_string.h" />
     <ClInclude Include="tvm\defined.h" />
+    <ClInclude Include="tvm\sequence.h" />
+    <ClInclude Include="tvm\tv.h" />
     <ClInclude Include="tvm\tvm.h" />
-    <ClInclude Include="tvm\type_value.h" />
+    <ClInclude Include="tvm\tv_bitmap.h" />
+    <ClInclude Include="tvm\vt.h" />
     <ClInclude Include="type_trait\function.h" />
     <ClInclude Include="type_trait\is_specialization.h" />
     <ClInclude Include="type_trait\is_template.h" />
