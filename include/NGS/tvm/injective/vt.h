@@ -10,6 +10,8 @@ template<value_type _Value> using type = typename type_map<_Value>::type;	\
 }																			\
 //
 
-#define NGS_TVM_VT_INSERT(mapper,type_,value_)															\
-template<> struct mapper::type_map<static_cast<mapper::value_type>(value_)> { using type = type_; };	\
+#define NGS_TVM_VT_INSERT(mapper,type_,value_)											\
+namespace mapper{																		\
+template<> struct type_map<static_cast<value_type>(value_)> { using type = type_; };	\
+}																						\
 //
