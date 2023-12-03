@@ -4,11 +4,23 @@
 
 NGS_LIB_BEGIN
 
-struct instance_create_info : VkInstanceCreateInfo
+struct instance_create_info
 {
-	using base_type = VkInstanceCreateInfo;
+	vk::InstanceCreateFlags flags{};
+	struct
+	{
+		std::string name{};
+		uint32_t version{};
+	}application{};
+	struct
+	{
+		std::string name{};
+		uint32_t version{};
+	}engine{};
+	uint32_t version{};
 
-	constexpr instance_create_info() = default;
+	std::vector<std::string> layers{};
+	std::vector<std::string> extensions{};
 };
 
 NGS_LIB_END

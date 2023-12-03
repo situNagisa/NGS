@@ -1,6 +1,5 @@
 ﻿#pragma  once
 
-#include "NGS/base/base.h"
 #include "NGS/bit/bit.h"
 
 NGS_BEGIN

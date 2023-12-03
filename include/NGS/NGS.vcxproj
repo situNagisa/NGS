@@ -137,7 +137,9 @@
     <ClInclude Include="external\glfw\glfw.hpp" />
     <ClInclude Include="external\glfw.hpp" />
     <ClInclude Include="external\vulkan.h" />
+    <ClInclude Include="external\vulkan.hpp" />
     <ClInclude Include="external\vulkan\application.h" />
+    <ClInclude Include="external\vulkan\application.hpp" />
     <ClInclude Include="external\vulkan\application\application.h" />
     <ClInclude Include="external\vulkan\application\defined.h" />
     <ClInclude Include="external\vulkan\application\info.h" />
@@ -159,6 +161,7 @@
     <ClInclude Include="external\vulkan\vulkan.h" />
     <ClInclude Include="external\vulkan\vulkan.hpp" />
     <ClInclude Include="external\vulkan\vulkan_with_depend.hpp" />
+    <ClInclude Include="external\vulkan_with_depend.hpp" />
     <ClInclude Include="_discard\gsml\defined.h" />
     <ClInclude Include="lib\defined.h" />
     <ClInclude Include="lib\lib.h" />

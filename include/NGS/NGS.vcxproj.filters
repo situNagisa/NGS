@@ -1131,6 +1131,9 @@
     <ClInclude Include="external\boost\pfr\defined.h" />
     <ClInclude Include="external\boost\pfr\pfr.h" />
     <ClInclude Include="external\boost\pfr\convert.h" />
+    <ClInclude Include="external\vulkan\application.hpp" />
+    <ClInclude Include="external\vulkan_with_depend.hpp" />
+    <ClInclude Include="external\vulkan.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />
