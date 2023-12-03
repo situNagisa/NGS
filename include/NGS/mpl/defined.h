@@ -4,6 +4,7 @@
 //#include "NGS/base/base.h"
 #include "NGS/ccpt/ccpt.h"
 
+#define NGS_MPL_NS mpl
 #define NGS_MPL_BEGIN NGS_BEGIN namespace mpl{
 #define NGS_MPL_END } NGS_END
 
