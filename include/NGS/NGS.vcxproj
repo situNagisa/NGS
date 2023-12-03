@@ -43,6 +43,10 @@
     <ClInclude Include="bit\operation.h" />
     <ClInclude Include="bit\set.h" />
     <ClInclude Include="bit\state.h" />
+    <ClInclude Include="external\boost\pfr.h" />
+    <ClInclude Include="external\boost\pfr\convert.h" />
+    <ClInclude Include="external\boost\pfr\defined.h" />
+    <ClInclude Include="external\boost\pfr\pfr.h" />
     <ClInclude Include="external\boost\stl_interfaces\iterator\random_access\trivial.h" />
     <ClInclude Include="byte\byte.h" />
     <ClInclude Include="byte\defined.h" />

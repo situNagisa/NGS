@@ -1127,6 +1127,10 @@
     <ClInclude Include="external\vulkan\application\application.h" />
     <ClInclude Include="external\vulkan\application\defined.h" />
     <ClInclude Include="external\vulkan\application\info.h" />
+    <ClInclude Include="external\boost\pfr.h" />
+    <ClInclude Include="external\boost\pfr\defined.h" />
+    <ClInclude Include="external\boost\pfr\pfr.h" />
+    <ClInclude Include="external\boost\pfr\convert.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />
