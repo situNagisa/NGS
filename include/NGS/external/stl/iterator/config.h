@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_STL_ITERATOR_BEGIN
+NGS_LIB_BEGIN
 
 template<class _T, class _O = type_traits::object_t<_T>>
 concept is_config = requires
@@ -71,4 +71,4 @@ using type_name = NGS_ mpl::options::value_or<typename config_type::type_name, _
 //
 #define NGS_STL_ITERATOR_CONFIG_VALUE_OR(type_name,...) NGS_STL_ITERATOR_CONFIG_VALUE_OR2(type_name, base_type, __VA_ARGS__)
 
-NGS_STL_ITERATOR_END
+NGS_LIB_END

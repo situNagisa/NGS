@@ -2,7 +2,7 @@
 
 #include "./input_or_output.h"
 
-NGS_STL_ITERATOR_BEGIN
+NGS_LIB_BEGIN
 /**
  * \brief
  * \tparam _Derived
@@ -29,4 +29,4 @@ public:
 	//constexpr type_traits::is_same_naked<value_type> auto operator*()const;
 };
 
-NGS_STL_ITERATOR_END
+NGS_LIB_END

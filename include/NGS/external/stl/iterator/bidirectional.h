@@ -2,7 +2,7 @@
 
 #include "./forward.h"
 
-NGS_STL_ITERATOR_BEGIN
+NGS_LIB_BEGIN
 /**
  * \code
  * std::bidirectional_iterator :
@@ -41,4 +41,4 @@ public:
 	}
 };
 
-NGS_STL_ITERATOR_END
+NGS_LIB_END

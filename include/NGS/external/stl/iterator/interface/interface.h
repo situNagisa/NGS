@@ -1,9 +1,9 @@
 ﻿#pragma once
 
-#include "./defined.h"
-#include "./config.h"
+#include "../defined.h"
+#include "../config.h"
 
-NGS_STL_ITERATOR_BEGIN
+NGS_LIB_BEGIN
 
 #undef interface
 /**
@@ -82,4 +82,4 @@ protected:
 };
 
 
-NGS_STL_ITERATOR_END
+NGS_LIB_END

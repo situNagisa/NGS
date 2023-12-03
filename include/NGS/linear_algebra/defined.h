@@ -4,7 +4,7 @@
 #include "NGS/type_trait/type_trait.h"
 #include "NGS/yap/yap.h"
 #include "NGS/assert/assert.h"
-#include "NGS/boost/stl_interfaces.h"
+#include "NGS/external/boost/stl_interfaces.h"
 #include "NGS/wrapper/wrapper.h"
 #include "NGS/static/functional.h"
 #include "NGS/math/basic.h"

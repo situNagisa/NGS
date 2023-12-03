@@ -7,3 +7,5 @@
 #include "./iterator/bidirectional.h"
 #include "./iterator/random_access.h"
 #include "./iterator/contiguous.h"
+
+#include "NGS/lib/lib_end.h"

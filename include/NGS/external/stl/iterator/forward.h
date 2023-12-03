@@ -2,7 +2,7 @@
 
 #include "./input.h"
 
-NGS_STL_ITERATOR_BEGIN
+NGS_LIB_BEGIN
 /**
  * \code
  * std::forward_iterator :
@@ -40,4 +40,4 @@ public:
 	constexpr auto operator<=>(const forward&) const = default;
 };
 
-NGS_STL_ITERATOR_END
+NGS_LIB_END

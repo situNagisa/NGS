@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "NGS/boost/fusion.h"
-#include "NGS/boost/stl_interfaces.h"
+#include "NGS/external/boost/fusion.h"
+#include "NGS/external/boost/stl_interfaces.h"
 
 #include "NGS/basic/basic.h"
 #include "NGS/ccpt/ccpt.h"
@@ -11,7 +11,7 @@
 
 #define NGS_LIB_VERSION_MAJOR 1
 #define NGS_LIB_VERSION_MINOR 1
-#define NGS_LIB_VERSION_PATCH 1
+#define NGS_LIB_VERSION_PATCH 2
 
 #define NGS_LIB_NAME mpl::mstruct
 #include "NGS/lib/lib.h"

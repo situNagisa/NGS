@@ -5,7 +5,7 @@
 #include "NGS/type_trait/type_trait.h"
 #include "NGS/cpt/cpt.h"
 #include "NGS/math/space.h"
-#include "NGS/boost/stl_interfaces.h"
+#include "NGS/external/boost/stl_interfaces.h"
 #include "NGS/math/basic.h"
 #include "NGS/math/angle.h"
 #include "NGS/math/matrix/concept.h"

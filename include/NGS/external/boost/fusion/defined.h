@@ -2,7 +2,7 @@
 
 #include "../defined.h"
 
-#include "NGS/boost/mpl.h"
+#include "NGS/external/boost/mpl.h"
 
 #include <boost/fusion/container.hpp>
 #include <boost/fusion/sequence.hpp>

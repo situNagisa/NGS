@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_STL_ITERATOR_BEGIN
+NGS_LIB_BEGIN
 
 /**
  * \code
@@ -53,4 +53,4 @@ protected:
 };
 
 
-NGS_STL_ITERATOR_END
+NGS_LIB_END

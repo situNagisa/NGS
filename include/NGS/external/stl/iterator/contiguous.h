@@ -2,7 +2,7 @@
 
 #include "./random_access.h"
 
-NGS_STL_ITERATOR_BEGIN
+NGS_LIB_BEGIN
 /**
  * \code
  * std::contiguous_iterator :
@@ -36,4 +36,4 @@ public:
 	//constexpr operator value_type*() const ;
 };
 
-NGS_STL_ITERATOR_END
+NGS_LIB_END

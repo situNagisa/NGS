@@ -2,7 +2,7 @@
 
 #include "./input_or_output.h"
 
-NGS_STL_ITERATOR_BEGIN
+NGS_LIB_BEGIN
 /**
  * \code
  * std::output_iterator :
@@ -33,4 +33,4 @@ public:
 	//constexpr auto& operator*();
 };
 
-NGS_STL_ITERATOR_END
+NGS_LIB_END
