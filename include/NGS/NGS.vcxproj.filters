@@ -1131,6 +1131,11 @@
     <ClInclude Include="external\boost\pfr\defined.h" />
     <ClInclude Include="external\boost\pfr\pfr.h" />
     <ClInclude Include="external\boost\pfr\convert.h" />
+    <ClInclude Include="external\stl\range\defined.h" />
+    <ClInclude Include="external\stl\range\transform.h" />
+    <ClInclude Include="external\stl\range\transform\defined.h" />
+    <ClInclude Include="external\stl\range\transform\container.h" />
+    <ClInclude Include="external\stl\range.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />
