@@ -29,8 +29,11 @@ NGS_EXTERNAL_VULKAN_FORMAT_TV_MAP(float64, 64, Sfloat);
 
 #undef NGS_EXTERNAL_VULKAN_FORMAT_TV_MAP
 
-template<class>
-struct adapter;
+template<class _T>
+struct adapter
+{
+	using type = _T;
+};
 
 template<cpt::fundamental _T> requires !::std::ranges::contiguous_range<_T>
 struct adapter<_T>
