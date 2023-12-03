@@ -736,37 +736,37 @@
     <ClInclude Include="ccpt\fundamental\uint.h" />
     <ClInclude Include="ccpt\predicate.h" />
     <ClInclude Include="ccpt\verify.h" />
-    <ClInclude Include="dl\defined.h" />
-    <ClInclude Include="dl\display.h" />
-    <ClInclude Include="dl\display.hpp" />
-    <ClInclude Include="dl\display\basic.h" />
-    <ClInclude Include="dl\display\bitmap.h" />
-    <ClInclude Include="dl\display\bitmap\bitmap.h" />
-    <ClInclude Include="dl\display\bitmap\data.h" />
-    <ClInclude Include="dl\display\bitmap\data.hpp" />
-    <ClInclude Include="dl\display\bitmap\idata.h" />
-    <ClInclude Include="dl\display\bitmap\view.h" />
-    <ClInclude Include="dl\display\display.h" />
-    <ClInclude Include="dl\display\get_display_stage.h" />
-    <ClInclude Include="dl\display\shape.hpp" />
-    <ClInclude Include="dl\display\shape.h" />
-    <ClInclude Include="dl\display\shape\graphic.h" />
-    <ClInclude Include="dl\display\shape\graphic.hpp" />
-    <ClInclude Include="dl\display\shape\graphic\command.h" />
-    <ClInclude Include="dl\display\shape\graphic\command.hpp" />
-    <ClInclude Include="dl\display\shape\graphic\graphic.h" />
-    <ClInclude Include="dl\display\shape\shape.h" />
-    <ClInclude Include="dl\display\shape\shape.hpp" />
-    <ClInclude Include="dl\display\sprite.h" />
-    <ClInclude Include="dl\display\stage.h" />
-    <ClInclude Include="dl\dl.h" />
-    <ClInclude Include="dl\dl.hpp" />
-    <ClInclude Include="dl\enum.h" />
-    <ClInclude Include="dl\enum\blend_mode.h" />
-    <ClInclude Include="dl\enum\graphic_command.h" />
-    <ClInclude Include="dl\graphic\api.h" />
-    <ClInclude Include="dl\graphic\listen.h" />
-    <ClInclude Include="dl\transform.h" />
+    <ClInclude Include="_discard\dl\defined.h" />
+    <ClInclude Include="_discard\dl\display.h" />
+    <ClInclude Include="_discard\dl\display.hpp" />
+    <ClInclude Include="_discard\dl\display\basic.h" />
+    <ClInclude Include="_discard\dl\display\bitmap.h" />
+    <ClInclude Include="_discard\dl\display\bitmap\bitmap.h" />
+    <ClInclude Include="_discard\dl\display\bitmap\data.h" />
+    <ClInclude Include="_discard\dl\display\bitmap\data.hpp" />
+    <ClInclude Include="_discard\dl\display\bitmap\idata.h" />
+    <ClInclude Include="_discard\dl\display\bitmap\view.h" />
+    <ClInclude Include="_discard\dl\display\display.h" />
+    <ClInclude Include="_discard\dl\display\get_display_stage.h" />
+    <ClInclude Include="_discard\dl\display\shape.hpp" />
+    <ClInclude Include="_discard\dl\display\shape.h" />
+    <ClInclude Include="_discard\dl\display\shape\graphic.h" />
+    <ClInclude Include="_discard\dl\display\shape\graphic.hpp" />
+    <ClInclude Include="_discard\dl\display\shape\graphic\command.h" />
+    <ClInclude Include="_discard\dl\display\shape\graphic\command.hpp" />
+    <ClInclude Include="_discard\dl\display\shape\graphic\graphic.h" />
+    <ClInclude Include="_discard\dl\display\shape\shape.h" />
+    <ClInclude Include="_discard\dl\display\shape\shape.hpp" />
+    <ClInclude Include="_discard\dl\display\sprite.h" />
+    <ClInclude Include="_discard\dl\display\stage.h" />
+    <ClInclude Include="_discard\dl\dl.h" />
+    <ClInclude Include="_discard\dl\dl.hpp" />
+    <ClInclude Include="_discard\dl\enum.h" />
+    <ClInclude Include="_discard\dl\enum\blend_mode.h" />
+    <ClInclude Include="_discard\dl\enum\graphic_command.h" />
+    <ClInclude Include="_discard\dl\graphic\api.h" />
+    <ClInclude Include="_discard\dl\graphic\listen.h" />
+    <ClInclude Include="_discard\dl\transform.h" />
     <ClInclude Include="_discard\extend\color\channel.h" />
     <ClInclude Include="_discard\extend\color\concept.h" />
     <ClInclude Include="_discard\extend\color\defined.h" />
@@ -1134,19 +1134,19 @@
     <ClInclude Include="yap\yap.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dl\display\display.hpp">
+    <ClCompile Include="_discard\dl\display\display.hpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="dl\display\get_display_stage.hpp">
+    <ClCompile Include="_discard\dl\display\get_display_stage.hpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="dl\transform.hpp">
+    <ClCompile Include="_discard\dl\transform.hpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
