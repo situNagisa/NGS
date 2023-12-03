@@ -1120,6 +1120,7 @@
     <ClInclude Include="transform\transform.h" />
     <ClInclude Include="transform\3d\projection.h" />
     <ClInclude Include="yap\yap.h" />
+    <ClInclude Include="external\vulkan\shader\buffer\buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

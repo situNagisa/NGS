@@ -1,16 +1,16 @@
 #pragma once
 
-#include "./defined.h"
 #include "./attribute.h"
 
 NGS_LIB_MODULE_BEGIN
 
-template<CAttribute... _Attributes>
+template<vk::VertexInputRate _InputRate, CAttribute... _Attributes>
 struct binder
 {
 	using structure_type = mpl::mstruct::structure<typename _Attributes::variable_type...>;
 	constexpr static size_t attribute_count = sizeof...(_Attributes);
 	constexpr static ::std::array<vk::Format, attribute_count> formats = { _Attributes::format... };
+	constexpr static auto input_rate = _InputRate;
 };
 
 template<class _T, class _O = type_traits::object_t<_T>>
