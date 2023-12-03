@@ -56,6 +56,18 @@ public:
 	using result_type = decltype(_GET());
 };
 
+/// @brief 生成一个`元结构体描述符`
+///
+///	@tparam CAlign,CAny 生成的`元结构体描述符`将采用`CAlign`作为对齐方式
+///	@tparam CAny 生成的`元结构体描述符`将采用`structure_default_align_t`作为对齐方式，并将每个变量包装为`variable` 
+///
+///	@example
+///	@code
+///		make_describe_t<int, float, double> = struct_describe<structure_default_align_t, variable<int>, variable<float>, variable<double>>;
+///		make_describe_t<ccpt::uint_<4>, int, float, double> = struct_describe<ccpt::uint_<4>, variable<int>, variable<float>, variable<double>>;
+///		make_describe_t<variable<int>,variable<float>> = struct_describe<structure_default_align_t, variable<int>, variable<float>>;
+///		make_describe_t<ccpt::uint_<4>, variable<int>, variable<float>> = struct_describe<ccpt::uint_<4>, variable<int>, variable<float>>;
+///	@endcode
 template<class... _Types>
 using make_describe_t = typename make_describe<_Types...>::result_type;
 
