@@ -1,4 +1,5 @@
-﻿temp
+﻿.VSCodeCounter/
+temp
 out
 .vs
 *.ipch
