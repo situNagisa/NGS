@@ -13,6 +13,7 @@ concept CStructureDescribe = requires() {
 	{ _ObjectType::get_variables() };
 
 		requires ((_ObjectType::variable_count == 0) || (_ObjectType::variable_count > 0 && CVariable<typename _ObjectType::template variable_at<0>>));
+		requires layout::CAlign<typename _ObjectType::align_type>;
 	//requires mpl::CVector<typename _ObjectType::variable_types>;
 	typename _ObjectType::variable_types;
 };

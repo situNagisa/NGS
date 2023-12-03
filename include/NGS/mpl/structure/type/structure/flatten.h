@@ -71,8 +71,7 @@ NGS_MPL_FUNCTION(flatten, class... _Types) < _Types... > {
 
 NGS_MPL_FUNCTION(flatten_as_struct, CStructureDescribe _Struct, class = flatten_t<_Struct>);
 NGS_MPL_FUNCTION(flatten_as_struct, CStructureDescribe _Struct, template<class...>class _Sequence, CVariable... _Variables) < _Struct, _Sequence<_Variables...> > {
-	using align_type = ccpt::uint_<_Struct::align>;
-	using result_type = structure<align_type, _Variables...>;
+	using result_type = structure<typename _Struct::align_type, _Variables...>;
 };
 
 /**

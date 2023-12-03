@@ -10,6 +10,7 @@ struct buffers;
 template<CBinder... _Binders>
 struct buffers<_Binders...>
 {
+	using sss = mpl::mstruct::structure<typename _Binders::structure_type...>;
 	using structure_type = mpl::mstruct::flatten_as_struct_t<mpl::mstruct::structure<typename _Binders::structure_type...>>;
 
 	constexpr static size_t binder_count = sizeof...(_Binders);

@@ -18,6 +18,7 @@ struct struct_describe<_Align, _Variable...> {
 	// 元变量个数
 	constexpr static size_t variable_count = variable_types::size::value;
 
+	using align_type = _Align;
 	constexpr static size_t align = layout::align_as<_Align::value>(_Variable::align...);
 
 	// 元结构体大小

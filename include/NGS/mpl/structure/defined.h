@@ -13,7 +13,7 @@
 
 #define NGS_LIB_VERSION_MAJOR 1
 #define NGS_LIB_VERSION_MINOR 1
-#define NGS_LIB_VERSION_PATCH 4
+#define NGS_LIB_VERSION_PATCH 5
 
 #define NGS_LIB_NAME NGS_MPL_NS::mstruct
 #include "NGS/lib/lib.h"
