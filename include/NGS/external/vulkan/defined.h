@@ -2,6 +2,7 @@
 
 #include <vulkan/vulkan.hpp>
 #include "NGS/basic/basic.h"
+#include "NGS/bases/bases.h"
 #include "NGS/mpl/structure.h"
 #include "NGS/tvm/tvm.h"
 #include "NGS/cpt/cpt.h"

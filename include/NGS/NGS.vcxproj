@@ -133,14 +133,21 @@
     <ClInclude Include="external\glfw\glfw.hpp" />
     <ClInclude Include="external\glfw.hpp" />
     <ClInclude Include="external\vulkan.h" />
+    <ClInclude Include="external\vulkan\application.h" />
+    <ClInclude Include="external\vulkan\application\application.h" />
+    <ClInclude Include="external\vulkan\application\defined.h" />
+    <ClInclude Include="external\vulkan\application\info.h" />
     <ClInclude Include="external\vulkan\defined.h" />
-    <ClInclude Include="external\vulkan\descriptor\buffer.h" />
+    <ClInclude Include="external\vulkan\descriptor.h" />
+    <ClInclude Include="external\vulkan\descriptor\vertex.h" />
+    <ClInclude Include="external\vulkan\descriptor\vertex\buffer.h" />
     <ClInclude Include="external\vulkan\descriptor\defined.h" />
+    <ClInclude Include="external\vulkan\descriptor\vertex\defined.h" />
     <ClInclude Include="external\vulkan\shader.h" />
-    <ClInclude Include="external\vulkan\shader\buffer.h" />
-    <ClInclude Include="external\vulkan\shader\buffer\attribute.h" />
-    <ClInclude Include="external\vulkan\shader\buffer\binder.h" />
-    <ClInclude Include="external\vulkan\shader\buffer\buffers.h" />
+    <ClInclude Include="external\vulkan\descriptor\buffer.h" />
+    <ClInclude Include="external\vulkan\descriptor\vertex\buffer\attribute.h" />
+    <ClInclude Include="external\vulkan\descriptor\vertex\buffer\binder.h" />
+    <ClInclude Include="external\vulkan\descriptor\vertex\buffer\buffers.h" />
     <ClInclude Include="external\vulkan\shader\defined.h" />
     <ClInclude Include="external\vulkan\type_map.h" />
     <ClInclude Include="external\vulkan\type_map\defined.h" />
@@ -1155,6 +1162,7 @@
     <ClCompile Include="nda\core\display_object.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="external\vulkan\application\application.hpp" />
     <None Include="mpl\structure\type\structure\describe\concept.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
