@@ -2,12 +2,12 @@
 
 #include "./defined.h"
 
-NGS_COLOR_BEGIN
+NGS_LIB_BEGIN
 
 template <class _T, class _O = type_traits::object_t<_T>>
-concept CColor = requires() {
+concept color = requires() {
 	true;
 	//{ _O::format() } -> std::convertible_to<color_format>;
 };
 
-NGS_COLOR_END
+NGS_LIB_END

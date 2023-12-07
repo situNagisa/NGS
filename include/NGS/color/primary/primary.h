@@ -12,9 +12,9 @@
 #endif
 
 
-NGS_COLOR_BEGIN
+NGS_LIB_MODULE_BEGIN
 
-template<CChannel _A, CChannel _R, CChannel _G, CChannel _B>
+template<color_channel _A, color_channel _R, color_channel _G, color_channel _B>
 struct NGS_DLL_API primary {
 protected:
 	using self_type = primary;
@@ -29,8 +29,6 @@ public:
 
 	using type = byte_<byte_count>;
 
-	using std_type = byte_<bits::as_byte(standard_channel::count) * 4>;//4 is count of channel
-
 	static constexpr size_t filter = alpha_type::filter_with_offset | red_type::filter_with_offset | green_type::filter_with_offset | blue_type::filter_with_offset;
 	static constexpr color_format_d format{ .size = byte_count, };
 
@@ -42,7 +40,8 @@ public:
 	constexpr self_type& operator=(const self_type&) = default;
 
 
-	template<CPrimary _P>
+	template<primary_color _P>
+		requires (!cpt::naked_same_as<_P, self_type>)
 	explicit(false) constexpr primary(_P&& color)
 		: primary(
 			(alpha_type	::template convert_from<typename _P::alpha_type>(color.alpha()) << alpha_type::offset) |
@@ -51,22 +50,31 @@ public:
 			(blue_type	::template convert_from<typename _P::blue_type>(color.blue()) << blue_type::offset)
 		)
 	{}
-	self_type& operator=(CPrimary auto&& color) {
+	constexpr self_type& operator=(primary_color auto&& color)
+		requires (!cpt::naked_same_as<decltype(color), self_type>)
+	{
 		_value = self_type(NGS_PP_PERFECT_FORWARD(color))._value;
 		return *this;
 	}
 
-	constexpr decltype(auto) value()const { return _value; }
+	constexpr bool operator==(const self_type&) const = default;
+	constexpr bool operator==(primary_color auto&& color) const
+		requires (!cpt::naked_same_as<decltype(color), self_type>)
+	{
+		return _value == self_type(NGS_PP_PERFECT_FORWARD(color))._value;
+	}
 
-	constexpr decltype(auto) alpha()const { return ((_value >> alpha_type::offset) & alpha_type::filter); }
-	constexpr decltype(auto) red()const { return ((_value >> red_type::offset) & red_type::filter); }
-	constexpr decltype(auto) green()const { return ((_value >> green_type::offset) & green_type::filter); }
-	constexpr decltype(auto) blue()const { return ((_value >> blue_type::offset) & blue_type::filter); }
+	constexpr auto value()const { return _value; }
 
-	constexpr decltype(auto) alpha_percent()const { return alpha_type::percent(alpha()); }
-	constexpr decltype(auto) red_percent()const { return red_type::percent(red()); }
-	constexpr decltype(auto) green_percent()const { return green_type::percent(green()); }
-	constexpr decltype(auto) blue_percent()const { return blue_type::percent(blue()); }
+	constexpr auto alpha()const { return ((_value >> alpha_type::offset) & alpha_type::filter); }
+	constexpr auto red()const { return ((_value >> red_type::offset) & red_type::filter); }
+	constexpr auto green()const { return ((_value >> green_type::offset) & green_type::filter); }
+	constexpr auto blue()const { return ((_value >> blue_type::offset) & blue_type::filter); }
+
+	constexpr auto alpha_percent()const { return alpha_type::percent(alpha()); }
+	constexpr auto red_percent()const { return red_type::percent(red()); }
+	constexpr auto green_percent()const { return green_type::percent(green()); }
+	constexpr auto blue_percent()const { return blue_type::percent(blue()); }
 
 	constexpr void set_alpha(const typename alpha_type::type& a)const
 	{
@@ -113,6 +121,8 @@ public:											\
 		(blue_type	::template convert_from<standard_channel>(B_) << blue_type::offset)		\
 		)									\
 	{}										\
+	using base_type::operator==;			\
+	using base_type::operator=;				\
 };											\
 using c1##c2##c3##c4##32 = c1##c2##c3##c4<8, 8, 8, 8>;	\
 using c1##c2##c3##c4##24 = c1##c2##c3##c4<0, 8, 8, 8>;	\
@@ -120,7 +130,7 @@ using c1##c2##c3##c4##16 = c1##c2##c3##c4<0, 5, 6, 5>;	\
 using c1##c2##c3##c4##15 = c1##c2##c3##c4<1, 5, 5, 5>;	\
 using c1##c2##c3##c4##8 = c1##c2##c3##c4<0, 3, 3, 2>;	\
 using standard_##c1##c2##c3##c4 = c1##c2##c3##c4##32;	\
-static_assert(CPrimary<standard_##c1##c2##c3##c4>)		\
+static_assert(primary_color<standard_##c1##c2##c3##c4>)	\
 //
 
 NGS_DEFINE_PRIMARY(A, R, G, B);
@@ -153,7 +163,10 @@ NGS_DEFINE_PRIMARY(B, G, R, A);
 
 #undef NGS_DEFINE_PRIMARY
 
-NGS_COLOR_END
+NGS_LIB_MODULE_END
+
+NGS_LIB_MODULE_EXPORT(primary);
+NGS_LIB_MODULE_EXPORT(standard_ARGB);
 
 #if defined(NGS_COMPILER_IS_MSVC)
 #pragma warning(pop)
