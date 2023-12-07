@@ -6,7 +6,7 @@
 #include "NGS/type_trait/type_trait.h"
 
 #define NGS_LIB_VERSION_MAJOR 0
-#define NGS_LIB_VERSION_MINOR 1
+#define NGS_LIB_VERSION_MINOR 2
 #define NGS_LIB_VERSION_PATCH 0
 #define NGS_LIB_NAME colors
 #include "NGS/lib/lib.h"
@@ -24,19 +24,19 @@
 
 NGS_LIB_BEGIN
 
-enum class color_format : uint32 {
-	unknown,
-
-	argb8,
-	argb15,
-	argb16,
-	argb24,
-	argb32,
-
-	mjpeg,
-
-	yuyv,
-};
+//enum class color_format : uint32 {
+//	unknown,
+//
+//	argb8,
+//	argb15,
+//	argb16,
+//	argb24,
+//	argb32,
+//
+//	mjpeg,
+//
+//	yuyv,
+//};
 
 struct color_format_d
 {

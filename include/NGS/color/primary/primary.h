@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 #include "./concept.h"
-
+#include "./same_as.h"
 
 #if defined(NGS_COMPILER_IS_MSVC)
 #pragma warning(push)
@@ -41,7 +41,7 @@ public:
 
 
 	template<primary_color _P>
-		requires (!cpt::naked_same_as<_P, self_type>)
+		requires (!same_as<_P, self_type>)
 	explicit(false) constexpr primary(_P&& color)
 		: primary(
 			(alpha_type	::template convert_from<typename _P::alpha_type>(color.alpha()) << alpha_type::offset) |
@@ -51,7 +51,7 @@ public:
 		)
 	{}
 	constexpr self_type& operator=(primary_color auto&& color)
-		requires (!cpt::naked_same_as<decltype(color), self_type>)
+		//	requires (!cpt::naked_same_as<decltype(color), self_type>)
 	{
 		_value = self_type(NGS_PP_PERFECT_FORWARD(color))._value;
 		return *this;
@@ -59,7 +59,7 @@ public:
 
 	constexpr bool operator==(const self_type&) const = default;
 	constexpr bool operator==(primary_color auto&& color) const
-		requires (!cpt::naked_same_as<decltype(color), self_type>)
+		//	requires (!cpt::naked_same_as<decltype(color), self_type>)
 	{
 		return _value == self_type(NGS_PP_PERFECT_FORWARD(color))._value;
 	}

@@ -1140,6 +1140,7 @@
     <ClInclude Include="color\channel\defined.h" />
     <ClInclude Include="color\channel\channel.h" />
     <ClInclude Include="color\channel\same_as.h" />
+    <ClInclude Include="color\primary\same_as.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />

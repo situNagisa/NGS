@@ -47,6 +47,7 @@
     <ClInclude Include="color\channel\concept.h" />
     <ClInclude Include="color\channel\defined.h" />
     <ClInclude Include="color\channel\same_as.h" />
+    <ClInclude Include="color\primary\same_as.h" />
     <ClInclude Include="external\boost\pfr.h" />
     <ClInclude Include="external\boost\pfr\convert.h" />
     <ClInclude Include="external\boost\pfr\defined.h" />
