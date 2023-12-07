@@ -58,22 +58,65 @@ public:
 		return t.rxlength;
 	}
 
+	struct transaction_type final : spi_transaction_t
+	{
+		constexpr void set_length(size_t size) { length = bits::as_bit(size); }
+		constexpr size_t get_rx_length()const { return bits::as_byte(rxlength); }
+		constexpr void set_tx_buffer(void_ptr_cst buffer, size_t size)
+		{
+			tx_buffer = buffer;
+			set_length(size);
+		}
+		constexpr void set_tx_buffer(::std::ranges::contiguous_range auto&& buffer) {
+			transaction_type::set_tx_buffer(::std::ranges::data(buffer), ::std::ranges::size(buffer));
+		}
+		constexpr void set_tx_data(auto&& buffer)
+		{
+			if constexpr (sizeof(buffer) <= sizeof(tx_data))
+			{
+				::std::memcpy(tx_data, &buffer, sizeof(buffer));
+				flags |= SPI_TRANS_USE_TXDATA;
+				set_length(sizeof(buffer));
+			}
+			else
+			{
+				transaction_type::set_tx_buffer(&buffer, sizeof(buffer));
+			}
+		}
+		constexpr void set_rx_buffer(void_ptr buffer, size_t size)
+		{
+			rx_buffer = buffer;
+			set_length(size);
+		}
+		constexpr void set_rx_buffer(::std::ranges::contiguous_range auto&& buffer) {
+			transaction_type::set_rx_buffer(::std::ranges::data(buffer), ::std::ranges::size(buffer));
+		}
+		constexpr void set_rx_data(auto& buffer)
+		{
+			if constexpr (sizeof(buffer) <= sizeof(rx_data))
+			{
+				flags |= SPI_TRANS_USE_RXDATA;
+				set_length(sizeof(buffer));
+			}
+			else
+			{
+				transaction_type::set_rx_buffer(&buffer, sizeof(buffer));
+			}
+		}
+		constexpr void get_rx_data(auto& buffer)
+		{
+			NGS_ASSERT(get_rx_length() <= sizeof(rx_data));
+			::std::memcpy(&buffer, rx_data, rxlength);
+		}
+	};
+
 	void polling_transmit(void_ptr_cst tx_buffer, size_t size, void_ptr user = nullptr, uint32 flags = 0)const { polling(tx_buffer, nullptr, size, user, flags); }
 	void polling_transmit(auto&& target, void_ptr user = nullptr, uint32 flags = 0)const
 	{
-		spi_transaction_t t{};
-		if constexpr (sizeof(target) <= 4)
-		{
-			std::memcpy(t.tx_data, &target, sizeof(target));
-			flags |= SPI_TRANS_USE_TXDATA;
-		}
-		else
-		{
-			t.tx_buffer = &target;
-		}
-		t.length = bits::as_bit(sizeof(target));
+		transaction_type t{};
+		t.set_tx_data(NGS_PP_PERFECT_FORWARD(target));
 		t.user = user;
-		t.flags = flags;
+		t.flags |= flags;
 
 		polling(t);
 	}
@@ -81,31 +124,21 @@ public:
 	size_t polling_receive(void_ptr rx_buffer, size_t size, void_ptr user = nullptr, uint32 flags = 0)const { return polling(nullptr, rx_buffer, size, user, flags); }
 	size_t polling_receive(auto& target, void_ptr user = nullptr, uint32 flags = 0)const
 	{
-		spi_transaction_t t{};
-		if constexpr (sizeof(target) <= 4)
-		{
-			flags |= SPI_TRANS_USE_RXDATA;
-		}
-		else
-		{
-			t.rx_buffer = &target;
-		}
-		t.length = bits::as_bit(sizeof(target));
+		transaction_type t{};
+		t.set_rx_data(target);
 		t.user = user;
-		t.flags = flags;
+		t.flags |= flags;
 
 		polling(t);
 
 		if constexpr (sizeof(target) <= 4)
-		{
-			std::memcpy(&target, t.rx_data, sizeof(target));
-		}
+			t.get_rx_data(target);
 
-		return t.rxlength;
+		return t.get_rx_length();
 	}
 
 	void queue(spi_transaction_t& transaction, esp_tick_type_t ticks_to_wait = portMAX_DELAY)const;
-	spi_transaction_t* wait_queue(esp_tick_type_t ticks_to_wait)const;
+	spi_transaction_t* wait_queue(esp_tick_type_t ticks_to_wait = portMAX_DELAY)const;
 
 private:
 	void _remove_device(embedded::io::pin_t cs);

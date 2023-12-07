@@ -8,6 +8,11 @@
 #define NGS_MPL_BEGIN NGS_BEGIN namespace mpl{
 #define NGS_MPL_END } NGS_END
 
+#define NGS_MPL_ENVIRON_BEGIN(target)				\
+protected:											\
+	using self_type = target						\
+//
+
 #define NGS_MPL_ENVIRON(target)						\
 private:											\
 	using base_type = typename target::self_type;	\

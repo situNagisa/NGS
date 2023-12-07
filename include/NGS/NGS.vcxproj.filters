@@ -1136,6 +1136,10 @@
     <ClInclude Include="external\stl\range\transform\defined.h" />
     <ClInclude Include="external\stl\range\transform\container.h" />
     <ClInclude Include="external\stl\range.h" />
+    <ClInclude Include="color\channel\concept.h" />
+    <ClInclude Include="color\channel\defined.h" />
+    <ClInclude Include="color\channel\channel.h" />
+    <ClInclude Include="color\channel\same_as.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />
