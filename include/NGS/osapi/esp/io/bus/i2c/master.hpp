@@ -29,6 +29,7 @@ NGS_HPP_INLINE bool i2c_master::open(
 {
 	_config.mode = I2C_MODE_MASTER;
 	_config.master.clk_speed = 400'000;
+	set_address(address);
 
 	return detail::i2c_open_impl(sda, scl, _port, _config);
 }
@@ -50,8 +51,6 @@ NGS_HPP_INLINE void i2c_master::set_address(embedded::io::bus::i2c::modes::addre
 
 NGS_HPP_INLINE size_t i2c_master::transfer(const embedded::io::bus::i2c::message* messages, size_t count)
 {
-	esp_err_t ret = ESP_OK;
-
 	_cmd = i2c_cmd_link_create();
 
 	for (size_t i = 0; i < count; i++)
@@ -93,17 +92,17 @@ NGS_HPP_INLINE size_t i2c_master::transfer(const embedded::io::bus::i2c::message
 		}
 	}
 	i2c_master_stop(_cmd);
-	ret = i2c_master_cmd_begin(_port, _cmd, _wait);
+	esp_err_t result = 0;
+	if (!NGS_OS_ESP_EXPECT_ERROR(
+		result = i2c_master_cmd_begin(_port, _cmd, _wait),
+		ngs::format("iic i2c_master write port:%d address:%d result:%d", _port, _address.value, result)
+	)) {
+		result = 0;
+	}
 	i2c_cmd_link_delete(_cmd);
 	//ret = i2c_master_write_to_device(iic.port, address, data, size, iic.ticks_to_wait / portTICK_PERIOD_MS);
 
-	if (ret != ESP_OK) {
-		if (ret == ESP_ERR_TIMEOUT)
-			NGS_LOGL(warn, "iic i2c_master write data time out");
-		else
-			NGS_LOGL(error, "iic i2c_master write port:%d address %d ret=%003x", _port, _address.value, ret);
-	}
-	return ret;
+	return result;
 }
 
 NGS_OS_ESP_IO_BUS_END

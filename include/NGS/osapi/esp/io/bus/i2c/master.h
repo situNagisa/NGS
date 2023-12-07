@@ -24,7 +24,7 @@ public:
 	virtual size_t transfer(const embedded::io::bus::i2c::message* messages, size_t count) override;
 
 protected:
-	esp_tick_type_t _wait = 1.0f / portTICK_PERIOD_MS;
+	esp_tick_type_t _wait = 1000.0f / portTICK_PERIOD_MS;
 	i2c_port_t _port = -1;
 	i2c_config_t _config{};
 	i2c_cmd_handle_t _cmd = nullptr;
