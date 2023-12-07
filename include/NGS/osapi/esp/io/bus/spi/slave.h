@@ -6,7 +6,7 @@ NGS_OS_ESP_IO_BUS_BEGIN
 
 inline constexpr int spi_default_speed_hz = 10 * 1000 * 1000;
 
-struct NGS_DLL_API spi_slave : embedded::io::bus::spi::slave
+struct NGS_DLL_API spi_slave : embedded::io::spi::slave
 {
 	NGS_MPL_ENVIRON(spi_slave);
 public:
@@ -16,6 +16,8 @@ public:
 	virtual bool open(embedded::io::pin_t sclk, embedded::io::pin_t miso, embedded::io::pin_t mosi, embedded::io::pin_t cs) override;
 	virtual void close() override;
 
+	using base_type::write;
+	using base_type::read;
 	virtual size_t read(void_ptr buffer, size_t size) override;
 	virtual size_t write(void_ptr_cst buffer, size_t size) override;
 

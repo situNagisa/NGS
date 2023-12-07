@@ -3,7 +3,7 @@
 #include "./defined.h"
 #include "./mode.h"
 
-NGS_EMBEDDED_IO_BUS_I2C_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API message
 {
@@ -17,4 +17,4 @@ struct NGS_DLL_API message
 	void_ptr user_data = nullptr;
 };
 
-NGS_EMBEDDED_IO_BUS_I2C_END
+NGS_LIB_MODULE_END

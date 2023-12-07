@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_EMBEDDED_IO_BEGIN
+NGS_LIB_BEGIN
 
 /**
  * \brief io流抽象基类
@@ -18,12 +18,12 @@ public:
 	 * \brief io流是否打开
 	 * \return true 打开，false 关闭
 	 */
-	virtual bool   is_opened() const = 0;
+	virtual bool is_opened() const = 0;
 
 	/**
 	 * \brief 关闭io流
 	 */
-	virtual void   close() = 0;
+	virtual void close() = 0;
 	/**
 	 * \brief 从io流中读取数据
 	 * \param buffer 缓存区
@@ -39,8 +39,19 @@ public:
 	 */
 	virtual size_t write(void_ptr_cst buffer, size_t size) = 0;
 
-	virtual bool read(byte_ref buffer) { return read(&buffer, 1); }
-	virtual bool write(byte_ref_cst buffer) { return write(&buffer, 1); }
+	NGS_CONSTEXPR26 size_t write(::std::ranges::contiguous_range auto&& buffer)
+	{
+		return this->write(::std::ranges::data(NGS_PP_PERFECT_FORWARD(buffer)), ::std::ranges::size(buffer));
+	}
+	NGS_CONSTEXPR26 size_t write(::std::convertible_to<byte> auto&&... buffer)
+	{
+		std::array<byte, sizeof...(buffer)> b{ static_cast<byte>(NGS_PP_PERFECT_FORWARD(buffer))... };
+		return this->write(b);
+	}
+	NGS_CONSTEXPR26 size_t read(::std::ranges::contiguous_range auto& buffer)
+	{
+		return this->read(::std::ranges::data(buffer), ::std::ranges::size(buffer));
+	}
 };
 
-NGS_EMBEDDED_IO_END
+NGS_LIB_END

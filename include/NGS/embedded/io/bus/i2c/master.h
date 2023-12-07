@@ -3,7 +3,7 @@
 #include "./base.h"
 #include "./message.h"
 
-NGS_EMBEDDED_IO_BUS_I2C_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API master : basic_i2c
 {
@@ -26,7 +26,8 @@ public:
 		std::array<message, sizeof...(messages)> msg{ messages... };
 		return this->transfer(msg);
 	}
-
+	using base_type::write;
+	using base_type::read;
 	virtual size_t write(void_ptr_cst buffer, size_t size) override
 	{
 		return transfer(message{
@@ -61,19 +62,6 @@ public:
 			}
 		);
 	}
-	size_t write(::std::ranges::contiguous_range auto&& buffer)
-	{
-		return this->write(::std::ranges::data(NGS_PP_PERFECT_FORWARD(buffer)), ::std::ranges::size(buffer));
-	}
-	size_t write(::std::convertible_to<byte> auto&&... buffer)
-	{
-		std::array<byte, sizeof...(buffer)> b{ static_cast<byte>(NGS_PP_PERFECT_FORWARD(buffer))... };
-		return this->write(b);
-	}
-	size_t read(::std::ranges::contiguous_range auto& buffer)
-	{
-		return this->read(::std::ranges::data(buffer), ::std::ranges::size(buffer));
-	}
 	size_t write_read(
 		::std::ranges::contiguous_range auto&& write_buffer,
 		::std::ranges::contiguous_range auto&& read_buffer
@@ -86,4 +74,4 @@ public:
 	}
 };
 
-NGS_EMBEDDED_IO_BUS_I2C_END
+NGS_LIB_MODULE_END

@@ -2,9 +2,9 @@
 
 #include "./defined.h"
 
-NGS_EMBEDDED_IO_BUS_SPI_BEGIN
+NGS_LIB_MODULE_BEGIN
 
-struct NGS_DLL_API basic_spi : basic_bus
+struct NGS_DLL_API basic_spi : basic_io
 {
 	NGS_MPL_ENVIRON(basic_spi);
 public:
@@ -14,4 +14,4 @@ public:
 	virtual pin_t get_miso()const = 0;
 };
 
-NGS_EMBEDDED_IO_BUS_SPI_END
+NGS_LIB_MODULE_END

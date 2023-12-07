@@ -1,6 +1,12 @@
 ﻿#pragma once
 
+#include "NGS/basic/basic.h"
+#include "NGS/mpl/mpl.h"
+
 #include "../defined.h"
 
-#define NGS_EMBEDDED_IO_BEGIN NGS_EMBEDDED_BEGIN namespace io {
-#define NGS_EMBEDDED_IO_END } NGS_EMBEDDED_END
+#define NGS_LIB_VERSION_MAJOR 0
+#define NGS_LIB_VERSION_MINOR 1
+#define NGS_LIB_VERSION_PATCH 0
+#define NGS_LIB_NAME NGS_EMBEDDED_NS::io
+#include "NGS/lib/lib.h"

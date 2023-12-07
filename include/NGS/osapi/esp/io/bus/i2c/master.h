@@ -5,7 +5,7 @@
 
 NGS_OS_ESP_IO_BUS_BEGIN
 
-struct NGS_DLL_API i2c_master : embedded::io::bus::i2c::master
+struct NGS_DLL_API i2c_master : embedded::io::i2c::master
 {
 	NGS_MPL_ENVIRON(i2c_master);
 public:
@@ -15,13 +15,13 @@ public:
 	virtual bool is_opened() const override;
 	virtual void close() override;
 
-	virtual bool open(embedded::io::pin_t sda, embedded::io::pin_t scl, embedded::io::bus::i2c::modes::address_t address) override;
+	virtual bool open(embedded::io::pin_t sda, embedded::io::pin_t scl, embedded::io::i2c::modes::address_t address) override;
 
-	virtual void set_ack(embedded::io::bus::i2c::modes::ack ack) override;
-	virtual void set_address(embedded::io::bus::i2c::modes::address mode) override;
-	virtual void set_address(embedded::io::bus::i2c::modes::address_t address) override;
+	virtual void set_ack(embedded::io::i2c::modes::ack ack) override;
+	virtual void set_address(embedded::io::i2c::modes::address mode) override;
+	virtual void set_address(embedded::io::i2c::modes::address_t address) override;
 
-	virtual size_t transfer(const embedded::io::bus::i2c::message* messages, size_t count) override;
+	virtual size_t transfer(const embedded::io::i2c::message* messages, size_t count) override;
 
 protected:
 	esp_tick_type_t _wait = 1000.0f / portTICK_PERIOD_MS;
@@ -30,10 +30,10 @@ protected:
 	i2c_cmd_handle_t _cmd = nullptr;
 	struct
 	{
-		embedded::io::bus::i2c::modes::address mode = embedded::io::bus::i2c::modes::address::_7;
-		embedded::io::bus::i2c::modes::address_t value = embedded::io::bus::i2c::modes::invalid_address;
+		embedded::io::i2c::modes::address mode = embedded::io::i2c::modes::address::_7;
+		embedded::io::i2c::modes::address_t value = embedded::io::i2c::modes::invalid_address;
 	}_address{};
-	embedded::io::bus::i2c::modes::ack _ack = embedded::io::bus::i2c::modes::ack::any;
+	embedded::io::i2c::modes::ack _ack = embedded::io::i2c::modes::ack::any;
 
 };
 

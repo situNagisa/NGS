@@ -7,7 +7,7 @@
 NGS_OS_ESP_IO_BUS_BEGIN
 inline constexpr spi_host_device_t spi_invalid_host = static_cast<spi_host_device_t>(allocators::invalid_id);
 
-struct NGS_DLL_API spi_master final : embedded::io::bus::spi::master, bases::delete_copy
+struct NGS_DLL_API spi_master final : embedded::io::spi::master, bases::delete_copy
 {
 	NGS_MPL_ENVIRON(spi_master);
 public:
@@ -22,12 +22,14 @@ public:
 	constexpr virtual embedded::io::pin_t get_mosi() const override { return _config.mosi_io_num; }
 	constexpr virtual embedded::io::pin_t get_sclk() const override { return _config.sclk_io_num; }
 
+	using base_type::write;
+	using base_type::read;
 	virtual size_t read(void_ptr buffer, size_t size) override;
 	virtual size_t write(void_ptr_cst buffer, size_t size) override;
 
-	virtual void select(const embedded::io::bus::spi::device& device) override { return select(spi_device(device)); }
-	virtual void add_device(const embedded::io::bus::spi::device& device) override { return add_device(spi_device(device)); }
-	virtual void remove_device(const embedded::io::bus::spi::device& device) override { return remove_device(spi_device(device)); }
+	virtual void select(const embedded::io::spi::device& device) override { return select(spi_device(device)); }
+	virtual void add_device(const embedded::io::spi::device& device) override { return add_device(spi_device(device)); }
+	virtual void remove_device(const embedded::io::spi::device& device) override { return remove_device(spi_device(device)); }
 	virtual const spi_device* get_current_device() const override { return _current_device.has_value() ? &_current_device.value() : nullptr; }
 
 	bool open(const spi_bus_config_t& config);

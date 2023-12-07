@@ -25,7 +25,7 @@ NGS_HPP_INLINE void i2c_master::close()
 
 NGS_HPP_INLINE bool i2c_master::open(
 	embedded::io::pin_t sda, embedded::io::pin_t scl,
-	embedded::io::bus::i2c::modes::address_t address)
+	embedded::io::i2c::modes::address_t address)
 {
 	_config.mode = I2C_MODE_MASTER;
 	_config.master.clk_speed = 400'000;
@@ -34,22 +34,22 @@ NGS_HPP_INLINE bool i2c_master::open(
 	return detail::i2c_open_impl(sda, scl, _port, _config);
 }
 
-NGS_HPP_INLINE void i2c_master::set_ack(embedded::io::bus::i2c::modes::ack ack)
+NGS_HPP_INLINE void i2c_master::set_ack(embedded::io::i2c::modes::ack ack)
 {
 	_ack = ack;
 }
 
-NGS_HPP_INLINE void i2c_master::set_address(embedded::io::bus::i2c::modes::address mode)
+NGS_HPP_INLINE void i2c_master::set_address(embedded::io::i2c::modes::address mode)
 {
 	_address.mode = mode;
 }
 
-NGS_HPP_INLINE void i2c_master::set_address(embedded::io::bus::i2c::modes::address_t address)
+NGS_HPP_INLINE void i2c_master::set_address(embedded::io::i2c::modes::address_t address)
 {
 	_address.value = address;
 }
 
-NGS_HPP_INLINE size_t i2c_master::transfer(const embedded::io::bus::i2c::message* messages, size_t count)
+NGS_HPP_INLINE size_t i2c_master::transfer(const embedded::io::i2c::message* messages, size_t count)
 {
 	_cmd = i2c_cmd_link_create();
 
@@ -60,11 +60,11 @@ NGS_HPP_INLINE size_t i2c_master::transfer(const embedded::io::bus::i2c::message
 		i2c_master_start(_cmd);
 		switch (message.io)
 		{
-		case embedded::io::bus::i2c::modes::io::read:
+		case embedded::io::i2c::modes::io::read:
 			i2c_master_write_byte(
 				_cmd,
-				embedded::io::bus::i2c::modes::read_address(_address.value),
-				_ack != embedded::io::bus::i2c::modes::ack::none
+				embedded::io::i2c::modes::read_address(_address.value),
+				_ack != embedded::io::i2c::modes::ack::none
 			);
 			i2c_master_read(
 				_cmd,
@@ -73,17 +73,17 @@ NGS_HPP_INLINE size_t i2c_master::transfer(const embedded::io::bus::i2c::message
 				static_cast<i2c_ack_type_t>(_ack)
 			);
 			break;
-		case embedded::io::bus::i2c::modes::io::write:
+		case embedded::io::i2c::modes::io::write:
 			i2c_master_write_byte(
 				_cmd,
-				embedded::io::bus::i2c::modes::write_address(_address.value),
-				_ack != embedded::io::bus::i2c::modes::ack::none
+				embedded::io::i2c::modes::write_address(_address.value),
+				_ack != embedded::io::i2c::modes::ack::none
 			);
 			i2c_master_write(
 				_cmd,
 				static_cast<const uint8_t*>(message.write_buffer),
 				message.size,
-				_ack != embedded::io::bus::i2c::modes::ack::none
+				_ack != embedded::io::i2c::modes::ack::none
 			);
 			break;
 		default:
