@@ -6,3 +6,5 @@
 #if defined(NGS_USE_HPP)
 #	include "./glfw.hpp"
 #endif
+
+#include "NGS/lib/lib_end.h"
