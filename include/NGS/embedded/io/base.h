@@ -43,7 +43,7 @@ public:
 	{
 		return this->write(::std::ranges::data(NGS_PP_PERFECT_FORWARD(buffer)), ::std::ranges::size(buffer));
 	}
-	NGS_CONSTEXPR26 size_t write(::std::convertible_to<byte> auto&&... buffer)
+	NGS_CONSTEXPR26 size_t write(auto&&... buffer) requires requires{ (static_cast<byte>(NGS_PP_PERFECT_FORWARD(buffer)), ...); }
 	{
 		std::array<byte, sizeof...(buffer)> b{ static_cast<byte>(NGS_PP_PERFECT_FORWARD(buffer))... };
 		return this->write(b);
