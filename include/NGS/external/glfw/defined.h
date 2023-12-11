@@ -8,5 +8,8 @@
 
 #include "../defined.h"
 
-#define NGS_EXTERNAL_GLFW_BEGIN NGS_EXTERNAL_BEGIN namespace glfw{
-#define NGS_EXTERNAL_GLFW_END } NGS_EXTERNAL_END
+#define NGS_LIB_VERSION_MAJOR 0
+#define NGS_LIB_VERSION_MINOR 1
+#define NGS_LIB_VERSION_PATCH 0
+#define NGS_LIB_NAME NGS_EXTERNAL_NS::glfw
+#include "NGS/lib/lib.h"

@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_EXTERNAL_GLFW_BEGIN
+NGS_LIB_BEGIN
 
 class NGS_DLL_API window : public bases::delete_copy {
 protected:
@@ -150,4 +150,4 @@ private:
 	inline static std::unordered_map<context_t, self_type*> _handle_map = {};
 };
 
-NGS_EXTERNAL_GLFW_END
+NGS_LIB_END
