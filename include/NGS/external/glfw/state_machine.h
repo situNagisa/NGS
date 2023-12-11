@@ -3,7 +3,7 @@
 #include "./defined.h"
 #include "./window.h"
 
-NGS_EXTERNAL_GLFW_BEGIN
+NGS_LIB_BEGIN
 
 class NGS_DLL_API GLFW : public bases::singleton<GLFW> {
 protected:
@@ -32,4 +32,4 @@ private:
 	state_type* _current = nullptr;
 };
 
-NGS_EXTERNAL_GLFW_END
+NGS_LIB_END
