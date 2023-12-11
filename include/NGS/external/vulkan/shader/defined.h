@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 
-#include "../../type_map.h"
+#include "../type_map.h"
 
 #include "../defined.h"
 

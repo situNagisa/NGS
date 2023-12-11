@@ -1117,15 +1117,15 @@
     <ClInclude Include="external\vulkan\descriptor.h" />
     <ClInclude Include="external\vulkan\descriptor\vertex\defined.h" />
     <ClInclude Include="external\vulkan\descriptor\vertex.h" />
-    <ClInclude Include="external\vulkan\application.h" />
-    <ClInclude Include="external\vulkan\application\application.h" />
-    <ClInclude Include="external\vulkan\application\defined.h" />
-    <ClInclude Include="external\vulkan\application\info.h" />
+    <ClInclude Include="external\vulkan\instance.h" />
+    <ClInclude Include="external\vulkan\instance\instance.h" />
+    <ClInclude Include="external\vulkan\instance\defined.h" />
+    <ClInclude Include="external\vulkan\instance\info.h" />
     <ClInclude Include="external\boost\pfr.h" />
     <ClInclude Include="external\boost\pfr\defined.h" />
     <ClInclude Include="external\boost\pfr\pfr.h" />
     <ClInclude Include="external\boost\pfr\convert.h" />
-    <ClInclude Include="external\vulkan\application.hpp" />
+    <ClInclude Include="external\vulkan\instance.hpp" />
     <ClInclude Include="external\vulkan_with_depend.hpp" />
     <ClInclude Include="external\vulkan.hpp" />
     <ClInclude Include="external\stl\range\defined.h" />
@@ -1141,9 +1141,13 @@
     <ClInclude Include="flag\flag.h" />
     <ClInclude Include="flag\defined.h" />
     <ClInclude Include="flag\enum_flag.h" />
+    <ClInclude Include="external\vulkan\instance\physical_device.hpp" />
+    <ClInclude Include="external\vulkan\instance\physical_device.h" />
+    <ClInclude Include="external\vulkan\instance\logical_device.hpp" />
+    <ClInclude Include="external\vulkan\instance\logical_device.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />
-    <None Include="external\vulkan\application\application.hpp" />
+    <None Include="external\vulkan\instance\instance.hpp" />
   </ItemGroup>
 </Project>

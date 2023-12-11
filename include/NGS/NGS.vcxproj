@@ -142,17 +142,21 @@
     <ClInclude Include="external\stl\range\transform\defined.h" />
     <ClInclude Include="external\vulkan.h" />
     <ClInclude Include="external\vulkan.hpp" />
-    <ClInclude Include="external\vulkan\application.h" />
-    <ClInclude Include="external\vulkan\application.hpp" />
-    <ClInclude Include="external\vulkan\application\application.h" />
-    <ClInclude Include="external\vulkan\application\defined.h" />
-    <ClInclude Include="external\vulkan\application\info.h" />
+    <ClInclude Include="external\vulkan\instance.h" />
+    <ClInclude Include="external\vulkan\instance.hpp" />
+    <ClInclude Include="external\vulkan\instance\instance.h" />
+    <ClInclude Include="external\vulkan\instance\defined.h" />
+    <ClInclude Include="external\vulkan\instance\info.h" />
     <ClInclude Include="external\vulkan\defined.h" />
     <ClInclude Include="external\vulkan\descriptor.h" />
     <ClInclude Include="external\vulkan\descriptor\vertex.h" />
     <ClInclude Include="external\vulkan\descriptor\vertex\buffer.h" />
     <ClInclude Include="external\vulkan\descriptor\defined.h" />
     <ClInclude Include="external\vulkan\descriptor\vertex\defined.h" />
+    <ClInclude Include="external\vulkan\instance\logical_device.h" />
+    <ClInclude Include="external\vulkan\instance\logical_device.hpp" />
+    <ClInclude Include="external\vulkan\instance\physical_device.h" />
+    <ClInclude Include="external\vulkan\instance\physical_device.hpp" />
     <ClInclude Include="external\vulkan\shader.h" />
     <ClInclude Include="external\vulkan\descriptor\buffer.h" />
     <ClInclude Include="external\vulkan\descriptor\vertex\buffer\attribute.h" />
@@ -1176,7 +1180,7 @@
     <ClCompile Include="nda\core\display_object.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="external\vulkan\application\application.hpp" />
+    <None Include="external\vulkan\instance\instance.hpp" />
     <None Include="mpl\structure\type\structure\describe\concept.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

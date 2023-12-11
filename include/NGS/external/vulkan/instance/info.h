@@ -1,8 +1,8 @@
-#pragma once
+﻿#pragma once
 
 #include "./defined.h"
 
-NGS_LIB_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 struct instance_create_info
 {
@@ -23,4 +23,6 @@ struct instance_create_info
 	std::vector<std::string> extensions{};
 };
 
-NGS_LIB_END
+NGS_LIB_MODULE_END
+
+NGS_LIB_MODULE_EXPORT(instance_create_info);

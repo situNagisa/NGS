@@ -1,10 +1,10 @@
-#pragma once
+﻿#pragma once
 
-#include"./application.h"
+#include"./instance.h"
 
-NGS_LIB_BEGIN
+NGS_LIB_MODULE_BEGIN
 
-NGS_HPP_INLINE void application::initialize(const instance_create_info& info)
+NGS_HPP_INLINE void instance::initialize(const instance_create_info& info)
 {
 	_info = info;
 
@@ -35,10 +35,10 @@ NGS_HPP_INLINE void application::initialize(const instance_create_info& info)
 	_instance = vk::createInstance(create_info);
 }
 
-NGS_HPP_INLINE void application::destroy()
+NGS_HPP_INLINE void instance::destroy()
 {
 	_instance.destroy();
 	_info = {};
 }
 
-NGS_LIB_END
+NGS_LIB_MODULE_END

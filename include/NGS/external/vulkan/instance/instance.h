@@ -1,16 +1,16 @@
-#pragma once
+﻿#pragma once
 
 #include "./defined.h"
 #include "./info.h"
 
-NGS_LIB_BEGIN
+NGS_LIB_MODULE_BEGIN
 
-struct application : bases::singleton<application>
+struct instance : bases::singleton<instance>
 {
-	NGS_MPL_ENVIRON(application);
+	NGS_MPL_ENVIRON(instance);
 private:
 	friend class base_type;
-	constexpr application() = default;
+	constexpr instance() = default;
 public:
 	void initialize(const instance_create_info& info);
 	void destroy();
@@ -23,4 +23,4 @@ private:
 	vk::Instance _instance{};
 };
 
-NGS_LIB_END
+NGS_LIB_MODULE_END
