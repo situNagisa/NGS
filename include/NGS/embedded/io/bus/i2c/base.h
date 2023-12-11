@@ -3,9 +3,9 @@
 #include "./defined.h"
 #include "./mode.h"
 
-NGS_EMBEDDED_IO_BUS_I2C_BEGIN
+NGS_LIB_MODULE_BEGIN
 
-struct NGS_DLL_API basic_i2c : basic_bus
+struct NGS_DLL_API basic_i2c : basic_io
 {
 	NGS_MPL_ENVIRON(basic_i2c);
 public:
@@ -16,4 +16,4 @@ public:
 	virtual void set_address(modes::address_t address) = 0;
 };
 
-NGS_EMBEDDED_IO_BUS_I2C_END
+NGS_LIB_MODULE_END

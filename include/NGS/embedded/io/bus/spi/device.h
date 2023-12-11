@@ -4,7 +4,7 @@
 #include "./mode.h"
 #include "../../frequency.h"
 
-NGS_EMBEDDED_IO_BUS_SPI_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API device
 {
@@ -19,4 +19,4 @@ public:
 	virtual pin_t get_cs()const = 0;
 };
 
-NGS_EMBEDDED_IO_BUS_SPI_END
+NGS_LIB_MODULE_END

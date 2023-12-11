@@ -25,10 +25,10 @@ NGS_HPP_INLINE void i2c_slave::close()
 
 NGS_HPP_INLINE bool i2c_slave::open(
 	embedded::io::pin_t sda, embedded::io::pin_t scl,
-	embedded::io::bus::i2c::modes::address_t address)
+	embedded::io::i2c::modes::address_t address)
 {
 	_config.mode = I2C_MODE_SLAVE;
-	_config.slave.addr_10bit_en = _address.mode == embedded::io::bus::i2c::modes::address::_10;
+	_config.slave.addr_10bit_en = _address.mode == embedded::io::i2c::modes::address::_10;
 	_config.slave.slave_addr = _address.value;
 	_config.slave.maximum_speed = 1'000'000;
 
@@ -65,12 +65,12 @@ NGS_HPP_INLINE size_t i2c_slave::write(void_ptr_cst buffer, size_t size)
 #endif
 }
 
-NGS_HPP_INLINE void i2c_slave::set_address(embedded::io::bus::i2c::modes::address mode)
+NGS_HPP_INLINE void i2c_slave::set_address(embedded::io::i2c::modes::address mode)
 {
 	_address.mode = mode;
 }
 
-NGS_HPP_INLINE void i2c_slave::set_address(embedded::io::bus::i2c::modes::address_t address)
+NGS_HPP_INLINE void i2c_slave::set_address(embedded::io::i2c::modes::address_t address)
 {
 	_address.value = address;
 }

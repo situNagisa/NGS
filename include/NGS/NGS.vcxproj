@@ -19,11 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="algorithm\algorithm.h" />
-    <ClInclude Include="algorithm\algorithm.hpp" />
-    <ClInclude Include="algorithm\dynamic_program.h" />
-    <ClInclude Include="algorithm\PID.h" />
-    <ClInclude Include="algorithm\PID.hpp" />
     <ClInclude Include="allocator\allocator.h" />
     <ClInclude Include="allocator\defined.h" />
     <ClInclude Include="allocator\id.h" />
@@ -43,6 +38,11 @@
     <ClInclude Include="bit\operation.h" />
     <ClInclude Include="bit\set.h" />
     <ClInclude Include="bit\state.h" />
+    <ClInclude Include="color\channel\channel.h" />
+    <ClInclude Include="color\channel\concept.h" />
+    <ClInclude Include="color\channel\defined.h" />
+    <ClInclude Include="color\channel\same_as.h" />
+    <ClInclude Include="color\primary\same_as.h" />
     <ClInclude Include="external\boost\pfr.h" />
     <ClInclude Include="external\boost\pfr\convert.h" />
     <ClInclude Include="external\boost\pfr\defined.h" />
@@ -84,7 +84,6 @@
     <ClInclude Include="embedded\embedded.h" />
     <ClInclude Include="embedded\io\base.h" />
     <ClInclude Include="embedded\io\bus.h" />
-    <ClInclude Include="embedded\io\bus\base.h" />
     <ClInclude Include="embedded\io\bus\defined.h" />
     <ClInclude Include="embedded\io\bus\i2c.h" />
     <ClInclude Include="embedded\io\bus\i2c\address.h" />
@@ -167,6 +166,9 @@
     <ClInclude Include="external\vulkan\vulkan.hpp" />
     <ClInclude Include="external\vulkan\vulkan_with_depend.hpp" />
     <ClInclude Include="external\vulkan_with_depend.hpp" />
+    <ClInclude Include="flag\defined.h" />
+    <ClInclude Include="flag\enum_flag.h" />
+    <ClInclude Include="flag\flag.h" />
     <ClInclude Include="_discard\gsml\defined.h" />
     <ClInclude Include="lib\defined.h" />
     <ClInclude Include="lib\lib.h" />
@@ -1218,31 +1220,31 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="C:\configure\visual_studio\NagisaBase.props" />
-    <Import Project="C:\configure\visual_studio\NagisaLib.props" />
-    <Import Project="C:\configure\visual_studio\ESPIDF.props" />
-    <Import Project="C:\configure\visual_studio\vulkan.props" />
+    <Import Project="$(VS_PROP_ROOT)\NagisaBase.props" />
+    <Import Project="$(VS_PROP_ROOT)\NagisaLib.props" />
+    <Import Project="$(VS_PROP_ROOT)\ESPIDF.props" />
+    <Import Project="$(VS_PROP_ROOT)\vulkan.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="C:\configure\visual_studio\NagisaBase.props" />
-    <Import Project="C:\configure\visual_studio\NagisaLib.props" />
-    <Import Project="C:\configure\visual_studio\ESPIDF.props" />
-    <Import Project="C:\configure\visual_studio\vulkan.props" />
+    <Import Project="$(VS_PROP_ROOT)\NagisaBase.props" />
+    <Import Project="$(VS_PROP_ROOT)\NagisaLib.props" />
+    <Import Project="$(VS_PROP_ROOT)\ESPIDF.props" />
+    <Import Project="$(VS_PROP_ROOT)\vulkan.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="C:\configure\visual_studio\NagisaBase.props" />
-    <Import Project="C:\configure\visual_studio\NagisaLib.props" />
-    <Import Project="C:\configure\visual_studio\ESPIDF.props" />
-    <Import Project="C:\configure\visual_studio\vulkan.props" />
+    <Import Project="$(VS_PROP_ROOT)\NagisaBase.props" />
+    <Import Project="$(VS_PROP_ROOT)\NagisaLib.props" />
+    <Import Project="$(VS_PROP_ROOT)\ESPIDF.props" />
+    <Import Project="$(VS_PROP_ROOT)\vulkan.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="C:\configure\visual_studio\NagisaBase.props" />
-    <Import Project="C:\configure\visual_studio\NagisaLib.props" />
-    <Import Project="C:\configure\visual_studio\ESPIDF.props" />
-    <Import Project="C:\configure\visual_studio\vulkan.props" />
+    <Import Project="$(VS_PROP_ROOT)\NagisaBase.props" />
+    <Import Project="$(VS_PROP_ROOT)\NagisaLib.props" />
+    <Import Project="$(VS_PROP_ROOT)\ESPIDF.props" />
+    <Import Project="$(VS_PROP_ROOT)\vulkan.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

@@ -3,7 +3,7 @@
 #include "./spi.h"
 #include "./device.h"
 
-NGS_EMBEDDED_IO_BUS_SPI_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API master : basic_spi
 {
@@ -18,4 +18,4 @@ public:
 	//virtual void unlock() = 0;
 };
 
-NGS_EMBEDDED_IO_BUS_SPI_END
+NGS_LIB_MODULE_END

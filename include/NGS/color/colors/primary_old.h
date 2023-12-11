@@ -83,7 +83,7 @@ public:
 		return *this;
 	}
 
-	/*template<CChannel A, CChannel R, CChannel G, CChannel B>
+	/*template<color_channel A, color_channel R, color_channel G, color_channel B>
 	explicit(false) constexpr operator primary<A, R, G, B>()const {
 		return primary<A, R, G, B>(
 			(A::template CONVERT_FROM<StdChannel>(StdAlpha()) << A::offset) |
@@ -121,7 +121,7 @@ public:
 
 
 
-	/*template<CChannel _A2, CChannel _R2, CChannel _G2, CChannel _B2>
+	/*template<color_channel _A2, color_channel _R2, color_channel _G2, color_channel _B2>
 	constexpr operator primary<_A2, _R2, _G2, _B2>()const {
 		return primary<_A2, _R2, _G2, _B2>(
 			StdAlpha(),

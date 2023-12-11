@@ -2,7 +2,7 @@
 
 #include "./mode.h"
 
-NGS_EMBEDDED_IO_GPIO_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API gpio : basic_io
 {
@@ -31,6 +31,8 @@ public:
 	void high() { set(true); }
 	void low() { set(false); }
 
+	using base_type::read;
+	using base_type::write;
 	virtual size_t read(void_ptr buffer, size_t size) override
 	{
 		std::memset(buffer, get(), size);
@@ -44,4 +46,4 @@ public:
 	}
 };
 
-NGS_EMBEDDED_IO_GPIO_END
+NGS_LIB_MODULE_END

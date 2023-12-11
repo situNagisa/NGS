@@ -1,7 +1,7 @@
-﻿#pragma once
+﻿#include "../../base.h"
+#include "../../pin.h"
 
 #include "../defined.h"
-#include "../base.h"
 
-#define NGS_EMBEDDED_IO_BUS_I2C_BEGIN NGS_EMBEDDED_IO_BUS_BEGIN namespace i2c {
-#define NGS_EMBEDDED_IO_BUS_I2C_END } NGS_EMBEDDED_IO_BUS_END
+#define NGS_LIB_MODULE_NAME i2c
+#include "NGS/lib/module.h"

@@ -3,14 +3,14 @@
 #include "./defined.h"
 #include "./concept.h"
 
-NGS_COLOR_BEGIN
+NGS_LIB_BEGIN
 
 template<class _T>
 struct constant;
 
 template<class _T, class _O = type_traits::object_t<_T>>
-concept CConstant =
-CColor<typename _O::color_type> && requires
+concept color_constant =
+color<typename _O::color_type> && requires
 {
 	{ _O::red } -> std::convertible_to<typename _O::color_type>;
 	{ _O::green } -> std::convertible_to<typename _O::color_type>;
@@ -29,4 +29,4 @@ CColor<typename _O::color_type> && requires
 	{ _O::purple } -> std::convertible_to<typename _O::color_type>;
 };
 
-NGS_COLOR_END
+NGS_LIB_END

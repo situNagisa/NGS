@@ -4,3 +4,4 @@ out
 .vs
 *.ipch
 cmake-build-debug/
+include/NGS/NGS.vcxproj

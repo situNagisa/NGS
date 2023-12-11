@@ -7,11 +7,6 @@
     <ClCompile Include="nda\core\display_object.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="algorithm\algorithm.h" />
-    <ClInclude Include="algorithm\algorithm.hpp" />
-    <ClInclude Include="algorithm\dynamic_program.h" />
-    <ClInclude Include="algorithm\PID.h" />
-    <ClInclude Include="algorithm\PID.hpp" />
     <ClInclude Include="allocator\allocator.h" />
     <ClInclude Include="allocator\defined.h" />
     <ClInclude Include="allocator\id.h" />
@@ -68,7 +63,6 @@
     <ClInclude Include="embedded\embedded.h" />
     <ClInclude Include="embedded\io\base.h" />
     <ClInclude Include="embedded\io\bus.h" />
-    <ClInclude Include="embedded\io\bus\base.h" />
     <ClInclude Include="embedded\io\bus\defined.h" />
     <ClInclude Include="embedded\io\bus\i2c.h" />
     <ClInclude Include="embedded\io\bus\i2c\address.h" />
@@ -1139,6 +1133,14 @@
     <ClInclude Include="external\stl\range\transform\defined.h" />
     <ClInclude Include="external\stl\range\transform\container.h" />
     <ClInclude Include="external\stl\range.h" />
+    <ClInclude Include="color\channel\concept.h" />
+    <ClInclude Include="color\channel\defined.h" />
+    <ClInclude Include="color\channel\channel.h" />
+    <ClInclude Include="color\channel\same_as.h" />
+    <ClInclude Include="color\primary\same_as.h" />
+    <ClInclude Include="flag\flag.h" />
+    <ClInclude Include="flag\defined.h" />
+    <ClInclude Include="flag\enum_flag.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />

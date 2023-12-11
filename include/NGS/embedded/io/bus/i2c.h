@@ -4,3 +4,5 @@
 #include "./i2c/slave.h"
 #include "./i2c/message.h"
 #include "./i2c/mode.h"
+
+#include "NGS/lib/module_end.h"

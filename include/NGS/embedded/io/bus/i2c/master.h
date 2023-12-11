@@ -3,7 +3,7 @@
 #include "./base.h"
 #include "./message.h"
 
-NGS_EMBEDDED_IO_BUS_I2C_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API master : basic_i2c
 {
@@ -19,14 +19,15 @@ public:
 	size_t transfer(std::ranges::contiguous_range auto&& messages)
 		requires std::convertible_to<std::ranges::range_value_t<decltype(messages)>, message>
 	{
-		return self_type::transfer(std::ranges::data(messages), std::ranges::size(messages));
+		return this->transfer(std::ranges::data(messages), std::ranges::size(messages));
 	}
 	size_t transfer(std::same_as<message> auto&&... messages)
 	{
 		std::array<message, sizeof...(messages)> msg{ messages... };
-		return self_type::transfer(msg);
+		return this->transfer(msg);
 	}
-
+	using base_type::write;
+	using base_type::read;
 	virtual size_t write(void_ptr_cst buffer, size_t size) override
 	{
 		return transfer(message{
@@ -61,6 +62,16 @@ public:
 			}
 		);
 	}
+	size_t write_read(
+		::std::ranges::contiguous_range auto&& write_buffer,
+		::std::ranges::contiguous_range auto&& read_buffer
+	)
+	{
+		return this->write_read(
+			::std::ranges::data(NGS_PP_PERFECT_FORWARD(write_buffer)), ::std::ranges::size(write_buffer),
+			::std::ranges::data(NGS_PP_PERFECT_FORWARD(read_buffer)), ::std::ranges::size(read_buffer)
+		);
+	}
 };
 
-NGS_EMBEDDED_IO_BUS_I2C_END
+NGS_LIB_MODULE_END

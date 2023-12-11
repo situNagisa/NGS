@@ -1,4 +1,4 @@
-//#pragma once
+﻿//#pragma once
 
 
 #if !defined(NGS_LIB_BEGIN) || !defined(NGS_LIB_END)
@@ -15,3 +15,9 @@
 #		error "NGS_LIB_MODULE_NAME or NGS_LIB_MODULE_INLINE_NAME is not defined."
 #	endif
 #endif
+
+#define NGS_LIB_MODULE_EXPORT(symbol)	\
+NGS_LIB_BEGIN							\
+using NGS_LIB_MODULE_NAME::symbol;		\
+NGS_LIB_END								\
+//

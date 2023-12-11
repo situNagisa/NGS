@@ -1,10 +1,11 @@
 ﻿#pragma once
 
 #include "./primary.h"
-#include "NGS/color/constant.h"
+#include "../constant.h"
 
-NGS_COLOR_BEGIN
-template<CPrimary _T>
+NGS_LIB_BEGIN
+
+template<primary_color _T>
 struct constant<_T>
 {
 	using color_type = _T;
@@ -27,4 +28,4 @@ struct constant<_T>
 
 };
 
-NGS_COLOR_END
+NGS_LIB_END
