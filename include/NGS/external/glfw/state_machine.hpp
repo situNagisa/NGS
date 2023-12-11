@@ -2,7 +2,7 @@
 
 #include "./glfw.h"
 
-NGS_EXTERNAL_GLFW_BEGIN
+NGS_LIB_BEGIN
 
 NGS_HPP_INLINE void GLFW::initialize(int major, int minor)
 {
@@ -44,4 +44,4 @@ NGS_HPP_INLINE void GLFW::terminate()
 	glfwTerminate();
 }
 
-NGS_EXTERNAL_GLFW_END
+NGS_LIB_END

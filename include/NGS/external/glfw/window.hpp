@@ -3,7 +3,7 @@
 #include "./window.h"
 #include "./state_machine.h"
 
-NGS_EXTERNAL_GLFW_BEGIN
+NGS_LIB_BEGIN
 
 NGS_HPP_INLINE window::window(std::string_view title, const Point2i& size)
 	: _title(title)
@@ -142,4 +142,4 @@ NGS_HPP_INLINE int window::get_mouse_state(int button) const
 	return glfwGetMouseButton(_context, button);
 }
 
-NGS_EXTERNAL_GLFW_END
+NGS_LIB_END
