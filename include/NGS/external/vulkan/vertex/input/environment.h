@@ -1,6 +1,10 @@
 ﻿#pragma once
 
-#include "./physical_device.h"
+#include "../../info.h"
+
+#include "./defined.h"
+
+
 
 NGS_LIB_MODULE_BEGIN
 

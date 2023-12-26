@@ -142,4 +142,16 @@ NGS_HPP_INLINE int window::get_mouse_state(int button) const
 	return glfwGetMouseButton(_context, button);
 }
 
+#if defined(VK_VERSION_1_0)
+
+NGS_HPP_INLINE VkSurfaceKHR window::create_surface(VkInstance instance, VkAllocationCallbacks* allocator) const
+{
+	VkSurfaceKHR surface;
+	auto ret = glfwCreateWindowSurface(instance, _context, nullptr, &surface);
+	NGS_ASSERT(ret == VK_SUCCESS, "failed to create window surface!");
+	return surface;
+}
+
+#endif
+
 NGS_LIB_END

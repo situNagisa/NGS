@@ -17,7 +17,7 @@
 #	elif defined(__DEBUG) or defined(_DEBUG)
 #		define NGS_BUILD_TYPE NGS_BUILD_DEBUG
 #	else
-#		define NGS_BUILD_TYPE NGS_BUILD_RELEASE
+#		define NGS_BUILD_TYPE NGS_BUILD_DEBUG
 #	endif
 #else
 #	define NGS_BUILD_TYPE 

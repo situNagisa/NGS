@@ -13,5 +13,6 @@
 #include "NGS/preprocessor/preprocessor.h"
 
 #define NGS_ ::ngs::
+#define NGS_NS ::ngs
 #define NGS_BEGIN   namespace ngs{
 #define NGS_END     };

@@ -5,3 +5,4 @@
 #include "./feature/inline.h"
 #include "./feature/module.h"
 #include "./feature/constexpr.h"
+#include "./feature/static.h"

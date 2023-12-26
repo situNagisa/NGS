@@ -1,13 +1,12 @@
 ﻿#pragma once
 
 #include "./defined.h"
+#include "./delete_copy.h"
 
 NGS_BASES_BEGIN
-
 template<class _Derived>
-class NGS_DLL_API singleton {
-protected:
-	using self_type = singleton;
+class NGS_DLL_API singleton : public delete_copy {
+	NGS_MPL_ENVIRON_BEGIN(singleton);
 public:
 	using singleton_type = _Derived;
 

@@ -100,48 +100,22 @@ public:																											\
 		_##function_name_lower##_callback = callback;															\
 	}																											\
 //
-	//void GLFWwindowposfun(GLFWwindow* window, int xpos, int ypos)
-	NGL_WINDOW_CALLBACK_DEFINE(WindowPos, position, int, int);
-
-	//void GLFWwindowsizefun(GLFWwindow* window, int width, int height)
-	NGL_WINDOW_CALLBACK_DEFINE(WindowSize, size, int, int);
-
-	//NGL_WINDOW_CALLBACK_DEFINE(WindowClose, close);
-	//NGL_WINDOW_CALLBACK_DEFINE(WindowRefresh, refresh);
-
-	//void GLFWwindowfocusfun(GLFWwindow* window, int focused)
-	NGL_WINDOW_CALLBACK_DEFINE(WindowFocus, focus, int);
-
-	//void GLFWwindowiconifyfun(GLFWwindow* window, int iconified)
-	NGL_WINDOW_CALLBACK_DEFINE(WindowIconify, iconify, int);
-
-	//void GLFWframebuffersizefun(GLFWwindow* window, int width, int height)
-	NGL_WINDOW_CALLBACK_DEFINE(FramebufferSize, framebuffer_size, int, int);
-
-	//void GLFWkeyfun(GLFWwindow* window, int key, int scancode, int action, int mods)
-	NGL_WINDOW_CALLBACK_DEFINE(Key, key, int, int, int, int);
-
-	//void GLFWcharfun(GLFWwindow* window, unsigned int codepoint)
-	NGL_WINDOW_CALLBACK_DEFINE(MouseButton, mouse_button, int, int, int);
-
-	//void GLFWcursorposfun(GLFWwindow* window, double xpos, double ypos)
-	NGL_WINDOW_CALLBACK_DEFINE(CursorPos, cursor_position, double, double);
-
-	//NGL_WINDOW_CALLBACK_DEFINE(CursorPosition, cursor_position, double, double);
-
-	//void GLFWcursorenterfun(GLFWwindow* window, int entered)
-	NGL_WINDOW_CALLBACK_DEFINE(CursorEnter, cursor_enter, int);
-
-	//void GLFWscrollfun(GLFWwindow* window, double xoffset, double yoffset)
-	NGL_WINDOW_CALLBACK_DEFINE(Scroll, scroll, double, double);
-
-	//void GLFWdropfun(GLFWwindow* window, int count, const char** paths)
-	NGL_WINDOW_CALLBACK_DEFINE(Drop, drop, int, const char**);
-
-	//NGL_WINDOW_CALLBACK_DEFINE(Joystick, joystick, int, int);
-	//NGL_WINDOW_CALLBACK_DEFINE(Monitor, monitor, int);
+	NGL_WINDOW_CALLBACK_DEFINE(WindowPos, position, int, int);				//void GLFWwindowposfun(GLFWwindow* window, int xpos, int ypos)
+	NGL_WINDOW_CALLBACK_DEFINE(WindowSize, size, int, int);					//void GLFWwindowsizefun(GLFWwindow* window, int width, int height)
+	NGL_WINDOW_CALLBACK_DEFINE(WindowFocus, focus, int);					//void GLFWwindowfocusfun(GLFWwindow* window, int focused)
+	NGL_WINDOW_CALLBACK_DEFINE(WindowIconify, iconify, int);				//void GLFWwindowiconifyfun(GLFWwindow* window, int iconified)
+	NGL_WINDOW_CALLBACK_DEFINE(FramebufferSize, framebuffer_size, int, int);//void GLFWframebuffersizefun(GLFWwindow* window, int width, int height)
+	NGL_WINDOW_CALLBACK_DEFINE(Key, key, int, int, int, int);				//void GLFWkeyfun(GLFWwindow* window, int key, int scancode, int action, int mods)
+	NGL_WINDOW_CALLBACK_DEFINE(MouseButton, mouse_button, int, int, int);	//void GLFWcharfun(GLFWwindow* window, unsigned int codepoint)
+	NGL_WINDOW_CALLBACK_DEFINE(CursorPos, cursor_position, double, double);	//void GLFWcursorposfun(GLFWwindow* window, double xpos, double ypos)
+	NGL_WINDOW_CALLBACK_DEFINE(CursorEnter, cursor_enter, int);				//void GLFWcursorenterfun(GLFWwindow* window, int entered)
+	NGL_WINDOW_CALLBACK_DEFINE(Scroll, scroll, double, double);				//void GLFWscrollfun(GLFWwindow* window, double xoffset, double yoffset)
+	NGL_WINDOW_CALLBACK_DEFINE(Drop, drop, int, const char**);				//void GLFWdropfun(GLFWwindow* window, int count, const char** paths)
 #undef NGL_WINDOW_CALLBACK_DEFINE
 
+#if defined(VK_VERSION_1_0)
+	VkSurfaceKHR create_surface(VkInstance instance, VkAllocationCallbacks* allocator = nullptr)const;
+#endif
 
 private:
 	context_t _context = nullptr;

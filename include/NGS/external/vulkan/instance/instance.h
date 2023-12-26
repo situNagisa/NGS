@@ -1,26 +1,38 @@
 ﻿#pragma once
 
 #include "./defined.h"
-#include "./info.h"
 
-NGS_LIB_MODULE_BEGIN
-
-struct instance : bases::singleton<instance>
+NGS_EXTERNAL_VULKAN_INFO_ENVIRONMENT(InstanceCreateInfo);
+NGS_LIB_BEGIN
+namespace instance
 {
-	NGS_MPL_ENVIRON(instance);
-private:
-	friend class base_type;
-	constexpr instance() = default;
-public:
-	void initialize(const instance_create_info& info);
-	void destroy();
+	constexpr auto layers(::std::span<const char* const> param)
+	{
+		return [=](VkInstanceCreateInfo& info) -> VkInstanceCreateInfo&
+			{
+				info.enabledLayerCount = static_cast<uint32_t>(param.size());
+				info.ppEnabledLayerNames = param.data();
+				return info;
+			};
+	};
+	constexpr auto extensions(::std::span<const char* const> param)
+	{
+		return [=](VkInstanceCreateInfo& info) -> VkInstanceCreateInfo&
+			{
+				info.enabledExtensionCount = static_cast<uint32_t>(param.size());
+				info.ppEnabledExtensionNames = param.data();
+				return info;
+			};
+	};
 
-	auto&& get_info() const noexcept { return _info; }
-	auto&& get_instance() const noexcept { return _instance; }
+	constexpr auto app(const VkApplicationInfo& param)
+	{
+		return [&](VkInstanceCreateInfo& info) -> VkInstanceCreateInfo&
+			{
+				info.pApplicationInfo = &param;
+				return info;
+			};
+	};
+}
 
-private:
-	instance_create_info _info;
-	vk::Instance _instance{};
-};
-
-NGS_LIB_MODULE_END
+NGS_LIB_END

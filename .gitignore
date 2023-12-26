@@ -5,3 +5,4 @@ out
 *.ipch
 cmake-build-debug/
 include/NGS/NGS.vcxproj
+extern

@@ -28,8 +28,8 @@ struct basic_string {
 		}
 	}
 
-	constexpr operator std::basic_string<value_type, traits_type>()const {
-		return std::basic_string<value_type, traits_type>(source);
+	constexpr operator ::std::basic_string<value_type, traits_type>()const {
+		return ::std::basic_string<value_type, traits_type>(source);
 	}
 	constexpr auto&& data() { return source; }
 	constexpr auto&& data()const { return source; }

@@ -16,8 +16,7 @@ private:
 public:
 	~GLFW() { destroy(); }
 
-	void initialize(int major, int minor);
-	void init_opengl();
+	void init_opengl(int major, int minor);
 	void init_vulkan();
 
 	void destroy();
