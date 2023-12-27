@@ -42,3 +42,6 @@ struct NGS_DLL_API meta_function				\
 
 #define NGS_MPL_INHERIT_TYPE(id,...) using id = typename __VA_ARGS__::id
 #define NGS_MPL_INHERIT_VALUE(id,...) constexpr static auto id = __VA_ARGS__::id
+
+#define NGS_MPL_INHERIT2(id,...) using __VA_ARGS__::id
+#define NGS_MPL_INHERIT(id) NGS_MPL_INHERIT2(id,base_type)

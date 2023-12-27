@@ -11,3 +11,4 @@
 #include "./floor.h"
 #include "./modulus.h"
 #include "./remainder.h"
+#include "./round.h"
