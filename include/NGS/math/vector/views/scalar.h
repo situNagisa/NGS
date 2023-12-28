@@ -6,7 +6,7 @@
 NGS_LIB_MODULE_BEGIN
 
 template<class _T>
-struct scalar : basic_vector
+struct scalar : basic_vector, ::std::ranges::view_base, ::std::ranges::view_interface<scalar<_T>>
 {
 	NGS_MPL_ENVIRON_BEGIN(scalar);
 public:
@@ -16,8 +16,6 @@ public:
 	constexpr scalar() = default;
 	constexpr explicit scalar(const value_type& data) :_data(data) {}
 	constexpr explicit scalar(value_type&& data) : _data(::std::move(data)) {}
-
-	constexpr auto operator[](index_t index)const { return _data; }
 
 	constexpr auto begin()const { return &_data; }
 	constexpr auto end()const { return &_data + 1; }

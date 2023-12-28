@@ -31,6 +31,10 @@ namespace _detail
 		{
 			NGS_LIB_NAME::assign(*this, NGS_PP_PERFECT_FORWARD(other));
 		}
+		constexpr explicit(false) static_vector(const ::std::initializer_list<value_type>& list)
+		{
+			NGS_LIB_NAME::assign(*this, list);
+		}
 
 		constexpr self_type& operator=(auto&& other)
 			requires assignable_from<self_type, decltype(other)>

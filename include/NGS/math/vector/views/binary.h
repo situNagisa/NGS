@@ -11,7 +11,7 @@ NGS_LIB_MODULE_BEGIN
 namespace _detail
 {
 	template<input_vector _L, input_vector _R, auto _Operate> requires maybe_same_extent<_L, _R>
-	struct binary_view : basic_vector
+	struct binary_view : basic_vector, ::std::ranges::view_base, ::std::ranges::view_interface<binary_view<_L, _R, _Operate>>
 	{
 		NGS_MPL_ENVIRON_BEGIN(binary_view);
 	public:
@@ -20,92 +20,112 @@ namespace _detail
 
 		constexpr static auto operate = _Operate;
 		constexpr static auto extent = static_extent<_L, _R>;
-		using value_type = type_traits::naked_t<::std::invoke_result_t<decltype(operate), ::std::ranges::range_value_t<_L>, ::std::ranges::range_value_t<_R>>>;
-
-
-		constexpr binary_view(typename left_trait::param left, typename right_trait::param right)
-			: _left(NGS_PP_PERFECT_FORWARD(left))
-			, _right(NGS_PP_PERFECT_FORWARD(right))
-		{
-			NGS_MATH_VECTOR_CHECK_SIZE(_left, _right);
-		}
 
 		constexpr static auto dereference(index_t index, typename left_trait::const_pointer left, typename right_trait::const_pointer right)
 		{
 			return operate(NGS_LIB_NAME::random_access(*left, index), NGS_LIB_NAME::random_access(*right, index));
 		}
-		using iterator = vector_iterator<const value_type, dereference, typename left_trait::const_pointer, typename right_trait::const_pointer>;
 
-		constexpr auto begin()const { return iterator(0, &_left, &_right); }
-		constexpr auto end()const { return iterator(NGS_LIB_NAME::size(_left, _right), &_left, &_right); }
+		using value_type = decltype(dereference(0, nullptr, nullptr));
+		using iterator = vector_iterator<value_type, dereference, typename left_trait::const_pointer, typename right_trait::const_pointer>;
+
+		constexpr binary_view(typename left_trait::param left, typename right_trait::param right)
+			: _left(&left)
+			, _right(&right)
+		{
+			NGS_MATH_VECTOR_CHECK_SIZE(*_left, *_right);
+		}
+
+		constexpr auto begin()const { return iterator(0, _left, _right); }
+		constexpr auto end()const { return iterator(NGS_LIB_NAME::size(*_left, *_right), _left, _right); }
 
 		NGS_EXTERN_STL_RANGE_INPUT_ITERATOR();
 
 	public:
-		typename left_trait::decay _left;
-		typename right_trait::decay _right;
+		typename left_trait::const_pointer _left;
+		typename right_trait::const_pointer _right;
 	};
 }
 
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
-using add_view = _detail::binary_view < _L, _R, [](::std::ranges::range_value_t<_L> left, ::std::ranges::range_value_t<_R> right) {return left + right; } > ;
+using add_value_view = _detail::binary_view < _L, _R, [](auto&& left, auto&& right) {return NGS_PP_PERFECT_FORWARD(left) + NGS_PP_PERFECT_FORWARD(right); } > ;
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
-using subtract_view = _detail::binary_view < _L, _R, [](::std::ranges::range_value_t<_L> left, ::std::ranges::range_value_t<_R> right) {return left - right; } > ;
+using subtract_value_view = _detail::binary_view < _L, _R, [](auto&& left, auto&& right) {return NGS_PP_PERFECT_FORWARD(left) - NGS_PP_PERFECT_FORWARD(right); } > ;
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
-using multiply_view = _detail::binary_view < _L, _R, [](::std::ranges::range_value_t<_L> left, ::std::ranges::range_value_t<_R> right) {return left * right; } > ;
+using multiply_value_view = _detail::binary_view < _L, _R, [](auto&& left, auto&& right) {return NGS_PP_PERFECT_FORWARD(left) * NGS_PP_PERFECT_FORWARD(right); } > ;
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
-using divide_view = _detail::binary_view < _L, _R, [](::std::ranges::range_value_t<_L> left, ::std::ranges::range_value_t<_R> right) {return left / right; } > ;
+using divide_value_view = _detail::binary_view < _L, _R, [](auto&& left, auto&& right) {return NGS_PP_PERFECT_FORWARD(left) / NGS_PP_PERFECT_FORWARD(right); } > ;
 
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
-constexpr auto add(_L&& left, _R&& right)
+constexpr auto add_value(_L&& left, _R&& right)
 {
-	return add_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
+	return add_value_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
 }
 
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
-constexpr auto subtract(_L&& left, _R&& right)
+constexpr auto subtract_value(_L&& left, _R&& right)
 {
-	return subtract_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
+	return subtract_value_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
 }
 
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
-constexpr auto multiply(_L&& left, _R&& right)
+constexpr auto multiply_value(_L&& left, _R&& right)
 {
-	return multiply_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
+	return multiply_value_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
 }
 
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
-constexpr auto divide(_L&& left, _R&& right)
+constexpr auto divide_value(_L&& left, _R&& right)
 {
-	return divide_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
+	return divide_value_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
 }
+
+template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
+using add_view = add_value_view<_L, _R>;
+template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
+using subtract_view = subtract_value_view<_L, _R>;
+
+template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
+constexpr decltype(auto) add(_L&& left, _R&& right) { return NGS_LIB_MODULE_NAME::add_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)); }
+
+template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
+constexpr decltype(auto) subtract(_L&& left, _R&& right) { return NGS_LIB_MODULE_NAME::subtract_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)); }
 
 NGS_LIB_MODULE_END
 
 NGS_LIB_BEGIN
 
-template<input_vector _L, input_vector _R> requires tag_vector<_L>&& tag_vector<_R>&& maybe_same_extent<_L, _R>
-constexpr auto operator+(_L&& left, _R&& right)
+namespace detail
 {
-	return NGS_LIB_MODULE_NAME::add(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
+	template<class _L, class _R>
+	concept allow_operator_functor =
+		tag_vector<_L> && tag_vector<_R> &&
+		scalar_vector<_L> && scalar_vector<_R> &&
+		maybe_same_extent<_L, _R>;
 }
 
-template<input_vector _L, input_vector _R> requires tag_vector<_L>&& tag_vector<_R>&& maybe_same_extent<_L, _R>
-constexpr auto operator-(_L&& left, _R&& right)
+template<input_vector _L, input_vector _R> requires detail::allow_operator_functor<_L, _R>
+constexpr decltype(auto) operator+(_L&& left, _R&& right)
 {
-	return NGS_LIB_MODULE_NAME::subtract(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
+	return NGS_LIB_MODULE_NAME::add_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
-template<input_vector _L, input_vector _R> requires tag_vector<_L>&& tag_vector<_R>&& maybe_same_extent<_L, _R>
-constexpr auto operator*(_L&& left, _R&& right)
+template<input_vector _L, input_vector _R> requires detail::allow_operator_functor<_L, _R>
+constexpr decltype(auto) operator-(_L&& left, _R&& right)
 {
-	return NGS_LIB_MODULE_NAME::multiply(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
+	return NGS_LIB_MODULE_NAME::subtract_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
-template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
-constexpr auto operator/(_L&& left, _R&& right)
+template<input_vector _L, input_vector _R> requires detail::allow_operator_functor<_L, _R>
+constexpr decltype(auto) operator*(_L&& left, _R&& right)
 {
-	return NGS_LIB_MODULE_NAME::divide(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
+	return NGS_LIB_MODULE_NAME::multiply_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
+}
+
+template<input_vector _L, input_vector _R> requires detail::allow_operator_functor<_L, _R>
+constexpr decltype(auto) operator/(_L&& left, _R&& right)
+{
+	return NGS_LIB_MODULE_NAME::divide_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
 NGS_LIB_END

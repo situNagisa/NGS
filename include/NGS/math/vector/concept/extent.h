@@ -44,7 +44,7 @@ template<class _L, class _R> concept maybe_same_extent = static_same_extent<_L, 
 NGS_LIB_MODULE_END
 NGS_LIB_BEGIN
 
-template<class _V, class _With> requires (adapter_vector<_V> && !adapter_vector<_With>) || !adapter_vector<_V>
+template<class _V, class _With> requires !adapter_vector<_With> || !adapter_vector<_V>
 constexpr extent_t static_extent = adapter_vector<_V> ? extent_v<_With> : extent_v<_V>;
 
 NGS_LIB_END

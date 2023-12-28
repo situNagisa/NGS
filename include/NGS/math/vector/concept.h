@@ -7,5 +7,6 @@
 #include "./concept/extent.h"
 #include "./concept/size.h"
 #include "./concept/tag.h"
+#include "./concept/scalar.h"
 
 #include "NGS/lib/module_end.h"

@@ -45,6 +45,7 @@ namespace detail {
 	inline constexpr auto random_access_plus_assign = [](auto& args, difference_t n) { ::std::get<0>(args) += n; };
 }
 
+
 template<class _T, auto _Dereference, class... _Args>
 using vector_iterator = detail::iterator<_T, _Dereference, detail::random_access_subtract, detail::random_access_plus_assign, index_t, _Args...>;
 
