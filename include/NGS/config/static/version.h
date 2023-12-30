@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "../defined.h"
+#include "./defined.h"
 
 #ifdef NGS_CPP_STANDARD_HAS_26
 #	define NGS_CONFIG_STATIC_26 static

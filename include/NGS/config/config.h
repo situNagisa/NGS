@@ -8,3 +8,4 @@
 #include "./feature.h"
 #include "./extern_c.h"
 #include "./lib.h"
+#include "./static.h"
