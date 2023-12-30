@@ -4,21 +4,17 @@
 
 NGS_TOSTRING_BEGIN
 
-#if NGS_COMPILER_IS_MSVC
-#define vprint vsprintf_s
-#else
-#define vprint vsprintf
-#endif
+inline ::std::string format(std::string_view fmt, ...) {
+	::std::string buffer{};
 
-inline std::string format(std::string_view fmt, ...) {
-	char buffer[1024];
 	va_list args;
 	va_start(args, fmt);
-	vprint(buffer, fmt.data(), args);
+	size_t buffer_size = vsnprintf(nullptr, 0, fmt.data(), args);
+	buffer.resize(buffer_size);
+	vsnprintf(buffer.data(), buffer_size + 1, fmt.data(), args);
 	va_end(args);
 	return buffer;
 }
 
-#undef vprint
 
 NGS_TOSTRING_END
