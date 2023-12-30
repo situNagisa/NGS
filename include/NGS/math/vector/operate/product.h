@@ -1,10 +1,11 @@
 ﻿#pragma once
 
-#include "./concept.h"
+#include "../concept.h"
 #include "./access.h"
+#include "./size.h"
+#include "./defined.h"
 
 NGS_LIB_BEGIN
-
 namespace NGS_MATH_VECTOR_CPT_NS
 {
 	template<class _L, class _R>
@@ -14,6 +15,8 @@ namespace NGS_MATH_VECTOR_CPT_NS
 		(left * right) + (left * right);
 	};
 }
+NGS_LIB_END
+NGS_LIB_MODULE_BEGIN
 
 template<class _L, class _R> requires inner_productable<_L, _R>
 constexpr auto product_inner(_L&& left, _R right)
@@ -29,10 +32,10 @@ constexpr auto product_inner(_L&& left, _R right)
 
 	for (index_t i = 0; i < size; ++i)
 	{
-		result += NGS_LIB_NAME::random_access(NGS_PP_PERFECT_FORWARD(left), i) * NGS_LIB_NAME::random_access(NGS_PP_PERFECT_FORWARD(right), i);
+		result += NGS_LIB_MODULE_NAME::access(NGS_PP_PERFECT_FORWARD(left), i) * NGS_LIB_MODULE_NAME::access(NGS_PP_PERFECT_FORWARD(right), i);
 	}
 
 	return result;
 }
 
-NGS_LIB_END
+NGS_LIB_MODULE_END

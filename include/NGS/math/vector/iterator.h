@@ -43,10 +43,20 @@ namespace detail {
 
 	inline constexpr auto random_access_subtract = [](auto&& left, auto&& right) {return ::std::get<0>(NGS_PP_PERFECT_FORWARD(left)) - ::std::get<0>(NGS_PP_PERFECT_FORWARD(right)); };
 	inline constexpr auto random_access_plus_assign = [](auto& args, difference_t n) { ::std::get<0>(args) += n; };
-}
 
+
+}
 
 template<class _T, auto _Dereference, class... _Args>
 using vector_iterator = detail::iterator<_T, _Dereference, detail::random_access_subtract, detail::random_access_plus_assign, index_t, _Args...>;
+
+struct adapter_sentinel
+{
+	constexpr adapter_sentinel() = default;
+	constexpr explicit(false) adapter_sentinel(auto&&...) :adapter_sentinel() {}
+	constexpr bool operator==(auto&&)const { return false; }
+};
+
+inline constexpr auto make_adapter_sentinel = [](auto&&...) { return adapter_sentinel{}; };
 
 NGS_LIB_END

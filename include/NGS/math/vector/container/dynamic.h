@@ -11,6 +11,21 @@ struct vector<_T, dynamic_extent> : ::std::vector<_T>, basic_vector
 	using base_type = ::std::vector<_T>;
 public:
 	using base_type::base_type;
+	using base_type::operator=;
+
+	constexpr explicit(false) vector(auto&& other)requires assignable_from<self_type, decltype(other)>
+		: base_type(::std::ranges::size(NGS_PP_PERFECT_FORWARD(other)))
+	{
+		NGS_MATH_VECTOR_OPERATE_NS::assign(*this, NGS_PP_PERFECT_FORWARD(other));
+	}
+	constexpr self_type& operator=(auto&& other)
+		requires assignable_from<self_type, decltype(other)>
+	{
+		base_type::reserve(::std::ranges::size(NGS_PP_PERFECT_FORWARD(other)));
+		NGS_MATH_VECTOR_OPERATE_NS::assign(*this, NGS_PP_PERFECT_FORWARD(other));
+
+		return *this;
+	}
 };
 
 NGS_LIB_MODULE_END

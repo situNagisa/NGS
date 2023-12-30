@@ -10,6 +10,12 @@ NGS_LIB_MODULE_BEGIN
 template<class, extent_t _Extent = dynamic_extent>
 struct vector;
 
+NGS_LIB_MODULE_END
+
+NGS_LIB_MODULE_EXPORT(vector);
+
+NGS_LIB_BEGIN
+
 template<class _T> using vector1 = vector<_T, 1>;
 template<class _T>using vector1c = vector<::std::complex<_T>, 1>;
 
@@ -67,4 +73,5 @@ using vectorcf = vector<::std::complex<float>>;
 using vectorcd = vector<::std::complex<double>>;
 using vectorcs = vector<::std::complex<size_t>>;
 
-NGS_LIB_MODULE_END
+NGS_LIB_END
+
