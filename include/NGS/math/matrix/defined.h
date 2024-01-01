@@ -11,6 +11,11 @@
 #include "NGS/cpt/cpt.h"
 #include "NGS/to_string/to_string.h"
 #include "NGS/math/vector.h"
+<<<<<<< Updated upstream
+=======
+#include "NGS/bases/bases.h"
+#include "NGS/functional/functional.h"
+>>>>>>> Stashed changes
 
 #define NGS_MATH_MATRIX_NS NGS_MATH_NS::matrixes
 
