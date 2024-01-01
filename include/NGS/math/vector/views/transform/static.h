@@ -6,42 +6,34 @@ NGS_LIB_MODULE_BEGIN
 
 namespace _detail
 {
-	template<size_t _Index, class _Tuple>
-	constexpr decltype(auto) get_tuple_restore(auto&& tuple)
+	template<size_t... _Index>
+	constexpr decltype(auto) apply(::std::index_sequence<_Index...>, auto&& functor, auto&& packer)
 	{
-		return type_traits::restore<::std::tuple_element_t<_Index, _Tuple>>(::std::get<_Index>(NGS_PP_PERFECT_FORWARD(tuple)));
-	}
-	template<class _Tuple, size_t... _Index>
-	constexpr decltype(auto) apply_prefix(::std::index_sequence<_Index...>, auto&& functor, auto&& tuple, auto&&... prefix_args)
-	{
-		return NGS_PP_PERFECT_FORWARD(functor)(NGS_PP_PERFECT_FORWARD(prefix_args)..., _detail::get_tuple_restore<_Index, _Tuple>(NGS_PP_PERFECT_FORWARD(tuple))...);
+		return NGS_PP_PERFECT_FORWARD(functor)(functional::parameter_packet::unpack<_Index>(NGS_PP_PERFECT_FORWARD(packer))...);
 	}
 }
 
 template<extent_t _Extent, auto _Transformer, auto _Sentinel, class... _Args>
 struct transform_view : basic_vector, ::std::ranges::view_base, ::std::ranges::view_interface<transform_view<_Extent, _Transformer, _Sentinel, _Args...>>
 {
-	using param_type = ::std::tuple<_Args...>;
-	using storage_type = ::std::tuple<type_traits::storage_t<_Args>...>;
+	using storage_type = functional::parameter_packet::packet<_Args...>;
 
 	constexpr static auto transformer = _Transformer;
 	constexpr static auto sentinel = _Sentinel;
 
-	constexpr static decltype(auto) dereference(index_t index, const storage_type* params)
+	constexpr static /*::std::invoke_result_t<decltype(transformer), index_t, _Args...>*/decltype(auto) dereference(index_t index, const storage_type* params)
 	{
 		static_assert(::std::invocable<decltype(transformer), index_t, _Args...>,
 			"transformer must be invocable with index_t, _Args...");
 
-		return _detail::apply_prefix<param_type>(
-			::std::make_index_sequence<sizeof...(_Args)>(),
-			transformer, *params, index);
+		return _detail::apply(::std::make_index_sequence<sizeof...(_Args)>(), functional::binders::bind<sizeof...(_Args)>(transformer, index), *params);
 	}
 	using value_type = type_traits::object_t<decltype(dereference(0, nullptr))>;
 	using iterator = vector_iterator<value_type, dereference, const storage_type*>;
 	constexpr static auto extent = _Extent;
 
 	constexpr explicit(false) transform_view(auto&&... args) //requires (::std::convertible_to<decltype(args), _Args> && ...)
-		: _params(type_traits::store<_Args>(NGS_PP_PERFECT_FORWARD(args))...)
+		: _params(NGS_PP_PERFECT_FORWARD(args)...)
 	{}
 
 	constexpr auto begin()const { return iterator(0, &_params); }
@@ -53,13 +45,13 @@ struct transform_view : basic_vector, ::std::ranges::view_base, ::std::ranges::v
 		using result_type = ::std::invoke_result_t<sizer_type, _Args...>;
 		if constexpr (::std::convertible_to<result_type, index_t>)
 		{
-			return iterator(_detail::apply_prefix<param_type>(::std::make_index_sequence<sizeof...(_Args)>(), sentinel, _params), &_params);
+			return iterator(functional::parameter_packet::apply(sentinel, _params), &_params);
 		}
 		else
 		{
 			static_assert(::std::sentinel_for<result_type, iterator>,
 				"sizer must return index_t or sentinel_for<iterator>");
-			return _detail::apply_prefix<param_type>(::std::make_index_sequence<sizeof...(_Args)>(), sentinel, _params);
+			return functional::parameter_packet::apply(sentinel, _params);
 		}
 	}
 

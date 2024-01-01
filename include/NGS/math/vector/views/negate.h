@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "../extent.h"
-#include "../param_trait.h"
 #include "./transform.h"
 #include "./defined.h"
 

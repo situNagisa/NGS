@@ -2,7 +2,6 @@
 
 #include "../extent.h"
 #include "../operate.h"
-#include "../param_trait.h"
 #include "../iterator.h"
 #include "./transform.h"
 #include "./defined.h"
