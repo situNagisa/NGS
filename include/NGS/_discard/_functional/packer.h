@@ -8,3 +8,6 @@
 #include "./packer/forward_as_packer.h"
 #include "./packer/replace.h"
 #include "./packer/apply.h"
+#include "./packer/storage_packer.h"
+
+#include "NGS/lib/module_end.h"

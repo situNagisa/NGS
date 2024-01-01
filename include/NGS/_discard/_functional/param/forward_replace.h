@@ -1,8 +1,10 @@
 ﻿#pragma once
 
 #include "./concept.h"
+#include "./defined.h"
 
-NGS_STATIC_FUNCTIONAL_BEGIN
+NGS_LIB_MODULE_BEGIN
+
 /**
  * \brief 参数变换
  * \note 用于参数变换，例如将参数转发到另一个函数，或者将参数转发到另一个函数的参数中
@@ -16,4 +18,4 @@ constexpr decltype(auto) forward_replace(is_param auto&& param, auto&&... params
 	return NGS_PP_PERFECT_FORWARD(param);
 }
 
-NGS_STATIC_FUNCTIONAL_END
+NGS_LIB_MODULE_END

@@ -2,8 +2,9 @@
 
 #include "./concept.h"
 #include "../packer.h"
+#include "./defined.h"
 
-NGS_STATIC_FUNCTIONAL_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 template<class _FunctionType, class... _Params>
 struct binder
@@ -11,9 +12,9 @@ struct binder
 protected:
 	using self_type = binder;
 public:
-	using type_category = detail::binder_tag;
+	using type_category = _detail::binder_tag;
 	using function_type = _FunctionType;
-	using packer_type = packer<_Params...>;
+	using packer_type = NGS_FUNCTIONAL_PACKER_NS::storage_packer<_Params...>;
 private:
 	using function_storage_type = std::decay_t<function_type>;
 	using packer_storage_type = packer_type;// parameter_pack<std::decay_t<_Args>...>;
@@ -23,10 +24,10 @@ public:
 		, _packer(NGS_PP_PERFECT_FORWARD(params)...)
 	{}
 
-private:
+public:
 	constexpr static decltype(auto) _call(auto&& self, auto&&... params)
 	{
-		return functional::apply(self._function, self._packer, NGS_PP_PERFECT_FORWARD(params)...);
+		return NGS_FUNCTIONAL_PACKER_NS::apply(self._function, self._packer, NGS_PP_PERFECT_FORWARD(params)...);
 	}
 public:
 	constexpr decltype(auto) operator()(auto&&... params)
@@ -49,10 +50,26 @@ template<class _FunctionType, class... _Args>
 binder(_FunctionType&&, _Args&&...) -> binder<_FunctionType, _Args...>;
 #endif
 
-
 [[nodiscard]] constexpr decltype(auto) bind(auto&& function, auto&&... args)
 {
-	return binder(NGS_PP_PERFECT_FORWARD(function), NGS_PP_PERFECT_FORWARD(args)...);
+	return binder<decltype(function), decltype(args)...>(NGS_PP_PERFECT_FORWARD(function), NGS_PP_PERFECT_FORWARD(args)...);
 }
 
-NGS_STATIC_FUNCTIONAL_END
+namespace _detail
+{
+	template<size_t _Offset, size_t... _Index>
+	constexpr decltype(auto) bind_on_sequence(::std::index_sequence<_Index...>, auto&& functor, auto&&... args)
+	{
+		return NGS_LIB_MODULE_NAME::bind(NGS_PP_PERFECT_FORWARD(functor), NGS_PP_PERFECT_FORWARD(args)..., placeholders::n<_Index + _Offset + 1>...);
+	}
+}
+
+template<size_t _Sequence, size_t _Offset = 0>
+constexpr decltype(auto) bind(auto&& functor, auto&&... args)
+{
+	return _detail::bind_on_sequence<_Offset>(::std::make_index_sequence<_Sequence>(), NGS_PP_PERFECT_FORWARD(functor), NGS_PP_PERFECT_FORWARD(args)...);
+}
+
+NGS_LIB_MODULE_END
+NGS_LIB_MODULE_EXPORT(binder);
+NGS_LIB_MODULE_EXPORT(bind);

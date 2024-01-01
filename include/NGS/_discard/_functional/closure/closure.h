@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_STATIC_FUNCTIONAL_BEGIN
+NGS_LIB_BEGIN
 
 template <class _Fn, class... _Types>
 struct closure {
@@ -68,4 +68,4 @@ private:
 	tuple<_Types...> _Captures;
 };
 
-NGS_STATIC_FUNCTIONAL_END
+NGS_LIB_END

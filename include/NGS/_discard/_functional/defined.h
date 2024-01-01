@@ -7,5 +7,10 @@
 #include "NGS/assert/assert.h"
 #include "NGS/external/boost/fusion.h"
 
-#define NGS_STATIC_FUNCTIONAL_BEGIN NGS_STATIC_BEGIN namespace functional {
-#define NGS_STATIC_FUNCTIONAL_END } NGS_STATIC_END
+#define NGS_FUNCTIONAL_NS functional
+
+#define NGS_LIB_VERSION_MAJOR 0
+#define NGS_LIB_VERSION_MINOR 3
+#define NGS_LIB_VERSION_PATCH 0
+#define NGS_LIB_NAME NGS_FUNCTIONAL_NS
+#include "NGS/lib/lib.h"

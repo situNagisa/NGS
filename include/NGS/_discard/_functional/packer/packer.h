@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "../defined.h"
+#include "./defined.h"
 
-NGS_STATIC_FUNCTIONAL_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 template<class...>
 struct packer
@@ -15,7 +15,7 @@ public:
 
 	constexpr packer() = default;
 
-	template<size_t _Index>
+	template<size_t>
 	constexpr void get()const {}
 };
 
@@ -36,7 +36,7 @@ public:
 protected:
 
 	template<size_t _Index>
-	constexpr static decltype(auto) _get_impl(auto&& self) //c++ 20 is not support display this
+	constexpr static auto&& _get_impl(auto&& self) //c++ 20 is not support display this
 	{
 		constexpr auto index = _Index;
 
@@ -58,12 +58,12 @@ public:
 	template<size_t _Index>
 	constexpr decltype(auto) get()
 	{
-		return _get_impl<count - _Index - 1>(*this);
+		return self_type::template _get_impl<count - _Index - 1>(*this);
 	}
 	template<size_t _Index>
 	constexpr decltype(auto) get() const
 	{
-		return _get_impl<count - _Index - 1>(*this);
+		return self_type::template _get_impl<count - _Index - 1>(*this);
 	}
 
 	//this `public` is for `structured type`
@@ -77,4 +77,5 @@ packer(_Args&&...) -> packer<_Args...>;
 #endif
 
 
-NGS_STATIC_FUNCTIONAL_END
+NGS_LIB_MODULE_END
+NGS_LIB_MODULE_EXPORT(packer);
