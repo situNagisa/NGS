@@ -1,0 +1,9 @@
+﻿#include "../defined.h"
+
+#define NGS_FUNCTIONAL_PARAMETER_PACKET_PLACEHOLDER_NS phs
+#define NGS_LIB_MODULE_NAME NGS_FUNCTIONAL_PARAMETER_PACKET_PLACEHOLDER_NS
+#include "NGS/lib/module.h"
+
+NGS_LIB_MODULE_BEGIN
+using index_t = int;
+NGS_LIB_MODULE_END
