@@ -27,7 +27,7 @@ namespace detail
 }
 
 template<class _T = void, class _ValueType = void>
-concept constant = detail::is_constant<_T, _ValueType>();
+concept constant = detail::is_constant<::std::remove_reference_t<_T>, _ValueType>();
 
 template<class  _Type, _Type _Value>
 struct NGS_DLL_API constant_ {

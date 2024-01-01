@@ -21,3 +21,10 @@ NGS_LIB_BEGIN							\
 using NGS_LIB_MODULE_NAME::symbol;		\
 NGS_LIB_END								\
 //
+#define NGS_LIB_MODULE_EXPORT_NAMESPACE_ID(ns,id)	\
+NGS_LIB_BEGIN										\
+namespace id = NGS_LIB_MODULE_NAME::ns;				\
+NGS_LIB_END											\
+//
+
+#define NGS_LIB_MODULE_EXPORT_NAMESPACE(ns) NGS_LIB_MODULE_EXPORT_NAMESPACE_ID(ns,ns)

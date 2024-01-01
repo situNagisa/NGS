@@ -2,7 +2,7 @@
 
 #include "NGS/cpt/cpt.h"
 #include "NGS/mpl/optional.h"
-#include "NGS/static/functional.h"
+#include "NGS/functional/functional.h"
 
 #include "../defined.h"
 

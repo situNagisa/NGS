@@ -12,7 +12,7 @@
 #include "NGS/to_string/to_string.h"
 #include "NGS/math/vector.h"
 #include "NGS/bases/bases.h"
-#include "NGS/static/functional.h"
+#include "NGS/functional/functional.h"
 
 #define NGS_MATH_MATRIX_NS NGS_MATH_NS::matrixes
 

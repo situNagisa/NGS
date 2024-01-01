@@ -1,0 +1,5 @@
+﻿#include "../defined.h"
+
+#define NGS_FUNCTIONAL_PARAMETER_PACKET_PACKET_NS packets
+#define NGS_LIB_MODULE_NAME NGS_FUNCTIONAL_PARAMETER_PACKET_PACKET_NS
+#include "NGS/lib/module.h"

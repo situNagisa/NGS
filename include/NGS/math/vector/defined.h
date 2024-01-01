@@ -11,6 +11,7 @@
 #include "NGS/cpt/cpt.h"
 #include "NGS/to_string/to_string.h"
 #include "NGS/bases/bases.h"
+#include "NGS/functional/binder.h"
 
 #define NGS_MATH_VECTOR_NS NGS_MATH_NS::vectors
 
