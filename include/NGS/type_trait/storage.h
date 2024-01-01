@@ -7,53 +7,63 @@ NGS_TYPE_TRAIT_BEGIN
 
 template<class _T> struct storage { using type = _T; };
 template<class _T> struct storage<_T&> { using type = ::std::add_pointer_t<_T>; };
-template<class _T> struct storage<_T&&> { using type = ::std::add_pointer_t<::std::add_const_t<_T>>; };
+template<class _T> struct storage<_T&&> { using type = _T; };
 template<class _T> struct storage<_T[]> { using type = ::std::add_pointer_t<_T>; };
 template<class _T, size_t _N> struct storage<_T[_N]> { using type = ::std::add_pointer_t<_T>; };
 
 template<class _T> using storage_t = typename storage<_T>::type;
 
+template<class _T> struct restored { using type = _T; };
+template<class _T> struct restored<_T&> { using type = _T&; };
+template<class _T> struct restored<_T&&> { using type = _T; };
+template<class _T> struct restored<_T[]> { using type = ::std::add_pointer_t<_T>; };
+template<class _T, size_t _N> struct restored<_T[_N]> { using type = ::std::add_pointer_t<_T>; };
+
+template<class _T> using restored_t = typename restored<_T>::type;
+
 template<class _T>
 constexpr decltype(auto) store(auto&& value) requires is_same_naked_v<decltype(value), _T>
 {
-	if constexpr (::std::same_as<_T, storage_t<_T>>)
+	using storage_type = storage_t<_T>;
+	if constexpr (::std::is_lvalue_reference_v<_T> && ::std::same_as<::std::add_pointer_t<::std::remove_reference_t<_T>>, storage_type>)
+	{
+		return static_cast<storage_type>(::std::addressof(value));
+	}
+	else if constexpr (::std::is_rvalue_reference_v<_T> && ::std::same_as<::std::remove_reference_t<_T>, storage_type>)
 	{
 		return NGS_PP_PERFECT_FORWARD(value);
 	}
-	else if constexpr (::std::is_reference_v<_T> || ::std::is_array_v<_T>)
+	else if constexpr (::std::is_array_v<_T> && requires{ requires ::std::same_as<::std::add_pointer_t<::std::ranges::range_value_t<_T>>, storage_type>; })
 	{
-		return static_cast<storage_t<_T>>(::std::addressof(value));
+		return static_cast<storage_type>(value);
 	}
 	else
 	{
-		static_assert(!::std::same_as<_T, _T>,
-			"can't store _T"
-			);
-		return void();
+		static_assert(::std::convertible_to<decltype(value), storage_type>, "can't store _T");
+		return NGS_PP_PERFECT_FORWARD(value);
 	}
 }
 
 template<class _T>
 constexpr decltype(auto) restore(auto&& value) requires is_same_naked_v<decltype(value), storage_t<_T>>
 {
-	if constexpr (::std::same_as<_T, storage_t<_T>>)
+	using restore_type = restored_t<_T>;
+	if constexpr (::std::is_lvalue_reference_v<_T> && ::std::same_as<_T, restore_type>)
 	{
-		return NGS_PP_PERFECT_FORWARD(value);
+		return static_cast<restore_type>(*value);
 	}
-	else if constexpr (::std::is_reference_v<_T>)
+	else if constexpr (::std::is_rvalue_reference_v<_T> && ::std::same_as<::std::remove_reference_t<_T>, restore_type>)
 	{
-		return *value;
+		return static_cast<restore_type>(NGS_PP_PERFECT_FORWARD(value));
 	}
-	else if constexpr (::std::is_array_v<_T>)
+	else if constexpr (::std::is_array_v<_T> && requires{ requires ::std::same_as<::std::add_pointer_t<::std::ranges::range_value_t<_T>>, restore_type>; })
 	{
-		return value;
+		return static_cast<restore_type>(NGS_PP_PERFECT_FORWARD(value));
 	}
 	else
 	{
-		static_assert(!::std::same_as<_T, _T>,
-			"can't restore _T"
-			);
-		return void();
+		static_assert(::std::convertible_to<decltype(value), restore_type>, "can't restore _T");
+		return /*static_cast<restore_type>*/NGS_PP_PERFECT_FORWARD(value);
 	}
 }
 
