@@ -11,10 +11,7 @@ constexpr ::std::string to_string(const math::vectors::input_vector auto& v)
 	for (auto i = ::std::ranges::begin(v); i != ::std::ranges::end(v); ++i)
 	{
 		result += ::ngs::to_string(*i);
-		if (i != ::std::ranges::end(v) - 1)
-		{
-			result += ", ";
-		}
+		result += ", ";
 	}
 	result += "}";
 	return result;

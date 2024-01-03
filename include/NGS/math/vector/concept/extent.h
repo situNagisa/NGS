@@ -14,41 +14,6 @@ NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_UNARY(dynamic_vector);
 NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_UNARY(adapter_vector);
 NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_UNARY(static_extent_vector);
 
-namespace _detail
-{
-	template<class _L, class _R>
-	constexpr bool is_same_extent()
-	{
-		if constexpr (static_extent_vector<_L> && static_extent_vector<_R>)
-		{
-			return extent_v<_L> == extent_v<_R>;
-		}
-		else if constexpr (adapter_vector<_L> && static_extent_vector<_R>)
-		{
-			return true;
-		}
-		else if constexpr (static_extent_vector<_L> && adapter_vector<_R>)
-		{
-			return true;
-		}
-		else if constexpr (adapter_vector<_L> && adapter_vector<_R>)
-		{
-			return false;
-		}
-		return false;
-	}
-}
-
-///\brief is same extent between two vectors in compile time
-template<class _L, class _R> concept same_extent = _detail::is_same_extent<_L, _R>();
-
-///\brief is maybe same extent between two vectors in compile time
-///\note we don't know is same type or not in compile time when the vector with dynamic extent
-template<class _L, class _R> concept maybe_same_extent = same_extent<_L, _R> || (dynamic_vector<_L> || dynamic_vector<_R>);
-
-NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_BINARY(same_extent);
-NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_BINARY(maybe_same_extent);
-
 NGS_LIB_MODULE_END
 NGS_LIB_BEGIN
 
@@ -60,3 +25,16 @@ constexpr extent_t static_extent_v = static_extent<_V, _With>::value;
 NGS_MATH_VECTOR_RECURSE_ANCHOR_BINARY_ENV(static_extent);
 
 NGS_LIB_END
+NGS_LIB_MODULE_BEGIN
+
+///\brief is same extent between two vectors in compile time
+template<class _L, class _R> concept same_extent = (!adapter_vector<_L> || !adapter_vector<_R>) && (static_extent_v<_L, _R> == static_extent_v<_R, _L>);
+
+///\brief is maybe same extent between two vectors in compile time
+///\note we don't know is same type or not in compile time when the vector with dynamic extent
+template<class _L, class _R> concept maybe_same_extent = same_extent<_L, _R> || (dynamic_vector<_L> || dynamic_vector<_R>);
+
+NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_BINARY(same_extent);
+NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_BINARY(maybe_same_extent);
+
+NGS_LIB_MODULE_END

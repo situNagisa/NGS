@@ -19,13 +19,14 @@ NGS_LIB_END
 NGS_LIB_MODULE_BEGIN
 
 template<class _L, class _R> requires inner_productable<_L, _R>
+using product_inner_t = decltype((::std::ranges::range_value_t<_L>{} *::std::ranges::range_value_t<_R>{}) + (::std::ranges::range_value_t<_L>{} *::std::ranges::range_value_t<_R>{}));
+
+template<class _L, class _R> requires inner_productable<_L, _R>
 constexpr auto product_inner(_L&& left, _R right)
 {
 	NGS_MATH_VECTOR_CHECK_SIZE(left, right);
 
-	using left_value_t = ::std::ranges::range_value_t<_L>;
-	using right_value_t = ::std::ranges::range_value_t<_R>;
-	using result_t = decltype((left_value_t{} *right_value_t{}) + (left_value_t{} *right_value_t{}));
+	using result_t = product_inner_t<_L, _R>;
 
 	const auto size = ::std::ranges::size(left);
 	result_t result = static_cast<result_t>(0);
