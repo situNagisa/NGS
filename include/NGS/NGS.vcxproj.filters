@@ -971,6 +971,13 @@
     <ClInclude Include="math\vector\operate\size\compare.h" />
     <ClInclude Include="math\vector\operate\size\recurse.h" />
     <ClInclude Include="math\vector\index.h" />
+    <ClInclude Include="math\vector\operate\compare.h" />
+    <ClInclude Include="math\vector\operate\sentinel.h" />
+    <ClInclude Include="math\vector\size\compare.h" />
+    <ClInclude Include="math\vector\size\defined.h" />
+    <ClInclude Include="math\vector\size\recurse.h" />
+    <ClInclude Include="math\vector\size\static.h" />
+    <ClInclude Include="math\vector\size\with.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />

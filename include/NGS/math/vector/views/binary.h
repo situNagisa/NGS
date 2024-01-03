@@ -9,10 +9,19 @@ NGS_LIB_MODULE_BEGIN
 
 namespace _detail
 {
+	template<auto _Operate>
+	struct binary_transformer_t
+	{
+		constexpr decltype(auto) operator()(index_t index, auto&& left, auto&& right)const
+		{
+			return _Operate(
+				NGS_MATH_VECTOR_OPERATE_NS::access(NGS_PP_PERFECT_FORWARD(left), index),
+				NGS_MATH_VECTOR_OPERATE_NS::access(NGS_PP_PERFECT_FORWARD(right), index)
+			);
+		}
+	};
 
-	template<input_vector _L, input_vector _R, auto _Operate> requires maybe_same_extent<_L, _R>
-	using binary_view = transform_view < static_extent<_L, _R>, binary_transformer_t<_Operate>{}, NGS_MATH_VECTOR_OPERATE_NS::size, _L, _R > ;
-
+	template<class _L, class _R, auto _Operate>
 	using binary_view = transform_view < binary_transformer_t<_Operate>{}, static_extent_v<_L, _R>, packet<_L, _R>, NGS_MATH_VECTOR_OPERATE_NS::size > ;
 
 }
