@@ -7,10 +7,11 @@
 NGS_LIB_MODULE_BEGIN
 
 template<input_vector _V>
-using negate_view = transform_depend_view < _V, [](index_t index, input_vector auto&& vector)
+using negate_view = transform_depend_view < [](index_t index, input_vector auto&& vector)
 	{
 		return -NGS_MATH_VECTOR_OPERATE_NS::access(NGS_PP_PERFECT_FORWARD(vector), index);
-	} > ;
+	}, _V > ;
+
 
 constexpr auto negate(input_vector auto&& vector)
 {

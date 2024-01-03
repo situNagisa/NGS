@@ -1,11 +1,11 @@
 ﻿#pragma once
 
+#include "./index.h"
+#include "./anchor.h"
 #include "./defined.h"
 
 NGS_LIB_BEGIN
 
-using index_t = ::std::size_t;
-using difference_t = decltype(index_t() - index_t());
 using extent_t = ::std::size_t;
 
 constexpr extent_t dynamic_extent = ::std::numeric_limits<extent_t>::max();
@@ -25,5 +25,7 @@ namespace detail
 
 template<class _V> requires detail::has_extent<_V>
 struct extent<_V> : ::std::integral_constant<extent_t, type_traits::object_t<_V>::extent> {};
+
+NGS_MATH_VECTOR_RECURSE_ANCHOR_UNARY_ENV(extent);
 
 NGS_LIB_END

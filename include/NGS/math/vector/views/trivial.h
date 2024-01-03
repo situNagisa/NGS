@@ -18,9 +18,9 @@ namespace _detail
 }
 
 template<class _T>
-struct trivial_vector : transform_view < adapter_extent, _detail::trivial_transformer, make_adapter_sentinel, _T>
+struct trivial_vector : transform_view <_detail::trivial_transformer, adapter_extent, packet<_T>, make_adapter_sentinel>
 {
-	using base_type = transform_view < adapter_extent, _detail::trivial_transformer, make_adapter_sentinel, _T>;
+	using base_type = transform_view <_detail::trivial_transformer, adapter_extent, packet<_T>, make_adapter_sentinel>;
 
 	constexpr explicit trivial_vector(const _T& data) :base_type(data) {}
 	constexpr explicit trivial_vector(_T&& data) : base_type(::std::move(data)) {}

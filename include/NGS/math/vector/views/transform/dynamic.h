@@ -21,11 +21,11 @@ namespace _detail
 		{
 			return ::std::ranges::size(NGS_PP_PERFECT_FORWARD(vector));
 		}
-	}dynamic_transform_sizer{};
+	}dynamic_transform_sentinel{};
 }
 
 template<input_or_output_vector _V, ::std::invocable<index_t, _V> _Functor>
-using transform_dynamic_view = transform_view<extent_v<_V>, _detail::dynamic_transform, _detail::dynamic_transform_sizer, _V, _Functor>;
+using transform_dynamic_view = transform_view<_detail::dynamic_transform, extent_v<_V>, packet< _V, _Functor>, _detail::dynamic_transform_sentinel>;
 
 template<input_or_output_vector _V>
 constexpr decltype(auto) transform(_V&& vector, ::std::invocable<index_t, _V> auto&& functor)

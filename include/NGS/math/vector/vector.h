@@ -2,6 +2,10 @@
 
 #include "./defined.h"
 
+#include "./index.h"
+#include "./depth.h"
+#include "./anchor.h"
+#include "./value.h"
 #include "./extent.h"
 #include "./tag.h"
 
@@ -9,9 +13,11 @@
 
 #include "./operate.h"
 
-#include "./container.h"
-
 #include "./views.h"
+
+#include "./recurse.h"
+
+#include "./container.h"
 
 #include "./io.h"
 
