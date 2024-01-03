@@ -32,10 +32,6 @@ public:
 		return parameter_packet::apply(self._function, self._packet, NGS_PP_PERFECT_FORWARD(params)...);
 	}
 public:
-	constexpr decltype(auto) operator()(auto&&... params)
-	{
-		return self_type::_call(*this, NGS_PP_PERFECT_FORWARD(params)...);
-	}
 	constexpr decltype(auto) operator()(auto&&... params) const
 	{
 		return self_type::_call(*this, NGS_PP_PERFECT_FORWARD(params)...);
@@ -43,7 +39,7 @@ public:
 
 	//for `structured type`
 public:
-	std::decay_t<function_type> _function;
+	function_storage_type _function;
 	packet_type _packet;
 };
 

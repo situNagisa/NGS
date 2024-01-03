@@ -29,4 +29,11 @@ namespace detail
 
 inline constexpr detail::replace_t replace{};
 
+template<class _First, class...>
+struct meta_replace
+{
+	using type = _First;
+};
+template<class _First, class... _Args> using meta_replace_t = typename meta_replace<_First, _Args...>::type;
+
 NGS_LIB_END

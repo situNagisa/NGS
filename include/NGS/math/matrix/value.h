@@ -5,10 +5,6 @@
 NGS_LIB_BEGIN
 
 template<class _M>
-using matrix_value_t = ::std::conditional_t<
-	::std::ranges::range<_M>&& ::std::ranges::range<::std::ranges::range_value_t<_M>>,
-	::std::ranges::range_value_t<::std::ranges::range_value_t<_M>>,
-	void
->;
+using matrix_value_t = vectors::value_t<_M, 2>;
 
 NGS_LIB_END

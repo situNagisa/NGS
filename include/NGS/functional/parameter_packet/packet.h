@@ -4,6 +4,7 @@
 #include "./packet/unpack.h"
 #include "./packet/packet.h"
 #include "./packet/make.h"
+#include "./packet/replace.h"
 
 NGS_LIB_MODULE_EXPORT(packet);
 NGS_LIB_MODULE_EXPORT(packet_like);
