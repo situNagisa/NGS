@@ -10,17 +10,15 @@
 #include "NGS/math/basic.h"
 #include "NGS/cpt/cpt.h"
 #include "NGS/to_string/to_string.h"
-<<<<<<< Updated upstream
-=======
 #include "NGS/bases/bases.h"
 #include "NGS/functional/binder.h"
->>>>>>> Stashed changes
 
 #define NGS_MATH_VECTOR_NS NGS_MATH_NS::vectors
 
-#define NGS_LIB_VERSION_MAJOR 0
-#define NGS_LIB_VERSION_MINOR 2
+#define NGS_LIB_VERSION_MAJOR 1
+#define NGS_LIB_VERSION_MINOR 1
 #define NGS_LIB_VERSION_PATCH 0
+
 #define NGS_LIB_NAME NGS_MATH_VECTOR_NS
 #include "NGS/lib/lib.h"
 

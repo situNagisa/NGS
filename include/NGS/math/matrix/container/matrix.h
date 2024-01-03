@@ -7,7 +7,7 @@
 NGS_LIB_MODULE_BEGIN
 
 template<class _E, extent_t _Major = dynamic_extent, extent_t _Minor = dynamic_extent>
-struct matrix : basic_matrix, vectors::vector<vectors::vector<_E, _Minor>, _Major>
+struct matrix : vectors::vector<vectors::vector<_E, _Minor>, _Major>, basic_matrix
 {
 	using base_type = vectors::vector<vectors::vector<_E, _Minor>, _Major>;
 	using basic_matrix::ngs_math_vector_type;

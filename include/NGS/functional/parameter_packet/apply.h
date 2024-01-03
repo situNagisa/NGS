@@ -57,21 +57,43 @@ namespace detail
 		static_assert(::std::same_as< NGS_LIB_NAME::apply_result_t<_Callable&&, statics::tuples::meta_cat_t<_FirstPacket&&, _SecondPacket&&>, _Args&&...>, result_type>);
 		return NGS_PP_PERFECT_FORWARD(callable)(
 			NGS_LIB_NAME::replace(
-				NGS_LIB_NAME::unpack<_Index>(NGS_PP_PERFECT_FORWARD(packet)),
+				NGS_LIB_NAME::unpack<_FirstIndex>(NGS_PP_PERFECT_FORWARD(first)),
+				NGS_PP_PERFECT_FORWARD(replace_params)...
+			)...,
+			NGS_LIB_NAME::replace(
+				NGS_LIB_NAME::unpack<_SecondIndex>(NGS_PP_PERFECT_FORWARD(second)),
 				NGS_PP_PERFECT_FORWARD(replace_params)...
 			)...
 			);
 	}
 }
 
-constexpr decltype(auto) apply(auto&& callable, packet_like auto&& packet, auto&&... replace_params)
-{
-	return detail::apply(
-		std::make_index_sequence<NGS_FUNCTIONAL_PARAMETER_PACKET_PACKET_NS::size_v<decltype(packet)>>(),
-		NGS_PP_PERFECT_FORWARD(callable),
-		NGS_PP_PERFECT_FORWARD(packet),
-		NGS_PP_PERFECT_FORWARD(replace_params)...
-	);
-}
+inline constexpr struct {
+	constexpr decltype(auto) operator()(auto&& callable, packet_like auto&& pack, auto&&... replace_params)const
+	{
+		return detail::apply(
+			std::make_index_sequence<NGS_FUNCTIONAL_PARAMETER_PACKET_PACKET_NS::size_v<decltype(pack)>>(),
+			std::make_index_sequence<0>(),
+			NGS_PP_PERFECT_FORWARD(callable),
+			NGS_PP_PERFECT_FORWARD(pack),
+			packet<>{},
+			NGS_PP_PERFECT_FORWARD(replace_params)...
+		);
+	}
+}apply{};
+
+inline constexpr struct {
+	constexpr decltype(auto) operator()(auto&& callable, packet_like auto&& first, packet_like auto&& second, auto&&... replace_params)const
+	{
+		return detail::apply(
+			std::make_index_sequence<NGS_FUNCTIONAL_PARAMETER_PACKET_PACKET_NS::size_v<decltype(first)>>(),
+			std::make_index_sequence<NGS_FUNCTIONAL_PARAMETER_PACKET_PACKET_NS::size_v<decltype(second)>>(),
+			NGS_PP_PERFECT_FORWARD(callable),
+			NGS_PP_PERFECT_FORWARD(first),
+			NGS_PP_PERFECT_FORWARD(second),
+			NGS_PP_PERFECT_FORWARD(replace_params)...
+		);
+	}
+}apply_pair{};
 
 NGS_LIB_END

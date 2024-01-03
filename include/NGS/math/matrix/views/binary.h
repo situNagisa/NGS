@@ -12,36 +12,13 @@ namespace _detail
 	template<class _L, class _R>
 	concept multipiable = input_matrix<_L> && input_matrix<_R> && vectors::maybe_same_extent<::std::ranges::range_value_t<_L>, _R>;
 
-	template<class _L, class _R> requires multipiable<_L, _R>
-	struct multiply_minor_view : vectors::basic_vector, ::std::ranges::view_base, ::std::ranges::view_interface<multiply_minor_view<_L, _R>>
+	inline constexpr struct
 	{
-		using left_type = vectors::param_trait<_L>;
-		using right_type = vectors::param_trait<_R>;
-
-		constexpr static decltype(auto) dereference(index_t minor, typename left_type::const_pointer left, typename right_type::const_pointer right, index_t major)
+		constexpr decltype(auto) operator()(index_t minor, index_t major, auto&& left, auto&& right)const
 		{
 			return vectors::ops::product_inner(NGS_LIB_NAME::NGS_MATH_MATRIX_OPERATE_NS::major(left, major), NGS_LIB_NAME::NGS_MATH_MATRIX_OPERATE_NS::minor(right, minor));
 		}
-		using value_type = type_traits::object_t<decltype(dereference(0, nullptr, nullptr, 0))>;
-		using iterator = vectors::vector_iterator<value_type, dereference, typename left_type::const_pointer, typename right_type::const_pointer, index_t>;
-		constexpr static auto extent = extent_v<::std::ranges::range_value_t<_R>>;
-
-		constexpr explicit(false) multiply_minor_view(typename left_type::const_pointer left, typename right_type::const_pointer right, index_t major)
-			: _left(left)
-			, _right(right)
-			, _major(major)
-		{}
-
-		constexpr auto begin()const { return iterator(0, _left, _right, _major); }
-		constexpr auto end()const { return iterator(::std::ranges::size(NGS_LIB_NAME::major(*_right, 0)), _left, _right, _major); }
-
-		NGS_EXTERN_STL_RANGE_INPUT_ITERATOR();
-
-	public:
-		typename left_type::const_pointer _left;
-		typename right_type::const_pointer _right;
-		index_t _major;
-	};
+	}multiply_transformer{};
 
 	template<extent_t _Extent>
 	struct multiply_minor_sentinel_t
@@ -67,8 +44,12 @@ namespace _detail
 		_L, _R>;
 }
 
-template<class _L, class _R> requires _detail::multipiable<_L, _R>
-using multiply_view = _detail::multiply_major_view< _L, _R>;
+using _detail::multiply_view;
+using vectors::views::add_view;
+using vectors::views::subtract_view;
+
+using vectors::views::add;
+using vectors::views::subtract;
 
 template<class _L, class _R> requires _detail::multipiable<_L, _R>
 constexpr auto multiply(_L&& left, _R&& right)

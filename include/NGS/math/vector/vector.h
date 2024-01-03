@@ -2,17 +2,23 @@
 
 #include "./defined.h"
 
-#include "./concept.h"
+#include "./index.h"
+#include "./depth.h"
+#include "./anchor.h"
+#include "./value.h"
 #include "./extent.h"
-#include "./decay.h"
-#include "./size.h"
-#include "./param_trait.h"
-#include "./container.h"
-#include "./views.h"
 #include "./tag.h"
-#include "./assign.h"
-#include "./product.h"
-#include "./norm.h"
+
+#include "./concept.h"
+
+#include "./operate.h"
+
+#include "./views.h"
+
+#include "./recurse.h"
+
+#include "./container.h"
+
 #include "./io.h"
 
 #if defined(NGS_USE_HPP)
