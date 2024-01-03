@@ -38,24 +38,28 @@ using divide_value_view = _detail::binary_view < _L, _R, [](auto&& left, auto&& 
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
 constexpr auto add_value(_L&& left, _R&& right)
 {
+	NGS_MATH_VECTOR_CHECK_SIZE(left, right);
 	return add_value_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
 }
 
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
 constexpr auto subtract_value(_L&& left, _R&& right)
 {
+	NGS_MATH_VECTOR_CHECK_SIZE(left, right);
 	return subtract_value_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
 }
 
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
 constexpr auto multiply_value(_L&& left, _R&& right)
 {
+	NGS_MATH_VECTOR_CHECK_SIZE(left, right);
 	return multiply_value_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
 }
 
 template<input_vector _L, input_vector _R> requires maybe_same_extent<_L, _R>
 constexpr auto divide_value(_L&& left, _R&& right)
 {
+	NGS_MATH_VECTOR_CHECK_SIZE(left, right);
 	return divide_value_view<_L, _R>{NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)};
 }
 
@@ -74,34 +78,25 @@ NGS_LIB_MODULE_END
 
 NGS_LIB_BEGIN
 
-namespace detail
-{
-	template<class _L, class _R>
-	concept allow_operator_functor =
-		tag_vector<_L> && tag_vector<_R> &&
-		scalar_vector<_L> && scalar_vector<_R> &&
-		maybe_same_extent<_L, _R>;
-}
-
-template<input_vector _L, input_vector _R> requires detail::allow_operator_functor<_L, _R>
+template<operator_vector _L, operator_vector _R> requires maybe_same_extent<_L, _R>
 constexpr decltype(auto) operator+(_L&& left, _R&& right)
 {
 	return NGS_LIB_MODULE_NAME::add_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
-template<input_vector _L, input_vector _R> requires detail::allow_operator_functor<_L, _R>
+template<operator_vector _L, operator_vector _R> requires maybe_same_extent<_L, _R>
 constexpr decltype(auto) operator-(_L&& left, _R&& right)
 {
 	return NGS_LIB_MODULE_NAME::subtract_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
-template<input_vector _L, input_vector _R> requires detail::allow_operator_functor<_L, _R>
+template<operator_vector _L, operator_vector _R> requires maybe_same_extent<_L, _R>
 constexpr decltype(auto) operator*(_L&& left, _R&& right)
 {
 	return NGS_LIB_MODULE_NAME::multiply_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
-template<input_vector _L, input_vector _R> requires detail::allow_operator_functor<_L, _R>
+template<operator_vector _L, operator_vector _R> requires maybe_same_extent<_L, _R>
 constexpr decltype(auto) operator/(_L&& left, _R&& right)
 {
 	return NGS_LIB_MODULE_NAME::divide_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));

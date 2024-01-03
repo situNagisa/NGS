@@ -11,26 +11,41 @@ struct extents : ccpt::constant_<size_t, sizeof...(_Extents)> {};
 
 namespace _detail
 {
-	template<auto _Transformer, class _Extents, class _Args, auto... _Sentinels>
+	template<auto _Sentinel, size_t _Depth, class = ::std::make_index_sequence<_Depth>>
+	struct transform_view_sentinel_t;
+
+	template<auto _Sentinel, size_t _Depth, size_t... _Index>
+	struct transform_view_sentinel_t<_Sentinel, _Depth, ::std::index_sequence<_Index...>>
+	{
+		constexpr decltype(auto) operator()(type_traits::index_type_identity_t<_Index, index_t>..., auto&&... args)const
+		{
+			return _Sentinel(NGS_PP_PERFECT_FORWARD(args)...);
+		}
+	};
+	template<auto _Sentinel, size_t _Depth>
+	inline constexpr transform_view_sentinel_t<_Sentinel, _Depth> transform_view_sentinel{};
+
+	template<index_t _Index, auto _Transformer, class _Extents, class _Args, auto... _Sentinels>
 	struct transform_view;
 
-	template<auto _Transformer, class _Extents, class _Args, auto... _Sentinels>
-	using transform_view_t = typename transform_view<_Transformer, _Extents, _Args, _Sentinels...>::type;
+	template<index_t _Index, auto _Transformer, class _Extents, class _Args, auto... _Sentinels>
+	using transform_view_t = typename transform_view<_Index, _Transformer, _Extents, _Args, _Sentinels...>::type;
 
 	template<
+		index_t _Index,
 		auto _Transformer,
 		extent_t _Extent, extent_t... _Extents,
 		template<class...>class _ArgContainer, class... _Args,
 		auto _Sentinel, auto... _Sentinels
 	> requires (sizeof...(_Extents) == sizeof...(_Sentinels))
-		struct transform_view<_Transformer, extents<_Extent, _Extents...>, _ArgContainer<_Args...>, _Sentinel, _Sentinels...>
+		struct transform_view<_Index, _Transformer, extents<_Extent, _Extents...>, _ArgContainer<_Args...>, _Sentinel, _Sentinels...>
 	{
 		constexpr static struct {
 			constexpr decltype(auto) operator()(index_t index, auto&&... args)const {
 
 				if constexpr (sizeof...(_Extents))
 				{
-					return transform_view_t<_Transformer, extents<_Extents...>, _ArgContainer<index_t, _Args...>, _Sentinels...>(index, NGS_PP_PERFECT_FORWARD(args)...);
+					return transform_view_t<_Index + 1, _Transformer, extents<_Extents...>, _ArgContainer<index_t, _Args...>, _Sentinels...>(index, NGS_PP_PERFECT_FORWARD(args)...);
 				}
 				else
 				{
@@ -41,7 +56,13 @@ namespace _detail
 
 		constexpr static auto get_type()
 		{
-			using result_type = views::transform_view<transformer, _Extent, _ArgContainer<_Args...>, _Sentinel >;
+			using result_type = views::transform_view<
+				transformer,
+				_Extent,
+				_ArgContainer<_Args...>,
+				transform_view_sentinel<_Sentinel, _Index>
+				//functional::binders::bind<sizeof...(_Args) - _Index, _Index>(_Sentinel)
+			>;
 
 			return declval<result_type>();
 		}
@@ -51,7 +72,7 @@ namespace _detail
 }
 
 template<auto _Transformer, class _Extents, functional::parameter_packet::packet_like _Args, auto... _Sentinels>
-using transform_view = _detail::transform_view_t<_Transformer, _Extents, _Args, _Sentinels...>;
+using transform_view = _detail::transform_view_t<0, _Transformer, _Extents, _Args, _Sentinels...>;
 
 namespace _detail
 {

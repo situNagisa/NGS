@@ -9,32 +9,20 @@ template<class _T> concept dynamic_matrix = input_or_output_matrix<_T> && vector
 template<class _T> concept adapter_matrix = input_or_output_matrix<_T> && vectors::adapter_vector<_T>;
 template<class _T> concept static_matrix = input_or_output_matrix<_T> && vectors::static_extent_vector<_T>;
 
-template<class _T> concept dynamic_dynamic_matrix = dynamic_matrix<_T> && vectors::dynamic_vector<::std::ranges::range_value_t<_T>>;
-template<class _T> concept dynamic_adapter_matrix = dynamic_matrix<_T> && vectors::adapter_vector<::std::ranges::range_value_t<_T>>;
-template<class _T> concept dynamic_static_matrix = dynamic_matrix<_T> && vectors::static_extent_vector<::std::ranges::range_value_t<_T>>;
-
-template<class _T> concept adapter_dynamic_matrix = adapter_matrix<_T> && vectors::dynamic_vector<::std::ranges::range_value_t<_T>>;
-template<class _T> concept adapter_adapter_matrix = adapter_matrix<_T> && vectors::adapter_vector<::std::ranges::range_value_t<_T>>;
-template<class _T> concept adapter_static_matrix = adapter_matrix<_T> && vectors::static_extent_vector<::std::ranges::range_value_t<_T>>;
-
-template<class _T> concept static_dynamic_matrix = static_matrix<_T> && vectors::dynamic_vector<::std::ranges::range_value_t<_T>>;
-template<class _T> concept static_adapter_matrix = static_matrix<_T> && vectors::adapter_vector<::std::ranges::range_value_t<_T>>;
-template<class _T> concept static_static_matrix = static_matrix<_T> && vectors::static_extent_vector<::std::ranges::range_value_t<_T>>;
-
 namespace _detail
 {
 	template<class _T, class _With>
-	constexpr bool is_static_same_type()
+	constexpr bool is_same_type()
 	{
 		if constexpr (static_matrix<_T>)
 		{
 			if constexpr (static_matrix<_With>)
 			{
-				return (major_extent_v<_T> == major_extent_v<_With>) && vectors::static_same_extent<::std::ranges::range_value_t<_T>, ::std::ranges::range_value_t<_With>>;
+				return (major_extent_v<_T> == major_extent_v<_With>) && vectors::same_extent_at<_T, _With, 1>;
 			}
 			else if constexpr (adapter_matrix<_With>)
 			{
-				return vectors::static_same_extent<::std::ranges::range_value_t<_T>, ::std::ranges::range_value_t<_With>>;
+				return vectors::same_extent_at<_T, _With, 1>;
 			}
 			else
 			{
@@ -43,7 +31,7 @@ namespace _detail
 		}
 		else if constexpr (static_matrix<_With>)
 		{
-			return is_static_same_type<_With, _T>();
+			return is_same_type<_With, _T>();
 		}
 		else
 		{
@@ -53,17 +41,19 @@ namespace _detail
 }
 
 ///\brief is same extent between two vectors in compile time
-template<class _L, class _R> concept static_same_type = _detail::is_static_same_type<_L, _R>();
+template<class _L, class _R> concept same_type = _detail::is_same_type<_L, _R>();
 
 ///\brief is maybe same extent between two vectors in compile time
 ///\note we don't know is same type or not in compile time when the vector with dynamic extent
-template<class _L, class _R> concept maybe_same_type =
-static_same_type<_L, _R> ||
-((dynamic_matrix<_L> || dynamic_matrix<_R>) && vectors::maybe_same_extent<::std::ranges::range_value_t<_L>, ::std::ranges::range_value_t<_R>>);
+template<class _L, class _R> concept maybe_same_type = same_type<_L, _R> ||
+((dynamic_matrix<_L> || dynamic_matrix<_R>) && vectors::maybe_same_extent_at<_L, _R, 1>);
 
 NGS_LIB_MODULE_END
 NGS_LIB_BEGIN
 
 using vectors::static_extent;
+using vectors::static_extent_v;
+using vectors::static_extent_at;
+using vectors::static_extent_at_v;
 
 NGS_LIB_END

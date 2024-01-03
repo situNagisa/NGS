@@ -1,8 +1,7 @@
 ﻿#pragma once
 
 #include "../concept.h"
-#include "../tag.h"
-#include "../access.h"
+#include "../operate.h"
 #include "./transform.h"
 #include "./defined.h"
 
@@ -17,17 +16,31 @@ namespace _detail
 	{
 		constexpr decltype(auto) operator()(index_t minor, index_t major, auto&& left, auto&& right)const
 		{
-			return vectors::product_inner(NGS_LIB_NAME::major(left, major), NGS_LIB_NAME::minor(right, minor));
+			return vectors::ops::product_inner(NGS_LIB_NAME::NGS_MATH_MATRIX_OPERATE_NS::major(left, major), NGS_LIB_NAME::NGS_MATH_MATRIX_OPERATE_NS::minor(right, minor));
 		}
 	}multiply_transformer{};
 
+	template<extent_t _Extent>
+	struct multiply_minor_sentinel_t
+	{
+		constexpr decltype(auto) operator()(auto&& left, auto&& right)const
+		{
+			return NGS_MATH_MATRIX_OPERATE_NS::default_minor_sentinel<_Extent>()(NGS_PP_PERFECT_FORWARD(right), NGS_PP_PERFECT_FORWARD(left));
+		}
+	};
+	template<extent_t _Extent>
+	inline constexpr multiply_minor_sentinel_t<_Extent> multiply_minor_sentinel{};
+
 	template<class _L, class _R> requires multipiable<_L, _R>
 	using multiply_view = transform_view<
-		major_static_extent<_L, _R>, minor_static_extent<_R, _L>,
 		multiply_transformer,
-		default_major_sizer<major_extent_v<_L>>(),
-		default_minor_sizer<minor_extent_v<_R>>(),
-		//statics::functional::bind(default_minor_sizer<minor_extent_v<_R>>(), statics::functional::placeholders::_2, statics::functional::placeholders::_1),
+		major_static_extent_v<_L, _R>, minor_static_extent_v<_R, _L>,
+		NGS_MATH_MATRIX_OPERATE_NS::default_major_sentinel<major_static_extent_v<_L, _R>>(),
+		multiply_minor_sentinel<minor_static_extent_v<_R, _L>>,
+		//functional::binders::bind(
+		//	NGS_MATH_MATRIX_OPERATE_NS::default_minor_sentinel<minor_extent_v<_R>>(),
+		//	functional::parameter_packet::placeholders::_2,
+		//	functional::parameter_packet::placeholders::_1),
 		_L, _R>;
 }
 
@@ -41,6 +54,7 @@ using vectors::views::subtract;
 template<class _L, class _R> requires _detail::multipiable<_L, _R>
 constexpr auto multiply(_L&& left, _R&& right)
 {
+	NGS_MATH_VECTOR_CHECK_SIZE(vectors::ops::access(NGS_PP_PERFECT_FORWARD(left), 0), right);
 	return multiply_view<_L&&, _R&&>(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
@@ -48,27 +62,19 @@ NGS_LIB_MODULE_END
 
 NGS_LIB_BEGIN
 
-namespace detail
-{
-	template<class _L, class _R>
-	concept allow_operator_functor =
-		tag_matrix<_L> && tag_matrix<_R> &&
-		scalar_matrix<_L> && scalar_matrix<_R>;
-}
-
-template<class _L, class _R> requires detail::allow_operator_functor<_L, _R>
+template<operator_matrix _L, operator_matrix _R> requires maybe_same_type<_L, _R>
 constexpr decltype(auto) operator+(_L&& left, _R&& right)
 {
 	return NGS_LIB_MODULE_NAME::add(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
-template<class _L, class _R> requires detail::allow_operator_functor<_L, _R>
+template<operator_matrix _L, operator_matrix _R> requires maybe_same_type<_L, _R>
 constexpr decltype(auto) operator-(_L&& left, _R&& right)
 {
 	return NGS_LIB_MODULE_NAME::subtract(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
-template<class _L, class _R> requires detail::allow_operator_functor<_L, _R>&& NGS_LIB_MODULE_NAME::_detail::multipiable<_L, _R>
+template<operator_matrix _L, operator_matrix _R> requires NGS_LIB_MODULE_NAME::_detail::multipiable<_L, _R>
 constexpr decltype(auto) operator*(_L&& left, _R&& right)
 {
 	return NGS_LIB_MODULE_NAME::multiply(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));

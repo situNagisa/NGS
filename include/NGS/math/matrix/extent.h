@@ -16,12 +16,12 @@ template<class _M>
 constexpr extent_t major_extent_v = vectors::extent_v<_M>;
 
 template<class _M, class _With>
-constexpr extent_t major_static_extent = vectors::static_extent<_M, _With>;
+constexpr extent_t major_static_extent_v = vectors::static_extent_v<_M, _With>;
 
 template<class _M>
-constexpr extent_t minor_extent_v = vectors::extent_v<::std::ranges::range_value_t<_M>>;
+constexpr extent_t minor_extent_v = vectors::extent_at_v<_M, 1>;
 
 template<class _M, class _With>
-constexpr extent_t minor_static_extent = vectors::static_extent<::std::ranges::range_value_t<_M>, ::std::ranges::range_value_t<_With>>;
+constexpr extent_t minor_static_extent_v = vectors::static_extent_at_v<_M, _With, 1>;
 
 NGS_LIB_END

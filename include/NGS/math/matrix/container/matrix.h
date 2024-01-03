@@ -10,7 +10,7 @@ template<class _E, extent_t _Major = dynamic_extent, extent_t _Minor = dynamic_e
 struct matrix : vectors::vector<vectors::vector<_E, _Minor>, _Major>, basic_matrix
 {
 	using base_type = vectors::vector<vectors::vector<_E, _Minor>, _Major>;
-	using basic_matrix::nmla_type;
+	using basic_matrix::ngs_math_vector_type;
 
 	using base_type::base_type;
 	using base_type::operator=;

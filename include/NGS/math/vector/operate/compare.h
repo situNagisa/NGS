@@ -31,8 +31,8 @@ constexpr bool equal(const auto& left, const auto& right)
 NGS_LIB_MODULE_END
 NGS_LIB_BEGIN
 
-constexpr bool operator==(const auto& left, const auto& right)
-	requires NGS_LIB_MODULE_NAME::_detail::comparable<decltype(left), decltype(right)>&& tag_vector<decltype(left)>&& tag_vector<decltype(right)>
+constexpr bool operator==(const operator_vector auto& left, const operator_vector auto& right)
+	requires NGS_LIB_MODULE_NAME::_detail::comparable<decltype(left), decltype(right)>
 {
 	return NGS_LIB_MODULE_NAME::equal(left, right);
 }

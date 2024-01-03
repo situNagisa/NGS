@@ -893,7 +893,7 @@
     <ClInclude Include="math\matrix\views\defined.h" />
     <ClInclude Include="math\matrix\views\binary.h" />
     <ClInclude Include="math\matrix\concept\scalar.h" />
-    <ClInclude Include="math\matrix\access.h" />
+    <ClInclude Include="math\matrix\operate\access.h" />
     <ClInclude Include="math\matrix\views\transpose.h" />
     <ClInclude Include="math\matrix\views\transform.h" />
     <ClInclude Include="math\vector\views\transform.h" />
@@ -901,7 +901,7 @@
     <ClInclude Include="math\vector\views\transform\defined.h" />
     <ClInclude Include="math\vector\views\transform\dynamic.h" />
     <ClInclude Include="math\vector\views\transform\static.h" />
-    <ClInclude Include="math\matrix\size.h" />
+    <ClInclude Include="math\matrix\operate\size.h" />
     <ClInclude Include="config\static\version.h" />
     <ClInclude Include="config\feature\defined.h" />
     <ClInclude Include="config\static\defined.h" />
@@ -963,21 +963,22 @@
     <ClInclude Include="math\vector\value.h" />
     <ClInclude Include="math\vector\recurse\transform.h" />
     <ClInclude Include="math\vector\anchor.h" />
-    <ClInclude Include="math\vector\operate\compare.h" />
-    <ClInclude Include="math\vector\operate\size\defined.h" />
-    <ClInclude Include="math\vector\operate\size\static.h" />
-    <ClInclude Include="math\vector\operate\size\with.h" />
     <ClInclude Include="math\vector\operate\sentinel.h" />
-    <ClInclude Include="math\vector\operate\size\compare.h" />
-    <ClInclude Include="math\vector\operate\size\recurse.h" />
     <ClInclude Include="math\vector\index.h" />
     <ClInclude Include="math\vector\operate\compare.h" />
     <ClInclude Include="math\vector\operate\sentinel.h" />
-    <ClInclude Include="math\vector\size\compare.h" />
-    <ClInclude Include="math\vector\size\defined.h" />
-    <ClInclude Include="math\vector\size\recurse.h" />
-    <ClInclude Include="math\vector\size\static.h" />
-    <ClInclude Include="math\vector\size\with.h" />
+    <ClInclude Include="math\vector\operate\compare.h" />
+    <ClInclude Include="math\vector\concept\operator.h" />
+    <ClInclude Include="math\matrix\operate\defined.h" />
+    <ClInclude Include="math\matrix\concept\operator.h" />
+    <ClInclude Include="math\matrix\operate.h" />
+    <ClInclude Include="math\vector\operate\size\with.h" />
+    <ClInclude Include="math\vector\operate\size\compare.h" />
+    <ClInclude Include="math\vector\operate\size\defined.h" />
+    <ClInclude Include="math\vector\operate\size\recurse.h" />
+    <ClInclude Include="math\vector\operate\size\static.h" />
+    <ClInclude Include="functional\parameter_packet\packet\replace.h" />
+    <ClInclude Include="static\tuple\core\cat.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />

@@ -6,8 +6,7 @@
 NGS_LIB_MODULE_BEGIN
 
 
-
-inline constexpr auto size = [](auto&& vector, auto&& with) requires !adapter_vector<decltype(vector)> || !adapter_vector<decltype(with)>
+inline constexpr auto size = [](auto&& vector, auto&& with) requires (!adapter_vector<decltype(vector)>) || (!adapter_vector<decltype(with)>)
 {
 	if constexpr (adapter_vector<decltype(vector)>)
 	{
