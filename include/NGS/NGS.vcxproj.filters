@@ -716,12 +716,12 @@
     <ClInclude Include="mpl\utils\sequence_params.h" />
     <ClInclude Include="mpl\utils\size_of.h" />
     <ClInclude Include="mpl\utils\template.h" />
-    <ClInclude Include="osapi\nsw\bus\serial_port.hpp" />
-    <ClInclude Include="osapi\nsw\bus\UART.hpp" />
-    <ClInclude Include="osapi\nsw\defined.h" />
-    <ClInclude Include="osapi\nsw\depend.h" />
-    <ClInclude Include="osapi\nsw\NSW.h" />
-    <ClInclude Include="osapi\nsw\NSW.hpp" />
+    <ClInclude Include="_discard\nsw\bus\serial_port.hpp" />
+    <ClInclude Include="_discard\nsw\bus\UART.hpp" />
+    <ClInclude Include="_discard\nsw\defined.h" />
+    <ClInclude Include="_discard\nsw\depend.h" />
+    <ClInclude Include="_discard\nsw\NSW.h" />
+    <ClInclude Include="_discard\nsw\NSW.hpp" />
     <ClInclude Include="mpl\structure\defined.h" />
     <ClInclude Include="mpl\structure\structure.h" />
     <ClInclude Include="mpl\structure\type\structure.h" />
@@ -850,9 +850,6 @@
     <ClInclude Include="math\vector\container\defined.h" />
     <ClInclude Include="math\vector\container\vector.h" />
     <ClInclude Include="math\vector\extent.h" />
-    <ClInclude Include="math\vector\test\defined.h" />
-    <ClInclude Include="math\vector\test\container.h" />
-    <ClInclude Include="math\vector\test\test.h" />
     <ClInclude Include="math\vector\container\dynamic.h" />
     <ClInclude Include="math\vector\container\static.h" />
     <ClInclude Include="math\vector\views.h" />
@@ -960,6 +957,20 @@
     <ClInclude Include="functional\parameter_packet\unpack.h" />
     <ClInclude Include="functional\parameter_packet\replace.h" />
     <ClInclude Include="functional\parameter_packet\placeholder\concept.h" />
+    <ClInclude Include="math\vector\recurse\defined.h" />
+    <ClInclude Include="math\vector\recurse\access.h" />
+    <ClInclude Include="math\vector\depth.h" />
+    <ClInclude Include="math\vector\value.h" />
+    <ClInclude Include="math\vector\recurse\transform.h" />
+    <ClInclude Include="math\vector\anchor.h" />
+    <ClInclude Include="math\vector\operate\compare.h" />
+    <ClInclude Include="math\vector\operate\size\defined.h" />
+    <ClInclude Include="math\vector\operate\size\static.h" />
+    <ClInclude Include="math\vector\operate\size\with.h" />
+    <ClInclude Include="math\vector\operate\sentinel.h" />
+    <ClInclude Include="math\vector\operate\size\compare.h" />
+    <ClInclude Include="math\vector\operate\size\recurse.h" />
+    <ClInclude Include="math\vector\index.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />
