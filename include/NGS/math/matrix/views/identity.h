@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "../operate.h"
 #include "./transform.h"
 #include "./defined.h"
 

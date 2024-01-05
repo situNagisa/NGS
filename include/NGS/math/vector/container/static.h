@@ -36,36 +36,6 @@ namespace _detail
 
 			return *this;
 		}
-	private:
-		constexpr decltype(auto) recurse_access(auto&& data, index_t index, ::std::convertible_to<index_t> auto&&... rest)
-		{
-			if constexpr (sizeof...(rest))
-			{
-				return self_type::recurse_access(data[index], static_cast<index_t>(rest)...);
-			}
-			else
-			{
-				return data[index];
-			}
-		}
-	public:
-		constexpr decltype(auto) operator()(type_traits::index_type_identity_t<_Index, index_t>... index)
-		{
-			return self_type::recurse_access(_data, index...);
-		}
-		constexpr decltype(auto) operator()(type_traits::index_type_identity_t<_Index, index_t>... index)const
-		{
-			return self_type::recurse_access(_data, index...);
-		}
-
-#if defined(__cpp_multidimensional_subscript) && defined(__cpp_explicit_this_parameter)
-		constexpr auto&& operator[](this auto&& self, type_traits::index_type_identity_t<_Index, index_t>... index)
-			requires (extent > 1)
-		{
-			return self_type::recurse_access(_data, index...);
-		}
-#endif
-
 		constexpr auto&& at(index_t index)
 		{
 			NGS_ASSERT(index < extent, "out of range!");

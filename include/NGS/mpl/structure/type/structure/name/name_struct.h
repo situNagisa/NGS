@@ -7,7 +7,7 @@ NGS_LIB_MODULE_BEGIN
 
 template<class _Type, class _ObjectType = std::remove_reference_t<_Type>>
 concept CNamedStruct = CStructure<_ObjectType> && requires(_ObjectType obj, const _ObjectType obj_cst) {
-	requires nboost::fusion::CMap<typename _ObjectType::map_type>;
+	requires external::nboost::fusion::CMap<typename _ObjectType::map_type>;
 };
 
 template<class...>

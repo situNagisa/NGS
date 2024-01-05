@@ -2,52 +2,52 @@
 
 #include "../base.h"
 
-#include <windows.h>
+#include "NGS/osapi/windows.h"
 
 NGS_CONSOLE_BEGIN
 
 namespace detail
 {
-struct console_data_impl
-{
-	HANDLE handle{};
-};
-
-NGS_HPP_GLOBAL_STATIC WORD convert_front(text_color color)
-{
-	switch (color)
+	struct console_data_impl
 	{
-	case text_color::black:
-		return 0;
-	case text_color::blue:
-		return FOREGROUND_BLUE;
-	case text_color::green:
-		return FOREGROUND_GREEN;
-	case text_color::cyan:
-		return FOREGROUND_GREEN | FOREGROUND_BLUE;
-	case text_color::red:
-		return FOREGROUND_RED;
-	case text_color::magenta:
-		return FOREGROUND_RED | FOREGROUND_BLUE;
-	case text_color::yellow:
-		return FOREGROUND_RED | FOREGROUND_GREEN;
-	default:
-		//[[fallthrough]]
-	case text_color::reset:
-		//[[fallthrough]]
-	case text_color::white:
-		return FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
-	}
-}
-NGS_HPP_GLOBAL_STATIC WORD convert_back(text_color color)
-{
-	return convert_front(color) << 4;
-}
+		HANDLE handle{};
+	};
 
-NGS_HPP_GLOBAL_STATIC WORD convert(text_color front, text_color back)
-{
-	return convert_front(front) | (convert_back(back));
-}
+	NGS_HPP_GLOBAL_STATIC WORD convert_front(text_color color)
+	{
+		switch (color)
+		{
+		case text_color::black:
+			return 0;
+		case text_color::blue:
+			return FOREGROUND_BLUE;
+		case text_color::green:
+			return FOREGROUND_GREEN;
+		case text_color::cyan:
+			return FOREGROUND_GREEN | FOREGROUND_BLUE;
+		case text_color::red:
+			return FOREGROUND_RED;
+		case text_color::magenta:
+			return FOREGROUND_RED | FOREGROUND_BLUE;
+		case text_color::yellow:
+			return FOREGROUND_RED | FOREGROUND_GREEN;
+		default:
+			//[[fallthrough]]
+		case text_color::reset:
+			//[[fallthrough]]
+		case text_color::white:
+			return FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+		}
+	}
+	NGS_HPP_GLOBAL_STATIC WORD convert_back(text_color color)
+	{
+		return convert_front(color) << 4;
+	}
+
+	NGS_HPP_GLOBAL_STATIC WORD convert(text_color front, text_color back)
+	{
+		return convert_front(front) | (convert_back(back));
+	}
 
 }
 

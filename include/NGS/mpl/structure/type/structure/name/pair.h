@@ -15,6 +15,6 @@ template<class _Type, class _ObjectType = std::remove_reference_t<_Type>>
 concept CVariableId = ccpt::constant<_ObjectType> && statics::strings::CString<typename _ObjectType::value_type>;
 
 template<class _Type, class _ObjectType = std::remove_reference_t<_Type>>
-concept CPair = nboost::fusion::CPair<_ObjectType> && CVariableId<typename _ObjectType::first_type>;
+concept CPair = external::nboost::fusion::CPair<_ObjectType> && CVariableId<typename _ObjectType::first_type>;
 
 NGS_LIB_MODULE_END

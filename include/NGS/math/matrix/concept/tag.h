@@ -1,11 +1,12 @@
 ﻿#pragma once
 
 #include "../tag.h"
-#include "./input_or_output.h"
+#include "./depth.h"
+#include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
 template<class _M>
-concept tag_matrix = input_or_output_matrix<_M> && ::std::derived_from<tag_trait_t<_M>, matrix_tag>;
+concept tag_matrix = generalized_matrix<_M> && vectors::tag_vector<_M> && vectors::tag_vector_at<_M, 1>;
 
 NGS_LIB_MODULE_END

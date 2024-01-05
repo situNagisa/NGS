@@ -43,7 +43,7 @@ namespace _detail
 }
 
 template<auto _Transformer, extent_t _Major, extent_t _Minor, auto _MajorSentinel, auto _MinorSentinel, class... _Args>
-using transform_view = _detail::basic_transform_view<_Transformer, _Major, _Minor, _MajorSentinel, _MinorSentinel, _Args...>;
+using transform_view = _detail::tag_transform_view<_Transformer, _Major, _Minor, _MajorSentinel, _MinorSentinel, _Args...>;
 
 template<auto _Transformer, extent_t _Major, extent_t _Minor, class... _Args>
 using transform_default_sentinel_view = transform_view<_Transformer, _Major, _Minor,

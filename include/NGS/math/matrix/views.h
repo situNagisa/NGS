@@ -6,5 +6,6 @@
 #include "./views/trivial.h"
 #include "./views/diagonal.h"
 #include "./views/identity.h"
+#include "./views/vector.h"
 
 #include "NGS/lib/module_end.h"

@@ -17,7 +17,7 @@
 #define NGS_MATH_MATRIX_NS NGS_MATH_NS::matrixes
 
 #define NGS_LIB_VERSION_MAJOR 1
-#define NGS_LIB_VERSION_MINOR 0
+#define NGS_LIB_VERSION_MINOR 1
 #define NGS_LIB_VERSION_PATCH 0
 #define NGS_LIB_NAME NGS_MATH_MATRIX_NS
 #include "NGS/lib/lib.h"

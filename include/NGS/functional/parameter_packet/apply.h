@@ -32,6 +32,12 @@ using apply_result_t = detail::apply_result_t<_Callable, type_traits::naked_t<_P
 
 namespace detail
 {
+	template<class _L, class _R>
+	struct same_as
+	{
+		static_assert(::std::same_as<_L, _R>);
+	};
+
 	template<size_t... _FirstIndex, size_t... _SecondIndex, class _Callable, class _FirstPacket, class _SecondPacket, class... _Args>
 	constexpr NGS_LIB_NAME::apply_result_t<_Callable&&, statics::tuples::meta_cat_t<_FirstPacket&&, _SecondPacket&&>, _Args&&...>
 		apply(
@@ -44,7 +50,7 @@ namespace detail
 		)
 		requires (unpack_has_adl<_FirstPacket&&, _FirstIndex> && ...) && (unpack_has_adl<_SecondPacket&&, _SecondIndex> && ...)
 	{
-		using result_type = decltype(NGS_PP_PERFECT_FORWARD(callable)(
+		same_as< NGS_LIB_NAME::apply_result_t<_Callable&&, statics::tuples::meta_cat_t<_FirstPacket&&, _SecondPacket&&>, _Args&&...>, decltype(NGS_PP_PERFECT_FORWARD(callable)(
 			NGS_LIB_NAME::replace(
 				NGS_LIB_NAME::unpack<_FirstIndex>(NGS_PP_PERFECT_FORWARD(first)),
 				NGS_PP_PERFECT_FORWARD(replace_params)...
@@ -53,8 +59,7 @@ namespace detail
 				NGS_LIB_NAME::unpack<_SecondIndex>(NGS_PP_PERFECT_FORWARD(second)),
 				NGS_PP_PERFECT_FORWARD(replace_params)...
 			)...
-			));
-		static_assert(::std::same_as< NGS_LIB_NAME::apply_result_t<_Callable&&, statics::tuples::meta_cat_t<_FirstPacket&&, _SecondPacket&&>, _Args&&...>, result_type>);
+			))>{};
 		return NGS_PP_PERFECT_FORWARD(callable)(
 			NGS_LIB_NAME::replace(
 				NGS_LIB_NAME::unpack<_FirstIndex>(NGS_PP_PERFECT_FORWARD(first)),

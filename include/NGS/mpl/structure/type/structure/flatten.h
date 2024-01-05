@@ -39,7 +39,7 @@ private:
 			else
 			{
 				using rest_type = flatten_t<boost::fusion::vector<_Rest...>>;
-				return ::ngs::declval<nboost::fusion::result_of::cat_t<first_flattened_type, rest_type>>();
+				return ::ngs::declval<external::nboost::fusion::result_of::cat_t<first_flattened_type, rest_type>>();
 			}
 		}
 		else
@@ -52,7 +52,7 @@ private:
 			else
 			{
 				using rest_type = flatten_t<boost::fusion::vector<_Rest...>>;
-				return declval<nboost::fusion::result_of::cat_t<first_flattened_type, rest_type>>();
+				return declval<external::nboost::fusion::result_of::cat_t<first_flattened_type, rest_type>>();
 			}
 		}
 	}

@@ -1,9 +1,12 @@
-#pragma once
+﻿#pragma once
 
-#include "NGS/mpl/mpl.h"
-#include "NGS/math/mla.h"
-#include "NGS/math/space.h"
-#include "NGS/math/util.h"
+#include "NGS/basic/basic.h"
+#include "NGS/math/vector.h"
+#include "NGS/math/matrix.h"
 
-#define NGS_TRANSFORM_BEGIN NGS_BEGIN namespace transforms{
-#define NGS_TRANSFORM_END } NGS_END
+#define NGS_TRANSFORM_NS transforms
+#define NGS_LIB_VERSION_MAJOR 0
+#define NGS_LIB_VERSION_MINOR 1
+#define NGS_LIB_VERSION_PATCH 0
+#define NGS_LIB_NAME NGS_TRANSFORM_NS
+#include "NGS/lib/lib.h"

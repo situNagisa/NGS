@@ -17,3 +17,13 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
+
+#undef _A
+#undef _R
+#undef _G
+#undef _B
+#undef __A
+#undef __R
+#undef __G
+#undef __B
+#undef _P

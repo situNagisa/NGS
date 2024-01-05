@@ -5,21 +5,34 @@
 
 NGS_TYPE_TRAIT_BEGIN
 
-template<class _T> struct storage { using type = _T; };
-template<class _T> struct storage<_T&> { using type = ::std::add_pointer_t<_T>; };
-template<class _T> struct storage<_T&&> { using type = _T; };
-template<class _T> struct storage<_T[]> { using type = ::std::add_pointer_t<_T>; };
-template<class _T, size_t _N> struct storage<_T[_N]> { using type = ::std::add_pointer_t<_T>; };
+template<class _T> struct storage_trait
+{
+	using storage_type = _T;
+	using restore_type = _T;
+};
+template<class _T> struct storage_trait<_T&>
+{
+	using storage_type = ::std::add_pointer_t<_T>;
+	using restore_type = _T&;
+};
+template<class _T> struct storage_trait<_T&&>
+{
+	using storage_type = _T;
+	using restore_type = _T;
+};
+template<class _T> struct storage_trait<_T[]>
+{
+	using storage_type = ::std::add_pointer_t<_T>;
+	using restore_type = ::std::add_pointer_t<_T>;
+};
+template<class _T, size_t _N> struct storage_trait<_T[_N]>
+{
+	using storage_type = ::std::add_pointer_t<_T>;
+	using restore_type = ::std::add_pointer_t<_T>;
+};
 
-template<class _T> using storage_t = typename storage<_T>::type;
-
-template<class _T> struct restored { using type = _T; };
-template<class _T> struct restored<_T&> { using type = _T&; };
-template<class _T> struct restored<_T&&> { using type = _T; };
-template<class _T> struct restored<_T[]> { using type = ::std::add_pointer_t<_T>; };
-template<class _T, size_t _N> struct restored<_T[_N]> { using type = ::std::add_pointer_t<_T>; };
-
-template<class _T> using restored_t = typename restored<_T>::type;
+template<class _T> using storage_t = typename storage_trait<_T>::storage_type;
+template<class _T> using restored_t = typename storage_trait<_T>::restore_type;
 
 template<class _T>
 constexpr decltype(auto) store(auto&& value) requires is_same_naked_v<decltype(value), _T>

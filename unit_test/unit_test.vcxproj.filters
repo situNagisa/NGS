@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="defined.h" />
+    <ClInclude Include="_ngs\math\vector\concept.h" />
+    <ClInclude Include="_ngs\math\vector\defined.h" />
+    <ClInclude Include="_ngs\math\defined.h" />
+    <ClInclude Include="_ngs\defined.h" />
+    <ClInclude Include="_ngs\math\vector.h" />
+    <ClInclude Include="_ngs\math.h" />
+    <ClInclude Include="ngs.h" />
+    <ClInclude Include="_ngs\math\vector\operate.h" />
+    <ClInclude Include="_ngs\math\vector\recurse.h" />
+    <ClInclude Include="_ngs\math\matrix\defined.h" />
+    <ClInclude Include="_ngs\math\matrix.h" />
+    <ClInclude Include="_ngs\math\matrix\concept.h" />
+    <ClInclude Include="_ngs\math\matrix\views.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{5c85b26f-814b-414a-b769-b30a7c681406}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

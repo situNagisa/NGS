@@ -1,4 +1,4 @@
 ﻿#pragma once
 
-#include "./3d.h"
-#include "./coordinate.h"
+
+#include "NGS/lib/lib_end.h"

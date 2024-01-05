@@ -18,7 +18,7 @@ namespace _detail
 }
 
 template<input_or_output_matrix _M>
-using transpose_view = transform_depend_view<_detail::transpose_transformer, _M>;
+using transpose_view = transform_default_sentinel_view<_detail::transpose_transformer, minor_extent_v<_M>, major_extent_v<_M>, _M>;
 
 constexpr decltype(auto) transpose(input_or_output_matrix auto&& matrix)
 {

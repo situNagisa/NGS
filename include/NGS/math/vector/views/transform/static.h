@@ -59,19 +59,22 @@ public:
 	storage_type _params;
 };
 
+template<auto _Transformer, extent_t _Extent, class... _Args>
+using transform_default_sentinel_view = transform_view<_Transformer, _Extent, packet<_Args...>, NGS_MATH_VECTOR_OPERATE_NS::default_sentinel<_Extent>()>;
+
 template<auto _Transformer, extent_t _Extent, auto _Sentinel, class... _Args>
 constexpr auto transform(_Args&&... args)
 {
 	return transform_view<_Transformer, _Extent, packet<_Args...>, _Sentinel>(NGS_PP_PERFECT_FORWARD(args)...);
 }
 
-template<auto _Transformer, extent_t _Extent, class... _Args> requires default_sentinel_able<_Extent, decltype(::std::ranges::size), _Args...>
+template<auto _Transformer, extent_t _Extent, class... _Args>
 constexpr auto transform(_Args&&... args)
 {
 	return transform_view < _Transformer, _Extent, packet<_Args...>, NGS_MATH_VECTOR_OPERATE_NS::default_sentinel<_Extent>() >(NGS_PP_PERFECT_FORWARD(args)...);
 }
 
 template<auto _Transformer, input_or_output_vector _V>
-using transform_depend_view = transform_view<_Transformer, extent_v<_V>, packet<_V>, NGS_MATH_VECTOR_OPERATE_NS::default_sentinel<extent_v<_V>>()>;
+using transform_depend_view = transform_default_sentinel_view<_Transformer, extent_v<_V>, _V>;
 
 NGS_LIB_MODULE_END

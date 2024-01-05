@@ -1,14 +1,14 @@
 ﻿#pragma once
 
-#include "../anchor.h"
 #include "../extent.h"
-#include "./input_or_output.h"
+#include "./depth.h"
+#include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
-template<class _T> concept dynamic_vector = input_or_output_vector<_T> && extent_v<_T> == dynamic_extent;
-template<class _T> concept adapter_vector = input_or_output_vector<_T> && extent_v<_T> == adapter_extent;
-template<class _T> concept static_extent_vector = input_or_output_vector<_T> && !dynamic_vector<_T> && !adapter_vector<_T>;
+template<class _T> concept dynamic_vector = generalized_vector<_T> && extent_v<_T> == dynamic_extent;
+template<class _T> concept adapter_vector = generalized_vector<_T> && extent_v<_T> == adapter_extent;
+template<class _T> concept static_extent_vector = generalized_vector<_T> && !dynamic_vector<_T> && !adapter_vector<_T>;
 
 NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_UNARY(dynamic_vector);
 NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_UNARY(adapter_vector);

@@ -1,13 +1,10 @@
 ﻿#pragma once
 
-#include "./concept/input_or_output.h"
-#include "./concept/input.h"
-#include "./concept/output.h"
-#include "./concept/contiguous.h"
+#include "./concept/depth.h"
+#include "./concept/io.h"
+#include "./concept/range.h"
 #include "./concept/extent.h"
-#include "./concept/size.h"
 #include "./concept/tag.h"
-#include "./concept/scalar.h"
 #include "./concept/operator.h"
 
 #include "NGS/lib/module_end.h"
