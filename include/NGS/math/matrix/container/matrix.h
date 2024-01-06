@@ -1,20 +1,14 @@
 ﻿#pragma once
 
 #include "../extent.h"
+#include "../operator.h"
 #include "../tag.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
 template<class _E, extent_t _Major = dynamic_extent, extent_t _Minor = dynamic_extent>
-struct matrix : vectors::vector<vectors::vector<_E, _Minor>, _Major>, basic_matrix
-{
-	using base_type = vectors::vector<vectors::vector<_E, _Minor>, _Major>;
-	using basic_matrix::ngs_math_vector_type;
-
-	using base_type::base_type;
-	using base_type::operator=;
-};
+using matrix = bases::adl_forward<NGS_MATH_MATRIX_TAG_NS::retag<NGS_MATH_MATRIX_TAG_NS::matrix, vectors::vector<vectors::vector<_E, _Minor>, _Major>>, allow_adl_operator>;
 
 #define NGS_MATH_MATRIX_CONSTANT(major_id,major_extent,minor_id,minor_extent)					\
 template<class _E> using matrix##major_id##minor_id = matrix<_E, major_extent, minor_extent>;	\

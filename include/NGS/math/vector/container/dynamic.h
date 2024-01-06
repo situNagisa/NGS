@@ -5,7 +5,10 @@
 NGS_LIB_MODULE_BEGIN
 
 template<class _T>
-struct vector<_T, dynamic_extent> : ::std::vector<_T>, basic_vector
+struct vector<_T, dynamic_extent>
+	: ::std::vector<_T>
+	, allow_adl_operator
+	, NGS_MATH_VECTOR_TAG_NS::tag<NGS_MATH_VECTOR_TAG_NS::vector>
 {
 	NGS_MPL_ENVIRON_BEGIN(vector);
 	using base_type = ::std::vector<_T>;

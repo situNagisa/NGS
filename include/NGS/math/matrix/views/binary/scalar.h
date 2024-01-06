@@ -22,7 +22,7 @@ using vectors::views::multiply_scalar;
 using vectors::views::divide_scalar;
 
 NGS_LIB_MODULE_END
-NGS_LIB_BEGIN
+NGS_MATH_MATRIX_OPERATOR_BEGIN
 
 template<class _L, class _R> requires NGS_LIB_MODULE_NAME::_detail::multiply_scalar_operatable<_L, _R>
 constexpr decltype(auto) operator+(_L&& left, _R&& right)
@@ -48,4 +48,4 @@ constexpr decltype(auto) operator/(_L&& left, _R&& right)
 	return NGS_LIB_MODULE_NAME::divide_scalar(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
-NGS_LIB_END
+NGS_MATH_MATRIX_OPERATOR_END

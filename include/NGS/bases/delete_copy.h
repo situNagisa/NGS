@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_BASES_BEGIN
+NGS_LIB_BEGIN
 
 class NGS_DLL_API delete_copy {
 public:
@@ -11,4 +11,4 @@ public:
 	delete_copy& operator=(const delete_copy&) = delete;
 };
 
-NGS_BASES_END
+NGS_LIB_END

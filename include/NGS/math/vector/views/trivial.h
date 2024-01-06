@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "../iterator.h"
+#include "../tag.h"
 #include "./transform.h"
 #include "./defined.h"
 
@@ -18,14 +18,28 @@ namespace _detail
 }
 
 template<class _T>
-struct trivial_vector : transform_view <_detail::trivial_transformer, adapter_extent, packet<_T>, make_adapter_sentinel>
+using trivial_vector = NGS_MATH_VECTOR_TAG_NS::retag<NGS_MATH_VECTOR_TAG_NS::trivial, transform_view <_detail::trivial_transformer, adapter_extent, packet<_T>, make_adapter_sentinel>>;
+
+//template<class _T>
+//struct trivial_vector : NGS_MATH_VECTOR_TAG_NS::retag<NGS_MATH_VECTOR_TAG_NS::trivial, transform_view <_detail::trivial_transformer, adapter_extent, packet<_T>, make_adapter_sentinel>>
+//{
+//	NGS_MPL_ENVIRON(trivial_vector);
+//public:
+//	constexpr explicit trivial_vector(const _T& data) :base_type(data) {}
+//	constexpr explicit trivial_vector(_T&& data) : base_type(::std::move(data)) {}
+//};
+
+//template<class _T> trivial_vector(_T) -> trivial_vector<_T>;
+
+constexpr auto trivial(auto&& value)
 {
-	using base_type = transform_view <_detail::trivial_transformer, adapter_extent, packet<_T>, make_adapter_sentinel>;
+	return trivial_vector<type_traits::naked_t<decltype(value)>>(NGS_PP_PERFECT_FORWARD(value));
+}
+namespace _detail
+{
+	using zero_vector = NGS_MATH_VECTOR_TAG_NS::retag<NGS_MATH_VECTOR_TAG_NS::zero, trivial_vector<bool>>;
+}
 
-	constexpr explicit trivial_vector(const _T& data) :base_type(data) {}
-	constexpr explicit trivial_vector(_T&& data) : base_type(::std::move(data)) {}
-};
-
-template<class _T> trivial_vector(_T) -> trivial_vector<_T>;
+inline constexpr _detail::zero_vector zero{ false };
 
 NGS_LIB_MODULE_END

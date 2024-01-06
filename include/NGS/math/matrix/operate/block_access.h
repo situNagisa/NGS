@@ -2,8 +2,8 @@
 
 #include "./defined.h"
 
-NGS_LIB_BEGIN
+NGS_LIB_MODULE_BEGIN
 
-struct empty {};
 
-NGS_LIB_END
+
+NGS_LIB_MODULE_END

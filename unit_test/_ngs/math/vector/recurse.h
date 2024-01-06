@@ -17,7 +17,7 @@ TEST(math_vector, recurse)
 	static_assert(contiguous_vector_at<recurse_type, 2>);
 
 	recurse_type recurse_vector({ {1,2} }, { {2,3} }, { {3,4} });
-	adapter_type adapter_vector(views::trivial_vector< views::trivial_vector<int>>(views::trivial_vector(2)));
+	adapter_type adapter_vector(views::trivial_vector< views::trivial_vector<int>>(views::trivial(2)));
 
 	EXPECT_EQ(recurse::access(recurse_vector, 0, 0, 0), 1);
 	EXPECT_EQ(recurse::access(recurse_vector, 0, 0, 1), 2);

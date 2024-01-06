@@ -3,6 +3,7 @@
 #include "../concept.h"
 #include "../tag.h"
 #include "../operate.h"
+#include "../operator.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
@@ -22,28 +23,18 @@ namespace _detail
 	inline constexpr basic_transform_view_transformer_t<_Transformer> basic_transform_view_transformer{};
 
 	template<auto _Transformer, extent_t _Major, extent_t _Minor, auto _MajorSentinel, auto _MinorSentinel, class... _Args>
-	using basic_transform_view =
+	using transform_view = bases::adl_forward<NGS_MATH_MATRIX_TAG_NS::retag < NGS_MATH_MATRIX_TAG_NS::matrix,
 		vectors::recurse::transform_view<
 		basic_transform_view_transformer<_Transformer>,
 		//functional::binders::bind<sizeof...(_Args), 2>(_Transformer, functional::parameter_packet::placeholders::_2, functional::parameter_packet::placeholders::_1),
 		vectors::recurse::extents<_Major, _Minor>,
 		vectors::packet<_Args...>,
 		_MajorSentinel, _MinorSentinel
-		>;
-
-	template<auto _Transformer, extent_t _Major, extent_t _Minor, auto _MajorSentinel, auto _MinorSentinel, class... _Args>
-	struct tag_transform_view : basic_transform_view<_Transformer, _Major, _Minor, _MajorSentinel, _MinorSentinel, _Args...>, basic_matrix
-	{
-		using base_type = basic_transform_view<_Transformer, _Major, _Minor, _MajorSentinel, _MinorSentinel, _Args...>;
-		using basic_matrix::ngs_math_vector_type;
-
-		using base_type::base_type;
-		using base_type::operator=;
-	};
+		>>, allow_adl_operator>;
 }
 
 template<auto _Transformer, extent_t _Major, extent_t _Minor, auto _MajorSentinel, auto _MinorSentinel, class... _Args>
-using transform_view = _detail::tag_transform_view<_Transformer, _Major, _Minor, _MajorSentinel, _MinorSentinel, _Args...>;
+using transform_view = _detail::transform_view<_Transformer, _Major, _Minor, _MajorSentinel, _MinorSentinel, _Args...>;
 
 template<auto _Transformer, extent_t _Major, extent_t _Minor, class... _Args>
 using transform_default_sentinel_view = transform_view<_Transformer, _Major, _Minor,

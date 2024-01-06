@@ -71,7 +71,7 @@ constexpr auto divide_value(_L&& left, _R&& right)
 
 NGS_LIB_MODULE_END
 
-NGS_LIB_BEGIN
+NGS_MATH_VECTOR_OPERATOR_BEGIN
 
 template<class _L, class _R> requires NGS_LIB_MODULE_NAME::_detail::binary_value_operatable<_L, _R>
 constexpr decltype(auto) operator+(_L&& left, _R&& right)
@@ -97,4 +97,40 @@ constexpr decltype(auto) operator/(_L&& left, _R&& right)
 	return NGS_LIB_MODULE_NAME::divide_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
-NGS_LIB_END
+template<class _L, class _R>
+	requires NGS_LIB_MODULE_NAME::_detail::binary_value_operatable<_L, _R>
+&& assignable_from<_L&, NGS_LIB_MODULE_NAME::add_value_view<_L&, _R&&>>
+constexpr decltype(auto) operator+=(_L&& left, _R&& right)
+{
+	NGS_MATH_VECTOR_OPERATE_NS::assign(left, NGS_LIB_MODULE_NAME::add_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)));
+	return left;
+}
+
+template<class _L, class _R>
+	requires NGS_LIB_MODULE_NAME::_detail::binary_value_operatable<_L, _R>
+&& assignable_from<_L&, NGS_LIB_MODULE_NAME::subtract_value_view<_L&, _R&&>>
+constexpr decltype(auto) operator-=(_L&& left, _R&& right)
+{
+	NGS_MATH_VECTOR_OPERATE_NS::assign(left, NGS_LIB_MODULE_NAME::subtract_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)));
+	return left;
+}
+
+template<class _L, class _R>
+	requires NGS_LIB_MODULE_NAME::_detail::binary_value_operatable<_L, _R>
+&& assignable_from<_L&, NGS_LIB_MODULE_NAME::multiply_value_view<_L&, _R&&>>
+constexpr decltype(auto) operator*=(_L&& left, _R&& right)
+{
+	NGS_MATH_VECTOR_OPERATE_NS::assign(left, NGS_LIB_MODULE_NAME::multiply_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)));
+	return left;
+}
+
+template<class _L, class _R>
+	requires NGS_LIB_MODULE_NAME::_detail::binary_value_operatable<_L, _R>
+&& assignable_from<_L&, NGS_LIB_MODULE_NAME::divide_value_view<_L&, _R&&>>
+constexpr decltype(auto) operator/=(_L&& left, _R&& right)
+{
+	NGS_MATH_VECTOR_OPERATE_NS::assign(left, NGS_LIB_MODULE_NAME::divide_value(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)));
+	return left;
+}
+
+NGS_MATH_VECTOR_OPERATOR_END

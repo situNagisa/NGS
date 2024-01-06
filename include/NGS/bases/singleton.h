@@ -3,7 +3,7 @@
 #include "./defined.h"
 #include "./delete_copy.h"
 
-NGS_BASES_BEGIN
+NGS_LIB_BEGIN
 template<class _Derived>
 class NGS_DLL_API singleton : public delete_copy {
 	NGS_MPL_ENVIRON_BEGIN(singleton);
@@ -16,4 +16,4 @@ public:
 	}
 };
 
-NGS_BASES_END
+NGS_LIB_END

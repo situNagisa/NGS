@@ -7,5 +7,6 @@
 #include "./views/diagonal.h"
 #include "./views/identity.h"
 #include "./views/vector.h"
+#include "./views/submatrix.h"
 
 #include "NGS/lib/module_end.h"

@@ -72,4 +72,7 @@ TEST(math_matrix, views)
 		EXPECT_TRUE(vectors::ops::equal(vectors::vector4f(1, 2, 3, 4) * views::identity, vectors::vector4f(1, 2, 3, 4)));
 		EXPECT_TRUE(vectors::ops::equal(views::identity * vectors::vector4f(1, 2, 3, 4), vectors::vector4f(1, 2, 3, 4)));
 	}
+	{
+		EXPECT_TRUE(is_same_as_eigen(views::submatrix(static_matrix, { 0,0,3,3 }), e_matrix.block<3, 3>(0, 0)));
+	}
 }

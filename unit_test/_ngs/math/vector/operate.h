@@ -9,7 +9,7 @@ TEST(math_vector, operate)
 
 	constexpr vector3i static_vector(1, 2, 3);
 	vectori dynamic_vector(static_vector);
-	constexpr views::trivial_vector adapter_vector(1);
+	constexpr auto adapter_vector = views::trivial(1);
 
 	Eigen::Vector3i e_vector(1, 2, 3);
 	Eigen::Vector3i e_a_vector(1, 1, 1);

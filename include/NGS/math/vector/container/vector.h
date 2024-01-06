@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "../operator.h"
 #include "../extent.h"
 #include "./defined.h"
 

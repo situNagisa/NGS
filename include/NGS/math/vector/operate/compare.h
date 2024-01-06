@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "../operator.h"
 #include "../concept.h"
 #include "./size.h"
 #include "./access.h"
@@ -44,7 +45,7 @@ constexpr bool equal(const auto& left, const auto& right)
 }
 
 NGS_LIB_MODULE_END
-NGS_LIB_BEGIN
+NGS_MATH_VECTOR_OPERATOR_BEGIN
 
 constexpr bool operator==(const operator_vector auto& left, const operator_vector auto& right)
 	requires equality_comparable_with<decltype(left), decltype(right)>
@@ -52,4 +53,4 @@ constexpr bool operator==(const operator_vector auto& left, const operator_vecto
 	return NGS_LIB_MODULE_NAME::equal(left, right);
 }
 
-NGS_LIB_END
+NGS_MATH_VECTOR_OPERATOR_END

@@ -4,4 +4,5 @@
 #include "../../tag.h"
 #include "../../operate.h"
 #include "../../iterator.h"
+#include "../../operator.h"
 #include "../defined.h"

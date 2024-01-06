@@ -11,10 +11,11 @@ template<auto _Transformer, extent_t _Extent, functional::parameter_packet::pack
 struct transform_view;
 
 template<auto _Transformer, extent_t _Extent, template<class...>class _ArgContainer, class... _Args, auto _Sentinel>
-struct transform_view<_Transformer, _Extent, _ArgContainer<_Args...>, _Sentinel> :
-	basic_vector,
-	::std::ranges::view_base,
-	::std::ranges::view_interface<transform_view<_Transformer, _Extent, _ArgContainer<_Args...>, _Sentinel>>
+struct transform_view<_Transformer, _Extent, _ArgContainer<_Args...>, _Sentinel>
+	: allow_adl_operator
+	, NGS_MATH_VECTOR_TAG_NS::tag<NGS_MATH_VECTOR_TAG_NS::vector>
+	, ::std::ranges::view_base
+	, ::std::ranges::view_interface<transform_view<_Transformer, _Extent, _ArgContainer<_Args...>, _Sentinel>>
 {
 	using storage_type = _ArgContainer<_Args...>;
 
@@ -55,6 +56,8 @@ struct transform_view<_Transformer, _Extent, _ArgContainer<_Args...>, _Sentinel>
 		}
 	}
 
+	constexpr auto&& get_parameter_packet() { return _params; }
+	constexpr auto&& get_parameter_packet()const { return _params; }
 public:
 	storage_type _params;
 };
