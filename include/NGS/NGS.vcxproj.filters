@@ -954,9 +954,7 @@
     <ClInclude Include="transform\las\defined.h" />
     <ClInclude Include="transform\las.h" />
     <ClInclude Include="transform\transform.h" />
-    <ClInclude Include="transform\las\3d\defined.h" />
     <ClInclude Include="transform\las\3d.h" />
-    <ClInclude Include="transform\las\3d\matrix.h" />
     <ClInclude Include="math\matrix\operate\compare.h" />
     <ClInclude Include="math\matrix\views\vector.h" />
     <ClInclude Include="math\vector\views\binary\value.h" />
@@ -999,6 +997,14 @@
     <ClInclude Include="math\matrix\views\submatrix.h" />
     <ClInclude Include="math\matrix\concept\block.h" />
     <ClInclude Include="math\matrix\operate\block_access.h" />
+    <ClInclude Include="static\tuple\algorithm\for_each.h" />
+    <ClInclude Include="static\tuple\algorithm\defined.h" />
+    <ClInclude Include="static\tuple\algorithm.h" />
+    <ClInclude Include="math\basic\minmax.h" />
+    <ClInclude Include="transform\scale.h" />
+    <ClInclude Include="math\vector\views\continuative.h" />
+    <ClInclude Include="math\vector\views\cat.h" />
+    <ClInclude Include="math\box\defined.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />

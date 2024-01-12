@@ -19,11 +19,11 @@ constexpr auto negate(accessable_vector auto&& vector)
 }
 
 NGS_LIB_MODULE_END
-NGS_LIB_BEGIN
+NGS_MATH_VECTOR_OPERATOR_BEGIN
 
 constexpr auto operator-(accessable_vector auto&& vector) requires operator_vector<decltype(vector)>
 {
 	return NGS_LIB_MODULE_NAME::negate(NGS_PP_PERFECT_FORWARD(vector));
 }
 
-NGS_LIB_END
+NGS_MATH_VECTOR_OPERATOR_END

@@ -6,6 +6,8 @@ NGS_LIB_BEGIN
 
 using depth_t = size_t;
 
+inline constexpr depth_t invalid_depth = static_cast<depth_t>(-1);
+
 template<class>
 struct depth : ccpt::constant_<depth_t, 0> {};
 

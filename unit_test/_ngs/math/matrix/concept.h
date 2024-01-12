@@ -10,7 +10,7 @@ TEST(math_matrix, concept)
 	using static_type = matrix44f;
 	using dynamic_major_type = matrixX3f;
 	using dynamic_minor_type = matrix3Xf;
-	using adapter_type = views::identity_matrix;
+	using adapter_type = views::identity_view;
 
 	{
 		static_assert(contiguous_matrix<static_type>);

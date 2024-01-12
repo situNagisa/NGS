@@ -64,10 +64,10 @@ constexpr auto diagonal(vectors::input_vector auto&& vector) requires (!vectors:
 	return diagonal_view<::std::ranges::range_value_t<decltype(vector)>, vectors::extent_v<decltype(vector)>>{ NGS_PP_PERFECT_FORWARD(vector) };
 }
 
-template<class _T>
-constexpr auto diagonal(_T&&... args)
+template<class _First, ::std::convertible_to<_First>... _Args>
+constexpr auto diagonal(_First&& first, _Args&&... args)
 {
-	return diagonal_view<type_traits::naked_t<_T>, sizeof...(args)>(NGS_PP_PERFECT_FORWARD(args)...);
+	return diagonal_view<type_traits::naked_t<_First>, 1 + sizeof...(args)>(NGS_PP_PERFECT_FORWARD(first), NGS_PP_PERFECT_FORWARD(args)...);
 }
 
 

@@ -270,6 +270,8 @@
     <ClInclude Include="functional\parameter_packet\placeholder\placeholders.h" />
     <ClInclude Include="functional\parameter_packet\replace.h" />
     <ClInclude Include="functional\parameter_packet\unpack.h" />
+    <ClInclude Include="math\basic\minmax.h" />
+    <ClInclude Include="math\box\defined.h" />
     <ClInclude Include="math\matrix\concept\block.h" />
     <ClInclude Include="math\matrix\concept\defined.h" />
     <ClInclude Include="math\matrix\concept\depth.h" />
@@ -327,10 +329,15 @@
     <ClInclude Include="math\vector\views\binary\scalar.h" />
     <ClInclude Include="math\vector\views\binary\value.h" />
     <ClInclude Include="math\vector\views\binary\vector.h" />
+    <ClInclude Include="math\vector\views\cat.h" />
+    <ClInclude Include="math\vector\views\continuative.h" />
     <ClInclude Include="osapi\windows.h" />
     <ClInclude Include="osapi\windows\defined.h" />
     <ClInclude Include="osapi\windows\windows_api.h" />
     <ClInclude Include="static\tuple.h" />
+    <ClInclude Include="static\tuple\algorithm.h" />
+    <ClInclude Include="static\tuple\algorithm\defined.h" />
+    <ClInclude Include="static\tuple\algorithm\for_each.h" />
     <ClInclude Include="static\tuple\concept.h" />
     <ClInclude Include="static\tuple\concept\defined.h" />
     <ClInclude Include="static\tuple\concept\tuple.h" />
@@ -403,9 +410,8 @@
     <ClInclude Include="transform\defined.h" />
     <ClInclude Include="transform\las.h" />
     <ClInclude Include="transform\las\3d.h" />
-    <ClInclude Include="transform\las\3d\defined.h" />
-    <ClInclude Include="transform\las\3d\matrix.h" />
     <ClInclude Include="transform\las\defined.h" />
+    <ClInclude Include="transform\scale.h" />
     <ClInclude Include="transform\transform.h" />
     <ClInclude Include="_discard\linear_algebra\api\matrix.h" />
     <ClInclude Include="_discard\linear_algebra\api\scalar.h" />

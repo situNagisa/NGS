@@ -10,7 +10,7 @@ TEST(math_matrix, views)
 	using static_type = matrix44f;
 	using dynamic_major_type = matrixX3f;
 	using dynamic_minor_type = matrix3Xf;
-	using adapter_type = views::identity_matrix;
+	using adapter_type = views::identity_view;
 
 	constexpr static_type static_matrix({ 1,2,3,4 }, { 2,3,4,5 }, { 3,4,5,6 }, { 4,5,6,7 });
 	::Eigen::Matrix4f e_matrix{};
@@ -40,7 +40,7 @@ TEST(math_matrix, views)
 			{
 				return ops::access(NGS_PP_PERFECT_FORWARD(matrix), major, minor) + 2;
 			});
-		EXPECT_EQ(dynamic_transform, left + views::trivial_matrix<int>(2));
+		EXPECT_EQ(dynamic_transform, left + views::trivial(2));
 
 		EXPECT_EQ(left * views::identity, left);
 	}

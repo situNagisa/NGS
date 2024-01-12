@@ -131,4 +131,31 @@ constexpr decltype(auto) operator*(_L&& left, _R&& right)
 	return NGS_LIB_MODULE_NAME::multiply(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right));
 }
 
+template<operator_matrix _L, operator_matrix _R>
+	requires maybe_same_type<_L, _R>
+&& vectors::assignable_from<_L&, views::add_view<_L&, _R&&>>
+constexpr decltype(auto) operator+=(_L& left, _R&& right)
+{
+	vectors::ops::assign(left, NGS_LIB_MODULE_NAME::add(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)));
+	return left;
+}
+
+template<operator_matrix _L, operator_matrix _R>
+	requires maybe_same_type<_L, _R>
+&& vectors::assignable_from<_L&, views::subtract_view<_L&, _R&&>>
+constexpr decltype(auto) operator-=(_L& left, _R&& right)
+{
+	vectors::ops::assign(left, NGS_LIB_MODULE_NAME::subtract(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)));
+	return left;
+}
+
+template<operator_matrix _L, operator_matrix _R>
+	requires matrix_multipiable<_L, _R>
+&& vectors::assignable_from<_L&, views::multiply_view<_L&, _R&&>>
+constexpr decltype(auto) operator*=(_L& left, _R&& right)
+{
+	vectors::ops::assign(left, NGS_LIB_MODULE_NAME::multiply(NGS_PP_PERFECT_FORWARD(left), NGS_PP_PERFECT_FORWARD(right)));
+	return left;
+}
+
 NGS_MATH_MATRIX_OPERATOR_END

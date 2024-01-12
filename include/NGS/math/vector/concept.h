@@ -7,5 +7,13 @@
 #include "./concept/tag.h"
 #include "./concept/operator.h"
 
+///
+///	generalized vector
+///		tuple vector
+///			
+///		range vector
+///			random access vector
+///			contiguous vector
+///			sized vector
 
 #include "NGS/lib/module_end.h"

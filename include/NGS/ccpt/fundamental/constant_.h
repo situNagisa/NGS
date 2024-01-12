@@ -35,4 +35,7 @@ struct NGS_DLL_API constant_ {
 	static constexpr value_type value = _Value;
 };
 
+template<auto _Value>
+struct NGS_DLL_API auto_constant : constant_<decltype(_Value), _Value> {};
+
 NGS_CCPT_END

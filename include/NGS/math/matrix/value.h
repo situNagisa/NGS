@@ -5,6 +5,6 @@
 NGS_LIB_BEGIN
 
 template<class _M>
-using matrix_value_t = vectors::value_t<_M, 2>;
+using matrix_value_t = vectors::value_at_t<_M, 2>;
 
 NGS_LIB_END
