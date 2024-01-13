@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_TOSTRING_BEGIN
+NGS_LIB_BEGIN
 
 inline ::std::string format(std::string_view fmt, ...) {
 	::std::string buffer{};
@@ -17,4 +17,4 @@ inline ::std::string format(std::string_view fmt, ...) {
 }
 
 
-NGS_TOSTRING_END
+NGS_LIB_END

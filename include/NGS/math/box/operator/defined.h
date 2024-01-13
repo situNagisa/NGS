@@ -1,0 +1,8 @@
+﻿#include "../defined.h"
+
+#define NGS_MATH_BOX_OPERATOR_NS operators
+#define NGS_LIB_MODULE_NAME NGS_MATH_BOX_OPERATOR_NS
+#include "NGS/lib/module.h"
+
+#define NGS_MATH_BOX_OPERATOR_BEGIN NGS_LIB_BEGIN namespace NGS_MATH_BOX_OPERATOR_NS {
+#define NGS_MATH_BOX_OPERATOR_END } NGS_LIB_END

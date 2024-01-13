@@ -2,6 +2,7 @@
 
 #include "./defined.h"
 
-#include "./enum_flag.h"
+#include "./basic.h"
+#include "./enum.h"
 
 #include "NGS/lib/lib_end.h"

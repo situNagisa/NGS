@@ -32,7 +32,7 @@ NGS_HPP_INLINE void gpio::reset()
 {
 	gpio_config config{};
 	config.pin_bit_mask = _config.pin_bit_mask;
-	NGS_OS_ESP_ASSERT_ERROR(::gpio_config(&config), format("io num = %d", _pin));
+	NGS_OS_ESP_ASSERT_ERROR(::gpio_config(&config), to_strings::format("io num = %d", _pin));
 }
 
 NGS_HPP_INLINE void gpio::set_interrupt(bool enable)
@@ -48,19 +48,19 @@ NGS_HPP_INLINE void gpio::set_interrupt(embedded::io::gpio::modes::interrupt typ
 NGS_HPP_INLINE void gpio::set_io(embedded::io::gpio::modes::io mode)
 {
 	_config.set_io(mode);
-	NGS_OS_ESP_ASSERT_ERROR(::gpio_config(&_config), format("io num = %d, io mode = 0x%02x", _pin, mode));
+	NGS_OS_ESP_ASSERT_ERROR(::gpio_config(&_config), to_strings::format("io num = %d, io mode = 0x%02x", _pin, mode));
 }
 
 NGS_HPP_INLINE void gpio::set_pull(embedded::io::gpio::modes::pull mode)
 {
 	_config.set_pull(mode);
-	NGS_OS_ESP_ASSERT_ERROR(::gpio_config(&_config), format("io num = %d, pull mode = %d", _pin, mode));
+	NGS_OS_ESP_ASSERT_ERROR(::gpio_config(&_config), to_strings::format("io num = %d, pull mode = %d", _pin, mode));
 }
 
 NGS_HPP_INLINE void gpio::set(bool value)
 {
 	//NGS_LOGFL(debug, "io num = %d, level = %s", _pin, ngs::to_string(value).data());
-	NGS_OS_ESP_ASSERT_ERROR(::gpio_set_level(static_cast<gpio_num_t>(_pin), static_cast<uint32>(value)), format("io num = %d, level = %s", _pin, ngs::to_string(value).data()));
+	NGS_OS_ESP_ASSERT_ERROR(::gpio_set_level(static_cast<gpio_num_t>(_pin), static_cast<uint32>(value)), to_strings::format("io num = %d, level = %s", _pin, to_strings::to_string(value).data()));
 }
 
 NGS_HPP_INLINE bool gpio::get() const
@@ -74,7 +74,7 @@ NGS_HPP_INLINE bool gpio::open(embedded::io::pin_t gpio_num, const gpio_config& 
 	_config = config;
 	_config.pin_bit_mask = bits::scope(gpio_num);
 
-	if (!NGS_OS_ESP_EXPECT_ERROR(::gpio_config(&_config), format("io num = %d", _pin))) {
+	if (!NGS_OS_ESP_EXPECT_ERROR(::gpio_config(&_config), to_strings::format("io num = %d", _pin))) {
 		_pin = embedded::io::invalid_pin;
 		return false;
 	}

@@ -12,11 +12,13 @@ struct transform_view;
 
 template<auto _Transformer, extent_t _Extent, template<class...>class _ArgContainer, class... _Args, auto _Sentinel>
 struct transform_view<_Transformer, _Extent, _ArgContainer<_Args...>, _Sentinel>
-	: allow_adl_operator
+	: allow_adl_operator, allow_adl_io
 	, NGS_MATH_VECTOR_TAG_NS::tag<NGS_MATH_VECTOR_TAG_NS::vector>
 	, ::std::ranges::view_base
 	, ::std::ranges::view_interface<transform_view<_Transformer, _Extent, _ArgContainer<_Args...>, _Sentinel>>
 {
+	NGS_MPL_ENVIRON_BEGIN(transform_view);
+public:
 	using storage_type = _ArgContainer<_Args...>;
 
 	constexpr static auto transformer = _Transformer;

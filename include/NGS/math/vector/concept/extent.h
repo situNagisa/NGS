@@ -37,4 +37,9 @@ template<class _L, class _R> concept maybe_same_extent = same_extent<_L, _R> || 
 NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_BINARY(same_extent);
 NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_BINARY(maybe_same_extent);
 
+template<class _V, extent_t _Extent>
+concept vector_with_extent = static_extent_vector<_V> && extent_v<_V> == _Extent;
+
+NGS_MATH_VECTOR_RECURSE_ANCHOR_CONCEPT_BINARY(vector_with_extent);
+
 NGS_LIB_MODULE_END

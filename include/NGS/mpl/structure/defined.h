@@ -8,6 +8,7 @@
 #include "NGS/layout/layout.h"
 #include "NGS/static/string.h"
 #include "NGS/type_trait/type_trait.h"
+#include "NGS/to_string/to_string.h"
 
 #include "../defined.h"
 

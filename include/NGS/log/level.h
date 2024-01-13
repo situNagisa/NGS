@@ -15,22 +15,18 @@ enum class log_level
 	max,
 };
 
-NGS_LOG_END
-
-NGS_TOSTRING_BEGIN
-
-NGS_CONSTEXPR17 std::string_view to_string(logs::log_level level)
+NGS_CONSTEXPR17 std::string_view to_string(log_level level)
 {
 	switch (level)
 	{
-	case logs::log_level::trace: return "trace";
-	case logs::log_level::debug: return "debug";
-	case logs::log_level::info: return "info";
-	case logs::log_level::warn: return "warn";
-	case logs::log_level::error: return "error";
-	case logs::log_level::fatal: return "fatal";
+	case log_level::trace: return "trace";
+	case log_level::debug: return "debug";
+	case log_level::info: return "info";
+	case log_level::warn: return "warn";
+	case log_level::error: return "error";
+	case log_level::fatal: return "fatal";
 	default: return "unknown";
 	}
 }
 
-NGS_TOSTRING_END
+NGS_LOG_END

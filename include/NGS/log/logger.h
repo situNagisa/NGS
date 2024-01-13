@@ -53,7 +53,7 @@ public:
 	}
 	void print_format(std::string_view f, auto&&... args)
 	{
-		self_type::print(ngs::format(f, NGS_PP_PERFECT_FORWARD(args)...));
+		self_type::print(to_strings::format(f, NGS_PP_PERFECT_FORWARD(args)...));
 	}
 	void print_format_line(std::string_view f, auto&&... args)
 	{
@@ -77,7 +77,7 @@ public:
 	void log_format(log_level level, std::string_view f, auto&&... args)
 	{
 		///\code NGS_ format\endcode remove ADL
-		self_type::log(level, NGS_ format(f, NGS_PP_PERFECT_FORWARD(args)...));
+		self_type::log(level, to_strings::format(f, NGS_PP_PERFECT_FORWARD(args)...));
 	}
 	void log_format_line(log_level level, std::string_view f, auto&&... args)
 	{
@@ -113,7 +113,7 @@ private:
 
 		_print('[');
 		_control_char(level_color(level));
-		_print(to_string(level));
+		_print(to_strings::to_string(level));
 		_control_char(consoles::text_color::reset);
 		_print(']');
 
@@ -133,16 +133,16 @@ private:
 		{
 			_print_callback(NGS_PP_PERFECT_FORWARD(first));
 		}
-		else if constexpr (requires{ ::ngs::to_string(NGS_PP_PERFECT_FORWARD(first)); })
+		else if constexpr (requires{ to_strings::to_string(NGS_PP_PERFECT_FORWARD(first)); })
 		{
-			_print_callback(::ngs::to_string(NGS_PP_PERFECT_FORWARD(first)));
+			_print_callback(to_strings::to_string(NGS_PP_PERFECT_FORWARD(first)));
 		}
-		else if constexpr (requires(std::stringstream o) { o << NGS_PP_PERFECT_FORWARD(first); })
-		{
-			std::stringstream buffer{};
-			buffer << NGS_PP_PERFECT_FORWARD(first);
-			_print_callback(buffer.str());
-		}
+		//else if constexpr (requires(std::stringstream o) { o << NGS_PP_PERFECT_FORWARD(first); })
+		//{
+		//	std::stringstream buffer{};
+		//	buffer << NGS_PP_PERFECT_FORWARD(first);
+		//	_print_callback(buffer.str());
+		//}
 		else
 		{
 			static_assert(cpt::none<decltype(first)>, "unsupported type");

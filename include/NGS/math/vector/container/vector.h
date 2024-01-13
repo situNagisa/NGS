@@ -2,6 +2,7 @@
 
 #include "../operator.h"
 #include "../extent.h"
+#include "../io.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN

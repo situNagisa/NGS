@@ -6,7 +6,7 @@
 #include "./concept/extent.h"
 #include "./concept/tag.h"
 #include "./concept/operator.h"
-
+#include "./concept/similar.h"
 ///
 ///	generalized vector
 ///		tuple vector

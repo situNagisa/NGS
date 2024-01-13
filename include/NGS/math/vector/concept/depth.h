@@ -37,31 +37,31 @@ NGS_LIB_BEGIN
 template<range_vector _V>
 struct depth<_V> : ccpt::constant_<depth_t, depth_v<value_t<_V>> +1> {};
 
-namespace detail
-{
-	constexpr depth_t min() { return 0; }
-	constexpr depth_t min(auto first) { return first; }
-	constexpr depth_t min(auto first, auto second, auto... args)
-	{
-		if constexpr (sizeof...(args))
-		{
-			return detail::min(first < second ? first : second, args...);
-		}
-		else
-		{
-			return first < second ? first : second;
-		}
-	}
-
-	template<class _Tuple, class = ::std::make_index_sequence<extent_v<_Tuple>>>
-	struct tuple_depth {};
-
-	template<class _Tuple, size_t... _Index>
-	struct tuple_depth<_Tuple, ::std::index_sequence<_Index...>>
-	{
-		constexpr static extent_t value = 1 + detail::min(depth_v<value_t<_Tuple, _Index>>...);
-	};
-}
+//namespace detail
+//{
+//	constexpr depth_t min() { return 0; }
+//	constexpr depth_t min(auto first) { return first; }
+//	constexpr depth_t min(auto first, auto second, auto... args)
+//	{
+//		if constexpr (sizeof...(args))
+//		{
+//			return detail::min(first < second ? first : second, args...);
+//		}
+//		else
+//		{
+//			return first < second ? first : second;
+//		}
+//	}
+//
+//	template<class _Tuple, class = ::std::make_index_sequence<extent_v<_Tuple>>>
+//	struct tuple_depth {};
+//
+//	template<class _Tuple, size_t... _Index>
+//	struct tuple_depth<_Tuple, ::std::index_sequence<_Index...>>
+//	{
+//		constexpr static extent_t value = 1 + detail::min(depth_v<value_t<_Tuple, _Index>>...);
+//	};
+//}
 
 //template<tuple_vector _V>
 //struct depth<_V> : ccpt::constant_<depth_t, detail::tuple_depth<_V>::value> {};

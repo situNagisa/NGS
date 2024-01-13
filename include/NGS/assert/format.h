@@ -8,7 +8,7 @@ inline decltype(auto) assert_format(
 	std::string_view expression, std::string_view message
 )
 {
-	return format(
+	return to_strings::format(
 		""
 		"\nerror:: %s"
 		"\nassert  : %s",
@@ -21,7 +21,7 @@ inline decltype(auto) assert_format(
 	const locations::source_location& location
 )
 {
-	return assert_format(expression, message) + format(
+	return assert_format(expression, message) + to_strings::format(
 		""
 		"\nfunction: %s"
 		"\nfile    : %s"

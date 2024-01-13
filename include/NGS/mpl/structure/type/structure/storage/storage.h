@@ -121,22 +121,19 @@ public:
 	byte data[describe_type::size]{};
 };
 
-NGS_LIB_MODULE_END
-
-NGS_BEGIN
-
-template<mpl::mstruct::CStructureStorage _Struct>
-constexpr std::string to_string(const _Struct& s) {
-	std::string str{};
+template<CStructureStorage _Struct>
+constexpr ::std::string to_string(const _Struct& s) {
+	::std::string str{};
 	str += "{";
 	str += [&s]<size_t... _Index>(std::index_sequence<_Index...>) {
 		std::string str{};
 		bool first = true;
-		((str += (first ? "" : ", ") + to_string(s.template get<_Index>()), first = false), ...);
+		((str += (first ? "" : ", ") + to_strings::to_string(s.template get<_Index>()), first = false), ...);
 		return str;
 	}(std::make_index_sequence<_Struct::variable_count>{});
 	str += "}";
 	return str;
 }
 
-NGS_END
+
+NGS_LIB_MODULE_END

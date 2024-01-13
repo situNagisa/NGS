@@ -13,7 +13,7 @@ namespace _detail
 
 	template<class _T, extent_t _Extent, size_t... _Index>
 	struct static_vector<_T, _Extent, ::std::index_sequence<_Index...>>
-		: allow_adl_operator
+		: allow_adl_operator, allow_adl_io
 		, NGS_MATH_VECTOR_TAG_NS::tag<NGS_MATH_VECTOR_TAG_NS::vector>
 	{
 		NGS_MPL_ENVIRON_BEGIN(static_vector);
