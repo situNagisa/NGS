@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_OPENGL_ENUM_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 enum class NGS_DLL_API blend_factors : gl_enum_t {
 	zero = GL_ZERO,
@@ -56,4 +56,4 @@ namespace blend_modes {
 
 }
 
-NGS_OPENGL_ENUM_END
+NGS_LIB_MODULE_END

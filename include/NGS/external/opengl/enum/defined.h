@@ -1,6 +1,5 @@
-﻿#pragma once
+﻿#include "../defined.h"
 
-#include "../defined.h"
-
-#define NGS_OPENGL_ENUM_BEGIN NGS_OPENGL_BEGIN namespace enums{
-#define NGS_OPENGL_ENUM_END }NGS_OPENGL_END
+#define NGS_EXTERNAL_OPENGL_ENUM_NS enums
+#define NGS_LIB_MODULE_NAME NGS_EXTERNAL_OPENGL_ENUM_NS
+#include "NGS/lib/module.h"

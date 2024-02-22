@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_OPENGL_ENUM_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 
 enum class NGS_DLL_API filters : gl_enum_t {
@@ -14,4 +14,4 @@ enum class NGS_DLL_API filters : gl_enum_t {
 	linear_mipmap_linear = GL_LINEAR_MIPMAP_LINEAR,
 };
 
-NGS_OPENGL_ENUM_END
+NGS_LIB_MODULE_END

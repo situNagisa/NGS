@@ -52,17 +52,17 @@ namespace detail
 		using position_point_type = vectors::vector<position_type, _Dimension>;
 		using size_point_type = vectors::vector<size_type, _Dimension>;
 
-		constexpr hypercube() = default;
+		constexpr hypercube() : base_type(position_point_type(), size_point_type()) {}
 		constexpr hypercube(const position_point_type& position, const size_point_type& size) : base_type(position, size) {}
 		constexpr explicit hypercube(const type_traits::index_type_identity_t<_Index, position_type>&... position, const type_traits::index_type_identity_t<_Index, size_type>&... size)
 			: base_type(position_point_type(position...), size_point_type(size...)) {}
 		constexpr explicit hypercube(const position_point_type& position, const type_traits::index_type_identity_t<_Index, size_type>&... size) : base_type(position, size_point_type(size...)) {}
 		constexpr explicit hypercube(const type_traits::index_type_identity_t<_Index, position_type>&... position, const size_point_type& size) : base_type(position_point_type(position...), size) {}
 
-		auto&& position()const { return functional::parameter_packet::unpack<0>(base_type::get_parameter_packet()); }
-		auto&& position() { return functional::parameter_packet::unpack<0>(base_type::get_parameter_packet()); }
-		auto&& size()const { return functional::parameter_packet::unpack<1>(base_type::get_parameter_packet()); }
-		auto&& size() { return functional::parameter_packet::unpack<1>(base_type::get_parameter_packet()); }
+		constexpr auto&& position()const { return functional::parameter_packet::unpack<0>(base_type::get_parameter_packet()); }
+		constexpr auto&& position() { return functional::parameter_packet::unpack<0>(base_type::get_parameter_packet()); }
+		constexpr auto&& size()const { return functional::parameter_packet::unpack<1>(base_type::get_parameter_packet()); }
+		constexpr auto&& size() { return functional::parameter_packet::unpack<1>(base_type::get_parameter_packet()); }
 
 	};
 }

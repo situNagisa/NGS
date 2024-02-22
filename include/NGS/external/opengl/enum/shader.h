@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "NGS/ngl/defined.h"
+#include "./defined.h"
 
-NGL_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 enum class NGS_DLL_API shader_type {
 	vertex = GL_VERTEX_SHADER,
@@ -14,4 +14,4 @@ enum class NGS_DLL_API shader_type {
 };
 
 
-NGL_END
+NGS_LIB_MODULE_END

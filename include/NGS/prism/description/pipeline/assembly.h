@@ -6,7 +6,6 @@ NGS_LIB_MODULE_BEGIN
 
 struct input_assembly
 {
-private:
 	enum class topology_type
 	{
 		point_list,
@@ -21,8 +20,8 @@ private:
 		triangle_strip_with_adjacency,
 		patch_list,
 	};
-public:
 	topology_type topology = topology_type::point_list;
+	bool primitive_restart_enable = false;
 };
 
 NGS_LIB_MODULE_END

@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_OPENGL_ENUM_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 enum class NGS_DLL_API texture_target : gl_enum_t {
 	_1D = GL_TEXTURE_1D,
@@ -52,4 +52,4 @@ enum class NGS_DLL_API texture_slot : gl_enum_t {
 constexpr texture_slot operator+(const texture_slot& slot, std::integral auto&& offset) { return static_cast<texture_slot>(static_cast<uint32>(slot) + offset); }
 constexpr texture_slot operator-(const texture_slot& slot, std::integral auto&& offset) { return static_cast<texture_slot>(static_cast<uint32>(slot) - offset); }
 
-NGS_OPENGL_ENUM_END
+NGS_LIB_MODULE_END

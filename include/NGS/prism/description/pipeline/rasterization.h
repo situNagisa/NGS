@@ -6,7 +6,6 @@ NGS_LIB_MODULE_BEGIN
 
 struct rasterization
 {
-private:
 	enum class polygon_mode_type
 	{
 		fill,
@@ -25,7 +24,6 @@ private:
 		counter_clockwise,
 		clockwise,
 	};
-public:
 
 	bool depth_clamp_enable = false;
 	bool rasterizaer_discard_enable = false;

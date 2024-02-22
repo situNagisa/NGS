@@ -2,7 +2,7 @@
 
 #include "./format.h"
 
-NGS_ASSERT_BEGIN
+NGS_LIB_BEGIN
 
 inline bool dynamic_assert(
 	bool condition,
@@ -41,7 +41,7 @@ constexpr bool assert_(
 	}
 }
 
-NGS_ASSERT_END
+NGS_LIB_END
 
 #if NGS_COMPILER_IS_MSVC && NGS_BUILD_TYPE_IS_DEBUG
 #	define NGS_ASSERT_FAIL __debugbreak()

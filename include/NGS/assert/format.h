@@ -2,13 +2,13 @@
 
 #include "./defined.h"
 
-NGS_ASSERT_BEGIN
+NGS_LIB_BEGIN
 
 inline decltype(auto) assert_format(
 	std::string_view expression, std::string_view message
 )
 {
-	return to_strings::format(
+	return fmt::c(
 		""
 		"\nerror:: %s"
 		"\nassert  : %s",
@@ -21,7 +21,7 @@ inline decltype(auto) assert_format(
 	const locations::source_location& location
 )
 {
-	return assert_format(expression, message) + to_strings::format(
+	return assert_format(expression, message) + fmt::c(
 		""
 		"\nfunction: %s"
 		"\nfile    : %s"
@@ -44,4 +44,4 @@ inline decltype(auto) print_assert(std::string_view message)
 	);
 }
 
-NGS_ASSERT_END
+NGS_LIB_END

@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_OPENGL_ENUM_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 enum class NGS_DLL_API framebuffer_status : gl_enum_t {
 	complete = GL_FRAMEBUFFER_COMPLETE,
@@ -12,7 +12,7 @@ enum class NGS_DLL_API framebuffer_status : gl_enum_t {
 	incomplete_draw_buffer = GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER,
 	incomplete_read_buffer = GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER,
 	unsupported = GL_FRAMEBUFFER_UNSUPPORTED,
-	incomplete_multisample = GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE,
+	incomplete_multi_sample = GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE,
 	incomplete_layer_targets = GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS,
 };
 enum class NGS_DLL_API framebuffer_attachment : gl_enum_t {
@@ -43,4 +43,4 @@ enum class NGS_DLL_API framebuffer_target : gl_enum_t {
 	draw = GL_DRAW_FRAMEBUFFER,
 };
 
-NGS_OPENGL_ENUM_END
+NGS_LIB_MODULE_END

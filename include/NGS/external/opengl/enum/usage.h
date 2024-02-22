@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_OPENGL_ENUM_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 enum class NGS_DLL_API usage : gl_enum_t {
 	stream_draw = GL_STREAM_DRAW,
@@ -18,4 +18,4 @@ enum class NGS_DLL_API usage : gl_enum_t {
 	dynamic_copy = GL_DYNAMIC_COPY,
 };
 
-NGS_OPENGL_ENUM_END
+NGS_LIB_MODULE_END

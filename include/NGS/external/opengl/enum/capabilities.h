@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_OPENGL_ENUM_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 enum class NGS_DLL_API capability : gl_enum_t {
 	blend = GL_BLEND,
@@ -23,7 +23,7 @@ enum class NGS_DLL_API capability : gl_enum_t {
 	dither = GL_DITHER,
 	framebuffer_srgb = GL_FRAMEBUFFER_SRGB,
 	line_smooth = GL_LINE_SMOOTH,
-	multisample = GL_MULTISAMPLE,
+	multi_sample = GL_MULTISAMPLE,
 	polygon_offset_fill = GL_POLYGON_OFFSET_FILL,
 	polygon_offset_line = GL_POLYGON_OFFSET_LINE,
 	polygon_offset_point = GL_POLYGON_OFFSET_POINT,
@@ -42,4 +42,4 @@ enum class NGS_DLL_API capability : gl_enum_t {
 	program_point_size = GL_PROGRAM_POINT_SIZE,
 };
 
-NGS_OPENGL_ENUM_END
+NGS_LIB_MODULE_END

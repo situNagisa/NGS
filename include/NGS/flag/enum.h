@@ -8,7 +8,7 @@ NGS_LIB_BEGIN
 template<class _BitType> requires ::std::is_enum_v<_BitType>
 struct enum_flag : basic_flag<enum_flag<_BitType>, ::std::underlying_type_t<_BitType>>
 {
-	NGS_MPL_ENVIRON(enum_flag);
+	NGS_MPL_ENVIRON2(enum_flag, basic_flag<enum_flag<_BitType>, ::std::underlying_type_t<_BitType>>);
 public:
 	NGS_MPL_INHERIT_TYPE(value_type, base_type);
 	using bit_type = _BitType;

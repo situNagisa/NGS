@@ -20,7 +20,6 @@ struct graphic_pipeline
 	viewport viewport{};
 	rasterization rasterization{};
 	blend_state blend{};
-
 };
 
 NGS_LIB_MODULE_END

@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_OPENGL_ENUM_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 
 enum class NGS_DLL_API error_code : gl_enum_t {
@@ -16,4 +16,4 @@ enum class NGS_DLL_API error_code : gl_enum_t {
 	stack_overflow = GL_STACK_OVERFLOW,
 };
 
-NGS_OPENGL_ENUM_END
+NGS_LIB_MODULE_END

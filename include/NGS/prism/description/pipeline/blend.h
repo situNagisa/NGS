@@ -6,10 +6,8 @@ NGS_LIB_MODULE_BEGIN
 
 struct blend_state
 {
-private:
 	struct attachment
 	{
-	private:
 		enum class factor_type
 		{
 			zero,
@@ -46,7 +44,6 @@ private:
 			alpha = 8,
 			all = red | green | blue | alpha
 		};
-	public:
 		bool enable = false;
 		struct
 		{
@@ -62,6 +59,7 @@ private:
 		}alpha{};
 		flags::enum_flag<write_type> write_mask = write_type::all;
 	};
+
 	enum class logic_operate_type
 	{
 		clear,
@@ -81,7 +79,6 @@ private:
 		nand,
 		set
 	};
-public:
 	struct
 	{
 		bool enable = false;
@@ -93,12 +90,12 @@ public:
 	{
 		struct
 		{
-			float red = 0.0f;
-			float green = 0.0f;
-			float blue = 0.0f;
-			float alpha = 0.0f;
+			float red;
+			float green;
+			float blue;
+			float alpha;
 		};
-		float constants[4];
+		float constants[4]{};
 	};
 };
 

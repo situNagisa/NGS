@@ -53,7 +53,7 @@ public:
 	}
 	void print_format(std::string_view f, auto&&... args)
 	{
-		self_type::print(to_strings::format(f, NGS_PP_PERFECT_FORWARD(args)...));
+		self_type::print(fmt::c(f, NGS_PP_PERFECT_FORWARD(args)...));
 	}
 	void print_format_line(std::string_view f, auto&&... args)
 	{
@@ -77,7 +77,7 @@ public:
 	void log_format(log_level level, std::string_view f, auto&&... args)
 	{
 		///\code NGS_ format\endcode remove ADL
-		self_type::log(level, to_strings::format(f, NGS_PP_PERFECT_FORWARD(args)...));
+		self_type::log(level, fmt::c(f, NGS_PP_PERFECT_FORWARD(args)...));
 	}
 	void log_format_line(log_level level, std::string_view f, auto&&... args)
 	{

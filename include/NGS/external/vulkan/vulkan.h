@@ -1,17 +1,12 @@
 ﻿#pragma once
 
-#include "./defined.h"
-#include "./tvm.h"
-#include "./info.h"
-#include "./instance.h"
-#include "./device.h"
-#include "./queue.h"
-#include "./ext.h"
-#include "./vertex.h"
+#include "./render_pass.h"
 #include "./shader.h"
+#include "./pipeline_layout.h"
 #include "./pipeline.h"
+#include "./framebuffer.h"
 
-#if defined(NGS_USE_HPP)
+#ifdef NGS_USE_HPP
 #	include "./vulkan.hpp"
 #endif
 

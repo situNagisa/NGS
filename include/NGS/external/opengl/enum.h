@@ -14,3 +14,5 @@
 #include "./enum/wraps.h"
 #include "./enum/cursor.h"
 #include "./enum/framebuffer.h"
+
+#include "NGS/lib/module_end.h"

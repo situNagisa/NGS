@@ -4,7 +4,7 @@
 
 #include "NGS/bases/bases.h"
 #include "NGS/color/color.h"
-#include "NGS/math/geometry.h"
+#include "NGS/math/vector.h"
 
 #include "../defined.h"
 

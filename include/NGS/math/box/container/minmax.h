@@ -32,8 +32,8 @@ namespace detail
 	public:
 		using point_type = vectors::vector<_value_type, _Dimension>;
 
-		constexpr minmax() = default;
-		constexpr minmax(const point_type& min, const point_type& max) :base_type(min, max) {}
+		constexpr minmax() : base_type(point_type(), point_type()) {}
+		constexpr minmax(const point_type& min, const point_type& max) : base_type(min, max) {}
 		constexpr explicit minmax(const type_traits::index_type_identity_t<_Index, _value_type>&... min, const type_traits::index_type_identity_t<_Index, _value_type>&... max) : base_type(point_type(min...), point_type(max...)) {}
 		constexpr explicit minmax(const point_type& min, const type_traits::index_type_identity_t<_Index, _value_type>&... max) : base_type(min, point_type(max...)) {}
 		constexpr explicit minmax(const type_traits::index_type_identity_t<_Index, _value_type>&... min, const point_type& max) : base_type(point_type(min...), max) {}

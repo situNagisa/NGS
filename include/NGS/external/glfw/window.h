@@ -10,7 +10,7 @@ protected:
 public:
 	using context_t = GLFWwindow*;
 public:
-	window(std::string_view title, const Point2i& size);
+	window(std::string_view title, const math::vectors::vector2i& size);
 	window() : self_type("", { 1,1 }) {};
 	window(std::string_view title, int width, int height) : self_type(title, { width,height }) {}
 	~window()noexcept;
@@ -40,26 +40,26 @@ public:
 
 	//void SetIcon(const std::vector<GLFWimage>& icons);
 	void set_position(int x, int y);
-	void set_position(const Point2i& pos) { set_position(pos.x, pos.y); }
-	Point2i get_position()const;
+	void set_position(const math::vectors::vector2i& pos) { set_position(pos[0], pos[1]); }
+	math::vectors::vector2i get_position()const;
 
 	void    set_size(int width, int height);
-	void    set_size(const Point2i& size) { set_size(size.x, size.y); }
-	Point2i get_size()const;
+	void    set_size(const math::vectors::vector2i& size) { set_size(size[0], size[1]); }
+	math::vectors::vector2i get_size()const;
 
 	void set_input_mode(int mode, int value);
 	void    set_cursor(GLFWcursor* cursor);
 	void    set_cursor_position(double x, double y);
-	void    set_cursor_position(const Point2d& pos) { set_cursor_position(pos.x, pos.y); }
-	Point2d get_cursor_position()const;
+	void    set_cursor_position(const math::vectors::vector2d& pos) { set_cursor_position(pos[0], pos[1]); }
+	math::vectors::vector2d get_cursor_position()const;
 
 	GLFWmonitor* get_monitor()const;
 
-	Point2i						get_framebuffer_size() const;
+	math::vectors::vector2i						get_framebuffer_size() const;
 
-	std::pair<Point2i, Point2i> get_frame_size()const;
+	std::pair<math::vectors::vector2i, math::vectors::vector2i> get_frame_size()const;
 
-	Rectanglei                  get_client_bound()const;
+	//Rectanglei                  get_client_bound()const;
 
 	void active();
 	void iconify();

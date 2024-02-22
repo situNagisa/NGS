@@ -5,10 +5,10 @@
 
 NGS_LIB_BEGIN
 
-NGS_HPP_INLINE window::window(std::string_view title, const Point2i& size)
+NGS_HPP_INLINE window::window(std::string_view title, const math::vectors::vector2i& size)
 	: _title(title)
 {
-	_context = glfwCreateWindow(size.x, size.y, _title.c_str(), nullptr, nullptr);
+	_context = glfwCreateWindow(size[0], size[1], _title.c_str(), nullptr, nullptr);
 	NGS_ASSERT(_context);
 	_handle_map.insert({ _context, this });
 
@@ -36,7 +36,7 @@ NGS_HPP_INLINE void window::set_title(std::string_view title) {
 
 NGS_HPP_INLINE void window::set_position(int x, int y) { glfwSetWindowPos(_context, x, y); }
 
-NGS_HPP_INLINE Point2i window::get_position() const
+NGS_HPP_INLINE math::vectors::vector2i window::get_position() const
 {
 	int x, y;
 	glfwGetWindowPos(_context, &x, &y);
@@ -45,7 +45,7 @@ NGS_HPP_INLINE Point2i window::get_position() const
 
 NGS_HPP_INLINE void window::set_size(int width, int height) { glfwSetWindowSize(_context, width, height); }
 
-NGS_HPP_INLINE Point2i window::get_size() const
+NGS_HPP_INLINE math::vectors::vector2i window::get_size() const
 {
 	int width, height;
 	glfwGetWindowSize(_context, &width, &height);
@@ -64,33 +64,33 @@ NGS_HPP_INLINE void window::set_cursor_position(double x, double y)
 	glfwSetCursorPos(_context, x, y);
 }
 
-NGS_HPP_INLINE Point2d window::get_cursor_position() const
+NGS_HPP_INLINE math::vectors::vector2d window::get_cursor_position() const
 {
 	double x, y;
 	glfwGetCursorPos(_context, &x, &y);
 	return { x,y };
 }
 
-NGS_HPP_INLINE Point2i window::get_framebuffer_size() const
+NGS_HPP_INLINE math::vectors::vector2i window::get_framebuffer_size() const
 {
 	int bufferWidth, bufferHeight;
 	glfwGetFramebufferSize(_context, &bufferWidth, &bufferHeight);
 	return { bufferWidth,bufferHeight };
 }
 
-NGS_HPP_INLINE std::pair<Point2i, Point2i> window::get_frame_size() const
+NGS_HPP_INLINE std::pair<math::vectors::vector2i, math::vectors::vector2i> window::get_frame_size() const
 {
 	int left, top, right, bottom;
 	glfwGetWindowFrameSize(_context, &left, &top, &right, &bottom);
-	return { Point2i(top,bottom), Point2i(left,right) };
+	return { math::vectors::vector2i(top,bottom), math::vectors::vector2i(left,right) };
 }
 
-NGS_HPP_INLINE Rectanglei window::get_client_bound() const
-{
-	auto pos = get_position();
-	auto size = get_size();
-	return { pos,size };
-}
+//NGS_HPP_INLINE Rectanglei window::get_client_bound() const
+//{
+//	auto pos = get_position();
+//	auto size = get_size();
+//	return { pos,size };
+//}
 
 NGS_HPP_INLINE void window::active()
 {

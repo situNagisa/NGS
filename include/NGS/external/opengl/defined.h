@@ -1,16 +1,28 @@
 ﻿#pragma once
 
+#include "../defined.h"
 #include "NGS/basic/basic.h"
-#include "NGS/color/color.h"
+#include "NGS/cpt/cpt.h"
+#include "NGS/bases/bases.h"
+#include "NGS/assert/assert.h"
+#include "NGS/type_trait/type_trait.h"
 #include "NGS/log/log.h"
+#include "NGS/color/color.h"
+#include "NGS/mpl/structure.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#define NGS_OPENGL_BEGIN NGS_BEGIN namespace opengl{
-#define NGS_OPENGL_END } NGS_END
+#define NGS_EXTERNAL_OPENGL_NS opengl
 
-NGS_OPENGL_BEGIN
+#define NGS_LIB_VERSION_MAJOR 0
+#define NGS_LIB_VERSION_MINOR 1
+#define NGS_LIB_VERSION_PATCH 0
+
+#define NGS_LIB_NAME NGS_EXTERNAL_NS::NGS_EXTERNAL_OPENGL_NS
+#include "NGS/lib/lib.h"
+
+NGS_LIB_BEGIN
 
 using fundamental_t = GLuint;
 using context_t = GLuint;
@@ -28,7 +40,7 @@ NGS_DEFINE_TV(gl, fundamental_t, uint16, GL_UNSIGNED_SHORT);
 NGS_DEFINE_TV(gl, fundamental_t, int32, GL_INT);
 NGS_DEFINE_TV(gl, fundamental_t, uint32, GL_UNSIGNED_INT);
 
-NGS_DEFINE_TV(gl, fundamental_t, colors::RGBA24, GL_RGB);
-NGS_DEFINE_TV(gl, fundamental_t, colors::RGBA32, GL_RGBA);
+NGS_DEFINE_TV(gl, fundamental_t, colors::primaries::RGBA24, GL_RGB);
+NGS_DEFINE_TV(gl, fundamental_t, colors::primaries::RGBA32, GL_RGBA);
 
-NGS_OPENGL_END
+NGS_LIB_END

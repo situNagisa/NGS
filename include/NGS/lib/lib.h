@@ -1,4 +1,4 @@
-//#pragma once
+﻿//#pragma once
 
 #include "./defined.h"
 
@@ -9,10 +9,12 @@
 #	if defined(NGS_LIB_NAME)
 #		define NGS_LIB_BEGIN NGS_BEGIN namespace NGS_LIB_NAME {
 #		define NGS_LIB_END } NGS_END
+#		define NGS_LIB_FULL_QUALIFIER_NAME NGS_ NGS_LIB_NAME
 #	elif defined(NGS_LIB_INLINE_NAME)
 #		define NGS_LIB_NAME NGS_LIB_INLINE_NAME
 #		define NGS_LIB_BEGIN NGS_BEGIN inline namespace NGS_LIB_NAME {
 #		define NGS_LIB_END } NGS_END
+#		define NGS_LIB_FULL_QUALIFIER_NAME NGS_ NGS_LIB_NAME
 #	else
 #		error "NGS_LIB_NAME or NGS_LIB_INLINE_NAME is not defined."
 #	endif

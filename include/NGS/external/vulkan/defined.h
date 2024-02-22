@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <vulkan/vulkan.hpp>
 #include "NGS/basic/basic.h"
 #include "NGS/bases/bases.h"
 #include "NGS/mpl/structure.h"
@@ -10,6 +9,9 @@
 #include "NGS/external/boost/fusion.h"
 #include "NGS/flag/flag.h"
 #include "NGS/external/boost/stl_interfaces.h"
+#include "NGS/prism/prism.h"
+
+#include "./vulkan_api.h"
 
 #define NGS_EXTERNAL_VULKAN_NS NGS_EXTERNAL_NS::vk
 

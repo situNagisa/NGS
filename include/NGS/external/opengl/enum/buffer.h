@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "NGS/ngl/defined.h"
+#include "./defined.h"
 
-NGS_OPENGL_ENUM_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 enum class NGS_DLL_API buffer_target : gl_enum_t {
 	array = GL_ARRAY_BUFFER,
@@ -21,4 +21,4 @@ enum class NGS_DLL_API buffer_target : gl_enum_t {
 	uniform = GL_UNIFORM_BUFFER,
 };
 
-NGS_OPENGL_ENUM_END
+NGS_LIB_MODULE_END

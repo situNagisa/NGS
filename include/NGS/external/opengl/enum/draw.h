@@ -2,7 +2,7 @@
 
 #include "./defined.h"
 
-NGS_OPENGL_ENUM_BEGIN
+NGS_LIB_MODULE_BEGIN
 
 enum class NGS_DLL_API element_draw_mode : gl_enum_t {
 	points = GL_POINTS,
@@ -17,7 +17,7 @@ enum class NGS_DLL_API element_draw_mode : gl_enum_t {
 
 	patches = GL_PATCHES,
 };
-enum class  DrawMode : gl_enum_t {
+enum class  draw_mode : gl_enum_t {
 	points = GL_POINTS,
 
 	lines = GL_LINES,
@@ -35,4 +35,4 @@ enum class  DrawMode : gl_enum_t {
 	triangles_adjacency = GL_TRIANGLES_ADJACENCY,
 };
 
-NGS_OPENGL_ENUM_END
+NGS_LIB_MODULE_END
