@@ -1,13 +1,12 @@
 #pragma once
 
-#include "./is_align.h"
+#include "./constant.h"
+#include "./valid_align.h"
+#include "./defined.h"
 
-NGS_LAYOUT_BEGIN
+NGS_LIB_MODULE_BEGIN
 
-template<class _Align, size_t _DefaultAlign = 1>
-concept CAlign = ccpt::uint<_Align> && is_align(_Align::value, _DefaultAlign);
+template<class Align, align_t DefaultAlign = 1>
+concept align = ccpt::constant<Align,align_t> && NGS_LIB_MODULE_NAME::is_valid_align(type_traits::object_t<Align>::value, DefaultAlign);
 
-using no_align_t = ccpt::uint_<no_align>;
-using default_align_t = ccpt::uint_<default_align>;
-
-NGS_LAYOUT_END
+NGS_LIB_MODULE_END

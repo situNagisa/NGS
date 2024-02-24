@@ -1,10 +1,10 @@
 ﻿#pragma once
 
 #include "../defined.h"
-#include "NGS/layout/align/constant.h"
-#include "NGS/layout/offset.h"
+#include "../align/constant.h"
+#include "../offset.h"
 
-NGS_LAYOUT_BEGIN
+NGS_LIB_BEGIN
 
 template<size_t _Align = no_align, size_t _Count>
 constexpr size_t size_of(const std::array<size_t, _Count>& sizes) {
@@ -30,4 +30,4 @@ template<size_t _Align, class... _Types>
 	requires (sizeof...(_Types) > 1)
 constexpr size_t size_of() { return layout::size_of< _Align >(size_of<_Types>()...); }
 
-NGS_LAYOUT_END
+NGS_LIB_END

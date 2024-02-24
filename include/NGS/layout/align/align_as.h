@@ -1,28 +1,30 @@
 #pragma once
 
-#include "./is_align.h"
+#include "./valid_align.h"
 #include "./align_of.h"
+#include "./defined.h"
 
-NGS_LAYOUT_BEGIN
+NGS_LIB_MODULE_BEGIN
 
-template<size_t _Align, size_t _Count>
-constexpr size_t align_as(const std::array<size_t, _Count>& aligns) {
+template<align_t Align>
+constexpr align_t align_as(::std::span<const align_t> aligns) {
 
-	if constexpr (_Align == default_align) {
-		return std::ranges::max(aligns);
+	if constexpr (Align == default_align) {
+		return ::std::ranges::max(aligns);
 	}
-	else if constexpr (_Align == no_align) {
+	else if constexpr (Align == no_align) {
 		return 1;
 	}
 	else {
-		constexpr size_t a = std::ranges::max(aligns);
-		return is_align(_Align, a) ? _Align : a;
+		constexpr align_t a = ::std::ranges::max(aligns);
+		return is_valid_align(Align, a) ? Align : a;
 	}
 }
-template<size_t _Align>
-constexpr size_t align_as(std::integral auto... aligns) { return layout::align_as<_Align, sizeof...(aligns)>(std::array<size_t, sizeof...(aligns)>{ static_cast<size_t>(aligns)... }); }
 
-template<size_t _Align, class... _Types>
-constexpr size_t align_as() { return layout::align_as<_Align>(align_of<_Types>()...); }
+template<align_t Align>
+constexpr align_t align_as(::std::integral auto... aligns) { return NGS_LIB_MODULE_NAME::align_as<Align>(::std::array<align_t, sizeof...(aligns)>{ static_cast<align_t>(aligns)... }); }
 
-NGS_LAYOUT_END
+template<align_t Align, class... Types>
+constexpr align_t align_as() { return NGS_LIB_MODULE_NAME::align_as<Align>(NGS_LIB_MODULE_NAME::align_of<Types>()...); }
+
+NGS_LIB_MODULE_END

@@ -7,6 +7,7 @@
 #include "NGS/assert/assert.h"
 #include "NGS/type_trait/type_trait.h"
 #include "NGS/log/log.h"
+#include "NGS/external/stl/tuple.h"
 #include "NGS/color/color.h"
 #include "NGS/mpl/structure.h"
 

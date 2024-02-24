@@ -1,10 +1,18 @@
 #pragma once
 
-#include "../defined.h"
+#include "./defined.h"
 
-NGS_LAYOUT_BEGIN
+NGS_LIB_MODULE_BEGIN
 
-inline constexpr size_t no_align = static_cast<size_t>(-1);
-inline constexpr size_t default_align = 0;
+using align_t = ::std::size_t;
 
-NGS_LAYOUT_END
+template<align_t Align>
+using align_constant = ccpt::constant_<align_t, Align>;
+
+inline constexpr align_t no_align = static_cast<align_t>(-1);
+inline constexpr align_t default_align = 0;
+
+using no_align_t = align_constant<no_align>;
+using default_align_t = align_constant<default_align>;
+
+NGS_LIB_MODULE_END

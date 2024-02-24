@@ -26,7 +26,7 @@ namespace _detail
 	struct is_fundamental<Vector<Args...>> : ::std::bool_constant<(gl_fundamental<typename mpl::mstruct::variable_traits<Args>::original_type> && ...)> {};
 
 	template<class T>
-	concept fundamental_structure = mpl::mstruct::CFlattenedStructure<T> && is_fundamental<typename T::variable_types>::value;
+	concept fundamental_structure = /*mpl::mstruct::CFlattenedStructure<T> &&*/ is_fundamental<typename T::variable_types>::value;
 
 	template<class T>
 	constexpr auto make_attribute(const mpl::mstruct::variable_dynamic_data& data, bool normalized, size_t stride)
@@ -57,6 +57,12 @@ namespace _detail
 		return make_attribute_from_variables<Buffer>::make(normalized);
 	}
 }
+
+//template<class...>
+//constexpr auto create_vertex_descriptor(bool)
+//{
+//	return ::std::array<attribute, 0>{};
+//}
 
 template<_detail::fundamental_structure Buffer, _detail::fundamental_structure... Rest>
 constexpr auto create_vertex_descriptor(bool normalized)

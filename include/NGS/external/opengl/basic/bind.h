@@ -18,14 +18,14 @@ namespace detail
 	{
 		{ bind(NGS_PP_PERFECT_FORWARD(s)) };
 	};
-
-
 }
+
+template<class T>
+concept bindable = detail::has_member<T> || detail::has_adl<T> || machine<state_machine_t<T>>;
 
 inline constexpr struct
 {
-	constexpr decltype(auto) operator()(auto&& s)const
-		requires detail::has_member<decltype(s)> || detail::has_adl<decltype(s)> || machine<state_machine_t<decltype(s)>>
+	constexpr decltype(auto) operator()(bindable auto&& s)const
 	{
 		using state_type = decltype(s);
 

@@ -25,16 +25,16 @@ public:
 	}
 };
 
-template<enums::buffer_target _Target>
+template<enums::buffer_target Target>
 struct buffer : unknown_buffer
 {
 	NGS_MPL_ENVIRON(buffer);
 public:
-	constexpr static auto target = _Target;
+	constexpr static auto target = Target;
 
 	struct machine_type : bases::singleton<machine_type>
 	{
-		using context_type = self_type;
+		using context_type = buffer;
 
 		void bind(const context_type& context) const
 		{
