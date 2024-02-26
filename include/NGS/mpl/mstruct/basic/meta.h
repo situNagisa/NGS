@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../variable.h"
-#include "./data.h"
+#include "./field_data.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
@@ -19,14 +19,20 @@ namespace _detail
 
 		static constexpr ::std::size_t size = layout::size_of<align>(variables::variable_size_v<Variables>...);
 
+		struct reflect_data {
+			::std::size_t size;
+			::std::size_t offset;
+			variables::variable_type_t type;
+		};
+
 		static constexpr auto reflect()
 		{
 			constexpr auto offsets = layout::offset<align>(variables::variable_size_v<Variables>...);
 
 			return []<::std::size_t... Index>(::std::index_sequence<Index...>)
 			{
-				return ::std::array<variable_data,field_count>{
-					variable_data{
+				return ::std::array<reflect_data,field_count>{
+					reflect_data{
 						variables::variable_size_v<Variables>,
 						offsets[Index],
 						variables::variable_type_reflect_v<Variables>

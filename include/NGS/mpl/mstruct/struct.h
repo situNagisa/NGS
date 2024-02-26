@@ -1,6 +1,5 @@
 #pragma once
 
-#include "./struct/descriptor.h"
 #include "./struct/concept.h"
 #include "./struct/struct.h"
 

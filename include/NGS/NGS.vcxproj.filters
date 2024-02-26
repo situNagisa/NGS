@@ -1104,7 +1104,7 @@
     <ClInclude Include="mpl\mstruct\mstruct.h" />
     <ClInclude Include="mpl\mstruct\variable.h" />
     <ClInclude Include="mpl\mstruct\variable\concept.h" />
-    <ClInclude Include="mpl\mstruct\basic\data.h" />
+    <ClInclude Include="mpl\mstruct\basic\field_data.h" />
     <ClInclude Include="mpl\mstruct\variable\variable.h" />
     <ClInclude Include="mpl\mstruct\variable\defined.h" />
     <ClInclude Include="mpl\mstruct\variable\value.h" />
@@ -1120,15 +1120,29 @@
     <ClInclude Include="mpl\mstruct\basic\concept.h" />
     <ClInclude Include="mpl\mstruct\basic\meta.h" />
     <ClInclude Include="layout\align\defined.h" />
-    <ClInclude Include="mpl\mstruct\struct\named_field.h" />
+    <ClInclude Include="mpl\mstruct\named\field\named_pair.h" />
     <ClInclude Include="mpl\mstruct\basic\reflect.h" />
     <ClInclude Include="mpl\mstruct\struct.h" />
     <ClInclude Include="mpl\mstruct\struct\struct.h" />
-    <ClInclude Include="mpl\mstruct\struct\defined.h" />
-    <ClInclude Include="mpl\mstruct\struct\descriptor.h" />
+    <ClInclude Include="mpl\mstruct\named\defined.h" />
     <ClInclude Include="mpl\mstruct\struct\concept.h" />
     <ClInclude Include="mpl\mstruct\basic\field_at.h" />
     <ClInclude Include="mpl\mstruct\basic\field_offset.h" />
+    <ClInclude Include="mpl\mstruct\named\named.h" />
+    <ClInclude Include="mpl\mstruct\named\concept.h" />
+    <ClInclude Include="mpl\mstruct\named.h" />
+    <ClInclude Include="mpl\mstruct\named\field\named_fields.h" />
+    <ClInclude Include="mpl\mstruct\named\field\defined.h" />
+    <ClInclude Include="mpl\mstruct\named\field\name.h" />
+    <ClInclude Include="mpl\mstruct\named\field\concept.h" />
+    <ClInclude Include="mpl\mstruct\named\field\field.h" />
+    <ClInclude Include="mpl\mstruct\named\field.h" />
+    <ClInclude Include="mpl\mstruct\struct\defined.h" />
+    <ClInclude Include="mpl\mstruct\named\named_fields.h" />
+    <ClInclude Include="mpl\mstruct\named\get.h" />
+    <ClInclude Include="mpl\mstruct\algorithm\flatten.h" />
+    <ClInclude Include="mpl\mstruct\algorithm\defined.h" />
+    <ClInclude Include="mpl\mstruct\algorithm\inherit.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />

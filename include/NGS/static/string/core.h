@@ -4,24 +4,23 @@
 
 NGS_STATIC_STRING_BEGIN
 
-template<class _Type, class _ObjectType = std::remove_reference_t<_Type>>
-concept CString = requires(_ObjectType obj, const _ObjectType obj_cst) {
-	typename _ObjectType::value_type;
-	typename _ObjectType::traits_type;
-	{ _ObjectType::size }->std::convertible_to<std::size_t>;
-	{ obj_cst.data() }->std::convertible_to<const typename _ObjectType::value_type*>;
+template<class T>
+concept static_string = requires{
+	typename type_traits::object_t<T>::value_type;
+	typename type_traits::object_t<T>::traits_type;
+	requires ::std::convertible_to<T, ::std::basic_string_view<typename type_traits::object_t<T>::value_type, typename type_traits::object_t<T>::traits_type>>;
 };
 
-template<std::size_t _N, class _CharType, class _Traits = std::char_traits<_CharType>>
+template<std::size_t N, class CharType, class Traits = std::char_traits<CharType>>
 struct basic_string {
-	using value_type = _CharType;
-	using traits_type = _Traits;
+	using value_type = CharType;
+	using traits_type = Traits;
 
-	constexpr static size_t char_size = _N;
+	constexpr static size_t char_size = N;
 
 	using string_type = value_type[char_size];
 
-	consteval explicit(false) basic_string(const value_type(&str)[_N]) noexcept {
+	consteval explicit(false) basic_string(const value_type(&str)[N]) noexcept {
 		for (size_t i = 0; i < char_size; i++)
 		{
 			source[i] = str[i];
@@ -31,6 +30,11 @@ struct basic_string {
 	constexpr operator ::std::basic_string<value_type, traits_type>()const {
 		return ::std::basic_string<value_type, traits_type>(source);
 	}
+	constexpr operator ::std::basic_string_view<value_type, traits_type>()const
+	{
+		return ::std::basic_string_view<value_type, traits_type>(source,char_size);
+	}
+
 	constexpr auto&& data() { return source; }
 	constexpr auto&& data()const { return source; }
 
