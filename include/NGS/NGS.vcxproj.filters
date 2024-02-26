@@ -457,7 +457,6 @@
     <ClInclude Include="yap\evaluate.h" />
     <ClInclude Include="yap\expression.h" />
     <ClInclude Include="layout\align.h" />
-    <ClInclude Include="layout\align\align_as.h" />
     <ClInclude Include="layout\align\concept.h" />
     <ClInclude Include="layout\align\constant.h" />
     <ClInclude Include="layout\align\align_of.h" />
@@ -1143,6 +1142,11 @@
     <ClInclude Include="mpl\mstruct\algorithm\flatten.h" />
     <ClInclude Include="mpl\mstruct\algorithm\defined.h" />
     <ClInclude Include="mpl\mstruct\algorithm\inherit.h" />
+    <ClInclude Include="mpl\mstruct\basic\inherit.h" />
+    <ClInclude Include="layout\align\normal.h" />
+    <ClInclude Include="layout\align\default.h" />
+    <ClInclude Include="layout\align\no.h" />
+    <ClInclude Include="layout\align\compare.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="mpl\structure\type\structure\describe\concept.h" />

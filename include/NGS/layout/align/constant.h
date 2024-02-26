@@ -1,18 +1,51 @@
 #pragma once
 
+#include "./concept.h"
+#include "./valid_align.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
-using align_t = ::std::size_t;
+template<::std::size_t Priority,::std::size_t Align>
+struct align_constant
+{
+	static constexpr ::std::size_t priority() { return Priority; }
+	static constexpr ::std::size_t align() { return Align; }
+};
 
-template<align_t Align>
-using align_constant = ccpt::constant_<align_t, Align>;
+struct align_t
+{
+	NGS_MPL_ENVIRON_BEGIN(align_t);
+public:
 
-inline constexpr align_t no_align = static_cast<align_t>(-1);
-inline constexpr align_t default_align = 0;
+	constexpr align_t() = default;
+	constexpr align_t(::std::size_t priority,::std::size_t align)
+		: _priority(priority)
+		, _align(align)
+	{
+		if (!::std::is_constant_evaluated())
+		{
+			NGS_ASSERT(is_valid_align(*this));
+		}
+	}
+	constexpr explicit(false) align_t(::std::size_t align) : self_type(align,align){}
 
-using no_align_t = align_constant<no_align>;
-using default_align_t = align_constant<default_align>;
+	constexpr explicit(false) align_t(NGS_LIB_MODULE_NAME::align auto&& other)
+		: self_type(NGS_PP_PERFECT_FORWARD(other).priority(), NGS_PP_PERFECT_FORWARD(other).align())
+	{}
+
+	constexpr self_type& operator=(NGS_LIB_MODULE_NAME::align auto&& other)
+	{
+		_priority = NGS_PP_PERFECT_FORWARD(other).priority();
+		_align = NGS_PP_PERFECT_FORWARD(other).align();
+		return *this;
+	}
+
+	constexpr ::std::size_t priority()const  { return _priority; }
+	constexpr ::std::size_t align() const { return _align; }
+
+	::std::size_t _priority;
+	::std::size_t _align;
+};
 
 NGS_LIB_MODULE_END

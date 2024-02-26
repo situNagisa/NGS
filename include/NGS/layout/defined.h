@@ -2,6 +2,7 @@
 
 #include "NGS/basic/basic.h"
 #include "NGS/ccpt/ccpt.h"
+#include "NGS/type_trait/type_trait.h"
 
 #define NGS_LIB_VERSION_MAJOR 1
 #define NGS_LIB_VERSION_MINOR 0

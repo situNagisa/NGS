@@ -1,23 +1,26 @@
 #pragma once
 
 #include "../variable.h"
-#include "./field_data.h"
+#include "./inherit.h"
 #include "./defined.h"
+
+
 
 NGS_LIB_MODULE_BEGIN
 
 namespace _detail
 {
-	template<layout::align Align,variables::variable... Variables>
+	template<layout::align auto Align,variables::variable... Variables>
 	struct descriptor
 	{
+		NGS_MPL_ENVIRON_BEGIN(descriptor);
+	public:
 		using fields_type = ::boost::fusion::vector<Variables...>;
 		static constexpr ::std::size_t field_count = sizeof...(Variables);
 
-		using align_type = Align;
-		static constexpr ::std::size_t align = layout::align_as<align_type::value>(variables::variable_align_v<Variables>...);
+		static constexpr layout::align_t align = layout::align_of(Align, variables::variable_align_v<Variables>...);
 
-		static constexpr ::std::size_t size = layout::size_of<align>(variables::variable_size_v<Variables>...);
+		static constexpr ::std::size_t size = layout::size_of<align.align()>(variables::variable_size_v<Variables>...);
 
 		struct reflect_data {
 			::std::size_t size;
@@ -27,7 +30,7 @@ namespace _detail
 
 		static constexpr auto reflect()
 		{
-			constexpr auto offsets = layout::offset<align>(variables::variable_size_v<Variables>...);
+			constexpr auto offsets = layout::offset<align.align()>(variables::variable_size_v<Variables>...);
 
 			return []<::std::size_t... Index>(::std::index_sequence<Index...>)
 			{
@@ -40,15 +43,18 @@ namespace _detail
 				};
 			}(::std::make_index_sequence<field_count>{});
 		}
+
+		template<class Self,class... Bases>
+		struct _basic_inherit : _detail::inherit<Self,Bases...> {};
 	};
 
-	template<layout::align Align, class...>
+	template<layout::align auto Align, class...>
 	struct make_descriptor;
 
-	template<layout::align Align>
+	template<layout::align auto Align>
 	struct make_descriptor<Align> { using type = descriptor<Align>; };
 
-	template<layout::align Align, class First, class... Rest>
+	template<layout::align auto Align, class First, class... Rest>
 	struct make_descriptor<Align, First, Rest...> {
 	private:
 		constexpr static auto _get() {
@@ -87,8 +93,16 @@ namespace _detail
 ///		make_describe_t<variable<int>,variable<float>> = struct_describe<structure_default_align_t, variable<int>, variable<float>>;
 ///		make_describe_t<ccpt::uint_<4>, variable<int>, variable<float>> = struct_describe<ccpt::uint_<4>, variable<int>, variable<float>>;
 ///	@endcode
-template<layout::align Align, class... Ts>
-using meta_struct = typename _detail::make_descriptor<Align,Ts...>::type;
+template<layout::align auto Align, class... Ts>
+struct meta_struct : _detail::make_descriptor<Align,Ts...>::type
+{
+	NGS_MPL_ENVIRON2(meta_struct, typename _detail::make_descriptor<Align, Ts...>::type);
+public:
+	template<class Self, class... Bases>
+	using _basic_inherit = typename base_type::template _basic_inherit<Self, Bases...>;
+	template<class... Bases>
+	struct inherit : _basic_inherit<self_type,Bases...> {};
+};
 
 
 NGS_LIB_MODULE_END

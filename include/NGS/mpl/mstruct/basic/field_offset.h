@@ -12,10 +12,10 @@ namespace _detail
 	template<class Fields, layout::align_t Align, ::std::size_t Index>
 	struct field_offset_impl{};
 
-	template<template<class...>class Container,class... Field,layout::align_t Align, ::std::size_t Index>
+	template<template<class...>class Container,class... Field,layout::align auto Align, ::std::size_t Index>
 	struct field_offset_impl<Container<Field...>, Align, Index>
 	{
-		static constexpr ::std::size_t value = layout::offset<Align>(variables::variable_size_v<Field>...)[Index];
+		static constexpr ::std::size_t value = layout::offset<Align.align()>(variables::variable_size_v<Field>...)[Index];
 	};
 }
 

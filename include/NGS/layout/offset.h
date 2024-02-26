@@ -5,20 +5,16 @@
 
 NGS_LIB_BEGIN
 
-template<align_t Align,::std::size_t Count>
-	requires align<align_constant<Align>>
+template<::std::size_t Align,::std::size_t Count> requires (aligns::is_valid_align(aligns::align_t(Align)))
 constexpr auto offset(const ::std::array<::std::size_t, Count>& sizes) {
 	using result_type = std::array<::std::size_t, Count>;
 	result_type offsets{};
 
-	if constexpr (Align == no_align) {
+	if constexpr (Align == 1) {
 		for (::std::size_t i = 1; i < offsets.size(); i++)
 		{
 			offsets[i] = offsets[i - 1] + sizes[i - 1];
 		}
-	}
-	else if constexpr (Align == default_align) {
-		static_assert(Align == default_align, "invalid align");
 	}
 	else {
 		for (size_t i = 1; i < offsets.size(); i++)
@@ -37,7 +33,7 @@ constexpr auto offset(const ::std::array<::std::size_t, Count>& sizes) {
 	return offsets;
 }
 
-template<align_t Align> requires align<align_constant<Align>>
+template<::std::size_t Align> requires (aligns::is_valid_align(aligns::align_t(Align)))
 constexpr auto offset(::std::integral auto... sizes) {
 	return layout::offset<Align>(::std::array{ static_cast<size_t>(sizes)... });
 }

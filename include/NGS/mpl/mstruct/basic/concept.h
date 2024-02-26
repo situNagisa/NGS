@@ -28,8 +28,7 @@ concept structure = requires
 	{ field_count_v<T> } -> ::std::convertible_to<::std::size_t>;
 	requires _detail::valid_fields_v<fields_t<T>>;
 	{ struct_size_v<T> } -> ::std::convertible_to<::std::size_t>;
-	{ struct_align_v<T> } -> ::std::convertible_to<::std::size_t>;
-	requires layout::align<struct_align_t<T>>;
+	{ struct_align_v<T> } -> layout::align;
 	requires reflectable<T>;
 };
 

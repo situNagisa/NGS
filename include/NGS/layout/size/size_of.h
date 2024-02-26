@@ -1,33 +1,32 @@
 ﻿#pragma once
 
 #include "../defined.h"
-#include "../align/constant.h"
 #include "../offset.h"
 
 NGS_LIB_BEGIN
 
-template<size_t _Align = no_align, size_t _Count>
-constexpr size_t size_of(const std::array<size_t, _Count>& sizes) {
-	auto offsets = layout::offset<_Align>(sizes);
-	const size_t size = offsets[offsets.size() - 1] + sizes[sizes.size() - 1];
+template<::std::size_t Align = no_align.align(), ::std::size_t Count>
+constexpr ::std::size_t size_of(const std::array<::std::size_t, Count>& sizes) {
+	auto offsets = layout::offset<Align>(sizes);
+	const ::std::size_t size = offsets[offsets.size() - 1] + sizes[sizes.size() - 1];
 
-	const auto model = size % _Align;
+	const auto model = size % Align;
 	if (!model) return size;
-	return size + _Align - model;
+	return size + Align - model;
 }
 
-template<size_t _Align = no_align>
-constexpr size_t size_of(std::integral auto... sizes) { return layout::size_of<_Align>(std::array{ static_cast<size_t>(sizes)... }); }
+template<::std::size_t Align = no_align.align()>
+constexpr ::std::size_t size_of(std::integral auto... sizes) { return layout::size_of<Align>(std::array{ static_cast<::std::size_t>(sizes)... }); }
 
-template<class _Type>
-constexpr size_t size_of() { return sizeof(_Type); }
+template<class Type>
+constexpr ::std::size_t size_of() { return sizeof(Type); }
 
-template<class... _Types>
-	requires (sizeof...(_Types) > 1)
-constexpr size_t size_of() { return layout::size_of(size_of<_Types>()...); }
+template<class... Types>
+	requires (sizeof...(Types) > 1)
+constexpr ::std::size_t size_of() { return layout::size_of(size_of<Types>()...); }
 
-template<size_t _Align, class... _Types>
-	requires (sizeof...(_Types) > 1)
-constexpr size_t size_of() { return layout::size_of< _Align >(size_of<_Types>()...); }
+template<::std::size_t Align = no_align.align(), class... Types>
+	requires (sizeof...(Types) > 1)
+constexpr ::std::size_t size_of() { return layout::size_of< Align >(size_of<Types>()...); }
 
 NGS_LIB_END

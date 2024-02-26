@@ -214,11 +214,16 @@
     <ClInclude Include="fmt\defined.h" />
     <ClInclude Include="fmt\fmt.h" />
     <ClInclude Include="fmt\format.h" />
+    <ClInclude Include="layout\align\compare.h" />
+    <ClInclude Include="layout\align\default.h" />
+    <ClInclude Include="layout\align\no.h" />
+    <ClInclude Include="layout\align\normal.h" />
     <ClInclude Include="layout\align\defined.h" />
     <ClInclude Include="mpl\mstruct\algorithm\defined.h" />
     <ClInclude Include="mpl\mstruct\algorithm\inherit.h" />
     <ClInclude Include="mpl\mstruct\basic\field_at.h" />
     <ClInclude Include="mpl\mstruct\basic\field_offset.h" />
+    <ClInclude Include="mpl\mstruct\basic\inherit.h" />
     <ClInclude Include="mpl\mstruct\defined.h" />
     <ClInclude Include="mpl\mstruct\basic\align.h" />
     <ClInclude Include="mpl\mstruct\basic\concept.h" />
@@ -897,7 +902,6 @@
     <ClInclude Include="yap\evaluate.h" />
     <ClInclude Include="yap\expression.h" />
     <ClInclude Include="layout\align.h" />
-    <ClInclude Include="layout\align\align_as.h" />
     <ClInclude Include="layout\align\concept.h" />
     <ClInclude Include="layout\align\constant.h" />
     <ClInclude Include="layout\align\align_of.h" />

@@ -7,11 +7,15 @@
 
 NGS_LIB_MODULE_BEGIN
 
-template<layout::align Align, class... Ts>
-struct alignas(basic::struct_align_v<basic::meta_struct<Align, Ts...>>) opaque_struct_mirror : basic::meta_struct<Align,Ts...>
+template<layout::align auto Align, class... Ts>
+struct alignas(basic::struct_align_v<basic::meta_struct<Align, Ts...>>.align()) opaque_struct_mirror : basic::meta_struct<Align,Ts...>
 {
 	NGS_MPL_ENVIRON2(opaque_struct_mirror, basic::meta_struct<Align, Ts...>);
 public:
+	template<class Self, class... Bases>
+	using _basic_inherit = typename base_type::template _basic_inherit<Self, Bases...>;
+	template<class... Bases>
+	struct inherit : _basic_inherit<self_type, Bases...> {};
 
 	byte _data[basic::struct_size_v<base_type>]{};
 };
