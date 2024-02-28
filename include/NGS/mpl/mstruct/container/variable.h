@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "./concept.h"
+#include "../variable.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
@@ -16,7 +16,7 @@ struct meta_variable {
 	static constexpr layout::align_t align = layout::align_of<value_type>();
 };
 
-template<variable T>
+template<variables::variable T>
 struct meta_variable<T> : T {};
 
 NGS_LIB_MODULE_END

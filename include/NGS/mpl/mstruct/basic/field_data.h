@@ -12,7 +12,7 @@ namespace _detail
 	{
 		{ obj.size } -> std::convertible_to<::std::size_t>;
 		{ obj.offset } -> std::convertible_to<::std::size_t>;
-		{ obj.type } -> std::convertible_to<variables::variable_type_t>;
+		{ obj.type };//->std::convertible_to<variables::variable_type_t>;
 	};
 }
 

@@ -25,10 +25,10 @@ namespace  _detail
 template<class T>
 concept structure = requires
 {
-	{ field_count_v<T> } -> ::std::convertible_to<::std::size_t>;
+	{ field_count<T>::value } -> ::std::convertible_to<::std::size_t>;
 	requires _detail::valid_fields_v<fields_t<T>>;
-	{ struct_size_v<T> } -> ::std::convertible_to<::std::size_t>;
-	{ struct_align_v<T> } -> layout::align;
+	{ struct_size<T>::value } -> ::std::convertible_to<::std::size_t>;
+	{ struct_align<T>::value } -> layout::align;
 	requires reflectable<T>;
 };
 

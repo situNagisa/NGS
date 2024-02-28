@@ -4,19 +4,19 @@
 
 NGS_LIB_BEGIN
 
-template<class _Forward, class... _Bases>
-struct base_forward : _Forward, _Bases...
+template<class Forward, class... Bases>
+struct base_forward : Forward, Bases...
 {
-	NGS_MPL_ENVIRON2(base_forward, _Forward);
+	NGS_MPL_ENVIRON2(base_forward, Forward);
 public:
 	using base_type::base_type;
 	using base_type::operator=;
 };
 
-template<class _Forward, class... _ADLSet>
-struct adl_forward : _Forward
+template<class Forward, class...>
+struct adl_forward : Forward
 {
-	NGS_MPL_ENVIRON2(adl_forward, _Forward);
+	NGS_MPL_ENVIRON2(adl_forward, Forward);
 public:
 	using base_type::base_type;
 	using base_type::operator=;

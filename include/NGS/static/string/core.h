@@ -20,11 +20,14 @@ struct basic_string {
 
 	using string_type = value_type[char_size];
 
-	consteval explicit(false) basic_string(const value_type(&str)[N]) noexcept {
-		for (size_t i = 0; i < char_size; i++)
-		{
-			source[i] = str[i];
-		}
+	consteval explicit(true) basic_string(::std::string_view str) noexcept
+	{
+		::std::ranges::copy(::std::ranges::begin(str), ::std::ranges::begin(str) + char_size, source);
+	}
+
+	consteval explicit(false) basic_string(const value_type(&str)[N]) noexcept
+	{
+		::std::ranges::copy(::std::ranges::begin(str), ::std::ranges::begin(str) + char_size, source);
 	}
 
 	constexpr operator ::std::basic_string<value_type, traits_type>()const {

@@ -4,17 +4,32 @@
 
 NGS_BOOST_FUSION_RESULT_OF_BEGIN
 
-template <typename _Left, typename _Right>
-struct cat;
-
-template<template<class...>class _Template, class... _LeftArgs, class... _RightArgs>
-struct cat<_Template<_LeftArgs...>, _Template<_RightArgs...>>
+template<template<class...>class Container, class...>
+struct cat
 {
-	using type = _Template<_LeftArgs..., _RightArgs...>;
+	using type = Container<>;
 };
 
-template <typename _Left, typename _Right>
-using cat_t = typename cat<_Left, _Right>::type;
+template<template<class...>class Container, class First>
+struct cat<Container, First>
+{
+	using type = Container<First>;
+};
+
+template<template<class...>class Container, template<class...>class FirstContainer, class... Firsts, template<class...>class SecondContainer, class... Seconds>
+struct cat<Container, FirstContainer<Firsts...>, SecondContainer<Seconds...>>
+{
+	using type = Container<Firsts..., Seconds...>;
+};
+
+template<template<class...>class Container, class First, class Second, class... Rest>
+struct cat<Container, First, Second, Rest...>
+{
+	using type = typename cat<Container, First, typename cat<Container, Second, Rest...>::type>::type;
+};
+
+template <template<class...>class Container, class... Rest>
+using cat_t = typename cat<Container,Rest...>::type;
 
 NGS_BOOST_FUSION_RESULT_OF_END
 

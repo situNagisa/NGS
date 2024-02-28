@@ -1,4 +1,4 @@
 #include "../defined.h"
 
-#define NGS_LIB_MODULE_NAME structs
+#define NGS_LIB_MODULE_NAME container
 #include "NGS/lib/module.h"

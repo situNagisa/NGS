@@ -27,126 +27,48 @@ namespace _detail
 				}
 				else
 				{
-					using rest_type = flatten_t<::boost::fusion::vector<Rest...>>;
-					return ::ngs::declval<external::nboost::fusion::result_of::cat_t<first_flattened_type, rest_type>>();
+					using rest_type = typename flatten<Template<Rest...>>::type;
+					return ::ngs::declval<external::nboost::fusion::result_of::cat_t<Template,first_flattened_type, rest_type>>();
 				}
 
 			}
 			else
 			{
-				using first_flattened_type = ::boost::fusion::vector<variable_type>;
+				using first_flattened_type = Template<first_type>;
 				if constexpr (!sizeof...(Rest))
 				{
 					return ::ngs::declval<first_flattened_type>();
 				}
 				else
 				{
-					using rest_type = flatten_t<::boost::fusion::vector<Rest...>>;
-					return declval<external::nboost::fusion::result_of::cat_t<first_flattened_type, rest_type>>();
+					using rest_type = typename flatten<Template<Rest...>>::type;
+					return ::ngs::declval<external::nboost::fusion::result_of::cat_t<Template, first_flattened_type, rest_type>>();
 				}
 			}
 		}
 		using type = type_traits::naked_t<decltype(_get())>;
 	};
-
-
-	template<variables::variable... Fields>
-	struct  flatten < Fields... > {
-		using type = flatten_t<boost::fusion::vector<Fields...>>;
-	};
-
-	template<class... Ts>
-	struct  flatten < Ts... > {
-		using type = flatten_t<boost::fusion::vector<variables::meta_variable<Ts>...>>;
-	};
 }
 
-/**
- * @brief 将输入的参数展开成`非元结构体`序列
- *
- * @tparam 元变量...
- * @tparam CAny...
- * @tparam boost::fusion::vector,CAny 递归展开序列
- *
- * @return 展开后的`非元结构体`序列
- */
-template<class... Ts>
-using flatten_t = typename flatten<Ts...>::type;
+template<basic::structure Struct>
+struct flatten_as_sequence { using type = typename _detail::flatten<basic::fields_t<Struct>>::type; };
 
-template<class First, class... Rest>
-struct flatten< ::boost::fusion::vector<First, Rest...> > {
-private:
-	constexpr static auto _get() {
-		// make _First as variable
-		using variable_type = variables::meta_variable<First>;
-		// get _First type in storage(decay type)
-		// the type will be solved in this layer
-		using type = variables::variable_value_t<variable_type>;
+template<basic::structure Struct>
+using flatten_as_sequence_t = typename flatten_as_sequence<Struct>::type;
 
-		constexpr size_t rest_count = sizeof...(Rest);
+template<class>
+struct flatten{};
 
-		// flatten meta structure
-		if constexpr (basic::structure<type>) {
-			using first_flattened_type = type_traits::naked_t<flatten_t<basic::fields_t<type>>>;
-			if constexpr (!rest_count)
-			{
-				return ::ngs::declval<first_flattened_type>();
-			}
-			else
-			{
-				using rest_type = flatten_t<::boost::fusion::vector<Rest...>>;
-				return ::ngs::declval<external::nboost::fusion::result_of::cat_t<first_flattened_type, rest_type>>();
-			}
-		}
-		else
-		{
-			using first_flattened_type = ::boost::fusion::vector<variable_type>;
-			if constexpr (!rest_count)
-			{
-				return ::ngs::declval<first_flattened_type>();
-			}
-			else
-			{
-				using rest_type = flatten_t<::boost::fusion::vector<Rest...>>;
-				return declval<external::nboost::fusion::result_of::cat_t<first_flattened_type, rest_type>>();
-			}
-		}
-	}
-public:
-	NGS_MPL_TYPE type = type_traits::naked_t<decltype(_get())>;
-};
+template<class Struct>
+using flatten_t = typename flatten<Struct>::type;
 
-NGS_MPL_FUNCTION(flatten, variables::variable... Fields) < Fields... > {
-	using type = flatten_t<boost::fusion::vector<Fields...>>;
-};
-
-NGS_MPL_FUNCTION(flatten, class... Ts) < Ts... > {
-	using type = flatten_t<boost::fusion::vector<variables::meta_variable<Ts>...>>;
-};
-
-
-NGS_MPL_FUNCTION(flatten_as_struct, basic::structure Struct, class = flatten_t<Struct>);
-NGS_MPL_FUNCTION(flatten_as_struct, basic::structure Struct, template<class...>class Sequence, variables::variable... Fields) < Struct, Sequence<Fields...> > {
-	using type = structure<typename Struct::align_type, Fields...>;
-};
-
-/**
- * @brief 将结构体的`元变量`展开直至所有元变量都为基础变量
- *
- * @tparam _Struct `元结构体`
- *
- * @return 展开后的元结构体
- */
-template<CStructureDescribe _Struct>
-using flatten_as_struct_t = typename flatten_as_struct<_Struct>::result_type;
-
-namespace detail
+namespace _detail
 {
 	template<class>
-	struct is_flattened_struct : std::false_type {};
+	struct is_flattened_struct : ::std::false_type {};
 
-	template<template<class...>class _Template, CVariable... _Variables>
-	struct is_flattened_struct<_Template<_Variables...>> : std::bool_constant<!(CStructure<typename _Variables::original_type> || ...)> {};
+	template<template<class...>class Template, class... Fields>
+	struct is_flattened_struct<Template<Fields...>> : ::std::bool_constant<!(basic::structure<variables::variable_value_t<Fields>> || ...)> {};
 
 }
 
@@ -155,8 +77,8 @@ namespace detail
  *
  * @tparam _Struct 待判断的结构体
  */
-template<class _Struct>
-concept CFlattenedStructure = CStructure<_Struct> && detail::is_flattened_struct<typename _Struct::variable_types>::value;
+template<class T>
+concept flattened_structure = basic::structure<T> && _detail::is_flattened_struct<basic::fields_t<T>>::value;
 
 
 NGS_LIB_MODULE_END
