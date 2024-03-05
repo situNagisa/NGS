@@ -12,7 +12,7 @@ NGS_LIB_MODULE_BEGIN
 template<class T>
 struct meta_variable {
 	using value_type = T;
-	static constexpr ::std::size_t size = layout::size_of<value_type>();
+	static constexpr ::std::size_t size = sizeof(value_type);// layout::size_of<value_type>();
 	static constexpr layout::align_t align = layout::align_of<value_type>();
 };
 

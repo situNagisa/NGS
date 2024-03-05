@@ -19,9 +19,18 @@ private:
 	}
 public:
 	unknown_buffer() noexcept : base_type(_create()) {}
+	unknown_buffer(self_type&&) = default;
 	~unknown_buffer()
 	{
 		NGS_EXTERNAL_OPENGL_CHECK(::glDeleteBuffers(1, &get_context()));
+	}
+
+	self_type& operator=(self_type&& other) noexcept
+	{
+		NGS_EXTERNAL_OPENGL_CHECK(::glDeleteBuffers(1, &get_context()));
+		_set_context(0);
+		base_type::operator=(::std::move(other));
+		return *this;
 	}
 };
 
@@ -43,6 +52,7 @@ public:
 	};
 
 	using base_type::base_type;
+	using base_type::operator=;
 };
 
 

@@ -6,5 +6,11 @@
 #include <boost/stl_interfaces/iterator_interface.hpp>
 #include <boost/stl_interfaces/reverse_iterator.hpp>
 
-#define NGS_BOOST_STL_INTERFACES_BEGIN NGS_BOOST_BEGIN namespace stl_interfaces{
-#define NGS_BOOST_STL_INTERFACES_END } NGS_BOOST_END
+#define NGS_EXTERNAL_BOOST_STL_INTERFACES_NS stl_interfaces
+
+#define NGS_LIB_VERSION_MAJOR 0
+#define NGS_LIB_VERSION_MINOR 1
+#define NGS_LIB_VERSION_PATCH 0
+
+#define NGS_LIB_NAME NGS_EXTERNAL_BOOST_NS::NGS_EXTERNAL_BOOST_STL_INTERFACES_NS
+#include "NGS/lib/lib.h"

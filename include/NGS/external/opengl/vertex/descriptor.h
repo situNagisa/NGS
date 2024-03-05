@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "../reflect.h"
 #include "./buffer.h"
 #include "./defined.h"
 
@@ -16,25 +17,12 @@ struct attribute
 
 namespace _detail
 {
-	template<class T>
-	concept gl_fundamental = cpt::fundamental<T> || (::std::is_bounded_array_v<T> && cpt::fundamental<::std::remove_all_extents_t<T>>);
-
-	template<class T>
-	struct is_fundamental : ::std::false_type {};
-
-	template<template<class...> class Vector, mpl::mstruct::CVariable... Args>
-	struct is_fundamental<Vector<Args...>> : ::std::bool_constant<(gl_fundamental<typename mpl::mstruct::variable_traits<Args>::original_type> && ...)> {};
-
-	template<class T>
-	concept fundamental_structure = /*mpl::mstruct::CFlattenedStructure<T> &&*/ is_fundamental<typename T::variable_types>::value;
-
-	template<class T>
-	constexpr auto make_attribute(const mpl::mstruct::variable_dynamic_data& data, bool normalized, size_t stride)
+	constexpr auto make_attribute(const reflect_data& data, bool normalized, size_t stride)
 	{
-		return attribute{ data.count, gl_convert<T>, normalized, stride, data.offset };
+		return attribute{ data.type.count, data.type.value, normalized, stride, data.offset };
 	}
 
-	template<class Buffer, class = ::std::make_index_sequence<Buffer::variable_count>>
+	template<class Buffer, class = ::std::make_index_sequence<mpl::mstruct::field_count_v<Buffer>>>
 	struct make_attribute_from_variables;
 
 	template<class Buffer, size_t... Index>
@@ -42,12 +30,10 @@ namespace _detail
 	{
 		static constexpr auto make(bool normalized)
 		{
-			using result_type = ::std::array<attribute, Buffer::variable_count>;
-			auto variables = Buffer::get_variables();
+			using result_type = ::std::array<attribute, mpl::mstruct::field_count_v<Buffer>>;
+			auto field_data = mpl::mstruct::reflect<Buffer, reflecter>();
 
-			return result_type{ (_detail::make_attribute<
-				::std::remove_all_extents_t<typename Buffer::template variable_at<Index>::original_type>
-			>(variables[Index], normalized, Buffer::size))... };
+			return result_type{ (_detail::make_attribute(field_data[Index], normalized, mpl::mstruct::struct_size_v<Buffer>))... };
 		}
 	};
 
@@ -64,7 +50,7 @@ namespace _detail
 //	return ::std::array<attribute, 0>{};
 //}
 
-template<_detail::fundamental_structure Buffer, _detail::fundamental_structure... Rest>
+template<mpl::mstruct::structure Buffer, mpl::mstruct::structure... Rest>
 constexpr auto create_vertex_descriptor(bool normalized)
 {
 	if constexpr (!sizeof...(Rest))

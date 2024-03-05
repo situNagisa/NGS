@@ -1,0 +1,5 @@
+#include "../defined.h"
+
+#define NGS_EXTERNAL_BOOST_STL_INTERFACES_ITERATOR_NS iterators
+#define NGS_LIB_MODULE_NAME NGS_EXTERNAL_BOOST_STL_INTERFACES_ITERATOR_NS
+#include "NGS/lib/module.h"

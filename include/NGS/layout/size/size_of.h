@@ -16,7 +16,10 @@ constexpr ::std::size_t size_of(const std::array<::std::size_t, Count>& sizes) {
 }
 
 template<::std::size_t Align = no_align.align()>
-constexpr ::std::size_t size_of(std::integral auto... sizes) { return layout::size_of<Align>(std::array{ static_cast<::std::size_t>(sizes)... }); }
+constexpr ::std::size_t size_of(std::integral auto... sizes)
+{
+	return layout::size_of<Align>(std::array< ::std::size_t,sizeof...(sizes)>{ static_cast<::std::size_t>(sizes)... });
+}
 
 template<class Type>
 constexpr ::std::size_t size_of() { return sizeof(Type); }

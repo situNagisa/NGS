@@ -14,7 +14,7 @@ void allocate(const unknown_buffer& buffer, enums::buffer_target target, size_t 
 template<enums::buffer_target _Target>
 void allocate(const buffer<_Target>& buffer, size_t size, enums::usage usage)
 {
-	NGS_LIB_MODULE_NAME::allocate(buffer, type_traits::object_t<decltype(buffer)>::target, size, nullptr, static_cast<GLenum>(usage));
+	NGS_LIB_MODULE_NAME::allocate(buffer, type_traits::object_t<decltype(buffer)>::target, size, usage);
 }
 
 void describe(const unknown_buffer& buffer, enums::buffer_target target, const ::std::ranges::contiguous_range auto& data, enums::usage usage)

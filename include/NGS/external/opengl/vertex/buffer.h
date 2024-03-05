@@ -6,33 +6,29 @@
 
 NGS_LIB_MODULE_BEGIN
 
-template<class> struct buffer_trait{};
-template<class T> requires requires{ typename type_traits::object_t<T>::descriptor_type; }
-struct buffer_trait<T>
-{
-	using descriptor_type = typename type_traits::object_t<T>::descriptor_type;
-};
+template<class> struct vertex_buffer_struct {};
+template<class T>
+using vertex_buffer_struct_t = typename vertex_buffer_struct<T>::type;
+
+template<class T> requires requires{ typename type_traits::object_t<T>::vertex_struct_type; }
+struct vertex_buffer_struct<T> { using type = typename type_traits::object_t<T>::vertex_struct_type; };
 
 template<class T>
-concept vertex_buffer_descriptor = mpl::mstruct::CStructureDescribe<T>;
+concept vertex_buffer_descriptor = mpl::mstruct::flattened_structure<T>;
 
 template<class T>
-concept vertex_buffer = basic::bindable<T> && vertex_buffer_descriptor<typename buffer_trait<T>::descriptor_type>;
+concept vertex_buffer = basic::bindable<T> && vertex_buffer_descriptor<vertex_buffer_struct_t<T>>;
 
-
-template<mpl::mstruct::CStructureDescribe Descriptor, mpl::mstruct::CStructure VertexStorage = mpl::mstruct::struct_storage<Descriptor>>
-struct buffer : buffers::buffer<enums::buffer_target::array>
+template<vertex_buffer_descriptor VertexStruct>
+struct buffer : buffers::unique_buffer<enums::buffer_target::array, VertexStruct>
 {
-	NGS_MPL_ENVIRON(buffer);
+	NGS_MPL_ENVIRON2(buffer, buffers::unique_buffer<enums::buffer_target::array, VertexStruct>);
 public:
-	using descriptor_type = Descriptor;
-	using vertex_storage_type = VertexStorage;
+	using vertex_struct_type = VertexStruct;
 
-	buffer() = default;
-private:
-	buffers::unique_buffer<vertex_storage_type> _data{};
+	using base_type::base_type;
+	using base_type::operator=;
 };
-
 
 
 NGS_LIB_MODULE_END

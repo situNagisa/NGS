@@ -23,7 +23,7 @@
     <ClInclude Include="bit\operation.h" />
     <ClInclude Include="bit\set.h" />
     <ClInclude Include="bit\state.h" />
-    <ClInclude Include="external\boost\stl_interfaces\iterator\random_access\trivial.h" />
+    <ClInclude Include="external\boost\stl_interfaces\iterator\random_access\index.h" />
     <ClInclude Include="byte\byte.h" />
     <ClInclude Include="byte\defined.h" />
     <ClInclude Include="byte\no_endian.h" />
@@ -366,12 +366,12 @@
     <ClInclude Include="external\boost\stl_interfaces.h" />
     <ClInclude Include="external\boost\stl_interfaces\defined.h" />
     <ClInclude Include="external\boost\stl_interfaces\iterator.h" />
-    <ClInclude Include="external\boost\stl_interfaces\iterator\base.h" />
+    <ClInclude Include="external\boost\stl_interfaces\iterator\basic.h" />
     <ClInclude Include="external\boost\stl_interfaces\iterator\contiguous.h" />
     <ClInclude Include="external\boost\stl_interfaces\iterator\contiguous\base.h" />
     <ClInclude Include="external\boost\stl_interfaces\iterator\contiguous\trivial.h" />
     <ClInclude Include="external\boost\stl_interfaces\iterator\random_access.h" />
-    <ClInclude Include="external\boost\stl_interfaces\iterator\random_access\base.h" />
+    <ClInclude Include="external\boost\stl_interfaces\iterator\random_access\iterator.h" />
     <ClInclude Include="external\boost\stl_interfaces\range\base.h" />
     <ClInclude Include="external\boost\stl_interfaces\range\contiguous.h" />
     <ClInclude Include="external\boost\stl_interfaces\range\input.h" />
@@ -1090,14 +1090,14 @@
     <ClInclude Include="external\opengl\buffer.h" />
     <ClInclude Include="external\opengl\buffer\pool.h" />
     <ClInclude Include="external\opengl\buffer\algorithm.h" />
-    <ClInclude Include="external\opengl\vertex\element.h" />
-    <ClInclude Include="external\opengl\buffer\unique.h" />
+    <ClInclude Include="external\opengl\indices\buffer.h" />
+    <ClInclude Include="external\opengl\buffer\_unique.h" />
     <ClInclude Include="external\opengl\vertex\draw.h" />
     <ClInclude Include="external\opengl\vertex\array.h" />
     <ClInclude Include="external\opengl\vertex\descriptor.h" />
     <ClInclude Include="external\opengl.h" />
     <ClInclude Include="external\opengl\vertex.h" />
-    <ClInclude Include="external\opengl\vertex\vertex.h" />
+    <ClInclude Include="external\opengl\vertex\buffer_array.h" />
     <ClInclude Include="external\stl\tuple\for_each.h" />
     <ClInclude Include="mpl\mstruct\defined.h" />
     <ClInclude Include="mpl\mstruct\mstruct.h" />
@@ -1170,6 +1170,22 @@
     <ClInclude Include="mpl\mstruct\basic\reflect\concept.h" />
     <ClInclude Include="mpl\mstruct\basic\reflect\zero.h" />
     <ClInclude Include="mpl\mstruct\basic\reflect.h" />
+    <ClInclude Include="external\opengl\reflect.h" />
+    <ClInclude Include="mpl\mstruct\basic\reflect\data.h" />
+    <ClInclude Include="external\opengl\vertex\vertex.h" />
+    <ClInclude Include="external\opengl\indices.h" />
+    <ClInclude Include="external\opengl\indices\defined.h" />
+    <ClInclude Include="external\opengl\indices\point.h" />
+    <ClInclude Include="external\boost\stl_interfaces\iterator\defined.h" />
+    <ClInclude Include="external\boost\stl_interfaces\iterator\random_access\defined.h" />
+    <ClInclude Include="external\opengl\indices\line.h" />
+    <ClInclude Include="external\opengl\indices\polygon.h" />
+    <ClInclude Include="external\opengl\buffer\unique.h" />
+    <ClInclude Include="external\opengl\vertex\indices.h" />
+    <ClInclude Include="external\opengl\shader\defined.h" />
+    <ClInclude Include="external\opengl\shader.h" />
+    <ClInclude Include="external\opengl\shader\shader.h" />
+    <ClInclude Include="external\opengl\shader\glsl.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="_discard\mpl\structure\type\structure\describe\concept.h" />

@@ -7,5 +7,6 @@
 NGS_LIB_MODULE_EXPORT(inherit_t);
 NGS_LIB_MODULE_EXPORT(flatten_as_sequence_t);
 NGS_LIB_MODULE_EXPORT(flatten_t);
+NGS_LIB_MODULE_EXPORT(flattened_structure);
 
 #include "NGS/lib/module_end.h"

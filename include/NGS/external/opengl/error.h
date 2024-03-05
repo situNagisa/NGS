@@ -15,12 +15,12 @@ public:
 
 #define NGS_EXTERNAL_OPENGL_CHECK(func)																					\
 do{																														\
-	NGS_LIB_FULL_QUALIFIER_NAME::error::clear();																		\
+	NGS_NS::NGS_EXTERNAL_NS::NGS_EXTERNAL_OPENGL_NS::error::clear();													\
 	func;																												\
 	NGS_OPENGL_SHOW_GL_FUNC(func);																						\
 	do {																												\
-		auto code = NGS_LIB_FULL_QUALIFIER_NAME::error::get();																			\
-		NGS_ASSERT(code == NGS_LIB_FULL_QUALIFIER_NAME::enums::error_code::no_error, fmt::c("OpenGL Error code %d", code).c_str());\
+		auto code = NGS_NS::NGS_EXTERNAL_NS::NGS_EXTERNAL_OPENGL_NS::error::get();										\
+		NGS_ASSERT(code == NGS_NS::NGS_EXTERNAL_NS::NGS_EXTERNAL_OPENGL_NS::enums::error_code::no_error, fmt::c("OpenGL Error code %d", code).c_str());\
 	} while (false);																									\
 }while(false)																											\
 //

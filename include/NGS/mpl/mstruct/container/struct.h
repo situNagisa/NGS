@@ -22,13 +22,6 @@ namespace _detail
 		
 		static constexpr ::std::size_t size = layout::size_of<align.align()>(variables::variable_size_v<Variables>...);
 
-		template<class T>
-		struct reflect_data {
-			::std::size_t size;
-			::std::size_t offset;
-			T type;
-		};
-
 		template<basic::reflecter Reflecter>
 		static constexpr auto reflect()
 		{
@@ -36,8 +29,8 @@ namespace _detail
 			constexpr auto types = ::std::array{ static_cast<typename Reflecter::type>(Reflecter::template reflect<variables::variable_value_t<Variables>>::value)... };
 			return[]<::std::size_t... Index>(::std::index_sequence<Index...>)
 			{
-				return ::std::array<reflect_data<typename Reflecter::type>, field_count>{
-					reflect_data{
+				return ::std::array<basic::reflect_data<typename Reflecter::type>, field_count>{
+					basic::reflect_data{
 						variables::variable_size_v<Variables>,
 						offsets[Index],
 						types[Index]
