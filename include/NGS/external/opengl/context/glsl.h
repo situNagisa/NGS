@@ -32,29 +32,6 @@ public:
 		base_type::operator=(::std::move(other));
 		return *this;
 	}
-
-	void set_code(::std::span<const ::GLchar* const> code)
-	{
-		NGS_EXTERNAL_OPENGL_CHECK(::glShaderSource(get_context(), static_cast<::GLsizei>(code.size()), code.data(), nullptr));
-	}
-	void set_code(const ::GLchar* code) { set_code({ &code,1 }); }
-
-	void compile()
-	{
-		NGS_EXTERNAL_OPENGL_CHECK(::glCompileShader(get_context()));
-#if defined(NGS_BUILD_TYPE_IS_DEBUG)
-		::GLint compile_ok = GL_FALSE;
-		NGS_EXTERNAL_OPENGL_CHECK(::glGetShaderiv(get_context(), GL_COMPILE_STATUS, &compile_ok));
-		if (compile_ok == GL_FALSE) {
-			::GLint log_length;
-			NGS_EXTERNAL_OPENGL_CHECK(::glGetShaderiv(get_context(), GL_INFO_LOG_LENGTH, &log_length));
-			::std::string log{};
-			log.resize(log_length);
-			NGS_EXTERNAL_OPENGL_CHECK(::glGetShaderInfoLog(get_context(), log_length, NULL, log.data()));
-			NGS_ASSERT(false, fmt::c("compile %d shader code fail! %s", log.c_str()));
-		}
-#endif
-	}
 };
 
 template<enums::shader_type Target>

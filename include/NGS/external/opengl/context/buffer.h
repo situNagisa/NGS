@@ -7,6 +7,8 @@
 
 NGS_LIB_MODULE_BEGIN
 
+
+
 struct unknown_buffer : basic::context
 {
 	NGS_MPL_ENVIRON(unknown_buffer);

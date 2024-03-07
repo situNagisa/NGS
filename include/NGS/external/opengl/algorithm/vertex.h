@@ -1,7 +1,8 @@
 ﻿#pragma once
 
+#include "../context.h"
 #include "../reflect.h"
-#include "./buffer.h"
+#include "../enum.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
@@ -44,14 +45,8 @@ namespace _detail
 	}
 }
 
-//template<class...>
-//constexpr auto create_vertex_descriptor(bool)
-//{
-//	return ::std::array<attribute, 0>{};
-//}
-
 template<mpl::mstruct::structure Buffer, mpl::mstruct::structure... Rest>
-constexpr auto create_vertex_descriptor(bool normalized)
+constexpr auto vertex_descriptor(bool normalized)
 {
 	if constexpr (!sizeof...(Rest))
 	{
@@ -62,7 +57,7 @@ constexpr auto create_vertex_descriptor(bool normalized)
 	else
 	{
 		auto current_attributes = _detail::make_attributes<Buffer>(normalized);
-		auto rest_attributes = create_vertex_descriptor<Rest...>(normalized);
+		auto rest_attributes = vertex_descriptor<Rest...>(normalized);
 		constexpr auto attribute_count = current_attributes.size() + rest_attributes.size();
 		using result_type = ::std::array<attribute, attribute_count>;
 		result_type result{};
@@ -77,5 +72,17 @@ constexpr auto create_vertex_descriptor(bool normalized)
 		return result;
 	}
 }
+
+void vertex_draw_array(const contexts::vertex_array& array, enums::draw_mode draw_mode, ::std::size_t count, ::std::size_t offset = 0)
+{
+
+	NGS_EXTERNAL_OPENGL_CHECK(::glDrawArrays(static_cast<GLenum>(draw_mode), static_cast<GLint>(offset), static_cast<GLsizei>(count)));
+}
+
+void vertex_draw_elements(const contexts::vertex_array& array, enums::draw_mode draw_mode, ::std::size_t count, fundamental_t type, ::std::size_t offset = 0)
+{
+	NGS_EXTERNAL_OPENGL_CHECK(::glDrawElements(static_cast<GLenum>(draw_mode), static_cast<GLsizei>(count), static_cast<GLenum>(type), reinterpret_cast<const void*>(offset)));
+}
+
 
 NGS_LIB_MODULE_END

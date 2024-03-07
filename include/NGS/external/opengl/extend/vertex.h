@@ -1,8 +1,9 @@
 #pragma once
 
-#include "./array.h"
-#include "./buffer.h"
-#include "./buffer_array.h"
+#include "../basic.h"
+#include "../context.h"
+#include "../algorithm.h"
+#include "./data.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
@@ -13,11 +14,16 @@ struct vertex_info
 	bool normalized = false;
 };
 
-template<vertex_buffer_descriptor... Buffers>
+template<contexts::vertex_buffer_descriptor... Buffers>
 struct vertex : ::std::ranges::view_interface<vertex<Buffers...>>
 {
 	NGS_MPL_ENVIRON_BEGIN(vertex);
 public:
+	template<contexts::vertex_buffer_descriptor Buffer>
+	using _buffer_type = data_buffer<contexts::vertex_buffer<Buffer>, Buffer>;
+
+	using buffer_array_type = ::std::tuple<_buffer_type<Buffers>...>;
+
 	using value_type = ::std::tuple<Buffers&...>;
 	using const_value_type = ::std::tuple<const Buffers&...>;
 	using vertex_struct_type = mpl::mstruct::storage<layout::default_align, Buffers...>;
@@ -26,10 +32,13 @@ public:
 	constexpr self_type& operator=(self_type&&) = default;
 
 	vertex(const vertex_info& info)
-		: _buffers(buffer<Buffers>(info.usage)...)
-		, _size()
+		: _buffers(::std::make_tuple(_buffer_type<Buffers>(info.usage)...))
 	{
-		NGS_LIB_MODULE_NAME::commit_layout(_array, info.normalized, _buffers.data());
+		basic::bind(_array);
+		::std::apply([&](auto&&... buffers)
+		{
+			algorithm::pipeline_layout(_array, info.normalized, NGS_PP_PERFECT_FORWARD(buffers).buffer()...);
+		}, _buffers);
 	}
 
 	constexpr auto vertex_size()const { return _size; }
@@ -41,7 +50,7 @@ public:
 		}
 		else
 		{
-			return ::std::get<0>(_buffers.data()).data().size();
+			return ::std::get<0>(_buffers).data().size();
 		}
 	}
 
@@ -49,7 +58,7 @@ public:
 	{
 		[&] <::std::size_t... Index>(::std::index_sequence<Index...>) {
 
-			((::std::get<Index>(_buffers.data()).data().push_back(mpl::mstruct::storages::get<Index>(vertex_struct))),...);
+			((::std::get<Index>(_buffers).data().push_back(mpl::mstruct::storages::get<Index>(vertex_struct))),...);
 
 		}(::std::make_index_sequence<sizeof...(Buffers)>{});
 	}
@@ -62,27 +71,24 @@ public:
 	void update(enums::usage usage)
 	{
 		_size = size();
-		stl::tuples::for_each(_buffers.data(), [usage](auto&& buffer)
+		stl::tuples::for_each(_buffers, [usage](auto&& buffer)
 			{
-				basic::bind(NGS_PP_PERFECT_FORWARD(buffer));
+				basic::bind(NGS_PP_PERFECT_FORWARD(buffer).buffer());
 				NGS_PP_PERFECT_FORWARD(buffer).update(usage);
 			});
 	}
 	void submit(::std::size_t begin, ::std::size_t count)const
 	{
 		NGS_ASSERT(begin + count <= _size);
-		stl::tuples::for_each(_buffers.data(), [begin,count](auto&& buffer)
+		stl::tuples::for_each(_buffers, [begin,count](auto&& buffer)
 			{
-				basic::bind(NGS_PP_PERFECT_FORWARD(buffer));
+				basic::bind(NGS_PP_PERFECT_FORWARD(buffer).buffer());
 				NGS_PP_PERFECT_FORWARD(buffer).submit(begin,count);
 			});
 	}
 
-	auto&& get_vertex_array() { return _array; }
-	auto&& get_vertex_array() const { return _array; }
-
-	vertex_array _array{};
-	buffer_array<buffer<Buffers>...> _buffers;
+	contexts::vertex_array _array{};
+	buffer_array_type _buffers;
 	::std::size_t _size = 0;
 };
 
@@ -97,11 +103,11 @@ namespace _detail
 
 		decltype(auto) operator()(Vertex* v, ::std::ptrdiff_t index)const
 		{
-			return typename Vertex::value_type{::std::get<Index>(v->_buffers.data()).data()[index]...};
+			return typename Vertex::value_type{::std::get<Index>(v->_buffers).data()[index]...};
 		}
 		decltype(auto) operator()(const Vertex* v, ::std::ptrdiff_t index)const
 		{
-			return typename Vertex::const_value_type{::std::get<Index>(v->_buffers.data()).data()[index]...};
+			return typename Vertex::const_value_type{::std::get<Index>(v->_buffers).data()[index]...};
 		}
 	};
 

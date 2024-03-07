@@ -1,13 +1,10 @@
 ﻿#pragma once
 
-#include "../basic.h"
+#include "./buffer.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
-struct pool
-{
-
-};
+using indices = buffer<enums::buffer_target::element>;
 
 NGS_LIB_MODULE_END

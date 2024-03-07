@@ -2,7 +2,7 @@
 
 #include "NGS/basic/basic.h"
 #include "NGS/bases/bases.h"
-#include "NGS/mpl/structure.h"
+#include "NGS/mpl/mstruct.h"
 #include "NGS/tvm/tvm.h"
 #include "NGS/cpt/cpt.h"
 #include "NGS/type_trait/type_trait.h"

@@ -1,23 +1,24 @@
 #pragma once
 
-#include "../indices.h"
-#include "./buffer.h"
+#include "../basic.h"
+#include "../context.h"
+#include "../algorithm.h"
+#include "./data.h"
 #include "./vertex.h"
-#include "./draw.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
 using indices_t = ::std::uint32_t;
 
-template<vertex_buffer_descriptor... Buffers>
+template<contexts::vertex_buffer_descriptor... Buffers>
 struct indices_vertex : vertex<Buffers...>
 {
 	NGS_MPL_ENVIRON2(indices_vertex, vertex<Buffers...>);
 public:
 	NGS_MPL_INHERIT_TYPE(vertex_struct_type, base_type);
 
-	using indices_buffer_type = indices::buffer<indices_t>;
+	using indices_buffer_type = data_buffer<contexts::indices, indices_t>;
 	using indices_sequence_callback_type = ::std::function<void(indices_buffer_type::range_type::iterator out, indices_t begin,::std::size_t count)>;
 	using indices_sequence_count_callback_type = ::std::function<::std::size_t(::std::size_t count)>;
 
@@ -50,7 +51,7 @@ public:
 	void update(enums::usage usage)
 	{
 		base_type::update(usage);
-		buffers::describe(_indices, _indices.data(), usage);
+		_indices.update(usage);
 	}
 
 	indices_buffer_type _indices;
