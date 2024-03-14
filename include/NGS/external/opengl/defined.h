@@ -10,6 +10,8 @@
 #include "NGS/external/stl/tuple.h"
 #include "NGS/color/color.h"
 #include "NGS/mpl/mstruct.h"
+#include "NGS/fmt/fmt.h"
+#include "NGS/symbol/symbol.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -26,7 +28,6 @@
 NGS_LIB_BEGIN
 
 using fundamental_t = GLuint;
-using context_t = GLuint;
 using pixel_internal_format_t = GLint;
 using pixel_format_t = GLenum;
 using gl_enum_t = GLenum;

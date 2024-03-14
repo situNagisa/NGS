@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../config.h"
 #include "../enum.h"
 #include "../basic.h"
 #include "../error.h"
@@ -14,12 +15,13 @@ struct shader : basic::context
 private:
 	static auto _create()
 	{
-		context_t context;
+		basic::context_t context;
 		NGS_EXTERNAL_OPENGL_CHECK(context = ::glCreateProgram());
 		return context;
 	}
 
 public:
+	NGS_EXTERNAL_OPENGL_CONTEXT_TYPE_AUTO();
 	struct machine_type : bases::singleton<machine_type>
 	{
 		using context_type = shader;

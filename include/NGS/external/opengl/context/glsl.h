@@ -13,7 +13,7 @@ struct basic_glsl : basic::context
 private:
 	static auto _create(enums::shader_type target)
 	{
-		context_t context;
+		basic::context_t context;
 		NGS_EXTERNAL_OPENGL_CHECK(context = ::glCreateShader(static_cast<::GLenum>(target)));
 		return context;
 	}

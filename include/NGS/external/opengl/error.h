@@ -17,7 +17,7 @@ public:
 do{																														\
 	NGS_NS::NGS_EXTERNAL_NS::NGS_EXTERNAL_OPENGL_NS::error::clear();													\
 	func;																												\
-	NGS_OPENGL_SHOW_GL_FUNC(func);																						\
+	NGS_EXTERNAL_OPENGL_SHOW_GL_FUNCTION(func);																			\
 	do {																												\
 		auto code = NGS_NS::NGS_EXTERNAL_NS::NGS_EXTERNAL_OPENGL_NS::error::get();										\
 		NGS_ASSERT(code == NGS_NS::NGS_EXTERNAL_NS::NGS_EXTERNAL_OPENGL_NS::enums::error_code::no_error, fmt::c("OpenGL Error code %d", code).c_str());\

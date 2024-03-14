@@ -5,6 +5,6 @@
 
 NGS_LIB_MODULE_BEGIN
 
-using indices = buffer<enums::buffer_target::element>;
+using indices_buffer = buffer<enums::buffer_target::element>;
 
 NGS_LIB_MODULE_END

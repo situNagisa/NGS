@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "../config.h"
 #include "../enum.h"
 #include "../basic.h"
 #include "../error.h"
@@ -7,19 +8,19 @@
 
 NGS_LIB_MODULE_BEGIN
 
-
-
 struct unknown_buffer : basic::context
 {
 	NGS_MPL_ENVIRON(unknown_buffer);
 private:
 	static auto _create()
 	{
-		context_t context;
+		basic::context_t context;
 		NGS_EXTERNAL_OPENGL_CHECK(::glGenBuffers(1, &context));
 		return context;
 	}
 public:
+	NGS_EXTERNAL_OPENGL_CONTEXT_TYPE_AUTO();
+
 	unknown_buffer() noexcept : base_type(_create()) {}
 	unknown_buffer(self_type&&) = default;
 	~unknown_buffer()

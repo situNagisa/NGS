@@ -4,6 +4,9 @@
 
 NGS_LIB_MODULE_BEGIN
 
+using context_t = GLuint;
+inline constexpr context_t null_context = static_cast<context_t>(0);
+
 struct context : bases::delete_copy
 {
 	NGS_MPL_ENVIRON_BEGIN(context);

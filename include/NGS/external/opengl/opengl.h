@@ -6,7 +6,8 @@
 #include "./error.h"
 #include "./context.h"
 #include "./algorithm.h"
-#include "./extend.h"
 #include "./indices.h"
+#include "./policy.h"
+#include "./container.h"
 
 #include "NGS/lib/lib_end.h"
