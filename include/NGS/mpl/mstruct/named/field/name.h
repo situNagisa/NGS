@@ -8,8 +8,7 @@ template<statics::strings::string Name>
 using name_constant = ccpt::auto_constant<Name>;
 
 template<class T>
-concept name = statics::strings::static_string<typename type_traits::object_t<T>::type> && statics::strings::static_string<decltype(type_traits::object_t<T>::type::value)>;
-
+concept name = statics::strings::static_string<typename type_traits::object_t<T>::value_type>&& statics::strings::static_string<decltype(type_traits::object_t<T>::value)>;
 
 template<class> struct named_pair_name {};
 template<class Field>

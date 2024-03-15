@@ -17,7 +17,7 @@ using state_machine_t = typename state_machine<T>::type;
 template<class Machine>
 concept machine = requires(type_traits::naked_t<Machine>&m, typename type_traits::object_t<Machine>::context_type context)
 {
-	{ type_traits::object_t<Machine>::instance() } -> std::convertible_to<type_traits::naked_t<Machine>&>;
+	{ type_traits::object_t<Machine>::instance() } -> ::std::convertible_to<type_traits::naked_t<Machine>&>;
 	{ m.bind(context) };
 };
 

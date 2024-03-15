@@ -214,13 +214,10 @@
     <ClInclude Include="external\opengl\enum\defined.h" />
     <ClInclude Include="external\opengl\enum\draw.h" />
     <ClInclude Include="external\opengl\enum\error_code.h" />
-    <ClInclude Include="external\opengl\enum\filters.h" />
     <ClInclude Include="external\opengl\enum\framebuffer.h" />
-    <ClInclude Include="external\opengl\enum\image_format.h" />
     <ClInclude Include="external\opengl\enum\shader.h" />
     <ClInclude Include="external\opengl\enum\texture.h" />
     <ClInclude Include="external\opengl\enum\usage.h" />
-    <ClInclude Include="external\opengl\enum\wraps.h" />
     <ClInclude Include="external\opengl\error.h" />
     <ClInclude Include="external\opengl\enum.h" />
     <ClInclude Include="external\opengl\opengl.h" />
@@ -1189,12 +1186,24 @@
     <ClInclude Include="external\opengl\policy\indices.h" />
     <ClInclude Include="external\opengl\indices\concept.h" />
     <ClInclude Include="external\opengl\indices\basic.h" />
-    <ClInclude Include="external\opengl\policy\draw.h" />
     <ClInclude Include="external\opengl\container\defined.h" />
     <ClInclude Include="external\opengl\container.h" />
     <ClInclude Include="external\opengl\container\indices_layout.h" />
     <ClInclude Include="external\opengl\container\vector_indices_layout.h" />
     <ClInclude Include="external\opengl\container\array_indices_layout.h" />
+    <ClInclude Include="external\opengl\container\span_indices_layout.h" />
+    <ClInclude Include="external\opengl\context\framebuffer.h" />
+    <ClInclude Include="external\opengl\algorithm\framebuffer.h" />
+    <ClInclude Include="external\opengl\context\renderbuffer.h" />
+    <ClInclude Include="external\opengl\context\texture.h" />
+    <ClInclude Include="external\opengl\enum\renderbuffer.h" />
+    <ClInclude Include="external\opengl\algorithm\renderbuffer.h" />
+    <ClInclude Include="external\opengl\algorithm\texture.h" />
+    <ClInclude Include="external\opengl\policy\image.h" />
+    <ClInclude Include="external\opengl\policy\texture.h" />
+    <ClInclude Include="external\opengl\policy\framebuffer.h" />
+    <ClInclude Include="external\opengl\policy\renderbuffer.h" />
+    <ClInclude Include="mpl\mstruct\named\field_at.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="_discard\mpl\structure\type\structure\describe\concept.h" />

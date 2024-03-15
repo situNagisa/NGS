@@ -28,8 +28,6 @@
 NGS_LIB_BEGIN
 
 using fundamental_t = GLuint;
-using pixel_internal_format_t = GLint;
-using pixel_format_t = GLenum;
 using gl_enum_t = GLenum;
 
 NGS_LIB_END

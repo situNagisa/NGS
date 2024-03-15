@@ -30,14 +30,14 @@ public:
 		{
 			[&] <::std::size_t... Index>(::std::index_sequence<Index...>) {
 
-				((this->get<Index>() =  mpl::mstruct::storages::get<Index>(vertex)), ...);
+				((this->template get<Index>() =  mpl::mstruct::storages::get<Index>(vertex)), ...);
 
 			}(::std::make_index_sequence<sizeof...(VertexBuffer)>{});
 		}
 
-		template<::std::size_t Index>
+		template<::std::size_t Index> requires (Index < sizeof...(VertexBuffer))
 		constexpr auto&& get() { return ::std::get<Index>(_data); }
-		template<::std::size_t Index>
+		template<::std::size_t Index> requires (Index < sizeof...(VertexBuffer))
 		constexpr auto&& get() const { return ::std::get<Index>(_data); }
 
 		::std::tuple<Ts...> _data;
@@ -127,6 +127,11 @@ public:
 		self_type::submit(::std::ranges::begin(*this) + offset, ::std::ranges::begin(*this) + offset + count);
 	}
 	void submit() { self_type::submit(*this); }
+
+	template<::std::size_t Index> requires (Index < sizeof...(VertexBuffer))
+	auto&& get_buffer() { return ::std::get<Index>(_buffer); }
+	template<::std::size_t Index> requires (Index < sizeof...(VertexBuffer))
+	auto&& get_buffer() const { return ::std::get<Index>(_buffer); }
 
 	void for_each_buffer(auto&& functor)
 		requires ((::std::invocable<decltype(functor),VertexBuffer&>) && ...)

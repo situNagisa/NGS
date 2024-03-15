@@ -13,13 +13,14 @@ struct indices_layout
 public:
 	using layout_type = Layout;
 	using indices_buffer_type = IndicesBuffer;
+	using vertex_type = typename layout_type::vertex_type;
 
 	indices_layout(layout_type&& layout, indices_buffer_type&& indices_buffer)
 		: _layout(::std::move(layout))
 		, _indices_buffer(::std::move(indices_buffer))
 	{}
 
-	auto push_back_vertex_range(::std::ranges::sized_range auto&& vertex_range)
+	decltype(auto) push_back_vertex_range(::std::ranges::sized_range auto&& vertex_range)
 		requires ::std::indirectly_copyable<::std::ranges::iterator_t<decltype(vertex_range)>,::std::ranges::iterator_t<layout_type>>
 	{
 		using layout_iterator_type = ::std::ranges::iterator_t<layout_type>;
@@ -36,6 +37,11 @@ public:
 		_current_layout_index += ::std::ranges::distance(layout_result.in, layout_result.out);
 
 		return ::std::pair{ layout_result, indices_result };
+	}
+
+	decltype(auto) push_back_vertex_range(::std::initializer_list<vertex_type>&& vertex_range)
+	{
+		return self_type::push_back_vertex_range(vertex_range);
 	}
 
 	auto&& layout() { return _layout; }
@@ -78,5 +84,6 @@ public:
 	indices_buffer_type _indices_buffer;
 	::std::ranges::range_difference_t<policy::buffer_range_t<indices_buffer_type>> _current_indices_index = 0;
 };
+
 
 NGS_LIB_MODULE_END

@@ -71,6 +71,11 @@ public:
 		return base_type::push_back_vertex_range(NGS_PP_PERFECT_FORWARD(vertex_range));
 	}
 
+	decltype(auto) push_back_vertex_range(::std::initializer_list<typename base_type::vertex_type>&& vertex_range)
+	{
+		return self_type::push_back_vertex_range(vertex_range);
+	}
+
 	enums::usage _vertex_usage;
 	enums::usage _indices_usage;
 };
