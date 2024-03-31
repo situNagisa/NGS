@@ -2,7 +2,6 @@
 
 #include "../reflect.h"
 #include "../enum.h"
-#include "./indices_layout.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
@@ -12,9 +11,9 @@ template<
 	indices::indices_drawer<IndexType,::std::ranges::iterator_t<::std::vector<IndexType>>> IndicesDrawer,
 	contexts::vertex_buffer_descriptor... BufferDescriptor
 >
-struct vector_indices_layout : indices_layout<policy::layout<policy::vertex_buffer<::std::vector<BufferDescriptor>>...>,policy::indices_buffer<::std::vector<IndexType>,IndicesDrawer>>
+struct vector_indices_layout : policy::indices_layout<policy::layout<policy::vertex_buffer<::std::vector<BufferDescriptor>>...>,policy::indices_buffer<::std::vector<IndexType>,IndicesDrawer>>
 {
-	NGS_MPL_ENVIRON2(vector_indices_layout, indices_layout<policy::layout<policy::vertex_buffer<::std::vector<BufferDescriptor>>...>, policy::indices_buffer<::std::vector<IndexType>, IndicesDrawer>>);
+	NGS_MPL_ENVIRON2(vector_indices_layout, policy::indices_layout<policy::layout<policy::vertex_buffer<::std::vector<BufferDescriptor>>...>, policy::indices_buffer<::std::vector<IndexType>, IndicesDrawer>>);
 
 public:
 	vector_indices_layout(bool normalized, enums::usage vertex_usage, enums::usage indices_usage,::std::size_t vertex_count)
@@ -68,12 +67,12 @@ public:
 		{
 			self_type::resize(base_type::vertex_size() + vertex_range_size);
 		}
-		return base_type::push_back_vertex_range(NGS_PP_PERFECT_FORWARD(vertex_range));
+		return base_type::copy_vertex_range(NGS_PP_PERFECT_FORWARD(vertex_range));
 	}
 
 	decltype(auto) push_back_vertex_range(::std::initializer_list<typename base_type::vertex_type>&& vertex_range)
 	{
-		return self_type::push_back_vertex_range(vertex_range);
+		return self_type::copy_vertex_range(vertex_range);
 	}
 
 	enums::usage _vertex_usage;

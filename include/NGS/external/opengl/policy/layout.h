@@ -33,6 +33,7 @@ public:
 				((this->template get<Index>() =  mpl::mstruct::storages::get<Index>(vertex)), ...);
 
 			}(::std::make_index_sequence<sizeof...(VertexBuffer)>{});
+			return *this;
 		}
 
 		template<::std::size_t Index> requires (Index < sizeof...(VertexBuffer))

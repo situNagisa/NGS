@@ -4,9 +4,9 @@
 
 #if NGS_CPP_VERSION
 
-#define NGS_C       extern "C"
-#define NGS_C_BEGIN extern "C" {
-#define NGS_C_END   };
+#define NGS_EXTERN_C       extern "C"
+#define NGS_EXTERN_C_BEGIN extern "C" {
+#define NGS_EXTERN_C_END   };
 
 #else
 

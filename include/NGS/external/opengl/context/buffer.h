@@ -38,6 +38,8 @@ public:
 	using machine_type = basic::context_machine<self_type, _detail::buffer_binder<target>>;
 };
 
-
+using vertex_buffer = buffer<enums::buffer_target::array>;
+using indices_buffer = buffer<enums::buffer_target::element>;
+using uniform_buffer = buffer<enums::buffer_target::uniform>;
 
 NGS_LIB_MODULE_END

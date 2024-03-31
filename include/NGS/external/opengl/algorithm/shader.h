@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../basic.h"
 #include "../context.h"
 #include "./defined.h"
 
@@ -52,11 +53,115 @@ void shader_link(const contexts::shader& shader)
 #endif
 }
 
-::std::ptrdiff_t shader_uniform_location(const contexts::shader& shader, ::std::string_view uniform_name)
+::std::ptrdiff_t shader_get_uniform_location(const contexts::shader& shader, ::std::string_view uniform_name)
 {
 	::std::ptrdiff_t result;
 	NGS_EXTERNAL_OPENGL_CHECK(result = ::glGetUniformLocation(shader.get_context(), uniform_name.data()));
 	return result;
+}
+
+namespace _detail
+{
+	template<class T>
+	concept fundametal_uniform = cpt::naked_same_as<T, ::GLint> || cpt::naked_same_as<T, ::GLuint> || cpt::naked_same_as<T, ::GLfloat>;
+
+	template<class T>
+	concept ranged_uniform = ::std::ranges::contiguous_range<T> && fundametal_uniform<::std::ranges::range_value_t<T>> && requires(const T & t) { requires (::std::ranges::size(t) > 0) && (::std::ranges::size(t) < 5); };
+
+	template<class T>
+	concept uniform = ranged_uniform<T> || fundametal_uniform<T>;
+
+	template<class T,::std::size_t Size>
+	concept sized_range_uniform = ranged_uniform<T> && requires(const T & t) { requires (::std::ranges::size(t) == Size); };
+
+	template<class T, class Expect, ::std::size_t Size>
+	concept expect_range_uniform = sized_range_uniform<T,Size> && cpt::naked_same_as<::std::ranges::range_value_t<T>, Expect>;
+
+	template<class T, class Expect, ::std::size_t Size>
+	concept expect_uniform = expect_range_uniform<T, Expect, Size> || (expect_range_uniform<T[1], Expect, 1> && Size == 1);
+
+	template<class T,bool IsPlural>
+	struct shader_uniform_functor;
+
+	template<expect_uniform<::GLint,1> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform1i; };
+	template<expect_uniform<::GLint,2> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform2i; };
+	template<expect_uniform<::GLint,3> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform3i; };
+	template<expect_uniform<::GLint,4> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform4i; };
+	template<expect_uniform<::GLuint,1> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform1ui; };
+	template<expect_uniform<::GLuint,2> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform2ui; };
+	template<expect_uniform<::GLuint,3> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform3ui; };
+	template<expect_uniform<::GLuint,4> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform4ui; };
+	template<expect_uniform<::GLfloat,1> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform1f; };
+	template<expect_uniform<::GLfloat,2> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform2f; };
+	template<expect_uniform<::GLfloat,3> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform3f; };
+	template<expect_uniform<::GLfloat,4> T> struct shader_uniform_functor<T, false> { inline static auto&& value = ::glUniform4f; };
+
+	template<expect_uniform<::GLint, 1> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform1iv; };
+	template<expect_uniform<::GLint, 2> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform2iv; };
+	template<expect_uniform<::GLint, 3> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform3iv; };
+	template<expect_uniform<::GLint, 4> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform4iv; };
+	template<expect_uniform<::GLuint, 1> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform1uiv; };
+	template<expect_uniform<::GLuint, 2> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform2uiv; };
+	template<expect_uniform<::GLuint, 3> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform3uiv; };
+	template<expect_uniform<::GLuint, 4> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform4uiv; };
+	template<expect_uniform<::GLfloat, 1> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform1fv; };
+	template<expect_uniform<::GLfloat, 2> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform2fv; };
+	template<expect_uniform<::GLfloat, 3> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform3fv; };
+	template<expect_uniform<::GLfloat, 4> T> struct shader_uniform_functor<T, true> { inline static auto&& value = ::glUniform4fv; };
+
+	decltype(auto) shader_uniform(::std::ptrdiff_t location, const ::std::ranges::contiguous_range auto& data, ::std::ptrdiff_t offset)
+		requires (uniform<::std::ranges::range_value_t<decltype(data)>>)
+	{
+		using value_type = type_traits::naked_t<::std::ranges::range_value_t<decltype(data)>>;
+		auto&& gl_uniform = shader_uniform_functor<value_type, true>::value;
+		location += offset;
+		if constexpr(ranged_uniform<value_type>)
+		{
+			NGS_EXTERNAL_OPENGL_CHECK(gl_uniform(location, ::std::ranges::size(data), ::std::ranges::data(*::std::ranges::begin(data))));
+		}
+		else
+		{
+			NGS_EXTERNAL_OPENGL_CHECK(gl_uniform(location, ::std::ranges::size(data), ::std::ranges::data(data)));
+		}
+	}
+
+	decltype(auto) shader_uniform(::std::ptrdiff_t location, const ranged_uniform auto& data)
+	{
+		using value_type = type_traits::naked_t<::std::ranges::range_value_t<decltype(data)>>;
+
+		auto&& gl_uniform = shader_uniform_functor<value_type, false>::value;
+		auto begin = ::std::ranges::begin(data);
+		if constexpr (sized_range_uniform<value_type, 1>)
+		{
+			NGS_EXTERNAL_OPENGL_CHECK(gl_uniform(location, begin[0]));
+		}
+		else if constexpr (sized_range_uniform<value_type, 2>)
+		{
+			NGS_EXTERNAL_OPENGL_CHECK(gl_uniform(location, begin[0], begin[1]));
+		}
+		else if constexpr (sized_range_uniform<value_type, 3>)
+		{
+			NGS_EXTERNAL_OPENGL_CHECK(gl_uniform(location, begin[0], begin[1], begin[2]));
+		}
+		else if constexpr (sized_range_uniform<value_type, 4>)
+		{
+			NGS_EXTERNAL_OPENGL_CHECK(gl_uniform(location, begin[0], begin[1], begin[2], begin[3]));
+		}
+	}
+}
+
+void shader_set_uniform(const contexts::shader& shader, ::std::ptrdiff_t location, const ::std::ranges::contiguous_range auto& data, ::std::ptrdiff_t offset = 0)
+	requires (_detail::uniform<::std::ranges::range_value_t<decltype(data)>>)
+{
+	NGS_EXTERNAL_OPENGL_EXPECT_BIND(shader);
+	_detail::shader_uniform(location, data, offset);
+}
+
+void shader_set_uniform(const contexts::shader& shader, ::std::ptrdiff_t location, const _detail::uniform auto& data)
+	requires (_detail::fundametal_uniform<::std::ranges::range_value_t<decltype(data)>>)
+{
+	NGS_EXTERNAL_OPENGL_EXPECT_BIND(shader);
+	_detail::shader_uniform(location, data);
 }
 
 NGS_LIB_MODULE_END

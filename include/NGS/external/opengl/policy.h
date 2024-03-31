@@ -6,6 +6,7 @@
 #include "./policy/indices.h"
 #include "./policy/vertex.h"
 #include "./policy/layout.h"
+#include "./policy/indices_layout.h"
 #include "./policy/image.h"
 #include "./policy/texture.h"
 #include "./policy/renderbuffer.h"
@@ -15,6 +16,7 @@ NGS_LIB_MODULE_EXPORT(shader);
 NGS_LIB_MODULE_EXPORT(indices_buffer);
 NGS_LIB_MODULE_EXPORT(vertex_buffer);
 NGS_LIB_MODULE_EXPORT(layout);
+NGS_LIB_MODULE_EXPORT(indices_layout);
 
 NGS_LIB_MODULE_EXPORT(image);
 NGS_LIB_MODULE_EXPORT(make_image);

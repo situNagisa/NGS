@@ -9,7 +9,6 @@
 #include "./enum/shader.h"
 #include "./enum/texture.h"
 #include "./enum/usage.h"
-#include "./enum/cursor.h"
 #include "./enum/framebuffer.h"
 #include "./enum/renderbuffer.h"
 

@@ -5,15 +5,15 @@
 NGS_BASIC_TYPE_BEGIN
 namespace detail
 {
-template<size_t _Byte>
-struct _byte_
+template<size_t Byte>
+struct _byte
 {
 	using type = decltype([] {
-		if		constexpr (_Byte > 4)
+		if		constexpr (Byte > 4)
 			return uint64();
-		else if constexpr (_Byte > 2)
+		else if constexpr (Byte > 2)
 			return uint32();
-		else if constexpr (_Byte > 1)
+		else if constexpr (Byte > 1)
 			return uint16();
 		else
 			return uint8();
@@ -22,8 +22,8 @@ struct _byte_
 }
 
 
-template<size_t _Byte>
-using byte_ = typename detail::_byte_<_Byte>::type;
+template<size_t Byte>
+using byte_ = typename detail::_byte<Byte>::type;
 
 NGS_BASIC_TYPE_DEFINE(byte_<0>, byte);
 

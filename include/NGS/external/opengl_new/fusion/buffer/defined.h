@@ -1,0 +1,5 @@
+#include "../defined.h"
+
+#define NGS_EXTERNAL_OPENGL_FUSION_BUFFER_NS NGS_EXTERNAL_OPENGL_FUSION_NS::buffers
+#define NGS_LIB_MODULE_NAME NGS_EXTERNAL_OPENGL_FUSION_BUFFER_NS
+#include "NGS/lib/module.h"

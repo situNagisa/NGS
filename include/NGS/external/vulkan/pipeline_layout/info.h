@@ -32,6 +32,7 @@ public:
 	vulkan_struct structure{ trait::structure_type };
 	//
 	vulkan_range<push_constant_range_type> push_constant_ranges{};
+	vulkan_range<::VkDescriptorSetLayout> descriptor_set_layouts{};
 
 	static trait::entity_type create(const self_type& info, const VkDevice& device)
 	{
@@ -39,8 +40,8 @@ public:
 
 		VkPipelineLayoutCreateInfo create_info{};
 		create_info.sType = static_cast<VkStructureType>(info.structure.type);
-		create_info.setLayoutCount = 0;
-		create_info.pSetLayouts = nullptr;
+		create_info.setLayoutCount = static_cast<uint32_t>(info.descriptor_set_layouts.size());
+		create_info.pSetLayouts = info.descriptor_set_layouts.data();
 		create_info.pushConstantRangeCount = static_cast<uint32_t>(push_ranges.size());
 		create_info.pPushConstantRanges = push_ranges.data();
 
