@@ -13,6 +13,7 @@
 #include "NGS/fmt/fmt.h"
 #include "NGS/symbol/symbol.h"
 #include "NGS/handle/handle.h"
+#include "NGS/flag/flag.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

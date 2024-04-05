@@ -112,7 +112,7 @@ void texture_set_image(
 	::std::size_t height,
 	enums::internal_format internal_format,
 	enums::format format,
-	enums::channel_type channel_type,
+	auto channel_type,
 	size_t mipmap_level = 0)
 {
 	NGS_EXTERNAL_OPENGL_EXPECT_BIND(texture);

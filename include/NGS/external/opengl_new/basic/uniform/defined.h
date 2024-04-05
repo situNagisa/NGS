@@ -1,0 +1,5 @@
+#include "../defined.h"
+
+#define NGS_EXTERNAL_OPENGL_BASIC_UNIFORM_NS NGS_EXTERNAL_OPENGL_BASIC_NS::uniforms
+#define NGS_LIB_MODULE_NAME NGS_EXTERNAL_OPENGL_BASIC_UNIFORM_NS
+#include "NGS/lib/module.h"

@@ -1,0 +1,5 @@
+﻿#include "../defined.h"
+
+#define NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS NGS_EXTERNAL_OPENGL_BASIC_NS::enums
+#define NGS_LIB_MODULE_NAME NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS
+#include "NGS/lib/module.h"

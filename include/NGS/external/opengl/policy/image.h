@@ -15,7 +15,7 @@ public:
 	::std::size_t height;
 	enums::internal_format internal_format;
 	enums::format format;
-	enums::channel_type channel_type;
+	GLenum channel_type;
 	void_ptr_cst data;
 };
 
@@ -27,7 +27,7 @@ constexpr auto make_image(::std::size_t width, ::std::size_t height, const void_
 		.height = height,
 		.internal_format = static_cast<enums::internal_format>(reflecter::reflect<InternalFormat>::value.value),
 		.format = static_cast<enums::format>(reflecter::reflect<Format>::value.value),
-		.channel_type = static_cast<enums::channel_type>(reflecter::reflect<ChannelType>::value.value),
+		.channel_type = static_cast<GLenum>(reflecter::reflect<ChannelType>::value.value),
 		.data = data
 	};
 }

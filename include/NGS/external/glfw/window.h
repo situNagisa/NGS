@@ -72,7 +72,7 @@ public:
 	void swap_buffer()const;
 
 	int  get_key_state(int key)const;
-	bool is_key_down(int key)const { return get_key_state(key) == GLFW_PRESS; }
+	bool is_key_press(int key)const { return get_key_state(key) == GLFW_PRESS; }
 	bool is_key_repeat(int key)const { return get_key_state(key) == GLFW_REPEAT; }
 	bool is_key_release(int key)const { return get_key_state(key) == GLFW_RELEASE; }
 

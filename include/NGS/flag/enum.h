@@ -5,13 +5,13 @@
 
 NGS_LIB_BEGIN
 
-template<class _BitType> requires ::std::is_enum_v<_BitType>
-struct enum_flag : basic_flag<enum_flag<_BitType>, ::std::underlying_type_t<_BitType>>
+template<class BitType> requires ::std::is_enum_v<BitType>
+struct enum_flag : basic_flag<enum_flag<BitType>, ::std::underlying_type_t<BitType>>
 {
-	NGS_MPL_ENVIRON2(enum_flag, basic_flag<enum_flag<_BitType>, ::std::underlying_type_t<_BitType>>);
+	NGS_MPL_ENVIRON2(enum_flag, basic_flag<enum_flag<BitType>, ::std::underlying_type_t<BitType>>);
 public:
 	NGS_MPL_INHERIT_TYPE(value_type, base_type);
-	using bit_type = _BitType;
+	using bit_type = BitType;
 
 	using base_type::base_type;
 	constexpr enum_flag(bit_type bit) : base_type(static_cast<value_type>(bit)) {}

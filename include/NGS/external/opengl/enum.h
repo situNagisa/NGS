@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "./defined.h"
+#include "./enum/basic.h"
 #include "./enum/blend.h"
 #include "./enum/buffer.h"
 #include "./enum/capabilities.h"
