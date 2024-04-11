@@ -1,18 +1,17 @@
 ﻿#pragma once
 
+#include "./trait.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
 template<class T>
-concept color_channel = requires{
-	{ type_traits::object_t<T>::count } -> std::convertible_to<size_t>;
-	{ type_traits::object_t<T>::offset } -> std::convertible_to<size_t>;
-	{ type_traits::object_t<T>::filter } -> std::convertible_to<size_t>;
-	{ type_traits::object_t<T>::filter_with_offset } -> std::convertible_to<size_t>;
-		requires std::integral<typename type_traits::object_t<T>::type>;
-};
+concept color_channel = ::std::is_object_v<underlying_type_t<T>>;
+
+template<class T>
+concept arithmetic_channel = color_channel<T> && ::std::is_arithmetic_v<underlying_type_t<T>> && requires
+{
+	{ NGS_LIB_MODULE_NAME::bit_count<T>() } -> ::std::convertible_to<::std::size_t>;
+} && ( bits::as_bit<underlying_type_t<T>>() >= (NGS_LIB_MODULE_NAME::bit_count<T>()) );
 
 NGS_LIB_MODULE_END
-
-NGS_LIB_MODULE_EXPORT(color_channel);

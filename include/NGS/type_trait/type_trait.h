@@ -13,3 +13,4 @@
 #include "./is_specialization.h"
 #include "./is_template.h"
 #include "./storage.h"
+#include "./trait.h"

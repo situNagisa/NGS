@@ -1,8 +1,9 @@
 ﻿#pragma once
 
-#include "./defined.h"
+#include "./channel.h"
 #include "./concept.h"
 #include "./same_as.h"
+#include "./defined.h"
 
 #if defined(NGS_COMPILER_IS_MSVC)
 #pragma warning(push)
@@ -14,25 +15,92 @@
 
 NGS_LIB_MODULE_BEGIN
 
-template<color_channel _A, color_channel _R, color_channel _G, color_channel _B>
+namespace _detail
+{
+	template<channels::arithmetic_channel C0, channels::arithmetic_channel C1, channels::arithmetic_channel C2, channels::arithmetic_channel C3>
+	struct primary_descriptor {
+		NGS_MPL_ENVIRON_BEGIN(primary_descriptor);
+	public:
+
+		using channel0_type = primary_channel<C0, 0>;
+		using channel1_type = primary_channel<C1, channels::bit_count<C0>()>;
+		using channel2_type = primary_channel<C2, channels::bit_count<C0>() + channels::bit_count<C1>()>;
+		using channel3_type = primary_channel<C3, channels::bit_count<C0>() + channels::bit_count<C1>() + channels::bit_count<C2>()>;
+
+		constexpr static ::std::size_t bit_count()
+		{
+			return channels::bit_count<channel0_type>() + channels::bit_count<channel1_type>() + channels::bit_count<channel2_type>() + channels::bit_count<channel3_type>();
+		}
+
+		using value_type = byte_<bits::as_byte(bit_count())>;
+	};
+
+	template<class Descriptor>
+	struct primary_memory
+	{
+		using value_type = typename Descriptor::value_type;
+
+		constexpr primary_memory() = default;
+		constexpr explicit(false) primary_memory(const value_type& value) : _value(value) {}
+		constexpr primary_memory(
+			channels::underlying_type_t<typename Descriptor::channel0_type> c0,
+			channels::underlying_type_t<typename Descriptor::channel1_type> c1, 
+			channels::underlying_type_t<typename Descriptor::channel2_type> c2, 
+			channels::underlying_type_t<typename Descriptor::channel3_type> c3
+		)
+			: _value(
+				(channels::bit_value<typename Descriptor::channel0_type>(c0) << Descriptor::channel0_type::bit_offset()) |
+				(channels::bit_value<typename Descriptor::channel1_type>(c1) << Descriptor::channel1_type::bit_offset()) |
+				(channels::bit_value<typename Descriptor::channel2_type>(c2) << Descriptor::channel2_type::bit_offset()) |
+				(channels::bit_value<typename Descriptor::channel3_type>(c3) << Descriptor::channel3_type::bit_offset())
+			)
+		{}
+
+		constexpr auto value() const { return _value; }
+
+		constexpr auto channel0() const { return channels::bit_value<typename Descriptor::channel0_type>(_value >> Descriptor::channel0_type::bit_offset()); }
+		constexpr auto channel1() const { return channels::bit_value<typename Descriptor::channel1_type>(_value >> Descriptor::channel1_type::bit_offset()); }
+		constexpr auto channel2() const { return channels::bit_value<typename Descriptor::channel2_type>(_value >> Descriptor::channel2_type::bit_offset()); }
+		constexpr auto channel3() const { return channels::bit_value<typename Descriptor::channel3_type>(_value >> Descriptor::channel3_type::bit_offset()); }
+
+		value_type _value{};
+	};
+
+}
+
+template<channels::arithmetic_channel A, channels::arithmetic_channel R, channels::arithmetic_channel G, channels::arithmetic_channel B>
 struct NGS_DLL_API primary {
-protected:
-	using self_type = primary;
+	NGS_MPL_ENVIRON_BEGIN(primary);
 public:
-	using alpha_type = _A;
-	using red_type = _R;
-	using green_type = _G;
-	using blue_type = _B;
 
-	constexpr static size_t bit_count = alpha_type::count + red_type::count + green_type::count + blue_type::count;
-	constexpr static size_t byte_count = bits::as_byte(bit_count);
+	using alpha_type = A;
+	using red_type = R;
+	using green_type = G;
+	using blue_type = B;
 
-	using type = byte_<byte_count>;
+	constexpr static ::std::size_t _bit_begin()
+	{
+		return ::std::min(::std::initializer_list<::std::size_t>{
+			channels::bit_offset<alpha_type>(),
+			channels::bit_offset<red_type>(),
+			channels::bit_offset<green_type>(),
+			channels::bit_offset<blue_type>(),
+		});
+	}
+	constexpr static ::std::size_t _bit_end()
+	{
+		return ::std::max(::std::initializer_list<::std::size_t>{
+			channels::bit_offset<alpha_type>() + channels::bit_count<alpha_type>(),
+			channels::bit_offset<red_type>() + channels::bit_count<red_type>(),
+			channels::bit_offset<green_type>() + channels::bit_count<green_type>(),
+			channels::bit_offset<blue_type>() + channels::bit_count<blue_type>(),
+		});
+	}
 
-	static constexpr size_t filter = alpha_type::filter_with_offset | red_type::filter_with_offset | green_type::filter_with_offset | blue_type::filter_with_offset;
-	static constexpr color_format_d format{ .size = byte_count, };
+	constexpr static ::std::size_t bit_offset() { return _bit_begin(); }
+	constexpr static ::std::size_t bit_count() { return _bit_end() - _bit_begin(); }
 
-public:
+	using value_type = byte_<bits::as_byte(_bit_end())>;
 
 	constexpr primary() = default;
 	explicit(false) constexpr primary(const type& value) : _value(value) {}
