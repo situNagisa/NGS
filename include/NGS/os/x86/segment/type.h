@@ -51,5 +51,4 @@ public:
 	segment_type type : 1;
 };
 
-
 NGS_LIB_MODULE_END

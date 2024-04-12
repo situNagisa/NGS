@@ -1,16 +1,16 @@
 ﻿#pragma once
 
+#include "./basic.h"
 #include "./defined.h"
-#include "./concept.h"
 
 NGS_LIB_BEGIN
 
-template<class _T>
+template<class T>
 struct constant;
 
-template<class _T, class _O = type_traits::object_t<_T>>
+template<class T, class _O = type_traits::object_t<T>>
 concept color_constant =
-color<typename _O::color_type> && requires
+basic::color<typename _O::color_type> && requires
 {
 	{ _O::red } -> std::convertible_to<typename _O::color_type>;
 	{ _O::green } -> std::convertible_to<typename _O::color_type>;

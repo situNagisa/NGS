@@ -1,5 +1,5 @@
 #pragma once
 
-#include "./system/global_segment.h"
-#include "./system/local_segment.h"
+#include "./system/gdtr.h"
+#include "./system/ldtr.h"
 #include "./system/interrupt.h"

@@ -33,6 +33,9 @@ public:
 			underlying_type index : 13;
 		}protect;
 	};
+
+	[[nodiscard]] constexpr auto privilege()const { return protect.rpl; }
+	[[nodiscard]] constexpr table_indicator table_indicator() const { return protect.ti; }
 };
 
 using code_segment = ::std::uint16_t;

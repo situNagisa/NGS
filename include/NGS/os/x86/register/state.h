@@ -91,6 +91,8 @@ public:
 	underlying_type vip : 1;
 	underlying_type id : 1;
 	underlying_type    : 10;
+
+
 };
 
 NGS_LIB_MODULE_END

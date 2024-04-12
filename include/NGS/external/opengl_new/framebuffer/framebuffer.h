@@ -75,7 +75,7 @@ public:
 		NGS_EXTERNAL_OPENGL_CHECK(::glDisable(static_cast<GLenum>(bit)));
 	}
 
-	void clear_color(colors::primary_color auto color) const
+	void clear_color(colors::basic::color auto color) const
 	{
 		NGS_EXTERNAL_OPENGL_EXPECT_BIND(_context);
 		//NGS_EXTERNAL_OPENGL_CHECK(::glClearColor(color.r, color.g, color.b, color.a));

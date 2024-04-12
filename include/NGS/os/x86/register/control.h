@@ -66,6 +66,18 @@ public:
 	underlying_type nw : 1;
 	underlying_type cd : 1;
 	underlying_type pg : 1;
+
+	[[nodiscard]] constexpr bool protected_enable() const noexcept { return pe; }
+	[[nodiscard]] constexpr bool monitor_coprocessor() const noexcept { return mp; }
+	[[nodiscard]] constexpr bool emulation() const noexcept { return em; }
+	[[nodiscard]] constexpr bool task_switched() const noexcept { return ts; }
+	[[nodiscard]] constexpr bool extension_type() const noexcept { return et; }
+	[[nodiscard]] constexpr bool numeric_error() const noexcept { return ne; }
+	[[nodiscard]] constexpr bool write_protect() const noexcept { return wp; }
+	[[nodiscard]] constexpr bool alignment_mask() const noexcept { return am; }
+	[[nodiscard]] constexpr bool not_write_through() const noexcept { return nw; }
+	[[nodiscard]] constexpr bool cache_disable() const noexcept { return cd; }
+	[[nodiscard]] constexpr bool paging() const noexcept { return pg; }
 };
 
 using control1 = ::std::uint32_t;

@@ -16,7 +16,7 @@ constexpr auto bit_value(underlying_type_t<Channel> v)
 	else
 	{
 		constexpr auto count = NGS_LIB_MODULE_NAME::bit_count<Channel>();
-		return v & bits::mask(count);
+		return v & bits::algorithm::mask(count);
 	}
 }
 
@@ -24,7 +24,7 @@ template<arithmetic_channel Channel,::std::floating_point Result = float>
 constexpr auto normalize(underlying_type_t<Channel> v)
 {
 	constexpr auto count = NGS_LIB_MODULE_NAME::bit_count<Channel>();
-	constexpr auto max = bits::mask(count);
+	constexpr auto max = bits::algorithm::mask(count);
 
 	if constexpr (!max)
 	{
@@ -48,8 +48,8 @@ constexpr auto convert(underlying_type_t<From> from)
 	}
 	else
 	{
-		constexpr auto from_max = bits::mask(from_count);
-		constexpr auto to_max = bits::mask(to_count);
+		constexpr auto from_max = bits::algorithm::mask(from_count);
+		constexpr auto to_max = bits::algorithm::mask(to_count);
 
 		constexpr auto value = NGS_LIB_MODULE_NAME::bit_value<From>(from);
 		constexpr auto result = value * to_max / from_max;

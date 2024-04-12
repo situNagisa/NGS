@@ -1,4 +1,8 @@
 ﻿#pragma once
 
-#include "./set.h"
-#include "./operation.h"
+#include "./bytebit.h"
+#include "./algorithm.h"
+#include "./bitset.h"
+#include "./literals.h"
+
+#include "NGS/lib/lib_end.h"

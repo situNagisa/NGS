@@ -1,6 +1,8 @@
 #pragma once
 
-#include "./segaddr.h"
-#include "./pageaddr.h"
+#include "./fieldset.h"
+#include "./segment.h"
+#include "./page.h"
+#include "./register.h"
 
 #include "NGS/lib/lib_end.h"

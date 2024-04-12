@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../fieldset.h"
 #include "./type.h"
 #include "./defined.h"
 
@@ -109,13 +110,50 @@ public:
 	[[nodiscard]] constexpr auto descriptor_type() const { return s; }
 	[[nodiscard]] constexpr auto privilege_level() const { return dpl; }
 	[[nodiscard]] constexpr bool present() const { return p; }
-	[[nodiscard]] constexpr auto user_data() const { return avl; }
+	[[nodiscard]] constexpr auto available() const { return avl; }
 	[[nodiscard]] constexpr auto mode() const { return l; }
 	[[nodiscard]] constexpr auto operation_size() const { return db; }
 	[[nodiscard]] constexpr auto granularity() const { return g; }
 
 	constexpr void load() { p = 1; }
 	constexpr void unload() { p = 0; }
+};
+
+struct descriptor_wrapper : fieldsets::wrapper<descriptor>
+{
+	NGS_MPL_ENVIRON(descriptor_wrapper);
+public:
+	using base_type::base_type;
+	using base_type::operator=;
+
+	constexpr descriptor_wrapper(
+		underlying_type base,
+		underlying_type limit,
+		segment_info segment,
+		enum descriptor::descriptor_type descriptor_type,
+		underlying_type privilege_level,
+		bool present,
+		underlying_type available,
+		enum descriptor::descriptor_mode mode,
+		enum descriptor::operation_size operation_size,
+		enum descriptor::limit_granularity granularity
+	)
+		: base_type({
+			.limit_low = static_cast<underlying_type>((limit >> 0) & 0xFFFF),
+			.base_low = static_cast<underlying_type>((base >> 0) & 0xFFFF),
+			.base_middle = static_cast<underlying_type>((base >> 16) & 0xFF),
+			.type = static_cast<underlying_type>(segment),
+			.s = (descriptor_type),
+			.dpl = static_cast<underlying_type>(privilege_level),
+			.p = static_cast<underlying_type>(present),
+			.limit_high = static_cast<underlying_type>((limit >> 16) & 0xF),
+			.avl = static_cast<underlying_type>(available),
+			.l = (mode),
+			.db = (operation_size),
+			.g = (granularity),
+			.base_high = static_cast<underlying_type>((base >> 24) & 0xFF),
+		})
+	{}
 };
 
 NGS_LIB_MODULE_END
