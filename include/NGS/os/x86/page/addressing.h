@@ -11,14 +11,14 @@ NGS_LIB_MODULE_BEGIN
 template<granularity G>
 constexpr decltype(auto) get_directory_entry(pointer_t visual, const ::std::span<const directory_entry>& directory_table)
 {
-	return directory_table[NGS_LIB_MODULE_NAME::page_directory_index<G>()];
+	return directory_table[NGS_LIB_MODULE_NAME::page_directory_index<G>(visual)];
 }
 
 template<granularity G>
 constexpr decltype(auto) get_table_entry(pointer_t visual, const directory_entry& directory)
 {
 	::std::span page_table(reinterpret_cast<const table_entry*>(directory.base_address), directory.page_size() / sizeof(table_entry));
-	return page_table[NGS_LIB_MODULE_NAME::page_table_index<G>()];
+	return page_table[NGS_LIB_MODULE_NAME::page_table_index<G>(visual)];
 }
 
 template<granularity G>

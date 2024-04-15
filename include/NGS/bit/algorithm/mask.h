@@ -14,7 +14,7 @@ constexpr auto mask(::std::size_t bit)
 	if (bit > NGS_LIB_MODULE_NAME::bit_of<Result>())
 		return static_cast<Result>(-1);
 
-	return (static_cast<Result>(1) << bit) - 1;
+	return static_cast<Result>((static_cast<Result>(1) << bit) - 1);
 }
 
 template<bitsets::bit_integral Result = ::std::uint32_t>

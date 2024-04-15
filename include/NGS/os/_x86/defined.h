@@ -7,9 +7,9 @@
 #include "NGS/bit/bit.h"
 #include "../defined.h"
 
-#define NGS_OS_X86LANGM_NS x86
+#define NGS_OS_X86_NS x86
 #define NGS_LIB_VERSION_MAJOR 0
 #define NGS_LIB_VERSION_MINOR 1
 #define NGS_LIB_VERSION_PATCH 0
-#define NGS_LIB_NAME NGS_OS_NS::NGS_OS_X86LANGM_NS
+#define NGS_LIB_NAME NGS_OS_NS::NGS_OS_X86_NS
 #include "NGS/lib/lib.h"

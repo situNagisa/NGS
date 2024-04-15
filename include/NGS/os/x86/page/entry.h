@@ -1,25 +1,42 @@
 #pragma once
 
+#include "../granularity.h"
+#include "../pointer.h"
+#include "./privilege.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
-struct table_entry
+
+struct basic_entry
 {
-	::std::uint32_t p : 1;
-	::std::uint32_t rw : 1;
-	::std::uint32_t us : 1;
-	::std::uint32_t pwt : 1;
-	::std::uint32_t pcd : 1;
-	::std::uint32_t a : 1;
-	::std::uint32_t d : 1;
-	::std::uint32_t pat : 1;
+	NGS_MPL_ENVIRON_BEGIN(basic_entry);
+public:
+	bool present;
+	bool writable;
+	page_privilege privilege;
+	bool write_through;
+	bool cache_disable;
+	bool accessed;
+	bool dirty;
+	granularity granularity;
+	bool global;
+	pointer_t base_address;
 
-	::std::uint32_t g : 1;
-	::std::uint32_t avl : 3;
+	constexpr auto page_size() const
+	{
+		return NGS_LIB_NAME::page_size(granularity);
+	}
 
-	::std::uint32_t base : 20;
+	auto page_range()
+	{
+		return ::std::span( reinterpret_cast<::std::byte*>(base_address), page_size() );
+	}
 
+	auto page_range() const
+	{
+		return ::std::span( reinterpret_cast<const ::std::byte*>(base_address), page_size() );
+	}
 };
 
 NGS_LIB_MODULE_END
