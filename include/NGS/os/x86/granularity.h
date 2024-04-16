@@ -19,7 +19,7 @@ constexpr ::std::size_t granularity_factor(granularity granularity)
 constexpr ::std::size_t page_size(granularity granularity)
 {
 	using namespace bits::literals;
-	return static_cast<::std::size_t>(4_kb * granularity_factor(granularity));
+	return static_cast<::std::size_t>(granularity == granularity::page ? 4_mb : 4_kb);
 }
 
 NGS_LIB_END

@@ -504,9 +504,13 @@
     <ClInclude Include="os\x86\segment\mode.h" />
     <ClInclude Include="os\x86\segment\selector.h" />
     <ClInclude Include="os\x86\segment\type.h" />
+    <ClInclude Include="os\x86\space\basic_address.h" />
+    <ClInclude Include="os\x86\space\concept.h" />
     <ClInclude Include="os\x86\space\defined.h" />
-    <ClInclude Include="os\x86\space\space.h" />
+    <ClInclude Include="os\x86\space\physical.h" />
+    <ClInclude Include="os\x86\space.h" />
     <ClInclude Include="os\x86\space\trait.h" />
+    <ClInclude Include="os\x86\space\visual.h" />
     <ClInclude Include="os\x86\value.h" />
     <ClInclude Include="os\x86\x86.h" />
     <ClInclude Include="os\_x86\cpu.h" />
