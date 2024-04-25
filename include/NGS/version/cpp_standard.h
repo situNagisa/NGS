@@ -3,7 +3,7 @@
 #include "./compiler.h"
 
 
-#if NGS_COMPILER_IS_MSVC && defined(_MSVC_LANG) && _MSVC_LANG > __cplusplus
+#if defined(NGS_COMPILER_IS_MSVC) && defined(_MSVC_LANG) && _MSVC_LANG > __cplusplus
 #	define NGS_CPP_VERSION _MSVC_LANG
 #else
 #	define NGS_CPP_VERSION __cplusplus

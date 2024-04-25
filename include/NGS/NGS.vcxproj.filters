@@ -1443,6 +1443,9 @@
     <ClInclude Include="os\x86\space\basic_address.h" />
     <ClInclude Include="os\x86\space\physical.h" />
     <ClInclude Include="os\x86\space\concept.h" />
+    <ClInclude Include="memory\defined.h" />
+    <ClInclude Include="memory\memory.h" />
+    <ClInclude Include="memory\algorithm.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="_discard\mpl\structure\type\structure\describe\concept.h" />

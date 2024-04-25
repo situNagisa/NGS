@@ -62,8 +62,8 @@ public:
 	using underlying_type = ::std::uint32_t;
 
 	underlying_type : 3;
-	underlying_type pwt : 1;
-	underlying_type pcd : 1;
+	underlying_type page_level_write_through : 1;
+	underlying_type page_level_cache_disable : 1;
 	underlying_type : 7;
 	underlying_type base : 20;
 

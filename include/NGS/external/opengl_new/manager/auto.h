@@ -39,4 +39,7 @@ public:
 template<cpt::derived_from_specialization<NGS_EXTERNAL_OPENGL_BUFFER_NS::vertex_group> VertexGroup>
 auto_manager(VertexGroup&&)->auto_manager<VertexGroup>;
 
+template<cpt::derived_from_specialization<NGS_EXTERNAL_OPENGL_BUFFER_NS::vertex_group> VertexGroup>
+auto_manager(VertexGroup&&,bool) -> auto_manager<VertexGroup>;
+
 NGS_LIB_MODULE_END

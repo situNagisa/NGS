@@ -382,6 +382,9 @@
     <ClInclude Include="layout\align\no.h" />
     <ClInclude Include="layout\align\normal.h" />
     <ClInclude Include="layout\align\defined.h" />
+    <ClInclude Include="memory\algorithm.h" />
+    <ClInclude Include="memory\defined.h" />
+    <ClInclude Include="memory\memory.h" />
     <ClInclude Include="mpl\container\defined.h" />
     <ClInclude Include="mpl\container\sequence\container.h" />
     <ClInclude Include="mpl\container\sequence\defined.h" />

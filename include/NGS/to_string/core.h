@@ -85,7 +85,7 @@ concept stringable = detail::policy_stringable<T> || detail::default_stringable<
 inline constexpr struct
 {
 	NGS_TOSTRING_STRING_CONSTEXPR decltype(auto) operator()(detail::policy_stringable auto&& target)const
-		requires !detail::fundamental_array<decltype(target)>
+		requires (!detail::fundamental_array<decltype(target)>)
 	{
 		constexpr auto choice = detail::choice<decltype(target)>();
 		if constexpr (choice == detail::to_string_type::conversion)
@@ -146,9 +146,10 @@ NGS_LIB_END
 
 template<class T>
 ::std::basic_ostream<::std::string::value_type, T>& operator<< (::std::basic_ostream<::std::string::value_type, T>& os, auto&& target)
-	requires	!NGS_NS::NGS_LIB_NAME::detail::stl_streamable<::std::basic_ostream<::std::string::value_type, T>, decltype(target)>&&
-				!NGS_NS::NGS_LIB_NAME::detail::adl_streamable<::std::basic_ostream<::std::string::value_type, T>, decltype(target)>&&
-				NGS_NS::NGS_LIB_NAME::stringable<decltype(target)>
+	requires
+		(!NGS_NS::NGS_LIB_NAME::detail::stl_streamable<::std::basic_ostream<::std::string::value_type, T>, decltype(target)>)
+		&& (!NGS_NS::NGS_LIB_NAME::detail::adl_streamable<::std::basic_ostream<::std::string::value_type, T>, decltype(target)>)
+		&& (NGS_NS::NGS_LIB_NAME::stringable<decltype(target)>)
 {
 	os << NGS_NS::NGS_LIB_NAME::to_string(NGS_PP_PERFECT_FORWARD(target));
 	return os;

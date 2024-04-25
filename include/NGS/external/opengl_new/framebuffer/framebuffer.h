@@ -48,7 +48,7 @@ public:
 		requires (sizeof...(attachments) == sizeof...(Attachments)) && (self_type::template _is_attachable<decltype(attachments), Attachments>() && ...)
 	{
 		(self_type::template _attach<Attachments>(_context, NGS_PP_PERFECT_FORWARD(attachments)),...);
-		::std::array framebuffer_attachments{ Attachments... };
+		::std::array< NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::framebuffer_attachment,sizeof...(Attachments)> framebuffer_attachments{ Attachments... };
 		auto is_not_color_attachment = [](NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::framebuffer_attachment attachment)
 		{
 			return !(static_cast<gl_enum_t>(attachment) >= static_cast<gl_enum_t>(NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::framebuffer_attachment::color0) && static_cast<gl_enum_t>(attachment) <= static_cast<gl_enum_t>(NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::framebuffer_attachment::color15));

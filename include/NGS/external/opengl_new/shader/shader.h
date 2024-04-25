@@ -50,7 +50,7 @@ public:
 	constexpr static auto _is_one_dimension_uniform() { return ::std::extent_v<_uniform_type<Name>> == 1; }
 
 	template<statics::strings::string Name>
-	using _param_type = ::std::conditional_t<_is_one_dimension_uniform<Name>(), ::std::ranges::range_value_t<_uniform_type<Name>>, _uniform_type<Name>>;
+	using _param_type = ::std::conditional_t<_is_one_dimension_uniform<Name>(), ::std::ranges::range_value_t<_uniform_type<Name>>, ::std::span<::std::ranges::range_value_t<_uniform_type<Name>>>>;
 
 	template<statics::strings::string Name>
 	void set_uniform(const _param_type<Name>& args)const
