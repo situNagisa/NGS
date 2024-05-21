@@ -8,7 +8,7 @@ NGS_LIB_MODULE_BEGIN
 	template<cpt::derived_from_specialization<shader> Shader>
 struct uniform_memory
 {
-	NGS_MPL_ENVIRON_BEGIN(uniform_memory);
+	NGS_PP_INJECT_BEGIN(uniform_memory);
 public:
 	using shader_type = Shader;
 	using struct_type = typename shader_type::struct_type;

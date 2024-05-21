@@ -13,7 +13,7 @@ template<
 >
 struct vector_indices_layout : policy::indices_layout<policy::layout<policy::vertex_buffer<::std::vector<BufferDescriptor>>...>,policy::indices_buffer<::std::vector<IndexType>,IndicesDrawer>>
 {
-	NGS_MPL_ENVIRON2(vector_indices_layout, policy::indices_layout<policy::layout<policy::vertex_buffer<::std::vector<BufferDescriptor>>...>, policy::indices_buffer<::std::vector<IndexType>, IndicesDrawer>>);
+	NGS_PP_INJECT_EXPLICIT(vector_indices_layout, policy::indices_layout<policy::layout<policy::vertex_buffer<::std::vector<BufferDescriptor>>...>, policy::indices_buffer<::std::vector<IndexType>, IndicesDrawer>>);
 
 public:
 	vector_indices_layout(bool normalized, enums::usage vertex_usage, enums::usage indices_usage,::std::size_t vertex_count)

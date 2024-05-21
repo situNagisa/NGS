@@ -8,12 +8,12 @@ NGS_LIB_MODULE_BEGIN
 template<class Value, auto Dereference, auto Subtract, auto PlusAssign, class... Args>
 struct random_access_iterator : basic_interface<random_access_iterator<Value, Dereference, Subtract, PlusAssign, Args...>, ::std::random_access_iterator_tag, Value>
 {
-	NGS_MPL_ENVIRON2(random_access_iterator, basic_interface<random_access_iterator<Value, Dereference, Subtract, PlusAssign, Args...>, ::std::random_access_iterator_tag, Value>);
+	NGS_PP_INJECT_EXPLICIT(random_access_iterator, basic_interface<random_access_iterator<Value, Dereference, Subtract, PlusAssign, Args...>, ::std::random_access_iterator_tag, Value>);
 public:
 	using param_pack_type = ::std::tuple<Args...>;
 
-	NGS_MPL_INHERIT_TYPE(difference_type, base_type);
-	NGS_MPL_INHERIT_TYPE(value_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(difference_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(value_type, base_type);
 
 	constexpr static auto dereference_functor = Dereference;
 	static_assert(::std::invocable<decltype(dereference_functor), Args...>, "dereference_functor is not valid functor");

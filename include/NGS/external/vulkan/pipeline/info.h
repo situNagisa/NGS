@@ -36,7 +36,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct info
 {
-	NGS_MPL_ENVIRON_BEGIN(info);
+	NGS_PP_INJECT_BEGIN(info);
 public:
 	using vulkan_type = VkGraphicsPipelineCreateInfo;
 
@@ -156,7 +156,7 @@ public:
 
 		struct viewport_type : math::boxes::containers::hypercube<3, float>
 		{
-			NGS_MPL_ENVIRON(viewport_type);
+			NGS_PP_INJECT(viewport_type);
 		public:
 			using vulkan_type = VkViewport;
 
@@ -179,7 +179,7 @@ public:
 
 		struct scissor_type : math::boxes::containers::hypercube<2, int32_t, uint32_t>
 		{
-			NGS_MPL_ENVIRON(scissor_type);
+			NGS_PP_INJECT(scissor_type);
 		public:
 			using vulkan_type = VkRect2D;
 

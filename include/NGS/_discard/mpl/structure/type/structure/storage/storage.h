@@ -67,13 +67,13 @@ public:
 		std::span<std::conditional_t<_Constant, const byte, byte>>
 		>
 	{
-		NGS_MPL_ENVIRON2(_storage_iterator, external::nboost::stl_interfaces::base_random_access_iterator<_storage_iterator<_Constant>, std::span<std::conditional_t<_Constant, const byte, byte>>>);
+		NGS_PP_INJECT_EXPLICIT(_storage_iterator, external::nboost::stl_interfaces::base_random_access_iterator<_storage_iterator<_Constant>, std::span<std::conditional_t<_Constant, const byte, byte>>>);
 	public:
-		NGS_MPL_INHERIT_TYPE(iterator_type, base_type);
-		NGS_MPL_INHERIT_TYPE(value_type, base_type);
-		NGS_MPL_INHERIT_TYPE(reference, base_type);
-		NGS_MPL_INHERIT_TYPE(pointer, base_type);
-		NGS_MPL_INHERIT_TYPE(difference_type, base_type);
+		NGS_PP_INHERIT_TYPE_EXPLICIT(iterator_type, base_type);
+		NGS_PP_INHERIT_TYPE_EXPLICIT(value_type, base_type);
+		NGS_PP_INHERIT_TYPE_EXPLICIT(reference, base_type);
+		NGS_PP_INHERIT_TYPE_EXPLICIT(pointer, base_type);
+		NGS_PP_INHERIT_TYPE_EXPLICIT(difference_type, base_type);
 
 		using range_type = std::conditional_t<_Constant, const struct_storage, struct_storage>;
 	public:

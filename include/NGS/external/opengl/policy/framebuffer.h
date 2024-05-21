@@ -12,7 +12,7 @@ NGS_LIB_MODULE_BEGIN
 template<enums::framebuffer_target Target, enums::framebuffer_attachment... Attachments>
 struct basic_framebuffer
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_framebuffer);
+	NGS_PP_INJECT_BEGIN(basic_framebuffer);
 public:
 	using context_type = contexts::basic_framebuffer<Target>;
 

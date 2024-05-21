@@ -8,7 +8,7 @@ NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expression>
 struct NGS_DLL_API matrix_traits : type_traits<_Expression> {
-	NGS_MPL_ENVIRON(matrix_traits);
+	NGS_PP_INJECT(matrix_traits);
 public:
 	using expression_type = std::remove_cvref_t<_Expression>;
 

@@ -10,7 +10,7 @@ NGS_LIB_MODULE_BEGIN
 template<NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::framebuffer_target Target, NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::framebuffer_attachment... Attachments>
 struct basic_framebuffer
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_framebuffer);
+	NGS_PP_INJECT_BEGIN(basic_framebuffer);
 public:
 	using context_type = NGS_EXTERNAL_OPENGL_BASIC_CONTEXT_NS::basic_framebuffer<Target>;
 

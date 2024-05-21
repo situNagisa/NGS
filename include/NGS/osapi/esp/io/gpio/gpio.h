@@ -7,7 +7,7 @@ NGS_OS_ESP_IO_BEGIN
 
 struct NGS_DLL_API gpio : embedded::io::gpio::gpio
 {
-	NGS_MPL_ENVIRON(gpio);
+	NGS_PP_INJECT(gpio);
 public:
 	gpio();
 	virtual ~gpio() override;

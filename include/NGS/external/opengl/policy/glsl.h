@@ -10,7 +10,7 @@ NGS_LIB_MODULE_BEGIN
 template<enums::shader_type Target>
 struct basic_glsl
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_glsl);
+	NGS_PP_INJECT_BEGIN(basic_glsl);
 public:
 	using code_type = const ::GLchar*;
 	using context_type = contexts::glsl<Target>;

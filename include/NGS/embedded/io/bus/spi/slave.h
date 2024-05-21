@@ -8,7 +8,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API slave : basic_spi
 {
-	NGS_MPL_ENVIRON(slave);
+	NGS_PP_INJECT(slave);
 public:
 	virtual bool open(pin_t sclk, pin_t miso, pin_t mosi, pin_t cs) = 0;
 

@@ -58,9 +58,9 @@ private:
 template<auto _InputCallback, class _Args = typename type_traits::function_traits<decltype(_InputCallback)>::args_type>
 struct output_wrapper : output_wrapper_view<_InputCallback, _Args>
 {
-	NGS_MPL_ENVIRON(output_wrapper);
+	NGS_PP_INJECT(output_wrapper);
 public:
-	NGS_MPL_INHERIT_TYPE(args_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(args_type, base_type);
 public:
 	using base_type::base_type;
 	constexpr output_wrapper(auto&&... args)

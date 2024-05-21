@@ -8,7 +8,6 @@
 #include "NGS/cpt/cpt.h"
 #include "NGS/to_string/to_string.h"
 #include "NGS/mpl/template.h"
-#include "NGS/assert/assert.h"
 #include "NGS/bases/bases.h"
 
 #include "NGS/external/boost/fusion.h"

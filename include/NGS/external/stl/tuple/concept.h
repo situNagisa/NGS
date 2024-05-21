@@ -4,9 +4,6 @@
 
 NGS_LIB_BEGIN
 
-#if defined(__cpp_lib_tuple_like)
-using std::tuple_like;
-#else
 namespace detail
 {
 	template<class T> constexpr bool is_array_impl = false;
@@ -26,7 +23,6 @@ namespace detail
 
 template<class T>
 concept tuple_like = detail::tuple_like_impl<T>();
-#endif
 
 
 NGS_LIB_END

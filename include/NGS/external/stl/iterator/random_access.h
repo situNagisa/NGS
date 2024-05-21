@@ -29,10 +29,10 @@ template<
 >
 struct random_access : bidirectional<_Derived, _ValueType, _Reference, _Difference>
 {
-	NGS_MPL_ENVIRON(random_access);
+	NGS_PP_INJECT(random_access);
 public:
-	NGS_MPL_INHERIT_TYPE(iterator_type, base_type);
-	NGS_MPL_INHERIT_TYPE(difference_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(iterator_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(difference_type, base_type);
 	using iterator_category = std::random_access_iterator_tag;
 
 	using base_type::base_type;

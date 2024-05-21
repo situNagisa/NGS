@@ -7,7 +7,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API master : basic_spi
 {
-	NGS_MPL_ENVIRON(master);
+	NGS_PP_INJECT(master);
 public:
 	virtual bool open(pin_t sclk, pin_t miso, pin_t mosi) = 0;
 	virtual void select(const device& device) = 0;

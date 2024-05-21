@@ -8,7 +8,7 @@ template<class HandleType, HandleType Null = {}>
 	requires ::std::constructible_from<HandleType> && ::std::equality_comparable<HandleType> && ::std::movable<HandleType> && ::std::assignable_from<HandleType&, HandleType>
 struct basic_handle : bases::delete_copy
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_handle);
+	NGS_PP_INJECT_BEGIN(basic_handle);
 public:
 	using handle_type = HandleType;
 	constexpr static handle_type null = Null;

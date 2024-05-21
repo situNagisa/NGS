@@ -30,7 +30,7 @@ template<CMatrixExpression _Matrix, CVectorExpression _Vector,
 	CMatrixVectorMultipliesMethod _Method
 >
 class  MatrixVectorMultiplies : public VectorExpression<MatrixVectorMultiplies<_Matrix, _Vector, _Method>> {
-	NGS_MPL_ENVIRON(MatrixVectorMultiplies);
+	NGS_PP_INJECT(MatrixVectorMultiplies);
 public:
 	using expression_type = typename base_type::expression_type;
 private:

@@ -9,7 +9,7 @@ NGS_LIB_MODULE_BEGIN
 template<cpt::derived_from_specialization<NGS_EXTERNAL_OPENGL_BUFFER_NS::vertex_group> VertexGroup>
 struct auto_manager
 {
-	NGS_MPL_ENVIRON_BEGIN(auto_manager);
+	NGS_PP_INJECT_BEGIN(auto_manager);
 public:
 	using group_type = VertexGroup;
 	using vertex_type = typename group_type::vertex_type;

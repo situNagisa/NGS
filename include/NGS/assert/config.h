@@ -1,0 +1,9 @@
+#pragma once
+
+#if !defined(NGS_ASSERT_CONFIG_LOG_ENABLE)
+#	define NGS_ASSERT_CONFIG_LOG_ENABLE 1
+#endif
+
+#if !defined(NGS_ASSERT_CONFIG_FORMAT_ENABLE)
+#	define NGS_ASSERT_CONFIG_FORMAT_ENABLE 1
+#endif

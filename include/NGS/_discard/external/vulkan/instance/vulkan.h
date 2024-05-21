@@ -8,7 +8,7 @@ NGS_LIB_BEGIN
 
 struct vulkan : bases::singleton<vulkan>
 {
-	NGS_MPL_ENVIRON(vulkan);
+	NGS_PP_INJECT(vulkan);
 private:
 	friend class base_type;
 	constexpr vulkan() = default;

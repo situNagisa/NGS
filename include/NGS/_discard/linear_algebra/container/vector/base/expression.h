@@ -7,7 +7,7 @@ NGS_MATH_LA_VECTOR_CONTAINER_BEGIN
 template<class _Derived>
 struct vector_expression : yap::expression<_Derived>
 {
-	NGS_MPL_ENVIRON(vector_expression);
+	NGS_PP_INJECT(vector_expression);
 public:
 	constexpr static traits::vectors::dimension_t dimension = 0;
 

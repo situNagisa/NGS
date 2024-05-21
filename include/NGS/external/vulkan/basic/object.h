@@ -7,7 +7,7 @@ NGS_LIB_BEGIN
 template<class _Info, class... _Args>
 struct vulkan_object
 {
-	NGS_MPL_ENVIRON_BEGIN(vulkan_object);
+	NGS_PP_INJECT_BEGIN(vulkan_object);
 public:
 	using info_type = _Info;
 

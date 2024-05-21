@@ -7,7 +7,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct image
 {
-	NGS_MPL_ENVIRON_BEGIN(image);
+	NGS_PP_INJECT_BEGIN(image);
 public:
 
 	::std::size_t width;

@@ -76,7 +76,7 @@ struct NGS_DLL_API MatrixContainer<
 	std::index_sequence<_RowIndex...>,
 	std::index_sequence<_ColIndex...>>
 	: MatrixExpression<_Derived>{
-	NGS_MPL_ENVIRON(MatrixContainer);
+	NGS_PP_INJECT(MatrixContainer);
 public:
 
 	using element_type = _ElementType;

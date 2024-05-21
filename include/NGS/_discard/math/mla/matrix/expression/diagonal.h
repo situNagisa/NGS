@@ -12,7 +12,7 @@ template<ccpt::uint _Dimension,CScalarExpression _ElementType,size_t... _Index>
 struct DiagonalMatrix<_Dimension,_ElementType,std::index_sequence<_Index...>> : MatrixContainer<DiagonalMatrix<_Dimension, _ElementType>,
 	_Dimension, _Dimension,
 	_ElementType, tag::row> {
-	NGS_MPL_ENVIRON(DiagonalMatrix);
+	NGS_PP_INJECT(DiagonalMatrix);
 public:
 	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
 	NGS_MPL_INHERIT_TYPE(element_type, base_type);

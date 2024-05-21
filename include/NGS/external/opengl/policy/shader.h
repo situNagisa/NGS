@@ -20,7 +20,7 @@ namespace _detail
 
 struct shader
 {
-	NGS_MPL_ENVIRON_BEGIN(shader);
+	NGS_PP_INJECT_BEGIN(shader);
 public:
 	using context_type = contexts::shader;
 

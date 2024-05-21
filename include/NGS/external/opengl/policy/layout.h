@@ -10,7 +10,7 @@ NGS_LIB_MODULE_BEGIN
 template<cpt::derived_from_specialization<vertex_buffer>... VertexBuffer>
 struct layout : ::std::ranges::view_interface<layout<VertexBuffer...>>
 {
-	NGS_MPL_ENVIRON2(layout,::std::ranges::view_interface<layout<VertexBuffer...>>);
+	NGS_PP_INJECT_EXPLICIT(layout,::std::ranges::view_interface<layout<VertexBuffer...>>);
 public:
 	using context_type = contexts::vertex_array;
 	using vertex_type = mpl::mstruct::storage<NGS_NS::layout::default_align, buffer_value_t<VertexBuffer>...>;
@@ -19,7 +19,7 @@ public:
 	template<class... Ts>
 	struct buffer_wrapper_type
 	{
-		NGS_MPL_ENVIRON_BEGIN(buffer_type);
+		NGS_PP_INJECT_BEGIN(buffer_type);
 	public:
 
 		constexpr explicit(false) buffer_wrapper_type(auto&&... args) requires ::std::constructible_from<::std::tuple<Ts...>,decltype(args)...>

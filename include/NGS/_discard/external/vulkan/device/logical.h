@@ -6,7 +6,7 @@ NGS_LIB_BEGIN
 
 struct logical_device
 {
-	NGS_MPL_ENVIRON_BEGIN(logical_device);
+	NGS_PP_INJECT_BEGIN(logical_device);
 private:
 	friend struct physical_device;
 	logical_device(physical_device* physical_device, const ::vk::Device& logical_device)

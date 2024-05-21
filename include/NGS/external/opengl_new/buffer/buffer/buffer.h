@@ -18,7 +18,7 @@ namespace _detail
 template<_detail::buffer_context Buffer,::std::ranges::contiguous_range Range>
 struct buffer
 {
-	NGS_MPL_ENVIRON_BEGIN(buffer);
+	NGS_PP_INJECT_BEGIN(buffer);
 public:
 	using context_type = Buffer;
 	using range_type = Range;

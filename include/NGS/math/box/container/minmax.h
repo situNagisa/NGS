@@ -27,7 +27,7 @@ namespace detail
 	template<vectors::scalar _T, vectors::extent_t _Dimension, size_t... _Index>
 	struct minmax<_T, _Dimension, ::std::index_sequence<_Index...>> : basic_minmax<_T, _Dimension>
 	{
-		NGS_MPL_ENVIRON(minmax);
+		NGS_PP_INJECT(minmax);
 		using _value_type = _T;
 	public:
 		using point_type = vectors::vector<_value_type, _Dimension>;

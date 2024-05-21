@@ -6,7 +6,7 @@ NGS_LIB_BEGIN
 
 struct queue_family : bases::delete_copy
 {
-	NGS_MPL_ENVIRON_BEGIN(queue_family);
+	NGS_PP_INJECT_BEGIN(queue_family);
 private:
 	friend struct physical_device;
 	queue_family(const physical_device* device, const ::vk::QueueFamilyProperties& properties, size_t index)

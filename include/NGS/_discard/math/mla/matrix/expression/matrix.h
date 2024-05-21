@@ -53,7 +53,7 @@ struct NGS_DLL_API Matrix<
 	std::index_sequence<_RowIndex...>,
 	std::index_sequence<_ColIndex...>
 	>{
-	NGS_MPL_ENVIRON(Matrix);
+	NGS_PP_INJECT(Matrix);
 public:
 	NGS_MPL_INHERIT_TYPE(layout_category, base_type);
 	NGS_MPL_INHERIT_TYPE(expression_type, base_type);

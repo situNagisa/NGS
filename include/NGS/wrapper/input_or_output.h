@@ -15,8 +15,8 @@ private:
 	using base_output_type = output_wrapper_view<_OutputCallback, _Args>;
 public:
 	using args_type = _Args;
-	NGS_MPL_INHERIT_VALUE(input_callback, base_input_type);
-	NGS_MPL_INHERIT_VALUE(output_callback, base_output_type);
+	NGS_PP_INHERIT_VALUE_EXPLICIT(input_callback, base_input_type);
+	NGS_PP_INHERIT_VALUE_EXPLICIT(output_callback, base_output_type);
 
 	constexpr input_or_output_wrapper_view(args_type* args = nullptr)
 		: base_input_type(args)
@@ -35,7 +35,7 @@ public:
 template<auto _InputCallback, auto _OutputCallback, class _Args = typename type_traits::function_traits<decltype(_InputCallback)>::args_type>
 struct input_or_output_wrapper : input_or_output_wrapper_view<_InputCallback, _OutputCallback, _Args>
 {
-	NGS_MPL_ENVIRON(input_or_output_wrapper);
+	NGS_PP_INJECT(input_or_output_wrapper);
 public:
 	using args_type = _Args;
 

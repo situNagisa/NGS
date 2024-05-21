@@ -19,7 +19,7 @@ struct base_contiguous_iterator : base_iterator <
 	_Pointer,
 	_DifferenceType
 > {
-	NGS_MPL_ENVIRON(base_contiguous_iterator);
+	NGS_PP_INJECT(base_contiguous_iterator);
 };
 
 

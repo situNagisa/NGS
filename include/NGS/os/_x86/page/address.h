@@ -1,92 +1,55 @@
 #pragma once
 
+#include "../granularity.h"
+#include "../pointer.h"
+#include "../space.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
-struct visual_address_4_kb
+template<granularity>
+inline constexpr ::std::size_t directory_selector_bit_width = 0;
+
+template<>
+inline constexpr ::std::size_t directory_selector_bit_width<granularity::bit> = 10;
+
+template<>
+inline constexpr ::std::size_t directory_selector_bit_width<granularity::page> = 10;
+
+template<granularity>
+inline constexpr ::std::size_t table_selector_bit_width = 0;
+
+template<>
+inline constexpr ::std::size_t table_selector_bit_width<granularity::bit> = 10;
+
+template<>
+inline constexpr ::std::size_t table_selector_bit_width<granularity::page> = 0;
+
+template<granularity G>
+inline constexpr ::std::size_t page_offset_bit_width = bits::algorithm::bit_of<pointer_t>() - directory_selector_bit_width<G> - table_selector_bit_width<G>;
+
+template<granularity G>
+constexpr ::std::size_t page_directory_index(spaces::visual_address visual)
 {
-	NGS_MPL_ENVIRON_BEGIN(visual_address_4_kb);
-public:
-	using underlying_type = ::std::uint32_t;
+	return bits::algorithm::extract(visual.value(), table_selector_bit_width<G> + page_offset_bit_width<G>, directory_selector_bit_width<G>);
+}
 
-	constexpr static self_type create(underlying_type value)
-	{
-		if (::std::is_constant_evaluated())
-		{
-			return {
-				.address = static_cast<underlying_type>((value >> 0) & bits::mask(page_address_bit_size)),
-				.page_table_index = static_cast<underlying_type>((value >> page_address_bit_size) & bits::mask(page_table_bit_size)),
-				.page_directory_index =static_cast<underlying_type>((value >> (page_address_bit_size + page_table_bit_size)) & bits::mask(page_directory_bit_size))
-			};
-		}
-		else
-		{
-			return *reinterpret_cast<self_type*>(&value);
-		}
-	}
-
-	constexpr explicit(false) operator underlying_type()const
-	{
-		if (::std::is_constant_evaluated())
-		{
-			return (address << 0) | (page_table_index << page_address_bit_size) | (page_directory_index << (page_address_bit_size + page_table_bit_size));
-		}
-		else
-		{
-			return *reinterpret_cast<const underlying_type*>(this);
-		}
-	}
-
-	constexpr static ::std::size_t address_bit_size = bits::as_bit<::std::uint32_t>();
-	constexpr static ::std::size_t page_directory_bit_size = 10;
-	constexpr static ::std::size_t page_table_bit_size = 10;
-	constexpr static ::std::size_t page_address_bit_size = address_bit_size - page_directory_bit_size - page_table_bit_size;
-
-	underlying_type address : page_address_bit_size;
-	underlying_type page_table_index : page_table_bit_size;
-	underlying_type page_directory_index : page_directory_bit_size;
-};
-
-struct visual_address_4_mb
+template<granularity G>
+constexpr ::std::size_t page_table_index(spaces::visual_address visual)
 {
-	NGS_MPL_ENVIRON_BEGIN(visual_address_4_mb);
-public:
-	using underlying_type = ::std::uint32_t;
+	return bits::algorithm::extract(visual.value(), page_offset_bit_width<G>, table_selector_bit_width<G>);
+}
 
-	constexpr static self_type create(underlying_type value)
-	{
-		if (::std::is_constant_evaluated())
-		{
-			return {
-				.address = static_cast<underlying_type>((value >> 0) & bits::mask(page_address_bit_size)),
-				.page_directory_index = static_cast<underlying_type>((value >> page_address_bit_size) & bits::mask(page_directory_bit_size))
-			};
-		}
-		else
-		{
-			return *reinterpret_cast<self_type*>(&value);
-		}
-	}
+template<granularity G>
+constexpr ::std::size_t page_offset(spaces::visual_address visual)
+{
+	return bits::algorithm::extract(visual.value(), 0, page_offset_bit_width<G>);
+}
 
-	constexpr explicit(false) operator underlying_type()const
-	{
-		if (::std::is_constant_evaluated())
-		{
-			return (address << 0) | (page_directory_index << page_address_bit_size);
-		}
-		else
-		{
-			return *reinterpret_cast<const underlying_type*>(this);
-		}
-	}
-
-	constexpr static ::std::size_t address_bit_size = bits::as_bit<::std::uint32_t>();
-	constexpr static ::std::size_t page_directory_bit_size = 10;
-	constexpr static ::std::size_t page_address_bit_size = address_bit_size - page_directory_bit_size;
-
-	underlying_type address : page_address_bit_size;
-	underlying_type page_directory_index : page_directory_bit_size;
-};
+template<granularity G>
+constexpr auto page_base(spaces::physical_address physical)
+{
+	return bits::algorithm::extract(physical.value(), page_offset_bit_width<G>, bits::algorithm::bit_of<pointer_t>() - page_offset_bit_width<G>);
+}
 
 NGS_LIB_MODULE_END

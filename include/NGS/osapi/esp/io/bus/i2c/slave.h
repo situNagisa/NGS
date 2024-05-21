@@ -6,7 +6,7 @@ NGS_OS_ESP_IO_BUS_BEGIN
 
 struct NGS_DLL_API i2c_slave : embedded::io::i2c::slave
 {
-	NGS_MPL_ENVIRON(i2c_slave);
+	NGS_PP_INJECT(i2c_slave);
 public:
 	i2c_slave();
 	virtual ~i2c_slave() override;

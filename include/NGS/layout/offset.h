@@ -33,7 +33,7 @@ constexpr auto offset(const ::std::array<::std::size_t, Count>& sizes) {
 	return offsets;
 }
 
-template<::std::size_t Align> requires (aligns::is_valid_align(aligns::align_t(Align)))
+template<::std::size_t Align = 1> requires (aligns::is_valid_align(aligns::align_t(Align)))
 constexpr auto offset(::std::integral auto... sizes) {
 	return layout::offset<Align>(::std::array{ static_cast<size_t>(sizes)... });
 }

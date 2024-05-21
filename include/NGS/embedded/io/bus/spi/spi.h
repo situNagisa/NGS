@@ -6,7 +6,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API basic_spi : basic_io
 {
-	NGS_MPL_ENVIRON(basic_spi);
+	NGS_PP_INJECT(basic_spi);
 public:
 
 	virtual pin_t get_sclk()const = 0;

@@ -11,7 +11,7 @@ template<class Indexer, ::std::ranges::contiguous_range Range>
 	requires NGS_EXTERNAL_OPENGL_INDEXER_NS::topology_indexer<Indexer, ::std::ranges::range_value_t<Range>> && NGS_EXTERNAL_OPENGL_BASIC_REFLECT_NS::buffer_indices<::std::ranges::range_value_t<Range>>
 struct indices_buffer : buffer<NGS_EXTERNAL_OPENGL_BASIC_CONTEXT_NS::indices_buffer, Range>
 {
-	NGS_MPL_ENVIRON2(indices_buffer, buffer<NGS_EXTERNAL_OPENGL_BASIC_CONTEXT_NS::indices_buffer, Range>);
+	NGS_PP_INJECT_EXPLICIT(indices_buffer, buffer<NGS_EXTERNAL_OPENGL_BASIC_CONTEXT_NS::indices_buffer, Range>);
 public:
 	using indexer_type = Indexer;
 

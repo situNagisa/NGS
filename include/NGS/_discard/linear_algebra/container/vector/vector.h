@@ -11,9 +11,9 @@ struct vector;
 template<traits::vectors::dimension_t _Dimension, class _ValueType, size_t... _Index>
 struct vector<_Dimension, _ValueType, std::index_sequence<_Index...>> : vector_container<vector<_Dimension, _ValueType>>
 {
-	NGS_MPL_ENVIRON(vector);
+	NGS_PP_INJECT(vector);
 public:
-	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(expression_type, base_type);
 public:
 	constexpr static traits::vectors::dimension_t dimension = _Dimension;
 	using value_type = _ValueType;

@@ -9,7 +9,7 @@ NGS_LIB_MODULE_BEGIN
 template<NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::texture_target Target>
 struct basic_texture
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_texture);
+	NGS_PP_INJECT_BEGIN(basic_texture);
 public:
 	using context_type = NGS_EXTERNAL_OPENGL_BASIC_CONTEXT_NS::basic_texture<Target>;
 

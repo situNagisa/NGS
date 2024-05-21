@@ -8,7 +8,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct point : basic_indices_drawer < point, NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::element_draw_mode::points, 0, [](::std::size_t vertex_count) { return vertex_count; }>
 {
-	NGS_MPL_ENVIRON(point);
+	NGS_PP_INJECT(point);
 public:
 	template<::std::integral Index>
 	constexpr static decltype(auto) fragment_indices(Index index, ::std::indirectly_writable<Index> auto out)

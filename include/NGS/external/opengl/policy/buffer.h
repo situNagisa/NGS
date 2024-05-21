@@ -11,7 +11,7 @@ template<::std::derived_from<contexts::unknown_buffer> Buffer,::std::ranges::con
 	requires basic::bindable<Buffer>
 struct buffer
 {
-	NGS_MPL_ENVIRON_BEGIN(buffer);
+	NGS_PP_INJECT_BEGIN(buffer);
 public:
 	using context_type = Buffer;
 	using range_type = Range;

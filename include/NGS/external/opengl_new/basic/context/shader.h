@@ -33,7 +33,7 @@ namespace _detail
 
 struct shader : _detail::basic_shader
 {
-	NGS_MPL_ENVIRON(shader);
+	NGS_PP_INJECT(shader);
 public:
 	using base_type::base_type;
 	using base_type::operator=;

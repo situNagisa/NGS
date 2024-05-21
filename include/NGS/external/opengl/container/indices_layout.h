@@ -9,7 +9,7 @@ NGS_LIB_MODULE_BEGIN
 template<cpt::derived_from_specialization<policy::layout> Layout,cpt::derived_from_specialization<policy::indices_buffer> IndicesBuffer>
 struct indices_layout
 {
-	NGS_MPL_ENVIRON_BEGIN(indices_layout);
+	NGS_PP_INJECT_BEGIN(indices_layout);
 public:
 	using layout_type = Layout;
 	using indices_buffer_type = IndicesBuffer;

@@ -7,9 +7,15 @@
 NGS_LIB_MODULE_BEGIN
 
 template<arithmetic_channel Channel>
-constexpr auto bit_value(underlying_type_t<Channel> v)
+constexpr bool is_complete()
 {
-	if constexpr (sizeof(underlying_type_t<Channel>) == NGS_LIB_MODULE_NAME::bit_count<Channel>())
+	return sizeof(underlying_type_t<Channel>) == NGS_LIB_MODULE_NAME::bit_count<Channel>();
+}
+
+template<arithmetic_channel Channel>
+constexpr underlying_type_t<Channel> bit_value(underlying_type_t<Channel> v)
+{
+	if constexpr (NGS_LIB_MODULE_NAME::is_complete<Channel>())
 	{
 		return v;
 	}
@@ -51,8 +57,8 @@ constexpr auto convert(underlying_type_t<From> from)
 		constexpr auto from_max = bits::algorithm::mask(from_count);
 		constexpr auto to_max = bits::algorithm::mask(to_count);
 
-		constexpr auto value = NGS_LIB_MODULE_NAME::bit_value<From>(from);
-		constexpr auto result = value * to_max / from_max;
+		auto value = NGS_LIB_MODULE_NAME::bit_value<From>(from);
+		auto result = value * to_max / from_max;
 
 		return result;
 	}

@@ -1,18 +1,15 @@
 #pragma once
 
-#include "./bit_width.h"
-#include "./granularity.h"
 #include "./pointer.h"
-#include "./privilege.h"
+#include "./enum.h"
 
-#include "./value.h"
+#include "./register.h"
 
-#include "./control.h"
-#include "./page.h"
-#include "./segment.h"
+#include "./asm.h"
 
-#include "./physical.h"
+#include "./16.h"
+#include "./32.h"
 
-#include "./device.h"
+#include "./algorithm.h"
 
 #include "NGS/lib/lib_end.h"

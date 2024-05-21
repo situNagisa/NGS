@@ -3,7 +3,6 @@
 #include "../defined.h"
 #include "NGS/basic/basic.h"
 #include "NGS/type_trait/type_trait.h"
-#include "NGS/mpl/mpl.h"
 #include "NGS/assert/assert.h"
 #include "NGS/external/stl/range.h"
 #include "NGS/external/boost/stl_interfaces.h"

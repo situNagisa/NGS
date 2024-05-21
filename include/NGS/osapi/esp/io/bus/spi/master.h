@@ -9,7 +9,7 @@ inline constexpr spi_host_device_t spi_invalid_host = static_cast<spi_host_devic
 
 struct NGS_DLL_API spi_master final : embedded::io::spi::master, bases::delete_copy
 {
-	NGS_MPL_ENVIRON(spi_master);
+	NGS_PP_INJECT(spi_master);
 public:
 	constexpr spi_master() = default;
 	virtual ~spi_master()override;

@@ -16,7 +16,7 @@ class NGS_DLL_API  Vector;
 
 template<size_t _Dimension, class  _ElementType, size_t... _Index>
 class NGS_DLL_API  Vector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<Vector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
-	NGS_MPL_ENVIRON(Vector);
+	NGS_PP_INJECT(Vector);
 public:
 	NGS_MPL_INHERIT_TYPE(element_type, base_type);
 	NGS_MPL_INHERIT_TYPE(expression_type, base_type);

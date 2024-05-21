@@ -16,7 +16,7 @@ template<
 	requires (VertexSize >= IndicesDrawer::at_least_vertex_count())
 struct array_indices_layout : indices_layout<policy::layout<policy::vertex_buffer<::std::array<BufferDescriptor, VertexSize>>...>, policy::indices_buffer<::std::array<IndexType, IndicesDrawer::indices_count_of(VertexSize)>, IndicesDrawer>>
 {
-	NGS_MPL_ENVIRON2(array_indices_layout, indices_layout<policy::layout<policy::vertex_buffer<::std::array<BufferDescriptor, VertexSize>>...>, policy::indices_buffer<::std::array<IndexType, IndicesDrawer::indices_count_of(VertexSize)>, IndicesDrawer>>);
+	NGS_PP_INJECT_EXPLICIT(array_indices_layout, indices_layout<policy::layout<policy::vertex_buffer<::std::array<BufferDescriptor, VertexSize>>...>, policy::indices_buffer<::std::array<IndexType, IndicesDrawer::indices_count_of(VertexSize)>, IndicesDrawer>>);
 
 public:
 	array_indices_layout(bool normalized, enums::usage vertex_usage, enums::usage indices_usage)

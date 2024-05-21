@@ -31,7 +31,7 @@ NGS_EXTERNAL_OPENGL_DEFINE_BINDABLE_CONTEXT(unknown_texture, _detail::texture_cr
 template<enums::texture_target Target>
 struct basic_texture : unknown_texture
 {
-	NGS_MPL_ENVIRON(basic_texture);
+	NGS_PP_INJECT(basic_texture);
 public:
 	constexpr static auto target = Target;
 	using machine_type = basic::context_machine<self_type, _detail::texture_binder<target>>;

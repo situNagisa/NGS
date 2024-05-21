@@ -34,7 +34,7 @@ namespace _detail
 template<enums::framebuffer_target Target>
 struct basic_framebuffer : _detail::unknown_framebuffer
 {
-	NGS_MPL_ENVIRON(basic_framebuffer);
+	NGS_PP_INJECT(basic_framebuffer);
 public:
 	constexpr static auto target = Target;
 	using machine_type = context_machine<self_type, _detail::framebuffer_binder<target>>;

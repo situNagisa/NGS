@@ -41,7 +41,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct info
 {
-	NGS_MPL_ENVIRON_BEGIN(info);
+	NGS_PP_INJECT_BEGIN(info);
 public:
 	using vulkan_type = trait::info_type;
 

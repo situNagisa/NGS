@@ -33,7 +33,7 @@ namespace _detail
 template<enums::buffer_target Target>
 struct buffer : _detail::unknown_buffer
 {
-	NGS_MPL_ENVIRON(buffer);
+	NGS_PP_INJECT(buffer);
 public:
 	constexpr static auto target = Target;
 	using machine_type = context_machine<self_type, _detail::buffer_binder<target>>;

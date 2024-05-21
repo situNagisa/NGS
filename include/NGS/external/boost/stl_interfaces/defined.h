@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../defined.h"
-#include "NGS/mpl/defined.h"
 
 #include <boost/stl_interfaces/iterator_interface.hpp>
 #include <boost/stl_interfaces/reverse_iterator.hpp>

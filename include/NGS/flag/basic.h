@@ -7,7 +7,7 @@ NGS_LIB_BEGIN
 template<class Derived, class ValueType>
 struct basic_flag
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_flag);
+	NGS_PP_INJECT_BEGIN(basic_flag);
 	using derived_type = Derived;
 	constexpr auto&& derived() { return static_cast<derived_type&>(*this); }
 	constexpr auto&& derived()const { return static_cast<const derived_type&>(*this); }
@@ -43,7 +43,7 @@ public:
 template<class ValueType>
 struct flag : basic_flag<flag<ValueType>, ValueType>
 {
-	NGS_MPL_ENVIRON(flag);
+	NGS_PP_INJECT(flag);
 public:
 	using base_type::base_type;
 	using base_type::operator=;

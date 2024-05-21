@@ -8,7 +8,7 @@ NGS_LIB_BEGIN
 template<vulkan_trait _Trait>
 struct basic_entity : bases::delete_copy
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_entity);
+	NGS_PP_INJECT_BEGIN(basic_entity);
 public:
 	using trait_type = _Trait;
 	using info_type = typename trait_type::info_type;

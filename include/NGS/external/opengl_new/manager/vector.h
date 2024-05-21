@@ -15,7 +15,7 @@ struct vector_index_manager : index_manager<
 	NGS_EXTERNAL_OPENGL_BUFFER_NS::indices_buffer<Indexer, ::std::vector<Index>>
 >
 {
-	NGS_MPL_ENVIRON(vector_index_manager);
+	NGS_PP_INJECT(vector_index_manager);
 public:
 	vector_index_manager(NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::usage vertex, NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::usage indices, bool normalized = false,::std::size_t vertex_count = 0)
 		: base_type(

@@ -14,7 +14,7 @@ template<
 >
 struct NGS_DLL_API basic_interface : boost::stl_interfaces::iterator_interface <Derived,Tag,ElementType,Reference,Pointer,DifferenceType>
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_interface);
+	NGS_PP_INJECT_BEGIN(basic_interface);
 public:
 	using iterator_type = Derived;
 

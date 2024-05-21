@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 #include "NGS/basic/basic.h"
-#include "NGS/mpl/mpl.h"
 #include "NGS/type_trait/type_trait.h"
 #include "NGS/cpt/cpt.h"
 #include "NGS/ccpt/ccpt.h"
 #include "NGS/bit/bit.h"
+#include "NGS/pointer/pointer.h"
 #include "../defined.h"
 
 #define NGS_OS_X86_NS x86

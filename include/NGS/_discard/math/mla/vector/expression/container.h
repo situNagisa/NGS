@@ -42,7 +42,7 @@ class NGS_DLL_API  VectorContainer<
 	_ElementType,
 	std::index_sequence<_Index...>
 > : public VectorExpression<_Derived> {
-	NGS_MPL_ENVIRON(VectorContainer);
+	NGS_PP_INJECT(VectorContainer);
 public:
 	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
 

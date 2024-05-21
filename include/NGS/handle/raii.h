@@ -14,7 +14,7 @@ concept handle_deleter = ::std::invocable<T, HandleType>;
 template<class HandleType, handle_creator<HandleType> auto Creator, handle_deleter<HandleType> auto Deleter, HandleType Null = {} >
 struct raii : basic_handle<HandleType, Null>
 {
-	NGS_MPL_ENVIRON(raii);
+	NGS_PP_INJECT(raii);
 public:
 	constexpr static auto create_functor = Creator;
 	constexpr static auto delete_functor = Deleter;

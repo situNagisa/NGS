@@ -6,7 +6,7 @@ NGS_LIB_MODULE_BEGIN
 template<class...>
 struct tuple
 {
-	NGS_MPL_ENVIRON_BEGIN(tuple);
+	NGS_PP_INJECT_BEGIN(tuple);
 public:
 	using sequence_type = self_type;
 	constexpr static size_t sequence_size = 0;
@@ -15,7 +15,7 @@ public:
 template<class _First, class... _Rest>
 struct tuple<_First, _Rest...> : tuple<_Rest...>
 {
-	NGS_MPL_ENVIRON(tuple);
+	NGS_PP_INJECT(tuple);
 public:
 	using sequence_type = self_type;
 	constexpr static size_t sequence_size = sizeof...(_Rest) + 1;

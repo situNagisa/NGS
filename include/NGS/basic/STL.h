@@ -26,9 +26,12 @@
 #include <tuple>
 #include <valarray>
 
+#include <numeric>
+
 #include <functional>
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <strstream>
 #include <filesystem>
@@ -57,6 +60,10 @@
 #include <mutex>
 
 #include <complex>
+
+#ifdef __cpp_lib_print
+#include <print>
+#endif
 
 #ifdef __cpp_lib_source_location
 #	include <source_location>

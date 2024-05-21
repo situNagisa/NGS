@@ -35,9 +35,9 @@ private:
 template<auto _InputCallback, class _Args = typename type_traits::function_traits<decltype(_InputCallback)>::args_type>
 struct input_wrapper : input_wrapper_view<_InputCallback, _Args>
 {
-	NGS_MPL_ENVIRON(input_wrapper);
+	NGS_PP_INJECT(input_wrapper);
 public:
-	NGS_MPL_INHERIT_TYPE(args_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(args_type, base_type);
 public:
 	using base_type::base_type;
 	constexpr input_wrapper(auto&&... args) requires std::constructible_from<args_type, decltype(args)...>

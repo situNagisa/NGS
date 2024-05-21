@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "NGS/basic/basic.h"
-#include "NGS/mpl/mpl.h"
 #include "NGS/bit/bit.h"
 #include "NGS/math/vector.h"
 #include "NGS/math/box.h"

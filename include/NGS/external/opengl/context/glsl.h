@@ -9,7 +9,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct basic_glsl : basic::context
 {
-	NGS_MPL_ENVIRON(basic_glsl);
+	NGS_PP_INJECT(basic_glsl);
 private:
 	static auto _create(enums::shader_type target)
 	{
@@ -37,7 +37,7 @@ public:
 template<enums::shader_type Target>
 struct glsl : basic_glsl
 {
-	NGS_MPL_ENVIRON(glsl);
+	NGS_PP_INJECT(glsl);
 public:
 	constexpr static auto target = Target;
 

@@ -8,7 +8,7 @@ NGS_LIB_MODULE_BEGIN
 template<NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::glsl_target Target>
 struct basic_glsl
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_glsl);
+	NGS_PP_INJECT_BEGIN(basic_glsl);
 public:
 	using code_type = const ::GLchar*;
 	using context_type = NGS_EXTERNAL_OPENGL_BASIC_CONTEXT_NS::glsl<Target>;

@@ -9,7 +9,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct surface
 {
-	NGS_MPL_ENVIRON_BEGIN(surface);
+	NGS_PP_INJECT_BEGIN(surface);
 public:
 	surface() = default;
 	surface(const VkSurfaceKHR& surface, physical_device& physical_device);

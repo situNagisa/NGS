@@ -11,7 +11,7 @@ NGS_MLA_BEGIN
 
 template<CVectorExpression _Expression, CMatrixLayout _Layout = tag::row>
 struct NGS_DLL_API MatrixVectorExpression : MatrixExpression<MatrixVectorExpression<_Expression, _Layout>> {
-	NGS_MPL_ENVIRON(MatrixVectorExpression);
+	NGS_PP_INJECT(MatrixVectorExpression);
 protected:
 	using closure_type = typename vector_traits<_Expression>::closure_type;
 public:

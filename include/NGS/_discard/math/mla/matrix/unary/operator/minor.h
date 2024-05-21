@@ -8,7 +8,7 @@ NGS_MLA_BEGIN
 
 template<CMatrixSquare _Expression>
 struct NGS_DLL_API MatrixMinor : SquareMatrix<MatrixMinor<_Expression>, std::integral_constant<size_t, _Expression::row_count>> {
-	NGS_MPL_ENVIRON(MatrixMinor);
+	NGS_PP_INJECT(MatrixMinor);
 public:
 	using element_type = typename _Expression::element_type;
 private:

@@ -16,7 +16,7 @@ namespace _detail
 		: allow_adl_operator, allow_adl_io
 		, NGS_MATH_VECTOR_TAG_NS::tag<NGS_MATH_VECTOR_TAG_NS::vector>
 	{
-		NGS_MPL_ENVIRON_BEGIN(static_vector);
+		NGS_PP_INJECT_BEGIN(static_vector);
 	public:
 		using value_type = _T;
 		constexpr static auto extent = _Extent;
@@ -67,7 +67,7 @@ namespace _detail
 template<class _T, extent_t _Extent> requires (_Extent != dynamic_extent) && (_Extent != adapter_extent)
 struct vector<_T, _Extent> : _detail::static_vector<_T, _Extent>
 {
-	NGS_MPL_ENVIRON2(vector, _detail::static_vector<_T, _Extent>);
+	NGS_PP_INJECT_EXPLICIT(vector, _detail::static_vector<_T, _Extent>);
 public:
 	using base_type::base_type;
 	using base_type::operator=;

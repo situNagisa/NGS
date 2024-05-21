@@ -8,7 +8,7 @@ inline constexpr int spi_default_speed_hz = 10 * 1000 * 1000;
 
 struct NGS_DLL_API spi_slave : embedded::io::spi::slave
 {
-	NGS_MPL_ENVIRON(spi_slave);
+	NGS_PP_INJECT(spi_slave);
 public:
 	virtual ~spi_slave()override;
 

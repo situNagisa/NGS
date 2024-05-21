@@ -13,7 +13,7 @@ namespace _detail
 	template<layout::align auto Align, variables::variable... Variables>
 	struct descriptor
 	{
-		NGS_MPL_ENVIRON_BEGIN(descriptor);
+		NGS_PP_INJECT_BEGIN(descriptor);
 	public:
 		using fields_type = fields<Variables...>;
 		static constexpr ::std::size_t field_count = sizeof...(Variables);
@@ -79,7 +79,7 @@ template<layout::align auto, _detail::fields> struct basic_struct {};
 template<layout::align auto Align, template<class...>class Container, class... Fields>
 struct basic_struct<Align, Container<Fields...>> : _detail::descriptor<Align, Fields...>
 {
-	NGS_MPL_ENVIRON(basic_struct);
+	NGS_PP_INJECT(basic_struct);
 public:
 	template<class... Bases>
 	struct inherit : _detail::inherit<self_type, Bases...>::type {};
@@ -88,7 +88,7 @@ public:
 template<layout::align auto Align, class... Ts>
 struct meta_struct : basic_struct<Align,make_fields_t<Ts...>>
 {
-	NGS_MPL_ENVIRON(meta_struct);
+	NGS_PP_INJECT(meta_struct);
 };
 
 

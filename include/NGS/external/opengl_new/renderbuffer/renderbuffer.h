@@ -8,7 +8,7 @@ NGS_LIB_MODULE_BEGIN
 template<NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::renderbuffer_target Target>
 struct basic_renderbuffer
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_renderbuffer);
+	NGS_PP_INJECT_BEGIN(basic_renderbuffer);
 public:
 	using context_type = NGS_EXTERNAL_OPENGL_BASIC_CONTEXT_NS::basic_renderbuffer<Target>;
 

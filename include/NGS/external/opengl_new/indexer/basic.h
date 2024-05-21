@@ -8,7 +8,7 @@ NGS_LIB_MODULE_BEGIN
 	requires requires(::std::size_t vertex_count) { { Map(vertex_count) } -> ::std::convertible_to<::std::size_t>; }
 struct basic_indices_drawer
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_indices_drawer);
+	NGS_PP_INJECT_BEGIN(basic_indices_drawer);
 public:
 	using derived_type = Derived;
 

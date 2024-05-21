@@ -28,7 +28,7 @@ namespace _detail
 
 struct vertex_array : _detail::basic_vertex_array
 {
-	NGS_MPL_ENVIRON(vertex_array);
+	NGS_PP_INJECT(vertex_array);
 public:
 	using base_type::base_type;
 	using base_type::operator=;

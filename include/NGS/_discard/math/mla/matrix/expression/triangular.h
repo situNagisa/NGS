@@ -34,7 +34,7 @@ template<
 	_ElementType,
 	_Layout
 > {
-	NGS_MPL_ENVIRON(TriangularMatrix);
+	NGS_PP_INJECT(TriangularMatrix);
 public:
 	NGS_MPL_INHERIT_TYPE(element_type, base_type);
 	NGS_MPL_INHERIT_TYPE(layout_category, base_type);

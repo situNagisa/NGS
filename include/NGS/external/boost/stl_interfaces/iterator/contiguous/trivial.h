@@ -9,7 +9,7 @@ struct trivial_contiguous_iterator;
 
 template<class _Derived, class _ElementType>
 struct trivial_contiguous_iterator : base_contiguous_iterator<_Derived,_ElementType> {
-	NGS_MPL_ENVIRON2(trivial_contiguous_iterator, base_contiguous_iterator<_Derived, _ElementType>);
+	NGS_PP_INJECT_EXPLICIT(trivial_contiguous_iterator, base_contiguous_iterator<_Derived, _ElementType>);
 public:
 	NGS_MPL_INHERIT_TYPE(iterator_type, base_type);
 	NGS_MPL_INHERIT_TYPE(value_type, base_type);
@@ -36,7 +36,7 @@ protected:
 template<class _ElementType>
 struct trivial_contiguous_iterator<_ElementType, void> :
 	trivial_contiguous_iterator< trivial_contiguous_iterator<_ElementType>, _ElementType> {
-	NGS_MPL_ENVIRON(trivial_contiguous_iterator);
+	NGS_PP_INJECT(trivial_contiguous_iterator);
 public:
 };
 

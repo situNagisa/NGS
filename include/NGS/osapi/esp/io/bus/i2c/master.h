@@ -7,7 +7,7 @@ NGS_OS_ESP_IO_BUS_BEGIN
 
 struct NGS_DLL_API i2c_master : embedded::io::i2c::master
 {
-	NGS_MPL_ENVIRON(i2c_master);
+	NGS_PP_INJECT(i2c_master);
 public:
 	i2c_master();
 	virtual ~i2c_master() override;

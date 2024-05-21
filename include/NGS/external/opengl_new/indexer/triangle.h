@@ -8,7 +8,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct triangle : basic_indices_drawer < triangle, NGS_EXTERNAL_OPENGL_BASIC_ENUM_NS::element_draw_mode::triangles, 2, [](::std::size_t vertex_count) { return vertex_count - 2; } >
 {
-	NGS_MPL_ENVIRON_BEGIN(triangle);
+	NGS_PP_INJECT_BEGIN(triangle);
 public:
 	template<::std::integral Index>
 	constexpr static decltype(auto) fragment_indices(Index index, ::std::size_t triangle_count, ::std::indirectly_writable<Index> auto out)

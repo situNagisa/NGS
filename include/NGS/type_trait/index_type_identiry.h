@@ -4,8 +4,8 @@
 
 NGS_TYPE_TRAIT_BEGIN
 
-NGS_MPL_FUNCTION(index_type_identity, ccpt::uint _Index, class _Type) {
-	NGS_MPL_TYPE result_type = _Type;
+template<ccpt::uint Index, class Type> struct  index_type_identity {
+	using result_type = Type;
 };
 
 template<size_t _Index, class _Type>

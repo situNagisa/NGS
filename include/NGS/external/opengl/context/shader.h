@@ -11,7 +11,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct shader : basic::context
 {
-	NGS_MPL_ENVIRON(shader);
+	NGS_PP_INJECT(shader);
 private:
 	static auto _create()
 	{

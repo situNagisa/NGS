@@ -24,7 +24,7 @@ namespace _detail
 template<shader_uniform... Uniforms>
 struct shader
 {
-	NGS_MPL_ENVIRON_BEGIN(shader);
+	NGS_PP_INJECT_BEGIN(shader);
 public:
 	using context_type = NGS_EXTERNAL_OPENGL_BASIC_CONTEXT_NS::shader;
 	using struct_type = mpl::mstruct::named_struct<layout::default_align, Uniforms...>;

@@ -28,7 +28,7 @@ struct NGS_DLL_API HomogeneousMatrix<
 	_Dimension, _ElementType, _Layout>,
 	std::integral_constant<size_t, _Dimension>, std::integral_constant<size_t, _Dimension>,
 	_ElementType, _Layout> {
-	NGS_MPL_ENVIRON(HomogeneousMatrix);
+	NGS_PP_INJECT(HomogeneousMatrix);
 public:
 	NGS_MPL_INHERIT_TYPE(expression_type, base_type);
 	NGS_MPL_INHERIT_TYPE(element_type, base_type);

@@ -9,7 +9,7 @@ NGS_LIB_MODULE_BEGIN
 template<cpt::derived_from_specialization<buffer>... Buffer>
 struct buffer_group : ::std::ranges::view_interface<buffer_group<Buffer...>>
 {
-	NGS_MPL_ENVIRON2(buffer_group, ::std::ranges::view_interface<buffer_group<Buffer...>>);
+	NGS_PP_INJECT_EXPLICIT(buffer_group, ::std::ranges::view_interface<buffer_group<Buffer...>>);
 public:
 	using value_type = mpl::mstruct::storage<layout::default_align, buffer_value_t<Buffer>...>;
 	using group_type = ::std::tuple<Buffer...>;
@@ -145,7 +145,7 @@ buffer_group(::std::tuple<Buffer...>&&) -> buffer_group<Buffer...>;
 template<cpt::derived_from_specialization<vertex_buffer>... Buffer>
 struct vertex_group : buffer_group<Buffer...>
 {
-	NGS_MPL_ENVIRON2(vertex_group, buffer_group<Buffer...>);
+	NGS_PP_INJECT_EXPLICIT(vertex_group, buffer_group<Buffer...>);
 public:
 	using vertex_type = typename base_type::value_type;
 

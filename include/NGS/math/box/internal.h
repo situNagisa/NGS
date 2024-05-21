@@ -7,7 +7,7 @@ NGS_LIB_BEGIN
 template<vectors::scalar _Value>
 struct internal
 {
-	NGS_MPL_ENVIRON_BEGIN(internal);
+	NGS_PP_INJECT_BEGIN(internal);
 public:
 	using value_type = _Value;
 

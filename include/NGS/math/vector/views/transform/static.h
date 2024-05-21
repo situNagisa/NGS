@@ -17,7 +17,7 @@ struct transform_view<_Transformer, _Extent, _ArgContainer<_Args...>, _Sentinel>
 	, ::std::ranges::view_base
 	, ::std::ranges::view_interface<transform_view<_Transformer, _Extent, _ArgContainer<_Args...>, _Sentinel>>
 {
-	NGS_MPL_ENVIRON_BEGIN(transform_view);
+	NGS_PP_INJECT_BEGIN(transform_view);
 public:
 	using storage_type = _ArgContainer<_Args...>;
 

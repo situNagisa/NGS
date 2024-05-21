@@ -8,7 +8,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct entity : basic_entity<trait>
 {
-	NGS_MPL_ENVIRON(entity);
+	NGS_PP_INJECT(entity);
 public:
 
 	entity(const info& info, const VkDevice& device)

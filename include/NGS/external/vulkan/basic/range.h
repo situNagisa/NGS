@@ -11,7 +11,7 @@ using size_t = uint32_t;
 template<class _T, class _SizeType = size_t>
 struct alignas(sizeof(const void*)) vulkan_range : ::std::ranges::view_interface<vulkan_range<_T, _SizeType>>
 {
-	NGS_MPL_ENVIRON_BEGIN(vulkan_range);
+	NGS_PP_INJECT_BEGIN(vulkan_range);
 public:
 	using value_type = _T;
 	using size_type = _SizeType;

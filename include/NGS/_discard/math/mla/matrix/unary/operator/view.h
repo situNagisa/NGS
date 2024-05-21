@@ -15,7 +15,7 @@ template<CMatrixExpression _Expression,
 	requires _OffsetCol::value + _Dimension::value <= _Expression::col_count;
 }
 struct NGS_DLL_API MatrixView : MatrixExpression<MatrixView<_Expression, _OffsetRow, _OffsetCol, _Dimension>> {
-	NGS_MPL_ENVIRON(MatrixView);
+	NGS_PP_INJECT(MatrixView);
 public:
 	using element_type = typename _Expression::element_type;
 

@@ -32,7 +32,7 @@ NGS_EXTERNAL_OPENGL_DEFINE_BINDABLE_CONTEXT(unknown_renderbuffer, _detail::rende
 template<enums::renderbuffer_target Target>
 struct basic_renderbuffer : unknown_renderbuffer
 {
-	NGS_MPL_ENVIRON(basic_renderbuffer);
+	NGS_PP_INJECT(basic_renderbuffer);
 public:
 	constexpr static auto target = Target;
 	using machine_type = basic::context_machine<self_type, _detail::renderbuffer_binder<target>>;

@@ -23,7 +23,7 @@ using trivial_vector = NGS_MATH_VECTOR_TAG_NS::retag<NGS_MATH_VECTOR_TAG_NS::tri
 //template<class _T>
 //struct trivial_vector : NGS_MATH_VECTOR_TAG_NS::retag<NGS_MATH_VECTOR_TAG_NS::trivial, transform_view <_detail::trivial_transformer, adapter_extent, packet<_T>, make_adapter_sentinel>>
 //{
-//	NGS_MPL_ENVIRON(trivial_vector);
+//	NGS_PP_INJECT(trivial_vector);
 //public:
 //	constexpr explicit trivial_vector(const _T& data) :base_type(data) {}
 //	constexpr explicit trivial_vector(_T&& data) : base_type(::std::move(data)) {}

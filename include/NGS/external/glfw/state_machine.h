@@ -7,7 +7,7 @@ NGS_LIB_BEGIN
 
 class NGS_DLL_API GLFW : public bases::singleton<GLFW> {
 protected:
-	NGS_MPL_ENVIRON(GLFW);
+	NGS_PP_INJECT(GLFW);
 
 	using state_type = window;
 private:

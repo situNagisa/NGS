@@ -9,7 +9,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct vertex_array : basic::context
 {
-	NGS_MPL_ENVIRON(vertex_array);
+	NGS_PP_INJECT(vertex_array);
 public:
 	NGS_EXTERNAL_OPENGL_CONTEXT_TYPE_AUTO();
 	struct machine_type : bases::singleton<machine_type>

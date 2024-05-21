@@ -12,7 +12,7 @@ template<::std::ranges::contiguous_range Range, indices::indices_drawer<::std::r
 	requires valid_fundamental<::std::ranges::range_value_t<Range>>
 struct indices_buffer : buffer<contexts::indices_buffer, Range>
 {
-	NGS_MPL_ENVIRON2(indices_buffer, buffer<contexts::indices_buffer, Range>);
+	NGS_PP_INJECT_EXPLICIT(indices_buffer, buffer<contexts::indices_buffer, Range>);
 public:
 	using indices_drawer_type = IndicesDrawer;
 

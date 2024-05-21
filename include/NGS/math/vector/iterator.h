@@ -16,8 +16,8 @@ namespace detail {
 
 		using param_pack_type = ::std::tuple<_Args...>;
 
-		NGS_MPL_INHERIT_TYPE(difference_type, base_type);
-		NGS_MPL_INHERIT_TYPE(value_type, base_type);
+		NGS_PP_INHERIT_TYPE_EXPLICIT(difference_type, base_type);
+		NGS_PP_INHERIT_TYPE_EXPLICIT(value_type, base_type);
 
 		constexpr static auto dereference_functor = _Dereference;
 		static_assert(::std::invocable<type_traits::object_t<decltype(dereference_functor)>, _Args...>, "dereference_functor is not valid functor");

@@ -7,7 +7,7 @@ NGS_BOOST_STL_INTERFACES_BEGIN
 template<class _Derived, std::input_iterator _Iterator>
 struct input_range : base_range<_Derived>
 {
-	NGS_MPL_ENVIRON(input_range);
+	NGS_PP_INJECT(input_range);
 public:
 	using input_iterator_type = _Iterator;
 

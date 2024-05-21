@@ -50,7 +50,7 @@ namespace _detail
 template<enums::texture_target Target>
 struct basic_texture : _detail::unknown_texture
 {
-	NGS_MPL_ENVIRON(basic_texture);
+	NGS_PP_INJECT(basic_texture);
 public:
 	constexpr static auto target = Target;
 	using machine_type = context_machine<self_type, _detail::texture_binder<target>>;

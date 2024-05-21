@@ -7,7 +7,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API master : basic_i2c
 {
-	NGS_MPL_ENVIRON(master);
+	NGS_PP_INJECT(master);
 public:
 
 	virtual void set_ack(modes::ack ack) = 0;

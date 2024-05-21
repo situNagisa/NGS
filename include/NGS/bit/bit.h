@@ -1,8 +1,10 @@
 ﻿#pragma once
 
-#include "./bytebit.h"
+#include "./limit.h"
+#include "./trait.h"
+#include "./concept.h"
 #include "./algorithm.h"
-#include "./bitset.h"
+#include "./implement.h"
 #include "./literals.h"
 
 #include "NGS/lib/lib_end.h"

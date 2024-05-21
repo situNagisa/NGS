@@ -14,7 +14,7 @@ using statics::tuples::size_v;
 template<class... _Args>
 struct packet : statics::tuples::tuple<type_traits::storage_t<_Args>...>
 {
-	NGS_MPL_ENVIRON2(packet, statics::tuples::tuple<type_traits::storage_t<_Args>...>);
+	NGS_PP_INJECT_EXPLICIT(packet, statics::tuples::tuple<type_traits::storage_t<_Args>...>);
 public:
 	using parameters_type = statics::tuples::tuple<_Args...>;
 

@@ -10,7 +10,7 @@ class NGS_DLL_API  HomogenousVector;
 
 template<size_t _Dimension, class  _ElementType, size_t... _Index>
 class NGS_DLL_API  HomogenousVector<_Dimension, _ElementType, std::index_sequence< _Index...>> : public VectorContainer<HomogenousVector<_Dimension, _ElementType>, std::integral_constant<size_t, _Dimension>, _ElementType> {
-	NGS_MPL_ENVIRON(HomogenousVector);
+	NGS_PP_INJECT(HomogenousVector);
 public:
 	NGS_MPL_INHERIT_TYPE(element_type, base_type);
 	NGS_MPL_INHERIT_TYPE(expression_type, base_type);

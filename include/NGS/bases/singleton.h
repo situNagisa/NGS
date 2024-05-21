@@ -6,7 +6,7 @@
 NGS_LIB_BEGIN
 template<class _Derived>
 class NGS_DLL_API singleton : public delete_copy {
-	NGS_MPL_ENVIRON_BEGIN(singleton);
+	NGS_PP_INJECT_BEGIN(singleton);
 public:
 	using singleton_type = _Derived;
 

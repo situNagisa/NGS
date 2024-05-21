@@ -24,7 +24,7 @@ template<
 >
 struct output : input_or_output<_Derived, _Difference>
 {
-	NGS_MPL_ENVIRON(output);
+	NGS_PP_INJECT(output);
 public:
 	using iterator_category = std::output_iterator_tag;
 

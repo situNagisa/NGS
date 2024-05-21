@@ -31,7 +31,7 @@ namespace _detail
 template<enums::renderbuffer_target Target>
 struct basic_renderbuffer : _detail::unknown_renderbuffer
 {
-	NGS_MPL_ENVIRON(basic_renderbuffer);
+	NGS_PP_INJECT(basic_renderbuffer);
 public:
 	constexpr static auto target = Target;
 	using machine_type = context_machine<self_type, _detail::renderbuffer_binder<target>>;

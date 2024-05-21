@@ -25,9 +25,9 @@ template<
 >
 struct bidirectional : forward<_Derived, _ValueType, _Reference, _Difference>
 {
-	NGS_MPL_ENVIRON(bidirectional);
+	NGS_PP_INJECT(bidirectional);
 public:
-	NGS_MPL_INHERIT_TYPE(iterator_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(iterator_type, base_type);
 	using iterator_category = std::bidirectional_iterator_tag;
 
 	using base_type::base_type;

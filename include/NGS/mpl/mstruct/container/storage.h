@@ -44,7 +44,7 @@ namespace  _detail
 template<layout::align auto Align, class... Ts>
 struct alignas(basic::struct_align_v<basic_struct<Align, make_fields_t<Ts...>>>.align()) storage : basic_struct<Align,make_fields_t<Ts...>>
 {
-	NGS_MPL_ENVIRON2(storage, basic_struct<Align, make_fields_t<Ts...>>);
+	NGS_PP_INJECT_EXPLICIT(storage, basic_struct<Align, make_fields_t<Ts...>>);
 public:
 	template<class... Bases>
 	struct inherit : _detail::inherit<self_type, Bases...>::type {};

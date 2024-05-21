@@ -17,7 +17,7 @@ template<CMatrixExpression _Expression,
 	requires _OffsetCol::value + _Dimension::value <= _Expression::col_count;
 }
 struct NGS_DLL_API TriangularMatrixAdapter : MatrixExpression<TriangularMatrixAdapter<_Expression, _Category, _OffsetRow, _OffsetCol, _Dimension>> {
-	NGS_MPL_ENVIRON(TriangularMatrixAdapter);
+	NGS_PP_INJECT(TriangularMatrixAdapter);
 public:
 	using element_type = typename _Expression::element_type;
 	using triangular_category = _Category;

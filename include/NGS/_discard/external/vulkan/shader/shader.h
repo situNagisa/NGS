@@ -7,7 +7,7 @@ NGS_EXTERNAL_VULKAN_INFO_ENVIRONMENT(PipelineShaderStageCreateInfo);
 NGS_LIB_BEGIN
 struct shader
 {
-	NGS_MPL_ENVIRON_BEGIN(shader);
+	NGS_PP_INJECT_BEGIN(shader);
 public:
 	shader(::vk::Device device, ::std::ranges::contiguous_range auto&& code)
 		: shader(device, {
@@ -47,7 +47,7 @@ private:
 template<flags::flag<::vk::ShaderStageFlagBits> _Stage>
 struct stage_shader : shader
 {
-	NGS_MPL_ENVIRON(stage_shader);
+	NGS_PP_INJECT(stage_shader);
 public:
 	stage_shader(::vk::Device device, ::std::ranges::contiguous_range auto&& code)
 		: stage_shader(device, {

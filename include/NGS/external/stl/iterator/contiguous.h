@@ -25,10 +25,10 @@ template<
 >
 struct contiguous : random_access<_Derived, _ValueType, _ValueType&, _Difference>
 {
-	NGS_MPL_ENVIRON(contiguous);
+	NGS_PP_INJECT(contiguous);
 public:
-	NGS_MPL_INHERIT_TYPE(iterator_type, base_type);
-	NGS_MPL_INHERIT_TYPE(difference_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(iterator_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(difference_type, base_type);
 	using iterator_category = std::contiguous_iterator_tag;
 
 	using base_type::base_type;

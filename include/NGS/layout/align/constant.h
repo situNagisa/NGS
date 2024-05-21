@@ -15,7 +15,7 @@ struct align_constant
 
 struct align_t
 {
-	NGS_MPL_ENVIRON_BEGIN(align_t);
+	NGS_PP_INJECT_BEGIN(align_t);
 public:
 
 	constexpr align_t() = default;
@@ -25,7 +25,7 @@ public:
 	{
 		if (!::std::is_constant_evaluated())
 		{
-			NGS_ASSERT(is_valid_align(*this));
+			assert(NGS_LIB_MODULE_NAME::is_valid_align(*this));
 		}
 	}
 	constexpr explicit(false) align_t(::std::size_t align) : self_type(align,align){}

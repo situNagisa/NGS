@@ -17,7 +17,7 @@ template<layout::CAlign _Align, size_t... _Index, CPair... _Pairs>
 struct _name_struct<_Align, std::index_sequence<_Index...>, _Pairs...> :
 	structure<_Align, typename _Pairs::second_type...>
 {
-	NGS_MPL_ENVIRON(_name_struct);
+	NGS_PP_INJECT(_name_struct);
 public:
 	using map_type = boost::fusion::map <
 		boost::fusion::pair<typename _Pairs::first_type, ccpt::uint_<_Index>>...

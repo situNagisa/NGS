@@ -11,7 +11,7 @@ NGS_LIB_MODULE_BEGIN
 template<cpt::derived_from_specialization<NGS_EXTERNAL_OPENGL_BUFFER_NS::vertex_group> VertexGroup, cpt::derived_from_specialization<NGS_EXTERNAL_OPENGL_BUFFER_NS::indices_buffer> IndexBuffer>
 struct index_manager : auto_manager<VertexGroup>
 {
-	NGS_MPL_ENVIRON2(index_manager, auto_manager<VertexGroup>);
+	NGS_PP_INJECT_EXPLICIT(index_manager, auto_manager<VertexGroup>);
 public:
 	using index_buffer_type = IndexBuffer;
 

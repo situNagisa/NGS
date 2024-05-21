@@ -1,14 +1,13 @@
 ﻿#pragma once
 
 #include "NGS/assert/assert.h"
-#include "NGS/mpl/mpl.h"
 #include "./defined.h"
 
 NGS_LIB_BEGIN
 
 struct NGS_DLL_API movie
 {
-	NGS_MPL_ENVIRON_BEGIN(movie);
+	NGS_PP_INJECT_BEGIN(movie);
 public:
 	using frame_type = ::std::size_t;
 	using frame_difference_type = ::std::ptrdiff_t;

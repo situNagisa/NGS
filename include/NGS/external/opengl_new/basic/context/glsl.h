@@ -25,7 +25,7 @@ namespace _detail
 template<enums::glsl_target Target>
 struct glsl : raii_context<_detail::glsl_creator<Target>,_detail::glsl_deleter>
 {
-	NGS_MPL_ENVIRON(glsl);
+	NGS_PP_INJECT(glsl);
 public:
 	constexpr static auto target = Target;
 

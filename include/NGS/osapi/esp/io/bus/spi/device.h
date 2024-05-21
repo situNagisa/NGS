@@ -6,7 +6,7 @@ NGS_OS_ESP_IO_BUS_BEGIN
 
 struct NGS_DLL_API spi_device : embedded::io::spi::device, spi_device_interface_config_t
 {
-	NGS_MPL_ENVIRON(spi_device);
+	NGS_PP_INJECT(spi_device);
 	using config_type = spi_device_interface_config_t;
 public:
 	using config_type::config_type;

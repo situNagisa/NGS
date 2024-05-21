@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "./format.h"
-#include "./assert_.h"
+#include "./detail.h"
 
 #include "NGS/lib/lib_end.h"

@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "NGS/basic/basic.h"
-#include "NGS/mpl/mpl.h"
 #include "NGS/type_trait/type_trait.h"
 
 #define NGS_POINTER_NS pointers

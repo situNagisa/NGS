@@ -14,7 +14,7 @@ template<
 	requires std::invocable<decltype(_Accessor), _Left, _Right, traits::vectors::index_t, _Params...>
 struct binary : containers::vectors::vector_expression<binary<_Accessor, _Dimension, _Left, _Right, _Params...>>
 {
-	NGS_MPL_ENVIRON(binary);
+	NGS_PP_INJECT(binary);
 public:
 	constexpr static size_t dimension = _Dimension::value;
 	constexpr static size_t complexity = yap::complexity<_Left> +yap::complexity<_Right> +1;

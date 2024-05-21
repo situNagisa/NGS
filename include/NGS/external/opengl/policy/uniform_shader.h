@@ -15,7 +15,7 @@ concept shader_uniform = mpl::mstruct::named_field<T>;
 template<shader_uniform... Uniforms>
 struct uniform_shader : shader
 {
-	NGS_MPL_ENVIRON(uniform_shader);
+	NGS_PP_INJECT(uniform_shader);
 public:
 	using struct_type = mpl::mstruct::named_struct<layout::default_align, Uniforms...>;
 

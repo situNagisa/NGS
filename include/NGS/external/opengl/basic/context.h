@@ -9,7 +9,7 @@ inline constexpr context_t null_context = static_cast<context_t>(0);
 
 struct context : bases::delete_copy
 {
-	NGS_MPL_ENVIRON_BEGIN(context);
+	NGS_PP_INJECT_BEGIN(context);
 public:
 	constexpr explicit(false) context(const context_t& context) noexcept : _context(context) {}
 	constexpr context(self_type&& other)noexcept : _context(other._context)
@@ -53,7 +53,7 @@ namespace _detail
 template<_detail::context_creator auto Creator,_detail::context_deleter auto Deleter>
 struct raii_context : context
 {
-	NGS_MPL_ENVIRON(raii_context);
+	NGS_PP_INJECT(raii_context);
 public:
 	constexpr static auto context_create_functor = Creator;
 	constexpr static auto context_delete_functor = Deleter;
@@ -90,7 +90,7 @@ struct context_machine : bases::singleton<context_machine<ContextType,Binder>>
 struct context_id :																									\
 	NGS_NS::NGS_EXTERNAL_NS::NGS_EXTERNAL_OPENGL_NS::NGS_EXTERNAL_OPENGL_BASIC_NS::raii_context<creator, deleter>	\
 {																													\
-	NGS_MPL_ENVIRON(context_id);																					\
+	NGS_PP_INJECT(context_id);																					\
 public:																												\
 	NGS_EXTERNAL_OPENGL_CONTEXT_TYPE_AUTO();																		\
 																													\

@@ -10,7 +10,7 @@ NGS_MLA_BEGIN
 
 template<CMatrixExpression _Expressioin>
 struct NGS_DLL_API MatrixRowVector : VectorExpression<MatrixRowVector<_Expressioin>> {
-	NGS_MPL_ENVIRON(MatrixRowVector);
+	NGS_PP_INJECT(MatrixRowVector);
 public:
 	using element_type = typename matrix_traits<_Expressioin>::element_type;
 	constexpr static size_t dimension = matrix_traits<_Expressioin>::col_count;
@@ -31,7 +31,7 @@ private:
 
 template<CMatrixExpression _Expressioin>
 struct NGS_DLL_API MatrixColVector : VectorExpression<MatrixColVector<_Expressioin>> {
-	NGS_MPL_ENVIRON(MatrixColVector);
+	NGS_PP_INJECT(MatrixColVector);
 public:
 	using element_type = typename matrix_traits<_Expressioin>::element_type;
 	constexpr static size_t dimension = matrix_traits<_Expressioin>::row_count;
@@ -51,7 +51,7 @@ private:
 
 template<ccpt::CRPT<(bool)CMatrixExpression<>> _Expression>
 struct NGS_DLL_API MatrixExpression : Expression<_Expression> {
-	NGS_MPL_ENVIRON(MatrixExpression);
+	NGS_PP_INJECT(MatrixExpression);
 public:
 	using type_category = tag::matrix;
 	constexpr static size_t row_count = 0;

@@ -10,7 +10,7 @@ struct vector<_T, dynamic_extent>
 	, allow_adl_operator, allow_adl_io
 	, NGS_MATH_VECTOR_TAG_NS::tag<NGS_MATH_VECTOR_TAG_NS::vector>
 {
-	NGS_MPL_ENVIRON_BEGIN(vector);
+	NGS_PP_INJECT_BEGIN(vector);
 	using base_type = ::std::vector<_T>;
 public:
 	using base_type::base_type;

@@ -17,9 +17,9 @@ template<
 >
 struct input : input_or_output<_Derived, _Difference>
 {
-	NGS_MPL_ENVIRON(input);
+	NGS_PP_INJECT(input);
 public:
-	NGS_MPL_INHERIT_TYPE(iterator_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(iterator_type, base_type);
 	using iterator_category = std::input_iterator_tag;
 	using value_type = _ValueType;
 	using reference = _Reference;

@@ -6,7 +6,7 @@ NGS_LIB_MODULE_BEGIN
 
 struct NGS_DLL_API gpio : basic_io
 {
-	NGS_MPL_ENVIRON(gpio);
+	NGS_PP_INJECT(gpio);
 public:
 
 	bool open(pin_t gpio_num)

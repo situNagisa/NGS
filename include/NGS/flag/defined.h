@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "NGS/basic/basic.h"
-#include "NGS/mpl/mpl.h"
 
 #define NGS_FLAG_NS flags
 

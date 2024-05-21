@@ -7,7 +7,7 @@ NGS_LIB_MODULE_BEGIN
 template<::std::ranges::range Range>
 struct pusher
 {
-	NGS_MPL_ENVIRON_BEGIN(pusher);
+	NGS_PP_INJECT_BEGIN(pusher);
 public:
 	using range_forward_type = Range;
 	using range_type = type_traits::object_t<range_forward_type>;

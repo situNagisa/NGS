@@ -44,7 +44,7 @@ namespace detail
 	template<vectors::scalar _Position, vectors::scalar _Size, vectors::extent_t _Dimension, size_t... _Index>
 	struct hypercube<_Position, _Size, _Dimension, ::std::index_sequence<_Index...>> : basic_hypercube<_Position, _Size, _Dimension>
 	{
-		NGS_MPL_ENVIRON(hypercube);
+		NGS_PP_INJECT(hypercube);
 	public:
 		using position_type = _Position;
 		using size_type = _Size;

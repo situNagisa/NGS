@@ -8,7 +8,7 @@ NGS_LIB_BEGIN
 template<class _T>
 struct vulkan_ptr
 {
-	NGS_MPL_ENVIRON_BEGIN(vulkan_ptr);
+	NGS_PP_INJECT_BEGIN(vulkan_ptr);
 public:
 	using value_type = _T;
 

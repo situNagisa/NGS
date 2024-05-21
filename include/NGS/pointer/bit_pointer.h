@@ -7,7 +7,7 @@ NGS_LIB_BEGIN
 template<class ValueType,class InnerType>
 struct basic_bit_pointer
 {
-	NGS_MPL_ENVIRON_BEGIN(basic_bit_pointer);
+	NGS_PP_INJECT_BEGIN(basic_bit_pointer);
 public:
 	using value_type = ValueType;
 	using value_pointer_type = ::std::add_pointer_t<value_type>;
@@ -28,7 +28,7 @@ public:
 		: _value(reinterpret_cast<pointer_type>(value))
 	{}
 
-	constexpr auto get() const noexcept
+	constexpr auto pointer() const noexcept
 	{
 		if constexpr (valid_pointer())
 		{
@@ -40,15 +40,24 @@ public:
 		}
 	}
 
-	constexpr explicit(false) operator value_pointer_type() const noexcept
-	{
-		return get();
-	}
+	constexpr explicit(false) operator value_pointer_type() const noexcept { return pointer(); }
 
 	constexpr decltype(auto) operator()(auto&&... args)const
 		requires ::std::invocable<value_pointer_type,decltype(args)...>
 	{
-		return (get())(NGS_PP_PERFECT_FORWARD(args)...);
+		return (pointer())(NGS_PP_PERFECT_FORWARD(args)...);
+	}
+
+	constexpr decltype(auto) value() const
+	{
+		if constexpr (valid_pointer())
+		{
+			return reinterpret_cast<inner_type>(_value);
+		}
+		else
+		{
+			return _value;
+		}
 	}
 
 	pointer_type _value{};

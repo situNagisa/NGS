@@ -1,10 +1,12 @@
 ﻿#pragma once
 
 #include "NGS/basic/basic.h"
-//#include "NGS/base/base.h"
-//#include "NGS/ccpt/ccpt.h"
+
+//#define NGS_MPL_VERSION 20240521
 
 #define NGS_MPL_NS mpl
+
+#if 0
 #define NGS_MPL_BEGIN NGS_BEGIN namespace mpl{
 #define NGS_MPL_END } NGS_END
 
@@ -21,7 +23,7 @@ protected:											\
 //
 
 /**
- * \brief 有的编译器不支持`NGS_MPL_ENVIRON`，所以提供了这个宏
+ * \brief 有的编译器不支持`NGS_PP_INJECT`，所以提供了这个宏
  * \param target 子类
  * \param ... 父类
  */
@@ -45,3 +47,5 @@ struct NGS_DLL_API meta_function				\
 
 #define NGS_MPL_INHERIT2(id,...) using __VA_ARGS__::id
 #define NGS_MPL_INHERIT(id) NGS_MPL_INHERIT2(id,base_type)
+
+#endif

@@ -9,9 +9,9 @@ NGS_LIB_BEGIN
 template<class _ValueType>
 struct index_flag : ::std::conditional_t<::std::is_enum_v<_ValueType>, enum_flag<_ValueType>, flag<_ValueType>>
 {
-	NGS_MPL_ENVIRON(index_flag);
+	NGS_PP_INJECT(index_flag);
 public:
-	NGS_MPL_INHERIT_TYPE(value_type, base_type);
+	NGS_PP_INHERIT_TYPE_EXPLICIT(value_type, base_type);
 
 	using base_type::base_type;
 
