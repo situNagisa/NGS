@@ -1503,8 +1503,7 @@
     <ClInclude Include="bit\concept\range.h" />
     <ClInclude Include="bit\algorithm.h" />
     <ClInclude Include="bit\algorithm\defined.h" />
-    <ClInclude Include="bit\algorithm\atomic.h" />
-    <ClInclude Include="bit\algorithm\bit_of.h" />
+    <ClInclude Include="bit\algorithm\size.h" />
     <ClInclude Include="bit\algorithm\bit_byte.h" />
     <ClInclude Include="bit\implement\defined.h" />
     <ClInclude Include="bit\implement\wrapper.h" />
@@ -1513,6 +1512,22 @@
     <ClInclude Include="bit\algorithm\shift.h" />
     <ClInclude Include="external\stl\range\range_interface.h" />
     <ClInclude Include="preprocessor\utils\inject.h" />
+    <ClInclude Include="config\calling_convention.h" />
+    <ClInclude Include="bit\algorithm\bit.h" />
+    <ClInclude Include="external\stl\range\range_closure.h" />
+    <ClInclude Include="bit\operator\defined.h" />
+    <ClInclude Include="bit\operator\bit.h" />
+    <ClInclude Include="bit\operator\adl.h" />
+    <ClInclude Include="bit\operator\shift.h" />
+    <ClInclude Include="bit\operator.h" />
+    <ClInclude Include="external\stl\range\algorithm\defined.h" />
+    <ClInclude Include="external\stl\range\concept\defined.h" />
+    <ClInclude Include="external\stl\range\algorithm\static_size.h" />
+    <ClInclude Include="external\stl\range\concept\static_sized.h" />
+    <ClInclude Include="external\stl\range\algorithm.h" />
+    <ClInclude Include="external\stl\range\concept.h" />
+    <ClInclude Include="bit\algorithm\atomic.h" />
+    <ClInclude Include="bit\algorithm\to_integral.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="_discard\mpl\structure\type\structure\describe\concept.h" />

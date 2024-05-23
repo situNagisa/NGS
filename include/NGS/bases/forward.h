@@ -13,13 +13,16 @@ public:
 	using base_type::operator=;
 };
 
-template<class Forward, class...>
-struct adl_forward : Forward
-{
-	NGS_PP_INJECT_EXPLICIT(adl_forward, Forward);
-public:
-	using base_type::base_type;
-	using base_type::operator=;
-};
+
+#define NGS_BASES_ADL_FORWARD()						\
+template<class Forward = ::std::true_type>			\
+struct adl_forward : Forward						\
+{													\
+	NGS_PP_INJECT_EXPLICIT(adl_forward, Forward);	\
+public:												\
+	using base_type::base_type;						\
+	using base_type::operator=;						\
+};													\
+//
 
 NGS_LIB_END

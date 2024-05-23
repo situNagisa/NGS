@@ -19,8 +19,6 @@ public:
 	using base_type::operator[];
 	using base_type::operator bool;
 
-	using base_type::begin;
-	using base_type::end;
 #if defined(NGS_CPP_STANDARD_HAS_23)
 	using base_type::cbegin;
 	using base_type::cend;

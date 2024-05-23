@@ -6,16 +6,25 @@ NGS_LIB_BEGIN
 
 NGS_HPP_INLINE void GLFW::init_opengl(int major, int minor)
 {
-	if (!glfwInit())
+	if (!::glfwInit())
 		NGS_ASSERT(false, "glfw init fail!");
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
+	::glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
+	::glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	if(major >= 3)
+	{
+		if(minor >= 2)
+		{
+			::glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		}
+		if (minor >= 0)
+		{
 #if defined(NGS_SYSTEM_IS_MAC)
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+			::glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
+		}
+	}
 }
 
 NGS_HPP_INLINE void GLFW::init_vulkan()

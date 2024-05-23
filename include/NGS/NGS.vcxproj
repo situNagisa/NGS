@@ -41,9 +41,11 @@
     <ClInclude Include="basic\preprocessor\has_property.h" />
     <ClInclude Include="bit\algorithm.h" />
     <ClInclude Include="bit\algorithm\atomic.h" />
-    <ClInclude Include="bit\algorithm\bit_of.h" />
+    <ClInclude Include="bit\algorithm\bit.h" />
+    <ClInclude Include="bit\algorithm\size.h" />
     <ClInclude Include="bit\algorithm\defined.h" />
     <ClInclude Include="bit\algorithm\shift.h" />
+    <ClInclude Include="bit\algorithm\to_integral.h" />
     <ClInclude Include="bit\bit.h" />
     <ClInclude Include="bit\concept.h" />
     <ClInclude Include="bit\concept\bit.h" />
@@ -59,7 +61,20 @@
     <ClInclude Include="bit\literals.h" />
     <ClInclude Include="bit\literals\byte.h" />
     <ClInclude Include="bit\literals\defined.h" />
+    <ClInclude Include="bit\operator.h" />
+    <ClInclude Include="bit\operator\adl.h" />
+    <ClInclude Include="bit\operator\bit.h" />
+    <ClInclude Include="bit\operator\defined.h" />
+    <ClInclude Include="bit\operator\shift.h" />
     <ClInclude Include="bit\trait.h" />
+    <ClInclude Include="config\calling_convention.h" />
+    <ClInclude Include="external\stl\range\algorithm.h" />
+    <ClInclude Include="external\stl\range\algorithm\defined.h" />
+    <ClInclude Include="external\stl\range\algorithm\static_size.h" />
+    <ClInclude Include="external\stl\range\concept.h" />
+    <ClInclude Include="external\stl\range\concept\defined.h" />
+    <ClInclude Include="external\stl\range\concept\static_sized.h" />
+    <ClInclude Include="external\stl\range\range_closure.h" />
     <ClInclude Include="external\stl\range\range_interface.h" />
     <ClInclude Include="preprocessor\utils\inject.h" />
     <ClInclude Include="_discard\bit\algorithm.h" />
@@ -1609,7 +1624,6 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -1627,7 +1641,6 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -1645,7 +1658,6 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -1663,7 +1675,6 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>

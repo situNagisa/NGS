@@ -28,7 +28,13 @@ concept bit_operatable = requires(const type_traits::object_t<T>& left, const ty
 };
 
 template<class T>
-concept range = ::std::ranges::range<T> && bit<::std::ranges::range_value_t<T>> && bit_operatable<T>;
+concept range = ::std::ranges::range<T> && bit<::std::ranges::range_value_t<T>>;
+
+template<class T>
+concept sized_range = range<T> && ::std::ranges::sized_range<T>;
+
+template<class T>
+concept static_sized_range = sized_range<T> && external::stl::ranges::algorithm::statid_sized_range<T>;
 
 template<class T>
 concept random_access_range = range<T> && ::std::ranges::random_access_range<T>;

@@ -4,6 +4,7 @@
 #include "./trait.h"
 #include "./concept.h"
 #include "./algorithm.h"
+#include "./operator.h"
 #include "./implement.h"
 #include "./literals.h"
 

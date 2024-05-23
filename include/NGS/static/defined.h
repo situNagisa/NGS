@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "NGS/basic/basic.h"
+#include "NGS/type_trait/type_trait.h"
 
 #define NGS_STATIC_NS statics
 #define NGS_STATIC_BEGIN NGS_BEGIN namespace NGS_STATIC_NS {

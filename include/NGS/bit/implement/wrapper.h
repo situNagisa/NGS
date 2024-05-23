@@ -2,38 +2,43 @@
 
 #include "../concept.h"
 #include "../algorithm.h"
+#include "../operator.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
 
 template<concepts::bit_operatable T>
-struct wrapper : ::std::ranges::view_interface<wrapper<T>>
+struct wrapper : operators::adl_forward<external::stl::ranges::range_interface<wrapper<T>>>
 {
-	NGS_PP_INJECT_EXPLICIT(wrapper, ::std::ranges::view_interface<wrapper>);
+	NGS_PP_INJECT(wrapper);
 public:
+	consteval static bool assignable() noexcept { return ::std::assignable_from<type_traits::object_t<T>&, type_traits::object_t<T>>; }
+
 	constexpr wrapper() noexcept = default;
 	constexpr explicit(false) wrapper(auto&& value) noexcept requires ::std::constructible_from<T, decltype(value)>
 		: _value(NGS_PP_PERFECT_FORWARD(value))
 	{}
-	constexpr wrapper(const self_type& other) : _value(other._value) {}
 
-	constexpr auto&& value() noexcept { return _value; }
-	constexpr auto&& value() const noexcept { return _value; }
+	[[nodiscard]] constexpr auto&& value() noexcept { return _value; }
+	[[nodiscard]] constexpr auto&& value() const noexcept { return _value; }
 
-	constexpr decltype(auto) operator&(const self_type& other) const noexcept { return self_type(_value & other._value); }
-	constexpr decltype(auto) operator|(const self_type& other) const noexcept { return self_type(_value | other._value); }
-	constexpr decltype(auto) operator^(const self_type& other) const noexcept { return self_type(_value ^ other._value); }
-	constexpr decltype(auto) operator~() const noexcept { return self_type(~_value); }
+	template<concepts::fundamental Result>
+	constexpr auto to_integral() const { return static_cast<Result>(_value); }
 
-	constexpr self_type& operator&=(const self_type& other) noexcept requires ::std::assignable_from<T,type_traits::object_t<T>> { _value = _value & other._value; return *this; }
-	constexpr self_type& operator|=(const self_type& other) noexcept requires ::std::assignable_from<T,type_traits::object_t<T>> { _value = _value | other._value; return *this; }
-	constexpr self_type& operator^=(const self_type& other) noexcept requires ::std::assignable_from<T,type_traits::object_t<T>> { _value = _value ^ other._value; return *this; }
+	[[nodiscard]] constexpr decltype(auto) bit_and(const self_type& other) const noexcept { return self_type(_value & other._value); }
+	[[nodiscard]] constexpr decltype(auto) bit_or(const self_type& other) const noexcept { return self_type(_value | other._value); }
+	[[nodiscard]] constexpr decltype(auto) bit_xor(const self_type& other) const noexcept { return self_type(_value ^ other._value); }
+	[[nodiscard]] constexpr decltype(auto) bit_not() const noexcept { return self_type(~_value); }
+
+	constexpr self_type& operator&=(const self_type& other) noexcept requires (assignable()) { _value = _value & other._value; return *this; }
+	constexpr self_type& operator|=(const self_type& other) noexcept requires (assignable()) { _value = _value | other._value; return *this; }
+	constexpr self_type& operator^=(const self_type& other) noexcept requires (assignable()) { _value = _value ^ other._value; return *this; }
 
 	constexpr decltype(auto) operator<<(::std::integral auto shift) const noexcept { return self_type(_value << shift); }
 	constexpr decltype(auto) operator>>(::std::integral auto shift) const noexcept { return self_type(_value >> shift); }
 
-	constexpr self_type& operator<<=(::std::integral auto shift) noexcept requires ::std::assignable_from<T, type_traits::object_t<T>> { _value = (_value << shift); return *this; }
-	constexpr self_type& operator>>=(::std::integral auto shift) noexcept requires ::std::assignable_from<T, type_traits::object_t<T>> { _value = (_value >> shift); return *this; }
+	constexpr self_type& operator<<=(::std::integral auto shift) noexcept requires (assignable()) { _value = (_value << shift); return *this; }
+	constexpr self_type& operator>>=(::std::integral auto shift) noexcept requires (assignable()) { _value = (_value >> shift); return *this; }
 
 private:
 	template<class T>
@@ -47,19 +52,19 @@ private:
 
 		constexpr void set() const requires (assignable())
 		{
-			(*_value) = *_value | (1 << _index);
+			algorithm::set(*_value, _index);
 		}
 		constexpr void reset() const requires (assignable())
 		{
-			(*_value) = *_value & ~(1 << _index);
+			algorithm::reset(*_value, _index);
 		}
 		constexpr void flip() const requires (assignable())
 		{
-			(*_value) = ~*_value;
+			algorithm::flip(*_value, _index);
 		}
 		constexpr bool test() const
 		{
-			return (*_value) & (1 << _index);
+			return algorithm::test(*_value, _index);
 		}
 		constexpr explicit(false) operator bool() const { return test(); }
 

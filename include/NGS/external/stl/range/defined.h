@@ -1,5 +1,7 @@
 #pragma once
 
+#include "NGS/cpt/cpt.h"
+
 #include "../defined.h"
 
 #define NGS_LIB_VERSION_MAJOR 1

@@ -3,8 +3,9 @@
 #include <GLFW/glfw3.h>
 
 #include "NGS/bases/bases.h"
-#include "NGS/color/color.h"
-#include "NGS/math/vector.h"
+#include "NGS/assert/assert.h"
+//#include "NGS/color/color.h"
+//#include "NGS/math/vector.h"
 
 #include "../defined.h"
 
