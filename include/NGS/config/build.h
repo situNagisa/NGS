@@ -11,10 +11,10 @@
 #	else
 #		define NGS_BUILD_TYPE NGS_BUILD_RELEASE
 #	endif
-#elif NGS_COMPILER_IS_GCC or NGS_COMPILER_IS_CLANG
+#elif NGS_COMPILER_IS_GCC || NGS_COMPILER_IS_CLANG
 #	ifdef NDEBUG
 #		define NGS_BUILD_TYPE NGS_BUILD_RELEASE
-#	elif defined(__DEBUG) or defined(_DEBUG)
+#	elif defined(__DEBUG) || defined(_DEBUG)
 #		define NGS_BUILD_TYPE NGS_BUILD_DEBUG
 #	else
 #		define NGS_BUILD_TYPE NGS_BUILD_DEBUG
@@ -24,9 +24,9 @@
 #endif
 
 #if NGS_BUILD_TYPE == NGS_BUILD_DEBUG
-#	define NGS_BUILD_TYPE_IS_DEBUG true
+#	define NGS_BUILD_TYPE_IS_DEBUG 1
 #endif
 
 #if NGS_BUILD_TYPE == NGS_BUILD_RELEASE
-#	define NGS_BUILD_TYPE_IS_RELEASE true
+#	define NGS_BUILD_TYPE_IS_RELEASE 1
 #endif
