@@ -42,21 +42,21 @@ constexpr bool assert_(
 NGS_LIB_MODULE_END
 
 #if NGS_COMPILER_IS_MSVC && NGS_BUILD_TYPE_IS_DEBUG
-#	define NGS_ASSERT_FAIL __debugbreak()
+#	define NGS_ASSERT_FAIL() __debugbreak()
 #else
-#	define NGS_ASSERT_FAIL std::abort()
+#	define NGS_ASSERT_FAIL() std::abort()
 #endif
 
 #if NGS_BUILD_TYPE_IS_DEBUG
 
-#define NGS_EXPECT(condition,...)	NGS_ asserts::detail::dynamic_assert((condition),#condition NGS_PP_VA_ARGS_OPT_COMMA(__VA_ARGS__))
+#define NGS_EXPECT(condition,...)	::ngs::asserts::detail::dynamic_assert((condition),#condition NGS_PP_VA_ARGS_OPT_COMMA(__VA_ARGS__))
 
 #define NGS_ASSERT(condition,...)									\
 do																	\
 {																	\
 	if (!NGS_EXPECT(condition ,__VA_ARGS__))						\
 	{																\
-		NGS_ASSERT_FAIL;											\
+		NGS_ASSERT_FAIL();											\
 	}																\
 }while(false)														\
 //
@@ -67,13 +67,9 @@ do																				\
 {																				\
 	if(::std::is_constant_evaluated())											\
 	{																			\
-																				\
-	}																			\
-	else																		\
-	{																			\
 		if (!NGS_EXPECT(condition ,__VA_ARGS__))								\
 		{																		\
-			NGS_ASSERT_FAIL;													\
+			NGS_ASSERT_FAIL();													\
 		}																		\
 	}																			\
 } while (false)																	\
