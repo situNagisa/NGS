@@ -65,7 +65,7 @@ do																	\
 #define NGS_ASSERT_IF_CONSTEVAL(condition,...)									\
 do																				\
 {																				\
-	if(::std::is_constant_evaluated())											\
+	if(!::std::is_constant_evaluated())											\
 	{																			\
 		if (!NGS_EXPECT(condition ,__VA_ARGS__))								\
 		{																		\

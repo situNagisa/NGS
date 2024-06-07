@@ -34,7 +34,7 @@ template<class T>
 concept sized_range = range<T> && ::std::ranges::sized_range<T>;
 
 template<class T>
-concept static_sized_range = sized_range<T> && external::stl::ranges::algorithm::statid_sized_range<T>;
+concept static_sized_range = sized_range<T> && external::stl::ranges::algorithm::static_sized_range<T>;
 
 template<class T>
 concept random_access_range = range<T> && ::std::ranges::random_access_range<T>;
