@@ -68,6 +68,8 @@
     <ClInclude Include="bit\operator\shift.h" />
     <ClInclude Include="bit\trait.h" />
     <ClInclude Include="config\calling_convention.h" />
+    <ClInclude Include="external\imgui\defined.h" />
+    <ClInclude Include="external\imgui\imgui.h" />
     <ClInclude Include="external\stl\range\algorithm.h" />
     <ClInclude Include="external\stl\range\algorithm\defined.h" />
     <ClInclude Include="external\stl\range\algorithm\static_size.h" />
@@ -125,6 +127,16 @@
     <ClInclude Include="math\tensor\trait\shape.h" />
     <ClInclude Include="math\tensor\trait\subtensor.h" />
     <ClInclude Include="preprocessor\utils\inject.h" />
+    <ClInclude Include="protoc\defined.h" />
+    <ClInclude Include="protoc\field.h" />
+    <ClInclude Include="protoc\field\algorithm.h" />
+    <ClInclude Include="protoc\field\concept.h" />
+    <ClInclude Include="protoc\field\trait.h" />
+    <ClInclude Include="protoc\field\defined.h" />
+    <ClInclude Include="protoc\protoc.h" />
+    <ClInclude Include="protoc\protocol.h" />
+    <ClInclude Include="protoc\protocol\field_set.h" />
+    <ClInclude Include="protoc\protocol\defined.h" />
     <ClInclude Include="_discard\bit\algorithm.h" />
     <ClInclude Include="_discard\bit\algorithm\bit.h" />
     <ClInclude Include="_discard\bit\algorithm\bit_byte.h" />

@@ -1576,6 +1576,18 @@
     <ClInclude Include="linalg\extent\defined.h" />
     <ClInclude Include="linalg\extent\shape.h" />
     <ClInclude Include="linalg\extent\trait.h" />
+    <ClInclude Include="protoc\defined.h" />
+    <ClInclude Include="protoc\field\trait.h" />
+    <ClInclude Include="protoc\field\defined.h" />
+    <ClInclude Include="protoc\field\concept.h" />
+    <ClInclude Include="protoc\field.h" />
+    <ClInclude Include="protoc\protocol\defined.h" />
+    <ClInclude Include="protoc\protocol\field_set.h" />
+    <ClInclude Include="protoc\field\algorithm.h" />
+    <ClInclude Include="protoc\protocol.h" />
+    <ClInclude Include="protoc\protoc.h" />
+    <ClInclude Include="external\imgui\defined.h" />
+    <ClInclude Include="external\imgui\imgui.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="_discard\mpl\structure\type\structure\describe\concept.h" />
