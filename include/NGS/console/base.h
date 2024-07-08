@@ -26,7 +26,7 @@ struct NGS_DLL_API console
 	void set_text_color(text_color front, text_color back = text_color::black);
 
 private:
-	void_ptr _data = nullptr;
+	void* _data = nullptr;
 };
 
 

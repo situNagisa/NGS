@@ -8,12 +8,12 @@ template<class Type> struct  precision { using type = Type; };
 
 template<> struct precision<float> { using type = double; };
 template<> struct precision<double> { using type = long double; };
-template<> struct precision<int8> { using type = int16; };
-template<> struct precision<int16> { using type = int32; };
-template<> struct precision<int32> { using type = int64; };
-template<> struct precision<uint8> { using type = uint16; };
-template<> struct precision<uint16> { using type = uint32; };
-template<> struct precision<uint32> { using type = uint64; };
+template<> struct precision<::std::int8_t> { using type = ::std::int16_t; };
+template<> struct precision<::std::int16_t> { using type = ::std::int32_t; };
+template<> struct precision<::std::int32_t> { using type = ::std::int64_t; };
+template<> struct precision<::std::uint8_t> { using type = ::std::uint16_t; };
+template<> struct precision<::std::uint16_t> { using type = ::std::uint32_t; };
+template<> struct precision<::std::uint32_t> { using type = ::std::uint64_t; };
 
 template<class Type>
 using precision_t = typename precision<Type>::type;
