@@ -20,7 +20,7 @@ public:
 	using vulkan_type = trait::info_type;
 
 	vulkan_struct structure{ trait::structure_type };
-	::std::span<const byte> code{};
+	::std::span<const ::std::byte> code{};
 
 	auto to_vulkan()const
 	{

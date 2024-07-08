@@ -1,5 +1,6 @@
 ﻿#pragma once
 
-#include "./enum.h"
-#include "./type.h"
-#include "./value.h"
+#include "./field_symbol.h"
+
+
+#include "NGS/lib/lib_end.h"

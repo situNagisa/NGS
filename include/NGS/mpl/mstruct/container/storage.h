@@ -70,7 +70,7 @@ public:
 		return *this;
 	}
 
-	byte _data[basic::struct_size_v<base_type>]{};
+	::std::uint8_t _data[basic::struct_size_v<base_type>]{};
 };
 
 using algorithm::to_string;

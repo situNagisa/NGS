@@ -7,7 +7,7 @@
 
 #define NGS_TO_STRING_NS to_strings
 
-#define NGS_LIB_VERSION_MAJOR 0
+#define NGS_LIB_VERSION_MAJOR 1
 #define NGS_LIB_VERSION_MINOR 1
 #define NGS_LIB_VERSION_PATCH 0
 

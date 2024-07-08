@@ -11,3 +11,13 @@
 
 #define NGS_LOG_BEGIN NGS_BEGIN namespace logs {
 #define NGS_LOG_END } NGS_END
+
+
+#include "NGS/basic/basic.h"
+
+#define NGS_LIB_VERSION_MAJOR 0
+#define NGS_LIB_VERSION_MINOR 1
+#define NGS_LIB_VERSION_PATCH 0
+
+#define NGS_LIB_NAME logs
+#include "NGS/lib/lib.h"

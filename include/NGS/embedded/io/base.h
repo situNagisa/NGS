@@ -30,22 +30,22 @@ public:
 	 * \param size 需要读取的长度（0为默认）
 	 * \return 读取成功的数据
 	 */
-	virtual size_t read(void_ptr buffer, size_t size = 0) = 0;
+	virtual size_t read(void* buffer, size_t size = 0) = 0;
 	/**
 	 * \brief 将数据写入到io流中
 	 * \param buffer 缓存区
 	 * \param size 需要写入的长度
 	 * \return 写入成功的数据
 	 */
-	virtual size_t write(void_ptr_cst buffer, size_t size) = 0;
+	virtual size_t write(const void* buffer, size_t size) = 0;
 
 	NGS_CONSTEXPR26 size_t write(::std::ranges::contiguous_range auto&& buffer)
 	{
 		return this->write(::std::ranges::data(NGS_PP_PERFECT_FORWARD(buffer)), ::std::ranges::size(buffer));
 	}
-	NGS_CONSTEXPR26 size_t write(auto&&... buffer) requires requires{ (static_cast<byte>(NGS_PP_PERFECT_FORWARD(buffer)), ...); }
+	NGS_CONSTEXPR26 size_t write(auto&&... buffer) requires requires{ (static_cast<::std::uint8_t>(NGS_PP_PERFECT_FORWARD(buffer)), ...); }
 	{
-		std::array<byte, sizeof...(buffer)> b{ static_cast<byte>(NGS_PP_PERFECT_FORWARD(buffer))... };
+		std::array<::std::uint8_t, sizeof...(buffer)> b{ static_cast<::std::uint8_t>(NGS_PP_PERFECT_FORWARD(buffer))... };
 		return this->write(b);
 	}
 	NGS_CONSTEXPR26 size_t read(::std::ranges::contiguous_range auto& buffer)

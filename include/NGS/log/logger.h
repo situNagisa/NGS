@@ -105,9 +105,9 @@ private:
 	{
 		if (_config.enable_print.time)
 		{
-			const auto now = std::chrono::system_clock::now();
-			std::time_t now_c = std::chrono::system_clock::to_time_t(now);
-			_print(std::put_time(std::localtime(&now_c), "%F %T "));
+			//const auto now = std::chrono::system_clock::now();
+			//std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+			//_print(std::put_time(std::localtime(&now_c), "%F %T "));
 
 		}
 
@@ -165,7 +165,7 @@ inline logger std_logger{};
 #define NGS_LOG_CALL(function,...)				\
 do												\
 {												\
-	NGS_ logs::std_logger.set_scope_name(NGS_PP_FUNCTION_NAME);\
+	NGS_ logs::std_logger.set_scope_name(NGS_PP_GET_CURRENT_FUNCTION_NAME());\
 	NGS_ logs::std_logger.function(__VA_ARGS__);\
 } while (false)									\
 //
