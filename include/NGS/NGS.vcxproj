@@ -122,6 +122,7 @@
     <ClInclude Include="external\imgui\component\detail\drag.h" />
     <ClInclude Include="external\imgui\defined.h" />
     <ClInclude Include="external\imgui\include.h" />
+    <ClInclude Include="external\opengl_new\context.h" />
     <ClInclude Include="external\opengl_new\context\config.h" />
     <ClInclude Include="external\opengl_new\context\context.h" />
     <ClInclude Include="external\opengl_new\context\core.h" />
@@ -152,11 +153,16 @@
     <ClInclude Include="external\opengl_new\error.h" />
     <ClInclude Include="external\opengl_new\error\error.h" />
     <ClInclude Include="external\opengl_new\opengl.h" />
+    <ClInclude Include="external\opengl_new\texture.h" />
     <ClInclude Include="external\opengl_new\texture\core.h" />
     <ClInclude Include="external\opengl_new\texture\defined.h" />
     <ClInclude Include="external\opengl_new\texture\detail.h" />
+    <ClInclude Include="external\opengl_new\texture\detail\reflect.h" />
     <ClInclude Include="external\opengl_new\texture\detail\defined.h" />
-    <ClInclude Include="external\opengl_new\texture\enum.h" />
+    <ClInclude Include="external\opengl_new\texture\detail\context.h" />
+    <ClInclude Include="external\opengl_new\texture\detail\image.h" />
+    <ClInclude Include="external\opengl_new\texture\detail\make.h" />
+    <ClInclude Include="external\opengl_new\texture\texture.h" />
     <ClInclude Include="external\stl\range\algorithm.h" />
     <ClInclude Include="external\stl\range\algorithm\defined.h" />
     <ClInclude Include="external\stl\range\algorithm\static_size.h" />

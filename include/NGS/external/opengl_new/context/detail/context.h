@@ -34,7 +34,7 @@ struct context_machine : bases::singleton<context_machine<ContextType, Binder>>
 
 #define NGS_EXTERNAL_OPENGL_CONTEXT_DEFINE_BASIC_CONTEXT(context_id,creator,deleter)	\
 struct context_id :																		\
-	NGS_NS::NGS_EXTERNAL_OPENGL_CONTEXT_NS::raii_context<creator, deleter>				\
+	NGS_NS::NGS_EXTERNAL_OPENGL_CONTEXT_NS::details::raii_context<creator, deleter>		\
 {																						\
 	NGS_PP_INJECT(context_id);															\
 public:																					\
@@ -47,11 +47,11 @@ public:																					\
 
 #define NGS_EXTERNAL_OPENGL_CONTEXT_DEFINE_BINDABLE_CONTEXT(context_id,creator,deleter,binder)			\
 struct context_id :																						\
-	NGS_NS::NGS_EXTERNAL_OPENGL_CONTEXT_NS::raii_context<creator, deleter>								\
+	NGS_NS::NGS_EXTERNAL_OPENGL_CONTEXT_NS::details::raii_context<creator, deleter>						\
 {																										\
 	NGS_PP_INJECT(context_id);																			\
 public:																									\
-	using machine_type = NGS_NS::NGS_EXTERNAL_OPENGL_CONTEXT_NS::context_machine<self_type, binder>;	\
+	using machine_type = NGS_NS::NGS_EXTERNAL_OPENGL_CONTEXT_NS::details::context_machine<self_type, binder>;\
 	NGS_EXTERNAL_OPENGL_CONTEXT_TYPE_AUTO();															\
 																										\
 	using base_type::base_type;																			\

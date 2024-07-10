@@ -1716,7 +1716,7 @@
     <ClInclude Include="external\opengl_new\texture\core.h" />
     <ClInclude Include="external\opengl_new\texture\defined.h" />
     <ClInclude Include="external\opengl_new\texture\detail.h" />
-    <ClInclude Include="external\opengl_new\texture\enum.h" />
+    <ClInclude Include="external\opengl_new\texture\texture.h" />
     <ClInclude Include="external\opengl_new\error\error.h" />
     <ClInclude Include="external\opengl_new\error.h" />
     <ClInclude Include="external\opengl_new\context\context.h" />
@@ -1728,6 +1728,12 @@
     <ClInclude Include="external\opengl_new\context\config.h" />
     <ClInclude Include="external\opengl_new\context\detail\machine.h" />
     <ClInclude Include="external\opengl_new\context\detail\bind.h" />
+    <ClInclude Include="external\opengl_new\context.h" />
+    <ClInclude Include="external\opengl_new\texture\detail\context.h" />
+    <ClInclude Include="external\opengl_new\texture\detail\image.h" />
+    <ClInclude Include="external\opengl_new\texture\detail\make.h" />
+    <ClInclude Include="external\opengl_new\texture.h" />
+    <ClInclude Include="external\opengl_new\texture\detail\reflect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="_discard\mpl\structure\type\structure\describe\concept.h" />
