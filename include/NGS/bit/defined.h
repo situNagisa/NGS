@@ -4,7 +4,7 @@
 #include "NGS/bases/bases.h"
 #include "NGS/cpt/cpt.h"
 #include "NGS/layout/layout.h"
-#include "NGS/external/boost/stl_interfaces.h"
+//#include "NGS/external/boost/stl_interfaces.h"
 #include "NGS/external/stl/range.h"
 
 #define NGS_BIT_NS bits

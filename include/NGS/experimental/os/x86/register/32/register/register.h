@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../register.h"
+#include "../../utility.h"
 #include "../../16.h"
 #include "./defined.h"
 
@@ -31,12 +32,12 @@ public:
 
 	constexpr explicit(false) extend_trivial_register(underlying_type value = {}) noexcept
 		: base_type{ static_cast<typename base_type::underlying_type>(value) }
-		, _extend{ static_cast<typename base_type::underlying_type>(bits::algorithm::extract(value, bits::algorithm::bit_of<typename base_type::underlying_type>(), bits::algorithm::bit_of<typename base_type::underlying_type>())) }
+		, _extend{ static_cast<typename base_type::underlying_type>(utility::bit_extract(value, bits::algorithm::bit_of<typename base_type::underlying_type>(), bits::algorithm::bit_of<typename base_type::underlying_type>())) }
 	{}
 
 	constexpr auto value_16() const noexcept { return base_type::value(); }
 
-	constexpr auto value() const noexcept { return bits::algorithm::fill(base_type::value(), _extend); }
+	constexpr auto value() const noexcept { return utility::byte_fill(base_type::value(), _extend); }
 
 	typename base_type::underlying_type _extend;
 };

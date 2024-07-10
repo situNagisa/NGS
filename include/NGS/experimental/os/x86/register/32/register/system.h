@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../utility.h"
 #include "./register.h"
 #include "./defined.h"
 
@@ -18,7 +19,7 @@ public:
 
 	constexpr ::std::uintptr_t address() const noexcept
 	{
-		return bits::algorithm::fill(address_low, address_high);
+		return utility::byte_fill(address_low, address_high);
 	}
 };
 
@@ -47,7 +48,7 @@ public:
 
 	constexpr ::std::uintptr_t address() const noexcept
 	{
-		return bits::algorithm::fill(address_low, address_high);
+		return utility::byte_fill(address_low, address_high);
 	}
 };
 

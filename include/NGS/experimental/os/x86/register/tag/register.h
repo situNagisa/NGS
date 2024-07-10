@@ -39,6 +39,6 @@ template<class T>
 concept register_tag = _detail::derived_from_basic_register<T>;
 
 template<class T>
-concept register_ = register_tag<register_category_t<T>> && (bits::algorithm::bit_of<bits::bitsets::underlying_type_t<T>>() >= NGS_LIB_MODULE_NAME::register_bit_v<register_category_t<T>>());
+concept register_ = register_tag<register_category_t<T>> /*&& (bits::algorithm::bit_of<bits::bitsets::underlying_type_t<T>>() >= NGS_LIB_MODULE_NAME::register_bit_v<register_category_t<T>>())*/;
 
 NGS_LIB_MODULE_END

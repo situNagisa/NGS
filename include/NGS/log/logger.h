@@ -127,6 +127,10 @@ private:
 		}
 	}
 
+	void _print(char c)
+	{
+		_print_callback(::std::string_view(&c, 1));
+	}
 	void _print(auto&& first)
 	{
 		if constexpr (requires{ _print_callback(NGS_PP_PERFECT_FORWARD(first)); })

@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "./range_interface.h"
-#include "./range/range_closure.h"
+#include "./range_closure.h"
 
 #include "./algorithm.h"
 #include "./concept.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../enum.h"
+#include "../../utility.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
@@ -74,19 +74,6 @@ namespace segment_types
 	}
 }
 
-namespace _detail
-{
-	constexpr auto bit_extract(::std::unsigned_integral auto value, ::std::size_t start, ::std::size_t length)
-	{
-		return (value >> start) & ((1 << length) - 1);
-	}
-
-	constexpr decltype(auto) byte_extract(::std::unsigned_integral auto value, ::std::size_t start, ::std::size_t length)
-	{
-		return _detail::bit_extract(value, bits::algorithm::byte_to_bit(start), bits::algorithm::byte_to_bit(length));
-	}
-}
-
 struct segment_descriptor
 {
 	NGS_PP_INJECT_BEGIN(segment_descriptor);
@@ -121,19 +108,19 @@ public:
 		enums::bit_width operation_size,
 		enums::granularity granularity
 	)
-		: _limit_low(static_cast<underlying_type>(_detail::bit_extract(limit,0,16)))
-		, _base_low(static_cast<underlying_type>(_detail::bit_extract(base,0,16)))
-		, _base_middle(static_cast<underlying_type>(_detail::bit_extract(base,16,8)))
+		: _limit_low(static_cast<underlying_type>(utility::bit_extract(limit,0,16)))
+		, _base_low(static_cast<underlying_type>(utility::bit_extract(base,0,16)))
+		, _base_middle(static_cast<underlying_type>(utility::bit_extract(base,16,8)))
 		, _segment_type(static_cast<underlying_type>(segment_type))
 		, _descriptor_type(static_cast<underlying_type>(descriptor_type))
 		, _descriptor_privilege(static_cast<underlying_type>(descriptor_privilege))
 		, _present(static_cast<underlying_type>(present))
-		, _limit_high(static_cast<underlying_type>(_detail::bit_extract(limit,16,4)))
+		, _limit_high(static_cast<underlying_type>(utility::bit_extract(limit,16,4)))
 		, _available(available)
 		, _code_bit(static_cast<underlying_type>(code_bit))
 		, _operation_size(static_cast<underlying_type>(operation_size))
 		, _granularity(static_cast<underlying_type>(granularity))
-		, _base_high(static_cast<underlying_type>(_detail::bit_extract(base,24,8)))
+		, _base_high(static_cast<underlying_type>(utility::bit_extract(base,24,8)))
 	{}
 
 	constexpr segment_descriptor(

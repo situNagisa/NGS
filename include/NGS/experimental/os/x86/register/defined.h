@@ -3,6 +3,10 @@
 #include "NGS/basic/basic.h"
 #include "NGS/type_trait/type_trait.h"
 #include "NGS/bit/bit.h"
+#include "NGS/layout/layout.h"
+
+#include "NGS/experimental/os/x86/enum.h"
+
 #include "../defined.h"
 
 #define NGS_LIB_VERSION_MAJOR 0

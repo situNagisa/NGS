@@ -6,7 +6,6 @@
 
 NGS_LIB_MODULE_BEGIN
 
-
 struct table_entry
 {
 	NGS_PP_INJECT_BEGIN(table_entry);
@@ -20,15 +19,13 @@ public:
 	constexpr void bind(physical_address_4_kb page)
 	{
 		_value.present = true;
-		_value.page_base = page.value();
+		_value.page_base = page.base();
 	}
 	constexpr auto unbind()
 	{
 		_value.present = false;
 		return physical_address_4_kb(_value.page_base << 12);
 	}
-
-	auto page() const { return reinterpret_cast<physical_page_4_kb*>(_value.page_base << 12); }
 
 	constexpr auto access_type() const { return static_cast<enums::access_type>(_value.access_type); }
 	constexpr void set_access_type(enums::access_type value) { _value.access_type = static_cast<table_type::underlying_type>(value); }
@@ -46,31 +43,15 @@ public:
 	table_type _value;
 };
 
-struct table : ::std::ranges::view_interface<table>
+
+auto as_table (page_4_kb& page)
 {
-	NGS_PP_INJECT_EXPLICIT(table, ::std::ranges::view_interface<table>);
-public:
-	using entry_type = table_entry;
+	return ::std::span<table_entry, page_4_kb::page_size / sizeof(table_entry)>(page);
+}
 
-	constexpr auto begin() { return _data.begin(); }
-	constexpr auto begin()const { return _data.begin(); }
-	constexpr auto end() { return _data.end(); }
-	constexpr auto end() const { return _data.end(); }
-
-	using base_type::operator[];
-	constexpr auto&& operator[](const page_4_kb* address)
-	{
-		namespace x86 = ::ngs::os::x86;
-		return _data[x86::algorithm::page_table_index<x86::enums::page_size::_4kb>(reinterpret_cast<x86::pointer_underlying_t>(address))];
-	}
-	constexpr auto&& operator[](const page_4_kb* address) const
-	{
-		namespace x86 = ::ngs::os::x86;
-		return _data[x86::algorithm::page_table_index<x86::enums::page_size::_4kb>(reinterpret_cast<x86::pointer_underlying_t>(address))];
-	}
-
-	::std::array<entry_type, ::ngs::bits::literals::operator ""_kb(1)> _data;
-};
-
+auto as_table(const page_4_kb& page)
+{
+	return ::std::span<const table_entry, page_4_kb::page_size / sizeof(table_entry)>(page);
+}
 
 NGS_LIB_MODULE_END

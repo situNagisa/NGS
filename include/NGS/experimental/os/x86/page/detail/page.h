@@ -5,23 +5,29 @@
 NGS_LIB_MODULE_BEGIN
 
 template<::std::size_t Size>
-struct basic_page final: ::std::ranges::view_interface<basic_page<Size>>
+struct basic_page : ::std::array<::std::byte, Size>
 {
-	NGS_PP_INJECT(basic_page);
+	NGS_PP_INJECT_BEGIN(basic_page);
 public:
-	constexpr static auto page_size() noexcept { return Size; }
+	constexpr static auto page_size = Size;
 
-	//uninitialized
-	::std::array<::std::byte, page_size()> _data;
+	template<class T>
+	explicit(true) operator ::std::span<T, page_size / sizeof(T)>(this auto&& self)
+	{
+		return ::std::span<T, page_size / sizeof(T)>(reinterpret_cast<T*>(::std::ranges::data(self)), page_size / sizeof(T));
+	}
+
+	template<class T>
+	explicit(true) operator ::std::span<T>(this auto&& self)
+	{
+		return ::std::span<T>(reinterpret_cast<T*>(::std::ranges::data(self)), page_size / sizeof(T));
+	}
 };
 
 template<enums::page_size Size>
 using page = basic_page<enums::factor(Size)>;
 
-using page_4_kb = basic_page<bits::literals::operator ""_kb(4)>;
-using page_4_mb = basic_page<bits::literals::operator ""_mb(4)>;
+using page_4_kb = page<enums::page_size::_4kb>;
+using page_4_mb = page<enums::page_size::_4mb>;
 
 NGS_LIB_MODULE_END
-
-template<::std::size_t Size>
-inline constexpr bool ::std::ranges::enable_view<NGS_NS::NGS_LIB_NAME::NGS_LIB_MODULE_NAME::basic_page<Size>> = false;

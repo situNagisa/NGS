@@ -7,5 +7,5 @@
 #endif
 
 #define NGS_EXTERNAL_BOOST_NS NGS_EXTERNAL_NS::nboost
-#define NGS_BOOST_BEGIN NGS_EXTERNAL_BEGIN namespace nboost{
-#define NGS_BOOST_END } NGS_EXTERNAL_END
+#define NGS_BOOST_BEGIN namespace NGS_EXTERNAL_BOOST_NS{
+#define NGS_BOOST_END }

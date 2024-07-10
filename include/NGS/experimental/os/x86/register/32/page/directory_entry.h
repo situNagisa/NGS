@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../../enum.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN

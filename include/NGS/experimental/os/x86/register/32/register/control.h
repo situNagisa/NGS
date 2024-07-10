@@ -65,7 +65,7 @@ public:
 	underlying_type page_level_cache_disable : 1;
 	underlying_type : 7;
 	underlying_type base : 20;
-
+#if 0
 	void load_to_register() const
 	{
 		volatile auto value = *reinterpret_cast<const ::std::uint32_t*>(this);
@@ -81,6 +81,7 @@ public:
 		asm volatile("movl %0, %%cr3" : : "r" (value));
 #endif
 	}
+#endif
 };
 
 struct control4_register

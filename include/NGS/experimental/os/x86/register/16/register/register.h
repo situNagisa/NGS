@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../register.h"
+#include "../../utility.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
@@ -16,7 +17,7 @@ public:
 	using register_category_type = Tag;
 
 	constexpr auto low() const noexcept { return static_cast<::std::byte>(_value); }
-	constexpr auto high() const noexcept { return static_cast<::std::byte>(bits::algorithm::extract(_value, bits::algorithm::bit_of<::std::byte>(), bits::algorithm::bit_of<::std::byte>())); }
+	constexpr auto high() const noexcept { return static_cast<::std::byte>(utility::bit_extract(_value, bits::algorithm::bit_of<::std::byte>(), bits::algorithm::bit_of<::std::byte>())); }
 
 	constexpr auto value() const noexcept { return _value; }
 
