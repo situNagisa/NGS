@@ -1734,6 +1734,7 @@
     <ClInclude Include="external\opengl_new\texture\detail\make.h" />
     <ClInclude Include="external\opengl_new\texture.h" />
     <ClInclude Include="external\opengl_new\texture\detail\reflect.h" />
+    <ClInclude Include="external\glfw\detail\hint.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="_discard\mpl\structure\type\structure\describe\concept.h" />

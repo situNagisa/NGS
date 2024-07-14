@@ -14,4 +14,9 @@ namespace guards
 
 using details::window;
 
+namespace hints = details::hints;
+using details::window_hint;
+using details::hint_t;
+using details::hint_v;
+
 NGS_LIB_END

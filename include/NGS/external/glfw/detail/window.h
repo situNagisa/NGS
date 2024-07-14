@@ -36,7 +36,12 @@ public:
 
 	[[nodiscard]] decltype(auto) should_close() const noexcept { return ::glfwWindowShouldClose(_handle); }
 	decltype(auto) close() const noexcept { ::glfwSetWindowShouldClose(_handle, GLFW_TRUE); }
+
+#if (GLFW_VERSION_MAJOR >= 3) && (GLFW_VERSION_MINOR >= 4)
+	[[nodiscard]] decltype(auto) title() const noexcept { return ::std::string_view(::glfwGetWindowTitle(_handle)); }
+#endif
 	decltype(auto) reset_title(::std::string_view title) const { ::glfwSetWindowTitle(_handle, title.data()); }
+
 	decltype(auto) move_to(int x, int y) const { ::glfwSetWindowPos(_handle, x, y); }
 	[[nodiscard]] decltype(auto) position() const
 	{
@@ -52,6 +57,11 @@ public:
 		::glfwGetWindowSize(_handle, &width, &height);
 		return ::std::make_pair(width, height);
 	}
+	[[nodiscard]] decltype(auto) size_limit(int min_width, int min_height, int max_width, int max_height) const noexcept
+	{
+		::glfwSetWindowSizeLimits(_handle, min_width, min_height, max_width, max_height);
+	}
+	[[nodiscard]] decltype(auto) aspect_ratio(int numerator, int denominator) const noexcept { ::glfwSetWindowAspectRatio(_handle, numerator, denominator); }
 
 	[[nodiscard]] decltype(auto) framebuffer_size() const noexcept
 	{
@@ -67,12 +77,22 @@ public:
 		return ::std::make_tuple(left, top, right, bottom);
 	}
 
+	decltype(auto) maximize() const noexcept { ::glfwMaximizeWindow(_handle); }
+	decltype(auto) minimize() const noexcept { ::glfwIconifyWindow(_handle); }
+	decltype(auto) restore() const noexcept { ::glfwRestoreWindow(_handle); }
+	decltype(auto) focus() const noexcept { ::glfwFocusWindow(_handle); }
+	decltype(auto) hide() const noexcept { ::glfwHideWindow(_handle); }
+	decltype(auto) show() const noexcept { ::glfwShowWindow(_handle); }
+
 	decltype(auto) active() const noexcept { ::glfwMakeContextCurrent(_handle); }
 
 	decltype(auto) swap_buffer() const noexcept { ::glfwSwapBuffers(_handle); }
 
 	[[nodiscard]] decltype(auto) key_state(int key) const noexcept { return ::glfwGetKey(_handle, key); }
 	[[nodiscard]] decltype(auto) mouse_state(int button) const noexcept { return ::glfwGetMouseButton(_handle, button); }
+
+	[[nodiscard]] decltype(auto) get_monitor() const noexcept { return ::glfwGetWindowMonitor(_handle); }
+	[[nodiscard]] decltype(auto) get_video_mode() const noexcept { return ::glfwGetVideoMode(get_monitor()); }
 
 	[[nodiscard]] decltype(auto) get_context() const noexcept { return _handle; }
 	[[nodiscard]] static auto&& get_self(handle_type context) noexcept { return *reinterpret_cast<self_type*>(::glfwGetWindowUserPointer(context)); }

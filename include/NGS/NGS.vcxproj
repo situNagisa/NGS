@@ -111,6 +111,7 @@
     <ClInclude Include="external\glfw\detail\defined.h" />
     <ClInclude Include="external\glfw\defined.h" />
     <ClInclude Include="external\glfw\detail\glfw_guard.h" />
+    <ClInclude Include="external\glfw\detail\hint.h" />
     <ClInclude Include="external\glfw\detail\window.h" />
     <ClInclude Include="external\glfw\glfw.h" />
     <ClInclude Include="external\imgui\component\component.h" />

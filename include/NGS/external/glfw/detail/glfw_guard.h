@@ -1,5 +1,6 @@
 #pragma once
 
+#include "./hint.h"
 #include "./window.h"
 #include "./defined.h"
 
@@ -35,6 +36,12 @@ public:
 	{
 		_windows.emplace_back(new window(NGS_PP_PERFECT_FORWARD(args)...));
 		return *_windows.back();
+	}
+
+	template<window_hint auto Hint>
+	decltype(auto) set_hint(hint_t<decltype(Hint)> value) const noexcept
+	{
+		::glfwWindowHint(hint_v<decltype(Hint)>, value);
 	}
 
 	decltype(auto) swap_interval(int interval) const{ return ::glfwSwapInterval(interval); }
