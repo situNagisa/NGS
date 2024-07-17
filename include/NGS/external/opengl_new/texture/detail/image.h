@@ -1,6 +1,5 @@
 #pragma once
 
-#include "./reflect.h"
 #include "./defined.h"
 
 NGS_LIB_MODULE_BEGIN
@@ -18,7 +17,7 @@ public:
 	const void* data;
 };
 
-template<texture_channel ChannelType>
+template<reflects::textures::channel_reflectable ChannelType>
 constexpr auto make_image(::std::size_t width, ::std::size_t height, const void* data, enums::texture_internal_format internal_format, enums::texture_format format)
 {
 	return image{
@@ -26,12 +25,12 @@ constexpr auto make_image(::std::size_t width, ::std::size_t height, const void*
 		.height = height,
 		.internal_format = internal_format,
 		.format = format,
-		.channel_type = channel_reflecter::reflect<ChannelType>::value,
+		.channel_type = reflects::textures::channel::reflect<ChannelType>::value,
 		.data = data
 	};
 }
 
-template<texture_channel ChannelType>
+template<reflects::textures::channel_reflectable ChannelType>
 constexpr decltype(auto) make_image(::std::size_t width, ::std::size_t height, const void* data, enums::texture_format format)
 {
 	return NGS_LIB_MODULE_NAME::make_image<ChannelType>(width, height, data, static_cast<enums::texture_internal_format>(format), format);

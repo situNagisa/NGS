@@ -60,6 +60,8 @@ namespace _detail
 		_detail::current_binding_context<decltype(s)>(null_context);
 	}
 }
+using _detail::is_binding;
+using _detail::unbind;
 
 
 #endif
@@ -101,7 +103,7 @@ NGS_LIB_MODULE_END
 #if defined(NGS_EXTERNAL_OPENGL_CONTEXT_CHECK_BIND)
 #	define NGS_EXTERNAL_OPENGL_CONTEXT_EXPECT_BIND(bindable)																	\
 NGS_ASSERT(																														\
-	NGS_NS::NGS_EXTERNAL_OPENGL_CONTEXT_NS::details::_detail::is_binding(bindable),												\
+	NGS_NS::NGS_EXTERNAL_OPENGL_CONTEXT_NS::details::is_binding(bindable),														\
 	NGS_NS::fmt::c(																												\
 		"the operation needs to bind the %s's context(%d) first",																\
 		NGS_NS::symbols::field_symbol_name<NGS_NS::type_traits::naked_t<decltype(bindable)>>().data(), (bindable).get_handle()	\

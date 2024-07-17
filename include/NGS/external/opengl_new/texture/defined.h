@@ -8,6 +8,7 @@
 #include "NGS/external/opengl_new/enum.h"
 #include "NGS/external/opengl_new/error.h"
 #include "NGS/external/opengl_new/context.h"
+#include "NGS/external/opengl_new/reflect.h"
 
 #include "../defined.h"
 

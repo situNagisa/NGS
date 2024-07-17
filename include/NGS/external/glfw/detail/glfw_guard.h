@@ -32,10 +32,9 @@ public:
 		::glfwTerminate();
 	}
 
-	window& create_window(auto&&... args)
+	decltype(auto) create_window(auto&&... args)
 	{
-		_windows.emplace_back(new window(NGS_PP_PERFECT_FORWARD(args)...));
-		return *_windows.back();
+		return window(NGS_PP_PERFECT_FORWARD(args)...);
 	}
 
 	template<window_hint auto Hint>
@@ -46,8 +45,6 @@ public:
 
 	decltype(auto) swap_interval(int interval) const{ return ::glfwSwapInterval(interval); }
 	decltype(auto) poll_events() const { return ::glfwPollEvents(); }
-
-	::std::vector<::std::unique_ptr<window>> _windows;
 };
 
 template<graphic_api Api>

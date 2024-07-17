@@ -59,7 +59,7 @@ public:
 
 	constexpr void assign(const auto& other) requires (sizeof(type_traits::object_t<decltype(other)>) == basic::struct_size_v<base_type>)
 	{
-		::std::ranges::copy(::std::span(reinterpret_cast<byte_ptr_cst>(::std::addressof(other)), sizeof(other)), ::std::ranges::begin(_data));
+		::std::ranges::copy(::std::span(reinterpret_cast<const ::std::uint8_t*>(::std::addressof(other)), sizeof(other)), ::std::ranges::begin(_data));
 	}
 
 	constexpr self_type& operator=(const self_type&) = default;

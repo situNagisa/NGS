@@ -19,5 +19,4 @@ namespace _detail
 	struct size<::std::span<T,Size>> : ccpt::auto_constant<Size> {};
 }
 
-
 NGS_LIB_MODULE_END

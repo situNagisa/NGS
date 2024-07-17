@@ -1,5 +1,12 @@
 #pragma once
 
-#include "./core.h"
-
-#include "NGS/lib/lib_end.h"
+#include "./enum.h"
+#include "./error.h"
+#include "./context.h"
+#include "./reflect.h"
+#include "./uniform.h"
+#include "./texture.h"
+#include "./shader.h"
+#include "./indexer.h"
+#include "./buffer.h"
+#include "./vertex_array.h"

@@ -5,6 +5,7 @@
 #include "NGS/cpt/cpt.h"
 #include "NGS/type_trait/type_trait.h"
 #include "NGS/handle/handle.h"
+#include "NGS/symbol/symbol.h"
 
 #define NGS_EXTERNAL_OPENGL_CONTEXT_NS NGS_EXTERNAL_OPENGL_NS::contextes
 
