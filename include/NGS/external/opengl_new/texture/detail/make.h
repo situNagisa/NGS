@@ -7,7 +7,7 @@
 NGS_LIB_MODULE_BEGIN
 
 template<enums::texture_target Target>
-decltype(auto) make_context(const image& image, ::std::size_t mipmap_level = 0)
+decltype(auto) make_texture(const image& image, ::std::size_t mipmap_level = 0)
 {
 	basic_texture<Target> result{};
 	contextes::bind(result);

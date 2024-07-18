@@ -17,17 +17,23 @@ NGS_LIB_MODULE_BEGIN
 #define NGS_TCEA_TRAIT_ALIAS_T(identifier) template<class T> using identifier##_t = typename identifier<T>::type
 #define NGS_TCEA_TRAIT_ALIAS_V(identifier) template<class T> inline constexpr auto identifier##_v = identifier<T>::value
 
-#define NGS_TCEA_TRAIT_HAS_TYPE(identifier, type_name)					\
+#define NGS_TCEA_TRAIT_HAS_SYMBOL(identifier, type_name, project, tv)	\
 template<class T>														\
-	requires requires { typename T::type_name; }						\
-struct identifier<T> { using type = typename T::type_name; }			\
+	requires requires { project(T)::type_name; }						\
+struct identifier<T> { tv type = project(T)::type_name; }				\
 //
 
-#define NGS_TCEA_TRAIT_HAS_VALUE(identifier, value_name)				\
-template<class T>														\
-	requires requires { { T::value_name }; }							\
-struct identifier<T> { constexpr static auto value = T::value_name; }	\
-//
+#define NGS_TCEA_TRAIT_PRIVATE_HAS_TYPE_PROJECT(type) typename type
+#define NGS_TCEA_TRAIT_PRIVATE_HAS_TYPE_PROJECT_OBJECT(type) typename ::std::remove_reference_t<type>
+#define NGS_TCEA_TRAIT_HAS_TYPE_PROJECT(identifier, type_name, project) NGS_TCEA_TRAIT_HAS_SYMBOL(identifier, type_name, project, using)
+#define NGS_TCEA_TRAIT_HAS_TYPE(identifier, type_name) NGS_TCEA_TRAIT_HAS_TYPE_PROJECT(identifier, type_name, NGS_TCEA_TRAIT_PRIVATE_HAS_TYPE_PROJECT)
+#define NGS_TCEA_TRAIT_HAS_TYPE_OBJECT(identifier, type_name) NGS_TCEA_TRAIT_HAS_TYPE_PROJECT(identifier, type_name, NGS_TCEA_TRAIT_PRIVATE_HAS_TYPE_PROJECT_OBJECT)
+
+#define NGS_TCEA_TRAIT_PRIVATE_HAS_VALUE_PROJECT(type) type
+#define NGS_TCEA_TRAIT_PRIVATE_HAS_VALUE_PROJECT_OBJECT(type) ::std::remove_reference_t<type>
+#define NGS_TCEA_TRAIT_HAS_VALUE_PROJECT(identifier, value_name, project) NGS_TCEA_TRAIT_HAS_SYMBOL(identifier, value_name, project, constexpr static auto)
+#define NGS_TCEA_TRAIT_HAS_VALUE(identifier, value_name) NGS_TCEA_TRAIT_HAS_VALUE_PROJECT(identifier, value_name, NGS_TCEA_TRAIT_PRIVATE_HAS_VALUE_PROJECT_OBJECT)
+#define NGS_TCEA_TRAIT_HAS_VALUE_OBJECT(identifier, value_name) NGS_TCEA_TRAIT_HAS_VALUE_PROJECT(identifier, value_name, NGS_TCEA_TRAIT_PRIVATE_HAS_VALUE_PROJECT_OBJECT)
 
 #define NGS_TCEA_PRIVATE_DECLARE(z, index, args) BOOST_PP_TUPLE_ELEM(index, args) ngs_tcea_arg_##index
 #define NGS_TCEA_PRIVATE_ARG(z, index, args) NGS_PP_PERFECT_FORWARD(ngs_tcea_arg_##index)

@@ -3,6 +3,7 @@
 #include "../defined.h"
 #include "NGS/basic/basic.h"
 #include "NGS/cpt/cpt.h"
+#include "NGS/concept/concept.h"
 #include "NGS/type_trait/type_trait.h"
 
 

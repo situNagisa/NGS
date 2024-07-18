@@ -38,21 +38,26 @@ enum class NGS_DLL_API framebuffer_attachment : enum_underlying_t {
 	depth_stencil = GL_DEPTH_STENCIL_ATTACHMENT,
 };
 
+constexpr auto is_color_attachment(framebuffer_attachment attachment)
+{
+	return attachment >= framebuffer_attachment::color0 && attachment <= framebuffer_attachment::color15;
+}
+
 enum class NGS_DLL_API framebuffer_target : enum_underlying_t {
 	framebuffer = GL_FRAMEBUFFER,
 	read = GL_READ_FRAMEBUFFER,
 	draw = GL_DRAW_FRAMEBUFFER,
 };
 
-template<class T> requires ::std::is_enum_v<T>
+template<concepts::enumeration T>
 constexpr auto operator|(T left, T right)
 {
-	return static_cast<T>(static_cast<::std::underlying_type_t<T>>(left) | static_cast<::std::underlying_type_t<T>>(right));
+	return static_cast<T>(::std::to_underlying(left) | ::std::to_underlying(right));
 }
-template<class T> requires ::std::is_enum_v<T>
+template<concepts::enumeration T>
 constexpr auto operator&(T left, T right)
 {
-	return static_cast<T>(static_cast<::std::underlying_type_t<T>>(left) & static_cast<::std::underlying_type_t<T>>(right));
+	return static_cast<T>(::std::to_underlying(left) & ::std::to_underlying(right));
 }
 
 enum class NGS_DLL_API framebuffer_clear_bit : GLbitfield

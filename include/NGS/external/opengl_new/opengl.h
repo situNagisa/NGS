@@ -10,3 +10,5 @@
 #include "./indexer.h"
 #include "./buffer.h"
 #include "./vertex_array.h"
+#include "./renderbuffer.h"
+#include "./framebuffer.h"

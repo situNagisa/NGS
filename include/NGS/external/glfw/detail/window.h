@@ -94,6 +94,8 @@ public:
 	[[nodiscard]] decltype(auto) get_monitor() const noexcept { return ::glfwGetWindowMonitor(_handle); }
 	[[nodiscard]] decltype(auto) get_video_mode() const noexcept { return ::glfwGetVideoMode(get_monitor()); }
 
+
+
 	[[nodiscard]] decltype(auto) get_context() const noexcept { return _handle; }
 	[[nodiscard]] static auto&& get_self(handle_type context) noexcept { return *reinterpret_cast<self_type*>(::glfwGetWindowUserPointer(context)); }
 

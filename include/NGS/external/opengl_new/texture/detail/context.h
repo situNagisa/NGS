@@ -108,6 +108,15 @@ public:
 
 };
 
+namespace _detail
+{
+	template <auto Args>
+	void derived_from_texture(const basic_texture<Args>&);
+}
+
+template <class T>
+concept texture = requires(const T & obj) { _detail::derived_from_texture(obj); };
+
 using texture_1d = basic_texture<enums::texture_target::_1d>;
 using texture_1d_array = basic_texture<enums::texture_target::_1d_array>;
 using texture_2d = basic_texture<enums::texture_target::_2d>;
