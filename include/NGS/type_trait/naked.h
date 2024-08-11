@@ -4,7 +4,7 @@
 
 NGS_TYPE_TRAIT_BEGIN
 
-template<class _Type>
-using naked_t = std::remove_cvref_t<_Type>;
+template<class Type>
+using naked_t = std::remove_cvref_t<Type>;
 
 NGS_TYPE_TRAIT_END

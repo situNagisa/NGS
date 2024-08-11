@@ -5,13 +5,13 @@
 
 NGS_TYPE_TRAIT_BEGIN
 
-template<class _CVR, class _T>
+template<class CVR, class T>
 struct add_cvref_like
 {
-	using type = add_reference_like_t<_CVR, add_cv_like_t<std::remove_reference_t<_CVR>, std::remove_reference_t<_T>>>;
+	using type = add_reference_like_t<CVR, add_cv_like_t<std::remove_reference_t<CVR>, std::remove_reference_t<T>>>;
 };
-template<class _CVR, class _T>
-using add_cvref_like_t = typename add_cvref_like<_CVR, _T>::type;
+template<class CVR, class T>
+using add_cvref_like_t = typename add_cvref_like<CVR, T>::type;
 
 NGS_TYPE_TRAIT_END
 

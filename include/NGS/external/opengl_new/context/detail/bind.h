@@ -34,11 +34,13 @@ namespace _detail
 	template<class>
 	inline context_t current_binding_context_impl = null_context;
 
-	template<class T,class = typename type_traits::naked_t<T>::binding_context_type>
+	template<class T>
+		requires requires { typename type_traits::naked_t<T>::binding_context_type; }
 	auto current_binding_context() {
 		return current_binding_context_impl<typename type_traits::naked_t<T>::binding_context_type>;
 	}
-	template<class T, class = typename type_traits::naked_t<T>::binding_context_type>
+	template<class T>
+		requires requires { typename type_traits::naked_t<T>::binding_context_type; }
 	auto current_binding_context(context_t context) {
 		current_binding_context_impl<typename type_traits::naked_t<T>::binding_context_type> = context;
 	}

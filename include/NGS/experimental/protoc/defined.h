@@ -1,15 +1,5 @@
-﻿#pragma once
+#pragma once
 
-#include "./defined.h"
-#include "NGS/basic/basic.h"
-#include "NGS/type_trait/type_trait.h"
+#include "../defined.h"
 
-#define NGS_PROTOC_NS protocs
-
-#define NGS_LIB_VERSION_MAJOR 1
-#define NGS_LIB_VERSION_MINOR 0
-#define NGS_LIB_VERSION_PATCH 0
-
-#define NGS_LIB_NAME NGS_PROTOC_NS
-#include "NGS/lib/lib.h"
-
+#define NGS_EXPERIMENT_PROTOC_NS NGS_EXPERIMENTAL_NS::protocs 

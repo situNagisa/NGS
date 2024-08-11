@@ -26,17 +26,19 @@ namespace _detail
 	NGS_EXTERNAL_OPENGL_CONTEXT_DEFINE_BASIC_CONTEXT(unknown_framebuffer, _detail::framebuffer_creator, _detail::framebuffer_deleter);
 }
 
-template<enums::framebuffer_target Target>
-struct basic_framebuffer : _detail::unknown_framebuffer
+template<enums::framebuffer_target Target, class ContextType>
+struct _basic_framebuffer : ContextType
 {
-	NGS_PP_INJECT(basic_framebuffer);
+	NGS_PP_INJECT(_basic_framebuffer);
 public:
 	constexpr static auto target = Target;
 	using machine_type = contextes::context_machine<self_type, _detail::framebuffer_binder<target>>;
 
-	basic_framebuffer() = default;
+	NGS_EXTERNAL_OPENGL_CONTEXT_TYPE(_detail::unknown_framebuffer);
 
-	basic_framebuffer(attachable auto&&... attachments) requires (sizeof...(attachments) != 0)
+	_basic_framebuffer() = default;
+
+	_basic_framebuffer(attachable auto&&... attachments) requires (sizeof...(attachments) != 0)
 	{
 		contextes::bind(*this);
 		self_type::attach_all(NGS_PP_PERFECT_FORWARD(attachments)...);
@@ -123,11 +125,11 @@ public:
 		NGS_EXTERNAL_OPENGL_ERROR_CHECK(::glDisable(static_cast<GLenum>(bit)));
 	}
 
-	//void clear_color(colors::basic::color auto color) const
-	//{
-	//	NGS_EXTERNAL_OPENGL_CONTEXT_EXPECT_BIND(*this);
-	//	//NGS_EXTERNAL_OPENGL_ERROR_CHECK(::glClearColor(color.r, color.g, color.b, color.a));
-	//}
+	void clear_color(float red, float green, float blue, float alpha) const
+	{
+		NGS_EXTERNAL_OPENGL_CONTEXT_EXPECT_BIND(*this);
+		NGS_EXTERNAL_OPENGL_ERROR_CHECK(::glClearColor(red, green, blue, alpha));
+	}
 
 	void set_viewport(::std::size_t x, ::std::size_t y, ::std::size_t width, ::std::size_t height) const
 	{
@@ -135,10 +137,14 @@ public:
 		NGS_EXTERNAL_OPENGL_ERROR_CHECK(::glViewport(static_cast<GLint>(x), static_cast<GLint>(y), static_cast<GLsizei>(width), static_cast<GLsizei>(height)));
 	}
 };
+
+template<enums::framebuffer_target Target>
+using basic_framebuffer = _basic_framebuffer<Target, _detail::unknown_framebuffer>;
+
 namespace _detail
 {
-	template <auto Args>
-	void derived_from_basic(const basic_framebuffer<Args>&);
+	template <auto Args, class ContextType>
+	void derived_from_basic(const _basic_framebuffer<Args, ContextType>&);
 }
 
 template <class T>
@@ -147,5 +153,7 @@ concept framebuffer = requires(const T & obj) { _detail::derived_from_basic(obj)
 using default_framebuffer = basic_framebuffer<enums::framebuffer_target::framebuffer>;
 using draw_framebuffer = basic_framebuffer<enums::framebuffer_target::draw>;
 using read_framebuffer = basic_framebuffer<enums::framebuffer_target::read>;
+
+inline auto zero_framebuffer = _basic_framebuffer<enums::framebuffer_target::framebuffer, contextes::context>{};
 
 NGS_LIB_MODULE_END

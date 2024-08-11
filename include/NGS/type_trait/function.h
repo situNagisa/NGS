@@ -10,41 +10,41 @@ namespace detail
 	template<class>
 	struct function_traits;
 
-	template<class _ResultType, class... _Args>
-	struct function_traits<_ResultType(_Args...)>
+	template<class ResultType, class... Args>
+	struct function_traits<ResultType(Args...)>
 	{
-		using function_type = _ResultType(_Args...);
-		using result_type = _ResultType;
-		using args_type = ::std::tuple<_Args...>;
+		using function_type = ResultType(Args...);
+		using result_type = ResultType;
+		using args_type = ::std::tuple<Args...>;
 	};
 
-	template<class _ResultType, class _Class, class... _Args>
-	struct function_traits<_ResultType(_Class::*)(_Args...)>
+	template<class ResultType, class Class, class... Args>
+	struct function_traits<ResultType(Class::*)(Args...)>
 	{
-		using function_type = _ResultType(_Args...);
-		using result_type = _ResultType;
-		using args_type = ::std::tuple<_Args...>;
+		using function_type = ResultType(Args...);
+		using result_type = ResultType;
+		using args_type = ::std::tuple<Args...>;
 	};
 
-	template<class _ResultType, class _Class, class... _Args>
-	struct function_traits<_ResultType(_Class::*)(_Args...)const>
+	template<class ResultType, class Class, class... Args>
+	struct function_traits<ResultType(Class::*)(Args...)const>
 	{
-		using function_type = _ResultType(_Args...);
-		using result_type = _ResultType;
-		using args_type = ::std::tuple<_Args...>;
+		using function_type = ResultType(Args...);
+		using result_type = ResultType;
+		using args_type = ::std::tuple<Args...>;
 	};
 
-	template<class _Lambda>
-		requires requires{ { &_Lambda::operator() }; }
-	struct function_traits<_Lambda>
+	template<class Lambda>
+		requires requires{ { &Lambda::operator() }; }
+	struct function_traits<Lambda>
 	{
-		using function_type = typename function_traits<decltype(&_Lambda::operator())>::function_type;
-		using result_type = typename function_traits<decltype(&_Lambda::operator())>::result_type;
-		using args_type = typename function_traits<decltype(&_Lambda::operator())>::args_type;
+		using function_type = typename function_traits<decltype(&Lambda::operator())>::function_type;
+		using result_type = typename function_traits<decltype(&Lambda::operator())>::result_type;
+		using args_type = typename function_traits<decltype(&Lambda::operator())>::args_type;
 	};
 }
 
-template<class _Functor>
-using function_traits = detail::function_traits<naked_t<::std::remove_pointer_t<_Functor>>>;
+template<class Functor>
+using function_traits = detail::function_traits<naked_t<::std::remove_pointer_t<Functor>>>;
 
 NGS_TYPE_TRAIT_END

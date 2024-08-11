@@ -1,7 +1,5 @@
-﻿#pragma once
+#pragma once
 
 #include "../defined.h"
-#include "./esp_idf.h"
 
-#define NGS_OS_ESP_BEGIN NGS_OSAPI_BEGIN namespace esp{
-#define NGS_OS_ESP_END } NGS_OSAPI_END
+#define NGS_OSAPI_ESP_NS NGS_OSAPI_NS::esp

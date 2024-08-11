@@ -18,7 +18,7 @@ private:
 	{
 		if(!_handle)
 		{
-			throw std::runtime_error("failed to create window");
+			throw ::std::runtime_error("failed to create window");
 		}
 		// unmovable
 		::glfwSetWindowUserPointer(_handle, this);
@@ -33,6 +33,13 @@ public:
 
 	window(const self_type&) = delete;
 	self_type& operator=(const self_type&) = delete;
+
+	window(self_type&& other) noexcept
+		: _handle(other._handle)
+	{
+		other._handle = nullptr;
+	}
+	self_type& operator=(self_type&&) noexcept = delete;
 
 	[[nodiscard]] decltype(auto) should_close() const noexcept { return ::glfwWindowShouldClose(_handle); }
 	decltype(auto) close() const noexcept { ::glfwSetWindowShouldClose(_handle, GLFW_TRUE); }
@@ -84,7 +91,10 @@ public:
 	decltype(auto) hide() const noexcept { ::glfwHideWindow(_handle); }
 	decltype(auto) show() const noexcept { ::glfwShowWindow(_handle); }
 
-	decltype(auto) active() const noexcept { ::glfwMakeContextCurrent(_handle); }
+	decltype(auto) active() const noexcept
+	{
+		::glfwMakeContextCurrent(_handle);
+	}
 
 	decltype(auto) swap_buffer() const noexcept { ::glfwSwapBuffers(_handle); }
 

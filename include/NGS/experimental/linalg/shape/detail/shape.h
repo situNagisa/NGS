@@ -14,4 +14,7 @@ concept shape =
 	&& ::std::is_trivially_copyable_v<::std::remove_cvref_t<T>>
 	;
 
+template<class T, class Other>
+concept common_index = ::std::convertible_to<Other, T>&& ::std::is_nothrow_constructible_v<T, Other>;
+
 NGS_LIB_MODULE_END

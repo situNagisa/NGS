@@ -10,6 +10,7 @@ using details::framebuffer;
 using details::default_framebuffer;
 using details::draw_framebuffer;
 using details::read_framebuffer;
+using details::zero_framebuffer;
 
 using details::attachable;
 using details::make_attachment;

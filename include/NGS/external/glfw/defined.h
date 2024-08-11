@@ -2,6 +2,8 @@
 
 #include "../defined.h"
 
+//#define GLFW_INCLUDE_NONE
+
 #include <GLFW/glfw3.h>
 
 #include "NGS/bases/bases.h"

@@ -22,5 +22,6 @@ using details::shape_ranks_v;
 using details::extent_at;
 
 using details::shape;
+using details::common_index;
 
 NGS_LIB_END

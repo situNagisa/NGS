@@ -1,0 +1,15 @@
+#pragma once
+
+#include "./defined.h"
+
+NGS_LIB_MODULE_BEGIN
+
+NGS_TCEA_TRAIT_DEFAULT_VALUE(align, alignof(T));
+NGS_TCEA_TRAIT_ALIAS_V(align);
+//NGS_TCEA_TRAIT_HAS_VALUE_OBJECT(align, align);
+
+NGS_TCEA_TRAIT_DEFAULT_VALUE(size, sizeof(T));
+NGS_TCEA_TRAIT_ALIAS_V(size);
+//NGS_TCEA_TRAIT_HAS_VALUE_OBJECT(size, size);
+
+NGS_LIB_MODULE_END

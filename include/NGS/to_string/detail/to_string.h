@@ -63,7 +63,7 @@ struct basic_to_string_function
 	}
 };
 
-template<class Char, string String, string View = String>
+template<class Char, string<Char> String, string<Char> View = String>
 inline constexpr basic_to_string_function<Char, String, View> basic_to_string{};
 
 namespace _detail

@@ -4,23 +4,23 @@
 
 NGS_TYPE_TRAIT_BEGIN
 
-template<class _Reference, class _To>
+template<class Reference, class To>
 struct add_reference_like
 {
-	using type = _To;
+	using type = To;
 };
-template<class _Reference, class _To>
-using add_reference_like_t = typename add_reference_like<_Reference, _To>::type;
+template<class Reference, class To>
+using add_reference_like_t = typename add_reference_like<Reference, To>::type;
 
-template<class _Reference, class _To>
-struct add_reference_like<_Reference&, _To>
+template<class Reference, class To>
+struct add_reference_like<Reference&, To>
 {
-	using type = std::add_lvalue_reference_t<_To>;
+	using type = std::add_lvalue_reference_t<To>;
 };
-template<class _Reference, class _To>
-struct add_reference_like<_Reference&&, _To>
+template<class Reference, class To>
+struct add_reference_like<Reference&&, To>
 {
-	using type = std::add_rvalue_reference_t<_To>;
+	using type = std::add_rvalue_reference_t<To>;
 };
 
 NGS_TYPE_TRAIT_END

@@ -8,7 +8,7 @@ NGS_LIB_MODULE_BEGIN
 /// @param identifier 
 /// @param statement[optional] 
 #define NGS_TCEA_TRAIT_DEFAULT(...) BOOST_PP_OVERLOAD(NGS_TCEA_TRAIT_DEFAULT_O_, __VA_ARGS__)(__VA_ARGS__)
-#define NGS_TCEA_TRAIT_DEFAULT_O_2(identifier, statement) template<class> struct identifier { statement }
+#define NGS_TCEA_TRAIT_DEFAULT_O_2(identifier, statement) template<class T> struct identifier { statement }
 #define NGS_TCEA_TRAIT_DEFAULT_O_1(identifier) NGS_TCEA_TRAIT_DEFAULT_O_2(identifier, )
 
 #define NGS_TCEA_TRAIT_DEFAULT_TYPE(identifier, default_type) NGS_TCEA_TRAIT_DEFAULT(identifier, using type = default_type;)
@@ -17,21 +17,21 @@ NGS_LIB_MODULE_BEGIN
 #define NGS_TCEA_TRAIT_ALIAS_T(identifier) template<class T> using identifier##_t = typename identifier<T>::type
 #define NGS_TCEA_TRAIT_ALIAS_V(identifier) template<class T> inline constexpr auto identifier##_v = identifier<T>::value
 
-#define NGS_TCEA_TRAIT_HAS_SYMBOL(identifier, type_name, project, tv)	\
+#define NGS_TCEA_TRAIT_HAS_SYMBOL(identifier, symbol_name, project, tv)	\
 template<class T>														\
-	requires requires { project(T)::type_name; }						\
-struct identifier<T> { tv type = project(T)::type_name; }				\
+	requires requires { project(T)::symbol_name; }						\
+struct identifier<T> { tv = project(T)::symbol_name; }					\
 //
 
 #define NGS_TCEA_TRAIT_PRIVATE_HAS_TYPE_PROJECT(type) typename type
 #define NGS_TCEA_TRAIT_PRIVATE_HAS_TYPE_PROJECT_OBJECT(type) typename ::std::remove_reference_t<type>
-#define NGS_TCEA_TRAIT_HAS_TYPE_PROJECT(identifier, type_name, project) NGS_TCEA_TRAIT_HAS_SYMBOL(identifier, type_name, project, using)
+#define NGS_TCEA_TRAIT_HAS_TYPE_PROJECT(identifier, type_name, project) NGS_TCEA_TRAIT_HAS_SYMBOL(identifier, type_name, project, using type)
 #define NGS_TCEA_TRAIT_HAS_TYPE(identifier, type_name) NGS_TCEA_TRAIT_HAS_TYPE_PROJECT(identifier, type_name, NGS_TCEA_TRAIT_PRIVATE_HAS_TYPE_PROJECT)
 #define NGS_TCEA_TRAIT_HAS_TYPE_OBJECT(identifier, type_name) NGS_TCEA_TRAIT_HAS_TYPE_PROJECT(identifier, type_name, NGS_TCEA_TRAIT_PRIVATE_HAS_TYPE_PROJECT_OBJECT)
 
 #define NGS_TCEA_TRAIT_PRIVATE_HAS_VALUE_PROJECT(type) type
 #define NGS_TCEA_TRAIT_PRIVATE_HAS_VALUE_PROJECT_OBJECT(type) ::std::remove_reference_t<type>
-#define NGS_TCEA_TRAIT_HAS_VALUE_PROJECT(identifier, value_name, project) NGS_TCEA_TRAIT_HAS_SYMBOL(identifier, value_name, project, constexpr static auto)
+#define NGS_TCEA_TRAIT_HAS_VALUE_PROJECT(identifier, value_name, project) NGS_TCEA_TRAIT_HAS_SYMBOL(identifier, value_name, project, constexpr static auto value)
 #define NGS_TCEA_TRAIT_HAS_VALUE(identifier, value_name) NGS_TCEA_TRAIT_HAS_VALUE_PROJECT(identifier, value_name, NGS_TCEA_TRAIT_PRIVATE_HAS_VALUE_PROJECT_OBJECT)
 #define NGS_TCEA_TRAIT_HAS_VALUE_OBJECT(identifier, value_name) NGS_TCEA_TRAIT_HAS_VALUE_PROJECT(identifier, value_name, NGS_TCEA_TRAIT_PRIVATE_HAS_VALUE_PROJECT_OBJECT)
 
@@ -71,8 +71,9 @@ namespace detail_##function																\
 }																						\
 inline constexpr struct																	\
 {																						\
+	template<class T>																	\
 	NGS_CONFIG_STATIC_CALL_OPERATOR constexpr decltype(auto) operator()(				\
-		auto&& target																	\
+		T&& target																		\
 		) NGS_CONFIG_STATIC_CALL_OPERATOR_CONST											\
 		requires detail_##function::invocable<decltype(target)>							\
 	{																					\
@@ -102,8 +103,9 @@ namespace detail_##function																															\
 }																																					\
 inline constexpr struct																																\
 {																																					\
+	template<class T>																																\
 	NGS_CONFIG_STATIC_CALL_OPERATOR constexpr decltype(auto) operator()(																			\
-		auto&& target, 																																\
+		T&& target, 																																\
 		BOOST_PP_ENUM(BOOST_PP_TUPLE_SIZE(concepts), NGS_TCEA_PRIVATE_CONCEPT, concepts)															\
 		) NGS_CONFIG_STATIC_CALL_OPERATOR_CONST																										\
 		requires detail_##function::invocable<decltype(target), BOOST_PP_ENUM(BOOST_PP_TUPLE_SIZE(concepts), NGS_TCEA_PRIVATE_CPO_ARG_TYPE, )>		\

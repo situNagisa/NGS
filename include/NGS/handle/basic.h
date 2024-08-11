@@ -13,7 +13,7 @@ public:
 	using handle_type = HandleType;
 	constexpr static handle_type null = Null;
 
-	constexpr explicit(false) basic_handle(const handle_type& handle) noexcept : _handle(handle) {}
+	constexpr explicit(false) basic_handle(const handle_type& handle = null) noexcept : _handle(handle) {}
 	constexpr basic_handle(self_type&& other)noexcept : _handle(::std::move(other._handle))
 	{
 		other._handle = null;

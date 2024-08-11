@@ -60,9 +60,9 @@ constexpr Result mask(::std::integral auto size)
 
 	[[unlikely]]
 	if (size > NGS_LIB_MODULE_NAME::static_size<Result>())
-		return { static_cast<shift_type>(-1) };
+		return static_cast<Result>(static_cast<shift_type>(-1));
 
-	return { static_cast<shift_type>((1 << size) - 1) };
+	return static_cast<Result>(static_cast<shift_type>((1 << size) - 1));
 }
 
 template<class Result = ::std::uint32_t>

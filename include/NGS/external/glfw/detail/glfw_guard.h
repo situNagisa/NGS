@@ -45,6 +45,7 @@ public:
 
 	decltype(auto) swap_interval(int interval) const{ return ::glfwSwapInterval(interval); }
 	decltype(auto) poll_events() const { return ::glfwPollEvents(); }
+	decltype(auto) get_time() const { return ::glfwGetTime(); }
 };
 
 template<graphic_api Api>
