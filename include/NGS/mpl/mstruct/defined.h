@@ -5,7 +5,7 @@
 #include "NGS/layout/layout.h"
 #include "NGS/static/string.h"
 #include "NGS/type_trait/type_trait.h"
-#include "NGS/cpt/cpt.h"
+#include "NGS/concept/concept.h"
 #include "NGS/to_string/to_string.h"
 #include "NGS/mpl/template.h"
 #include "NGS/bases/bases.h"

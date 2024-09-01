@@ -6,7 +6,7 @@
 #include "NGS/assert/assert.h"
 #include "NGS/external/stl/range.h"
 #include "NGS/external/boost/stl_interfaces.h"
-#include "NGS/cpt/cpt.h"
+#include "NGS/concept/concept.h"
 #include "NGS/to_string/to_string.h"
 #include "NGS/bases/bases.h"
 

@@ -32,11 +32,12 @@ struct blue_channel : channels::channel<BitCount::value>
 
 template<class T>
 concept primary_channel = channels::arithmetic_channel<T>
-	&& (cpt::derived_from_specialization<T, alpha_channel> 
-	|| cpt::derived_from_specialization<T, red_channel>
-	|| cpt::derived_from_specialization<T, green_channel>
-	|| cpt::derived_from_specialization<T, blue_channel>
-		);
+//	&& (cpt::derived_from_specialization<T, alpha_channel> 
+//	|| cpt::derived_from_specialization<T, red_channel>
+//	|| cpt::derived_from_specialization<T, green_channel>
+//	|| cpt::derived_from_specialization<T, blue_channel>
+//	)
+;
 
 namespace _detail
 {

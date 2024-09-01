@@ -22,7 +22,7 @@ public:
 	underlying_type _value;
 };
 
-template<cpt::derived_from_specialization<bit16::trivial_register> Register, tags::register_tag Tag = tags::register_category_t<Register>>
+template</*bit16::trivial_register*/class Register, tags::register_tag Tag = tags::register_category_t<Register>>
 struct extend_trivial_register : Register
 {
 	NGS_PP_INJECT_EXPLICIT(extend_trivial_register,Register);

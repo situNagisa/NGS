@@ -20,7 +20,7 @@ NGS_TVM_TV_INSERT(imgui_scalar, ::std::float_t, ::ImGuiDataType_Float);
 NGS_TVM_TV_INSERT(imgui_scalar, ::std::double_t, ::ImGuiDataType_Double);
 
 template<class T>
-	requires ::ngs::cpt::naked_same_as<::ImGuiDataType_, decltype(imgui_scalar::value<T>)>
+	requires ::std::same_as<::ImGuiDataType_, decltype(imgui_scalar::value<T>)>
 decltype(auto) drag(
 	::std::string_view label,
 	T& value,

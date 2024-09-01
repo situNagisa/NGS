@@ -1,4 +1,4 @@
-﻿#include "../defined.h"
+#include "../defined.h"
 
 #define NGS_EXTERNAL_OPENGL_ALGORITHM_NS algorithm
 #define NGS_LIB_MODULE_NAME NGS_EXTERNAL_OPENGL_ALGORITHM_NS

@@ -5,6 +5,8 @@
 
 NGS_LIB_MODULE_BEGIN
 
+#define NGS_ASSERT_FAIL() while(true)
+
 #ifdef __cpp_exceptions
 #define NGS_OSAPI_ESP_CHECK_ASSERT_THROW(condition, exception) do{ if (!(condition)) { throw exception; } } while(false)
 #else

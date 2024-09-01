@@ -2,7 +2,7 @@
 
 #include "../defined.h"
 #include "NGS/basic/basic.h"
-#include "NGS/cpt/cpt.h"
+#include "NGS/concept/concept.h"
 #include "NGS/bases/bases.h"
 #include "NGS/assert/assert.h"
 #include "NGS/type_trait/type_trait.h"
@@ -12,6 +12,8 @@
 #include "NGS/mpl/mstruct.h"
 #include "NGS/fmt/fmt.h"
 #include "NGS/symbol/symbol.h"
+#include "NGS/handle/handle.h"
+#include "NGS/flag/flag.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -26,8 +28,5 @@
 #include "NGS/lib/lib.h"
 
 NGS_LIB_BEGIN
-
-using fundamental_t = GLuint;
 using gl_enum_t = GLenum;
-
 NGS_LIB_END

@@ -2,7 +2,7 @@
 
 #include "NGS/basic/basic.h"
 #include "NGS/type_trait/type_trait.h"
-#include "NGS/cpt/cpt.h"
+#include "NGS/concept/concept.h"
 
 
 #define NGS_TO_STRING_NS to_strings

@@ -3,16 +3,14 @@
 #include "NGS/basic/basic.h"
 #include "NGS/type_trait/type_trait.h"
 #include "NGS/ccpt/ccpt.h"
-#include "NGS/cpt/cpt.h"
+#include "NGS/concept/concept.h"
 #include "NGS/assert/assert.h"
-#include "NGS/external/boost/fusion.h"
+#include "NGS/experimental/template/template.h"
 
 #include "../defined.h"
 
-#define NGS_STATIC_TUPLE_NS NGS_STATIC_NS::tuples
-
-#define NGS_LIB_VERSION_MAJOR 0
-#define NGS_LIB_VERSION_MINOR 2
-#define NGS_LIB_VERSION_PATCH 1
-#define NGS_LIB_NAME NGS_STATIC_TUPLE_NS
+#define NGS_LIB_VERSION_MAJOR 1
+#define NGS_LIB_VERSION_MINOR 0
+#define NGS_LIB_VERSION_PATCH 0
+#define NGS_LIB_NAME NGS_STATIC_NS::tuples
 #include "NGS/lib/lib.h"

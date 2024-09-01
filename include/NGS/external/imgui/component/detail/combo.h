@@ -11,7 +11,7 @@ constexpr decltype(auto) combo(::std::string_view label, T& current_item, ::std:
 	auto index = static_cast<int>(::std::ranges::distance(::std::ranges::begin(items), ::std::ranges::find(items, current_item)));
 
 	auto labels = [](auto&& items_label) -> auto&& {
-		if constexpr (cpt::naked_same_as<::std::ranges::range_value_t<decltype(items_label)>, const char*>)
+		if constexpr (::std::same_as<::std::remove_cvref_t<::std::ranges::range_value_t<decltype(items_label)>>, const char*>)
 		{
 			if constexpr (::std::ranges::contiguous_range<decltype(items_label)>)
 			{
@@ -51,7 +51,7 @@ constexpr decltype(auto) combo(::std::string_view label, T& current_item)
 	constexpr auto keys = Items | ::std::views::keys;
 	constexpr auto values = Items | ::std::views::values;
 
-	if constexpr (::ngs::cpt::naked_same_as<::std::ranges::range_value_t<decltype(values)>, const char*> && ::std::ranges::contiguous_range<decltype(values)>)
+	if constexpr (::std::same_as<::std::remove_cvref_t<::std::ranges::range_value_t<decltype(values)>>, const char*> && ::std::ranges::contiguous_range<decltype(values)>)
 	{
 		return NGS_LIB_MODULE_NAME::combo(label, current_item, keys, values);
 	}

@@ -32,7 +32,7 @@ inline constexpr struct
 		}
 		else
 		{
-			static_assert(cpt::none<decltype(info)>, "invalid vulkan_info");
+			static_assert(concepts::none<decltype(info)>, "invalid vulkan_info");
 		}
 	}
 }to_vulkan{};

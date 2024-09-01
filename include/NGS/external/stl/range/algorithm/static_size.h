@@ -93,7 +93,7 @@ namespace _detail
 			}
 			else
 			{
-				static_assert(cpt::none<T>);
+				static_assert(concepts::none<T>);
 			}
 		}
 	};

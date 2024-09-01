@@ -1,5 +1,5 @@
 #pragma once
 
-#include "./buffer/buffer.h"
-#include "./buffer/vertex.h"
-#include "./buffer/indices.h"
+#include "./core.h"
+
+#include "NGS/lib/lib_end.h"

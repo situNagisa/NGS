@@ -1,13 +1,21 @@
-﻿#pragma once
+#pragma once
 
-#include "./core/tuple.h"
-#include "./core/get.h"
-#include "./core/size.h"
-#include "./core/element.h"
-#include "./core/cat.h"
+#include "./detail.h"
+#include "./defined.h"
 
-NGS_LIB_MODULE_EXPORT(tuple);
-NGS_LIB_MODULE_EXPORT(meta_cat);
-NGS_LIB_MODULE_EXPORT(meta_cat_t);
+NGS_LIB_BEGIN
 
-#include "NGS/lib/module_end.h"
+using details::as_std_t;
+using details::get;
+using details::element_t;
+using details::size_v;
+using details::cat_t;
+
+using details::tuple;
+
+using details::as_std;
+
+using details::static_tuple;
+using details::make_tuple;
+
+NGS_LIB_END

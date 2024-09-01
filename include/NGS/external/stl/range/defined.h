@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NGS/cpt/cpt.h"
+#include "NGS/concept/concept.h"
 
 #include "../defined.h"
 

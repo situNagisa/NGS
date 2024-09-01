@@ -11,6 +11,6 @@
 #else
 
 #	define NGS_THROW_WARNING(code, msg)	
-#	define throw_error(level, code, msg)
+#	define NGS_THROW_ERROR(level, code, msg)
 
 #endif

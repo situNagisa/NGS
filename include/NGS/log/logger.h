@@ -6,8 +6,8 @@
 
 NGS_LOG_BEGIN
 
-template<class _Type>
-concept is_control_char = cpt::is_any_of<type_traits::naked_t<_Type>, consoles::text_color, log_level>;
+template<class T>
+concept is_control_char = ::std::same_as<::std::remove_cvref_t<T>, consoles::text_color> || ::std::same_as<::std::remove_cvref_t<T>, log_level>;
 
 struct NGS_DLL_API logger
 {
@@ -149,7 +149,7 @@ private:
 		//}
 		else
 		{
-			static_assert(cpt::none<decltype(first)>, "unsupported type");
+			static_assert(concepts::none<decltype(first)>, "unsupported type");
 		}
 	}
 private:

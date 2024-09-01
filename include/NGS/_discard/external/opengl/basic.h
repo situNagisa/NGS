@@ -1,9 +1,8 @@
-﻿#pragma once
+#pragma once
 
+#include "./basic/config.h"
+#include "./basic/enum.h"
+#include "./basic/error.h"
+#include "./basic/reflect.h"
+#include "./basic/uniform.h"
 #include "./basic/context.h"
-#include "./basic/machine.h"
-#include "./basic/bind.h"
-
-NGS_LIB_MODULE_EXPORT(bind);
-
-#include "NGS/lib/module_end.h"

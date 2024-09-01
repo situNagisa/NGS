@@ -38,7 +38,7 @@ constexpr decltype(auto) convert(basic_stringable<Char, String> auto&& target)
 	}
 	else
 	{
-		static_assert(cpt::none<string_type>);
+		static_assert(concepts::none<string_type>);
 	}
 }
 

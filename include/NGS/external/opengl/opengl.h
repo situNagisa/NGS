@@ -1,18 +1,14 @@
 #pragma once
 
-#include "./basic.h"
-
-#include "./indexer.h"
-
-#include "./shader.h"
-#include "./buffer.h"
+#include "./enum.h"
+#include "./error.h"
+#include "./context.h"
+#include "./reflect.h"
+#include "./uniform.h"
 #include "./texture.h"
-
-#include "./manager.h"
-
+#include "./shader.h"
+#include "./indexer.h"
+#include "./buffer.h"
+#include "./vertex_array.h"
 #include "./renderbuffer.h"
 #include "./framebuffer.h"
-
-#include "./api.h"
-
-#include "NGS/lib/lib_end.h"

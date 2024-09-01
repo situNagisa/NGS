@@ -30,10 +30,10 @@ struct basic_string {
 		::std::ranges::copy(::std::ranges::begin(str), ::std::ranges::begin(str) + char_size, source);
 	}
 
-	constexpr operator ::std::basic_string<value_type, traits_type>()const {
+	constexpr explicit(false) operator ::std::basic_string<value_type, traits_type>()const {
 		return ::std::basic_string<value_type, traits_type>(source);
 	}
-	constexpr operator ::std::basic_string_view<value_type, traits_type>()const
+	constexpr explicit(false) operator ::std::basic_string_view<value_type, traits_type>()const
 	{
 		return ::std::basic_string_view<value_type, traits_type>(source,char_size);
 	}
@@ -46,15 +46,15 @@ struct basic_string {
 	string_type source{};
 };
 
-template<std::size_t _N>
-using string = basic_string<_N, char>;
-template<std::size_t _N>
-using wstring = basic_string<_N, wchar_t>;
-template<std::size_t _N>
-using u16string = basic_string<_N, char16_t>;
-template<std::size_t _N>
-using u32string = basic_string<_N, char32_t>;
-template<std::size_t _N>
-using u8string = basic_string<_N, char8_t>;
+template<std::size_t N>
+using string = basic_string<N, char>;
+template<std::size_t N>
+using wstring = basic_string<N, wchar_t>;
+template<std::size_t N>
+using u16string = basic_string<N, char16_t>;
+template<std::size_t N>
+using u32string = basic_string<N, char32_t>;
+template<std::size_t N>
+using u8string = basic_string<N, char8_t>;
 
 NGS_STATIC_STRING_END

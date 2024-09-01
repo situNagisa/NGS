@@ -7,7 +7,7 @@ NGS_LIB_MODULE_BEGIN
 
 template<class T>
 concept tensor = ::std::ranges::range<T>
-&& requires
+	&& requires
 {
 	{ traits::shape<T>() } -> external::stl::ranges::algorithm::static_sized_range;
 	requires ::std::convertible_to<::std::ranges::range_value_t<decltype(traits::shape<T>())>, ::std::size_t>;

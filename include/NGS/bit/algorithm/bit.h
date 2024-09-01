@@ -8,7 +8,7 @@ NGS_LIB_MODULE_BEGIN
 namespace _detail
 {
 	template<class L, class R>
-	concept bit_or_has_member = cpt::naked_same_as<L, R> && requires(L l, R r)
+	concept bit_or_has_member = ::std::same_as<::std::remove_cvref_t<L>, ::std::remove_cvref_t<R>> && requires(L l, R r)
 	{
 		NGS_PP_PERFECT_FORWARD(l).bit_or(NGS_PP_PERFECT_FORWARD(r));
 	};
@@ -20,7 +20,7 @@ namespace _detail
 	};
 
 	template<class L, class R>
-	concept bit_and_has_member = cpt::naked_same_as<L, R> && requires(L l, R r)
+	concept bit_and_has_member = ::std::same_as<::std::remove_cvref_t<L>, ::std::remove_cvref_t<R>>&& requires(L l, R r)
 	{
 		NGS_PP_PERFECT_FORWARD(l).bit_and(NGS_PP_PERFECT_FORWARD(r));
 	};
@@ -32,7 +32,7 @@ namespace _detail
 	};
 
 	template<class L, class R>
-	concept bit_xor_has_member = cpt::naked_same_as<L, R> && requires(L l, R r)
+	concept bit_xor_has_member = ::std::same_as<::std::remove_cvref_t<L>, ::std::remove_cvref_t<R>>&& requires(L l, R r)
 	{
 		NGS_PP_PERFECT_FORWARD(l).bit_xor(NGS_PP_PERFECT_FORWARD(r));
 	};
